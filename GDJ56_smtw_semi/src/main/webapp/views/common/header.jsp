@@ -99,8 +99,8 @@
                     <!-- 서브메뉴영역 -->
                     <div class="sub">
                         <ul class="submenu">
-                            <li><a href="">공지사항</a></li>
-                            <li><a href="">질문하기</a></li>
+                            <li><a href="<%=request.getContextPath()%>/notice/noticeList.do">공지사항</a></li>
+                            <li><a href="<%=request.getContextPath()%>/qna/qnaList.do">질문하기</a></li>
                         </ul>
                     </div>
                 </li>
