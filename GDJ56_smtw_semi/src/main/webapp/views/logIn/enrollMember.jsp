@@ -24,14 +24,15 @@
 				<div class="form-group has-success">
 					<label class="form-label mt-4" for="inputPwd">비밀번호<span class="obli">(필수)</span></label>
 					<input type="password" class="form-control" name="inputPwd" id="inputPwd" placeholder="비밀번호를 입력해주세요" required>
-                    <small id="emailHelp" class="form-text text-muted">8자리 이상 20자리 이하의 영문+숫자를 입력하세요</small>
+                    <small id="emailHelp" class="form-text text-muted">비밀번호는 숫자, 특수문자 및 영문자를 포함하여 8자리 이상 입력하세요</small>
 					<div class="valid-feedback"></div>
 				</div>
                 <!-- is-valid is-invalid -->
 
 				<div class="form-group has-danger">
 					<label class="form-label mt-4" for="pwdCheck">비밀번호 재확인</label> 
-					<input type="password" class="form-control" name="pwdCheck" id="pwdCheck" placeholder="비밀번호를 다시한번 입력해주세요">
+					<input type="password" class="form-control" name="pwdCheck" id="pwdCheck"
+						 placeholder="비밀번호를 다시한번 입력해주세요">
 					<span></span>
                     <div class="invalid-feedback">비밀번호가 일치하지 않습니다</div>
 				</div>
@@ -44,7 +45,8 @@
                 	<label class="form-label mt-4">생년월일<span class="obli">(필수)</span></label>
                 <div class="bir_yy">
                 	<span class="ps_box">
-                		<input type="text" class="form-control" name="yy" id="yy" placeholder="년(4자)" maxlength="4">
+                		<input type="text" class="form-control" name="yy" id="yy" 
+                		placeholder="년(4자)" maxlength="4" required>
                 	</span>
                 </div>
                 	<div class="bir_mm">
@@ -146,7 +148,8 @@
                 </div>
                 <div class="form-group">
                     <label for="inputPhone" class="form-label mt-4">전화번호('-'없이 입력해주세요)</label>
-                 <input type="text" class="form-control" name="inputPhone" id="inputPhone" aria-describedby="emailHelp">
+                 <input type="text" class="form-control" name="inputPhone" id="inputPhone" 
+                 	aria-describedby="emailHelp" minlength="9" maxlength="11">
                 </div>
 			    <div class="form-group">
 			      <label class="form-label mt-4">성별</label>
@@ -162,7 +165,8 @@
                       
                 <div class="form-group">
                		<label for="inputEmail" class="form-label mt-4">이메일<span class="obli">(필수)</span></label>
-                    <input type="email" class="form-control" name="inputEmail" id="inputEmail" aria-describedby="emailHelp" placeholder="이메일을 입력해주세요" required>
+                    <input type="email" class="form-control" name="inputEmail" id="inputEmail"
+                    	 aria-describedby="emailHelp" placeholder="이메일을 입력해주세요" required>
                 </div>
                 <div class ="adddressContainer">
                     <label class="form-label mt-4">주소</label>
@@ -196,8 +200,57 @@
 </section>
 <script>
 	const fn_enrollFail=()=>{
-		const inputId=$("#inputId").val().trim();
-		console.log(inputId);
+		//아이디 5자리 이상 필수입력
+// 		const inputId=$("#inputId").val().trim();
+// 		if(inputId.length<5){
+// 			alert("아이디는 5자리 이상 입력해주세요.");
+// 			$("#inputId").focus();
+// 			return false;
+// 		}
+		
+		//비밀번호 필수입력
+// 		const inputPwd=$("#inputPwd").val().trim();
+// 		//숫자, 특문 각 1회 이상, 영문은 2개 이상 사용하여 8자리 이상 입력조건
+// 		const pwdReg=/(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
+		
+// 		if(inputPwd.match(pwdReg)==null){//비밀번호가 입력조건대로 입력되지 않았으면(==실패)
+// 			alert("비밀번호는 숫자, 특수문자 및 영문자를 포함하여 8자리 이상이여야합니다.");
+// 			$("#inputPwd").focus();
+// 			return false;
+// 		}
+
+		//이름 2자리 이상 필수입력
+// 		const inputName=$("#inputName").val().trim();
+// 		if(inputName.length<2){
+// 			alert("이름은 2자리 이상 입력해주세요.");
+// 			$("#inputName").focus();
+// 			return false;
+// 		}
+		
+		//년도 입력
+// 		const yy=$("#yy").val().trim();
+// 		const pattern=/^(19|20)\d{2}$/;//1900~2099년도까지
+// 		if(!pattern.test(yy)){//연도입력이 잘못 되었으면
+// 			alert("올바른 연도를 입력해주세요.");
+// 			$("#yy").focus();
+// 			return false;
+// 		}
+
+		//핸드폰 번호 입력★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+		const inputPhone=$("#inputPhone").val().trim();
+		//console.log(inputPhone);
+// 		return false;
+// 		const phoneReg=/^\d{3}-\d{3,4}-\d{4}$/;//핸드폰 번호(- 없음)
+// 		if(phoneReg.test(inputPhone)){
+// 			console.log(phoneReg.test(inputPhone));
+// 			return false;
+// 		}
+// 		else{
+// 			console.log(!phoneReg.test(inputPhone));//true
+// 			console.log("?");
+// 			return false;
+// 		}
+		
 	}
 </script>
 
@@ -219,28 +272,6 @@
                 } else { // 사용자가 지번 주소를 선택했을 경우(J)
                     addr = data.jibunAddress;
                 }
-
-                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-//                 if(data.userSelectedType === 'R'){
-//                     // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-//                     // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-//                     if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-//                         extraAddr += data.bname;
-//                     }
-//                     // 건물명이 있고, 공동주택일 경우 추가한다.
-//                     if(data.buildingName !== '' && data.apartment === 'Y'){
-//                         extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-//                     }
-//                     // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-//                     if(extraAddr !== ''){
-//                         extraAddr = ' (' + extraAddr + ')';
-//                     }
-//                     // 조합된 참고항목을 해당 필드에 넣는다.
-//                     document.getElementById("sample6_extraAddress").value = extraAddr;
-                
-//                 } else {
-//                     document.getElementById("sample6_extraAddress").value = '';
-//                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('inputAddress_postcode').value = data.zonecode;
