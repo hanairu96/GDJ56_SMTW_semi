@@ -11,7 +11,7 @@
             </div>
             
             <form name="enrollMemberFrm" action="<%=request.getContextPath()%>/logIn/enrollMemberEnd.do" 
-        		method="post" onsubmit="return">
+        		method="post" onsubmit="return fn_enrollFail();">
         		
                 <div class="form-group">
                		<label for="inputId" class="form-label mt-4">아이디<span class="obli">(필수)</span></label>
@@ -19,7 +19,7 @@
                     <input id="idCheck" type="button" value="중복확인">
                     <input type="text" class="form-control" name="inputId" id="inputId" 
                     	aria-describedby="emailHelp" placeholder="아이디를 입력해주세요" required>
-                    <small id="emailHelp" class="form-text text-muted"></small>
+                    <small id="emailHelp" class="form-text text-muted">아이디는 5자리 이상 입력하세요</small>
                 </div>
 				<div class="form-group has-success">
 					<label class="form-label mt-4" for="inputPwd">비밀번호<span class="obli">(필수)</span></label>
@@ -194,6 +194,12 @@
             </form>
         </div>
 </section>
+<script>
+	const fn_enrollFail=()=>{
+		const inputId=$("#inputId").val().trim();
+		console.log(inputId);
+	}
+</script>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
