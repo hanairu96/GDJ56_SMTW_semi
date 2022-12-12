@@ -16,7 +16,7 @@
                 <div class="form-group">
                		<label for="inputId" class="form-label mt-4">아이디<span class="obli">(필수)</span></label>
                     <!-- <a href=""  >중복확인</a> -->
-                    <input id="idCheck"type="button" value="중복확인">
+                    <input id="idCheck" type="button" value="중복확인">
                     <input type="text" class="form-control" name="inputId" id="inputId" 
                     	aria-describedby="emailHelp" placeholder="아이디를 입력해주세요" required>
                     <small id="emailHelp" class="form-text text-muted"></small>
@@ -50,23 +50,23 @@
                 	<div class="bir_mm">
                         <span class="ps_box focus">
                             <select name="month" name="month" id="month" class="custom-select">
-                                <option value="1">1
+                                <option value="01">1
                                 </option>
-                                <option value="2">2
+                                <option value="02">2
                                 </option>
-                                <option value="3">3
+                                <option value="03">3
                                 </option>
-                                <option value="4">4
+                                <option value="04">4
                                 </option>
-                                <option value="5">5
+                                <option value="05">5
                                 </option>
-                                <option value="6">6
+                                <option value="06">6
                                 </option>
-                                <option value="7">7
+                                <option value="07">7
                                 </option>
-                                <option value="8">8
+                                <option value="08">8
                                 </option>
-                                <option value="9">9
+                                <option value="09">9
                                 </option>
                                 <option value="10">10
                                 </option>
@@ -79,23 +79,23 @@
                 	</div>
                     <div class="bir_dd">
                         <select name="day" name="day" id="day" class="custom-select">
-                            <option value="1" selected="selected">1
+                            <option value="01" selected="selected">1
                             </option>
-                            <option value="2">2
+                            <option value="02">2
                             </option>
-                            <option value="3">3
+                            <option value="03">3
                             </option>
-                            <option value="4">4
+                            <option value="04">4
                             </option>
-                            <option value="5">5
+                            <option value="05">5
                             </option>
-                            <option value="6">6
+                            <option value="06">6
                             </option>
-                            <option value="7">7
+                            <option value="07">7
                             </option>
-                            <option value="8">8
+                            <option value="08">8
                             </option>
-                            <option value="9">9
+                            <option value="09">9
                             </option>
                             <option value="10">10
                             </option>
