@@ -40,8 +40,9 @@ public class LogInEndServlet extends HttpServlet {
 		if(m!=null) {
 			HttpSession session=request.getSession();//세션생성
 			session.setAttribute("logInMember", m); //logInMember 세션에 아이디,비번 저장
-			System.out.println(session.getAttribute("logInMember"));
-			response.sendRedirect(request.getContextPath());
+			
+			response.sendRedirect(request.getContextPath());//저장한 세션값 전송
+			
 			System.out.println("로그인 성공");
 		}else {
 			System.out.println("실패");
