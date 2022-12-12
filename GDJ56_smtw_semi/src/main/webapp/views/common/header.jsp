@@ -7,11 +7,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Show Me The Way</title>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/style.css"/>
-<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400&display=swap" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/index.css"/>
+	<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400&display=swap" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 </head>
 <body>
 <header>
