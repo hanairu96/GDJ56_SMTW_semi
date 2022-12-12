@@ -90,10 +90,10 @@
                 <li id="menuli">
                     <div class="hoversection">
                         <div>
-                            <a href=""><img src="<%=request.getContextPath()%>/images/게시판.png" alt="" width="60px" height="60px"></a>
+                            <a href="<%=request.getContextPath()%>/notice/noticeList.do"><img src="<%=request.getContextPath()%>/images/게시판.png" alt="" width="60px" height="60px"></a>
                         </div>
                         <div>
-                            <a href="">게시판</a>
+                            <a href="<%=request.getContextPath()%>/notice/noticeList.do">게시판</a>
                         </div>
                     </div>
                     <!-- 서브메뉴영역 -->
