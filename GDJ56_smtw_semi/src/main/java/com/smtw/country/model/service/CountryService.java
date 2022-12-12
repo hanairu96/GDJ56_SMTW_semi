@@ -6,10 +6,11 @@ import static com.smtw.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.List;
 
+import com.smtw.country.model.dao.CountrytDao;
 import com.smtw.country.model.vo.Country;
 
 public class CountryService {
-
+	private CountrytDao dao=new CountrytDao();
 	
 	public List<Country> searchCountry() {
 		Connection conn=getConnection();
