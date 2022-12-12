@@ -6,9 +6,9 @@
  <!-- ##### 여기 왼쪽 사이드메뉴 div ##### -->
 	<div class="sector">
 	    <div class="sidemenu">
-	        <div><a href=""><p>게시판</p></a></div>
+	        <div><a href="<%=request.getContextPath()%>/notice/noticeList.do"><p>게시판</p></a></div>
 	        <div><a href="<%=request.getContextPath()%>/notice/noticeList.do"><p>공지사항</p></a></div>
-	        <div><a href="<%=request.getContextPath()%>/qna/qnaList.do"><p>자료실</p></a></div>
+	        <div><a href="<%=request.getContextPath()%>/qna/qnaList.do"><p>질문하기</p></a></div>
 	    </div>
 	<!-- ##### 사이드메뉴랑 본내용 구분하는 div ##### -->
 	    <div class="menuDiv"></div>
