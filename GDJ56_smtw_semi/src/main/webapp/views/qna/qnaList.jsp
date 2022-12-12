@@ -5,7 +5,7 @@
 <section>
 	<div class="sector">
 	    <div class="sidemenu">
-	        <div><a href=""><p>게시판</p></a></div>
+	        <div><a href="<%=request.getContextPath()%>/notice/noticeList.do"><p>게시판</p></a></div>
 	        <div><a href="<%=request.getContextPath()%>/notice/noticeList.do"><p>공지사항</p></a></div>
 	        <div><a href="<%=request.getContextPath()%>/qna/qnaList.do"><p>질문하기</p></a></div>
 	    </div>
