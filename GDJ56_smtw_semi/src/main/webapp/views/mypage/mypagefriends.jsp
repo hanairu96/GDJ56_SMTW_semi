@@ -1,6 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="EUC-KR"%>
 <%@include file="/views/common/header.jsp" %>
+<%@ page import="com.smtw.mypage.model.vo.Applyfriends" %>
+<%@ page import="com.smtw.mypage.model.vo.MemberInfo" %>
+<%@ page import="java.util.List" %>
+
+<%
+List<Applyfriends> list =  (List<Applyfriends>)request.getAttribute("list");
+%>
+<%
+List<MemberInfo> infolist =  (List<MemberInfo>)request.getAttribute("infolist");
+%>
+<%
+List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendslist");
+%>
+
     <section>
         <div class="sidemenu">
             <div><h4 style="text-align: center;">마이 페이지</h4></div>
@@ -15,67 +29,53 @@
         <div class="contentList">
             <div id="menutitle"><h2 style="background-color: cornflowerblue;">워홀 프렌즈</h2></div>
             <div id="mypsc">
-                <p>000님 어서 오세요!</p>
+                <p><%=logInMember.getMemberName() %>님 어서 오세요!</p>
                 <img src="<%=request.getContextPath()%>/images/mypage/tomcat.png" alt="" width="200" height="200">
             </div>
             <div id="flist">
                 <p>친구 목록</p>
                 <!-- 크롬은 팝업창 최대화 금지가 안됨 -->
-                <img src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
-                alt="" width="100" height="100" onclick="window.open('mypage-pop_friendclick.jsp','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');"> 
-                <img src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
-                alt="" width="100" height="100" onclick="window.open('mypage-pop_friendclick.jsp','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');"> 
-                <img src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
-                alt="" width="100" height="100" onclick="window.open('mypage-pop_friendclick.jsp','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');"> 
-                <img src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
-                alt="" width="100" height="100" onclick="window.open('mypage-pop_friendclick.jsp','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');"> 
-                <img src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
-                alt="" width="100" height="100" onclick="window.open('mypage-pop_friendclick.jsp','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');"> 
-                <img src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
-                alt="" width="100" height="100" onclick="window.open('mypage-pop_friendclick.jsp','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');"> 
-                <img src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
-                alt="" width="100" height="100" onclick="window.open('mypage-pop_friendclick.jsp','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');"> 
-                <img src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
-                alt="" width="100" height="100" onclick="window.open('mypage-pop_friendclick.jsp','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');"> 
-                <img src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
-                alt="" width="100" height="100" onclick="window.open('mypage-pop_friendclick.jsp','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');"> 
-                <img src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
-                alt="" width="100" height="100" onclick="window.open('mypage-pop_friendclick.jsp','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');"> 
+                <%if(friendslist.isEmpty()){ %>
+                	아직 수락한 친구가 없습니다 :(
+                <%} else{
+                	for(int i=0;i<friendslist.size();i++){
+                %>
+                <form action="<%=request.getContextPath()%>/views/mypage/mypage-pop_friendclick.jsp">
+                <input type="hidden" name="friendName" value="<%=friendslist.get(i).getMemberName()%>"> 
+                <input type="hidden" name="friendAge" value="<%=friendslist.get(i).getAge()%>"> 
+                <input type="hidden" name="friendGender" value="<%=friendslist.get(i).getGender()%>"> 
+               <%--  <img src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
+                alt="" width="100" height="100" method="post" type="submit" onclick="window.open('<%=request.getContextPath()%>/views/mypage/mypage-pop_friendclick.jsp','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');"> --%>
+                <input type="image" id="ficon" name="submit" src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
+                onclick="window.open('<%=request.getContextPath()%>/views/mypage/mypage-pop_friendclick.jsp','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');">>
+                <%}
+                }%>
+                </form>
             </div>
 
             <div id="recievelist">
 
-                <p>친구신청 받은 목록</p>
+                <p>친구신청 받은 목록<p>
 
 
+                <%if(list.isEmpty()){ %>
+                	아직 친구 신청을 보낸 회원이 없습니다 :(
+                <%} else{
+                	for(int i=0;i<list.size();i++){
+                %>
                 <div style="width:800; height:100;border: 1px solid;">
-                    <p style="color: gray; float: right;">친구신청일 : 2022-12-01 </p>
-                    <p style="text-align: center; float: left;">유병승(10/남) 님</p>
-                    <p style="text-align: center;">안녕하세요~ 친구신청 보냅니다.^^
+                    <p style="color: gray; float: right;">친구신청일 : <%=list.get(i).getFEnroll()%></p>
+                    <p style="text-align: center; float: left;">
+                    <%=infolist.get(i).getMemberName()%>(<%=infolist.get(i).getAge()%>/<%=infolist.get(i).getGender()%>)</p>
+                    <p style="text-align: center;"><%=list.get(i).getPropose()%>
                         <button name="수락" value="수락" onclick="window.open('<%=request.getContextPath()%>/mypage/acceptFriends.do','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');">수락</button>
                         <button name="거절" value="거절" onclick="window.open('<%=request.getContextPath()%>/mypage/rejectFriends.do','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');">거절</button>
                     </p>
                 </div>
                 <br>
-                <div style="width:800; height:100;border: 1px solid;">
-                    <p style="color: gray; float: right;">친구신청일 : 2022-12-01 </p>
-                    <p style="text-align: center; float: left;">유병승(10/남) 님</p>
-                    <p style="text-align: center;">안녕하세요~ 친구신청 보냅니다.^^ 
-                    
-                    <!-- 일단 리스트 잘 불러오는 지 확인용 임시버튼 -->
-                        <button name="수락" value="수락" onclick="location.replace('<%=request.getContextPath()%>/mypage/mapageFriends.do');">수락</button>
-                        <button name="거절" value="거절" onclick="">거절</button>
-                    </p>
-                </div>
-                <br>
-                <div style="width:800; height:100;border: 1px solid;">
-                    <p style="color: gray; float: right;">친구신청일 : 2022-12-01 </p>
-                    <p style="text-align: center; float: left;">유병승(10/남) 님</p>
-                    <p style="text-align: center;">안녕하세요~ 친구신청 보냅니다.^^ 
-                        <button name="수락" value="수락" onclick="">수락</button>
-                        <button name="거절" value="거절" onclick="">거절</button>
-                    </p>
-                </div>
+                <%}
+                }%>
+                
                  
             </div>
 
@@ -140,9 +140,11 @@
             width: 600px;
             height: 300px;
         }
-        #flist>img{
+        #ficon{
             float: left;
             margin: 5px;
+            height:100px;
+            width:100px;
         }
         #recievelist{
             border: 1px solid;

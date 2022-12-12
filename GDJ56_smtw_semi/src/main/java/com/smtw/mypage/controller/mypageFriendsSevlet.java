@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.smtw.mapage.model.service.MypageService;
 import com.smtw.mypage.model.vo.Applyfriends;
+import com.smtw.mypage.model.vo.MemberInfo;
 
 /**
  * Servlet implementation class mapageFriendsSevlet
@@ -33,9 +34,15 @@ public class mypageFriendsSevlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//userId가지고 오기
-		String userId="USER01";
+		String userId=request.getParameter("id");
 		List<Applyfriends> list = new MypageService().applyfriendsList(userId);
-		System.out.println(list);
+		List<MemberInfo> infolist = new MypageService().InfoapplyfriendsList(userId);
+		List<MemberInfo> friendslist = new MypageService().FriendsList(userId);
+		request.setAttribute("list",list);
+		request.setAttribute("infolist",infolist);
+		request.setAttribute("friendslist",friendslist);
+		
+		request.getRequestDispatcher("/views/mypage/mypagefriends.jsp").forward(request, response);
 		
 		
 	}

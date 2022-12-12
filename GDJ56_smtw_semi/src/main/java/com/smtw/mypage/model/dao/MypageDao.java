@@ -69,7 +69,6 @@ public class MypageDao {
 			}finally {
 				close(rs);
 				close(pstmt);
-				
 			}return af;
 	}
 	
