@@ -1,0 +1,173 @@
+@charset "UTF-8";
+/* 전체 글씨체 설정 */
+body, pre{
+        font-family: "Hahmlet";
+    }
+    .showme{
+        text-align: center;
+        margin: 5px;
+    }
+    .bar{
+        justify-content: space-between;
+        align-items: center;
+    }
+    .icon{
+        display: flex;
+        justify-content: space-around;
+    }
+    .menuli{
+        position: relative;
+    }
+    .menu{
+        display: flex;
+        justify-content: space-around;
+        list-style-type: none;
+        font-family: "Hahmlet";
+        padding-right: 20px;
+    }
+    .menuTotal{
+        margin-bottom: 10px;
+        height: 140px;
+    }
+    .hoversection{
+        margin-top: 100px;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+    }
+    /* 메인메뉴 글자 */
+    .menu a{ 
+        text-decoration: none;
+        font-size: 25px;
+        color: black;
+        text-shadow: 2px 2px 3px rgb(190, 182, 182);
+    }
+    /* 메인메뉴 배치 */
+    .menu li{
+        display: flex;
+        list-style: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    /* 서부메뉴 div */
+    .sub{
+        position: absolute;
+        margin-top: 300px;
+        display: flex;
+        flex-direction: row;
+    }
+    /* 서브메뉴 배치 */
+    .submenu >li{
+        display: flex;
+        padding-right: 30px;
+        justify-content: center;
+        align-items: center;
+    }
+    /* 서브메뉴 글자 스타일 */
+    .submenu>li>a{
+       font-size: 20px;
+       color: black;
+       text-shadow: 1px 1px 5px #d3bded;
+    }
+    /* 서브메뉴 감추기 */
+    .submenu{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        display:none;
+   }
+    /* 마우스 올리면 서브메뉴 보이기 */
+    .menuTotal:hover .submenu{
+        display: block;
+    }
+    
+  /*  가운데 섹션 영역
+  -->이 부분은 각자 만드는 페이지에서 개별적으로 수정하세요~  
+    section{
+            border: 1px solid tomato;
+            
+            margin-left: 50px;
+            margin-right: 50px;
+            padding-left: 5%;
+            padding-right: 5%;
+            
+                만약 섹션 안에 div를 만든다면 여기 padding-left,padding-right에서
+                좌우 간격을 조정하세요
+                왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
+            
+            margin-top: 100px;
+            height: 700px; 
+            
+                ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
+                높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.
+           
+            display: flex;
+        } */
+    
+    
+    /* 푸터스타일 */
+    .write{
+            float: right;
+        }
+        span#footmain{
+            font-size: 20px;
+            border: 2px;
+            color: black;
+            text-shadow: 2px 2px 2px lightblue;
+        }
+        span#foot{
+            font-size: 15px;
+            color: rgb(104, 103, 103);
+        }
+        #wrap {
+        /* 구조 변경 구문  min-height 100vh를 20%로 변경했음 */
+            min-height: 20%;
+            position: relative;
+            width: 100%;
+        }
+        footer :hover{
+            cursor: pointer;
+        }
+        
+        footer {
+        /* 구조수정 추가구문 */
+            position: absolute;  
+            bottom: 0;
+            height: 100px;
+            left: 60px;
+            right: 60px;
+            position: absolute;
+            border-top: 1px solid rgb(71, 72, 79);
+            padding-top: 10px;
+            padding-bottom: 0px;
+            margin-bottom: 50px;
+            font-family: "Hahmlet";
+        }
+    
+        footer a {
+            display: inline-block;
+            margin: 0 20px 10px 20px;
+            color: #808080;
+            font-size: 11px;
+        }
+    
+        /* footer a:visited {
+        color: #808080;
+        } */
+    
+        footer p {
+            margin-top: 0; margin-bottom: 0;   
+        }
+    
+        footer p span {
+            display: inline-block;
+            margin-left: 20px;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            /* 구조수정추가구문 */
+            height: 100% 
+        }
