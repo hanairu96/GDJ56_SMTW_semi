@@ -6,10 +6,11 @@
 	<div class="wrapper">
 	    <div id="login">
 	        <h1>Show Me The Way</h1>
-	        <form action="">
-	            <input class="logInform" type="text" placeholder="아이디"><br>
-	            <input class="logInform" type="password" placeholder="비밀번호"><br>
-	            <!-- <span><small>비밀번호가 틀립니다</small></span><br> -->
+	        <form id="loginForm" action="<%=request.getContextPath()%>/logIn/logInEnd.do" method="post">
+	            <input class="logInform" name="logInId" type="text" placeholder="아이디"><br>
+	            <input class="logInform" name="logInPwd" type="password" placeholder="비밀번호"><br>
+	            <span id="pwdCheck"><small></small></span>
+	            <br>
 	            <button id="loginBtn" class="customBtn btnStyle">로그인</button>
 	        </form>
 	        <a href="<%=request.getContextPath()%>/logIn/enrollMember.do">회원가입</a><span> / </span>
