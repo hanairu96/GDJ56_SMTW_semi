@@ -9,20 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.smtw.member.model.service.MemberService;
-import com.smtw.member.model.vo.Member;
-
 /**
- * Servlet implementation class LogInEndServlet
+ * Servlet implementation class LogOutServlet
  */
-@WebServlet("/logIn/logInEnd.do")
-public class LogInEndServlet extends HttpServlet {
+@WebServlet("/logIn/logOut.do")
+public class LogOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogInEndServlet() {
+    public LogOutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,24 +28,12 @@ public class LogInEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String logInId=request.getParameter("logInId");
-		String logInPwd=request.getParameter("logInPwd");
+		//로그아웃 시 세션삭제
+		HttpSession session=request.getSession(false);
 		
-		//아이디와 패스워드로 로그인하여 정보 가져오기
-		Member m=new MemberService().searchIdPwd(logInId,logInPwd);
+		if(session!=null) session.invalidate();
 		
-		if(m!=null) {
-			HttpSession session=request.getSession();//세션생성
-			session.setAttribute("logInMember", m); //logInMember 세션에 아이디,비번 저장
-			
-			response.sendRedirect(request.getContextPath());//저장한 세션값 전송
-			
-			System.out.println("로그인 성공");
-		}else {
-			System.out.println("실패");
-		}
-		
-		
+		response.sendRedirect(request.getContextPath());
 	}
 
 	/**

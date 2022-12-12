@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.smtw.member.model.vo.Member" %>
+<%
+	Member logInMember=(Member)session.getAttribute("logInMember");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,17 +113,25 @@
                         <div>
                             <a href="<%=request.getContextPath()%>/logIn/logIn.do"><img src="<%=request.getContextPath()%>/images/로그인.png" alt="" width="60px" height="60px"></a>
                         </div>
-                        <div>
-                            <a href="<%=request.getContextPath()%>/logIn/logIn.do">로그인</a>
+                        <!-- 로그인 유무에 따라 메뉴 다르게 보임 -->
+                        <%if(logInMember==null){ %>
+                        	<div>
+                            	<a href="<%=request.getContextPath()%>/logIn/logIn.do">로그인</a>
+                        	</div>
                         </div>
-                    </div>
-                    <!-- 서브메뉴영역 -->
-                    <div class="sub">
-                        <ul class="submenu">
-                            <li><a href="">쪽지함</a></li>
-                            <li><a href="">로그아웃</a></li>
-                        </ul>
-                    </div>
+                        <%}else{ %>
+	                        <div>
+	                            <a href="">마이페이지</a>
+	                        </div>
+	                    </div>
+	                    <!-- 서브메뉴영역 -->
+	                    <div class="sub">
+	                        <ul class="submenu">
+	                            <li><a href="">쪽지함</a></li>
+	                            <li><a href="<%=request.getContextPath()%>/logIn/logOut.do">로그아웃</a></li>
+	                        </ul>
+	                    </div>
+                        <%} %>
                 </li>
             </ul>
         </div>

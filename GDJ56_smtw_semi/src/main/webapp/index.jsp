@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.smtw.member.model.vo.Member" %>
+<%
+	Member logInMember=(Member)session.getAttribute("logInMember");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +23,7 @@
 <header>
         <div class="showme">
             <div class="logo">
-                <a href="Main.html"><img src="<%=request.getContextPath()%>/images/ShowMeTheWay45.jpg" alt=""></a>            
+                <a href="<%=request.getContextPath()%>"><img src="<%=request.getContextPath()%>/images/ShowMeTheWay45.jpg" alt=""></a>            
                 <!--카카오톡 공유하기 아이콘 -->
                 <a id="kakaotalk-sharing-btn" href="javascript:window.scrollTo(0.750);">
                     <img src="https://w7.pngwing.com/pngs/978/183/png-transparent-computer-icons-share-icon-share-button-monochrome-share-icon-icon-download.png"
@@ -124,26 +128,31 @@
                         <div>
                             <a href="<%=request.getContextPath()%>/logIn/logIn.do"><img src="<%=request.getContextPath()%>/images/로그인.png" alt="" width="60px" height="60px"></a>
                         </div>
-                        <div>
-                            <a href="<%=request.getContextPath()%>/logIn/logIn.do">로그인</a>
+                        <!-- 로그인 유무에 따라 메뉴 다르게 보임 -->
+                        <%if(logInMember==null){ %>
+                        	<div>
+                            	<a href="<%=request.getContextPath()%>/logIn/logIn.do">로그인</a>
+                        	</div>
                         </div>
-                    </div>
-                    <!-- 서브메뉴영역 -->
-                    <div class="sub">
-                        <ul class="submenu">
-                            <li><a href="">쪽지함</a></li>
-                            <li><a href="">로그아웃</a></li>
-                        </ul>
-                    </div>
+                        <%}else{ %>
+	                        <div>
+	                            <a href="">마이페이지</a>
+	                        </div>
+	                    </div>
+	                    <!-- 서브메뉴영역 -->
+	                    <div class="sub">
+	                        <ul class="submenu">
+	                            <li><a href="">쪽지함</a></li>
+	                            <li><a href="<%=request.getContextPath()%>/logIn/logOut.do">로그아웃</a></li>
+	                        </ul>
+	                    </div>
+                        <%} %>
                 </li>
             </ul>
         </div>
     </div>
     <!-- 배너 -->
         <div id="banner" style="top: 350px;">
-            <!-- <div id="msg" style="background-color: rgb(157, 215, 248);">
-                <h5 class="txt-label">사전알림서비스 신청</h5> 
-            </div>-->
             <div id="insurance" style="background-color: rgb(224, 185, 247);">
                 <h5 class="txt-label">INSURANCE</h5>
                 <span class="txt-label" style="font-size: 11px">여행자(워홀) 보험</span>
@@ -152,9 +161,6 @@
                 <h5 class="txt-label">MOBILE</h5>
                 <span class="txt-label" style="font-size: 11px;">여행자 유심칩 공동구매</span>
             </div>
-            <!-- <div id="bigmac" style="background-color: rgb(247, 168, 123);">
-                <h5 class="txt-label">오늘의 빅맥지수는?</h5>
-            </div> -->
             <div id="myfly" style="background-color: rgb(181, 247, 211);">
                 <h5 class="txt-label">나의 출국일지</h5>
             </div>
