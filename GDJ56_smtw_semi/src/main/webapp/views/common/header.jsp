@@ -13,7 +13,7 @@
 <header>
         <div class="showme">
             <div class="logo">
-                <a href="Main.html"><img src="<%=request.getContextPath()%>/images/ShowMeTheWay45.jpg" alt=""></a>          
+                <a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/ShowMeTheWay45.jpg" alt=""></a>          
             </div>
         </div>
     <div class="bar">
@@ -56,17 +56,17 @@
                 <li id="menuli">
                     <div class="hoversection">
                         <div>
-                            <a href="LeavingDiaryFirst.html"><img src="<%=request.getContextPath()%>/images/참여하기.png" alt="" width="60px" height="60px"></a>
+                            <a href="<%=request.getContextPath()%>/diary/firstDiary.do"><img src="<%=request.getContextPath()%>/images/참여하기.png" alt="" width="60px" height="60px"></a>
                         </div>
                         <div>
-                            <a href="LeavingDiaryFirst.html">참여하기</a>
+                            <a href="<%=request.getContextPath()%>/diary/firstDiary.do">참여하기</a>
                         </div>
                     </div>
                     <!-- 서브메뉴영역 -->
                     <div class="sub">
                         <ul class="submenu">
-                            <li><a href="LeavingDiaryFirst.html">나의 출국일지</a></li>
-                            <li><a href="MyCountry.html">나에게 맞는 나라찾기</a></li>
+                            <li><a href="<%=request.getContextPath()%>/diary/firstDiary.do">나의 출국일지</a></li>
+                            <li><a href="<%=request.getContextPath()%>/mycountry/myCountry.do">나에게 맞는 나라찾기</a></li>
                         </ul>
                     </div>
                 </li>
