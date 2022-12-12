@@ -52,8 +52,8 @@
                     <p style="color: gray; float: right;">친구신청일 : 2022-12-01 </p>
                     <p style="text-align: center; float: left;">유병승(10/남) 님</p>
                     <p style="text-align: center;">안녕하세요~ 친구신청 보냅니다.^^
-                        <button name="수락" value="수락" onclick="">수락</button>
-                        <button name="거절" value="거절" onclick="">거절</button>
+                        <button name="수락" value="수락" onclick="window.open('<%=request.getContextPath()%>/mypage/acceptFriends.do','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');">수락</button>
+                        <button name="거절" value="거절" onclick="window.open('<%=request.getContextPath()%>/mypage/rejectFriends.do','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');">거절</button>
                     </p>
                 </div>
                 <br>
@@ -61,7 +61,9 @@
                     <p style="color: gray; float: right;">친구신청일 : 2022-12-01 </p>
                     <p style="text-align: center; float: left;">유병승(10/남) 님</p>
                     <p style="text-align: center;">안녕하세요~ 친구신청 보냅니다.^^ 
-                        <button name="수락" value="수락" onclick="location.replace('<%=request.getContextPath()%>/mapage/mapageFriends.do');">수락</button>
+                    
+                    <!-- 일단 리스트 잘 불러오는 지 확인용 임시버튼 -->
+                        <button name="수락" value="수락" onclick="location.replace('<%=request.getContextPath()%>/mypage/mapageFriends.do');">수락</button>
                         <button name="거절" value="거절" onclick="">거절</button>
                     </p>
                 </div>
