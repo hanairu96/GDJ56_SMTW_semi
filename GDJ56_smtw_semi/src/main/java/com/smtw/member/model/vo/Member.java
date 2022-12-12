@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 public class Member {
-	private String userId;
-	private String password;
-	private String userName;
+	private String memberId;
+	private String memberPwd;
+	private String memberName;
 	private String email;
 	private String phone;
 	private String birth;
