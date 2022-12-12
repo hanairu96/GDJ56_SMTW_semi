@@ -135,9 +135,15 @@
                         	</div>
                         </div>
                         <%}else{ %>
-	                        <div>
-	                            <a href="">마이페이지</a>
-	                        </div>
+                        	<%if(logInMember.getMemberId().equals("ADMIN")) {%>
+		                        <div>
+		                            <a href="<%=request.getContextPath()%>/admin/memberList.do">관리자페이지</a>
+		                        </div>
+                        	<%}else {%>
+		                        <div>
+		                            <a href="">마이페이지</a>
+		                        </div>
+                        	<%} %>
 	                    </div>
 	                    <!-- 서브메뉴영역 -->
 	                    <div class="sub">
