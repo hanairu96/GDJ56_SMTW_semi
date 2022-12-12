@@ -13,7 +13,7 @@
 <header>
         <div class="showme">
             <div class="logo">
-                <a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/ShowMeTheWay45.jpg" alt=""></a>          
+            	<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/ShowMeTheWay45.jpg" alt=""></a>
             </div>
         </div>
     <div class="bar">
@@ -90,10 +90,10 @@
                 <li id="menuli">
                     <div class="hoversection">
                         <div>
-                            <a href=""><img src="<%=request.getContextPath()%>/images/게시판.png" alt="" width="60px" height="60px"></a>
+                            <a href="<%=request.getContextPath()%>/notice/noticeList.do"><img src="<%=request.getContextPath()%>/images/게시판.png" alt="" width="60px" height="60px"></a>
                         </div>
                         <div>
-                            <a href="">게시판</a>
+                            <a href="<%=request.getContextPath()%>/notice/noticeList.do">게시판</a>
                         </div>
                     </div>
                     <!-- 서브메뉴영역 -->
@@ -107,10 +107,10 @@
                 <li id="menuli">
                     <div class="hoversection">
                         <div>
-                            <a href=""><img src="<%=request.getContextPath()%>/images/로그인.png" alt="" width="60px" height="60px"></a>
+                            <a href="<%=request.getContextPath()%>/logIn/logIn.do"><img src="<%=request.getContextPath()%>/images/로그인.png" alt="" width="60px" height="60px"></a>
                         </div>
                         <div>
-                            <a href="">로그인</a>
+                            <a href="<%=request.getContextPath()%>/logIn/logIn.do">로그인</a>
                         </div>
                     </div>
                     <!-- 서브메뉴영역 -->
