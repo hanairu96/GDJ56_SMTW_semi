@@ -13,7 +13,7 @@
 <header>
         <div class="showme">
             <div class="logo">
-                <a href="Main.html"><img src="<%=request.getContextPath()%>/images/ShowMeTheWay45.jpg" alt=""></a>          
+                <a href="<%=request.getContextPath()%>"><img src="<%=request.getContextPath()%>/images/ShowMeTheWay45.jpg" alt=""></a>          
             </div>
         </div>
     <div class="bar">
@@ -107,10 +107,10 @@
                 <li id="menuli">
                     <div class="hoversection">
                         <div>
-                            <a href=""><img src="<%=request.getContextPath()%>/images/로그인.png" alt="" width="60px" height="60px"></a>
+                            <a href="<%=request.getContextPath()%>/logIn/logIn.do"><img src="<%=request.getContextPath()%>/images/로그인.png" alt="" width="60px" height="60px"></a>
                         </div>
                         <div>
-                            <a href="">로그인</a>
+                            <a href="<%=request.getContextPath()%>/logIn/logIn.do">로그인</a>
                         </div>
                     </div>
                     <!-- 서브메뉴영역 -->
