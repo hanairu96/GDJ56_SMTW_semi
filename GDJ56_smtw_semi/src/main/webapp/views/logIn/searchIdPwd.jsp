@@ -7,18 +7,18 @@
 <section>
 	<div class="container py-4">
 	    <div class="row align-items-center justify-content-between" id="insert">
-	        <a href="" class="text-dark h4">아이디 찾기</a>
-	        <a href="" class="text-dark h4">비밀번호 찾기</a>
+	        <h2 class="text-dark h4" onclick="fn_searchId();" id="searchIdtext" style="font-weight: bold;">아이디 찾기</h2>
+	        <h2 class="text-dark h4" onclick="fn_searchPwd();" id="searchPwdtext">비밀번호 찾기</h2>
 	    </div>
 	    <form>
 	        <small id="emailHelp" class="form-text text-muted">
 	            가입 당시 입력한 <b>이메일</b>을 통해 비밀번호를 재설정해주세요.<br>
 	            비밀번호는 고객님의 소중한 개인정보로 고객센터에서 안내 또는 수정이 불가합니다.
 	        </small>
-<!-- 	        <div class="form-group"> -->
-<!-- 	       		<label for="exampleInputId" class="form-label mt-4">아이디　　</label> -->
-<!-- 	            <input type="text" class="" id="exampleInputId" aria-describedby="emailHelp" > -->
-<!-- 	        </div> -->
+	        <div id="searchIdContainer" class="form-group"  style="display: none;">
+	       		<label for="exampleInputId" class="form-label mt-4">아이디　　</label>
+	            <input type="text" class="" id="exampleInputId" aria-describedby="emailHelp" >
+	        </div>
 	        <div class="form-group">
 	       		<label for="exampleInputName" class="form-label mt-4">이름　　　</label>
 	            <input type="text" class="" id="exampleInputName" aria-describedby="emailHelp">
@@ -38,9 +38,26 @@
 	                <button id="searchIdPwd" class="customBtn btnStyle" type="submit">다음</button>
 	            </div>
 	        </div>
-	
 	    </form>
 	</div>
+	<script>
+		const fn_searchId=()=>{
+			$("#searchIdContainer").hide();
+			$("#searchIdtext").css("font-weight","bold");
+			$("#searchPwdtext").css("font-weight","normal");
+			
+		}
+		const fn_searchPwd=()=>{
+			$("#searchIdContainer").show();
+			$("#searchPwdtext").css("font-weight","bold");
+			$("#searchIdtext").css("font-weight","normal");
+		}
+	</script>
+	<style>
+		.text-dark:hover{
+			cursor: pointer;
+		}
+	</style>
 </section>
 
 <%@include file="/views/common/footer.jsp" %>

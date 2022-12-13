@@ -13,7 +13,7 @@
 	            <br>
 	            <button id="loginBtn" class="customBtn btnStyle">로그인</button>
 	        </form>
-	        <a href="<%=request.getContextPath()%>/logIn/enrollMember.do">회원가입</a><span> / </span>
+	        <a href="<%=request.getContextPath()%>/logIn/enrollAgree.do">회원가입</a><span> / </span>
 	        <a href="<%=request.getContextPath()%>/logIn/searchIdPwd.do">아이디 또는 비밀번호 찾기</a>
 	    </div>
 	</div>
