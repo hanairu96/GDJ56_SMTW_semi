@@ -116,13 +116,13 @@ public class FriendsDao {
 		}return result;
 	}
 	
-	public Friends selectFriendsId(Connection conn, String FriendsId) {
+	public Friends selectFriendsId(Connection conn, String id) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		Friends m=null;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectFriendsId"));
-			pstmt.setString(1, FriendsId);
+			pstmt.setString(1, id);
 			rs=pstmt.executeQuery();
 			if(rs.next()) m=getFriends(rs);
 		}catch(SQLException e) {
@@ -133,12 +133,12 @@ public class FriendsDao {
 		}return m;
 	}
 	
-	public int deleteFriends(Connection conn, String id) {
+	public int deleteFriends(Connection conn, int no) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("deleteFriends"));
-			pstmt.setString(1, id);
+			pstmt.setInt(1, no);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -153,7 +153,7 @@ public class FriendsDao {
 				.friendsNo(rs.getInt("Friends_No"))
 				.nName(rs.getString("n_Name"))
 				.friendsTitle(rs.getString("friends_Title"))
-				.friendsContents(rs.getString("friends_Contents"))
+				//.friendsContents(rs.getString("friends_Contents"))
 				.enrollDate(rs.getDate("enroll_Date"))
 				.memberId(rs.getString("member_Id"))
 				.mbti(rs.getString("mbti"))
