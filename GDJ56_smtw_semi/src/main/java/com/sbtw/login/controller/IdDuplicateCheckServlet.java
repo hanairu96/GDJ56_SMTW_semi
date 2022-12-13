@@ -1,23 +1,29 @@
-package com.smtw.mycountry.controller;
+package com.sbtw.login.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+import com.google.gson.Gson;
+import com.smtw.member.model.service.MemberService;
+import com.smtw.member.model.vo.Member;
+
 /**
- * Servlet implementation class MyCountryServlet
+ * Servlet implementation class IdDuplicateCheckServlet
  */
-@WebServlet(name="myCountry", urlPatterns="/mycountry/myCountry.do")
-public class MyCountryServlet extends HttpServlet {
+@WebServlet("/logIn/idDuplicateCheck.do")
+public class IdDuplicateCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyCountryServlet() {
+    public IdDuplicateCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +32,13 @@ public class MyCountryServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String inputId=request.getParameter("inputId");
+//		System.out.println(id);
+		//아이디중복확인
+		Member m=new MemberService().idDuplicateCheck(inputId);
 		
-		request.getRequestDispatcher("/views/mycountry/myCountry.jsp").forward(request, response);
+		response.setContentType("application/json;charset=utf-8");
+		new Gson().toJson(m, response.getWriter());
 	}
 
 	/**

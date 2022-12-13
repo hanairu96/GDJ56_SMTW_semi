@@ -3,6 +3,9 @@
 <%@include file="/views/common/header.jsp" %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/firstDiary.css"/>
 
+<%
+	String memberId=(String)request.getAttribute("memberId");
+%>
 <section>
 	<div class="sector">
             <div class="sidemenu">
@@ -17,10 +20,12 @@
                 <h1>나의 출국일지</h1>
                 <div id="insertLeavingDate">
                     <fieldset id="leavingfield">
-                        <legend>출국일 입력</legend>
-                            <form action="<%=request.getContextPath()%>/diary/myDiary.do" method="post" id="insertDateform">
-                                <input type="date" id="leavingday"><br>
-                                <button class="customBtn btnStyle" type="submit" id="leabingDiaryBtn" >확인</button>
+                        <legend>나의 출국일지 등록</legend>
+                            <form action="<%=request.getContextPath()%>/diary/myDiary.do?memberId=<%=memberId%>" method="post" id="insertDateform">
+                                출국일 : <input type="date" name="leavingdate" id="leavingdate"><br>
+                                <input type="checkbox" name="alarm" id="alarm">출국 10일전 알람서비스<br>
+                                <input type="hidden" name="alarmcheck" value="N" id="alarmcheck"/>
+                                <button class="customBtn btnStyle" type="submit" name="leabingDiaryBtn" id="leabingDiaryBtn">확인</button>
                             </form>
                     </fieldset>
                 </div>  
@@ -47,6 +52,16 @@
               }, 500);
           }).scroll();
       });
+      
+      $("#alarm").change(function(){
+    	 if($("#alarm").is(":checked")){
+    		 $("#alarmcheck").attr("value","Y");
+    	 }else{
+    		 $("#alarmcheck").attr("value","N");
+    	 }
+    	 console.log( $("#alarmcheck").val());
+      });
+      
 </script> 
 
 <%@include file="/views/common/footer.jsp" %>

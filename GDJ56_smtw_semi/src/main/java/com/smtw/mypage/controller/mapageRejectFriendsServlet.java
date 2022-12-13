@@ -1,4 +1,4 @@
-package com.smtw.mycountry.controller;
+package com.smtw.mypage.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,17 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.smtw.mapage.model.service.MypageService;
+
 /**
- * Servlet implementation class MyCountryServlet
+ * Servlet implementation class mapageRejectFriendsServlet
  */
-@WebServlet(name="myCountry", urlPatterns="/mycountry/myCountry.do")
-public class MyCountryServlet extends HttpServlet {
+@WebServlet("/mypage/rejectFriends.do")
+public class mapageRejectFriendsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyCountryServlet() {
+    public mapageRejectFriendsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +28,26 @@ public class MyCountryServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	
 		
-		request.getRequestDispatcher("/views/mycountry/myCountry.jsp").forward(request, response);
+		String userId=request.getParameter("id");
+		String memberFrom = request.getParameter("memberfrom");
+		int result = new MypageService().rejectFriends(userId,memberFrom);
+		
+		
+		String msg="", loc="";
+		if(result<1) {
+			msg="친구 신청 거절에 실패했습니다. 다시 시도해주세요";
+		}else {
+			msg="친구 신청를 거절하셨습니다!";
+		}
+		loc="/mypage/mypageFriends.do?id="+userId;
+		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		
 	}
 
 	/**

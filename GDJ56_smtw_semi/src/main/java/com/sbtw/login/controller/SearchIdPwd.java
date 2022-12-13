@@ -1,4 +1,4 @@
-package com.smtw.mycountry.controller;
+package com.sbtw.login.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MyCountryServlet
+ * Servlet implementation class SearchIdPwd
  */
-@WebServlet(name="myCountry", urlPatterns="/mycountry/myCountry.do")
-public class MyCountryServlet extends HttpServlet {
+@WebServlet("/logIn/searchIdPwd.do")
+public class SearchIdPwd extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyCountryServlet() {
+    public SearchIdPwd() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,7 @@ public class MyCountryServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.getRequestDispatcher("/views/mycountry/myCountry.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/logIn/searchIdPwd.jsp").forward(request, response);
 	}
 
 	/**

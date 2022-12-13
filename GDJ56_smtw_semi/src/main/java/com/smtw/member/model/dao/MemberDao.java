@@ -77,6 +77,29 @@ public class MemberDao {
 		}
 		return m;
 	}
+	
+	//아이디중복확인
+	public Member idDuplicateCheck(Connection conn,String inputId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("idDuplicateCheck"));
+			pstmt.setString(1, inputId);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) m=getMember(rs);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return m;
+	}
+	
+	
+	
 		
 	
 	private Member getMember(ResultSet rs) throws SQLException {

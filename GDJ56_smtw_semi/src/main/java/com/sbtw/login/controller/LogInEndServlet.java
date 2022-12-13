@@ -45,7 +45,10 @@ public class LogInEndServlet extends HttpServlet {
 			
 			System.out.println("로그인 성공");
 		}else {
-			System.out.println("실패");
+			request.setAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
+			request.setAttribute("loc", "/logIn/logIn.do");//		/저장해놓기
+			request.getRequestDispatcher("/views/common/msg.jsp")
+			.forward(request, response);
 		}
 		
 		

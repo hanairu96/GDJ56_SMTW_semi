@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="EUC-KR"%>
+<%@ page import="com.smtw.mypage.model.vo.MemberInfo" %>
+
+<%
+	String friendName = (String)request.getParameter("friendName");
+	String friendAge = (String)request.getParameter("friendAge");
+	String friendGender = (String)request.getParameter("friendGender");
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +24,7 @@
             <img src="<%=request.getContextPath()%>/images/mypage/mail.png" id="mail" width="60" height="60" alt="" onclick="">
         </div>
         
-        <div height="117" id="text"><h2>È«±æµ¿(19/³²)</h2> 
+        <div height="117" id="text"><h2><%=friendName %>(<%=friendAge %>/<%=friendGender %>)</h2> 
            <br>
         </div>
         <button onclick="window.close()">´Ý±â</button>
