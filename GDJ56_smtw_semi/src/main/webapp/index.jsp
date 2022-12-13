@@ -84,8 +84,8 @@
                     <!-- 서브메뉴영역 -->
                     <div class="sub">
                         <ul class="submenu">
-                            <li><a href="<%=request.getContextPath()%>/diary/firstDiary.do">나의 출국일지</a></li>
-                            <li><a href="<%=request.getContextPath()%>/mycountry/myCountry.do">나에게 맞는 나라찾기</a></li>
+                             <li><a href="<%=request.getContextPath() %>/diary/firstDiary.do">나의 출국일지</a></li>																	
+                             <li><a href="<%=request.getContextPath() %>/mycountry/myCountry.do">나에게 맞는 나라찾기</a></li>
                         </ul>
                     </div>
                 </li>
@@ -144,10 +144,10 @@
 		                        </div>
                         	<%}else{%>
 		                        <div>
-		                         <a href="<%=request.getContextPath()%>/mypage/mypagefriends.do?id=<%=logInMember.getMemberId()%>;"><img src="<%=request.getContextPath()%>/images/로그인.png" alt="" width="60px" height="60px"></a>
+		                         <a href="<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>"><img src="<%=request.getContextPath()%>/images/로그인.png" alt="" width="60px" height="60px"></a>
 		                            </div>
 		                           <div> 
-		                            <a href="<%=request.getContextPath()%>/mypage/mypagefriends.do?id=<%=logInMember.getMemberId()%>;">마이페이지</a>
+		                            <a href="<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>">마이페이지</a>
 		                        </div>
                         	<%} %>
 	                    </div>

@@ -43,11 +43,11 @@ public class MyDiaryServlet extends HttpServlet {
 		
 		if(result>0) {
 			msg="나의 출국일지 저장 성공";
-			loc="/diary/firstDiary.do";
 		}else {
 			msg="나의 출국일지 저장 실패";
-			loc="/diary/firstDiary.do";
 		}
+		loc="/diary/firstDiary.do";
+		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		

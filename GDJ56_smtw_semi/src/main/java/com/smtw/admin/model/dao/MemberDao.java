@@ -133,12 +133,12 @@ public class MemberDao {
 		}return m;
 	}
 	
-	public int deleteMember(Connection conn, Member m) {
+	public int deleteMember(Connection conn, String id) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("deleteMember"));
-			pstmt.setString(1, m.getMemberId());
+			pstmt.setString(1, id);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

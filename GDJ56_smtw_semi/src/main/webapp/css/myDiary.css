@@ -16,7 +16,7 @@
                 왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
              */
             margin-top: 100px;
-            height: 1000px; 
+            height: 1030px; 
             /*
                 ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
                 높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.
@@ -79,7 +79,7 @@
             border: 2px solid black;
             border-radius: 10px;
             width: 70%;
-            height: 900px;
+            height: 1020px;
             text-align: center;
         }
         /* "나의출국일지"폰트스타일 */
@@ -135,14 +135,23 @@
             align-content: center;
             align-tracks: center;
             text-align: center;
-            margin-left: 350px;
+            margin-left: 35px;
         }
         
         /* 디데이영역 */
         .dday{
             align-items: center;
             display: flex;
+            flex-direction: column;
+        }
+        .dday2{
+         	align-items: center;
+            display: flex;
             flex-direction: row;
+        }
+        #ddayfont{
+        	color: red;
+        	font-size: 35px;
         }
         /* 비행기이미지 */
         #plane{
