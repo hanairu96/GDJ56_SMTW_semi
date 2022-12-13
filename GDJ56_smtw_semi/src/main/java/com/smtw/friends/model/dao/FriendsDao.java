@@ -1,4 +1,4 @@
-package com.smtw.admin.model.dao;
+package com.smtw.friends.model.dao;
 
 import static com.smtw.common.JDBCTemplate.close;
 
@@ -12,14 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.smtw.member.model.vo.Member;
+import com.smtw.friends.model.vo.Friends;
 
-public class MemberDao {
+public class FriendsDao {
 	
 	private Properties sql=new Properties();
 	
-	public MemberDao() {
-		String path=MemberDao.class.getResource("/sql/admin/admin_sql.properties").getPath();
+	public FriendsDao() {
+		String path=FriendsDao.class.getResource("/sql/friends/friends_sql.properties").getPath();
 		try {
 			sql.load(new FileReader(path));
 		}catch(IOException e) {
@@ -27,20 +27,20 @@ public class MemberDao {
 		}
 	}
 	
-	public List<Member> selectMemberList(Connection conn, int cPage, int numPerpage){
+	public List<Friends> selectFriendsList(Connection conn, int cPage, int numPerpage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		List<Member> result=new ArrayList();
+		List<Friends> result=new ArrayList();
 		
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectMemberList"));
+			pstmt=conn.prepareStatement(sql.getProperty("selectFriendsList"));
 
 			pstmt.setInt(1, (cPage-1)*numPerpage+1);
 			pstmt.setInt(2, cPage*numPerpage);
 			
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				result.add(getMember(rs));
+				result.add(getFriends(rs));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -51,12 +51,12 @@ public class MemberDao {
 		return result;
 	}
 	
-	public int selectMemberCount(Connection conn) {
+	public int selectFriendsCount(Connection conn) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int count=0;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectMemberCount"));
+			pstmt=conn.prepareStatement(sql.getProperty("selectFriendsCount"));
 			rs=pstmt.executeQuery();
 			if(rs.next()) count=rs.getInt(1);
 		}catch(SQLException e) {
@@ -67,13 +67,13 @@ public class MemberDao {
 		}return count;
 	}
 	
-	public List<Member> selectMemberList(Connection conn, String type, String keyword,
+	public List<Friends> selectFriendsList(Connection conn, String type, String keyword,
 			int cPage, int numPerpage) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		List<Member> result=new ArrayList();
-		String query=sql.getProperty("selectMemberListKeyword");
-		//SELECT * FROM MEMBER WHERE $COL LIKE ?
+		List<Friends> result=new ArrayList();
+		String query=sql.getProperty("selectFriendsListKeyword");
+		//SELECT * FROM Friends WHERE $COL LIKE ?
 		query=query.replace("$COL", type);
 		
 		try {
@@ -85,7 +85,7 @@ public class MemberDao {
 			
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				result.add(getMember(rs));
+				result.add(getFriends(rs));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -97,11 +97,11 @@ public class MemberDao {
 	
 	}
 	
-	public int selectMemberCount(Connection conn, String type, String keyword) {
+	public int selectFriendsCount(Connection conn, String type, String keyword) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int result=0;
-		String query=sql.getProperty("selectMemberCountKeyword");
+		String query=sql.getProperty("selectFriendsCountKeyword");
 		query=query.replace("$COL", type);
 		try {
 			pstmt=conn.prepareStatement(query);
@@ -116,15 +116,15 @@ public class MemberDao {
 		}return result;
 	}
 	
-	public Member selectMemberId(Connection conn, String memberId) {
+	public Friends selectFriendsId(Connection conn, String id) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		Member m=null;
+		Friends m=null;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectMemberId"));
-			pstmt.setString(1, memberId);
+			pstmt=conn.prepareStatement(sql.getProperty("selectFriendsId"));
+			pstmt.setString(1, id);
 			rs=pstmt.executeQuery();
-			if(rs.next()) m=getMember(rs);
+			if(rs.next()) m=getFriends(rs);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -133,12 +133,12 @@ public class MemberDao {
 		}return m;
 	}
 	
-	public int deleteMember(Connection conn, String id) {
+	public int deleteFriends(Connection conn, int no) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("deleteMember"));
-			pstmt.setString(1, id);
+			pstmt=conn.prepareStatement(sql.getProperty("deleteFriends"));
+			pstmt.setInt(1, no);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -148,18 +148,19 @@ public class MemberDao {
 		return result;
 	}
 	
-	public static Member getMember(ResultSet rs) throws SQLException {
-		return Member.builder()
+	public static Friends getFriends(ResultSet rs) throws SQLException {
+		return Friends.builder()
+				.friendsNo(rs.getInt("Friends_No"))
+				.nName(rs.getString("n_Name"))
+				.friendsTitle(rs.getString("friends_Title"))
+				//.friendsContents(rs.getString("friends_Contents"))
+				.enrollDate(rs.getDate("enroll_Date"))
 				.memberId(rs.getString("member_Id"))
-				.memberPwd(rs.getString("member_Pwd"))
-				.memberName(rs.getString("member_Name"))
-				.email(rs.getString("email"))
-				.phone(rs.getString("phone"))
-				.birth(rs.getString("birth"))
-				.gender(rs.getString("gender").charAt(0))
-				.address(rs.getString("address"))
-				.myImg(rs.getString("myimg"))
-				.emailAgree(rs.getString("email_Agree").charAt(0))
+				.mbti(rs.getString("mbti"))
+				.type(rs.getString("type"))
+				.introduce(rs.getString("introduce"))
+				.filed(rs.getString("filed").charAt(0))
+				.purpose(rs.getString("purpose"))
 				.build();
 	}
 

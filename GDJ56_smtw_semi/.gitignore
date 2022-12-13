@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 src/main/webapp/WEB-INF/classes/
 src/main/resources/
 Scripts/
+=======
+src/main/webapp/WEB-INF/classes/
+src/main/resources/
+Scripts/
+>>>>>>> branch 'dongmin' of https://github.com/thereisri/GDJ56_SMTW_semi.git
 .dbeaver/
