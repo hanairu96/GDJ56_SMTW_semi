@@ -29,7 +29,7 @@ List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendsl
         <div class="contentList">
             <div id="menutitle"><h2 style="background-color: cornflowerblue;">워홀 프렌즈</h2></div>
             <div id="mypsc">
-                <p><%=logInMember.getMemberName() %>님 어서 오세요!</p>
+                <p><%=logInMember.getMemberName()%>님 어서 오세요!</p>
                 <img src="<%=request.getContextPath()%>/images/mypage/tomcat.png" alt="" width="200" height="200">
             </div>
             <div id="flist">
@@ -46,16 +46,16 @@ List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendsl
                 <input type="hidden" name="friendGender" value="<%=friendslist.get(i).getGender()%>"> 
                 </form>
                 <input type="image" name="submit" id="ficon" src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
-                onclick="goPopup()">
+                onclick="goPopup(event)">
                 <%}
                 }%>
             </div>
             
             
                 <script>
-            	function goPopup(){
+            	function goPopup(e){
             		var gsWin=window.open("","winName","width=380,height=380"); //open("주소",띄우는방식,크기)
-            		var frm=document.form;
+            		var frm=$(e.target).prev()[0];
             		frm.action="<%=request.getContextPath()%>/mapage/mapagePopUp.do";
             		frm.target="winName";
             		frm.submit();
@@ -79,20 +79,18 @@ List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendsl
                     <p style="color: gray; float: right;">친구신청일 : <%=list.get(i).getFEnroll()%></p>
                     <p style="text-align: center; float: left;">
                     <%=infolist.get(i).getMemberName()%>(<%=infolist.get(i).getAge()%>/<%=infolist.get(i).getGender()%>)</p>
+                    
+                    
                     <p style="text-align: center;"><%=list.get(i).getPropose()%>
-                        <button name="수락" value="수락" onclick="window.open('<%=request.getContextPath()%>/mypage/acceptFriends.do','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');">수락</button>
-                        <button name="거절" value="거절" onclick="window.open('<%=request.getContextPath()%>/mypage/rejectFriends.do','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');">거절</button>
+                        <button name="수락" value="수락" type="submit" onclick="window.open('<%=request.getContextPath()%>/mypage/acceptFriends.do?id=<%=logInMember.getMemberId()%>&&memberfrom=<%=list.get(i).getMemberId()%>','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');">수락</button>
+                        <button name="거절" value="거절" type="submit" onclick="window.open('<%=request.getContextPath()%>/mypage/rejectFriends.do?id=<%=logInMember.getMemberId()%>&&memberfrom=<%=list.get(i).getMemberId()%>','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');">거절</button>
                     </p>
                 </div>
                 <br>
                 <%}
                 }%>
-                
                  
             </div>
-
-
-           
           
         </div>
         
@@ -110,7 +108,7 @@ List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendsl
 
                 var newPosition=scrollTop +floatPosition + "px"; //사이드메뉴바의 처음위치+ 현재스크롤위치
 
-                if(scrollTop=<300){ //해당 페이지의 푸터위 스크롤값이 620이여서 scrollTop이 620까지만 이동하게 설정했음
+                if(scrollTop<=300){ //해당 페이지의 푸터위 스크롤값이 620이여서 scrollTop이 620까지만 이동하게 설정했음
                     $(".sidemenu").stop().animate({
                         "top" : newPosition
                     }, 50);}
