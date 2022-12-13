@@ -27,4 +27,11 @@ public class MemberService {
 		close(conn);
 		return m;
 	}
+	//아이디중복확인
+	public Member idDuplicateCheck(String inputId) {
+		Connection conn=getConnection();
+		Member m=dao.idDuplicateCheck(conn,inputId);
+		close(conn);
+		return m;
+	}
 }
