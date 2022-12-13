@@ -1,0 +1,219 @@
+@charset "UTF-8";
+.sector{
+            display: flex;
+        }
+
+        .sidemenu{
+            width: 20%;
+            height: 100px;
+            font-size: 20px;
+            font-weight: bold;
+            position: absolute;
+        }
+        
+        .menuDiv{
+            width: 15%;
+        }
+
+        .sidemenu>*:hover{
+            transform: scale(1.1);
+            transition-property: transform;
+            transition-duration: 1s;
+        }
+        .sidemenu>*:not(div:nth-child(1)){
+            background-color: lavender;
+            border-radius: 50px;
+            box-shadow: 5px 2px 8px lavender;
+        }
+        .sidemenu p{
+            text-align: center;
+            padding-top: 6%;
+        }
+        .sidemenu>div:first-child{
+            color: purple;
+        }
+
+        .sidemenu>div{
+            height: 70px;
+            
+        }
+        a{
+            text-decoration: none;
+        }
+/* ##### 여기까지 사이드메뉴 스타일 #####  */
+        .menuDiv{
+            width: 40%;
+            /* margin: 50px; */
+        }
+        .customBtn {
+            color: #fff;
+            border-radius: 5px;
+            padding: 10px 25px;
+            /* font-family: 'Lato', sans-serif; */
+            font-weight: 500;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+            box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+            7px 7px 20px 0px rgba(0,0,0,.1),
+            4px 4px 5px 0px rgba(0,0,0,.1);
+            outline: none;
+            min-width: 80px;
+        }
+        .btnStyle {
+            line-height: 40px;
+            padding: 0;
+            border: none;
+            background: #7e8cd2;
+            background: linear-gradient(0deg, #7e8cd2 0%, #7e8cd2 100%);
+        }
+        .btnStyle:hover {
+            color: #7e8cd2;
+            background: transparent;
+            box-shadow:none;
+        }
+        .btnStyle:before,.btnStyle:after{
+            content:'';
+            position:absolute;
+            top:0;
+            right:0;
+            height:2px;
+            width:0;
+            background: #7e8cd2;
+            box-shadow:
+            -1px -1px 5px 0px #fff,
+            7px 7px 20px 0px #0003,
+            4px 4px 5px 0px #0002;
+            transition:400ms ease all;
+        }
+        .btnStyle:after{
+            right:inherit;
+            top:inherit;
+            left:0;
+            bottom:0;
+        }
+        .btnStyle:hover:before,.btnStyle:hover:after{
+            width:100%;
+            transition:800ms ease all;
+        }
+        section{
+            /* border: 1px solid tomato; */
+            
+            margin-left: 50px;
+            margin-right: 50px;
+            /* padding-left: 5%;
+            padding-right: 5%; */
+            /* 
+                만약 섹션 안에 div를 만든다면 여기 padding-left,padding-right에서
+                좌우 간격을 조정하세요
+                왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
+             */
+            margin-top: 100px;
+            height: 700px; 
+            /*
+                ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
+                높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.
+            */
+            display: flex;
+        }
+        /* 모든 리스트 스타일 왼쪽 점 없애기 */
+        li {
+            list-style: none;
+        }
+        /* 모든 a태그 밑줄과 글자색 변경 */
+        section a {
+            text-decoration: none;
+            color: #404040;
+        }
+        /* 공지사항 박스 */
+        #notice {
+            width: 1500px;
+            margin: 0 auto;
+            padding-right: 50px;
+            box-sizing: border-box;
+            border: 2px solid black; /* ##### */
+            border-radius: 10px; /* ##### */
+        }
+        /* 공지사항 글자 */
+        #notice h1 {
+            width: 450px;
+            margin: 20px auto;
+            font-size: 25px;
+            text-align: center;
+        }
+        /* 공지사항 글목록 리스트 */
+        #notice ul li.title{
+            border-top: 2px solid grey;
+            border-bottom: 2px solid grey;
+            padding-left: 150px;
+            line-height: 40px;
+            text-align: center;
+        }
+        #notice ul>li.content {
+            line-height: 40px; /*li 세로 간격*/
+            padding-left: 20px;
+            border-bottom: 2px solid lightgray;
+        }
+        /* 공지사항 목록 내 날짜 */
+        #notice ul>li.content span.right,#notice ul>li.title span.right {
+            float: right;
+            width: 100px;
+            text-align: center;
+        }
+        ul>li.title span.number,ul>li.content span.number{
+            float: left;
+        }
+        /* 페이지 색 조절 */
+        .page-link {
+            color: #000; 
+            background-color: #fff;
+            border: 1px solid #ccc; 
+        }
+        .page-item.active .page-link {
+            z-index: 1;
+            color: #555;
+            font-weight:bold;
+            background-color: #f1f1f1;
+            border-color: #ccc;
+        
+        }
+        .page-link:focus, .page-link:hover {
+            color: white;
+            background-color: #c9c8c8; 
+            border-color: #ccc;
+        }
+        #pagination{
+            /* border: 1px solid magenta; */
+            font-size: 18px;
+            width: 150px;
+            margin: 0 auto;
+            margin-top: 80px;
+            margin-bottom: 30px;
+            letter-spacing: 3px;
+            text-align: end;
+        }
+        #pagination>a{
+            margin: 0px;
+        }
+        
+        .navbar{
+            /* border: 1px solid magenta; */
+            /* margin-left: 30px; */
+            margin-bottom: 10px;
+            height: 100px;
+            justify-content: end;
+        }
+        .container-fluid{
+            width: 270px;
+            /* border: 1px solid magenta; */
+            height: 50px;
+            margin-top: 10px;
+            display: block;
+            /* flex-direction: row; */
+            float: right;
+        }
+        .form-control{
+            height: 38px;
+        }
