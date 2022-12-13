@@ -29,9 +29,24 @@ public class mapageRejectFriendsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String userId="USER01";
-		String memberFrom = "dd";
+	
+		
+		String userId=request.getParameter("id");
+		String memberFrom = request.getParameter("memberfrom");
 		int result = new MypageService().rejectFriends(userId,memberFrom);
+		
+		
+		String msg="", loc="";
+		if(result<1) {
+			msg="친구 신청 거절에 실패했습니다. 다시 시도해주세요";
+		}else {
+			msg="친구 신청를 거절하셨습니다!";
+		}
+		loc="/mypage/mypageFriends.do?id="+userId;
+		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		
 	}
 
