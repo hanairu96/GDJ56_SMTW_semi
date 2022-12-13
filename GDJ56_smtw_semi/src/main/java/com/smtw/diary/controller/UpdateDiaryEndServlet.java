@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.smtw.diary.model.service.DiaryService;
+
 /**
  * Servlet implementation class UpdateDiaryEndServlet
  */
@@ -28,9 +30,25 @@ public class UpdateDiaryEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memberId=request.getParameter("memberId");
 		String leavingdate=request.getParameter("leavingdate");
-		String alarmcheck=request.getParameter("alarmcheck");
+		String alarmYN=request.getParameter("alarmcheck");
 		
-		System.out.println(memberId+""+leavingdate+""+alarmcheck);
+		int result=new DiaryService().updateDiary(memberId,leavingdate,alarmYN);
+		
+		String msg="", loc="";
+		
+		if(result>0) {
+			msg="수정 성공";
+		}else {
+			msg="수정 실패";
+		}
+		
+		loc="/diary/firstDiary.do";
+		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		
 	}
 
 	/**
