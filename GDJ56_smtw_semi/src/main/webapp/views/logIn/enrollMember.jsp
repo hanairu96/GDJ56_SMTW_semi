@@ -15,26 +15,56 @@
         		
                 <div class="form-group">
                		<label for="inputId" class="form-label mt-4">아이디<span class="obli">(필수)</span></label>
-                    <!-- <a href=""  >중복확인</a> -->
-                    <input id="idCheck" type="button" value="중복확인">
+                    <input id="idCheck" type="button" value="중복확인"><span class="check" id="checkId"><small></small></span>
                     <input type="text" class="form-control" name="inputId" id="inputId" 
                     	aria-describedby="emailHelp" placeholder="아이디를 입력해주세요" required>
-                    <small id="emailHelp" class="form-text text-muted">아이디는 5자리 이상 입력하세요</small>
+                    <small class="form-text text-muted">아이디는 5자리 이상 입력하세요</small>
                 </div>
+                <script>
+                	//아이디 중복확인
+                	$("input#idCheck").click(e=>{
+                		
+                		$.ajax({
+                			url:"<%=request.getContextPath()%>/logIn/idDuplicateCheck.do",
+                			data:{inputId:$("input#inputId").val().trim()},
+                			dataType:"json",
+                			success:data=>{
+                				if(data!=null){
+                					$("span#checkId>small").text("사용 불가한 아이디입니다.").css("color","red");
+                				}
+                				else{
+                					$("span#checkId>small").text("사용 가능한 아이디입니다.").css("color","green");
+                				}
+                			}
+                		})
+                	});
+                	//비밀번호 재확인
+                	$(()=>{
+                        $("#pwdCheck").blur(e=>{
+                           const pw=$("#inputPwd").val();
+                           const pwck=$(e.target).val();
+                           if(pw==pwck){
+                              $("span#checkPwd>small").css("color","green").text("비밀번호가 일치합니다.");
+                           }else{
+                              $("span#checkPwd>small").css("color","red").text("비밀번호가 불일치합니다.");
+                              
+                           }
+                        });
+                     })
+                	
+                	
+                </script>
 				<div class="form-group has-success">
 					<label class="form-label mt-4" for="inputPwd">비밀번호<span class="obli">(필수)</span></label>
 					<input type="password" class="form-control" name="inputPwd" id="inputPwd" placeholder="비밀번호를 입력해주세요" required>
                     <small id="emailHelp" class="form-text text-muted">비밀번호는 숫자, 특수문자 및 영문자를 포함하여 8자리 이상 입력하세요</small>
-					<div class="valid-feedback"></div>
 				</div>
-                <!-- is-valid is-invalid -->
 
 				<div class="form-group has-danger">
 					<label class="form-label mt-4" for="pwdCheck">비밀번호 재확인</label> 
 					<input type="password" class="form-control" name="pwdCheck" id="pwdCheck"
 						 placeholder="비밀번호를 다시한번 입력해주세요">
-					<span></span>
-                    <div class="invalid-feedback">비밀번호가 일치하지 않습니다</div>
+					<span class="check" id="checkPwd"><small></small></span>
 				</div>
                 <div class="form-group">
                		<label for="inputName" class="form-label mt-4">이름<span class="obli">(필수)</span></label>
@@ -149,7 +179,7 @@
                 <div class="form-group">
                     <label for="inputPhone" class="form-label mt-4">전화번호('-'없이 입력해주세요)</label>
                  <input type="text" class="form-control" name="inputPhone" id="inputPhone" 
-                 	aria-describedby="emailHelp" minlength="9" maxlength="11">
+                 	aria-describedby="emailHelp" >
                 </div>
 			    <div class="form-group">
 			      <label class="form-label mt-4">성별</label>
@@ -166,7 +196,7 @@
                 <div class="form-group">
                		<label for="inputEmail" class="form-label mt-4">이메일<span class="obli">(필수)</span></label>
                     <input type="email" class="form-control" name="inputEmail" id="inputEmail"
-                    	 aria-describedby="emailHelp" placeholder="이메일을 입력해주세요" required>
+                    	  placeholder="이메일을 입력해주세요" required>
                 </div>
                 <div class ="adddressContainer">
                     <label class="form-label mt-4">주소</label>
@@ -236,21 +266,34 @@
 // 			return false;
 // 		}
 
-		//핸드폰 번호 입력★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
-		const inputPhone=$("#inputPhone").val().trim();
-		//console.log(inputPhone);
-// 		return false;
-// 		const phoneReg=/^\d{3}-\d{3,4}-\d{4}$/;//핸드폰 번호(- 없음)
-// 		if(phoneReg.test(inputPhone)){
-// 			console.log(phoneReg.test(inputPhone));
-// 			return false;
+		//핸드폰 번호 입력
+// 		const inputPhone=$("#inputPhone").val().trim();
+// 		console.log(inputPhone);
+// 		const phoneReg=/^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;//핸드폰 번호(- 없음)
+// 		if(inputPhone==""||phoneReg.test(inputPhone)){
+// 			console.log("정상입력");
 // 		}
 // 		else{
-// 			console.log(!phoneReg.test(inputPhone));//true
-// 			console.log("?");
+// 			alert("올바른 휴대폰 번호를 입력해주세요");
+// 			$("#inputPhone").focus();		
 // 			return false;
 // 		}
-		
+
+		//이메일 입력
+// 		const inputEmail=$("#inputEmail").val().trim();
+// 		var emailReg=/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+// 		if(inputEmail==""){
+// 			alert("이메일을 입력해주세요.");
+// 			$("#inputEmail").focus();
+// 			return false;
+// 		}else{
+// 			if(!emailReg.test(inputEmail)){
+// 				alert("이메일 형식에 맞게 입력해주세요");
+// 				$("#inputEmail").focus();
+// 				return false;
+// 			}
+// 		}
 	}
 </script>
 
