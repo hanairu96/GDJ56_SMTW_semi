@@ -87,7 +87,7 @@
                     <div class="sub">
                         <ul class="submenu">
                             <li><a href="">워홀 프렌즈 구하기</a></li>
-                            <li><a href="">생생후기</a></li>
+                            <li><a href="<%=request.getContextPath()%>/community/reviewBasic.do">생생후기</a></li>
                         </ul>
                     </div>
                 </li>
