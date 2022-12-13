@@ -3,7 +3,10 @@ package com.smtw.diary.controller;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -51,29 +54,26 @@ public class FirstDiaryServlet extends HttpServlet {
 		if(diary.getMemberId()!=null) {
 			//1) 나의출국일지 DB가 있는 회원이라면 MyDiary.jsp
 			
-	        LocalDate today = LocalDate.now(); // 현재 날짜 구하기
-	        int year = today.getYear();
-	        String month = today.getMonth().toString();
-	        int monthValue = today.getMonthValue();
-	        int dayOfMonth = today.getDayOfMonth();
-	        int dayOfYear = today.getDayOfYear();
-	        String dayOfWeek = today.getDayOfWeek().toString();
-	        int dayOfWeekValue = today.getDayOfWeek().getValue();
-	       
-	        System.out.println("오늘 : "+ today);  // 결과 출력 YYYY-MM-DD형식
+			//D-DAY구하기
+	        LocalDate today = LocalDate.now(); // 오늘 날짜 구하기 (YYYY-MM-DD)
 	        
-	        LocalDate diaryDate = LocalDate.parse(diary.getDDay()); // 문자열 -> LocalDate 타입변환
+	        LocalDate diaryDate = LocalDate.parse(diary.getDDay()); // 출국일 : 문자열 -> LocalDate 타입변환
 	        
-	        System.out.println(memberId+"의 출국일 : "+diaryDate); 
-	        
-	        Period dday=today.until(diaryDate); //출국일-오늘 DDAY계산
-	        System.out.println(dday.getDays()); //D-일수 출력
-	       
-	        int ddayResult=dday.getDays();
-	        
-	        request.setAttribute("ddayResult", ddayResult);
-			request.setAttribute("diary", diary);
+	        LocalDate dday=LocalDate.now();
+	        dday=LocalDate.of(diaryDate.getYear(), diaryDate.getMonth(), diaryDate.getDayOfMonth()); //출국일
 			
+			LocalTime time=LocalTime.now();
+			time=LocalTime.of(00, 00, 00);
+			
+			LocalDateTime ddayResult=LocalDateTime.now();
+			ddayResult=LocalDateTime.of(dday, time); //저장된 출국일로 설정 (날짜,시간)
+			
+			
+			//날짜 사이의 간격을 계산해주는 메소드 제공
+			int diaryDday=(int) ChronoUnit.DAYS.between(LocalDateTime.now(), ddayResult);  //출국일-오늘 DDAY계산
+	        
+	        request.setAttribute("diaryDday", diaryDday);
+			request.setAttribute("diary", diary);
 			
 			request.getRequestDispatcher("/views/diary/myDiary.jsp").forward(request, response);
 		}else {
