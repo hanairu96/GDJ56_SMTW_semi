@@ -78,7 +78,7 @@
             </table>
             <br><br>
         	
-        	<form action="<%=request.getContextPath() %>/admin/deleteMember.do">
+        	<form action="<%=request.getContextPath() %>/admin/deleteMemberEnd.do">
 	            <input type="hidden" id="memberId" name="memberId" value="<%=m.getMemberId() %>">
 	            <input type="submit" id="del" value="회원 삭제">
         	</form>
