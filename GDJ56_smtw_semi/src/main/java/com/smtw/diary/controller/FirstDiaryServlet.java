@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.smtw.diary.model.service.DiaryService;
+import com.smtw.diary.model.vo.CheckList;
 import com.smtw.diary.model.vo.Diary;
 import com.smtw.member.model.vo.Member;
 
@@ -48,8 +49,11 @@ public class FirstDiaryServlet extends HttpServlet {
 		
 		String memberId=m.getMemberId(); //로그인 된 멤버아이디
 		
-		//로그인 한 멤버의 Diary테이블 정보를 가져와서 화면으로 보내야함
+		//로그인 한 멤버의 Diary테이블 정보를 가져옴
 		Diary diary=new DiaryService().searchDiary(memberId);
+		
+		//로그인 한 멤버의 CHECKLIST테이블 정보를 가져옴
+		CheckList checklist=new DiaryService().searchCheckList(memberId);
 		
 		if(diary.getMemberId()!=null) {
 			//1) 나의출국일지 DB가 있는 회원이라면 MyDiary.jsp
@@ -59,21 +63,12 @@ public class FirstDiaryServlet extends HttpServlet {
 	        
 	        LocalDate diaryDate = LocalDate.parse(diary.getDDay()); // 출국일 : 문자열 -> LocalDate 타입변환
 	        
-	        LocalDate dday=LocalDate.now();
-	        dday=LocalDate.of(diaryDate.getYear(), diaryDate.getMonth(), diaryDate.getDayOfMonth()); //출국일
-			
-			LocalTime time=LocalTime.now();
-			time=LocalTime.of(00, 00, 00);
-			
-			LocalDateTime ddayResult=LocalDateTime.now();
-			ddayResult=LocalDateTime.of(dday, time); //저장된 출국일로 설정 (날짜,시간)
-			
-			
-			//날짜 사이의 간격을 계산해주는 메소드 제공
-			int diaryDday=(int) ChronoUnit.DAYS.between(LocalDateTime.now(), ddayResult);  //출국일-오늘 DDAY계산
+			//날짜 사이의 간격을 계산해주는 메소드
+			int diaryDday=(int) ChronoUnit.DAYS.between(today, diaryDate);  //출국일-오늘 DDAY계산
 	        
 	        request.setAttribute("diaryDday", diaryDday);
 			request.setAttribute("diary", diary);
+			request.setAttribute("checklist", checklist);
 			
 			request.getRequestDispatcher("/views/diary/myDiary.jsp").forward(request, response);
 		}else {
