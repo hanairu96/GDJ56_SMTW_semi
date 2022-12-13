@@ -7,14 +7,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.smtw.diary.model.service.DiaryService;
 import com.smtw.diary.model.vo.Diary;
+import com.smtw.member.model.vo.Member;
 
 /**
  * Servlet implementation class FirstDiaryServlet
  */
-@WebServlet("/diary/firstDiary.do")
+@WebServlet(name="firstDiary", urlPatterns="/diary/firstDiary.do")
 public class FirstDiaryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,12 +32,17 @@ public class FirstDiaryServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//로그인 세션이 없으면 -> 해당 페이지 권한X
+		
+		//로그인 세션이 없으면 -> 해당 페이지 권한X -> 필터에서 설정해줘야함
 		
 		//로그인 세션이 있으면 
-		String memberId="dd"; //로그인 세션이 있다고 치고 테스트
+		HttpSession session=request.getSession();
+		Member m=(Member) session.getAttribute("logInMember");
+		System.out.println(m.getMemberId());
 		
-		//해당 회원의 Diary테이블 정보를 가져와서 화면으로 보내야함
+		String memberId=m.getMemberId(); //로그인 된 멤버아이디
+		
+		//로그인 한 멤버의 Diary테이블 정보를 가져와서 화면으로 보내야함
 		Diary diary=new DiaryService().searchDiary(memberId);
 		
 		if(diary.getMemberId()!=null) {
