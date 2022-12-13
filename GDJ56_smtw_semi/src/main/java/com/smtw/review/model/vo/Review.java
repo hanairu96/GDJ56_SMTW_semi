@@ -17,6 +17,6 @@ public class Review {
 	private Date enrollDate;
 	private String reviewCity;
 	private int reviewSat;
-	
+	// System.out.println();
 	
 }

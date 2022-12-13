@@ -39,7 +39,7 @@
                             <div class="nav-wrap">
                                 <nav class="main-nav" role="navigation">
                                     <ul class="unstyled list-hover-slide">
-                                        <li><a href="LeavingDiary.html">워홀프렌즈 구하기</a></li>
+                                        <li><a href="LeavingDiary.html">워홀프렌즈구하기</a></li>
                                         <li><a href="MyCountry.html">생생후기</a></li>
                                     </ul>
                                 </nav>
