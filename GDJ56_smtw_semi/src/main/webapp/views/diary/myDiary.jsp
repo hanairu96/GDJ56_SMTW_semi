@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="com.smtw.diary.model.vo.Diary" %>
+<%@page import="com.smtw.diary.model.vo.Diary,com.smtw.diary.model.vo.CheckList" %>
 <%@include file="/views/common/header.jsp" %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/myDiary.css"/>
 
 <%
 	Diary diary=(Diary)request.getAttribute("diary");
 	int ddayResult=(int)(request.getAttribute("diaryDday"));
+	CheckList checklist=(CheckList)request.getAttribute("checklist");
 %>
 <section>
 	<div class="sector">
@@ -50,38 +51,38 @@
                     <div id="leavingCLContent">
                         <table id="leavingCLTable" align="center">
                             <tr>
-                                <td><input type="checkbox" class="checkList" value="여권">여권</td>
-                                <td><input type="checkbox" class="checkList" value="증명사진여분">증명사진여분</td>
-                                <td><input type="checkbox" class="checkList" value="비자증명서">비자증명서</td>
-                                <td><input type="checkbox" class="checkList" value="비행기티켓">비행기티켓</td>
+                                <td><input type="checkbox" class="checkList" value="passport" <%=checklist.getPassport()=='Y'?"checked":""%>>여권</td>
+                                <td><input type="checkbox" class="checkList" value="surplus" <%=checklist.getSurplus()=='Y'?"checked":""%>>증명사진여분</td>
+                                <td><input type="checkbox" class="checkList" value="vCertificate" <%=checklist.getVCertificate()=='Y'?"checked":""%>>비자증명서</td>
+                                <td><input type="checkbox" class="checkList" value="ticket" <%=checklist.getTicket()=='Y'?"checked":""%>>비행기티켓</td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td><input type="checkbox" class="checkList" value="환전">환전</td>
-                                <td><input type="checkbox" class="checkList" value="워홀보험">워홀보험</td>
-                                <td><input type="checkbox" class="checkList" value="멀티탭">멀티탭</td>
-                                <td><input type="checkbox" class="checkList" value="비상약">비상약</td>
+                                <td><input type="checkbox" class="checkList" value="doller" <%=checklist.getDoller()=='Y'?"checked":""%>>환전</td>
+                                <td><input type="checkbox" class="checkList" value="insurance" <%=checklist.getInsurance()=='Y'?"checked":""%>>워홀보험</td>
+                                <td><input type="checkbox" class="checkList" value="multitab" <%=checklist.getMultitab()=='Y'?"checked":""%>>멀티탭</td>
+                                <td><input type="checkbox" class="checkList" value="em" <%=checklist.getEm()=='Y'?"checked":""%>>비상약</td>
                                 <!-- <td></td> -->
                             </tr>
                             <tr>
-                                <td><input type="checkbox" class="checkList" value="이력서">이력서</td>
-                                <td><input type="checkbox" class="checkList" value="건강검진">건강검진</td>
-                                <td><input type="checkbox" class="checkList" value="핸드폰">핸드폰 해지 및 로밍</td>
-                                <td><input type="checkbox" class="checkList" value="공인인증서">공인인증서갱신</td>
+                                <td><input type="checkbox" class="checkList" value="resume" <%=checklist.getResume()=='Y'?"checked":""%>>이력서</td>
+                                <td><input type="checkbox" class="checkList" value="hCheckup" <%=checklist.getHCheckup()=='Y'?"checked":""%>>건강검진</td>
+                                <td><input type="checkbox" class="checkList" value="roaming" <%=checklist.getRoaming()=='Y'?"checked":""%>>핸드폰 해지 및 로밍</td>
+                                <td><input type="checkbox" class="checkList" value="aCertificate" <%=checklist.getACertificate()=='Y'?"checked":""%>>공인인증서갱신</td>
                                 <!-- <td></td> -->
                             </tr>
                             <tr>
-                                <td><input type="checkbox" class="checkList" value="유심칩">유심칩</td>
-                                <td><input type="checkbox" class="checkList" value="의류">의류</td>
-                                <td><input type="checkbox" class="checkList" value="카드">해외사용 가능 카드 개설</td>
-                                <td><input type="checkbox" class="checkList" value="국제면허증">국제면허증</td>
+                                <td><input type="checkbox" class="checkList" value="sim" <%=checklist.getSim()=='Y'?"checked":""%>>유심칩</td>
+                                <td><input type="checkbox" class="checkList" value="clothing" <%=checklist.getClothing()=='Y'?"checked":""%>>의류</td>
+                                <td><input type="checkbox" class="checkList" value="creditCard" <%=checklist.getCreditCard()=='Y'?"checked":""%>>해외사용 가능 카드 개설</td>
+                                <td><input type="checkbox" class="checkList" value="iLicense" <%=checklist.getILicense()=='Y'?"checked":""%>>국제면허증</td>
                                 <!-- <td></td> -->
                             </tr>
                             <tr>
-                                <td><input type="checkbox" class="checkList" value="증명서">각종증명서<br>(토익,토플 등 필요시)</td>
-                                <td><input type="checkbox" class="checkList" value="숙소">숙소예약</td>
-                                <td><input type="checkbox" class="checkList" value="비상연락망">비상연락망</td>
-                                <td><input type="checkbox" class="checkList" value="생필품">생필품</td>
+                                <td><input type="checkbox" class="checkList" value="certificate" <%=checklist.getCertificate()=='Y'?"checked":""%>>각종증명서<br>(토익,토플 등 필요시)</td>
+                                <td><input type="checkbox" class="checkList" value="reservation" <%=checklist.getReservation()=='Y'?"checked":""%>>숙소예약</td>
+                                <td><input type="checkbox" class="checkList" value="eContact" <%=checklist.getEContact()=='Y'?"checked":""%>>비상연락망</td>
+                                <td><input type="checkbox" class="checkList" value="dailyNecessity" <%=checklist.getDailyNecessity()=='Y'?"checked":""%>>생필품</td>
                                 <td colspan="5">
                                     <button class="customBtn btnStyle" id="leavingCLSave" onclick="checkListBtn();">저장</button></td>
                             </tr>
@@ -116,7 +117,7 @@
         var resultHtml="";
 
         $(function() {
-            function randomText(){
+            function randomText(){ //말풍선 문구 무한반복 출력
                 var newLeavingDiaryText =leavingDiaryArr;
                 var diarylength = newLeavingDiaryText.length;		
                 if(newLeavingDiaryText != null && newLeavingDiaryText.length > 0) {
@@ -132,32 +133,55 @@
                     
                 }
                 const target=document.getElementById("progress");
-                if(target.value<100){
+                if(target.value<100){ //프로그래스바 무한반복
                     target.value+=(Number)(Math.random()*20);
                 }else{
                     target.value=0;
                 }
         }
 
-        if(leavingDiaryArr.length>0){
+        if(leavingDiaryArr.length>0){  //말풍선 문구 무한반복 출력
             randomText();
 		    var resultPrint = window.setInterval(randomText, 2000);
 		}
     });        
 
      let count=0;
-     const checkListBtn=()=>{
+     let checkListCheck=[];
+     
+     const checkListBtn=()=>{ //체크리스트 버튼 클릭시
          const checkList=document.getElementsByClassName("checkList");
+     
          for(let i=0;i<checkList.length;i++){
-             if(checkList[i].checked==true){
+             if(checkList[i].checked==true){ 
                  count++;
+                 checkListCheck.push(checkList[i].value);
              }
          }
+         
          const title3=document.querySelector("#title3");
          var result=count*5;
          title3.innerHTML=result;
          count=0;
+         console.log(checkListCheck);
+         
+         const set = new Set(checkListCheck);
+         const newCheckList = [...set];
+         
+		 $.ajax({
+			url:"<%=request.getContextPath()%>/diary/saveCheckList.do",
+			type:"get",
+			data:{
+					checkList:JSON.stringify(newCheckList)				
+				 },
+			success:data=>{
+				alert(data);
+			}
+		}); 
+		 
+		checkListCheck=[];
      }
+     
  </script>
     
 <%@include file="/views/common/footer.jsp" %>
