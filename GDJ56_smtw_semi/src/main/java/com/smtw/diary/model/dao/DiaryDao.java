@@ -71,4 +71,24 @@ public class DiaryDao {
 		   }
 		   return result;
 	}
+	
+	public int updateDiary(Connection conn, String memberId, String leavingdate, String alarmYN) {
+		   PreparedStatement pstmt=null;
+		   int result=0;
+		   
+		   try {
+			   pstmt=conn.prepareStatement(sql.getProperty("updateDiary"));
+			   pstmt.setString(1, leavingdate);
+			   pstmt.setString(2, String.valueOf(alarmYN));
+			   pstmt.setString(3, memberId);
+			   
+			   result=pstmt.executeUpdate();
+			   
+		   }catch(SQLException e){
+			   e.printStackTrace();
+		   }finally{
+			   close(pstmt);
+		   }
+		   return result;
+		}
 }

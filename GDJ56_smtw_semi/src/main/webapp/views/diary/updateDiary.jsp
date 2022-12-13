@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.smtw.diary.model.vo.Diary" %>
 <%@include file="/views/common/header.jsp" %>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/firstDiary.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/updateDiary.css"/>
 
 <%
-	String memberId=(String)request.getAttribute("memberId");
+	Diary diary=(Diary)request.getAttribute("diary");
 %>
+
 <section>
 	<div class="sector">
             <div class="sidemenu">
@@ -21,11 +23,11 @@
                 <div id="insertLeavingDate">
                     <fieldset id="leavingfield">
                         <legend>나의 출국일지 등록</legend>
-                            <form action="<%=request.getContextPath()%>/diary/myDiary.do?memberId=<%=memberId%>" method="post" id="insertDateform">
-                                출국일 : <input type="date" name="leavingdate" id="leavingdate"><br>
-                                <input type="checkbox" name="alarm" id="alarm">출국 10일전 알람서비스<br>
+                            <form action="<%=request.getContextPath()%>/diary/updateDiaryEnd.do?memberId=<%=diary.getMemberId()%>" method="post" id="insertDateform">
+                                출국일 : <input type="date" name="leavingdate" id="leavingdate" value="<%=diary.getDDay()%>"><br>
+                                <input type="checkbox" name="alarm" id="alarm" <%=diary.getAlarm().equals("Y")?"checked":""%>>출국 10일전 알람서비스<br>
                                 <input type="hidden" name="alarmcheck" value="N" id="alarmcheck"/>
-                                <button class="customBtn btnStyle" type="submit" name="leabingDiaryBtn" id="leabingDiaryBtn">확인</button>
+                                <button class="customBtn btnStyle" type="submit" name="leabingDiaryBtn" id="leabingDiaryBtn">수정</button>
                             </form>
                     </fieldset>
                 </div>  
@@ -62,7 +64,6 @@
     	 console.log( $("#alarmcheck").val());
       });
       
-      
       /* 오늘날짜 이후로만 선택할 수 있게 설정 */
       var nowDate = Date.now(); // 지금 날짜를 밀리초로
       var timeOff = new Date().getTimezoneOffset()*60000; // getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
@@ -70,6 +71,7 @@
    						// new Date(now_utc-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
       document.getElementById("leavingdate").setAttribute("min", today);
       
+  	
 </script> 
 
 <%@include file="/views/common/footer.jsp" %>

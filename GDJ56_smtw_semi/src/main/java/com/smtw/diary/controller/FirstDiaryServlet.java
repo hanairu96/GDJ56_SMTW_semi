@@ -1,6 +1,12 @@
 package com.smtw.diary.controller;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,7 +53,28 @@ public class FirstDiaryServlet extends HttpServlet {
 		
 		if(diary.getMemberId()!=null) {
 			//1) 나의출국일지 DB가 있는 회원이라면 MyDiary.jsp
+			
+			//D-DAY구하기
+	        LocalDate today = LocalDate.now(); // 오늘 날짜 구하기 (YYYY-MM-DD)
+	        
+	        LocalDate diaryDate = LocalDate.parse(diary.getDDay()); // 출국일 : 문자열 -> LocalDate 타입변환
+	        
+	        LocalDate dday=LocalDate.now();
+	        dday=LocalDate.of(diaryDate.getYear(), diaryDate.getMonth(), diaryDate.getDayOfMonth()); //출국일
+			
+			LocalTime time=LocalTime.now();
+			time=LocalTime.of(00, 00, 00);
+			
+			LocalDateTime ddayResult=LocalDateTime.now();
+			ddayResult=LocalDateTime.of(dday, time); //저장된 출국일로 설정 (날짜,시간)
+			
+			
+			//날짜 사이의 간격을 계산해주는 메소드 제공
+			int diaryDday=(int) ChronoUnit.DAYS.between(LocalDateTime.now(), ddayResult);  //출국일-오늘 DDAY계산
+	        
+	        request.setAttribute("diaryDday", diaryDday);
 			request.setAttribute("diary", diary);
+			
 			request.getRequestDispatcher("/views/diary/myDiary.jsp").forward(request, response);
 		}else {
 			//2) 나의 출국일지 DB가 없는 회원이라면 firstDiary.jsp
