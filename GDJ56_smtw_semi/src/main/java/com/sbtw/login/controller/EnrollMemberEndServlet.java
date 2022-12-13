@@ -39,7 +39,7 @@ public class EnrollMemberEndServlet extends HttpServlet {
 		String birthYear=request.getParameter("yy");
 		String birthMonth=request.getParameter("month");
 		String birthDay=request.getParameter("day");
-		String birth=birthYear+birthMonth+birthDay;
+		String birth=birthYear+"/"+birthMonth+"/"+birthDay;
 		String phone=request.getParameter("inputPhone");
 		char gender=request.getParameter("gender").charAt(0);
 		String email=request.getParameter("inputEmail");
