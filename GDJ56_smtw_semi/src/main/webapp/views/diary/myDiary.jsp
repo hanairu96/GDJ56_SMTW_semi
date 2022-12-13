@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.smtw.diary.model.vo.Diary" %>
 <%@include file="/views/common/header.jsp" %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/myDiary.css"/>
 
+<%
+	Diary diary=(Diary)request.getAttribute("diary");
+	int ddayResult=(int)(request.getAttribute("ddayResult"));
+%>
 <section>
 	<div class="sector">
             <div class="sidemenu">
@@ -14,25 +19,21 @@
             <div class="menuDiv"></div>
 
             <div id="leavingDiary">
-                <h1>나의 출국일지</h1>
+                <h1>'<%=diary.getMemberId() %>' 님의 출국일지</h1>
                 <div class ="leavingInfo">
                     <div class="speech-bubble"><p id="speechText">안녕</p></div>
                 </div>
                 <div class="leavingService">
                     <div class="dday">
-                        <h2>D-50</h2>
-                        <!-- <i id="plane" class="bi bi-airplane-fill"></i>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-airplane-fill" viewBox="0 0 16 16">
-                            <path d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Z"/>
-                          </svg> -->
-                          <img src="<%=request.getContextPath()%>/images/plane.jpg" id="plane" alt="" width="80" height="80">
+                        <h2>출국일 : <%=diary.getDDay()%></h2>
+                        <div class="dday2">
+                      	 	<h2 id="ddayfont">D-<%=ddayResult %></h2>
+                        	<img src="<%=request.getContextPath()%>/images/plane.jpg" id="plane" alt="" width="80" height="80">
+                   		</div>
                     </div>
-                    <!-- <div class="leavingAlarm">
-                        <input type="checkbox" id="alarm" value="alarm">출국 10일전 알람서비스
-                    </div> -->
                 </div>
                 <div id="progressBar">
-                    <p id="progressText">출국일 <button class="customBtn btnStyle" id="updateBtn" onclick=" location.assign('<%=request.getContextPath()%>/diary/firstDiary.do?');">수정</button></p>
+                    <p id="progressText">출국일 <button class="customBtn btnStyle" id="updateBtn" onclick=" location.assign('<%=request.getContextPath()%>/diary/updateDiary.do?memberId=<%=diary.getMemberId()%>');">수정</button></p>
                     <progress id="progress" value="0" max="100" width="500"></progress>
                 </div>
                 <div id="leavingCheckList">
