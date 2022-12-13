@@ -55,7 +55,7 @@
           }).scroll();
       });
       
-      $("#alarm").change(function(){
+      $("#alarm").change(function(){  //출국10일전 알람서비스 체크시 Y, 체크해제시 N
     	 if($("#alarm").is(":checked")){
     		 $("#alarmcheck").attr("value","Y");
     	 }else{
@@ -64,6 +64,14 @@
     	 console.log( $("#alarmcheck").val());
       });
       
+      /* 오늘날짜 이후로만 선택할 수 있게 설정 */
+      var nowDate = Date.now(); // 지금 날짜를 밀리초로
+      var timeOff = new Date().getTimezoneOffset()*60000; // getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
+      var today = new Date(nowDate-timeOff).toISOString().split("T")[0];
+   						// new Date(now_utc-timeOff).toISOString()은 '2022-05-11T18:09:38.134Z'를 반환
+      document.getElementById("leavingdate").setAttribute("min", today);
+      
+  	
 </script> 
 
 <%@include file="/views/common/footer.jsp" %>
