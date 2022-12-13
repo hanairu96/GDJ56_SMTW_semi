@@ -149,13 +149,13 @@
             margin-left: 20px;
         }
         /* 출국10일전 알람서비스 영역 */
-        .leavingAlarm{
+      /*   .leavingAlarm{
             margin-top: 30px;
             padding-left: 80px;
             font-size: 18px;
             font-style: italic;
             color: gray;
-        }
+        } */
         /* 프로그레스바 영역 */
         #progressBar{
             padding-top: 10px;

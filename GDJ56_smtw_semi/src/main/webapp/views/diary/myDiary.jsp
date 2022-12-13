@@ -27,9 +27,9 @@
                           </svg> -->
                           <img src="<%=request.getContextPath()%>/images/plane.jpg" id="plane" alt="" width="80" height="80">
                     </div>
-                    <div class="leavingAlarm">
+                    <!-- <div class="leavingAlarm">
                         <input type="checkbox" id="alarm" value="alarm">출국 10일전 알람서비스
-                    </div>
+                    </div> -->
                 </div>
                 <div id="progressBar">
                     <p id="progressText">출국일 <button class="customBtn btnStyle" id="updateBtn" onclick=" location.assign('<%=request.getContextPath()%>/diary/firstDiary.do?');">수정</button></p>
