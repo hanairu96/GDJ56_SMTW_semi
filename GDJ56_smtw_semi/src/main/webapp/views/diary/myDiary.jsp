@@ -6,7 +6,7 @@
 
 <%
 	Diary diary=(Diary)request.getAttribute("diary");
-	int ddayResult=(int)(request.getAttribute("ddayResult"));
+	int ddayResult=(int)(request.getAttribute("diaryDday"));
 %>
 <section>
 	<div class="sector">
@@ -25,9 +25,15 @@
                 </div>
                 <div class="leavingService">
                     <div class="dday">
-                        <h2>출국일 : <%=diary.getDDay()%></h2>
+                        	<h2>출국일 : <%=diary.getDDay()%></h2>
+                        
                         <div class="dday2">
-                      	 	<h2 id="ddayfont">D-<%=ddayResult %></h2>
+                        <%if(ddayResult==0){ %>
+                      	 	<h2 id="ddayfont">D-DAY!!! 가즈아-!!</h2>
+                      	<%}else{ %>
+                        	<h2 id="ddayfont">D-<%=ddayResult %></h2>
+                        <%} %>
+                      	 	
                         	<img src="<%=request.getContextPath()%>/images/plane.jpg" id="plane" alt="" width="80" height="80">
                    		</div>
                     </div>
