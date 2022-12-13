@@ -34,4 +34,11 @@ public class MemberService {
 		close(conn);
 		return m;
 	}
+	//이름, 이메일로 아이디 찾기
+	public Member searchId(String searchName,String searchEmail) {
+		Connection conn=getConnection();
+		Member m=dao.searchId(conn,searchName,searchEmail);
+		close(conn);
+		return m;
+	}
 }

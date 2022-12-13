@@ -97,6 +97,26 @@ public class MemberDao {
 			close(pstmt);
 		}return m;
 	}
+	//이름, 이메일로 아이디 찾기
+	public Member searchId(Connection conn,String searchName,String searchEmail) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("searchId"));
+			pstmt.setString(1, searchName);
+			pstmt.setString(2, searchEmail);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) m=getMember(rs);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return m;
+	}
 	
 	
 	
