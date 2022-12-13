@@ -87,7 +87,7 @@
                     <div class="sub">
                         <ul class="submenu">
                             <li><a href="">워홀 프렌즈 구하기</a></li>
-                            <li><a href="">생생후기</a></li>
+                            <li><a href="<%=request.getContextPath()%>/community/reviewBasic.do">생생후기</a></li>
                         </ul>
                     </div>
                 </li>
@@ -130,10 +130,10 @@
 		                        </div>
                         	<%}else{%>
 		                        <div>
-		                         <a href="<%=request.getContextPath()%>/mypage/mypagefriends.do?id=<%=logInMember.getMemberId()%>;"><img src="<%=request.getContextPath()%>/images/로그인.png" alt="" width="60px" height="60px"></a>
+		                         <a href="<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>"><img src="<%=request.getContextPath()%>/images/로그인.png" alt="" width="60px" height="60px"></a>
 		                            </div>
 		                           <div> 
-		                            <a href="<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>;">마이페이지</a>
+		                            <a href="<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>">마이페이지</a>
 		                        </div>
                         	<%} %>
 	                    </div>
