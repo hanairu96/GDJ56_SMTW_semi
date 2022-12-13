@@ -33,4 +33,16 @@ public class DiaryService {
 		close(conn);
 		return result;
 	}
+	
+	public int updateDiary(String memberId, String leavingdate, String alarmYN) {
+		Connection conn=getConnection();
+		int result=0;
+		result=dao.updateDiary(conn,memberId, leavingdate, alarmYN);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		return result;
+	}
 }
