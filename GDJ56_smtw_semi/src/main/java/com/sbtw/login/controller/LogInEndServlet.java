@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.smtw.member.model.service.MemberService;
 import com.smtw.member.model.vo.Member;
 
@@ -37,21 +38,16 @@ public class LogInEndServlet extends HttpServlet {
 		//아이디와 패스워드로 로그인하여 정보 가져오기
 		Member m=new MemberService().searchIdPwd(logInId,logInPwd);
 		
+		response.setContentType("application/json;charset=utf-8");
+		new Gson().toJson(m, response.getWriter());
+		
 		if(m!=null) {
 			HttpSession session=request.getSession();//세션생성
 			session.setAttribute("logInMember", m); //logInMember 세션에 아이디,비번 저장
-			
 			response.sendRedirect(request.getContextPath());//저장한 세션값 전송
 			
 			System.out.println("로그인 성공");
-		}else {
-			request.setAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
-			request.setAttribute("loc", "/logIn/logIn.do");//		/저장해놓기
-			request.getRequestDispatcher("/views/common/msg.jsp")
-			.forward(request, response);
 		}
-		
-		
 	}
 
 	/**

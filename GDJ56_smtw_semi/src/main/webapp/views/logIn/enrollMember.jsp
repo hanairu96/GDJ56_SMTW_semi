@@ -23,7 +23,6 @@
                 <script>
                 	//아이디 중복확인
                 	$("input#idCheck").click(e=>{
-                		
                 		$.ajax({
                 			url:"<%=request.getContextPath()%>/logIn/idDuplicateCheck.do",
                 			data:{inputId:$("input#inputId").val().trim()},
@@ -31,8 +30,9 @@
                 			success:data=>{
                 				if(data!=null){
                 					$("span#checkId>small").text("사용 불가한 아이디입니다.").css("color","red");
-                				}
-                				else{
+                				}else if($("#inputId").val()==""){
+                					$("span#checkId>small").text("아이디를 입력해주세요.").css("color","red");
+                				}else{
                 					$("span#checkId>small").text("사용 가능한 아이디입니다.").css("color","green");
                 				}
                 			}
@@ -43,16 +43,22 @@
                         $("#pwdCheck").blur(e=>{
                            const pw=$("#inputPwd").val();
                            const pwck=$(e.target).val();
-                           if(pw==pwck){
-                              $("span#checkPwd>small").css("color","green").text("비밀번호가 일치합니다.");
-                           }else{
-                              $("span#checkPwd>small").css("color","red").text("비밀번호가 불일치합니다.");
+                           if(pw==pwck){//비밀번호가 일치할 때
+                        	   if(pwck!=""){//비밀번호재입력 칸이 비어있지 않으면
+	                              $("span#checkPwd>small").css("color","green").text("비밀번호가 일치합니다.");                        		   
+                        	   }else{
+                        		   $("span#checkPwd>small").text(" ");
+                        	   }
+                           
+                           }else{//비밀번호가 불일치할 때
+                        	   if(pwck==""){//비밀번호입력칸이 비어있으면
+                        		   $("span#checkPwd>small").text(" ");
+                        	   }
+	                              $("span#checkPwd>small").css("color","red").text("비밀번호가 불일치합니다.");
                               
                            }
                         });
                      })
-                	
-                	
                 </script>
 				<div class="form-group has-success">
 					<label class="form-label mt-4" for="inputPwd">비밀번호<span class="obli">(필수)</span></label>
@@ -249,10 +255,11 @@
 // 			return false;
 // 		}
 
-		//이름 2자리 이상 필수입력
+		//이름 정규식 표현
 // 		const inputName=$("#inputName").val().trim();
-// 		if(inputName.length<2){
-// 			alert("이름은 2자리 이상 입력해주세요.");
+// 		const nameReg=/^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;//한글이름2~4자or영문 이름 2~10자 이내 : 띄어쓰기(\s)가 들어가며 First, Last Name 형식
+// 		if(!nameReg.test(inputName)){
+// 			alert("올바른 이름을 입력해주세요");
 // 			$("#inputName").focus();
 // 			return false;
 // 		}
