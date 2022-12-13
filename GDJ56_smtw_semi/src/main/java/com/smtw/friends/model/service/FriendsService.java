@@ -54,5 +54,7 @@ public class FriendsService {
 		close(conn);
 		return result;
 	}
+	
+	//
 
 }

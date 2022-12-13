@@ -15,6 +15,7 @@
 </head>
 <body>
 <header>
+<p>임시로 만듦</p>
         <div class="showme">
             <div class="logo">
             	<a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/images/ShowMeTheWay45.jpg" alt=""></a>

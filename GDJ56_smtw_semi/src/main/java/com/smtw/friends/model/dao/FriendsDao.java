@@ -163,5 +163,7 @@ public class FriendsDao {
 				.purpose(rs.getString("purpose"))
 				.build();
 	}
+	
+	//
 
 }
