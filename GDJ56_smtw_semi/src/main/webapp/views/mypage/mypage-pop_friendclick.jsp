@@ -3,9 +3,9 @@
 <%@ page import="com.smtw.mypage.model.vo.MemberInfo" %>
 
 <%
-	String friendName = request.getParameter("friendName");
-	String friendAge = request.getParameter("friendAge");
-	String friendGender = request.getParameter("friendGender");
+	String friendName = (String)request.getParameter("friendName");
+	String friendAge = (String)request.getParameter("friendAge");
+	String friendGender = (String)request.getParameter("friendGender");
 %>
 
 <!DOCTYPE html>

@@ -40,18 +40,30 @@ List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendsl
                 <%} else{
                 	for(int i=0;i<friendslist.size();i++){
                 %>
-                <form action="<%=request.getContextPath()%>/views/mypage/mypage-pop_friendclick.jsp">
+                <form name="form" action="" method="post">
                 <input type="hidden" name="friendName" value="<%=friendslist.get(i).getMemberName()%>"> 
                 <input type="hidden" name="friendAge" value="<%=friendslist.get(i).getAge()%>"> 
                 <input type="hidden" name="friendGender" value="<%=friendslist.get(i).getGender()%>"> 
-               <%--  <img src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
-                alt="" width="100" height="100" method="post" type="submit" onclick="window.open('<%=request.getContextPath()%>/views/mypage/mypage-pop_friendclick.jsp','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');"> --%>
-                <input type="image" id="ficon" name="submit" src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
-                onclick="window.open('<%=request.getContextPath()%>/views/mypage/mypage-pop_friendclick.jsp','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');">>
+                </form>
+                <input type="image" name="submit" id="ficon" src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
+                onclick="goPopup()">
                 <%}
                 }%>
-                </form>
             </div>
+            
+            
+                <script>
+            	function goPopup(){
+            		var gsWin=window.open("","winName","width=380,height=380"); //open("林家",剁快绰规侥,农扁)
+            		var frm=document.form;
+            		frm.action="<%=request.getContextPath()%>/mapage/mapagePopUp.do";
+            		frm.target="winName";
+            		frm.submit();
+            	}
+            	</script>
+            
+        
+         
 
             <div id="recievelist">
 
