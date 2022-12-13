@@ -18,5 +18,5 @@ public class Review {
 	private String reviewCity;
 	private int reviewSat;
 	// System.out.println();
-	
+	// System.out.println();
 }

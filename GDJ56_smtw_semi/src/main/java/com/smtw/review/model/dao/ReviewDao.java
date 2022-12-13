@@ -16,7 +16,7 @@ import com.smtw.review.model.vo.Review;
 
 
 public class ReviewDao {
-	
+	// System.out.println();
 	// System.out.println();
 	private Properties sql=new Properties();
 	
