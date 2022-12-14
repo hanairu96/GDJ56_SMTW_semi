@@ -101,20 +101,6 @@
 </section>
 
  <script>
-		 <%-- if(<%=ddayResult%><0){
-			 $.ajax({
-					url:"<%=request.getContextPath()%>/diary/deleteCheckList.do",
-					type:"get",
-					data:{
-							memberId:<%=diary.getMemberId()%>
-						 },
-					success:data=>{
-						alert(data);
-					}
-				}); 
-		 } --%>
- 
- 
          $(document).ready(function() {
             var floatPosition = parseInt($(".sidemenu").css('top')); //사이드메뉴바의 top위치 가져옴
 
@@ -215,7 +201,9 @@
      
      const deleteBtn=()=>{
     	 var deleteConfirm=confirm("복구 할 수 없습니다. 정말 삭제 하시겠습니까?");
+    	 
          if(deleteConfirm==true){
+        	 
         	 $.ajax({
      			url:"<%=request.getContextPath()%>/diary/deleteDiary.do",
      			type:"get",
