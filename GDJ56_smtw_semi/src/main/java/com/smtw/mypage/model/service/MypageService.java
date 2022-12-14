@@ -81,4 +81,11 @@ public class MypageService {
 		return result;
 	}
 	
+	public int updatePassword(String userId, String newPass) {
+		Connection conn = getConnection();
+		int result=new MypageDao().updatePassword(conn, userId,newPass);
+		close(conn);
+		return result;
+	}
+	
 }

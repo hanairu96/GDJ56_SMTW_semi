@@ -35,7 +35,6 @@ public class MypageDao {
 		int result = 0;
 		PreparedStatement pstmt=null;
 		
-		
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("updateMember"));
 			
@@ -265,6 +264,27 @@ public int deleteMember(Connection conn, String userId) {
 				.address(rs.getString("ADDRESS"))
 				.myImg(rs.getString("MYIMG"))
 				.build();
+	}
+	
+public int updatePassword(Connection conn, String userId, String newPass) {
+		
+		int result = 0;
+		PreparedStatement pstmt=null;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("updatePassword"));
+			pstmt.setString(1,newPass);
+			pstmt.setString(2,userId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+		
+			close(pstmt);
+		
+		}return result;
+		
+		
 	}
 		
 	
