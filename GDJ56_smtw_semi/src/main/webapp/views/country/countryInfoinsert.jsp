@@ -3,7 +3,7 @@
 <%@ include file="/views/common/header.jsp" %>
 <section>
 	<form name="countryinfo" action="<%=request.getContextPath()%>/country/insertCountryFirst.do" 
-	method="post" enctype="multipart/form-data">
+	method="post">
 		<div id="insertpage">
 	        <fieldset id="wrap2">
 	            <legend><h1 style="text-align: centers;">국가정보 입력페이지</h1></legend>
@@ -65,10 +65,7 @@
 	                    나라사진
 	                    <br><input type="file" name="piccountry"></input>
 	                </div>
-	                <script>
-	                	
-	                
-	                </script>
+
 	                <br>
 	                <div>
 	                    한줄글 

@@ -91,7 +91,12 @@
     </style>  
     <body>
     <h1 style="text-align: center;">국가 및 지역 정보</h1>
-    <%for(CountryPageInfo c : info) { %>
+    <%for(CountryPageInfo c : info) { 
+    
+    /* 	if(c.getNName().eqauls(nName)){ */
+    	%>
+
+
     	    <div id="twobu">
         		<button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/updatego.do?nName=<%=c.getNName()%>')"><span>국가정보 수정</span></button>
    			</div>
@@ -281,6 +286,10 @@
         },1000);
     </script>
     
-    <%} %>
+<%-- 	    <%}else{%>
+	    	<h1>조회된 결과가 없습니다.</h1>
+	    <%} --%>
+    
+    <%}%>
 </section>
 <%@ include file="/views/common/footer.jsp" %>

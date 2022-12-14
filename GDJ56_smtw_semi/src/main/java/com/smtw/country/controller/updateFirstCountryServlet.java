@@ -49,7 +49,7 @@ public class updateFirstCountryServlet extends HttpServlet {
 				.nImg(pic)
 				.npharse(text)
 				.build();
-		System.out.println(c);
+//		System.out.println(c);
 		
 		int result=new CountryService().updateCountry(c);
 		String msg="",loc="";

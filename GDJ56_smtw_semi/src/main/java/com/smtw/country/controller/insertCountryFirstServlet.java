@@ -32,8 +32,6 @@ public class insertCountryFirstServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		request.setCharacterEncoding("utf-8");
-		
 		String name=request.getParameter("selectco");
 		String lang=request.getParameter("langEn");
 		String tend=request.getParameter("tend2");
@@ -52,9 +50,9 @@ public class insertCountryFirstServlet extends HttpServlet {
 				.npharse(ontext)
 				.build();
 		
-//		System.out.println(c);
+		System.out.println(c);
 		int result=new CountryService().insertCountry(c);
-//		System.out.println(result);
+		System.out.println(result);
 		
 		String msg="",loc="";
 		if(result>0) {
