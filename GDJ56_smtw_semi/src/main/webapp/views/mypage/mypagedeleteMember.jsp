@@ -2,7 +2,7 @@
     pageEncoding="EUC-KR"%>
 <%@include file="/views/common/header.jsp" %>
 <%
-	String userId = (String)request.getParameter("id");
+	String userId = (String)request.getAttribute("userId");
 %>
  <section>
             <div class="sidemenu">
@@ -18,11 +18,11 @@
             <div class="contentList">
                 <div id="menutitle"><h2 style="background-color: cornflowerblue;">계정 관리</h2></div>
             <div id="pwck">
-            <p>message : 개인정보 보호를 위해 비밀번호를 다시 한 번 입력해주세요</p>
-           	<form action="<%=request.getContextPath()%>/mypage/mypagePwdCkEnd.do" method="post">
-           	비밀번호 <input type="hidden" name="id" value="<%=userId%>">
-             <input type="password" name="password" value="">
-            <input type="submit" name="submit" id="" value="입력">
+            <p style="color:red">warning! : 탈퇴하면 다시 복구할수 없습니다. 정말 탈퇴하시겠습니까?</p>
+           	
+           	 <input type="hidden" name="id" value="<%=userId%>">
+            <input type="button" name="agree" value="탈퇴하기" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageMemberDeleteEnd.do?id=<%=userId%>');">
+             <input type="button" name="cancle" value="취소하기" onclick="location.replace('<%=request.getContextPath()%>');"> 
             </form>
             </div>
                

@@ -67,4 +67,18 @@ public class MypageService {
 		return m;
 	}
 	
+	public int updateMember(Member updateMember) {
+		Connection conn = getConnection();
+		int result=new MypageDao().updateMember(conn, updateMember);
+		close(conn);
+		return result;
+	}
+	
+	public int deleteMember(String userId) {
+		Connection conn = getConnection();
+		int result=new MypageDao().deleteMember(conn, userId);
+		close(conn);
+		return result;
+	}
+	
 }

@@ -30,6 +30,60 @@ public class MypageDao {
 		}
 	}
 	
+	public int updateMember(Connection conn, Member updateMember) {
+		
+		int result = 0;
+		PreparedStatement pstmt=null;
+		
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("updateMember"));
+			
+			pstmt.setString(1,updateMember.getMemberName());
+			pstmt.setString(2,updateMember.getEmail());
+			pstmt.setString(3,updateMember.getPhone());
+			pstmt.setString(4,updateMember.getBirth());
+			pstmt.setString(5,String.valueOf(updateMember.getGender()));
+			pstmt.setString(6,updateMember.getAddress());
+			pstmt.setString(7,updateMember.getMyImg());
+			pstmt.setString(8,updateMember.getMemberId());
+			result=pstmt.executeUpdate();
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+		
+			close(pstmt);
+		
+		}return result;
+		
+		
+	}
+	
+public int deleteMember(Connection conn, String userId) {
+		
+		int result = 0;
+		PreparedStatement pstmt=null;
+		
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("deleteMember"));
+			
+			pstmt.setString(1,userId);
+			
+			result=pstmt.executeUpdate();
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+		
+			close(pstmt);
+		
+		}return result;
+		
+		
+	}
+	
 
 	
 	private Applyfriends getApplyfriendsList(ResultSet rs) throws SQLException{

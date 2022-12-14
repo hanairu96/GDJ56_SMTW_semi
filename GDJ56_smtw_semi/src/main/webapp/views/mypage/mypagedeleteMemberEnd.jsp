@@ -18,19 +18,18 @@
             <div class="contentList">
                 <div id="menutitle"><h2 style="background-color: cornflowerblue;">계정 관리</h2></div>
             <div id="pwck">
-            <p>message : 개인정보 보호를 위해 비밀번호를 다시 한 번 입력해주세요</p>
-           	<form action="<%=request.getContextPath()%>/mypage/mypagePwdCkEnd.do" method="post">
-           	비밀번호 <input type="hidden" name="id" value="<%=userId%>">
-             <input type="password" name="password" value="">
-            <input type="submit" name="submit" id="" value="입력">
-            </form>
+            <meta http-equiv="refresh" content="2; url=<%=request.getContextPath()%>"> 
+            <p >message : 그동안 Show Me The Way를 찾아주셔서 감사합니다</p>
             </div>
-               
-              
             </div>
             
-    
-        </section>
+</section>
+<script>
+()=()=>{
+	setTimeout(() => <%=request.getContextPath()%>, 2000);
+	
+}
+</script>
         <style>
         #pwck{
            

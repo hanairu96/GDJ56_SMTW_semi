@@ -3,6 +3,13 @@
 <%@include file="/views/common/header.jsp" %>
   <%
   	Member m = (Member)request.getAttribute("member");
+  	String postcode = (String)request.getAttribute("postcode");
+  	String address = (String)request.getAttribute("address");
+  	String detialadd = (String)request.getAttribute("detialadd");
+  	String bYear = (String)request.getAttribute("bYear");
+  	String bMonth = (String)request.getAttribute("bMonth");
+  	String bDay = (String)request.getAttribute("bDay");
+  	
   %>
  <section>
         <div class="sidemenu">
@@ -18,9 +25,9 @@
         <div class="contentList">
             <div id="menutitle"><h2 style="background-color: cornflowerblue;">계정 관리</h2></div>
         
-        <form action="<%=request.getContextPath()%>/mypageAccountUpdateEnd.do">
+        <form action="<%=request.getContextPath()%>/mypageAccountUpdateEnd.do" method="post">
         <div id="mypsc">
-                <img src="./사진/tomcat.png" alt="" width="200" height="200">
+                <img src="<%=m.getMyImg()%>" alt="" width="200" height="200" >
                 <br>
                 수정할 사진을 불러오세요 <br>
                 <input type="file" name="mypcs">
@@ -43,9 +50,9 @@
 
             
             <label class="form-label mt-4">생년월일<span class="obli">(필수)</span></label><br>
-        	년 <input type="text" class="form-control" name="bYear" value="" placeholder="년(4자)" maxlength="4" required>
+        	년 <input type="text" class="form-control" name="bYear" value="<%=bYear %>" placeholder="년(4자)" maxlength="4" required>
 
-               월 <select name="bMonth" id="bMonth" placeholder="월"> 
+               월 <select name="bMonth" id="bMonth" placeholder="월" value="<%=bMonth %>"> 
                     <option value="01">1
                     </option>
                     <option value="02">2
@@ -142,7 +149,7 @@
             <div class ="adddressContainer">
         <label class="form-label mt-4">주소</label>
         <div class="bir_yy address">
-                <input type="text" class="form-control inputAddr"
+                <input type="text" class="form-control inputAddr" value=<%=postcode %>
                    name="inputAddress_postcode" id="inputAddress_postcode" placeholder="우편번호" readonly>
         
             <input id="searchAddr" type="button" value="주소 검색" onclick="sample6_execDaumPostcode()">
@@ -150,11 +157,11 @@
     </div> <div class ="adddressContainer">
    
         <div class="bir_yy address">
-                <input type="text" class="form-control inputAddr"
+                <input type="text" class="form-control inputAddr" value=" <%=address %>"
                    name="inputAddress_address" id="inputAddress_address" placeholder="주소" readonly>
         
         
-                <input type="text" class="form-control inputAddr" 
+                <input type="text" class="form-control inputAddr"  value="<%=detialadd %>"
                    name="inputAddress_detailAddress"id="inputAddress_detailAddress" placeholder="상세주소">
         </div>
     </div>
