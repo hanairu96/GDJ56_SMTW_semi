@@ -1,4 +1,4 @@
-package com.sbtw.login.controller;
+package com.smtw.login.controller;
 
 import java.io.IOException;
 
@@ -34,19 +34,23 @@ public class SearchIdPwdEndServlet extends HttpServlet {
 		String searchEmail=request.getParameter("searchEmail");
 		String searchId=request.getParameter("searchId");
 		
-		Member m=new MemberService().searchId(searchName,searchEmail);
+		Member m=new MemberService().searchId(searchName,searchEmail);//아이디 찾기 값
+		//Member m2=new MemberService().searchIdPwd(searchName, searchEmail,searchId);//비밀번호 찾기 값
+		
 		String msg="",loc="";
+		request.setAttribute("members", m);
+		//아이디찾기
 		if(m!=null) {
-			System.out.println(m.getMemberId());
+			request.getRequestDispatcher("/views/logIn/searchIdEnd.jsp").forward(request, response);
 		}
 		else {
 			msg="일치하는 아이디가 없습니다.";
 			loc="/logIn/searchIdPwd.do";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

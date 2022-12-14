@@ -54,5 +54,4 @@ public class FriendsInfoServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	//
 }

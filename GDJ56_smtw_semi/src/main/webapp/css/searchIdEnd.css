@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 .customBtn {
             color: #fff;
             border-radius: 5px;
@@ -58,10 +57,16 @@
             margin-bottom: 30px;
         }
         #emailHelp{
+            text-align: center;
+            padding: 40px;
             margin-bottom: 20px;
         }
         .d-grid{
             margin: 0 auto;
+        }
+        #idResult{
+            color:#7e8cd2;
+            font-weight: bold;
         }
         
         /* <!-- 섹션 크기 --> */
