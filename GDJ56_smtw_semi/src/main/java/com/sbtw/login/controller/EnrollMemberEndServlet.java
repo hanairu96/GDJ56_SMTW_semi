@@ -39,22 +39,12 @@ public class EnrollMemberEndServlet extends HttpServlet {
 		String birthYear=request.getParameter("yy");
 		String birthMonth=request.getParameter("month");
 		String birthDay=request.getParameter("day");
-		String birth=birthYear+birthMonth+birthDay;
+		String birth=birthYear+"/"+birthMonth+"/"+birthDay;
 		String phone=request.getParameter("inputPhone");
 		char gender=request.getParameter("gender").charAt(0);
 		String email=request.getParameter("inputEmail");
 		String address="("+request.getParameter("inputAddress_postcode")+")"+request.getParameter("inputAddress_address")+","+request.getParameter("inputAddress_detailAddress");
-//		System.out.println(userId);
-//		System.out.println(password);
-//		System.out.println(userName);
-//		System.out.println(birthYear);
-//		System.out.println(birthMonth);
-//		System.out.println(birthDay);
-//		System.out.println(birth);
-//		System.out.println(phone);
-//		System.out.println(gender);
-//		System.out.println(email);
-//		System.out.println(address);
+
 		Member m=Member.builder()
 				.memberId(memberId)
 				.memberPwd(memberPwd)
@@ -66,8 +56,18 @@ public class EnrollMemberEndServlet extends HttpServlet {
 				.address(address)
 				.build();
 		int result=new MemberService().insertMember(m);
-		if(result>0) System.out.println("성공");
-		else System.out.println("실패");
+		String msg="",loc="";
+		if(result>0) {
+			msg="회원가입 성공! 환영합니다!";
+			loc="/";
+		}else {
+			msg="회원가입에 실패했습니다. 다시 시도해주세요.";
+			loc="/logIn/enrollMember.do";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

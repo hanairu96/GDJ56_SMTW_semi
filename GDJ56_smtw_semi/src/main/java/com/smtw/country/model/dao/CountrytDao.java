@@ -1,5 +1,7 @@
 package com.smtw.country.model.dao;
 
+import static com.smtw.common.JDBCTemplate.*;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import static com.smtw.common.JDBCTemplate.*;
+
 import com.smtw.country.model.vo.Country;
 
 public class CountrytDao {
@@ -24,17 +26,18 @@ public class CountrytDao {
 		}
 	}
 	
-	public List<Country> searchCountryList(Connection conn){
+	public List<Country> searchCountryList(Connection conn,int cPage, int numPerpage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Country> c=new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("searchCountry"));
+			pstmt.setInt(1,(cPage-1)*numPerpage+1);
+			pstmt.setInt(2,cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				c.add(getCountry(rs));
 			}
-			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -43,7 +46,26 @@ public class CountrytDao {
 		}return c;
 	}
 	
-	private Country getCountry(ResultSet rs) throws SQLException{
+	//페이징처리
+	public int searchCountryCount(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int count=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("searchCountryCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) count=rs.getInt(1);
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return count;
+		
+	}
+	
+	
+	public static Country getCountry(ResultSet rs) throws SQLException{
 		return Country.builder()
 				.nName(rs.getString("N_NAME"))
 				.nLanguage(rs.getString("N_LANGUAGE"))
@@ -55,6 +77,7 @@ public class CountrytDao {
 				.build();
 	}
 	
+	//추가
 	public int insertCountry(Connection conn, Country c) {
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -75,4 +98,61 @@ public class CountrytDao {
 		}return result;
 		
 	}
+	
+	//삭제
+	public int deleteCountry(Connection conn, Country c) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("deleteCountry"));
+			pstmt.setString(1,  c.getNName());
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	//수정을위해 정보를 가져옴
+	public Country searchNName(Connection conn, String name) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Country c=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("searchNName"));
+			pstmt.setString(1,name);
+			rs=pstmt.executeQuery();
+			if(rs.next()) c=getCountry(rs);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return c;
+	}
+	
+	public int updateCountry(Connection conn, Country c) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("updateCountry"));
+			pstmt.setString(1, c.getNLanguage());
+			pstmt.setString(2, c.getNTend());
+			pstmt.setString(3, c.getNPlace());
+			pstmt.setString(4, c.getNSeason());
+			pstmt.setString(5, c.getNImg());
+			pstmt.setString(6, c.getNpharse());
+			pstmt.setString(7, c.getNName());
+			result=pstmt.executeUpdate();	
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 }

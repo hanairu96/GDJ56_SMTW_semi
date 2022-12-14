@@ -77,14 +77,8 @@
                 </tr>
             </table>
             <br><br>
-        	
-        	<form action="<%=request.getContextPath() %>/admin/deleteMember.do">
-	            <input type="hidden" id="memberId" name="memberId" value="<%=m.getMemberId() %>">
-	            <input type="submit" id="del" value="회원 삭제">
-        	</form>
+        	<button id="del" onclick="deleteMember();">회원 삭제</button>
         </div>
-
-
     </section>
     <style>
         .memberInfo{
@@ -141,5 +135,12 @@
         $(".sidemenu>div:nth-child(2)").click(e=>{
             location.assign("<%=request.getContextPath()%>/admin/qnaManage.do");
         })
+        
+       	const deleteMember=()=>{
+       		let check=confirm("정말로 삭제하겠습니까?");
+       		if(check==true){
+       			location.replace("<%=request.getContextPath() %>/admin/deleteMemberEnd.do?memberId=<%=m.getMemberId() %>");
+       		}
+       	}
     </script>
 <%@ include file="/views/common/footer.jsp" %>

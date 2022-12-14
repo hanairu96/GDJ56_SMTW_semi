@@ -48,9 +48,9 @@ public class MemberService {
 		return m;
 	}
 	
-	public int deleteMember(Member m) {
+	public int deleteMember(String id) {
 		Connection conn=getConnection();
-		int result=dao.deleteMember(conn, m);
+		int result=dao.deleteMember(conn, id);
 		close(conn);
 		return result;
 	}
