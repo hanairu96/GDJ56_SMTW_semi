@@ -107,7 +107,7 @@
         <div id="titlecountryinfo">
             <div>
                 <h2 style="text-align: center;"><%=c.getNName() %></h2>
-                <img src="<%=c.getCPic() %>" alt=""
+                <img src="<%=request.getContextPath()%>/images/country/noimage_view.png" alt=""
                 width="200" height="130">
             </div>
             <p style="font-size: 13px;">

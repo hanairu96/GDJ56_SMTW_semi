@@ -116,7 +116,7 @@
            		 		
            		 		
        				 <div id="collectmain2">
-	                    <img src="" alt="" style="width: 370px; height:250px;" >
+	                    <img src="<%=request.getContextPath()%>/images/country/noimage_view.png"  alt="" style="width: 370px; height:250px;" >
 	                    <div id="likenameinfo">
 	                        <div id="likename2">
 	                            <p id="font1" style="font-size:30px;">

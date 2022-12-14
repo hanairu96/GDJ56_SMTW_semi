@@ -35,7 +35,7 @@ public class searchCountryInfoAllServlet extends HttpServlet {
 		List<CountryPageInfo> c=new CountryPageInfoService().searchAll();
 		
 		request.setAttribute("coinfo", c);
-		System.out.println(c);
+//		System.out.println(c);
 		request.getRequestDispatcher("/views/countryInfo/countryInfoMain.jsp").forward(request, response);
 	
 	
