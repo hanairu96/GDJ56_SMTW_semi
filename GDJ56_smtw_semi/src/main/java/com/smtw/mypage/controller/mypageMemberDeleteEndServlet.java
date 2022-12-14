@@ -6,21 +6,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.smtw.member.model.vo.Member;
 import com.smtw.mypage.model.service.MypageService;
 
 /**
- * Servlet implementation class mapagePwdCkEndServlet
+ * Servlet implementation class mypageMemberDeleteEndServlet
  */
-@WebServlet("/mypage/mypagePwdCkEnd.do")
-public class mapagePwdCkEndServlet extends HttpServlet {
+@WebServlet("/mypage/mypageMemberDeleteEnd.do")
+public class mypageMemberDeleteEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public mapagePwdCkEndServlet() {
+    public mypageMemberDeleteEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,34 +29,32 @@ public class mapagePwdCkEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String userId=request.getParameter("id");
-		String pwd=request.getParameter("password");
+		String userId= request.getParameter("id");
 		
-		System.out.println(userId+" : "+pwd);
-		Member m = new MypageService().pwdCk(userId,pwd);
-		
-		request.setAttribute("userId", userId);
+		int delete = new MypageService().deleteMember(userId);
 		
 		String msg="",loc="";
-		if(m==null) {
-			msg="비밀번호를 잘못입력하셨습니다. 다시입력해주세요";
-			loc="/mypage/mypagePwdCk.do?id="+userId;
-		}else {
-			msg="비밀번호를 올바르게 입력하셧습니다. 개인정보 수정 페이지로 넘어갑니다";
-			loc="/mypage/mypageAccountUpdate.do?id="+userId;
-		}
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);;
 		
+		if(delete>0) {
+			HttpSession session = request.getSession(false);
+			if(session!=null) {
+				session.invalidate();
+			}
+			request.getRequestDispatcher("/views/mypage/mypagedeleteMemberEnd.jsp").forward(request, response);
+		}else {
+			msg="회원탈퇴를 실패했습니다. 다시 시도해주세요";
+			loc="/mypage/mypagedeleteMember.do?id="+userId;
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

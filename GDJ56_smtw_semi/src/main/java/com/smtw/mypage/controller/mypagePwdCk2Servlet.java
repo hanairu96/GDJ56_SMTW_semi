@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.member.model.vo.Member;
-import com.smtw.mypage.model.service.MypageService;
-
 /**
- * Servlet implementation class mapagePwdCkEndServlet
+ * Servlet implementation class mypagePwdCheck2
  */
-@WebServlet("/mypage/mypagePwdCkEnd.do")
-public class mapagePwdCkEndServlet extends HttpServlet {
+@WebServlet("/mypage/mypagePwdCk2.do")
+public class mypagePwdCk2Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public mapagePwdCkEndServlet() {
+    public mypagePwdCk2Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,26 +27,9 @@ public class mapagePwdCkEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String userId=request.getParameter("id");
-		String pwd=request.getParameter("password");
-		
-		System.out.println(userId+" : "+pwd);
-		Member m = new MypageService().pwdCk(userId,pwd);
-		
-		request.setAttribute("userId", userId);
-		
-		String msg="",loc="";
-		if(m==null) {
-			msg="비밀번호를 잘못입력하셨습니다. 다시입력해주세요";
-			loc="/mypage/mypagePwdCk.do?id="+userId;
-		}else {
-			msg="비밀번호를 올바르게 입력하셧습니다. 개인정보 수정 페이지로 넘어갑니다";
-			loc="/mypage/mypageAccountUpdate.do?id="+userId;
-		}
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);;
-		
+		String id=request.getParameter("id");
+		request.setAttribute(id, "id");
+		request.getRequestDispatcher("/views/mypage//mypagepwdck2.jsp").forward(request, response);
 	}
 
 	/**

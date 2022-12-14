@@ -8,8 +8,8 @@
    <section>
         <div class="sidemenu">
             <div><h4 style="text-align: center;">마이 페이지</h4></div>
-            <div><p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypagePwdCk.do?id=<%=logInMember.getMemberId()%>');">워홀 프렌즈</p></div>
-            <div><p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageAccountView.do?id=<%=logInMember.getMemberId()%>');">계정 관리</p></div>
+            <div><p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypagePwdCk.do?id=<%=m.getMemberId()%>');">워홀 프렌즈</p></div>
+            <div><p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageAccountView.do?id=<%=m.getMemberId()%>');">계정 관리</p></div>
             <div><p>쪽지함</p></div>
             <div><p>내가 쓴 글</p></div>
             <div><p>찜한 나라</p></div>
@@ -23,8 +23,8 @@
                 <img src="./사진/tomcat.png" alt="" width="200" height="200" style="border">
                 <br>
                 
-                <button onclick="location.replace('<%=request.getContextPath()%>/mypage/mypagePwdCk.do?id=<%=logInMember.getMemberId()%>');"; style="box-shadow: 3px 3px;background-color: lavender;">수정하기</button>
-                <button onclick="window.open('mypage-pwcheck.html')" style="box-shadow: 3px 3px;background-color: lavender;">탈퇴하기</button>
+                <button onclick="location.replace('<%=request.getContextPath()%>/mypage/mypagePwdCk.do?id=<%=m.getMemberId()%>');"; style="box-shadow: 3px 3px;background-color: lavender;">수정하기</button>
+                <button onclick="location.replace('<%=request.getContextPath()%>/mypage/mypagePwdCk2.do?id=<%=m.getMemberId()%>');" style="box-shadow: 3px 3px;background-color: lavender;">탈퇴하기</button>
         </div>
         <div id="myimpo">
             <div>아이디 : <%=m.getMemberId() %></div>

@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.smtw.member.model.vo.Member;
+import com.smtw.mypage.model.service.MypageService;
+
 /**
  * Servlet implementation class mypageAccountUpdateEndServlet
  */
@@ -34,6 +37,9 @@ public class mypageAccountUpdateEndServlet extends HttpServlet {
 		String bYear=request.getParameter("bYear");
 		String bMonth=request.getParameter("bMonth");
 		String bDay=request.getParameter("bDay");
+		String email=request.getParameter("email");
+		String phone=request.getParameter("phone");
+		String myImg=request.getParameter("mypcs");
 		
 		String address="("+request.getParameter("inputAddress_postcode")+")"+request.getParameter("inputAddress_address")+","+request.getParameter("inputAddress_detailAddress");
 		
@@ -44,6 +50,23 @@ public class mypageAccountUpdateEndServlet extends HttpServlet {
 		System.out.println("성별"+gender);
 		System.out.println("생년월일"+birth);
 		System.out.println("주소"+address);
+		System.out.println("이멜일"+email);
+		System.out.println("내사진"+myImg);
+		
+		Member updateMember = Member.builder()
+						.memberId(id)
+						.memberName(name)
+						.email(email)
+						.phone(phone)
+						.birth(birth)
+						.gender(gender)
+						.address(address)
+						.myImg(myImg)
+						.build();
+		
+		int result=new MypageService().updateMember(updateMember);
+		
+		request.getRequestDispatcher("/views/mypage/mypagefriends.jsp").forward(request, response);
 	}
 
 	/**
