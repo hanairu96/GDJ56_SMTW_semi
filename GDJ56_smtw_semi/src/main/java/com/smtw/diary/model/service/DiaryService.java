@@ -78,4 +78,17 @@ public class DiaryService {
 		close(conn);
 		return result;
 	}
+	
+	public int deleteDiary(String memberId) {
+		Connection conn=getConnection();
+		int result=dao.deleteDiary(conn,memberId);
+		
+		 if(result>0) {
+			 commit(conn);
+		 }else {
+			 rollback(conn);
+		 }
+		 close(conn);
+		 return result;
+	}
 }

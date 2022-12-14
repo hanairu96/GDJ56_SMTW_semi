@@ -27,7 +27,7 @@ public class DiaryDao {
 	   
 	   public static Diary getDiary(ResultSet rs) throws SQLException{
 	         return Diary.builder()
-	               .memberId(rs.getString("MEMBER_ID"))
+	               .memberId(rs.getString("MEMBER_ID2"))
 	               .dDay(rs.getString("D_DAY"))
 	               .alarm(rs.getString("ALARM"))
 	               .build();
@@ -35,7 +35,7 @@ public class DiaryDao {
 	   
 	   public static CheckList getCheckList(ResultSet rs) throws SQLException{
 	         return CheckList.builder()
-	               .memberId(rs.getString("MEMBER_ID"))
+	               .memberId(rs.getString("MEMBER_ID2"))
 	               .passport(rs.getString("PASSPORT").charAt(0))
 	               .doller(rs.getString("DOLLER").charAt(0))
 	               .resume(rs.getString("RESUME").charAt(0))
@@ -216,5 +216,24 @@ public class DiaryDao {
 		   }
 		   return result;
 		
+	}
+	
+	public int deleteDiary(Connection conn,String memberId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("deleteDiary"));
+			pstmt.setString(1, memberId);
+			
+			result=pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 }
