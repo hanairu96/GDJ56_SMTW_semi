@@ -68,6 +68,51 @@ public class NoticeDao {
 		}return result;
 	}
 	
+	//공지사항 작성
+	public int insertNotice(Connection conn,String writer,String title,String contents) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertNotice"));
+			pstmt.setString(1, writer);
+			pstmt.setString(2, title);
+			pstmt.setString(3, contents);
+			
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	//제목,내용 별 검색
+	public List<Notice> searchNotice(Connection conn, String option,String notice){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Notice> list=new ArrayList();
+		
+		String query=sql.getProperty("searchNotice");
+		query=query.replace("$COL", option);
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1,"%"+notice+"%");
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(getNotice(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
 	
 	
 	

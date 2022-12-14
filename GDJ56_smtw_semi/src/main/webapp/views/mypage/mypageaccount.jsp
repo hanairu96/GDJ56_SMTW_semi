@@ -34,7 +34,7 @@
             <div>주소 : <%=m.getAddress() %></div>
             <div>전화번호 : <%=m.getPhone() %></div>
             <div>이메일 : <%=m.getEmail() %></div>
-            <div>비밀번호 : <button onclick="location.replace('<%=request.getContextPath()%>/mypage/mypagePwdCk.do?id=<%=logInMember.getMemberId()%>');">수정하기</button></div>
+            <div>비밀번호 : <button onclick="location.replace('<%=request.getContextPath()%>/mypage/mypagePwdCk3.do?id=<%=m.getMemberId()%>');">수정하기</button></div>
         </div>
 
 

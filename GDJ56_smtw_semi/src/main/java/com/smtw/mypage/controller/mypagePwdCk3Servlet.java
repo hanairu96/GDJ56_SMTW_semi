@@ -1,4 +1,4 @@
-package com.smtw.diary.controller;
+package com.smtw.mypage.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,19 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.diary.model.service.DiaryService;
-
 /**
- * Servlet implementation class DeleteDiaryServlet
+ * Servlet implementation class mypagePwdCk3Servlet
  */
-@WebServlet("/diary/deleteDiary.do")
-public class DeleteDiaryServlet extends HttpServlet {
+@WebServlet("/mypage/mypagePwdCk3.do")
+public class mypagePwdCk3Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteDiaryServlet() {
+    public mypagePwdCk3Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,17 +26,10 @@ public class DeleteDiaryServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId=request.getParameter("memberId");
-		
-		int result=new DiaryService().deleteDiary(memberId);
-		response.setContentType("text/html;charset=utf-8");
-		
-		if(result>0) {
-			response.getWriter().append("삭제완료!");
-		}else {
-			response.getWriter().append("삭제 실패, 다시 시도하세요!");
-		}
-		
+		// TODO Auto-generated method stub
+		String id=request.getParameter("id");
+		request.setAttribute(id, "id");
+		request.getRequestDispatcher("/views/mypage//mypagepwdck3.jsp").forward(request, response);
 	}
 
 	/**
