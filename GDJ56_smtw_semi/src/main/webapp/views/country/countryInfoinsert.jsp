@@ -58,8 +58,8 @@
 	                <br>
 	                <div>
 	                    대표적인 계절
-	                    <br><label><input type="radio" name="weather" value="여름" checked>여름</label>
-	                    <label><input type="radio" name="weather" value="겨울">겨울</label>
+	                    <br><label><input type="radio" name="weather" value="온난" checked>온난</label>
+	                    <label><input type="radio" name="weather" value="한랭">한랭</label>
 	                </div>
 	                <br>
 	                <div>

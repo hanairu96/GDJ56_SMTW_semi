@@ -112,9 +112,11 @@
 	                        <div id="likename2">
 	                            <button id="like2">좋아요</button>
 	                
-	                            <p id="font1" style="font-size:50px;"><a href="<%=request.getContextPath()%>/countryInfo/insergo.do?nName=<%=con.get(i).getNName()%>"><%=con.get(i).getNName() %></a></p>
-	                            <%-- <p id="font1" style="font-size:50px;">
-	                            <a href="<%=request.getContextPath()%>/countryinfo/searchAll.do?nName=<%=con.get(i).getNName()%>"><%=con.get(i).getNName() %></a></p> --%>
+	                            <%-- <p id="font1" style="font-size:50px;"><a href="<%=request.getContextPath()%>/countryInfo/insergo.do?nName=<%=con.get(i).getNName()%>"><%=con.get(i).getNName() %></a></p> --%>
+	                            
+	                            
+	                            <p id="font1" style="font-size:50px;">
+	                            <a href="<%=request.getContextPath()%>/countryinfo/searchAll.do?nName=<%=con.get(i).getNName()%>"><%=con.get(i).getNName() %></a></p>
 	                            
 	                            
 	                            <button id="update" onclick="location.assign('<%=request.getContextPath()%>/country/updateCountry.do?nName=<%=con.get(i).getNName()%>')">수정</button>

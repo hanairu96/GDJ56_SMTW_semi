@@ -19,4 +19,5 @@ public class CountryPageInfo {
 	private String englishName;
 	private String clock;
 	private String cPic;
+	
 }

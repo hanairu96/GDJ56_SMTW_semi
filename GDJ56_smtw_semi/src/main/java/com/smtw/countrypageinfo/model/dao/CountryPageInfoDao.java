@@ -66,14 +66,14 @@ public class CountryPageInfoDao {
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("insertCountryInfo"));
 			pstmt.setString(1, c.getNName());
-			pstmt.setString(2, c.getCPic());
-			pstmt.setString(3, c.getCLanguage());
-			pstmt.setString(4, c.getUrban());
-			pstmt.setString(5, c.getMoney());
-			pstmt.setString(6, c.getElect());
-			pstmt.setString(7, c.getMapAddress());
-			pstmt.setString(8, c.getEnglishName());
-			pstmt.setString(9, c.getClock());
+			pstmt.setString(2, c.getCLanguage());
+			pstmt.setString(3, c.getUrban());
+			pstmt.setString(4, c.getMoney());
+			pstmt.setString(5, c.getElect());
+			pstmt.setString(6, c.getMapAddress());
+			pstmt.setString(7, c.getEnglishName());
+			pstmt.setString(8, c.getClock());
+			pstmt.setString(9, c.getCPic());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

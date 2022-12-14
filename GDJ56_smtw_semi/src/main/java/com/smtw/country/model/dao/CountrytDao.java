@@ -36,7 +36,9 @@ public class CountrytDao {
 			pstmt.setInt(2,cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				c.add(getCountry(rs));
+				Country co=getCountry(rs);
+			//	co.setInfo(getCountyInfo(rs));
+				c.add(co);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
