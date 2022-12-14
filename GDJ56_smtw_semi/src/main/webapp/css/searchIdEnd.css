@@ -1,0 +1,146 @@
+@charset "UTF-8";
+.customBtn {
+            color: #fff;
+            border-radius: 5px;
+            padding: 10px 25px;
+            font-weight: 500;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+            box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+            7px 7px 20px 0px rgba(0,0,0,.1),
+            4px 4px 5px 0px rgba(0,0,0,.1);
+            outline: none;
+            min-width: 80px;
+        }
+        .btnStyle {
+            line-height: 40px;
+            padding: 0;
+            border: none;
+            background: #7e8cd2;
+            background: linear-gradient(0deg, #7e8cd2 0%, #7e8cd2 100%);
+        }
+        .btnStyle:hover {
+            color: #7e8cd2;
+            background: transparent;
+            box-shadow:none;
+        }
+        .btnStyle:before,.btnStyle:after{
+            content:'';
+            position:absolute;
+            top:0;
+            right:0;
+            height:2px;
+            width:0;
+            background: #7e8cd2;
+            box-shadow:
+            -1px -1px 5px 0px #fff,
+            7px 7px 20px 0px #0003,
+            4px 4px 5px 0px #0002;
+            transition:400ms ease all;
+        }
+        .btnStyle:after{
+            right:inherit;
+            top:inherit;
+            left:0;
+            bottom:0;
+        }
+        .btnStyle:hover:before,.btnStyle:hover:after{
+            width:100%;
+            transition:800ms ease all;
+        }
+        #insert{
+            display: flex;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+        #emailHelp{
+            text-align: center;
+            padding: 40px;
+            margin-bottom: 20px;
+        }
+        .d-grid{
+            margin: 0 auto;
+        }
+        #idResult{
+            color:#7e8cd2;
+            font-weight: bold;
+        }
+        
+        /* <!-- 섹션 크기 --> */
+        
+        .flex-fill.mx-xl-5.mb-2{
+            margin: 0 auto;
+            width : 700px;
+            padding-right: 7rem;
+            padding-left: 7rem;
+        }
+        /* <!-- 입력창 --> */
+        .container.py-4{
+            margin: 0 auto;
+            width : 503px;
+        }
+        /* <!-- 가입하기 --> */
+        .d-grid.gap-2{
+            padding-top: 20px;
+        }
+        .row{
+            display: block;
+        }
+        .text-dark{
+            text-align:center;
+            display:block;
+            margin: 0 auto;
+        }
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 350px;
+        }
+        /* 내용보기 글자위치 */
+        span.obli{
+            color: rgba(103, 103, 194, 0.685);
+            font-size: small;
+            padding-left:80px;
+        }
+        a{
+            color: lightgray;
+            font-size: 13px;
+        }
+        div#login{
+            width: 400px;
+            text-align: center;
+            margin: 0 auto;
+            align-items: center;
+            
+        }
+        section{
+            /* border: 1px solid tomato; */
+            
+            margin-left: 50px;
+            margin-right: 50px;
+            /* padding-left: 100px;
+            padding-right: 100px; */
+            /* 
+                만약 섹션 안에 div를 만든다면 여기 padding-left,padding-right에서
+                좌우 간격을 조정하세요
+                왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
+             */
+            margin-top: 100px;
+            height: 500px; 
+            /*
+                ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
+                높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.
+            */
+            
+        }
+        section>div{
+            border: 1px solid lightgray;
+            /* 섹션 안의 div테두리 */
+            
+        }
+        
+        
