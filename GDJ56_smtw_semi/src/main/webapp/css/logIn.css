@@ -1,8 +1,11 @@
 @charset "UTF-8";
+h1{
+	margin-bottom:4px;
+}
 .logInform{
     height: 20px;
     width: 200px;
-    margin: 5px;
+	margin: 5px;
 }
 .wrapper {
     display: flex;
@@ -17,7 +20,7 @@ a{
 div#login{
     border: 1px solid lightgray;
     width: 450px;
-    height: 280px;
+    height: 300px;
     text-align: center;
     margin: 0 auto;
     align-items: center;
