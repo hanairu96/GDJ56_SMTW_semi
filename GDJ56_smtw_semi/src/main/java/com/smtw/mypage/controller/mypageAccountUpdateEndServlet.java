@@ -1,27 +1,23 @@
 package com.smtw.mypage.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.mypage.model.service.MypageService;
-
 /**
- * Servlet implementation class mypageAcceptFriends
+ * Servlet implementation class mypageAccountUpdateEndServlet
  */
-@WebServlet("/mypage/acceptFriends.do")
-public class mypageAcceptFriendsServlet extends HttpServlet {
+@WebServlet("/mypageAccountUpdateEnd.do")
+public class mypageAccountUpdateEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public mypageAcceptFriendsServlet() {
+    public mypageAccountUpdateEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,27 +26,24 @@ public class mypageAcceptFriendsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
-		String userId=request.getParameter("id");
-		String memberFrom = request.getParameter("memberfrom");
-		System.out.println(memberFrom);
-		System.out.println(userId);
-		int result = new MypageService().acceptFriends(userId,memberFrom);
-		System.out.println(result);
+		String mypcs=request.getParameter("mypcs");
+		String id=request.getParameter("id");
+		String name=request.getParameter("name");
+		char gender=request.getParameter("gender").charAt(0);
+		String bYear=request.getParameter("bYear");
+		String bMonth=request.getParameter("bMonth");
+		String bDay=request.getParameter("bDay");
 		
-		String msg="", loc="";
-		if(result<1) {
-			msg="친구 신청 수락에 실패했습니다. 다시 시도해주세요";
-		}else {
-			msg="친구 신청를 수락하셨습니다!";
-		}
-		loc="/mypage/mypageFriends.do?id="+userId;
+		String address="("+request.getParameter("inputAddress_postcode")+")"+request.getParameter("inputAddress_address")+","+request.getParameter("inputAddress_detailAddress");
 		
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		String birth = bYear+"/"+bMonth+"/"+bDay;
 		
+		System.out.println("아이디"+id);
+		System.out.println("이름"+name);
+		System.out.println("성별"+gender);
+		System.out.println("생년월일"+birth);
+		System.out.println("주소"+address);
 	}
 
 	/**

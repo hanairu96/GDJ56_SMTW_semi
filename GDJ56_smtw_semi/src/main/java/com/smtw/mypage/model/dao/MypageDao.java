@@ -153,6 +153,65 @@ public class MypageDao {
 			System.out.println(result);
 		}return result;
 	}
+	
+	public Member memberInfo(Connection conn, String userId){
+		
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("memberInfo"));
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=getMember(rs);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
+	
+	public Member pwdCk(Connection conn, String userId, String pwd) {
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("pwdCk"));
+			pstmt.setString(1, userId);
+			pstmt.setString(2, pwd);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=getMember(rs);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		System.out.println(m);
+		return m;
+		
+	}
+	
+	private Member getMember(ResultSet rs) throws SQLException {
+		return Member.builder()
+				.memberId(rs.getString("MEMBER_ID"))
+				.memberPwd(rs.getString("MEMBER_PWD"))
+				.memberName(rs.getString("MEMBER_NAME"))
+				.email(rs.getString("EMAIL"))
+				.phone(rs.getString("PHONE"))
+				.birth(rs.getString("BIRTH"))
+				.gender(rs.getString("GENDER").charAt(0))
+				.address(rs.getString("ADDRESS"))
+				.myImg(rs.getString("MYIMG"))
+				.build();
+	}
 		
 	
 		
