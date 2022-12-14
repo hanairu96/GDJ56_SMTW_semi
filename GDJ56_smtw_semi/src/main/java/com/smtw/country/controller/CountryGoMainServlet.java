@@ -45,6 +45,7 @@ public class CountryGoMainServlet extends HttpServlet {
 	
 		List<Country> country=new CountryService().searchCountry(cPage, numPerpage);
 		
+//		System.out.println(country);
 		int totalData=new CountryService().searchCountryCount();
 		String pageBar="";
 		int pageBarSize=3;

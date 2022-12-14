@@ -56,7 +56,20 @@ public class InsertCountryInfoServlet extends HttpServlet {
 		
 		int result=new CountryPageInfoService().insertInfo(cp);
 	
-	
+		String msg="",loc="";
+		if(result>0) {
+			msg="국가정보가 정상적으로 등록되었습니다.";
+			loc="/countryinfo/searchAll.do";
+		}else {
+			msg="등록을 실패하였습니다. 다시 시도해주세요.";
+			loc="/countryInfo/insergo.do";
+		}
+		request.setAttribute("msg",msg);
+		request.setAttribute("loc",loc);
+		
+		request.getRequestDispatcher("/views/common/msg.jsp")
+		.forward(request, response);
+		
 	
 	
 	

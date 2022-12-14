@@ -1,6 +1,6 @@
 package com.smtw.country.model.dao;
 
-import static com.smtw.common.JDBCTemplate.*;
+import static com.smtw.common.JDBCTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,9 +13,14 @@ import java.util.List;
 import java.util.Properties;
 
 import com.smtw.country.model.vo.Country;
+import com.smtw.country.model.vo.CountryPageInfo;
+import com.smtw.countrypageinfo.model.dao.CountryPageInfoDao;
 
 public class CountrytDao {
+
 	private Properties sql=new Properties();
+	
+//	private CountryPageInfoDao cp=new CountryPageInfoDao();
 	
 	public CountrytDao() {
 		String path=CountrytDao.class.getResource("/sql/country/country_sql.properties").getPath();
@@ -37,7 +42,7 @@ public class CountrytDao {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Country co=getCountry(rs);
-			//	co.setInfo(getCountyInfo(rs));
+				co.setInfo(getContryInfo(rs));
 				c.add(co);
 			}
 		}catch(SQLException e) {
@@ -46,6 +51,21 @@ public class CountrytDao {
 			close(rs);
 			close(pstmt);
 		}return c;
+	}
+	
+	
+	public static CountryPageInfo getContryInfo(ResultSet rs) throws SQLException{
+		return CountryPageInfo.builder()
+				.nName(rs.getString("N_NAME"))
+				.cLanguage(rs.getString("C_LANGUAGE"))
+				.urban(rs.getString("URBAN"))
+				.money(rs.getString("MONEY"))
+				.elect(rs.getString("ELECT"))
+				.mapAddress(rs.getString("MAPADDRESS"))
+				.englishName(rs.getString("ENGLISHNAME"))
+				.clock(rs.getString("CLOCK"))
+				.cPic(rs.getString("C_PIC"))
+				.build();
 	}
 	
 	//페이징처리

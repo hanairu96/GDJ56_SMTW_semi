@@ -3,6 +3,7 @@
 <%@ page import="java.util.List,com.smtw.country.model.vo.Country" %>
 <%
 	List<Country> con=(List<Country>)request.getAttribute("country");
+	
 %>
 <%@ include file="/views/common/header.jsp" %>
 
@@ -111,12 +112,20 @@
 	                    <div id="likenameinfo">
 	                        <div id="likename2">
 	                            <button id="like2">좋아요</button>
-	                
-	                            <%-- <p id="font1" style="font-size:50px;"><a href="<%=request.getContextPath()%>/countryInfo/insergo.do?nName=<%=con.get(i).getNName()%>"><%=con.get(i).getNName() %></a></p> --%>
-	                            
-	                            
 	                            <p id="font1" style="font-size:50px;">
-	                            <a href="<%=request.getContextPath()%>/countryinfo/searchAll.do?nName=<%=con.get(i).getNName()%>"><%=con.get(i).getNName() %></a></p>
+	                            <a href="<%=request.getContextPath()+(con.get(i).getInfo().getMoney()==null?"/countryInfo/insergo.do?nName=":"/countryinfo/searchAll.do?nName=")+con.get(i).getNName()%>">
+	                			<%-- <%if(con.get(i).getInfo()==null) {	                            
+	                            	request.getContextPath()+"/countryInfo/insergo.do?nName="con.get(i).getNName()%>">
+	                            <%}else{ %>
+	                            	<%=request.getContextPath()%>/countryinfo/searchAll.do?nName=<%=con.get(i).getNName()%>">
+	                            <%}  %> --%>
+	                            <%=con.get(i).getNName() %></a></p>
+	                            
+	                            
+	                            
+	                            
+	                            <%-- <a href="<%=request.getContextPath()%>/countryInfo/insergo.do?nName=<%=con.get(i).getNName()%>"><%=con.get(i).getNName() %></a></p> --%>
+
 	                            
 	                            
 	                            <button id="update" onclick="location.assign('<%=request.getContextPath()%>/country/updateCountry.do?nName=<%=con.get(i).getNName()%>')">수정</button>
