@@ -55,8 +55,8 @@
 
         <div style="height:700px">
             <div style="display:flex">
-                <div style="border:0px solid yellow;width:300px;height:700px">
-                    <div style="border:0px solid blue;width:270px;height:350px">
+                <div style="border:1px solid yellow;width:300px;height:700px">
+                    <div style="border:1px solid blue;width:270px;height:350px">
                         <header class="header" role="banner">
                             <div id="sideMenu">
                                 <h1 class="sidelogo">
@@ -195,73 +195,81 @@
 
                 </style>
 
-                <div style="border:0px solid red;width:800px;height:695px">
+                <div style="border:1px solid red;width:800px;height:695px">
                     <div style="display:flex">
                     
                       
-                 <%if(fs==null||fs.isEmpty()) {%>
-                        <div id="box" style="border:0px solid green;width:300px;height:300px">
-                            <div style="border:0px solid magenta;width:220px;height:270px; margin-left :25px; margin-top :5px;background-color:rgba(128, 128, 128, 0.342);border-radius:20px;" >
-                                <div style="border:0px solid blue;width:100%;height:110px;display:flex;justify-content: center;">
-                                </div>        
-									<p>조회된 회원이 없습니다.</p>
-                                <div style="border:0px solid blue;width:100%;height:30px;margin-top:30px;display:flex;">
+                <%if(fs==null||fs.isEmpty()) {%>
+                       <div id="box" style="border:1px solid green;width:300px;height:300px">
+                           <div style="border:1px solid magenta;width:220px;height:270px; margin-left :25px; margin-top :5px;background-color:rgba(128, 128, 128, 0.342);border-radius:20px;" >
+                               <div style="border:1px solid blue;width:100%;height:110px;display:flex;justify-content: center;">
+                               </div>        
+								<p>조회된 회원이 없습니다.</p>
+                               <div style="border:1px solid blue;width:100%;height:30px;margin-top:30px;display:flex;">
+                               </div>
+                           </div>
+                       </div>
+				<%}else {
+					int count=0;
+					for(Friends f : fs) {%>
+                       <div id="box" style="border:1px solid green;width:300px;height:300px">
+						<button onclick="location.assign('<%=request.getContextPath() %>/friends/friendsInfo.do?memberId=<%=f.getMemberId() %>')"
+						style="border:1px;background-color: white;">
+                            <div style="border:1px solid magenta;width:220px;height:270px; margin-left :25px; margin-top :5px;background-color:rgba(128, 128, 128, 0.342);border-radius:20px;" >
+                                <div style="border:1px solid blue;width:100%;height:110px;display:flex;justify-content: center;">
+                                    <img src="<%=request.getContextPath() %>/images/lupy.jpg" alt="" style="width:50%;height:80%;margin:auto;border-radius:120px;">
+                                </div>
+                                <div style="border:1px solid blue;width:100%;height:30px;margin-top:30px;display:flex;">
+                                    <div>이름:</div>
+                                    <div><%=f.getMemberId() %></div>
+                                </div>
+                                <div style="border:1px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
+                                    <div>희망국가:</div>
+                                    <div><%=f.getNName() %></div>
+                                </div>
+                                <div style="border:1px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
+                                    <div>목적:</div>
+                                    <div><%=f.getPurpose() %></div>
                                 </div>
                             </div>
-                        </div>
- 				<%}else {
-					for(Friends f : fs) {%>
-                        <div id="box" style="border:0px solid green;width:300px;height:300px">
-							<button onclick="location.assign('<%=request.getContextPath() %>/friends/friendsInfo.do?memberId=<%=f.getMemberId() %>')"
-							style="border:0px;background-color: white;">
-	                            <div style="border:0px solid magenta;width:220px;height:270px; margin-left :25px; margin-top :5px;background-color:rgba(128, 128, 128, 0.342);border-radius:20px;" >
-	                                <div style="border:0px solid blue;width:100%;height:110px;display:flex;justify-content: center;">
-	                                    <img src="<%=request.getContextPath() %>/images/lupy.jpg" alt="" style="width:50%;height:80%;margin:auto;border-radius:120px;">
-	                                </div>
-	                                <div style="border:0px solid blue;width:100%;height:30px;margin-top:30px;display:flex;">
-	                                    <div>이름:</div>
-	                                    <div><%=f.getMemberId() %></div>
-	                                </div>
-	                                <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
-	                                    <div>희망국가:</div>
-	                                    <div><%=f.getNName() %></div>
-	                                </div>
-	                                <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
-	                                    <div>목적:</div>
-	                                    <div><%=f.getPurpose() %></div>
-	                                </div>
-	                            </div>
-	                        </button>
-                        </div>
-                    <%} 
-                    }%>
-                    </div>
-                    
-                    <div style="border:0px solid blue;width:100%;height:80px;text-align: center;">
-                        <!-- 페이지 바 -->
-                         <nav aria-label="Page navigation example" style="margin-top:30px;color:rgba(221, 160, 221, 0.508) !important;">
-                             <ul class="pagination justify-content-center" style="color:rgba(221, 160, 221, 0.508) !important;">
-                               <li class="page-item disabled"  style="color:rgba(221, 160, 221, 0.508) !important;">
-                                 <a class="page-link" style="color:rgba(221, 160, 221, 0.508) !important;">이전</a>
-                               </li>
-                               <li class="page-item"><a class="page-link" href="#" style="color:rgba(221, 160, 221, 0.508) !important;">1</a></li>
-                               <li class="page-item"><a class="page-link" href="#" style="color:rgba(221, 160, 221, 0.508) !important;">2</a></li>
-                               <li class="page-item"><a class="page-link" href="#" style="color:rgba(221, 160, 221, 0.508) !important;">3</a></li>
-                               <li class="page-item"><a class="page-link" href="#" style="color:rgba(221, 160, 221, 0.508) !important;">4</a></li>
-                               <li class="page-item">
-                                 <a class="page-link" href="#" style="color:rgba(221, 160, 221, 0.508) !important;">다음</a>
-                               </li>
-                             </ul>
-                           </nav>
-                     </div>
-                </div>
+                        </button>
+                       </div>
+                       <%count++;
+                        if(count==3){
+                    		System.out.println(count);
+                       		count=0;%>
+                       	</div>
+                       	<div style="display:flex">
+                      <%} %>
+                    <%} %>
+                 <%} %>
+                 </div>
+                  
+                 <div style="border:1px solid blue;width:100%;height:80px;text-align: center;">
+                     <!-- 페이지 바 -->
+                     <nav aria-label="Page navigation example" style="margin-top:30px;color:rgba(221, 160, 221, 0.508) !important;">
+                         <ul class="pagination justify-content-center" style="color:rgba(221, 160, 221, 0.508) !important;">
+                             <li class="page-item disabled"  style="color:rgba(221, 160, 221, 0.508) !important;">
+                               <a class="page-link" style="color:rgba(221, 160, 221, 0.508) !important;">이전</a>
+                             </li>
+                             <li class="page-item"><a class="page-link" href="#" style="color:rgba(221, 160, 221, 0.508) !important;">1</a></li>
+                             <li class="page-item"><a class="page-link" href="#" style="color:rgba(221, 160, 221, 0.508) !important;">2</a></li>
+                             <li class="page-item"><a class="page-link" href="#" style="color:rgba(221, 160, 221, 0.508) !important;">3</a></li>
+                             <li class="page-item"><a class="page-link" href="#" style="color:rgba(221, 160, 221, 0.508) !important;">4</a></li>
+                             <li class="page-item">
+                               <a class="page-link" href="#" style="color:rgba(221, 160, 221, 0.508) !important;">다음</a>
+                             </li>
+                         </ul>
+                     </nav>
+                 </div>
+              </div>
             </div>
 
         </div>
-        <div style="display:flex; border:0px solid rgb(15, 231, 231);width:100%;height:75px">
-            <div style="border:0px solid yellow;width:400px;height:60px"></div>
-            <div style="border:0px solid yellow;width:400px;height:60px"></div>
-            <div style="border:0px solid yellow;width:400px;height:60px">
+        <div style="display:flex; border:1px solid rgb(15, 231, 231);width:100%;height:75px">
+            <div style="border:1px solid yellow;width:400px;height:60px"></div>
+            <div style="border:1px solid yellow;width:400px;height:60px"></div>
+            <div style="border:1px solid yellow;width:400px;height:60px">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <!-- 관리자만 보이게 -->
                     <%-- <%if(logInMember.getMemberId().equals("ADMIN")) {%> --%>

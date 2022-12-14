@@ -32,7 +32,7 @@ public class FriendsListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int cPage;
-		int numPerpage=10;
+		int numPerpage=6;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
@@ -80,7 +80,6 @@ public class FriendsListServlet extends HttpServlet {
 		
 		request.getRequestDispatcher("/views/friends/friendsList.jsp")
 		.forward(request, response);
-	
 	
 	}
 
