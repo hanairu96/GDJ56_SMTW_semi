@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CountryPageInfo {
 	private String nName;
-	private String coInfoSimple;
 	private String cLanguage;
 	private String urban;
 	private String money;
