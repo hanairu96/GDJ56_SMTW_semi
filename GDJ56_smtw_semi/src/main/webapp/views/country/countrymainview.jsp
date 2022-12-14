@@ -13,21 +13,21 @@
             width: 300px;
             float: left; 
             height: 1100px;
-            border:1px solid black;
+/*             border:1px solid black; */
         }
         #collectmain2{
         	flex-wrap: wrap;
             padding: 30px;
-            border: 3px solid brown;
-            width:410px;
-            height: 450px;
+/*             border: 3px solid brown; */
+            width:520px;
+            height: 650px;
         }
         #maininfo2{
             line-height: 50px;
             text-align: center;
-            border: 1px solid black;
+/*             border: 1px solid black; */
             height: 50px;
-            font-size:10px; 
+            font-size:20px; 
         }
         #likename2{
         	display: flex;
@@ -41,25 +41,28 @@
         	display:flex;
          	position: absolute;
         	left :500px; 
-         	border: 5px solid green;
-        	width:1500px;
-        	height:1050px;
+/*          	border: 5px solid green; */
+        	width:1800px;
+        	height:1500px;
         }
         #pageBar2{
         	position: absolute;
-        	top:1150px;
-        	left:850PX;
-        	margin: 0 auto;
+        	top:900px;
+			left:50%;
+			width:500px;
         }
         #btncollect2{
        		position: absolute;
        		top:1150px;
-        	left:1500px
+   		 	left:50%;
         }
-        div#btncollect2>button{
-            width:100px;
-        }
+		#btnbtn{
+			position: absolute;
+			top :2035px;
+			width:100px;
+			left:2000px
 
+		}
     </style>
 
 
@@ -106,13 +109,13 @@
            		 		
            		 		
        				 <div id="collectmain2">
-	                    <img src="" alt="" style="width: 400px; height:300px;" >
+	                    <img src="" alt="" style="width: 500px; height:400px;" >
 	                    <div id="likenameinfo">
 	                        <div id="likename2">
 	                            <button id="like2">좋아요</button>
 	                         
-	                            <%-- <p style="font-size:30px; border: 1px solid red; "><a href="<%=request.getContextPath()%>/countryInfo/insergo.do?nName=<%=con.get(i).getNName()%>"><%=con.get(i).getNName() %></a></p> --%>
-	                            <p style="font-size:30px; border: 1px solid red; "><a href="<%=request.getContextPath()%>/countryinfo/searchAll.do?nName=<%=con.get(i).getNName()%>"><%=con.get(i).getNName() %></a></p>
+	                            <%-- <p style="font-size:30px;"><a href="<%=request.getContextPath()%>/countryInfo/insergo.do?nName=<%=con.get(i).getNName()%>"><%=con.get(i).getNName() %></a></p> --%>
+	                            <p id="font1" style="font-size:50px;"><a href="<%=request.getContextPath()%>/countryinfo/searchAll.do?nName=<%=con.get(i).getNName()%>"><%=con.get(i).getNName() %></a></p>
 	                            
 	                            
 	                            <button id="update" onclick="location.assign('<%=request.getContextPath()%>/country/updateCountry.do?nName=<%=con.get(i).getNName()%>')">수정</button>
@@ -128,11 +131,17 @@
     	<div id="pageBar2">
 		<%=request.getAttribute("pageBar")%>
 		</div>
-        <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/insertgo.do')"><span>추가</span></button>
     </div>
+    <button id="btnbtn" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/insertgo.do')"><span>추가</span></button>
     
 </section>
     <STYLE>
+    	#font1{
+    		padding-left:60px;
+    	
+    	
+    	}
+    
          .customBtn {
             color: #fff;
             border-radius: 5px;
@@ -198,18 +207,18 @@
              왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
           */
          margin-top: 100px;
-         height: 1200px; 
+         height: 1600px; 
          /*
              ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
              높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.
          */
             
         }
-        section>div{
+/*         section>div{
             border: 1px solid blue;
             /* 섹션 안의 div테두리 */
             
-        }
+        } */
     </style>
 
 <%@ include file="/views/common/footer.jsp" %>
