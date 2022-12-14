@@ -82,7 +82,17 @@
 	            <input type="hidden" id="memberId" name="memberId" value="<%=m.getMemberId() %>">
 	            <input type="submit" id="del" value="회원 삭제">
         	</form>
+        	<button id="del" onclick="deleteMember();">회원 삭제</button>
         </div>
+        
+        <script>
+        	const deleteMember=()=>{
+        		let check=confirm("정말로 삭제하겠습니까?");
+        		if(check==true){
+        			location.replace("<%=request.getContextPath() %>/admin/deleteMemberEnd.do?memberId=<%=m.getMemberId() %>");
+        		}
+        	}
+        </script>
 
 
     </section>

@@ -200,43 +200,41 @@
                     
                       
                  <%if(fs==null||fs.isEmpty()) {%>
-                        <div style="border:0px solid green;width:300px;height:300px">
+                        <div id="box" style="border:0px solid green;width:300px;height:300px">
                             <div style="border:0px solid magenta;width:220px;height:270px; margin-left :25px; margin-top :5px;background-color:rgba(128, 128, 128, 0.342);border-radius:20px;" >
-                                <div  style="border:0px solid blue;width:100%;height:110px;display:flex;justify-content: center;">
+                                <div style="border:0px solid blue;width:100%;height:110px;display:flex;justify-content: center;">
                                 </div>        
-                                <div style="border:0px solid blue;width:100%;height:30px;margin-top:30px;display:flex;">
 									<p>조회된 회원이 없습니다.</p>
+                                <div style="border:0px solid blue;width:100%;height:30px;margin-top:30px;display:flex;">
                                 </div>
                             </div>
                         </div>
  				<%}else {
 					for(Friends f : fs) {%>
-                        <div style="border:0px solid green;width:300px;height:300px">
-						<button onclick="location.assign('<%=request.getContextPath() %>/friends/friendsInfo.do?memberId=<%=f.getMemberId() %>')"
-						style="border:0px">
-                            <div style="border:0px solid magenta;width:220px;height:270px; margin-left :25px; margin-top :5px;background-color:rgba(128, 128, 128, 0.342);border-radius:20px;" >
-                                <div  style="border:0px solid blue;width:100%;height:110px;display:flex;justify-content: center;">
-                                    <img src="<%=request.getContextPath() %>/images/lupy.jpg" alt="" style="width:50%;height:80%;margin:auto;border-radius:120px;">
-                                </div>
-                                <div style="border:0px solid blue;width:100%;height:30px;margin-top:30px;display:flex;">
-                                    <div>이름:</div>
-                                    <div><%=f.getMemberId() %></div>
-                                </div>
-                                <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
-                                    <div>희망국가:</div>
-                                    <div><%=f.getNName() %></div>
-                                </div>
-                                <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
-                                    <div>목적:</div>
-                                    <div><%=f.getPurpose() %></div>
-                                </div>
-                            </div>
-                        </button>
+                        <div id="box" style="border:0px solid green;width:300px;height:300px">
+							<button onclick="location.assign('<%=request.getContextPath() %>/friends/friendsInfo.do?memberId=<%=f.getMemberId() %>')"
+							style="border:0px;background-color: white;">
+	                            <div style="border:0px solid magenta;width:220px;height:270px; margin-left :25px; margin-top :5px;background-color:rgba(128, 128, 128, 0.342);border-radius:20px;" >
+	                                <div style="border:0px solid blue;width:100%;height:110px;display:flex;justify-content: center;">
+	                                    <img src="<%=request.getContextPath() %>/images/lupy.jpg" alt="" style="width:50%;height:80%;margin:auto;border-radius:120px;">
+	                                </div>
+	                                <div style="border:0px solid blue;width:100%;height:30px;margin-top:30px;display:flex;">
+	                                    <div>이름:</div>
+	                                    <div><%=f.getMemberId() %></div>
+	                                </div>
+	                                <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
+	                                    <div>희망국가:</div>
+	                                    <div><%=f.getNName() %></div>
+	                                </div>
+	                                <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
+	                                    <div>목적:</div>
+	                                    <div><%=f.getPurpose() %></div>
+	                                </div>
+	                            </div>
+	                        </button>
                         </div>
                     <%} 
                     }%>
-
-                        
                     </div>
                     
                     <div style="border:0px solid blue;width:100%;height:80px;text-align: center;">
@@ -326,7 +324,10 @@
            width:100%;
            transition:800ms ease all;
        }
-
+       
+       #box{
+    	   text-align: center;
+       }
 
     </style>
     
