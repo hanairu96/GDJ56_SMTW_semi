@@ -34,10 +34,8 @@ public class DeleteDiaryServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		
 		if(result>0) {
-			//msg="출국 일지 삭제!";
 			response.getWriter().append("삭제완료!");
 		}else {
-			//msg="삭제 실패, 다시 시도하세요!";
 			response.getWriter().append("삭제 실패, 다시 시도하세요!");
 		}
 		
