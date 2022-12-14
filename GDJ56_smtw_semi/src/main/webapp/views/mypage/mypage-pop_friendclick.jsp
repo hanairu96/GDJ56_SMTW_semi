@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <%@ page import="com.smtw.mypage.model.vo.MemberInfo" %>
 
 <%
@@ -27,7 +27,7 @@
         <div height="117" id="text"><h2><%=friendName %>(<%=friendAge %>/<%=friendGender %>)</h2> 
            <br>
         </div>
-        <button onclick="window.close()">´Ý±â</button>
+        <button onclick="window.close()">ë‹«ê¸°</button>
         
     </div>
     

@@ -142,7 +142,7 @@ public int deleteMember(Connection conn, String userId) {
 			}finally {
 				close(rs);
 				close(pstmt);
-		
+				
 			}return m;
 		}
 	
@@ -162,7 +162,7 @@ public int deleteMember(Connection conn, String userId) {
 			}finally {
 				close(rs);
 				close(pstmt);
-				
+				System.out.println(m);
 			}return m;
 		
 	}
