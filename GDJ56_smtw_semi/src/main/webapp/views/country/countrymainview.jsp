@@ -3,6 +3,7 @@
 <%@ page import="java.util.List,com.smtw.country.model.vo.Country" %>
 <%
 	List<Country> con=(List<Country>)request.getAttribute("country");
+	
 %>
 <%@ include file="/views/common/header.jsp" %>
 
@@ -47,21 +48,19 @@
         }
         #pageBar2{
         	position: absolute;
-        	top:900px;
+        	top :2000px;
 			left:50%;
 			width:500px;
         }
-        #btncollect2{
-       		position: absolute;
-       		top:1150px;
-   		 	left:50%;
-        }
 		#btnbtn{
 			position: absolute;
-			top :2035px;
 			width:100px;
-			left:2000px
+			left:1800px
 
+		}
+		#positionbtn{
+			position: absolute;
+			top:400px; 
 		}
     </style>
 
@@ -113,9 +112,20 @@
 	                    <div id="likenameinfo">
 	                        <div id="likename2">
 	                            <button id="like2">좋아요</button>
-	                         
-	                            <%-- <p style="font-size:30px;"><a href="<%=request.getContextPath()%>/countryInfo/insergo.do?nName=<%=con.get(i).getNName()%>"><%=con.get(i).getNName() %></a></p> --%>
-	                            <p id="font1" style="font-size:50px;"><a href="<%=request.getContextPath()%>/countryinfo/searchAll.do?nName=<%=con.get(i).getNName()%>"><%=con.get(i).getNName() %></a></p>
+	                            <p id="font1" style="font-size:50px;">
+	                            <a href="<%=request.getContextPath()+(con.get(i).getInfo().getMoney()==null?"/countryInfo/insergo.do?nName=":"/countryinfo/searchAll.do?nName=")+con.get(i).getNName()%>">
+	                			<%-- <%if(con.get(i).getInfo()==null) {	                            
+	                            	request.getContextPath()+"/countryInfo/insergo.do?nName="con.get(i).getNName()%>">
+	                            <%}else{ %>
+	                            	<%=request.getContextPath()%>/countryinfo/searchAll.do?nName=<%=con.get(i).getNName()%>">
+	                            <%}  %> --%>
+	                            <%=con.get(i).getNName() %></a></p>
+	                            
+	                            
+	                            
+	                            
+	                            <%-- <a href="<%=request.getContextPath()%>/countryInfo/insergo.do?nName=<%=con.get(i).getNName()%>"><%=con.get(i).getNName() %></a></p> --%>
+
 	                            
 	                            
 	                            <button id="update" onclick="location.assign('<%=request.getContextPath()%>/country/updateCountry.do?nName=<%=con.get(i).getNName()%>')">수정</button>
@@ -127,18 +137,16 @@
 				 <%} 
 			 	}%>  
    		</div>
-    <div id="btncollect2">
-    	<div id="pageBar2">
+   	<div id="pageBar2">
 		<%=request.getAttribute("pageBar")%>
-		</div>
+	</div>
+	<div id="positionbtn">
+    	<button id="btnbtn" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/insertgo.do')"><span>추가</span></button>
     </div>
-    <button id="btnbtn" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/insertgo.do')"><span>추가</span></button>
-    
 </section>
     <STYLE>
     	#font1{
     		padding-left:60px;
-    	
     	
     	}
     
@@ -195,7 +203,7 @@
             transition:800ms ease all;
         }
          section{
-         border: 1px solid tomato;
+    /*      border: 1px solid tomato; */
          
          margin-left: 50px;
          margin-right: 50px;

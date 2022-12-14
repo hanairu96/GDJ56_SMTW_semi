@@ -36,8 +36,8 @@
                 <br>
                 <div>
                     대표적인 계절
-                    <br><label><input type="radio" name="weather" value="여름" <%=c.getNSeason().equals("여름")?"checked":"" %>>여름</label>
-                    <label><input type="radio" name="weather" value="겨울" <%=c.getNSeason().equals("겨울")?"checked":"" %>>겨울</label>
+                    <br><label><input type="radio" name="weather" value="온난" <%=c.getNSeason().equals("온난")?"checked":"" %>>온난</label>
+                    <label><input type="radio" name="weather" value="한랭" <%=c.getNSeason().equals("한랭")?"checked":"" %>>한랭</label>
                 </div>
                 <br>
                 <div>

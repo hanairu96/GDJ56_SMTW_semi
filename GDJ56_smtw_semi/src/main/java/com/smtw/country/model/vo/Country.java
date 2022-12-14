@@ -17,6 +17,7 @@ public class Country {
 	private String nSeason;
 	private String nImg;
 	private String npharse;
+	private CountryPageInfo info;
 	
 	
 }
