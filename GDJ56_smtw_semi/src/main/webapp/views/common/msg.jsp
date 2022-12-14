@@ -12,6 +12,7 @@
 <meta charset="UTF-8">
 <title>메세지페이지</title>
 </head>
+
 <body>
 	<script>
 		alert('<%=msg%>');
