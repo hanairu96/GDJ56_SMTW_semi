@@ -18,7 +18,7 @@ public class CountryPageInfoDao {
 	private Properties sql=new Properties();
 	
 	public CountryPageInfoDao() {
-		String path=CountryPageInfoDao.class.getResource("/sql/countryPageInfo/countryPageInfo_sql.properties").getPath();
+		String path=CountryPageInfoDao.class.getResource("/sql/country/countryPageInfo_sql.properties").getPath();
 		try {
 			sql.load(new FileReader(path));
 		}catch(IOException e) {
