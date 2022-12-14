@@ -23,4 +23,20 @@ public class NoticeService {
 		close(conn);
 		return result;
 	}
+	
+	public int insertNotice(String writer,String title,String contents) {
+		Connection conn=getConnection();
+		int result=dao.insertNotice(conn,writer,title,contents);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public List<Notice> searchNotice(String option,String notice){
+		Connection conn=getConnection();
+		List<Notice> list=dao.searchNotice(conn,option,notice);
+		close(conn);
+		return list;
+	}
 }
