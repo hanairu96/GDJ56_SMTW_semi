@@ -271,10 +271,12 @@
 		//이름 정규식 표현
 		const inputName=$("#inputName").val().trim();
 		const nameReg=/^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;//한글이름2~4자or영문 이름 2~10자 이내 : 띄어쓰기(\s)가 들어가며 First, Last Name 형식
-		if(!nameReg.test(inputName)){
+		if(!nameReg.test(inputName)){//이름이 틀렸으면
 			$("span#checkName>small").text("올바른 이름을 입력해주세요.").css("color","red");
 			$("#inputName").focus();
 			return false;
+		}else{
+			$("span#checkName>small").text(" ");
 		}
 		
 		//년도 입력
@@ -284,13 +286,15 @@
 			$("span#checkYear>small").text("올바른 연도를 입력해주세요.").css("color","red");
 			$("#yy").focus();
 			return false;
+		}else{
+			$("span#checkYear>small").text(" ");
 		}
 
 		//핸드폰 번호 입력
 		const inputPhone=$("#inputPhone").val().trim();
 		const phoneReg=/^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;//핸드폰 번호(- 없음)
 		if(inputPhone==""||phoneReg.test(inputPhone)){
-			console.log("정상입력");
+			$("span#checkPhone>small").text(" ");
 		}
 		else{
 			$("span#checkPhone>small").text("올바른 번호를 입력해주세요.").css("color","red");
