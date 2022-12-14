@@ -31,11 +31,12 @@ public class searchCountryInfoAllServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		String name=request.getParameter("nName");
 		List<CountryPageInfo> c=new CountryPageInfoService().searchAll();
 		
 		request.setAttribute("coinfo", c);
 //		System.out.println(c);
+		request.setAttribute("name", name);
 		request.getRequestDispatcher("/views/countryInfo/countryInfoMain.jsp").forward(request, response);
 	
 	

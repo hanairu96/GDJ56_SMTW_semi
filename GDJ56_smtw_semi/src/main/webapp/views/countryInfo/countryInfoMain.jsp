@@ -3,6 +3,7 @@
 <%@ page import="java.util.List,com.smtw.country.model.vo.CountryPageInfo" %>
 <%
 	List<CountryPageInfo> info=(List<CountryPageInfo>)request.getAttribute("coinfo");
+	String name=(String)request.getAttribute("name");
 %>
 <%@ include file="/views/common/header.jsp" %>
 <section>
@@ -93,7 +94,7 @@
     <h1 style="text-align: center;">국가 및 지역 정보</h1>
     <%for(CountryPageInfo c : info) { 
     
-    /* 	if(c.getNName().eqauls(nName)){ */
+    	if(c.getNName().equals(name)){
     	%>
 
 
@@ -290,6 +291,7 @@
 	    	<h1>조회된 결과가 없습니다.</h1>
 	    <%} --%>
     
-    <%}%>
+    <%}
+    }%>
 </section>
 <%@ include file="/views/common/footer.jsp" %>
