@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/style.css"/>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/searchIdPwd.css"/>
+
 <section>
 	<div class="container py-4">
 	    <div class="row align-items-center justify-content-between" id="insert">
@@ -22,11 +23,11 @@
 	        </div>
 	        <div class="form-group">
 	       		<label for="exampleInputName" class="form-label mt-4">이름　　　</label>
-	            <input type="text" name="searchName" id="exampleInputName" >
+	            <input type="text" name="searchName" id="exampleInputName" required>
 	        </div>
 	        <div class="form-group">
 	               <label for="exampleInputEmail" class="form-label mt-4">이메일　　</label>
-	            <input type="email" name="searchEmail" id="exampleInputEmail" >
+	            <input type="email" name="searchEmail" id="exampleInputEmail" required >
 	            <br><span class="obli">인증번호를 발송했습니다. 인증번호를 입력해주세요.</span> 
 <!-- 	            <input type="button" aria-describedby="emailHelp"  value="인증번호"> -->
 	        </div>
