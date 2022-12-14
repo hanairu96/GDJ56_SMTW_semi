@@ -32,4 +32,21 @@ public class CountryPageInfoService {
 	}
 	
 	
+	public CountryPageInfo searchName(String name) {
+		Connection conn=getConnection();
+		CountryPageInfo cp=dao.searchName(conn,name);
+		close(conn);
+		return cp;
+	}
+	
+	
+	public int updateInfo(CountryPageInfo c) {
+		Connection conn=getConnection();
+		int result=dao.updateInfo(conn,c);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
 }

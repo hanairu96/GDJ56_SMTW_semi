@@ -87,12 +87,17 @@
             */
             
         }
-    
+ 
     </style>  
     <body>
-    <h1 style="text-align: center;">국가/지역소개</h1>
-    <p style="font-size: 13px; text-align: center;">설명 sql문을 JOIN 해서 가져오자</p>
-    <%for(CountryPageInfo c : info) {%>
+    <h1 style="text-align: center;">국가 및 지역 정보</h1>
+    <%for(CountryPageInfo c : info) { %>
+    	    <div id="twobu">
+        		<button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/updatego.do?nName=<%=c.getNName()%>')"><span>국가정보 수정</span></button>
+   			</div>
+    <p style="font-size: 13px; text-align: center;"></p>
+    
+    	
     <div id="wrapper">
         <div id="titlecountryinfo">
             <div>
@@ -146,7 +151,7 @@
 
 	<style>
 		#twobu>button{
-    		width:100px;
+    		width:110px;
     	}
 	  .customBtn {
            color: #fff;

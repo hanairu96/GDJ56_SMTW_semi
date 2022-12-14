@@ -81,4 +81,48 @@ public class CountryPageInfoDao {
 			close(pstmt);
 		}return result;
 	}
+	
+	public CountryPageInfo searchName(Connection conn, String name) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		CountryPageInfo cp=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("searchName"));
+			pstmt.setString(1, name);
+			rs=pstmt.executeQuery();
+			if(rs.next()) cp=getContryInfo(rs);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return cp;
+	}
+
+	public int updateInfo(Connection conn, CountryPageInfo c) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("uodateinfo"));
+			pstmt.setString(1, c.getCLanguage());
+			pstmt.setString(2, c.getUrban());
+			pstmt.setString(3,c.getMoney());
+			pstmt.setString(4, c.getMapAddress());
+			pstmt.setString(5, c.getEnglishName());
+			pstmt.setString(7, c.getClock());
+			pstmt.setString(8, c.getCPic());
+			pstmt.setString(9, c.getNName());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		}
+		
+	
+	
+	
+	
 }
