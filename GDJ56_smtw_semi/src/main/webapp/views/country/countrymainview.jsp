@@ -137,7 +137,8 @@
 	<div id="pageBar">
 		<%=request.getAttribute("pageBar")%>
 	</div>
-
+</section>
+<%@ include file="/views/common/footer.jsp" %>
     <STYLE>
          .customBtn {
             color: #fff;
@@ -192,5 +193,3 @@
             transition:800ms ease all;
         }
     </STYLE>
-</section>
-<%@ include file="/views/common/footer.jsp" %>

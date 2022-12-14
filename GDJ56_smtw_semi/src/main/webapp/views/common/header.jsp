@@ -44,16 +44,16 @@
                 <li id="menuli">
                     <div class="hoversection">
                         <div>
-                            <a href=""><img src="<%=request.getContextPath()%>/images/국가정보.png" alt="" width="60px" height="60px"></a>
+                            <a href="<%=request.getContextPath()%>/country/countryMain.do"><img src="<%=request.getContextPath()%>/images/국가정보.png" alt="" width="60px" height="60px"></a>
                         </div>
                         <div>
-                            <a href="">국가정보</a>
+                            <a href="<%=request.getContextPath()%>/country/countryMain.do">국가정보</a>
                         </div>
                     </div>
                     <!-- 서브메뉴영역 -->
                     <div class="sub">
                         <ul class="submenu">
-                            <li><a href="">국가 및 지역별 정보</a></li>
+                            <li><a href="<%=request.getContextPath()%>/country/countryMain.do">국가 및 지역별 정보</a></li>
                         </ul>
                     </div>
                 </li>
