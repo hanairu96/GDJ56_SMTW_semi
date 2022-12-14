@@ -3,6 +3,7 @@
 <%@ page import="com.smtw.member.model.vo.Member,java.util.List,com.smtw.notice.model.vo.Notice" %>
 <%
 	List<Notice> list=(List<Notice>)request.getAttribute("notices");
+// 	List<Notice> searchList=(List<Notice>)request.getAttribute("searchList");
 %>
 <%@ include file="/views/common/header.jsp" %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/noticeList.css"/>
@@ -18,16 +19,24 @@
 	    <div class="menuDiv"></div>
 	    
 	<div id="notice">
-	    <h1>공지사항</h1>
+	    <h1>공지사항</h1>	    
 	    <nav class="navbar"style="background-color: white;">
-	        <div class="container-fluid">
-	            <a class="navbar-brand"></a>
-	            <form class="d-flex" role="search">
-	                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-	            <button class="customBtn btnStyle" type="submit">Search</button>
-	          </form>
-	        </div>
-	    </nav>
+                <div class="container-fluid">
+                    <a class="navbar-brand"></a>
+                    <form action="<%=request.getContextPath() %>/notice/searchNotice.do" class="d-flex" role="search">
+                        <select name="searchOption" class="form-select">
+                            <option selected>선택</option>
+                            <option value="NOTICE_TITLE">제목</option>
+                            <option value="NOTICE_CONTENTS">내용</option>
+                        </select>
+                        <input class="form-control me-2" name="searchNotice" type="search" placeholder="Search">
+                    <button class="customBtn btnStyle" type="submit">검색</button>
+                  </form>
+                </div>
+            </nav>
+	    
+	    
+	    
 	    <ul>
 	    	<!-- 공지사항이 있으면  -->
 	        <%if(!list.isEmpty()) {%>
