@@ -5,70 +5,67 @@
 	List<Country> con=(List<Country>)request.getAttribute("country");
 %>
 <%@ include file="/views/common/header.jsp" %>
-<section>
+
     <style>
-        #countrymenu{
+        #countrymenu2{
             display: flex;
-            font-size:15px;
-            width: 250px;
+            font-size:20px;
+            width: 300px;
             float: left; 
             height: 1100px;
             border:1px solid black;
         }
-        #collectmain{
+        #collectmain2{
         	flex-wrap: wrap;
             padding: 30px;
             border: 3px solid brown;
             width:410px;
             height: 450px;
         }
-        #maininfo{
+        #maininfo2{
             line-height: 50px;
             text-align: center;
             border: 1px solid black;
             height: 50px;
             font-size:10px; 
         }
-        #likename{
+        #likename2{
         	display: flex;
         }
-        #like{
+        #like2{
         	width:80px;
         	height:80px;
         }
-        #comaincontainer{
+        #comaincontainer2{
         	flex-wrap: wrap;
         	display:flex;
-        	position: absolute;
-        	left:260px;
+         	position: absolute;
+        	left :500px; 
          	border: 5px solid green;
         	width:1500px;
         	height:1050px;
         }
-        #pageBar{
+        #pageBar2{
         	position: absolute;
         	top:1150px;
         	left:850PX;
         	margin: 0 auto;
         }
-        #btncollect{
+        #btncollect2{
        		position: absolute;
        		top:1150px;
         	left:1500px
         }
-        div#btncollect>button{
+        div#btncollect2>button{
             width:100px;
         }
-/*         #maininfo{
-        	font-size:50px;
-        } */
 
     </style>
 
 
-    <section>
-        <h1 style="text-align: center;">국가 및 지역 정보</h1>
-	            <div id="countrymenu">
+<section>
+        <h1 style="text-align: center;  font-size:40px;">국가 및 지역 정보</h1>
+	            <div id="countrymenu2">
 	                <ul>
 	                    <li><a href="<%=request.getContextPath()%>">네덜란드</a></li>
 	                    <li><a href="">뉴질랜드</a></li>
@@ -99,7 +96,7 @@
 	                </ul>
 	            </div>
 	      
-        <div id="comaincontainer"> 
+        <div id="comaincontainer2"> 
 	        <%if(con.isEmpty()) {%>
 	        	<div>
 	        		<h2>조회된 나라가 없습니다.</h2>
@@ -108,11 +105,11 @@
 	        	for(int i=0;i<con.size();i++) {%>
            		 		
            		 		
-       				 <div id="collectmain">
+       				 <div id="collectmain2">
 	                    <img src="" alt="" style="width: 400px; height:300px;" >
 	                    <div id="likenameinfo">
-	                        <div id="likename">
-	                            <button id="like">좋아요</button>
+	                        <div id="likename2">
+	                            <button id="like2">좋아요</button>
 	                         
 	                            <%-- <p style="font-size:30px; border: 1px solid red; "><a href="<%=request.getContextPath()%>/countryInfo/insergo.do?nName=<%=con.get(i).getNName()%>"><%=con.get(i).getNName() %></a></p> --%>
 	                            <p style="font-size:30px; border: 1px solid red; "><a href="<%=request.getContextPath()%>/countryinfo/searchAll.do?nName=<%=con.get(i).getNName()%>"><%=con.get(i).getNName() %></a></p>
@@ -121,24 +118,20 @@
 	                            <button id="update" onclick="location.assign('<%=request.getContextPath()%>/country/updateCountry.do?nName=<%=con.get(i).getNName()%>')">수정</button>
 	                            <button id="delete" onclick="location.assign('<%=request.getContextPath()%>/country/deleteCountry.do?nName=<%=con.get(i).getNName()%>')">삭제</button>
 	                        </div>
-	                        <p id="maininfo"><%=con.get(i).getNpharse() %></p>
+	                        <p id="maininfo2"><%=con.get(i).getNpharse() %></p>
 	                    </div>
 	                 </div>
 				 <%} 
 			 	}%>  
    		</div>
-    <div id="btncollect">
-    	<div id="pageBar">
+    <div id="btncollect2">
+    	<div id="pageBar2">
 		<%=request.getAttribute("pageBar")%>
 		</div>
         <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/insertgo.do')"><span>추가</span></button>
     </div>
-
-	<div id="pageBar">
-		<%=request.getAttribute("pageBar")%>
-	</div>
+    
 </section>
-<%@ include file="/views/common/footer.jsp" %>
     <STYLE>
          .customBtn {
             color: #fff;
@@ -192,4 +185,31 @@
             width:100%;
             transition:800ms ease all;
         }
-    </STYLE>
+         section{
+         border: 1px solid tomato;
+         
+         margin-left: 50px;
+         margin-right: 50px;
+         padding-left: 100px;
+         padding-right: 100px;
+         /* 
+             만약 섹션 안에 div를 만든다면 여기 padding-left,padding-right에서
+             좌우 간격을 조정하세요
+             왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
+          */
+         margin-top: 100px;
+         height: 1200px; 
+         /*
+             ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
+             높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.
+         */
+            
+        }
+        section>div{
+            border: 1px solid blue;
+            /* 섹션 안의 div테두리 */
+            
+        }
+    </style>
+
+<%@ include file="/views/common/footer.jsp" %>

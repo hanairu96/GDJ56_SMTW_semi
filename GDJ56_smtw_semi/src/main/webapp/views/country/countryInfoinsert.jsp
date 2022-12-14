@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/style.css"/>
 <section>
 	<form name="countryinfo" action="<%=request.getContextPath()%>/country/insertCountryFirst.do" method="post">
 		<div id="insertpage">
