@@ -153,7 +153,7 @@ public class FriendsDao {
 				.friendsNo(rs.getInt("Friends_No"))
 				.nName(rs.getString("n_Name"))
 				.friendsTitle(rs.getString("friends_Title"))
-				//.friendsContents(rs.getString("friends_Contents"))
+				.friendsContents(rs.getString("friends_Contents"))
 				.enrollDate(rs.getDate("enroll_Date"))
 				.memberId(rs.getString("member_Id"))
 				.mbti(rs.getString("mbti"))
@@ -164,6 +164,4 @@ public class FriendsDao {
 				.build();
 	}
 	
-	//
-
 }

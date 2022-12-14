@@ -9,8 +9,8 @@
     
     <section>
         <div class="sidemenu">
-            <div><p>회원 관리</p></div>
-            <div><p>Q&A 관리</p></div>
+            <div><a href="<%=request.getContextPath()%>/admin/memberList.do"><p>회원 관리</p></a></div>
+            <div><a href="<%=request.getContextPath()%>/admin/qnaManage.do"><p>Q&A 관리</p></a></div>
         </div>
 
         <div class="menuDiv"></div>
@@ -108,12 +108,27 @@
     	}
     </style>
     <script>
-	    $(".sidemenu>div:nth-child(1)").click(e=>{
+<%-- 	    $(".sidemenu>div:nth-child(1)").click(e=>{
 	    	location.assign('<%=request.getContextPath()%>/admin/memberList.do');
 	    })
 	    $(".sidemenu>div:nth-child(2)").click(e=>{
 	        location.assign("<%=request.getContextPath()%>/admin/qnaManage.do");
-	    })
+	    }) --%>
+	    
+/* 		$(document).ready(function() {
+		    // 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
+		    var floatPosition = parseInt($(".sidemenu").css('top'));
+		    // 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
+		
+		    $(window).scroll(function() {
+		        // 현재 스크롤 위치를 가져온다.
+		        var scrollTop = $(window).scrollTop();
+		        var newPosition = scrollTop + floatPosition + "px";
+		        $(".sidemenu").stop().animate({
+		            "top" : newPosition
+		        }, 500);
+		    }).scroll();
+		}); */
 	    
 	   	$("#searchType").change(e=>{
 	    	const type=$(e.target).val();

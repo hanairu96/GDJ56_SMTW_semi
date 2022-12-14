@@ -55,6 +55,4 @@ public class FriendsService {
 		return result;
 	}
 	
-	//
-
 }
