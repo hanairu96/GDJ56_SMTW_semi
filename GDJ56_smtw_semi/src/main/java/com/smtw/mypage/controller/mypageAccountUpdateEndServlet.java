@@ -66,7 +66,17 @@ public class mypageAccountUpdateEndServlet extends HttpServlet {
 		
 		int result=new MypageService().updateMember(updateMember);
 		
-		request.getRequestDispatcher("/views/mypage/mypagefriends.jsp").forward(request, response);
+		String msg="", loc="";
+		if(result<1) {
+			msg="수정안됨...ㅋ";
+		}else {
+			msg="회원정보가 성공적으로 수정되었습니다!";
+		}
+		loc="/mypage/mypageAccountView.do?id="+id;
+		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

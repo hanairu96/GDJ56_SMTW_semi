@@ -1,28 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <%@include file="/views/common/header.jsp" %>
 <%
 	String userId = (String)request.getParameter("id");
 %>
  <section>
             <div class="sidemenu">
-                <div><h4 style="text-align: center;">¸¶ÀÌ ÆäÀÌÁö</h4></div>
-                <div><p>¿öÈ¦ ÇÁ·»Áî</p></div>
-                <div><p>°èÁ¤ °ü¸®</p></div>
-                <div><p>ÂÊÁöÇÔ</p></div>
-                <div><p>³»°¡ ¾´ ±Û</p></div>
-                <div><p>ÂòÇÑ ³ª¶ó</p></div>
+                <div><h4 style="text-align: center;">ë§ˆì´ íŽ˜ì´ì§€</h4></div>
+                <div><p>ì›Œí™€ í”„ë Œì¦ˆ</p></div>
+                <div><p>ê³„ì • ê´€ë¦¬</p></div>
+                <div><p>ìª½ì§€í•¨</p></div>
+                <div><p>ë‚´ê°€ ì“´ ê¸€</p></div>
+                <div><p>ì°œí•œ ë‚˜ë¼</p></div>
                
             </div>
             <div class="menuDiv"></div>
             <div class="contentList">
-                <div id="menutitle"><h2 style="background-color: cornflowerblue;">°èÁ¤ °ü¸®</h2></div>
+                <div id="menutitle"><h2 style="background-color: cornflowerblue;">ê³„ì • ê´€ë¦¬</h2></div>
             <div id="pwck">
-            <p>message : °³ÀÎÁ¤º¸ º¸È£¸¦ À§ÇØ ºñ¹Ð¹øÈ£¸¦ ´Ù½Ã ÇÑ ¹ø ÀÔ·ÂÇØÁÖ¼¼¿ä</p>
+            <p>message : ê°œì¸ì •ë³´ ë³´í˜¸ë¥¼ ìœ„í•´ ë¹„ë°€ë²ˆí˜¸ë¥¼ ë‹¤ì‹œ í•œ ë²ˆ ìž…ë ¥í•´ì£¼ì„¸ìš”</p>
            	<form action="<%=request.getContextPath()%>/mypage/mypagePwdCkEnd.do" method="post">
-           	ºñ¹Ð¹øÈ£ <input type="hidden" name="id" value="<%=userId%>">
+           	ë¹„ë°€ë²ˆí˜¸ <input type="hidden" name="id" value="<%=userId%>">
              <input type="password" name="password" value="">
-            <input type="submit" name="submit" id="" value="ÀÔ·Â">
+            <input type="submit" name="submit" id="" value="ìž…ë ¥">
             </form>
             </div>
                
@@ -137,26 +137,26 @@
                 
                 margin-left: 50px;
                 margin-right: 50px;
-                /* ¡Ú¼öÁ¤ÇÑ ºÎºÐ */
+                /* â˜…ìˆ˜ì •í•œ ë¶€ë¶„ */
                 /* padding-left: 100px;
                 padding-right: 100px; */
-                /* ¡Ú¼öÁ¤ÇÑºÎºÐ */
+                /* â˜…ìˆ˜ì •í•œë¶€ë¶„ */
                 /* 
-                    ¸¸¾à ¼½¼Ç ¾È¿¡ div¸¦ ¸¸µç´Ù¸é ¿©±â padding-left,padding-right¿¡¼­
-                    ÁÂ¿ì °£°ÝÀ» Á¶Á¤ÇÏ¼¼¿ä
-                    ¿ÞÂÊ ¿À¸¥ÂÊµµ À¢¸¸ÇÏ¸é ´Ù°°ÀÌ ¸ÂÃß¸é ÁÁÀ» µí ÇÏ´Ï °¢ÀÚ ¸¸µé¾îº¸°í ÀÇ°ßÁÖ¼¼¿ä
+                    ë§Œì•½ ì„¹ì…˜ ì•ˆì— divë¥¼ ë§Œë“ ë‹¤ë©´ ì—¬ê¸° padding-left,padding-rightì—ì„œ
+                    ì¢Œìš° ê°„ê²©ì„ ì¡°ì •í•˜ì„¸ìš”
+                    ì™¼ìª½ ì˜¤ë¥¸ìª½ë„ ì›¬ë§Œí•˜ë©´ ë‹¤ê°™ì´ ë§žì¶”ë©´ ì¢‹ì„ ë“¯ í•˜ë‹ˆ ê°ìž ë§Œë“¤ì–´ë³´ê³  ì˜ê²¬ì£¼ì„¸ìš”
                  */
                 margin-top: 100px;
                 height: 900px; 
                 /*
-                    ->³»°¡ »ç¿ëÇÏ´Â Áß°£ ¼½¼ÇºÎºÐÀÇ Å©±â¸¦ Á¶ÀýÇÏ·Á¸é ÀÌ height¸¦ Á¶Á¤ÇÏ¼¼¿ä¡Ú¡Ú
-                    ³ô³·ÀÌ Á¶ÀýÇØµµ footerÄ§¹üÇÏÁö ¾Êµµ·Ï ¼³Á¤ÇØ³ùÀ¸´Ï ¸¶À½²¯ ´Ã·Áµµ µË´Ï´Ù.
+                    ->ë‚´ê°€ ì‚¬ìš©í•˜ëŠ” ì¤‘ê°„ ì„¹ì…˜ë¶€ë¶„ì˜ í¬ê¸°ë¥¼ ì¡°ì ˆí•˜ë ¤ë©´ ì´ heightë¥¼ ì¡°ì •í•˜ì„¸ìš”â˜…â˜…
+                    ë†’ë‚®ì´ ì¡°ì ˆí•´ë„ footerì¹¨ë²”í•˜ì§€ ì•Šë„ë¡ ì„¤ì •í•´ë†¨ìœ¼ë‹ˆ ë§ˆìŒê» ëŠ˜ë ¤ë„ ë©ë‹ˆë‹¤.
                 */
                 
             }
             section>div{
                 border: 1px solid blue;
-                /* ¼½¼Ç ¾ÈÀÇ divÅ×µÎ¸® */
+                /* ì„¹ì…˜ ì•ˆì˜ diví…Œë‘ë¦¬ */
                 
             }
         </style>
