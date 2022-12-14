@@ -148,6 +148,28 @@ public class FriendsDao {
 		return result;
 	}
 	
+	public int insertFriends(Connection conn, Friends f) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertFriends"));
+			pstmt.setString(1, f.getNName());
+			pstmt.setString(2, f.getFriendsTitle());
+			pstmt.setString(3, f.getFriendsContents());
+			pstmt.setString(4, f.getMemberId());
+			pstmt.setString(5, f.getMbti());
+			pstmt.setString(6, f.getType());
+			pstmt.setString(7, String.valueOf(f.getExpYn()));
+			pstmt.setString(8, f.getPurpose());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	public static Friends getFriends(ResultSet rs) throws SQLException {
 		return Friends.builder()
 				.friendsNo(rs.getInt("Friends_No"))
@@ -158,8 +180,7 @@ public class FriendsDao {
 				.memberId(rs.getString("member_Id"))
 				.mbti(rs.getString("mbti"))
 				.type(rs.getString("type"))
-				.introduce(rs.getString("introduce"))
-				.filed(rs.getString("filed").charAt(0))
+				.expYn(rs.getString("exp_yn").charAt(0))
 				.purpose(rs.getString("purpose"))
 				.build();
 	}

@@ -5,15 +5,28 @@
 	List<Friends> fs=(List<Friends>)request.getAttribute("list");
 %>
 <%@ include file="/views/common/header.jsp" %>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/friendsList.css"/>
 
 <!-- 부트스트랩 CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
 <!-- 부트스트랩 JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-
     <section>
+     <!-- ##### 여기 왼쪽 사이드메뉴 div ##### -->
+	<div class="sector">
+	    <div class="sidemenu">
+	        <div><a href="<%=request.getContextPath()%>/friends/friendsList.do"><p>커뮤니티</p></a></div><br>
+	        <div><a href="<%=request.getContextPath()%>/friends/friendsList.do"><p>워홀프렌즈 구하기</p></a></div><br>
+	        <div><a href="<%=request.getContextPath()%>/community/reviewBasic.do"><p>생생후기</p></a></div>
+	    </div>
+	<!-- ##### 사이드메뉴랑 본내용 구분하는 div ##### -->
+	    <div class="menuDiv"></div>
+    
+    
+    <div id="friendsList">
         <div id="friendTitle" style="text-align: center;">
-            <h1>워홀프렌즈 찾기</h1>
+            <br>
+            <h1>워홀프렌즈 구하기</h1>
         </div>
 
         <div style="height:25px;">
@@ -23,7 +36,7 @@
                     <option value="네덜란드">네덜란드</option>
                     <option value="스웨덴">스웨덴</option>
                     <option value="이스라엘">이스라엘</option>
-                    <option value="포르투칼">포르투칼</option>
+                    <option value="포르투갈">포르투갈</option>
                     
                     <option value="뉴질랜드">뉴질랜드</option>
                     <option value="스페인">스페인</option>
@@ -55,148 +68,10 @@
 
         <div style="height:700px">
             <div style="display:flex">
-                <div style="border:1px solid yellow;width:300px;height:700px">
-                    <div style="border:1px solid blue;width:270px;height:350px">
-                        <header class="header" role="banner">
-                            <div id="sideMenu">
-                                <h1 class="sidelogo">
-                                    <a href="LeavingDiary.html"><span>커뮤니티</span></a>
-                                </h1>
-                                <div class="nav-wrap">
-                                    <nav class="main-nav" role="navigation">
-                                        <ul class="unstyled list-hover-slide">
-                                            <li><a href="LeavingDiary.html">워홀프렌즈 구하기</a></li>
-                                            <li><a href="MyCountry.html">생생후기</a></li>
-                                        </ul>
-                                    </nav>
-                              </div>
-                            </div>
-                        </header>
 
-                    </div>
-                </div>
-               
-                <style>
-                    /* 사이드메뉴바 스타일 여기부터*/
-        /* 왼쪽 사이드메뉴영역 */
-        #sideMenu{
-            border: 1px solid black;
-            /* border-radius: 10px; */
-            position: absolute; 
-            z-index: 10;
-            width: 18%;
-        }
-        .header {
-        /* position:relative; */
-        left: 0;
-        top: 100px;
-        bottom: 0;
-        /* width: 17.5em; */
-        width: 20%;
-        /* height: 900px; */
-        /* background: #d9d9db; */
-        }
 
-        *,
-        :before,
-        :after {
-        box-sizing: border-box;
-        }
-
-        .unstyled {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .unstyled a {
-            text-decoration: none;
-        }
-
-        .list-inline {
-            overflow: hidden;
-        }
-
-        .sidelogo {
-            background-color: #b5aae5;
-            text-transform: lowercase;
-            font: 300 2em "Source Sans Pro", Helvetica, Arial, sans-serif;
-            text-align: center;
-            padding: 0;
-            margin: 0;
-            border: 2px solid black;
-            /* border-radius: 10px; */
-        }
-        .sidelogo a {
-        display: block;
-        padding: 1em 0;
-        color: #dfdbd9;
-        text-decoration: none;
-        transition: 0.15s linear color;
-        }
-        .sidelogo a:hover {
-        color: #fffaf8;
-        }
-        .sidelogo a:hover span {
-        color: #df4500;
-        }
-        .sidelogo span {
-           
-        color: #131110;
-        font-weight: 700;
-        transition: 0.15s linear color;
-        }
-        .main-nav li {
-        /* border-bottom: solid 1px #3c3735; */
-        font-size: 20px;
-        font-weight: bold;
-        }
-        .main-nav a {
-        padding: 1.1em 0;
-        color: #f1f1f1;
-        font: 400 1.125em "Source Sans Pro", Helvetica, Arial, sans-serif;
-        text-align: center;
-        text-transform: lowercase;
-        }
-        .main-nav a:hover {
-        color: #f9f8f8;
-        }
-        .list-hover-slide li {
-            border: 1px solid rgb(0, 0, 0);
-            /* border-radius: 10px; */
-            background-color: #d5d0e8;
-            position: relative;
-            overflow: hidden;
-        }
-        .list-hover-slide a {
-        display: block;
-        position: relative;
-        z-index: 1;
-        transition: 0.35s ease color;
-        color: rgb(0, 0, 0);
-        }
-        .list-hover-slide a:before {
-        content: "";
-        display: block;
-        z-index: -1;
-        position: absolute;
-        left: -100%;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        border-right: solid 5px #4300df;
-        background: #b7aee0;
-        transition: 0.35s ease left;
-        
-        }
-        .list-hover-slide a.is-current:before, .list-hover-slide a:hover:before {
-        left: 0;
-        }
-        /* 사이드메뉴바 스타일 여기까지*/
-
-                </style>
-
-                <div style="border:1px solid red;width:800px;height:695px">
-                    <div style="display:flex">
+            <div id="lists" style="border:1px solid red;width:800px;height:695px">
+                <div style="display:flex">
                     
                       
                 <%if(fs==null||fs.isEmpty()) {%>
@@ -215,21 +90,24 @@
                        <div id="box" style="border:1px solid green;width:300px;height:300px">
 						<button onclick="location.assign('<%=request.getContextPath() %>/friends/friendsInfo.do?memberId=<%=f.getMemberId() %>')"
 						style="border:1px;background-color: white;">
-                            <div style="border:1px solid magenta;width:220px;height:270px; margin-left :25px; margin-top :5px;background-color:rgba(128, 128, 128, 0.342);border-radius:20px;" >
+                            <div style="border:1px solid magenta;width:210px;height:270px; margin-left :0px; margin-top :5px;background-color:rgba(128, 128, 128, 0.342);border-radius:20px;">
                                 <div style="border:1px solid blue;width:100%;height:110px;display:flex;justify-content: center;">
                                     <img src="<%=request.getContextPath() %>/images/lupy.jpg" alt="" style="width:50%;height:80%;margin:auto;border-radius:120px;">
                                 </div>
-                                <div style="border:1px solid blue;width:100%;height:30px;margin-top:30px;display:flex;">
-                                    <div>이름:</div>
-                                    <div><%=f.getMemberId() %></div>
+                                <div style="border:1px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
+                                    <div>&nbsp<strong><%=f.getFriendsTitle() %></strong></div>
                                 </div>
                                 <div style="border:1px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
-                                    <div>희망국가:</div>
-                                    <div><%=f.getNName() %></div>
+                                    <div>&nbsp이름:</div>
+                                    <div>&nbsp<%=f.getMemberId() %></div>
                                 </div>
                                 <div style="border:1px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
-                                    <div>목적:</div>
-                                    <div><%=f.getPurpose() %></div>
+                                    <div>&nbsp희망국가:</div>
+                                    <div>&nbsp<%=f.getNName() %></div>
+                                </div>
+                                <div style="border:1px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
+                                    <div>&nbsp목적:</div>
+                                    <div>&nbsp<%=f.getPurpose() %></div>
                                 </div>
                             </div>
                         </button>
@@ -272,100 +150,40 @@
             <div style="border:1px solid yellow;width:400px;height:60px">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <!-- 관리자만 보이게 -->
-                    <%-- <%if(logInMember.getMemberId().equals("ADMIN")) {%> --%>
-	                    <button class="customBtn btnStyle btn btn-primary" type="button" style=" margin-left :300px; margin-top :15px;background-color: rgba(221, 160, 221, 0.508) !important;" value="등록">등록하기</button>
-					<%-- <%} %> --%>
+                     <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
+	                    <button onclick="enroll();" class="customBtn btnStyle btn btn-primary" type="button" style=" margin-left :300px; margin-top :15px;background-color: rgba(221, 160, 221, 0.508) !important;" value="등록">등록하기</button>
+					 <%} %>
                 </div>
             </div>
-        </div>       
+        </div>  
+        </div>
+    </div>
     </section>
-    <style>
-        .customBtn {
-           color: #fff;
-           border-radius: 5px;
-           padding: 10px 25px;
-           font-family: 'Lato', sans-serif;
-           font-weight: 500;
-           background: transparent;
-           cursor: pointer;
-           transition: all 0.3s ease;
-           position: relative;
-           display: inline-block;
-           box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
-           7px 7px 20px 0px rgba(0,0,0,.1),
-           4px 4px 5px 0px rgba(0,0,0,.1);
-           outline: none;
-           }
-       .btnStyle {
-           line-height: 42px;
-           padding: 0;
-           border: none;
-           background: #d27ec492;
-           background: linear-gradient(0deg, #d27ec492 0%, #d27ec492 100%);
-       }
-       .btnStyle:hover {
-           color: #d27ec492;
-           background: transparent;
-           box-shadow:none;
-       }
-       .btnStyle:before,.btnStyle:after{
-           content:'';
-           position:absolute;
-           top:0;
-           right:0;
-           height:2px;
-           width:0;
-           background: #d27ec492;
-           box-shadow:
-           -1px -1px 5px 0px #fff,
-           7px 7px 20px 0px #0003,
-           4px 4px 5px 0px #0002;
-           transition:400ms ease all;
-       }
-       .btnStyle:after{
-           right:inherit;
-           top:inherit;
-           left:0;
-           bottom:0;
-       }
-       .btnStyle:hover:before,.btnStyle:hover:after{
-           width:100%;
-           transition:800ms ease all;
-       }
-       
-       #box{
-    	   text-align: center;
-       }
-
-    </style>
     
-    
-    
-    <style>
-        section{
-            border: 0px solid tomato;
-            font-family: "Hahmlet";
-            margin-left: 50px;
-            margin-right: 50px;
-            /* padding-left: 100px; */
-            /* padding-right: 100px; */
-            /* 
-                만약 섹션 안에 div를 만든다면 여기 padding-left,padding-right에서
-                좌우 간격을 조정하세요
-                왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
-             */
-            margin-top: 100px;
-            height: 900px; 
-            /*
-                ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
-                높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.
-            */
-            
-        }
-        section>div{
-            border: 0px solid blue;
-            /* 섹션 안의 div테두리 */
-            
-        }
-    </style>
+    <!-- ##### 사이드바 스크롤 위치 따라 움직이는 스크립트문 ##### -->
+    <!-- ##### 개별적으로 설정해줘야 하는 부분 있음 (각자 페이지 푸터위까지만 움직이게) ##### -->
+    <!-- ##### 크롬 비율 80프로기준으로 설정했음 ##### -->
+	<script>
+		const enroll=()=>{
+			location.assign("<%=request.getContextPath()%>/friends/friendsEnroll.do");
+		}
+	
+	    $(document).ready(function() {
+	        var floatPosition = parseInt($(".sidemenu").css("top")); //사이드메뉴바의 top위치 가져옴
+	
+	        $(window).scroll(function() {
+	            var scrollTop = $(window).scrollTop(); // 현재 스크롤 위치를 가져온다.
+	            console.log(scrollTop); //스크롤위치 콘솔창에 출력해보면서 본인 페이지의 푸터위에 
+	                                    //사이드메뉴바가 딱 정지하는 위치값 확인할것
+	
+	            var newPosition=scrollTop +floatPosition + "px"; //사이드메뉴바의 처음위치+ 현재스크롤위치
+	
+	            if(scrollTop<=620){ //해당 페이지의 푸터위 스크롤값이 620이여서 scrollTop이 620까지만 이동하게 설정했음
+	                $(".sidemenu").stop().animate({
+	                    "top" : newPosition
+	                }, 500);}
+	        }).scroll();
+	    });
+	</script> 
+    <!-- ##### 여기까지 스크립트 구문 ##### -->
 <%@ include file="/views/common/footer.jsp" %>
