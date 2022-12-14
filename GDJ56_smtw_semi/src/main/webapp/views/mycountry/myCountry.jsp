@@ -23,17 +23,17 @@
                   </tr>
                   <tr id="selectSection">
                       <td>
-                          <img src="<%=request.getContextPath()%>/images/영어권.JPG" alt="" width="400" height="400">
+                          <img src="<%=request.getContextPath()%>/images/myCountry/영어권.JPG" alt="" width="400" height="400">
                           <div>
-                              <input type="radio" class="selectRadio" name="selectText" id="select1" value="영어">
-                              <label id="selectLabel" for="select1">영어</label>
+                              <input type="radio" class="selectRadio" name="selectText" id="select1" value="영어권">
+                              <label id="selectLabel" for="select1">영어권</label>
                           </div>
                       </td>
                       <td>
-                          <img src="<%=request.getContextPath()%>/images/비영어권.JPG" alt="" width="400" height="400">
+                          <img src="<%=request.getContextPath()%>/images/myCountry/비영어권.JPG" alt="" width="400" height="400">
                           <div>
-                              <input type="radio" class="selectRadio" name="selectText" id="select2" value="비영어">
-                              <label id="selectLabel" for="select2">비영어</label>
+                              <input type="radio" class="selectRadio" name="selectText" id="select2" value="비영어권">
+                              <label id="selectLabel" for="select2">비영어권</label>
                           </div>
                       </td>
                   </tr>
@@ -43,14 +43,14 @@
                   </tr>
                   <tr id="selectSection">
                       <td>
-                          <img src="<%=request.getContextPath()%>/images/대륙.JPG" alt="" width="400" height="400">
+                          <img src="<%=request.getContextPath()%>/images/myCountry/대륙.JPG" alt="" width="400" height="400">
                           <div>
                               <input type="radio" class="selectRadio" name="selectText1" id="select3" value="대륙">
                               <label id="selectLabel" for="select3">대륙</label>
                           </div>
                       </td>
                       <td>
-                          <img src="<%=request.getContextPath()%>/images/섬.jpg" alt="" width="400" height="400">
+                          <img src="<%=request.getContextPath()%>/images/myCountry/섬.jpg" alt="" width="400" height="400">
                           <div>
                               <input type="radio" class="selectRadio" name="selectText1" id="select4" value="섬">
                               <label id="selectLabel" for="select4">섬</label>
@@ -63,14 +63,14 @@
                   </tr>
                   <tr id="selectSection">
                       <td>
-                          <img src="<%=request.getContextPath()%>/images/온난.JPG" alt="" width="400" height="400">
+                          <img src="<%=request.getContextPath()%>/images/myCountry/온난.JPG" alt="" width="400" height="400">
                           <div>
                               <input type="radio" class="selectRadio" name="selectText2" id="select5" value="온난">
                               <label id="selectLabel" for="select5">온난</label>
                           </div>
                       </td>
                       <td>
-                          <img src="<%=request.getContextPath()%>/images/한랭.JPG" alt="" width="400" height="400">
+                          <img src="<%=request.getContextPath()%>/images/myCountry/한랭.JPG" alt="" width="400" height="400">
                           <div>
                               <input type="radio" class="selectRadio" name="selectText2" id="select6" value="한랭">
                               <label id="selectLabel" for="select6">한랭</label>
@@ -83,14 +83,14 @@
                   </tr>
                   <tr id="selectSection">
                       <td>
-                          <img src="<%=request.getContextPath()%>/images/열정.JPG" alt="" width="400" height="400">
+                          <img src="<%=request.getContextPath()%>/images/myCountry/열정.JPG" alt="" width="400" height="400">
                           <div>
                               <input type="radio" class="selectRadio" name="selectText3" id="select7" value="열정">
                               <label id="selectLabel" for="select7">열정</label>
                           </div>
                       </td>
                       <td>
-                          <img src="<%=request.getContextPath()%>/images/온순.JPG" alt="" width="400" height="400">
+                          <img src="<%=request.getContextPath()%>/images/myCountry/온순.JPG" alt="" width="400" height="400">
                           <div>
                               <input type="radio" class="selectRadio" name="selectText3" id="select8" value="온순">
                               <label id="selectLabel" for="select8">온순</label>
@@ -125,30 +125,27 @@
         }).scroll();
     });
 
+     
      const myCountryResult=()=>{
          const radioValue=document.querySelectorAll(".selectRadio");
-         let text="";
          let count=0;
-
+		 let countryResult=[];
+		 
          for(let i=0;i<radioValue.length;i++){
              if(radioValue[i].checked){
-                 text+=radioValue[i].name+"="+radioValue[i].value;
-                  if(count<3){
-                     text+="&";
-                  }
+                 countryResult.push(radioValue[i].value);
                  count++;
              }
          }
-        console.log(count);
-        console.log(text);
         if(count<4){
             alert("모든 값을 선택해주세요!");
         }else{
-            location.assign("<%=request.getContextPath()%>/mycountry/myCountryResult.do?"+text);
+           location.assign("<%=request.getContextPath()%>/mycountry/myCountryResult.do?result="+countryResult);
         } 
     }
-     // selectText=영어&selectText1=대륙&selectText2=한랭selectText3=온순
-
+     
+     
+     
      //  기본 위치(top)값
      $(document).ready(function() {
          // 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
