@@ -20,7 +20,13 @@
             <div class="menuDiv"></div>
 
             <div id="leavingDiary">
-                <h1>'<%=diary.getMemberId() %>' 님의 출국일지</h1>
+            	<div class="DiaryTitle">
+	                <h1 id="memberName"><%=diary.getMemberId() %></h1><h1> 님의 출국일지
+	                <%if(ddayResult<0){ %>
+	                <button class="customdeleteBtn deletebtnStyle" id="deleteBtn" onclick="deleteBtn();">삭제</button>
+	                <%} %>
+	                </h1>
+                </div>
                 <div class ="leavingInfo">
                     <div class="speech-bubble"><p id="speechText">안녕</p></div>
                 </div>
@@ -31,10 +37,11 @@
                         <div class="dday2">
                         <%if(ddayResult==0){ %>
                       	 	<h2 id="ddayfont">D-DAY!!! 가즈아-!!</h2>
-                      	<%}else{ %>
+                      	<%}else if(ddayResult>0){ %>
                         	<h2 id="ddayfont">D-<%=ddayResult %></h2>
-                        <%} %>
-                      	 	
+                        <%}else{ %>
+                      	 	<h2 id="ddayfont">D+<%=Math.abs(ddayResult) %></h2>
+                      	 <%} %>
                         	<img src="<%=request.getContextPath()%>/images/plane.jpg" id="plane" alt="" width="80" height="80">
                    		</div>
                     </div>
@@ -94,6 +101,20 @@
 </section>
 
  <script>
+		 <%-- if(<%=ddayResult%><0){
+			 $.ajax({
+					url:"<%=request.getContextPath()%>/diary/deleteCheckList.do",
+					type:"get",
+					data:{
+							memberId:<%=diary.getMemberId()%>
+						 },
+					success:data=>{
+						alert(data);
+					}
+				}); 
+		 } --%>
+ 
+ 
          $(document).ready(function() {
             var floatPosition = parseInt($(".sidemenu").css('top')); //사이드메뉴바의 top위치 가져옴
 
@@ -146,22 +167,32 @@
 		}
     });        
 
-     let count=0;
-     let checkListCheck=[];
+     let count=0; //진행도 계산할 변수
+     let checkListCheck=[]; //체크리스트 체크된것들 저장할 배열
+     const checkList=document.getElementsByClassName("checkList");
+     
+     for(let i=0;i<checkList.length;i++){
+         if(checkList[i].checked==true){ 
+             count++;
+         }
+     }
+     const title3=document.querySelector("#title3");
+     var countResult=count*5;
+     title3.innerHTML=countResult;
+     count=0;
+     
      
      const checkListBtn=()=>{ //체크리스트 버튼 클릭시
-         const checkList=document.getElementsByClassName("checkList");
-     
          for(let i=0;i<checkList.length;i++){
              if(checkList[i].checked==true){ 
-                 count++;
+            	 count++;
                  checkListCheck.push(checkList[i].value);
              }
          }
-         
+     
          const title3=document.querySelector("#title3");
-         var result=count*5;
-         title3.innerHTML=result;
+         var countResult=count*5;
+         title3.innerHTML=countResult;
          count=0;
          console.log(checkListCheck);
          
@@ -172,7 +203,7 @@
 			url:"<%=request.getContextPath()%>/diary/saveCheckList.do",
 			type:"get",
 			data:{
-					checkList:JSON.stringify(newCheckList)				
+					checkList:JSON.stringify(newCheckList)	
 				 },
 			success:data=>{
 				alert(data);
@@ -181,6 +212,26 @@
 		 
 		checkListCheck=[];
      }
+     
+     const deleteBtn=()=>{
+    	 var deleteConfirm=confirm("복구 할 수 없습니다. 정말 삭제 하시겠습니까?");
+         if(deleteConfirm==true){
+        	 $.ajax({
+     			url:"<%=request.getContextPath()%>/diary/deleteDiary.do",
+     			type:"get",
+     			data:{memberId:"<%=diary.getMemberId()%>"},
+     			success:data=>{
+     				alert(data);
+     				location.replace("<%=request.getContextPath()%>/diary/firstDiary.do");
+     			}
+     		}); 
+        	 
+         }else{
+        	 alert("삭제취소");
+         }  
+     }
+   
+     
      
  </script>
     
