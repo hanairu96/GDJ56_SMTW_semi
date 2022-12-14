@@ -29,15 +29,6 @@ public class DeleteMemberEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//String accept=(String)request.getAttribute("accept");
-		
-		//if(accept.equals("t")==true) {
-				
-//			Member m=Member.builder()
-//					.memberId(request.getParameter("memberId"))
-//					.build();
-
-//			String id=(String)request.getAttribute("memberId");
 			String id=request.getParameter("memberId");
 			System.out.println(id);
 			
@@ -48,11 +39,6 @@ public class DeleteMemberEndServlet extends HttpServlet {
 			
 			request.getRequestDispatcher("/views/common/msg.jsp")
 			.forward(request, response);
-//		}else {
-//			request.getRequestDispatcher("/admin/memberList.do")
-//			.forward(request, response);
-//		}
-	
 	}
 
 	/**
