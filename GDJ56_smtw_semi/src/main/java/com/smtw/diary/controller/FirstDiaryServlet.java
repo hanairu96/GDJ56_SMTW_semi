@@ -65,12 +65,14 @@ public class FirstDiaryServlet extends HttpServlet {
 	        
 			//날짜 사이의 간격을 계산해주는 메소드
 			int diaryDday=(int) ChronoUnit.DAYS.between(today, diaryDate);  //출국일-오늘 DDAY계산
-	        
-	        request.setAttribute("diaryDday", diaryDday);
+			//Math.abs(diaryDday);
+			
+			request.setAttribute("diaryDday", diaryDday);
 			request.setAttribute("diary", diary);
 			request.setAttribute("checklist", checklist);
 			
 			request.getRequestDispatcher("/views/diary/myDiary.jsp").forward(request, response);
+			
 		}else {
 			//2) 나의 출국일지 DB가 없는 회원이라면 firstDiary.jsp
 			request.setAttribute("memberId", memberId);
