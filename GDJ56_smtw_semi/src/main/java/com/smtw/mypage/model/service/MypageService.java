@@ -1,4 +1,4 @@
-package com.smtw.mapage.model.service;
+package com.smtw.mypage.model.service;
 
 import java.sql.Connection;
 import java.util.List;
@@ -51,6 +51,20 @@ public class MypageService {
 		
 		
 		return result;
+	}
+	
+	public Member memberInfo(String userId){
+		Connection conn = getConnection();
+		Member m=new MypageDao().memberInfo(conn,userId);
+		close(conn);
+		return m;
+	}
+	
+	public Member pwdCk(String userId, String pwd) {
+		Connection conn = getConnection();
+		Member m = new MypageDao().pwdCk(conn,userId,pwd);
+		close(conn);
+		return m;
 	}
 	
 }

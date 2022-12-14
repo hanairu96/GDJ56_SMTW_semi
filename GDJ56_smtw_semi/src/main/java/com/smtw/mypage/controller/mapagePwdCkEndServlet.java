@@ -1,27 +1,26 @@
 package com.smtw.mypage.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.smtw.member.model.vo.Member;
 import com.smtw.mypage.model.service.MypageService;
 
 /**
- * Servlet implementation class mypageAcceptFriends
+ * Servlet implementation class mapagePwdCkEndServlet
  */
-@WebServlet("/mypage/acceptFriends.do")
-public class mypageAcceptFriendsServlet extends HttpServlet {
+@WebServlet("/mypage/mypagePwdCkEnd.do")
+public class mapagePwdCkEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public mypageAcceptFriendsServlet() {
+    public mapagePwdCkEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,25 +30,25 @@ public class mypageAcceptFriendsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String userId=request.getParameter("userId");
+		String pwd=request.getParameter("password");
 		
-		String userId=request.getParameter("id");
-		String memberFrom = request.getParameter("memberfrom");
-		System.out.println(memberFrom);
-		System.out.println(userId);
-		int result = new MypageService().acceptFriends(userId,memberFrom);
-		System.out.println(result);
+		System.out.println(userId+" : "+pwd);
+		Member m = new MypageService().pwdCk(userId,pwd);
 		
-		String msg="", loc="";
-		if(result<1) {
-			msg="친구 신청 수락에 실패했습니다. 다시 시도해주세요";
+		request.setAttribute("userId", userId);
+		
+		String msg="",loc="";
+		if(m==null) {
+			msg="비밀번호를 잘못입력하셨습니다. 다시입력해주세요";
+			loc="/mypage/mypagePwdCk.do?id="+userId;
 		}else {
-			msg="친구 신청를 수락하셨습니다!";
+			msg="비밀번호를 올바르게 입력하셧습니다. 개인정보 수정 페이지로 넘어갑니다";
+			loc="/mypage/mypageAccountUpdate.do?id="+userId;
 		}
-		loc="/mypage/mypageFriends.do?id="+userId;
-		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);;
 		
 	}
 

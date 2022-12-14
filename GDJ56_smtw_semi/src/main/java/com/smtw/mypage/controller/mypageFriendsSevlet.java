@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.mapage.model.service.MypageService;
+import com.smtw.mypage.model.service.MypageService;
 import com.smtw.mypage.model.vo.Applyfriends;
 import com.smtw.mypage.model.vo.MemberInfo;
 
@@ -43,7 +43,6 @@ public class mypageFriendsSevlet extends HttpServlet {
 		request.setAttribute("friendslist",friendslist);
 		
 		request.getRequestDispatcher("/views/mypage/mypagefriends.jsp").forward(request, response);
-		
 		
 	}
 
