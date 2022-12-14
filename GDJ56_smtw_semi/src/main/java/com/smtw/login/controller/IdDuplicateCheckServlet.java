@@ -1,23 +1,29 @@
-package com.sbtw.login.controller;
+package com.smtw.login.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+import com.google.gson.Gson;
+import com.smtw.member.model.service.MemberService;
+import com.smtw.member.model.vo.Member;
+
 /**
- * Servlet implementation class EnrollMemberServlet
+ * Servlet implementation class IdDuplicateCheckServlet
  */
-@WebServlet("/logIn/enrollMember.do")
-public class EnrollMemberServlet extends HttpServlet {
+@WebServlet("/logIn/idDuplicateCheck.do")
+public class IdDuplicateCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EnrollMemberServlet() {
+    public IdDuplicateCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +32,13 @@ public class EnrollMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/views/logIn/enrollMember.jsp").forward(request, response);
+		String inputId=request.getParameter("inputId");
+//		System.out.println(id);
+		//아이디중복확인
+		Member m=new MemberService().idDuplicateCheck(inputId);
+		
+		response.setContentType("application/json;charset=utf-8");
+		new Gson().toJson(m, response.getWriter());
 	}
 
 	/**

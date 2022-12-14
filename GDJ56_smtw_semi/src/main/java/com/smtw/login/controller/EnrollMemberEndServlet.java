@@ -1,4 +1,4 @@
-package com.sbtw.login.controller;
+package com.smtw.login.controller;
 
 import java.io.IOException;
 
