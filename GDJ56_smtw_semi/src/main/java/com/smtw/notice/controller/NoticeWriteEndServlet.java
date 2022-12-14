@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.smtw.notice.model.service.NoticeService;
+
 /**
  * Servlet implementation class NoticeWriteEndServlet
  */
@@ -26,10 +28,24 @@ public class NoticeWriteEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String noticeTitle=request.getParameter("noticeTitle");
 		String noticeWriter=request.getParameter("noticeWriter");
+		String noticeTitle=request.getParameter("noticeTitle");
 		String summernote=request.getParameter("summernote");
 		
+		int result=new NoticeService().insertNotice(noticeWriter,noticeTitle,summernote);
+		
+		String msg="",loc="";
+		if(result>0) {
+			msg="글 작성 완료!";
+			loc="/notice/noticeList.do";
+		}else {
+			msg="글 등록 실패..";
+			loc="/notice/noticeWrite.do";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		
 	}
 
