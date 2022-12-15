@@ -41,4 +41,12 @@ public class MemberService {
 		close(conn);
 		return m;
 	}
+	
+	//이메일중복확인
+	public Member emailDuplicateCheck(String inputEmail) {
+		Connection conn=getConnection();
+		Member m=dao.emailDuplicateCheck(conn,inputEmail);
+		close(conn);
+		return m;
+	}
 }

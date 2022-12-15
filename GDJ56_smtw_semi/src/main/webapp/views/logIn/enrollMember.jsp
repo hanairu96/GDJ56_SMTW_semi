@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<% char emailAgree=(char)request.getAttribute("emailAgree"); %>
+    
 <%@include file="/views/common/header.jsp" %>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/style.css"/>
@@ -12,7 +15,7 @@
             
             <form name="enrollMemberFrm" action="<%=request.getContextPath()%>/logIn/enrollMemberEnd.do" 
         		method="post" onsubmit="return fn_enrollFail();">
-        		
+        		<input type="hidden" name="emailAgree" id="emailAgree" value="<%=emailAgree %>" />
                 <div class="form-group">
                		<label for="inputId" class="form-label mt-4">아이디<span class="obli">(필수)</span></label>
 <!--                     <input id="idCheck" type="button" value="중복확인"> -->
@@ -62,6 +65,7 @@
                            }
                         });
                      })
+                   
                 </script>
 				<div class="form-group has-success">
 					<label class="form-label mt-4" for="inputPwd">비밀번호<span class="obli">(필수)</span></label>
@@ -188,7 +192,7 @@
                 	</div>
                 </div>
                 <div class="form-group">
-                    <label for="inputPhone" class="form-label mt-4">전화번호('-'없이 입력해주세요)</label>
+                    <label for="inputPhone" class="form-label mt-4">핸드폰번호('-'없이 입력해주세요)</label>
                     <span class="check" id="checkPhone"><small></small></span>
                  <input type="text" class="form-control" name="inputPhone" id="inputPhone" >
                 </div>
@@ -210,6 +214,28 @@
                     <input type="email" class="form-control" name="inputEmail" id="inputEmail"
                     	  placeholder="이메일을 입력해주세요" required>
                 </div>
+                
+                <script>
+	              //이메일 중복확인
+	             	$("input#inputEmail").keyup(e=>{
+	             		$.ajax({
+	             			url:"<%=request.getContextPath()%>/logIn/emailDuplicateCheck.do",
+	             			data:{inputEmail:$("input#inputEmail").val().trim()},
+	             			dataType:"json",
+	             			success:data=>{
+	             				console.log(data);
+	             				if(data!=null){
+	             					$("span#checkEmail>small").text("이미 가입된 이메일 입니다.").css("color","red");
+	             				}else{
+	             					$("span#checkEmail>small").text(" ");
+	             				}
+	             			}
+	             		})
+	             	});
+	        		
+	        		
+                </script>
+                
                 <div class ="adddressContainer">
                     <label class="form-label mt-4">주소</label>
                     <div class="bir_yy address">
@@ -317,6 +343,12 @@
 				return false;
 			}
 		}
+		
+		//가입가능한 이메일
+   		if(!($("span#checkEmail>small").text().includes("가능한"))){//이메일 사용 가능하다는 말이 없으면
+   			$("#inputEmail").focus();
+   			return false;
+   		}
 	}
 </script>
 

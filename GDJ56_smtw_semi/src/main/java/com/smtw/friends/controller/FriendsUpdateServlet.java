@@ -1,23 +1,27 @@
-package com.smtw.login.controller;
+package com.smtw.friends.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.smtw.friends.model.service.FriendsService;
+import com.smtw.friends.model.vo.Friends;
+
 /**
- * Servlet implementation class EnrollMemberServlet
+ * Servlet implementation class FriendsUpdateServlet
  */
-@WebServlet("/logIn/enrollMember.do")
-public class EnrollMemberServlet extends HttpServlet {
+@WebServlet("/friends/friendsUpdate.do")
+public class FriendsUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EnrollMemberServlet() {
+    public FriendsUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,13 +30,15 @@ public class EnrollMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("emailAgree"));
-		char emailAgree=request.getParameter("emailAgree").charAt(0); //이메일 수신 동의 여부
-		System.out.println(emailAgree);
+		String id=request.getParameter("memberId");
 		
-		request.setAttribute("emailAgree", emailAgree);
+		Friends f=new FriendsService().selectFriendsId(id);
 		
-		request.getRequestDispatcher("/views/logIn/enrollMember.jsp").forward(request, response);
+		request.setAttribute("friends", f);
+		
+		request.getRequestDispatcher("/views/friends/friendsUpdate.jsp")
+		.forward(request, response);
+		
 	}
 
 	/**

@@ -133,12 +133,12 @@ public class FriendsDao {
 		}return m;
 	}
 	
-	public int deleteFriends(Connection conn, int no) {
+	public int deleteFriends(Connection conn, String id) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("deleteFriends"));
-			pstmt.setInt(1, no);
+			pstmt.setString(1, id);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -161,6 +161,29 @@ public class FriendsDao {
 			pstmt.setString(6, f.getType());
 			pstmt.setString(7, String.valueOf(f.getExpYn()));
 			pstmt.setString(8, f.getPurpose());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int updateFriends(Connection conn, Friends f) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("updateFriends"));
+			pstmt.setString(1, f.getNName());
+			pstmt.setString(2, f.getFriendsTitle());
+			pstmt.setString(3, f.getFriendsContents());
+			pstmt.setString(4, f.getMemberId());
+			pstmt.setString(5, f.getMbti());
+			pstmt.setString(6, f.getType());
+			pstmt.setString(7, String.valueOf(f.getExpYn()));
+			pstmt.setString(8, f.getPurpose());
+			pstmt.setString(9, f.getMemberId());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

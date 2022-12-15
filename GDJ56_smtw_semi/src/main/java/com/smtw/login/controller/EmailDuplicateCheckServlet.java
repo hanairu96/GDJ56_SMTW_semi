@@ -7,17 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.smtw.member.model.service.MemberService;
+import com.smtw.member.model.vo.Member;
+
 /**
- * Servlet implementation class EnrollMemberServlet
+ * Servlet implementation class EmailDuplicateCheckServlet
  */
-@WebServlet("/logIn/enrollMember.do")
-public class EnrollMemberServlet extends HttpServlet {
+@WebServlet("/logIn/emailDuplicateCheck.do")
+public class EmailDuplicateCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EnrollMemberServlet() {
+    public EmailDuplicateCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,13 +30,13 @@ public class EnrollMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("emailAgree"));
-		char emailAgree=request.getParameter("emailAgree").charAt(0); //이메일 수신 동의 여부
-		System.out.println(emailAgree);
+		String inputEmail=request.getParameter("inputEmail");
 		
-		request.setAttribute("emailAgree", emailAgree);
+		//이메일중복확인
+		Member m=new MemberService().emailDuplicateCheck(inputEmail);
 		
-		request.getRequestDispatcher("/views/logIn/enrollMember.jsp").forward(request, response);
+		response.setContentType("application/json;charset=utf-8");
+		new Gson().toJson(m, response.getWriter());
 	}
 
 	/**
