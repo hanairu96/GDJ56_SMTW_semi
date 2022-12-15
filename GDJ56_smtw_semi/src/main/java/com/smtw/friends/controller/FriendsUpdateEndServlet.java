@@ -3,7 +3,6 @@ package com.smtw.friends.controller;
 import java.io.IOException;
 import java.util.Arrays;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,16 +13,16 @@ import com.smtw.friends.model.service.FriendsService;
 import com.smtw.friends.model.vo.Friends;
 
 /**
- * Servlet implementation class FriendsEnrollEndServlet
+ * Servlet implementation class FriendsUpdateEndServlet
  */
-@WebServlet("/friends/friendsEnrollEnd.do")
-public class FriendsEnrollEndServlet extends HttpServlet {
+@WebServlet("/friends/friendsUpdateEnd.do")
+public class FriendsUpdateEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FriendsEnrollEndServlet() {
+    public FriendsUpdateEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -58,23 +57,23 @@ public class FriendsEnrollEndServlet extends HttpServlet {
 			.build();
 		System.out.println("객체:"+f);
 		
-		int result=new FriendsService().insertFriends(f);
-		String msg="", loc="";
+		int result=new FriendsService().updateFriends(f);
+		
+		String msg, loc;
 		if(result>0) {
-			//msg="프렌즈 등록 성공!";
-			//request.setAttribute("msg", msg);
-			request.setAttribute("id", memberId);
-			RequestDispatcher rd=request.getRequestDispatcher("/views/friends/friendsAfterEnroll.jsp");
-			rd.forward(request, response);
+			msg="수정이 완료됐습니다.";
+			loc="/friends/friendsList.do";
 		}else {
-			msg="프렌즈 등록 실패!";
-			loc="/friends/friendsEnroll.do";
-			request.setAttribute("msg", msg);
-			request.setAttribute("loc", loc);
-			RequestDispatcher rd=request.getRequestDispatcher("/views/common/msg.jsp");
-			rd.forward(request, response);
+			msg="수정에 실패하였습니다.";
+			loc="/friends/friendsUpdate.do?memberId="+memberId;
 		}
-	
+		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		
+		request.getRequestDispatcher("/views/common/msg.jsp")
+		.forward(request, response);
+
 	}
 
 	/**

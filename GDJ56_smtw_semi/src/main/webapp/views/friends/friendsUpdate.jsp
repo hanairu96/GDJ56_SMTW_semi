@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.smtw.friends.model.vo.Friends" %>
+<%
+	Friends f=(Friends)request.getAttribute("friends");
+%>
 <%@ include file="/views/common/header.jsp" %>
 
 <!-- 부트스트랩 CSS -->
@@ -9,7 +13,7 @@
 
     <section>
         <div id="friendTitle" style="text-align: center;">
-            <h1>워홀프렌즈 등록</h1>
+            <h1>워홀프렌즈 수정</h1>
         </div>
 
         <div style="height:25px;">
@@ -155,7 +159,8 @@
                 /* 사이드메뉴바 스타일 여기까지*/
                 </style>
                 
-                <form id="enrollForm" action="<%=request.getContextPath()%>/friends/friendsEnrollEnd.do">
+                <form id="updateForm" action="<%=request.getContextPath()%>/friends/friendsUpdateEnd.do"
+                onsubmit="return update_friend();">
                 <div style="border:0px solid red;width:910px;height:695px;display:flex;margin-left:50px; ">
                     <div style="display:flex">
                         <div style="border:0px solid green;width:900px;height:690px ">
@@ -166,7 +171,7 @@
                                 <div style="border:0px solid rgb(210, 243, 21);width:300px;">
                                 	<br><br>
                                 	<div style="border:0px solid blueviolet;width:300px;height:30px;text-align:left ">
-                                        <b>제목</b> : <input type="text" name="title" placeholder="제목을 입력하세요.">
+                                        <b>제목</b> : <input type="text" name="title" placeholder="제목을 입력하세요." value="<%=f.getFriendsTitle()%>">
                                     </div>
                                     <div style="border:0px solid blueviolet;width:300px;height:30px;text-align:left ">
                                         <b>이름</b> : <%=logInMember.getMemberName() %>
@@ -181,7 +186,8 @@
                             </div>
                             <div style="border:0px solid pink;width:880px;height:580px;text-align: center; ">
                                 <div style="border:0px solid blueviolet;width:800px;height:30px;text-align:left ">
-                                    <b>MBTI</b> : <input type="text" name="mbti" style="margin-top:0px;" placeholder="대문자로 입력해주세요.">
+                                    <b>MBTI</b> : <input type="text" name="mbti" style="margin-top:0px;" placeholder="대문자로 입력해주세요."
+                                    value="<%=f.getMbti()%>">
                                </div>
                                <div style="border:0px solid blueviolet;width:800px;height:150x;text-align:left">
                                     <label><b>희망국가</b></label>
@@ -242,11 +248,10 @@
                                     <b>자기소개글</b>
                                 </div>
                                 <div style="border:0px solid blueviolet;width:820px;height:200px;text-align:left">
-                                    <textarea name="friendsContents" cols="80" rows="8" style="margin-top:10px;resize:none;" placeholder="내용을 입력해주세요."></textarea>
-			                    	<p>친구 요청을 수락하면 서로 쪽지 보내기가 가능합니다. 친구를 맺어 대화를 나누세요!</p>
+                                    <textarea name="friendsContents" cols="80" rows="8" style="margin-top:10px;resize:none;" placeholder="내용을 입력해주세요."><%=f.getFriendsContents()%></textarea>
+                                    <p>친구 요청을 수락하면 서로 쪽지 보내기가 가능합니다. 친구를 맺어 대화를 나누세요!</p>
                                 </div>
                                 <input type="hidden" name="memberId" value="<%=logInMember.getMemberId() %>">
-                                <input type="submit" style="display: none">
                             </div>
                         </div>
                     </div>
@@ -261,7 +266,7 @@
             <div style="border:0px solid yellow;width:400px;height:60px;">
                 <div style="border:0px solid yellow;width:400px;height:60px;display: inline-flex;align-items:center; ">
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button onclick="enroll_friend(this.form);" class="customBtn btnStyle btn btn-primary" type="button" style=" margin-left:250px;background-color: rgba(221, 160, 221, 0.508) !important;" value="등록">등록</button>
+                        <input type="submit" class="customBtn btnStyle btn btn-primary" style=" margin-left:250px;background-color: rgba(221, 160, 221, 0.508) !important;" value="수정"></button>
                         <button onclick="cancel_friend();" class="customBtn btnStyle btn btn-primary" type="button" style=" background-color: rgba(221, 160, 221, 0.508) !important;" value="취소">취소</button>
                     </div> 
                 </div>
@@ -269,6 +274,7 @@
             </div>
         </div>
             </form>
+            
     <style>
          .customBtn {
             color: #fff;
@@ -327,17 +333,43 @@
 	
 	</section>
 	<script>
-		function enroll_friend(f){
+		const update_friend=()=>{
 			let answer;
-			answer=confirm("프렌즈 찾기 등록하시겠습니까?");
-			if(answer==true){
-				f.submit();
+			answer=confirm("수정을 완료 하시겠습니까?");
+			if(answer){
+				return true;
 			}
 		}
         
 		function cancel_friend(url){
-			location.assign("<%=request.getContextPath()%>/friends/friendsList.do");
+			location.assign(document.referrer); //이전 페이지 주소로 이동
 		}
+		
+		const checking=()=>({
+			for(int i=0;i<$("[name=nation]").size();i++){
+				if($("[name=nation]")[i].value==<%=f.getNName()%>){
+					$("[name=nation]")[i].prop('checked', true);
+					break;
+				}
+			}
+			for(int i=0;i<$("[name=type]").size();i++){
+				if($("[name=type]")[i].value==<%=f.getType()%>){
+					$("[name=type]")[i].prop('checked', true);
+					break;
+				}
+			}
+			for(int i=0;i<$("[name=expYn]").size();i++){
+				if($("[name=expYn]")[i].value==<%=f.getExpYn()%>){
+					$("[name=expYn]")[i].prop('checked', true);
+					break;
+				}
+			}
+			for(int i=0;i<$("[name=purpose]").size();i++){
+				if($("[name=purpose]")[i].value==<%=f.getPurpose()%>){
+					$("[name=purpose]")[i].prop('checked', true);
+				}
+			}
+		})();
 	</script>
 	
 	<style>

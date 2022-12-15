@@ -21,23 +21,22 @@
             <div style="border:0px solid yellow;width:400px;height:60px;margin-left: 50px;"></div>
             <div style="border:0px solid yellow;width:400px;height:60px;margin-left: 50px;"></div>
             <div style="border:0px solid yellow;width:400px;height:60px;margin-left: 50px;">
+                <%if(logInMember==null) {%>
+                <%}else if(logInMember.getMemberId().equals("ADMIN")||logInMember.getMemberId().equals(f.getMemberId())) {%>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button onclick="friend_delete('주소값');" class="customBtn btnStyle btn btn-primary" type="button" style=" background-color: rgba(221, 160, 221, 0.479) !important;" value="삭제">삭제하기</button>
+                    <button onclick="friend_delete();" class="customBtn btnStyle btn btn-primary" type="button" style=" background-color: rgba(221, 160, 221, 0.479) !important;" value="삭제">삭제하기</button>
                 </div>
+                <%} %>
             </div>
         </div>
-        <script>
-            function friend_delete(url){
-            var answer;
-             answer = confirm("워홀프렌즈를 삭제하시겠습니까?");
-             if(answer == true){
-             location = url;
-                }
-          }
-            
-         </script>
-
-
+		<script>
+		function friend_delete(){
+			let answer = confirm("정말로 삭제하시겠습니까?");
+			if(answer == true){
+				location.assign("<%=request.getContextPath()%>/friends/friendsDelete.do?memberId=<%=f.getMemberId() %>");
+			}
+		}
+		</script>
 
         <div style="height:700px">
             <div style="display:flex">
@@ -182,7 +181,7 @@
 
 
 
-                <div style="border:1px solid rgba(238, 130, 238, 0.315);width:910px;height:695px;display:flex;border-radius:20px;">
+                <div style="border:0px solid rgba(238, 130, 238, 0.315);width:910px;height:695px;display:flex;border-radius:20px;">
                     <div style="display:flex">
                         <div style="border:0px solid green;width:452px;height:690px ">
                             <div style="border:0px solid pink;width:440px;height:340px;">
@@ -219,7 +218,7 @@
                             </div>
                             <div style="border:0px solid blueviolet;width:452px;height:50px;display:flex;justify-content:center;">
                                 <div>워홀경험 유무:</div>
-                                <div>?</div>
+                                <div><%=f!=null?(f.getExpYn()=='Y'?"있음":"없음"):"" %></div>
                             </div>
                             <div style="border:0px solid blueviolet;width:452px;height:50px;display:flex;justify-content:center;">
                                 <div>목적:</div>
@@ -229,7 +228,7 @@
                                 자기소개글(100자이내)
                             </div>
                             <div style="border:0px solid blueviolet;width:452px;height:300px;">
-                                <div style="border:1px solid rgba(238, 130, 238, 0.452);width:452px;height:180px;margin-top:30px;">
+                                <div style="border:0px solid rgba(238, 130, 238, 0.452);width:452px;height:180px;margin-top:30px;">
                                     <%=f!=null?f.getFriendsContents():"" %>
                                 </div>
                             </div>
@@ -244,23 +243,18 @@
             <div style="border:0px solid yellow;width:400px;height:60px"></div>
             <div style="border:0px solid yellow;width:400px;height:60px;display: inline-flex;align-items:center; ">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button onClick="location.href='링크주소'" class="customBtn btnStyle btn btn-primary" type="button" style="margin-left:220px;background-color: rgba(221, 160, 221, 0.508) !important;" value="목록">목록</button>
-                    <button onclick="update_friend('주소값');" class="customBtn btnStyle btn btn-primary" type="button" style="background-color: rgba(221, 160, 221, 0.508) !important;" value="수정하기">수정하기</button>
+                    <button onClick="location.href='<%=request.getContextPath() %>/friends/friendsList.do'" class="customBtn btnStyle btn btn-primary" type="button" style="margin-left:220px;background-color: rgba(221, 160, 221, 0.508) !important;" value="목록">목록</button>
+                    <%if(logInMember==null) {%>
+                	<%}else if(logInMember.getMemberId().equals("ADMIN")||logInMember.getMemberId().equals(f.getMemberId())){%>
+	                    <button onclick="location.assign('<%=request.getContextPath()%>/friends/friendsUpdate.do?memberId=<%=f.getMemberId()%>');" 
+	                    class="customBtn btnStyle btn btn-primary" type="button" style="background-color: rgba(221, 160, 221, 0.508) !important;" value="수정하기">수정하기</button>
+                    <%} %>
                 </div>
             </div>
         </div>       
     </section>
     <script>
-        function update_friend(url){
-        var answer;
-         answer = confirm("수정하시겠습니까?");
-         if(answer == true){
-         location = url;
-            }
-      }
-        
-         
-     </script>
+    </script>
 
      <style>
          .customBtn {
