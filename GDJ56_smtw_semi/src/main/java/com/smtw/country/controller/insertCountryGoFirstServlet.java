@@ -27,6 +27,9 @@ public class insertCountryGoFirstServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		String name=request.getParameter("nName");
+		
+		request.setAttribute("name", name);
 		request.getRequestDispatcher("/views/country/countryInfoinsert.jsp").forward(request, response);
 	
 	

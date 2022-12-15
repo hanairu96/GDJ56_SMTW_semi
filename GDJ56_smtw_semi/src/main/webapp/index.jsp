@@ -239,7 +239,7 @@
                         </div>
                         <div class="carousel-item">
                             <div class="textcontainer">
-                                <h3>국가정보</h3>
+                                <h3><a href="<%=request.getContextPath()%>/country/countryMain.do">국가정보</a></h3>
                             </div>
                             <img src="https://img.freepik.com/free-vector/global-travelling-abstract-concept-vector-illustration-global-insurance-world-trip-international-tourism-travel-agency-working-holiday-luxury-vacation-resort-chain-abstract-metaphor_335657-2953.jpg?w=826&t=st=1668756054~exp=1668756654~hmac=e2c0a85010a8ffb2c9d72fbe22c4eec5b55e28218e7bd4547aac02a7bf66e63c" class="d-block w-100" alt="...">
                         </div>

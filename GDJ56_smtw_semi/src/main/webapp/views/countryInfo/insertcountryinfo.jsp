@@ -133,7 +133,7 @@
                 <br>
                 <div>
                     구글 주소 링크
-                    <br><textarea name="contryaddress" id="contryaddress" cols="80" rows="5"  placeholder="예시) 구글지도 링크를 전부 가져와야하는건지..."></textarea>
+                    <br><textarea name="contryaddress" id="contryaddress" cols="80" rows="5"  placeholder="예시) 구글지도 링크를 받아와서 입력해주세요."></textarea>
                 </div>
                 <br>    
                 <div>

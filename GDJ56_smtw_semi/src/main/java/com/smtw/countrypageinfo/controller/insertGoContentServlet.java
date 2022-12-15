@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.country.model.vo.CountryPageInfo;
-import com.smtw.countrypageinfo.model.service.CountryPageInfoService;
-
 /**
- * Servlet implementation class insertGoCountryInfoServlet
+ * Servlet implementation class insertGoContentServlet
  */
-@WebServlet("/countryInfo/insergo.do")
-public class insertGoCountryInfoServlet extends HttpServlet {
+@WebServlet("/countryinfo/goInsertContext.do")
+public class insertGoContentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public insertGoCountryInfoServlet() {
+    public insertGoContentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,9 +29,9 @@ public class insertGoCountryInfoServlet extends HttpServlet {
 
 		
 		String name=request.getParameter("nName");
-	
+		
 		request.setAttribute("name", name);
-		request.getRequestDispatcher("/views/countryInfo/insertcountryinfo.jsp").forward(request,response);
+		request.getRequestDispatcher("/views/countryInfo/insertcontentinfo.jsp").forward(request, response);
 	
 	
 	}

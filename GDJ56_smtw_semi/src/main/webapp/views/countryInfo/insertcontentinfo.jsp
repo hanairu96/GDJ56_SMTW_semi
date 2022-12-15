@@ -1,39 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String name=(String)request.getAttribute("name");
+%>
 <%@ include file="/views/common/header.jsp" %>
 <section>
+<form name="contentinfo" action="<%=request.getContextPath()%>/countryinfo/insertcontentinfo.do" method="post">
     <div id="insertCountrypage">
         <fieldset>
-            <legend><h1 style="text-align: centers;">국가정보 입력하는 페이지</h1></legend>
+            <legend><h1 style="text-align: centers;">국가 내용 입력 페이지</h1></legend>
+                <div>
+                	나라명 : <%=name %>
+   					<input type="hidden" name="nName" value="<%=name%>">
+                </div>
                 <br>
                 <div>
                     국가/지역소개
-                    <br><textarea name="" id="" cols="100" rows="30" placeholder="국가/지역소개 입력" ></textarea>
+                    <br><textarea name="coareainfo" id="" cols="100" rows="30" placeholder="국가/지역소개 입력" ></textarea>
                 </div>
                 <br>    
                 <div>
                     워홀비자 
-                    <br><textarea name="" id="" cols="100" rows="30" placeholder="워홀비자 입력" ></textarea>
+                    <br><textarea name="wkvisa" id="" cols="100" rows="30" placeholder="워홀비자 입력" ></textarea>
                 </div>
                 <br>  
                 <div>
                     안전정보 
-                    <br><textarea name="" id="" cols="100" rows="30" placeholder="안전정보 입력" ></textarea>
+                    <br><textarea name="safebady" id="" cols="100" rows="30" placeholder="안전정보 입력" ></textarea>
                 </div>
                 <br>  
                 <div>
                     초기정착 
-                    <br><textarea name="" id="" cols="100" rows="30" placeholder="초기정착 입력" ></textarea>
+                    <br><textarea name="homestay" id="" cols="100" rows="30" placeholder="초기정착 입력" ></textarea>
                 </div>
                 <br>  
                 <div>
                     취업정보 
-                    <br><textarea name="" id="" cols="100" rows="30" placeholder="취업정보 입력" ></textarea>
+                    <br><textarea name="getjob" id="" cols="100" rows="30" placeholder="취업정보 입력" ></textarea>
                 </div>
                 <br>  
 			    <div id="twobu">
-			        <button class="customBtn btnStyle"><span>등록</span></button>
+			        <button class="customBtn btnStyle" type="submit"><span>등록</span></button>
 			    </div>
+		    </form>
         </fieldset>
     </div>
     <style>

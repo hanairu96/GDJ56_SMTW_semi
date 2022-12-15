@@ -3,17 +3,19 @@
 <%@ page import="java.util.List,com.smtw.country.model.vo.Country" %>
 <%
 	List<Country> con=(List<Country>)request.getAttribute("country");
+	List<Country> list=(List<Country>)request.getAttribute("list");
 	
 %>
 <%@ include file="/views/common/header.jsp" %>
 
     <style>
+     a:link { color: black; text-decoration: none;}
+	 a:visited { color: black; text-decoration: none;}
+	 a:hover { color: black; text-decoration: underline;}
         #countrymenu2{
-            display: flex;
-            font-size:15px;
             width: 250px;
             float: left; 
-            height: 1100px;
+            height: 1100px;	
            /*  border:1px solid black; */
         }
         #collectmain2{
@@ -24,11 +26,8 @@
             height: 450px;
         }
         #maininfo2{
-            line-height: 50px;
             text-align: center;
             /* border: 1px solid black; */
-            height: 50px;
-            font-size:15px; 
         }
         #likename2{
         	display: flex;
@@ -68,7 +67,10 @@
 			top:450px; 
 		}
 		#btninsertdelete{
-			padding-left:75%;
+			padding-left:50%;
+		}
+		#btninsertdelete>button{
+			width:80px;
 		}
     </style>
 
@@ -76,9 +78,20 @@
 <section>
         <h1 style="text-align: center;  font-size:40px;">국가 및 지역 정보</h1>
 	            <div id="countrymenu2">
+	            <%if(list.isEmpty()) {%>
+	            	나라를 추가해주세요!! -> <button id="btnbtn" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/insertgo.do')"><span>국가 추가</span></button>
+	            <%}else{
+	            	for(Country c : list){%>
 	                <ul>
-	                    <li><a href="<%=request.getContextPath()%>">네덜란드</a></li>
-	                    <li><a href="">뉴질랜드</a></li>
+	                	
+	                    <li><a href="<%=request.getContextPath()%>/countryinfo/searchAll.do?nName=<%=c.getNName() %>"><%=c.getNName() %></a></li>
+	                   
+	                </ul>    
+	                
+                <%}
+            	}%>
+	            </div>
+<!-- 	                    <li><a href="">뉴질랜드</a></li>
 	                    <li><a href="">대만</a></li>
 	                    <li><a href="">덴마크</a></li>
 	                    <li><a href="">독일</a></li>
@@ -90,8 +103,8 @@
 	                    <li><a href="">영국</a></li>
 	                    <li><a href="">오스트리아</a></li>
 	                    
-	                </ul>
-	                <ul>
+	                </ul> -->
+	    <!--             <ul>
 	                    <li><a href="">이스라엘</a></li>
 	                    <li><a href="">이탈리아</a></li>
 	                    <li><a href="">일본</a></li>
@@ -104,8 +117,7 @@
 	                    <li><a href="">헝가리</a></li>
 	                    <li><a href="">호주</a></li>
 	                    <li><a href="">홍콩</a></li>
-	                </ul>
-	            </div>
+	                </ul> -->
 	      
         <div id="comaincontainer2"> 
 	        <%if(con.isEmpty()) {%>
@@ -123,16 +135,19 @@
 	                            <p id="font1" style="font-size:30px;">
 	                            <a href="<%=request.getContextPath()+(con.get(i).getInfo().getMoney()==null?"/countryInfo/insergo.do?nName=":"/countryinfo/searchAll.do?nName=")+con.get(i).getNName()%>">
 	                                            
-	                            <%=con.get(i).getNName() %></a></p>
+	                            <%=con.get(i).getNName() %></a></p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	                        	<div id="likebtn">
 		                            <button id="like2">좋아요</button>
 	                        	</div>	    
 	                        </div>
-	                        <p id="maininfo2"><%=con.get(i).getNpharse() %></p>
+	                        <h4 id="maininfo2"><%=con.get(i).getNpharse() %></h4>
+	                        
+	                        <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
 	                        <div id="btninsertdelete">
-	                            <button id="update" onclick="location.assign('<%=request.getContextPath()%>/country/updateCountry.do?nName=<%=con.get(i).getNName()%>')">수정</button>
-	                            <button id="delete" onclick="location.assign('<%=request.getContextPath()%>/country/deleteCountry.do?nName=<%=con.get(i).getNName()%>')">삭제</button>
+	                            <button id="update" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/updateCountry.do?nName=<%=con.get(i).getNName()%>')">수정</button>
+	                            <button id="delete" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/deleteCountry.do?nName=<%=con.get(i).getNName()%>')">삭제</button>
 	                        </div>
+	                        <%} %>
 	                    </div>
 	                 </div>
 				 <%} 
@@ -141,10 +156,11 @@
    	<div id="pageBar2">
 		<%=request.getAttribute("pageBar")%>
 	</div>
+	 <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
 	<div id="positionbtn">
-    	<button id="btnbtn" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/insertgo.do')"><span>추가</span></button>
+    	<button id="btnbtn" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/insertgo.do')"><span>국가 추가</span></button>
     </div>
-    
+    <%} %>
 </section>
     <STYLE>
     	#font1{
