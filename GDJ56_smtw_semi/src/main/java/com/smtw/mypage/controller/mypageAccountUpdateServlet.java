@@ -33,6 +33,7 @@ public class mypageAccountUpdateServlet extends HttpServlet {
 		String userId=request.getParameter("id");
 		System.out.println("불러와짐??"+userId);
 		Member m = new MypageService().memberInfo(userId);
+		System.out.println("다시?");
 		if(!m.getAddress().equals("(),")) {
 		String address=m.getAddress();
 		String postcode=address.substring(1, 6);
@@ -48,17 +49,32 @@ public class mypageAccountUpdateServlet extends HttpServlet {
 		}else {
 			String address="주소를 입력해주세요";
 			request.setAttribute("address",address);
-			}
-		
+		}
 		String[] birth = m.getBirth().split("/");
 		String bYear = birth[0];
+		System.out.println("생년생녕!!:"+bYear);
 		String bMonth = birth[1];
 		String bDay = birth[2];
-		
-		
-		
-		System.out.println(bYear+"/"+bMonth+"/"+bDay);
+		request.setAttribute("bYear", bYear);
+		request.setAttribute("bMonth", bMonth);
+		request.setAttribute("bDay", bDay);
 		request.setAttribute("member", m);
+		
+		String name = m.getMemberName();
+		request.setAttribute("name", name);
+		if(m.getPhone()!=null) {
+			String phone = m.getPhone();
+			request.setAttribute("phone", phone);
+		}else {
+			String phone = "번호를 입력해주세요";
+			request.setAttribute("phone", phone);
+		}
+		
+		char gender=m.getGender();
+		request.setAttribute("gender", gender);
+
+		String email = m.getEmail();
+		request.setAttribute("email", email);
 		
 		request.getRequestDispatcher("/views/mypage/mypageaccountupdate.jsp").forward(request, response);
 		

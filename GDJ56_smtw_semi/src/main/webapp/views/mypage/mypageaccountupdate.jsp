@@ -9,7 +9,12 @@
   	String bYear = (String)request.getAttribute("bYear");
   	String bMonth = (String)request.getAttribute("bMonth");
   	String bDay = (String)request.getAttribute("bDay");
+  	char gender = (char)request.getAttribute("gender");
+  	String phone = (String)request.getAttribute("phone");
+  	String name = (String)request.getAttribute("name");
+  	String email = (String)request.getAttribute("email");
   	
+out.print(bYear);
   %>
  <section>
         <div class="sidemenu">
@@ -36,12 +41,12 @@
         </div>
         <div id="myimpo">
             <div>아이디 : <input type="text" name="id" value="<%=m.getMemberId()%>" readonly></div>
-            <div>이름 : <input type="text" name="name" value="<%=m.getMemberName()%>" required ></div>
+            <div>이름 : <input type="text" name="name" value="<%=name %>" required ></div>
             
             <div>성별 : 
-                <input type="radio" name="gender" id="gender0" value="M" <%=m.getGender()=='M'? "checked":"" %>>
+                <input type="radio" name="gender" id="gender0" value="M" <%=gender=='M'? "checked":"" %>>
                 <label for="gender0">남</label>
-                <input type="radio" name="gender" id="gender1" value="F" <%=m.getGender()=='F'? "checked":"" %>>
+                <input type="radio" name="gender" id="gender1" value="F" <%=gender=='F'? "checked":"" %>>
                 <label for="gender1">여</label>
             </div>
             
@@ -163,12 +168,12 @@
         
         
                 <input type="text" class="form-control inputAddr"  value="<%=detialadd %>"
-                   name="inputAddress_detailAddress"id="inputAddress_detailAddress" placeholder="상세주소">
+                   name="inputAddress_detailAddress"id="inputAddress_detailAddress" placeholder="상세주소" required>
         </div>
     </div>
     <%}else{%>
 		<div class ="adddressContainer">
-                    <label class="form-label mt-4">주소</label>
+                    
                     <div class="bir_yy address">
                             <input type="text" class="form-control inputAddr"
                                name="inputAddress_postcode" id="inputAddress_postcode" placeholder="우편번호" readonly>
@@ -184,7 +189,7 @@
                     </div>
                     <div class="bir_yy address">
                             <input type="text" class="form-control inputAddr" 
-                               name="inputAddress_detailAddress"id="inputAddress_detailAddress" placeholder="상세주소">
+                               name="inputAddress_detailAddress"id="inputAddress_detailAddress" placeholder="상세주소" required>
                     </div>
                 </div>
 	<%}%>
@@ -221,8 +226,8 @@
            
             
             
-            <div>전화번호 : <input type="tel" placeholder="(-없이)01012345678" name="phone" id="phone" value="<%=logInMember.getPhone()%>" maxlength="11" required ></div>
-            <div>이메일 : <input type="email" placeholder="abc@xyz.com" name="email" id="email"  value="<%=logInMember.getEmail()%>" required ></div>
+            <div>전화번호 : <input type="tel" placeholder="(-없이)01012345678" name="phone" id="phone" value="<%=phone%>" maxlength="11" required ></div>
+            <div>이메일 : <input type="email" placeholder="abc@xyz.com" name="email" id="email"  value="<%=email%>" required ></div>
 			<%-- <div>비밀번호 : <button onclick="windows.open('<%=request.getContextPath()%>/mypage/mypagePwdCk3.do?id=<%=m.getMemberId()%>');">수정하기</button></div>            --%>
             <input type="submit" name="저장하기" value="저장하기" style="float: right;" onclick="">
 		</form>
