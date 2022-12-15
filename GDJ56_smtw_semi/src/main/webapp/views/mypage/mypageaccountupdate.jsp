@@ -148,6 +148,7 @@
            <div>
             <div class ="adddressContainer">
         <label class="form-label mt-4">주소</label>
+        <%if(!address.equals("주소를 입력해주세요")) {%>
         <div class="bir_yy address">
                 <input type="text" class="form-control inputAddr" value=<%=postcode %>
                    name="inputAddress_postcode" id="inputAddress_postcode" placeholder="우편번호" readonly>
@@ -165,7 +166,28 @@
                    name="inputAddress_detailAddress"id="inputAddress_detailAddress" placeholder="상세주소">
         </div>
     </div>
-
+    <%}else{%>
+		<div class ="adddressContainer">
+                    <label class="form-label mt-4">주소</label>
+                    <div class="bir_yy address">
+                            <input type="text" class="form-control inputAddr"
+                               name="inputAddress_postcode" id="inputAddress_postcode" placeholder="우편번호" readonly>
+                    </div>
+                    <div class="bir_yy address">
+                        <input id="searchAddr" type="button" value="주소 검색" onclick="sample6_execDaumPostcode()">
+                    </div>
+                </div>
+                <div class ="adddressContainer">
+                    <div class="bir_yy address">
+                            <input type="text" class="form-control inputAddr"
+                               name="inputAddress_address" id="inputAddress_address" placeholder="주소" readonly>
+                    </div>
+                    <div class="bir_yy address">
+                            <input type="text" class="form-control inputAddr" 
+                               name="inputAddress_detailAddress"id="inputAddress_detailAddress" placeholder="상세주소">
+                    </div>
+                </div>
+	<%}%>
 
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>

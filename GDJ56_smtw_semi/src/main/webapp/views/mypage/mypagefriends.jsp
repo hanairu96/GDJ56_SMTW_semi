@@ -13,7 +13,6 @@ List<MemberInfo> infolist =  (List<MemberInfo>)request.getAttribute("infolist");
 %>
 <%
 List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendslist");
-out.print(friendslist);
 %>
 
     <section>
