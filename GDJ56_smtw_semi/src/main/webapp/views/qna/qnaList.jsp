@@ -19,21 +19,7 @@
         <div class="all">
             <h1 style="text-align: center;">질문하기</h1>
             <!-- 검색창 -->
-            <nav class="navbar navbar-expand-sm " style="background-color: white;" >
-                <div class="container-fluid position-absolute top-0 end-0" >
-                   <div class=" navbar-collapse" id="navbarSupportedContent">
-                    <form action="<%=request.getContextPath() %>/qna/searchQna.do" class="d-flex" role="search">
-	                    <select name="searchOption" class="form-select">
-	                        <option value="REVIEW_TITLE">제목</option>
-	                        <option value="REVIEW_CONTENTS">내용</option>
-	                        <option value="MEMBER_ID">작성자</option>
-	                    </select>
-	                      <input class="form-control me-2" name="searchQna" type="search" placeholder="Search">
-	                      <button class="customBtn btnStyle" type="submit">검색</button>
-                    </form>
-                  </div>
-                </div>
-              </nav>
+            
 
             <div id="Accordion_wrap">
                 <h2>FAQ</h2><span>자주 묻는 질문들</span>
@@ -73,8 +59,24 @@
 			    	onclick="location.assign('<%=request.getContextPath()%>/qna/faqModify.do');">수정</button>	    
 			    <%} %>
             </div>
+            
             <div id="notice">
                 <h2>Q&A</h2><span>질문 게시판</span>
+                <nav class="navbar navbar-expand-sm " style="background-color: white;" >
+                <div class="container-fluid position-absolute top-0 end-0" >
+                   <div class=" navbar-collapse" id="navbarSupportedContent">
+                    <form action="<%=request.getContextPath() %>/qna/searchQna.do" class="d-flex" role="search">
+	                    <select name="searchOption" class="form-select">
+	                        <option value="REVIEW_TITLE">제목</option>
+	                        <option value="REVIEW_CONTENTS">내용</option>
+	                        <option value="MEMBER_ID">작성자</option>
+	                    </select>
+	                      <input class="form-control me-2" name="searchQna" type="search" placeholder="Search">
+	                      <button class="customBtn btnStyle" type="submit">검색</button>
+                    </form>
+                  </div>
+                </div>
+              </nav>
                 
                 <ul>
 		                <!-- 질문이 있으면  -->
