@@ -274,6 +274,7 @@
                 </div>
                 <script>
                 	$(()=>{
+                		//공지사항
                 		$.ajax({
                 			url:"<%=request.getContextPath()%>/main/mainNoticeList.do",
                 			success:data=>{
@@ -296,17 +297,37 @@
                 				}
                 			}
                 		});
+                		//질문하기 
+                		$.ajax({
+                			url:"<%=request.getContextPath()%>/main/mainQnaList.do",
+                			success:data=>{
+                				if(data!=null){
+                					const ul=$("#qnaListUl");
+                					
+                					for(i=0;i<data.length;i++){
+	                					const li=$("<li>");
+	                					const a=$("<a href='<%=request.getContextPath()%>/qna/qnaList.do'>").text(data[i].reviewTitle);
+                						li.append(a);/* li태그에 a태그 넣기 */
+                					ul.append(li); 
+                					}
+                				}else{
+                					const ul=$("#qnaListUl");
+                					const li=$("<li>");
+                					const a=$("<a>").text("데이터가 없습니다.");
+                					
+                					li.append(a); /* li태그에 a태그 넣기 */
+                					ul.append(li);
+                				}
+                			}
+                		});
+                		
                 	});
                 </script>
                 
                 <div class="notice">
-                    <h5 style="margin: 10px;"><b>자료실</b></h5>
-                    <ul style="font-size: 14px">
-                        <li><a href="">워홀러들 자주 하는 질문</a></li>
-                        <li><a href="">취업비자? 학생비자? 관광비자? 알려드립니다</a></li>
-                        <li><a href="">10월 휴무일정</a></li>
-                        <li><a href="">코로나 19관련 외국정부의 한국 여행객에 대한 조치현황</a></li>
-                        <li><a href="">워킹홀리데이 참가자들 위한 "안전행동수칙" 12가지</a></li>
+                    <h5 style="margin: 10px;"><b>질문하기</b></h5>
+                    <ul id="qnaListUl" style="font-size: 14px">
+                    
                     </ul>
                 </div>
             </div>
