@@ -57,14 +57,14 @@ public class NoticeListServlet extends HttpServlet {
 		if(pageNo==1) {
 			pageBar+="<a>&laquo;</a>";
 		}else {
-			pageBar+="<a href='"+request.getRequestURL()+"?cPage="+(pageNo-1)+"'>&laquo;</a>";
+			pageBar+="<a href='"+request.getRequestURL()+"?cPage="+(pageNo-1)+"' style='color: #7e8cd2;'>&laquo;</a>";
 		}
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(cPage==pageNo) {
 				//보고있는 페이지
 				pageBar+="<span style='color: #7e8cd2;'>"+pageNo+"</span>";
 			}else {
-				pageBar+="<a href='"+request.getRequestURL()+"?cPage="+pageNo+"' style='color: #7e8cd2;'>"+pageNo+"</a>";
+				pageBar+="<a href='"+request.getRequestURL()+"?cPage="+pageNo+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
