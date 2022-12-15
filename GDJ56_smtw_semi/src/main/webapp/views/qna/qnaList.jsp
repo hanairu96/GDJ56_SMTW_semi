@@ -24,34 +24,34 @@
             <div id="Accordion_wrap">
                 <h2>FAQ</h2><span>자주 묻는 질문들</span>
                 <div class="que">
-                    <span>This is first question.</span>
+                    <span> 워킹홀리데이 도중 어학학원을 등록할 수 있나요?</span>
                     <div class="arrow-wrap">
                         <span class="arrow-top">↑</span>
                         <span class="arrow-bottom">↓</span>
                     </div>
                 </div>
                 <div class="anw">
-                    <span>This is first answer.</span>
+                    <span>사립어학원은 가능합니다.</span>
                 </div>
                 <div class="que">
-                    <span>This is second question.</span>
+                    <span>워킹홀리데이 체류 중 비자를 중간에 학생비자로 바꿀 수 있나요?</span>
                     <div class="arrow-wrap">
                         <span class="arrow-top">↑</span>
                         <span class="arrow-bottom">↓</span>
                     </div>
                 </div>
                 <div class="anw">
-                    <span>This is second answer.</span>
+                    <span>워킹홀리데이는 변경이 안되는 비자입니다. 또한 학생비자는 국가 입국전에 받아야하는 비자이기때문에 거주국에서 먼저 발급받아야합니다.</span>
                 </div>
                 <div class="que">
-                    <span>This is third question.</span>
+                    <span>전에 워킹홀리데이 비자를 받았지만 코로나 19로 인해 쓰지 못하고 기간이 만료 되었습니다. 이런 경우에도 워홀 비자 재신청이 가능한가요?</span>
                     <div class="arrow-wrap">
                         <span class="arrow-top">↑</span>
                         <span class="arrow-bottom">↓</span>
                     </div>
                 </div>
                 <div class="anw">
-                    <span>This is third answer.</span>
+                    <span>네. 가능합니다. 신청시 기존 워킹홀리데이 비자와 같이 제출해 주세요.</span>
                 </div>
                 <!-- 관리자만 글쓰기 버튼 보이게  -->
 			    <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) { %>
