@@ -41,7 +41,7 @@
                 <tr>
                     <th colspan="2">
                         <div class="cont">
-                            <textarea rows="10" cols="100" name="summernote" id="summernote" placeholder="내용 입력"></textarea>
+                            <textarea rows="10" cols="100" name="summernote" id="summernote" required></textarea>
                         </div>
                     </th>
                 </tr>
