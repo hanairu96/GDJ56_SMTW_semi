@@ -40,6 +40,7 @@ Show Me The Way(SMTW) 이용약관(이하 ‘본 약관’이라 함)은 Show Me
 	                </li>
 	                <li>
 		                <input type="checkbox" name="joinMember" id="join3" value='join3'>
+		                <input type="hidden" name="emailAgree" id="emailAgree" value="N" />
 		                <label for="join3">　이메일 마케팅 수신 동의(선택)</label>
 	                </li>
 	            </ul>
@@ -58,8 +59,13 @@ Show Me The Way(SMTW) 이용약관(이하 ‘본 약관’이라 함)은 Show Me
 		$(document).ready(function() {//페이지 로드가 끝나면 실행하는 함수
 			
 			$("#allcheck").click(function() {//전체선택을 클릭했을 때
-				if($("#allcheck").is(":checked")) $("input[name=joinMember]").prop("checked", true);//전부 체크
-				else $("input[name=joinMember]").prop("checked", false);//전부체크해제
+				if($("#allcheck").is(":checked")) {
+					$("input[name=joinMember]").prop("checked", true);//전부 체크
+					$("#emailAgree").attr("value","Y"); //이메일 수신동의 값 'Y'
+				}else {
+					$("input[name=joinMember]").prop("checked", false);//전부체크해제
+					$("#emailAgree").attr("value","N"); //이메일 수신동의 값 'N'
+				}
 			});
 			
 			$("input[name=joinMember]").click(function() {
@@ -85,6 +91,16 @@ Show Me The Way(SMTW) 이용약관(이하 ‘본 약관’이라 함)은 Show Me
 				return false;
 			}
 		}
+		
+		//이메일 수신 동의 체크 로직
+	  $("#join3").change(function(){  //이메일 수신 동의 체크시 Y, 체크 해제시 N
+	    	 if($("#join3").is(":checked")){
+	    		 $("#emailAgree").attr("value","Y");
+	    	 }else{
+	    		 $("#emailAgree").attr("value","N");
+	    	 }
+	    	 console.log( $("#emailAgree").val());
+	      });
 			
 	</script>
 </section>
