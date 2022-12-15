@@ -2,7 +2,7 @@
 .bt_wrap {
             margin-top: 30px;
             text-align: center;
-            height: 30px;
+			height: 40px;
          }
         .bt_wrap>button {
             display: inline-block;

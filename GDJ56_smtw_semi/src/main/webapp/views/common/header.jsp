@@ -26,18 +26,18 @@
                 <li id="menuli">
                     <div class="hoversection">
                         <div>
-                            <a href=""><img src="<%=request.getContextPath()%>/images/워킹홀리데이란.png" alt="" width="60px" height="60px"></a>
+                            <a href="<%=request.getContextPath()%>/holiday/holiday.do"><img src="<%=request.getContextPath()%>/images/워킹홀리데이란.png" alt="" width="60px" height="60px"></a>
                         </div>
                         <div>
-                            <a href="001워킹홀리데이란.html">워킹홀리데이란?</a>
+                            <a href="<%=request.getContextPath()%>/holiday/holiday.do">워킹홀리데이란?</a>
                         </div>
                     </div>
                     <!-- 서브메뉴영역 -->
                     <div class="sub">
                         <ul class="submenu">
-                            <li><a href="001워킹홀리데이란.html">워킹홀리데이란?</a></li>
-                            <li><a href="">찾아오시는길</a></li>
-                            <li><a href="">Show me the way</a></li>
+                            <li><a href="<%=request.getContextPath()%>/holiday/holiday.do">워킹홀리데이란?</a></li>
+                            <li><a href="<%=request.getContextPath()%>/holiday/holidayRoad.do">찾아오시는길</a></li>
+                            <li><a href="<%=request.getContextPath()%>/holiday/holidaySMTW.do">Show me the way</a></li>
                         </ul>
                     </div>
                 </li>
@@ -77,10 +77,10 @@
                 <li id="menuli">
                     <div class="hoversection">
                         <div>
-                            <a href=""><img src="<%=request.getContextPath()%>/images/커뮤니티.png" alt="" width="60px" height="60px"></a>
+                            <a href="<%=request.getContextPath()%>/friends/friendsList.do"><img src="<%=request.getContextPath()%>/images/커뮤니티.png" alt="" width="60px" height="60px"></a>
                         </div>
                         <div>
-                            <a href="">커뮤니티</a>
+                            <a href="<%=request.getContextPath()%>/friends/friendsList.do">커뮤니티</a>
                         </div>
                     </div>
                     <!-- 서브메뉴영역 -->

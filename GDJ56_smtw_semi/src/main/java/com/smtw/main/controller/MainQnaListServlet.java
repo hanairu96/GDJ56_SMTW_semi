@@ -1,23 +1,29 @@
-package com.smtw.login.controller;
+package com.smtw.main.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.smtw.qna.model.service.QnaService;
+import com.smtw.qna.model.vo.Qna;
+
 /**
- * Servlet implementation class EnrollMemberServlet
+ * Servlet implementation class MainQnaList
  */
-@WebServlet("/logIn/enrollMember.do")
-public class EnrollMemberServlet extends HttpServlet {
+@WebServlet("/main/mainQnaList.do")
+public class MainQnaListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EnrollMemberServlet() {
+    public MainQnaListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,13 +32,10 @@ public class EnrollMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("emailAgree"));
-		char emailAgree=request.getParameter("emailAgree").charAt(0); //이메일 수신 동의 여부
-		System.out.println(emailAgree);
+		List<Qna> list=new QnaService().selectQnaList(1,5);
 		
-		request.setAttribute("emailAgree", emailAgree);
-		
-		request.getRequestDispatcher("/views/logIn/enrollMember.jsp").forward(request, response);
+		response.setContentType("application/json;charset=utf-8");
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**

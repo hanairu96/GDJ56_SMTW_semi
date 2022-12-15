@@ -32,6 +32,9 @@ public class EnrollMemberEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
+		//이메일 수신 동의 여부 값 가져오기
+		char emailAgree=request.getParameter("emailAgree").charAt(0);		
+		
 		//회원이 입력한 값 가져오기
 		String memberId=request.getParameter("inputId");
 		String memberPwd=request.getParameter("inputPwd");
@@ -54,6 +57,7 @@ public class EnrollMemberEndServlet extends HttpServlet {
 				.birth(birth)
 				.gender(gender)
 				.address(address)
+				.emailAgree(emailAgree)
 				.build();
 		int result=new MemberService().insertMember(m);
 		String msg="",loc="";

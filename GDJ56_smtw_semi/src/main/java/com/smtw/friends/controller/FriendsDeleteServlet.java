@@ -1,23 +1,26 @@
-package com.smtw.login.controller;
+package com.smtw.friends.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.smtw.friends.model.service.FriendsService;
+
 /**
- * Servlet implementation class EnrollMemberServlet
+ * Servlet implementation class FriendsDeleteServlet
  */
-@WebServlet("/logIn/enrollMember.do")
-public class EnrollMemberServlet extends HttpServlet {
+@WebServlet("/friends/friendsDelete.do")
+public class FriendsDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EnrollMemberServlet() {
+    public FriendsDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,13 +29,26 @@ public class EnrollMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("emailAgree"));
-		char emailAgree=request.getParameter("emailAgree").charAt(0); //이메일 수신 동의 여부
-		System.out.println(emailAgree);
+		String id=request.getParameter("memberId");
+		System.out.println(id);
 		
-		request.setAttribute("emailAgree", emailAgree);
+		int result=new FriendsService().deleteFriends(id);
 		
-		request.getRequestDispatcher("/views/logIn/enrollMember.jsp").forward(request, response);
+		String msg, loc;
+		if(result>0) {
+			msg="삭제가 완료됐습니다.";
+			loc="/friends/friendsList.do";
+		}else {
+			msg="삭제에 실패하였습니다.";
+			loc="/friends/friendsInfo.do";
+		}
+		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		
+		request.getRequestDispatcher("/views/common/msg.jsp")
+		.forward(request, response);
+	
 	}
 
 	/**

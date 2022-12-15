@@ -42,6 +42,7 @@ public class MemberDao {
 			pstmt.setString(6, m.getBirth());
 			pstmt.setString(7, String.valueOf(m.getGender()));
 			pstmt.setString(8, m.getAddress());
+			pstmt.setString(9, String.valueOf(m.getEmailAgree()));
 			
 			result=pstmt.executeUpdate();
 			
@@ -118,7 +119,25 @@ public class MemberDao {
 		}return m;
 	}
 	
-	
+	//이메일 중복확인
+	public Member emailDuplicateCheck(Connection conn,String inputEmail) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("emailDuplicateCheck"));
+			pstmt.setString(1, inputEmail);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) m=getMember(rs);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return m;
+	}
 	
 		
 	

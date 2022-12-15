@@ -8,26 +8,39 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/style.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/noticeWrite.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/qnaWrite.css"/>
 	<section id="notice-container">
         <div>
-            <form action="<%=request.getContextPath()%>/notice/noticeWriteEnd.do" method="post">
-                <h2>공지사항 글쓰기</h2>
+            <form action="<%=request.getContextPath()%>/qna/qnaWriteEnd.do" method="post" onsubmit="return fn_summernote();">
+                <h2>Q&A 글쓰기</h2>
                 <table id="tbl-notice">
                 <tr>
                     <th>제 목</th>
-                    <td><input type="text" name="noticeTitle" placeholder="제목" size="65" required></td>
+                    <td><input type="text" name="qnaTitle" placeholder="제목" size="65" required></td>
                 </tr>
                 <tr>
                     <th>작성자</th>
                     <td><%=logInMember.getMemberId()%>
-                        <input type="hidden" name="noticeWriter" value=<%=logInMember.getMemberId()%>>
+                        <input type="hidden" name="qnaWriter" value=<%=logInMember.getMemberId()%>>
                     </td>
                 </tr>
+<!--                 <tr> -->
+<!--                     <th>이메일</th> -->
+<!--                     <td> -->
+<!--                         <input type="text" name="qnaEmail_1" size="30"> @  -->
+<!--                         <select name="qnaEmail_2" id="email"> -->
+<!--                             <option value="naver.com">naver.com</option> -->
+<!--                             <option value="gmail.com">gmail.com</option> -->
+<!--                             <option value="hanmail.net">hanmail.net</option> -->
+<!--                             <option value="direct">직접입력</option> -->
+<!--                             <input type="text" id="selboxDirect" name="selboxDirect"/> 정규식 처리 필요!!!!!!  -->
+<!--                         </select> -->
+<!--                     </td> -->
+<!--                 </tr> -->
                 <tr>
                     <th colspan="2">
                         <div class="cont">
-                            <textarea rows="10" cols="100" name="summernote" id="summernote" required></textarea>
+                            <textarea rows="10" cols="100" name="summernote" id="summernote"></textarea>
                         </div>
                     </th>
                 </tr>
@@ -40,10 +53,18 @@
         </div>
     </section>
     <script>
+		//글 작성 안하면 못 넘어가게 하기
+		const fn_summernote=()=>{
+			if($("#summernote").summernote().val()==""){
+				alert("내용을 입력해주세요.");
+				return false;
+			}
+		};
+		//글 작성 취소 시 반응
     	const fn_writeReset=()=>{
     		const result=confirm("글 작성을 취소하시겠습니까?");
     		if(result){
-    			location.replace('<%=request.getContextPath()%>/notice/noticeList.do');
+    			location.replace('<%=request.getContextPath()%>/qna/qnaList.do');
     		}
     	}
     </script>
@@ -73,5 +94,4 @@
             });
         });
     </script>
-    
 <%@include file="/views/common/footer.jsp" %>

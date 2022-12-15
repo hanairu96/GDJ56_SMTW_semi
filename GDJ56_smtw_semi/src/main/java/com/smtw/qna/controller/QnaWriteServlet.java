@@ -1,4 +1,4 @@
-package com.smtw.login.controller;
+package com.smtw.qna.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class EnrollMemberServlet
+ * Servlet implementation class QnaWriteServlet
  */
-@WebServlet("/logIn/enrollMember.do")
-public class EnrollMemberServlet extends HttpServlet {
+@WebServlet("/qna/qnaWrite.do")
+public class QnaWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EnrollMemberServlet() {
+    public QnaWriteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,13 +26,7 @@ public class EnrollMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("emailAgree"));
-		char emailAgree=request.getParameter("emailAgree").charAt(0); //이메일 수신 동의 여부
-		System.out.println(emailAgree);
-		
-		request.setAttribute("emailAgree", emailAgree);
-		
-		request.getRequestDispatcher("/views/logIn/enrollMember.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/qna/qnaWrite.jsp").forward(request, response);
 	}
 
 	/**

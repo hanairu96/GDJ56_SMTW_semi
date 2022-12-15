@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.notice{
+	font-family: "Hahmlet";
+}
 /* 전체 글씨체 설정 */
 body{
     font-family: "Hahmlet";

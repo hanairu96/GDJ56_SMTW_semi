@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.smtw.member.model.vo.Member" %>
+<%@ page import="com.smtw.member.model.vo.Member,java.util.List,com.smtw.notice.model.vo.Notice" %>
 <%
 	Member logInMember=(Member)session.getAttribute("logInMember");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,18 +42,18 @@
                 <li id="menuli">
                     <div class="hoversection">
                         <div>
-                            <a href=""><img src="<%=request.getContextPath()%>/images/워킹홀리데이란.png" alt="" width="60px" height="60px"></a>
+                            <a href="<%=request.getContextPath()%>/holiday/holiday.do"><img src="<%=request.getContextPath()%>/images/워킹홀리데이란.png" alt="" width="60px" height="60px"></a>
                         </div>
                         <div>
-                            <a href="001워킹홀리데이란.html">워킹홀리데이란?</a>
+                            <a href="<%=request.getContextPath()%>/holiday/holiday.do">워킹홀리데이란?</a>
                         </div>
                     </div>
                     <!-- 서브메뉴영역 -->
                     <div class="sub">
                         <ul class="submenu">
-                            <li><a href="001워킹홀리데이란.html">워킹홀리데이란?</a></li>
-                            <li><a href="">찾아오시는길</a></li>
-                            <li><a href="">Show me the way</a></li>
+                            <li><a href="<%=request.getContextPath()%>/holiday/holiday.do">워킹홀리데이란?</a></li>
+                            <li><a href="<%=request.getContextPath()%>/holiday/holidayRoad.do">찾아오시는길</a></li>
+                            <li><a href="<%=request.getContextPath()%>/holiday/holidaySMTW.do">Show me the way</a></li>
                         </ul>
                     </div>
                 </li>
@@ -92,10 +93,10 @@
                 <li id="menuli">
                     <div class="hoversection">
                         <div>
-                            <a href=""><img src="<%=request.getContextPath()%>/images/커뮤니티.png" alt="" width="60px" height="60px"></a>
+                            <a href="<%=request.getContextPath()%>/friends/friendsList.do"><img src="<%=request.getContextPath()%>/images/커뮤니티.png" alt="" width="60px" height="60px"></a>
                         </div>
                         <div>
-                            <a href="">커뮤니티</a>
+                            <a href="<%=request.getContextPath()%>/friends/friendsList.do">커뮤니티</a>
                         </div>
                     </div>
                     <!-- 서브메뉴영역 -->
@@ -266,22 +267,67 @@
             <div class="container2">
                 <div class="notice">
                     <h5 style="margin: 10px;"><b>공지사항</b></h5>
-                    <ul style="font-size: 14px">
-                        <li><a href="">워홀러들 자주 하는 질문</a></li>
-                        <li><a href="">취업비자? 학생비자? 관광비자? 알려드립니다</a></li>
-                        <li><a href="">10월 휴무일정</a></li>
-                        <li><a href="">코로나 19관련 외국정부의 한국 여행객에 대한 조치현황</a></li>
-                        <li><a href="">워킹홀리데이 참가자들 위한 "안전행동수칙" 12가지</a></li>
+                    <ul id="noticeListUl" style="font-size: 14px">
+<!--                         <li><a href="">워홀러들 자주 하는 질문</a></li> -->
+
                     </ul>
                 </div>
+                <script>
+                	$(()=>{
+                		//공지사항
+                		$.ajax({
+                			url:"<%=request.getContextPath()%>/main/mainNoticeList.do",
+                			success:data=>{
+                				if(data!=null){
+                					const ul=$("#noticeListUl");
+                					
+                					for(i=0;i<data.length;i++){
+	                					const li=$("<li>");
+	                					const a=$("<a href='<%=request.getContextPath()%>/notice/noticeList.do'>").text(data[i].noticeTitle);
+                						li.append(a);/* li태그에 a태그 넣기 */
+                					ul.append(li); 
+                					}
+                				}else{
+                					const ul=$("#noticeListUl");
+                					const li=$("<li>");
+                					const a=$("<a>").text("데이터가 없습니다.");
+                					
+                					li.append(a); /* li태그에 a태그 넣기 */
+                					ul.append(li);
+                				}
+                			}
+                		});
+                		//질문하기 
+                		$.ajax({
+                			url:"<%=request.getContextPath()%>/main/mainQnaList.do",
+                			success:data=>{
+                				if(data!=null){
+                					const ul=$("#qnaListUl");
+                					
+                					for(i=0;i<data.length;i++){
+	                					const li=$("<li>");
+	                					const a=$("<a href='<%=request.getContextPath()%>/qna/qnaList.do'>").text(data[i].reviewTitle);
+                						li.append(a);/* li태그에 a태그 넣기 */
+                					ul.append(li); 
+                					}
+                				}else{
+                					const ul=$("#qnaListUl");
+                					const li=$("<li>");
+                					const a=$("<a>").text("데이터가 없습니다.");
+                					
+                					li.append(a); /* li태그에 a태그 넣기 */
+                					ul.append(li);
+                				}
+                			}
+                		});
+                		
+                	});
+                </script>
+                
                 <div class="notice">
-                    <h5 style="margin: 10px;"><b>자료실</b></h5>
-                    <ul style="font-size: 14px">
-                        <li><a href="">워홀러들 자주 하는 질문</a></li>
-                        <li><a href="">취업비자? 학생비자? 관광비자? 알려드립니다</a></li>
-                        <li><a href="">10월 휴무일정</a></li>
-                        <li><a href="">코로나 19관련 외국정부의 한국 여행객에 대한 조치현황</a></li>
-                        <li><a href="">워킹홀리데이 참가자들 위한 "안전행동수칙" 12가지</a></li>
+                    <h5 style="margin: 10px;"><b>질문하기</b></h5>
+                    <ul id="qnaListUl" style="font-size: 14px">
+                    
                     </ul>
                 </div>
             </div>

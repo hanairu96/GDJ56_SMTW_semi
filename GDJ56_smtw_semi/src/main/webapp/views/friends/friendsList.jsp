@@ -27,6 +27,7 @@
         <div id="friendTitle" style="text-align: center;">
             <br>
             <h1>워홀프렌즈 구하기</h1>
+            <p>친구를 맺으면 서로 쪽지 보내기가 가능합니다. 친구를 맺어 대화를 나누세요!</p>
         </div>
 
         <div style="height:25px;">
@@ -70,42 +71,42 @@
             <div style="display:flex">
 
 
-            <div id="lists" style="border:1px solid red;width:800px;height:695px">
+            <div id="lists" style="border:0px solid red;width:800px;height:695px">
                 <div style="display:flex">
                     
                       
                 <%if(fs==null||fs.isEmpty()) {%>
-                       <div id="box" style="border:1px solid green;width:300px;height:300px">
-                           <div style="border:1px solid magenta;width:220px;height:270px; margin-left :25px; margin-top :5px;background-color:rgba(128, 128, 128, 0.342);border-radius:20px;" >
-                               <div style="border:1px solid blue;width:100%;height:110px;display:flex;justify-content: center;">
+                       <div id="box" style="border:0px solid green;width:300px;height:300px">
+                           <div style="border:0px solid magenta;width:220px;height:270px; margin-left :25px; margin-top :5px;background-color:rgba(128, 128, 128, 0.342);border-radius:20px;" >
+                               <div style="border:0px solid blue;width:100%;height:110px;display:flex;justify-content: center;">
                                </div>        
 								<p>조회된 회원이 없습니다.</p>
-                               <div style="border:1px solid blue;width:100%;height:30px;margin-top:30px;display:flex;">
+                               <div style="border:0px solid blue;width:100%;height:30px;margin-top:30px;display:flex;">
                                </div>
                            </div>
                        </div>
 				<%}else {
 					int count=0;
 					for(Friends f : fs) {%>
-                       <div id="box" style="border:1px solid green;width:300px;height:300px">
+                       <div id="box" style="border:0px solid green;width:300px;height:300px">
 						<button onclick="location.assign('<%=request.getContextPath() %>/friends/friendsInfo.do?memberId=<%=f.getMemberId() %>')"
-						style="border:1px;background-color: white;">
-                            <div style="border:1px solid magenta;width:210px;height:270px; margin-left :0px; margin-top :5px;background-color:rgba(128, 128, 128, 0.342);border-radius:20px;">
-                                <div style="border:1px solid blue;width:100%;height:110px;display:flex;justify-content: center;">
+						style="border:0px;background-color: white;">
+                            <div style="border:0px solid magenta;width:210px;height:270px; margin-left :0px; margin-top :5px;background-color:rgba(128, 128, 128, 0.342);border-radius:20px;">
+                                <div style="border:0px solid blue;width:100%;height:110px;display:flex;justify-content: center;">
                                     <img src="<%=request.getContextPath() %>/images/lupy.jpg" alt="" style="width:50%;height:80%;margin:auto;border-radius:120px;">
                                 </div>
-                                <div style="border:1px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
+                                <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
                                     <div>&nbsp<strong><%=f.getFriendsTitle() %></strong></div>
                                 </div>
-                                <div style="border:1px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
+                                <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
                                     <div>&nbsp이름:</div>
                                     <div>&nbsp<%=f.getMemberId() %></div>
                                 </div>
-                                <div style="border:1px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
+                                <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
                                     <div>&nbsp희망국가:</div>
                                     <div>&nbsp<%=f.getNName() %></div>
                                 </div>
-                                <div style="border:1px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
+                                <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
                                     <div>&nbsp목적:</div>
                                     <div>&nbsp<%=f.getPurpose() %></div>
                                 </div>
@@ -123,7 +124,7 @@
                  <%} %>
                  </div>
                   
-                 <div style="border:1px solid blue;width:100%;height:80px;text-align: center;">
+                 <div style="border:0px solid blue;width:100%;height:80px;text-align: center;">
                      <!-- 페이지 바 -->
                      <nav aria-label="Page navigation example" style="margin-top:30px;color:rgba(221, 160, 221, 0.508) !important;">
                          <ul class="pagination justify-content-center" style="color:rgba(221, 160, 221, 0.508) !important;">
@@ -144,13 +145,12 @@
             </div>
 
         </div>
-        <div style="display:flex; border:1px solid rgb(15, 231, 231);width:100%;height:75px">
-            <div style="border:1px solid yellow;width:400px;height:60px"></div>
-            <div style="border:1px solid yellow;width:400px;height:60px"></div>
-            <div style="border:1px solid yellow;width:400px;height:60px">
+        <div style="display:flex; border:0px solid rgb(15, 231, 231);width:100%;height:75px">
+            <div style="border:0px solid yellow;width:400px;height:60px"></div>
+            <div style="border:0px solid yellow;width:400px;height:60px"></div>
+            <div style="border:0px solid yellow;width:400px;height:60px">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <!-- 관리자만 보이게 -->
-                     <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
+                     <%if(logInMember!=null) {%>
 	                    <button onclick="enroll();" class="customBtn btnStyle btn btn-primary" type="button" style=" margin-left :300px; margin-top :15px;background-color: rgba(221, 160, 221, 0.508) !important;" value="등록">등록하기</button>
 					 <%} %>
                 </div>
