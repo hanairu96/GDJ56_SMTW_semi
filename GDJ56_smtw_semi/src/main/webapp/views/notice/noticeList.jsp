@@ -25,7 +25,6 @@
                     <a class="navbar-brand"></a>
                     <form action="<%=request.getContextPath() %>/notice/searchNotice.do" class="d-flex" role="search">
                         <select name="searchOption" class="form-select">
-                            <option selected>선택</option>
                             <option value="NOTICE_TITLE">제목</option>
                             <option value="NOTICE_CONTENTS">내용</option>
                         </select>
