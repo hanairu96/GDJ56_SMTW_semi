@@ -155,7 +155,7 @@
                 /* 사이드메뉴바 스타일 여기까지*/
                 </style>
                 
-                <form id="enrollForm">
+                <form id="enrollForm" action="<%=request.getContextPath()%>/friends/friendsEnrollEnd.do">
                 <div style="border:1px solid red;width:910px;height:695px;display:flex;margin-left:50px; ">
                     <div style="display:flex">
                         <div style="border:1px solid green;width:900px;height:690px ">
@@ -165,12 +165,15 @@
                                 </div>
                                 <div style="border:1px solid rgb(210, 243, 21);width:300px;">
                                 	<br><br>
+                                	<div style="border:1px solid blueviolet;width:300px;height:30px;text-align:left ">
+                                        <b>제목</b> : <input type="text" name="title" placeholder="제목을 입력하세요.">
+                                    </div>
                                     <div style="border:1px solid blueviolet;width:300px;height:30px;text-align:left ">
-                                        이름 :<input type="text" style="margin-top:0px;" placeholder="내용을 입력해주세요">
-                                   </div>
-                                   <div style="border:1px solid blueviolet;width:300px;height:30px;text-align:left ">
-                                    성별: <input type="text" style="margin-top:0px;" placeholder="(M/F)">
-                               </div>
+                                        <b>이름</b> : <%=logInMember.getMemberName() %>
+                                    </div>
+                                    <div style="border:1px solid blueviolet;width:300px;height:30px;text-align:left ">
+                                   		<b>성별</b> : <%=(logInMember.getGender()=='M')?"남자":"여자" %>
+                               		</div>
                                 </div>
                                 <div style="border:1px solid rgb(210, 243, 21);width:300px;">
 
@@ -178,76 +181,76 @@
                             </div>
                             <div style="border:1px solid pink;width:880px;height:580px;text-align: center; ">
                                 <div style="border:1px solid blueviolet;width:800px;height:30px;text-align:left ">
-                                    MBTI <input type="text" style="margin-top:0px;" placeholder="대문자로 입력해주세요">
+                                    <b>MBTI</b> : <input type="text" name="mbti" style="margin-top:0px;" placeholder="대문자로 입력해주세요.">
                                </div>
                                <div style="border:1px solid blueviolet;width:800px;height:150x;text-align:left">
-                                    <label>희망국가 </label>
+                                    <label><b>희망국가</b></label>
                                         <table>
                                             <tr>
-                                                <td><input type="checkbox" value="네덜란드">네덜란드</td>
-                                                <td><input type="checkbox" value="스웨덴">스웨덴</td>
-                                                <td><input type="checkbox" value="이스라엘">이스라엘</td>
-                                                <td><input type="checkbox" value="포르투갈">포르투갈</td>
+                                                <td><input type="checkbox" name="nation" value="네덜란드">네덜란드</td>
+                                                <td><input type="checkbox" name="nation" value="스웨덴">스웨덴</td>
+                                                <td><input type="checkbox" name="nation" value="이스라엘">이스라엘</td>
+                                                <td><input type="checkbox" name="nation" value="포르투갈">포르투갈</td>
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" value="뉴질랜드">뉴질랜드</td>
-                                                <td><input type="checkbox" value="스페인">스페인</td>
-                                                <td><input type="checkbox" value="이탈리아">이탈리아</td>
-                                                <td><input type="checkbox" value="폴란드">폴란드</td>
+                                                <td><input type="checkbox" name="nation" value="뉴질랜드">뉴질랜드</td>
+                                                <td><input type="checkbox" name="nation" value="스페인">스페인</td>
+                                                <td><input type="checkbox" name="nation" value="이탈리아">이탈리아</td>
+                                                <td><input type="checkbox" name="nation" value="폴란드">폴란드</td>
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" value="대만">대만</td>
-                                                <td><input type="checkbox" value="아르헨티나">아르헨티나</td>
-                                                <td><input type="checkbox"value="일본">일본</td>
-                                                <td><input type="checkbox" value="프랑스">프랑스</td>
+                                                <td><input type="checkbox" name="nation" value="대만">대만</td>
+                                                <td><input type="checkbox" name="nation" value="아르헨티나">아르헨티나</td>
+                                                <td><input type="checkbox" name="nation" value="일본">일본</td>
+                                                <td><input type="checkbox" name="nation" value="프랑스">프랑스</td>
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" value="덴마크">덴마크</td>
-                                                <td><input type="checkbox" value="아일랜드">아일랜드</td>
-                                                <td><input type="checkbox" value="체코">체코</td>
-                                                <td><input type="checkbox" value="헝가리">헝가리</td>
+                                                <td><input type="checkbox" name="nation" value="덴마크">덴마크</td>
+                                                <td><input type="checkbox" name="nation" value="아일랜드">아일랜드</td>
+                                                <td><input type="checkbox" name="nation" value="체코">체코</td>
+                                                <td><input type="checkbox" name="nation" value="헝가리">헝가리</td>
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" value="독일">독일</td>
-                                                <td><input type="checkbox" value="영국">영국</td>
-                                                <td><input type="checkbox" value="칠레">칠레</td>
-                                                <td><input type="checkbox" value="호주">호주</td>
+                                                <td><input type="checkbox" name="nation" value="독일">독일</td>
+                                                <td><input type="checkbox" name="nation" value="영국">영국</td>
+                                                <td><input type="checkbox" name="nation" value="칠레">칠레</td>
+                                                <td><input type="checkbox" name="nation" value="호주">호주</td>
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" value="벨기에">벨기에</td>
-                                                <td><input type="checkbox" value="오스트리아">오스트리아</td>
-                                                <td><input type="checkbox" value="캐나다">캐나다</td>
-                                                <td><input type="checkbox" value="홍콩">홍콩</td>
+                                                <td><input type="checkbox" name="nation" value="벨기에">벨기에</td>
+                                                <td><input type="checkbox" name="nation" value="오스트리아">오스트리아</td>
+                                                <td><input type="checkbox" name="nation" value="캐나다">캐나다</td>
+                                                <td><input type="checkbox" name="nation" value="홍콩">홍콩</td>
                                             </tr>
                                         </table>
                                 </div>
                                 <div style="border:1px solid blueviolet;width:800px;height:30px;text-align:left ">
-                                    취향:<input type="checkbox" value="집순이">집순이
-                                    <input type="checkbox" value="밖돌이">밖돌이
+                                    <b>취향</b> : <input type="radio" name="type" value="집순이">집순이&nbsp 
+                                    <input type="radio" name="type" value="밖돌이">밖돌이
                                </div>
                                <div style="border:1px solid blueviolet;width:800px;height:30px;text-align:left ">
-                                	워홀경험자:<input type="checkbox" value="경험자">경험자
-                                <input type="checkbox" value="비경험자">비경험자
+                                	<b>워홀경험자</b> : <input type="radio" name="expYn" value="Y">경험자&nbsp
+                                	<input type="radio" name="expYn" value="N">비경험자
                                 </div>
                                 <div style="border:1px solid blueviolet;width:800px;height:30px;text-align:left ">
-                                    목적:<input type="checkbox" value="스터디">스터디
-                                    <input type="checkbox" value="여행">여행
-                                    <input type="checkbox" value="워홀준비">워홀준비
-                                    <input type="checkbox" value="기타">기타
+                                    <b>목적</b> : <input type="checkbox" value="스터디">스터디&nbsp
+                                    <input type="checkbox" name="purpose" value="여행">여행&nbsp
+                                    <input type="checkbox" name="purpose" value="워홀준비">워홀준비&nbsp
+                                    <input type="checkbox" name="purpose" value="기타">기타
                                  </div>
                                  <div style="border:1px solid blueviolet;width:452px;height:25px;text-align:left">
-                                    자기소개글(100자이내)
+                                    <b>자기소개글</b>
                                 </div>
                                 <div style="border:1px solid blueviolet;width:820px;height:200px;text-align:left">
-                                    <textarea name="" id="" cols="90" rows="8" style="margin-top:10px;" placeholder="내용을 입력해주세요"></textarea>
+                                    <textarea name="friendsContents" cols="80" rows="8" style="margin-top:10px;" placeholder="내용을 입력해주세요."></textarea>
                                 </div>
-                               
+                                <input type="hidden" name="memberId" value="<%=logInMember.getMemberId() %>">
+                                <input type="submit"> <!-- style="display: none"> -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            </form>
 
         </div>
         <br><br>
@@ -257,13 +260,14 @@
             <div style="border:1px solid yellow;width:400px;height:60px;">
                 <div style="border:1px solid yellow;width:400px;height:60px;display: inline-flex;align-items:center; ">
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button onclick="enroll_friend('주소값');" class="customBtn btnStyle btn btn-primary" type="button" style=" margin-left:250px;background-color: rgba(221, 160, 221, 0.508) !important;" value="등록">등록</button>
-                        <button onclick="cancel_friend('주소값');" class="customBtn btnStyle btn btn-primary" type="button" style=" background-color: rgba(221, 160, 221, 0.508) !important;" value="취소">취소</button>
+                        <button onclick="enroll_friend(this.form);" class="customBtn btnStyle btn btn-primary" type="button" style=" margin-left:250px;background-color: rgba(221, 160, 221, 0.508) !important;" value="등록">등록</button>
+                        <button onclick="cancel_friend();" class="customBtn btnStyle btn btn-primary" type="button" style=" background-color: rgba(221, 160, 221, 0.508) !important;" value="취소">취소</button>
                     </div> 
                 </div>
             
             </div>
         </div>
+            </form>
     <style>
          .customBtn {
             color: #fff;
@@ -319,36 +323,23 @@
         }
 
     </style>
+	
+	</section>
+	<script>
+		function enroll_friend(f){
+			let answer;
+			answer=confirm("프렌즈 찾기 등록하시겠습니까?");
+			if(answer==true){
+				f.submit();
+			}
+		}
         
-
-
-    </section>
-    <script>
-        function enroll_friend(url){
-        var answer;
-         answer = confirm("프렌즈 찾기 등록하시겠습니까?");
-         if(answer == true){
-         	let form=$("#enrollForm").clone();
-         	
-        	 
-        	 location = url;
-            }
-      }
-        
-         
-        function cancel_friend(url){
-        var answer;
-         answer = confirm("취소시 목록화면으로 돌아갑니다 취소하시겠습니까?");
-         if(answer == true){
-         location = url;
-            }
-      }
-     </script>
-
-
-
-
-    <style>
+		function cancel_friend(url){
+			location.assign("<%=request.getContextPath()%>/friends/friendsList.do");
+		}
+	</script>
+	
+	<style>
         section{
             border: 0px solid tomato;
             font-family: "Hahmlet";

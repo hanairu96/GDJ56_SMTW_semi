@@ -20,7 +20,6 @@ public class Friends {
 	private String memberId;
 	private String mbti;
 	private String type;
-	private String introduce;
-	private char filed;
+	private char expYn;
 	private String purpose;
 }

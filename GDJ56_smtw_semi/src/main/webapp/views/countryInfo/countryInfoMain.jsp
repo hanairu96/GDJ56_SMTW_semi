@@ -3,6 +3,7 @@
 <%@ page import="java.util.List,com.smtw.country.model.vo.CountryPageInfo" %>
 <%
 	List<CountryPageInfo> info=(List<CountryPageInfo>)request.getAttribute("coinfo");
+	String name=(String)request.getAttribute("name");
 %>
 <%@ include file="/views/common/header.jsp" %>
 <section>
@@ -87,17 +88,27 @@
             */
             
         }
-    
+ 
     </style>  
     <body>
-    <h1 style="text-align: center;">국가/지역소개</h1>
-    <p style="font-size: 13px; text-align: center;">설명 sql문을 JOIN 해서 가져오자</p>
-    <%for(CountryPageInfo c : info) {%>
+    <h1 style="text-align: center;">국가 및 지역 정보</h1>
+    <%for(CountryPageInfo c : info) { 
+    
+    	if(c.getNName().equals(name)){
+    	%>
+
+
+    	    <div id="twobu">
+        		<button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/updatego.do?nName=<%=c.getNName()%>')"><span>국가정보 수정</span></button>
+   			</div>
+    <p style="font-size: 13px; text-align: center;"></p>
+    
+    	
     <div id="wrapper">
         <div id="titlecountryinfo">
             <div>
                 <h2 style="text-align: center;"><%=c.getNName() %></h2>
-                <img src="<%=c.getCPic() %>" alt=""
+                <img src="<%=request.getContextPath()%>/images/country/noimage_view.png" alt=""
                 width="200" height="130">
             </div>
             <p style="font-size: 13px;">
@@ -146,7 +157,7 @@
 
 	<style>
 		#twobu>button{
-    		width:100px;
+    		width:110px;
     	}
 	  .customBtn {
            color: #fff;
@@ -276,6 +287,11 @@
         },1000);
     </script>
     
-    <%} %>
+<%-- 	    <%}else{%>
+	    	<h1>조회된 결과가 없습니다.</h1>
+	    <%} --%>
+    
+    <%}
+    }%>
 </section>
 <%@ include file="/views/common/footer.jsp" %>

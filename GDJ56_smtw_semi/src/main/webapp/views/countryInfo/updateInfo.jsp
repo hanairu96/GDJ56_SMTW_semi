@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	String name=(String)request.getAttribute("name");
-%>
+<%@ page import="com.smtw.country.model.vo.CountryPageInfo" %>
+    <%
+    CountryPageInfo cp=(CountryPageInfo)request.getAttribute("coinfo");
+    %>
 <%@ include file="/views/common/header.jsp" %>
 <style>
     #insertpage{
@@ -97,60 +98,60 @@
     }
 </style>
 <section>
-    <form action="<%=request.getContextPath()%>/countryinfo/insertinfo.do?" method="post">
+    <form action="<%=request.getContextPath()%>/countryinfo/updatecoinfo.do" method="post">
     <div id="insertpage">
         <fieldset>
-            <legend><h1 style="text-align: centers;">국가정보 기본 입력 페이지</h1></legend>
+            <legend><h1 style="text-align: centers;">국가정보 수정 페이지</h1></legend>
             	<div>
-            		나라이름 : <%=name %>
-            		<br><input type="hidden" name="nName" value="<%=name %>" readonly>  
+            		나라이름 : <%=cp.getNName() %>
+            		<br><input type="hidden" name="nName" value="<%=cp.getNName() %>" readonly>  
             	</div>
             	<br>
                 <div>
                     국기사진
-                    <br><input type="file" name="cimage">
+                    <br><input type="file" name="cimage" >
                 </div> 
                 <br>
                 <div>
                     언어 
-                    <br><inpuT type="text" name="langagecountry" placeholder="예시) 영어, 프랑스어, 독일어"></inpuT>
+                    <br><inpuT type="text" name="langagecountry" value="<%=cp.getCLanguage() %>" placeholder="예시) 영어, 프랑스어, 독일어"></inpuT>
                 </div>
                 <br>
                 <div>
                     수도 
-                    <br><inpuT type="text" name="urban" placeholder="예시) 암스트르담"></inpuT>
+                    <br><inpuT type="text" name="urban" value="<%=cp.getUrban() %>" placeholder="예시) 암스트르담"></inpuT>
                 </div>
                 <br>
                 <div>
                     화폐단위 
-                    <br><inpuT type="text" name="moneycountry" placeholder="예시) 유로(Euro, €, EUR)" ></inpuT>
+                    <br><inpuT type="text" name="moneycountry" value="<%=cp.getMoney() %>" placeholder="예시) 유로(Euro, €, EUR)" ></inpuT>
                 </div>
                 <br>
                 <div>
                     전기 
-                    <br><inpuT type="text" name="elect" placeholder="예시) 220V"></inpuT>
+                    <br><inpuT type="text" name="elect" value="<%=cp.getElect() %>" placeholder="예시) 220V"></inpuT>
                 </div>
                 <br>
                 <div>
                     구글 주소 링크
-                    <br><textarea name="contryaddress" id="contryaddress" cols="80" rows="5"  placeholder="예시) 구글지도 링크를 전부 가져와야하는건지..."></textarea>
+                    <br><textarea name="contryaddress" id="contryaddress" cols="80" rows="5"  placeholder="예시) 구글지도 링크"><%=cp.getMapAddress() %></textarea>
                 </div>
                 <br>    
                 <div>
                     영문 수도명  
-                    <br><inpuT type="text" name="engcity" placeholder="예시) amsterdam"></inpuT>
+                    <br><inpuT type="text" name="engcity" value="<%=cp.getEnglishName() %>" placeholder="예시) amsterdam"></inpuT>
                 </div>
                 <br>    
                 <div>
                     시차 (영국기준) 
-                    <br><inpuT type="text" name="clockchange" placeholder="예시) +1"></inpuT>
+                    <br><inpuT type="text" name="clockchange" value="<%=cp.getClock() %>" placeholder="예시) +1"></inpuT>
                 </div>
                 <br>
 
         </fieldset>
     </div>
         <div id="twobu">
-            <button class="customBtn btnStyle" type="submit"><span>확인</span></button>
+            <button class="customBtn btnStyle" type="submit"><span>수정</span></button>
         </div>
 	</form>
 </section>

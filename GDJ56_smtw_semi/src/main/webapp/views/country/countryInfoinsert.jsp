@@ -2,15 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
 <section>
-	<form name="countryinfo" action="<%=request.getContextPath()%>/country/insertCountryFirst.do" method="post">
+	<form name="countryinfo" action="<%=request.getContextPath()%>/country/insertCountryFirst.do" 
+	method="post">
 		<div id="insertpage">
 	        <fieldset id="wrap2">
 	            <legend><h1 style="text-align: centers;">국가정보 입력페이지</h1></legend>
 	                <div>
 	                    나라이름 <br>
 	                    <select name="selectco" id="" >
-	                    <!--     <option value="">선택하세요</option> -->
-	                     <!--    <option value="직접입력">직접입력</option> -->
 	                        <option value="네덜란드">네덜란드</option>
 	                        <option value="뉴질랜드">뉴질랜드</option>
 	                        <option value="대만">대만</option>
@@ -66,18 +65,18 @@
 	                    나라사진
 	                    <br><input type="file" name="piccountry"></input>
 	                </div>
+
 	                <br>
 	                <div>
 	                    한줄글 
 	                    <br><inpuT type="text" name="ontext" size="100" placeholder="예시)풍차와 나막신, 튤립과 치즈의 나라" required></inpuT>
 	                </div>
 	                <br>    
-	
+			        <div id="twobu">
+			            <button class="customBtn btnStyle" ><span>저장</span></button>
+			        </div>
 	        </fieldset>
 	    </div>
-        <div id="twobu">
-            <button class="customBtn btnStyle" ><span>저장</span></button>
-        </div>
       </form>
     <style>
     	#twobu{
@@ -159,7 +158,7 @@
              왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
           */
          margin-top: 100px;
-         height: 600px; 
+         height: auto; 
          /*
              ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
              높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.

@@ -1,7 +1,6 @@
 package com.smtw.countrypageinfo.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +12,16 @@ import com.smtw.country.model.vo.CountryPageInfo;
 import com.smtw.countrypageinfo.model.service.CountryPageInfoService;
 
 /**
- * Servlet implementation class searchCountryInfoAllServlet
+ * Servlet implementation class updateInfoGoServlet
  */
-@WebServlet("/countryinfo/searchAll.do")
-public class searchCountryInfoAllServlet extends HttpServlet {
+@WebServlet("/countryinfo/updatego.do")
+public class updateInfoGoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public searchCountryInfoAllServlet() {
+    public updateInfoGoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,19 +30,13 @@ public class searchCountryInfoAllServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		String name=request.getParameter("nName");
-		List<CountryPageInfo> c=new CountryPageInfoService().searchAll();
+		CountryPageInfo cp=new CountryPageInfoService().searchName(name);
 		
-		request.setAttribute("coinfo", c);
-//		System.out.println(c);
-		request.setAttribute("name", name);
-		request.getRequestDispatcher("/views/countryInfo/countryInfoMain.jsp").forward(request, response);
-	
-	
-	
-	
-	
-	
+		request.setAttribute("coinfo", cp);
+		request.getRequestDispatcher("/views/countryInfo/updateInfo.jsp").forward(request, response);
+		
 	
 	
 	

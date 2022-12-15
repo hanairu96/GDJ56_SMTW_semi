@@ -66,7 +66,7 @@
 				<div class="form-group has-success">
 					<label class="form-label mt-4" for="inputPwd">비밀번호<span class="obli">(필수)</span></label>
 					<input type="password" class="form-control" name="inputPwd" id="inputPwd" placeholder="비밀번호를 입력해주세요" required>
-                    <small id="emailHelp" class="form-text text-muted">비밀번호는 숫자, 특수문자 및 영문자를 포함하여 8자리 이상 입력하세요</small>
+                    <small id="emailHelp" class="form-text text-muted">비밀번호는 숫자, 영문자를 포함하여 8자리 이상 입력하세요</small>
 				</div>
 
 				<div class="form-group has-danger">
@@ -252,8 +252,8 @@
 		
 		//비밀번호 필수입력
 		const inputPwd=$("#inputPwd").val().trim();
-		//숫자, 특문 각 1회 이상, 영문은 2개 이상 사용하여 8자리 이상 입력조건
-		const pwdReg=/(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
+		//숫자,영문 1개 이상씩 사용하여 8자리 이상 입력조건
+		const pwdReg=/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 		
 		if(inputPwd.match(pwdReg)==null){//비밀번호가 양식대로 입력되지 않았으면(==실패)
 			alert("비밀번호는 숫자, 특수문자 및 영문자를 포함하여 8자리 이상이여야합니다.");

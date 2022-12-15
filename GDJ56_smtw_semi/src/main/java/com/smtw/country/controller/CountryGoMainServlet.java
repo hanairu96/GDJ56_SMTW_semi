@@ -34,7 +34,6 @@ public class CountryGoMainServlet extends HttpServlet {
 
 		
 		int cPage;
-		//6개씩 출력
 		int numPerpage=6;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
@@ -48,7 +47,7 @@ public class CountryGoMainServlet extends HttpServlet {
 //		System.out.println(country);
 		int totalData=new CountryService().searchCountryCount();
 		String pageBar="";
-		int pageBarSize=3;
+		int pageBarSize=5;
 		
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		
@@ -58,14 +57,16 @@ public class CountryGoMainServlet extends HttpServlet {
 		if(pageNo==1) {
 			pageBar+="<span>[이전]</span>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()+"/country/countryMain.do?cPage="+(pageNo-1)+"'>[이전]</a>";
+			pageBar+="<a href='"+request.getContextPath()
+			+"/country/countryMain.do?cPage="+(pageNo-1)+"'>[이전]</a>";
 		}
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(cPage==pageNo) {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
-				pageBar+="<a href='"+request.getContextPath()+"/country/countryMain.do?cPage="+pageNo+"'>"+pageNo+"</a>";
+				pageBar+="<a href='"+request.getContextPath()
+				+"/country/countryMain.do?cPage="+pageNo+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
@@ -73,7 +74,8 @@ public class CountryGoMainServlet extends HttpServlet {
 		if(pageNo>totalPage) {
 			pageBar+="<span>[다음]</span>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()+"/country/countryMain.do?cPage="+pageNo+"'>[다음]</a>";
+			pageBar+="<a href='"+request.getContextPath()
+			+"/country/countryMain.do?cPage="+pageNo+"'>[다음]</a>";
 		
 		}
 		request.setAttribute("pageBar", pageBar);

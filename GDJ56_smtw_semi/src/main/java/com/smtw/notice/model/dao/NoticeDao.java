@@ -33,8 +33,8 @@ public class NoticeDao {
 		
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectNoticeList"));
-			pstmt.setInt(1, cPage);
-			pstmt.setInt(2, numPerpage);
+			pstmt.setInt(1, (cPage-1)*numPerpage+1);
+			pstmt.setInt(2, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -89,7 +89,7 @@ public class NoticeDao {
 	}
 	
 	//제목,내용 별 검색
-	public List<Notice> searchNotice(Connection conn, String option,String notice){
+	public List<Notice> searchNotice(Connection conn, String option,String notice,int cPage,int numPerpage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Notice> list=new ArrayList();
@@ -100,6 +100,9 @@ public class NoticeDao {
 		try {
 			pstmt=conn.prepareStatement(query);
 			pstmt.setString(1,"%"+notice+"%");
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
+			
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -113,6 +116,26 @@ public class NoticeDao {
 		}return list;
 	}
 	
+	public int selectNoticeCount(Connection conn,String option,String notice) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		String query=sql.getProperty("selectNoticeCountKeyword");
+		query=query.replace("$COL", option);
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1,"%"+notice+"%");
+			rs=pstmt.executeQuery();
+
+			if(rs.next()) result=rs.getInt(1);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
 	
 	
 	

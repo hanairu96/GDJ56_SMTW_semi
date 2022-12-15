@@ -55,4 +55,11 @@ public class FriendsService {
 		return result;
 	}
 	
+	public int insertFriends(Friends f) {
+		Connection conn=getConnection();
+		int result=dao.insertFriends(conn, f);
+		close(conn);
+		return result;
+	}
+	
 }

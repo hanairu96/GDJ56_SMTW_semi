@@ -11,8 +11,8 @@
             <legend><h1 style="text-align: centers;">국가정보 수정페이지</h1></legend>
             <form name="countryinfo" action="<%=request.getContextPath()%>/country/updateFirstCountry.do" method="post">
                 <div>
-                	나라명
-                   	<input type="text" name="nName" value="<%=c.getNName()%>" readonly>
+                	나라명 : <%=c.getNName()%>
+                   	<input type="hidden" name="nName" value="<%=c.getNName()%>" readonly>
                 </div>
                 <br>
                 <div>
@@ -51,10 +51,10 @@
                 </div>
                 <br>    
 
+		        <div id="twobu">
+		            <button class="customBtn btnStyle"><span>수정</span></button>
+		        </div>
         </fieldset>
-        <div id="twobu">
-            <button class="customBtn btnStyle"><span>수정</span></button>
-        </div>
         </form>
     </div>
     <style>
@@ -137,7 +137,7 @@
              왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
           */
          margin-top: 100px;
-         height: 500px; 
+         height: 600px; 
          /*
              ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
              높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.

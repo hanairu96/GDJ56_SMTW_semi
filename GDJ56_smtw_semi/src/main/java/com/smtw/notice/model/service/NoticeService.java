@@ -33,10 +33,17 @@ public class NoticeService {
 		return result;
 	}
 	
-	public List<Notice> searchNotice(String option,String notice){
+	public List<Notice> searchNotice(String option,String notice,int cPage,int numPerpage){
 		Connection conn=getConnection();
-		List<Notice> list=dao.searchNotice(conn,option,notice);
+		List<Notice> list=dao.searchNotice(conn,option,notice,cPage,numPerpage);
 		close(conn);
 		return list;
+	}
+	
+	public int selectNoticeCount(String option,String notice) {
+		Connection conn=getConnection();
+		int result=dao.selectNoticeCount(conn,option,notice);
+		close(conn);
+		return result;
 	}
 }
