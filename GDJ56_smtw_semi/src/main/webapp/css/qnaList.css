@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.navbar select {
+    height: 30px;
+}
 .customBtn {
     color: #fff;
     border-radius: 5px;
@@ -107,7 +110,7 @@
 li {
     list-style: none;
 }
-#write{
+#writeQna,#modifyQna{
     float: right;
 }
 h2{
@@ -301,7 +304,7 @@ ul>li.title span.number,ul>li.content span.number{
     font-size: 18px;
     width: 150px;
     margin: 0 auto;
-    margin-top: 80px;
+    margin-top: 50px;
     margin-bottom: 30px;
     letter-spacing: 3px;
     text-align: end;
