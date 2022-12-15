@@ -33,15 +33,50 @@ public class SearchNoticeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String searchOption=request.getParameter("searchOption");
 		String searchNotice=request.getParameter("searchNotice");
-//		System.out.println(searchOption+searchNotice);
 		
-		List<Notice> list=new NoticeService().searchNotice(searchOption,searchNotice);
-		for(Notice n : list) {
-			System.out.println(n);
+		int cPage;
+		int numPerpage=5;
+		String pageBar="";
+		try {
+			cPage=Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			cPage=1;
 		}
+		//검색 한 결과리스트 불러오기
+		List<Notice> list=new NoticeService().searchNotice(searchOption,searchNotice,cPage,numPerpage);
+		request.setAttribute("notices", list);
 		
-		request.setAttribute("searchList", list);
-//		request.getRequestDispatcher("/views/notice/noticeList.jsp").forward(request, response);
+		//결과가 총 몇 개인지 불러오기
+		int totalData=new NoticeService().selectNoticeCount(searchOption,searchNotice);
+		
+		int totalPage=(int)Math.ceil((double)totalData/numPerpage);//총 페이지 수= 전체공지사항개수/5
+		int pageBarsize=5;
+		int pageNo=((cPage-1)/pageBarsize)*pageBarsize+1;
+		int pageEnd=pageNo+pageBarsize-1;
+		
+		if(pageNo==1) {
+			pageBar+="<a>&laquo;</a>";
+		}else {
+			pageBar+="<a href='"+request.getRequestURL()+"?cPage="+(pageNo-1)+"'>&laquo;</a>";
+		}
+		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+			if(cPage==pageNo) {
+				//보고있는 페이지
+				pageBar+="<span>"+pageNo+"</span>";
+			}else {
+				pageBar+="<a href='"+request.getRequestURL()+"?cPage="+pageNo+"'>"+pageNo+"</a>";
+			}
+			pageNo++;
+		}
+		if(pageNo>totalPage) {
+			pageBar+="<a>&raquo;</a>";
+		}else {
+			pageBar+="<a href='"+request.getRequestURL()+"cPage="+pageNo+"'>&raquo;</a>";
+		}
+
+		request.setAttribute("pageBar", pageBar);
+		
+		request.getRequestDispatcher("/views/notice/noticeList.jsp").forward(request, response);
 		
 			
 	}
