@@ -1,26 +1,28 @@
 package com.smtw.countrypageinfo.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.country.model.vo.CountryPageInfo;
+import com.smtw.country.model.vo.CountryPage;
 import com.smtw.countrypageinfo.model.service.CountryPageInfoService;
 
 /**
- * Servlet implementation class insertGoCountryInfoServlet
+ * Servlet implementation class selecrContentServlcet
  */
-@WebServlet("/countryInfo/insergo.do")
-public class insertGoCountryInfoServlet extends HttpServlet {
+@WebServlet("/countrypage/selecontent.do")
+public class selecrContentServlcet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public insertGoCountryInfoServlet() {
+    public selecrContentServlcet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,11 +32,11 @@ public class insertGoCountryInfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		List<CountryPage> c=new CountryPageInfoService().selectContent();
 		
-		String name=request.getParameter("nName");
+		request.setAttribute("info", c);
+		request.getRequestDispatcher("/views/countryInfo/countryInfoMain.jsp").forward(request, response);
 	
-		request.setAttribute("name", name);
-		request.getRequestDispatcher("/views/countryInfo/insertcountryinfo.jsp").forward(request,response);
 	
 	
 	}

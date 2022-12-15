@@ -15,13 +15,13 @@ import com.smtw.countrypageinfo.model.service.CountryPageInfoService;
  * Servlet implementation class InsertCountryInfoServlet
  */
 @WebServlet("/countryinfo/insertinfo.do")
-public class InsertCountryInfoServlet extends HttpServlet {
+public class InsertinsertCountryInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertCountryInfoServlet() {
+    public InsertinsertCountryInfoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -59,7 +59,7 @@ public class InsertCountryInfoServlet extends HttpServlet {
 		String msg="",loc="";
 		if(result>0) {
 			msg="국가정보가 정상적으로 등록되었습니다.";
-			loc="/countryinfo/searchAll.do";
+			loc="/countryinfo/searchAll.do?nName="+name;
 		}else {
 			msg="등록을 실패하였습니다. 다시 시도해주세요.";
 			loc="/countryInfo/insergo.do";
