@@ -33,8 +33,8 @@ public class NoticeDao {
 		
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectNoticeList"));
-			pstmt.setInt(1, cPage);
-			pstmt.setInt(2, numPerpage);
+			pstmt.setInt(1, (cPage-1)*numPerpage+1);
+			pstmt.setInt(2, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
