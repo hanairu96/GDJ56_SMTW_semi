@@ -32,7 +32,13 @@ public class insertCountryFirstServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		String name=request.getParameter("selectco");
+		String name=null;
+		name=request.getParameter("selectco");
+		if(request.getParameter("selectco").equals("self")) {
+			name=request.getParameter("selfname");
+		}else {
+			name=request.getParameter("selectco");
+		}
 		String lang=request.getParameter("langEn");
 		String tend=request.getParameter("tend2");
 		String place=request.getParameter("land");
