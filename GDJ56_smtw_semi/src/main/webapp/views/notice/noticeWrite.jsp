@@ -24,20 +24,6 @@
                         <input type="hidden" name="noticeWriter" value=<%=logInMember.getMemberId()%>>
                     </td>
                 </tr>
-<!--                 <tr> -->
-<!--                     <th>이메일</th> -->
-<!--                     <td> -->
-<!--                         <input type="text" name="email" size="30"> @  -->
-<!--                         <select name="email" id="email"> -->
-<!--                             <option value="선택" >선택</option> -->
-<!--                             <option value="naver.com">naver.com</option> -->
-<!--                             <option value="gmail.com">gmail.com</option> -->
-<!--                             <option value="hanmail.net">hanmail.net</option> -->
-<!--                             <option value="direct">직접입력</option> -->
-<!--                             <input type="text" id="selboxDirect" name="selboxDirect"/> -->
-<!--                         </select> -->
-<!--                     </td> -->
-<!--                 </tr> -->
                 <tr>
                     <th colspan="2">
                         <div class="cont">
