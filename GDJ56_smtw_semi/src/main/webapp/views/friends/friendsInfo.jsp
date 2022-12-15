@@ -13,250 +13,68 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <section>
-        <div id="friendTitle" style="text-align: center;">
-            <h1>워홀프렌즈 찾기</h1>
-        </div>
-
-        <div style="height:40px;display: flex;">
-            <div style="border:0px solid yellow;width:400px;height:60px;margin-left: 50px;"></div>
-            <div style="border:0px solid yellow;width:400px;height:60px;margin-left: 50px;"></div>
-            <div style="border:0px solid yellow;width:400px;height:60px;margin-left: 50px;">
-                <%if(logInMember==null) {%>
-                <%}else if(logInMember.getMemberId().equals("ADMIN")||logInMember.getMemberId().equals(f.getMemberId())) {%>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button onclick="friend_delete();" class="customBtn btnStyle btn btn-primary" type="button" style=" background-color: rgba(221, 160, 221, 0.479) !important;" value="삭제">삭제하기</button>
-                </div>
-                <%} %>
-            </div>
-        </div>
-		<script>
-		function friend_delete(){
-			let answer = confirm("정말로 삭제하시겠습니까?");
-			if(answer == true){
-				location.assign("<%=request.getContextPath()%>/friends/friendsDelete.do?memberId=<%=f.getMemberId() %>");
-			}
-		}
-		</script>
-
-        <div style="height:700px">
-            <div style="display:flex">
-                <div style="border:0px solid yellow;width:300px;height:700px">
-                    <div style="border:0px solid blue;width:270px;height:350px">
-                        <header class="header" role="banner">
-                            <div id="sideMenu">
-                                <h1 class="sidelogo">
-                                    <a href="LeavingDiary.html"><span>커뮤니티</span></a>
-                                </h1>
-                                <div class="nav-wrap">
-                                    <nav class="main-nav" role="navigation">
-                                        <ul class="unstyled list-hover-slide">
-                                            <li><a href="LeavingDiary.html">워홀프렌즈 구하기</a></li>
-                                            <li><a href="MyCountry.html">생생후기</a></li>
-                                        </ul>
-                                    </nav>
-                              </div>
-                            </div>
-                        </header>
-                    </div>
-                </div>
-                <style>
-                    /* 사이드메뉴바 스타일 여기부터*/
-        /* 왼쪽 사이드메뉴영역 */
-        #sideMenu{
-            border: 1px solid black;
-            /* border-radius: 10px; */
-            position: absolute; 
-            z-index: 10;
-            width: 18%;
-        }
-        .header {
-        /* position:relative; */
-        left: 0;
-        top: 100px;
-        bottom: 0;
-        /* width: 17.5em; */
-        width: 20%;
-        /* height: 900px; */
-        /* background: #d9d9db; */
-        }
-
-        *,
-        :before,
-        :after {
-        box-sizing: border-box;
-        }
-
-        .unstyled {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .unstyled a {
-            text-decoration: none;
-        }
-
-        .list-inline {
-            overflow: hidden;
-        }
-
-        .sidelogo {
-            background-color: #b5aae5;
-            text-transform: lowercase;
-            font: 300 2em "Source Sans Pro", Helvetica, Arial, sans-serif;
-            text-align: center;
-            padding: 0;
-            margin: 0;
-            border: 2px solid black;
-            /* border-radius: 10px; */
-        }
-        .sidelogo a {
-        display: block;
-        padding: 1em 0;
-        color: #dfdbd9;
-        text-decoration: none;
-        transition: 0.15s linear color;
-        }
-        .sidelogo a:hover {
-        color: #fffaf8;
-        }
-        .sidelogo a:hover span {
-        color: #df4500;
-        }
-        .sidelogo span {
-           
-        color: #131110;
-        font-weight: 700;
-        transition: 0.15s linear color;
-        }
-        .main-nav li {
-        /* border-bottom: solid 1px #3c3735; */
-        font-size: 20px;
-        font-weight: bold;
-        }
-        .main-nav a {
-        padding: 1.1em 0;
-        color: #f1f1f1;
-        font: 400 1.125em "Source Sans Pro", Helvetica, Arial, sans-serif;
-        text-align: center;
-        text-transform: lowercase;
-        }
-        .main-nav a:hover {
-        color: #f9f8f8;
-        }
-        .list-hover-slide li {
-            border: 1px solid rgb(0, 0, 0);
-            /* border-radius: 10px; */
-            background-color: #d5d0e8;
-            position: relative;
-            overflow: hidden;
-        }
-        .list-hover-slide a {
-        display: block;
-        position: relative;
-        z-index: 1;
-        transition: 0.35s ease color;
-        color: rgb(0, 0, 0);
-        }
-        .list-hover-slide a:before {
-        content: "";
-        display: block;
-        z-index: -1;
-        position: absolute;
-        left: -100%;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        border-right: solid 5px #4300df;
-        background: #b7aee0;
-        transition: 0.35s ease left;
-        
-        }
-        .list-hover-slide a.is-current:before, .list-hover-slide a:hover:before {
-        left: 0;
-        }
-        /* 사이드메뉴바 스타일 여기까지*/
-
-
-        </style>
-
-
-
-                <div style="border:0px solid rgba(238, 130, 238, 0.315);width:910px;height:695px;display:flex;border-radius:20px;">
+        <div id="friendTitle">
+            <h1 style="text-align: center;">워홀프렌즈 찾기</h1><br>
+                <div style="margin:0 auto;border:1px solid rgba(238, 130, 238, 0.315);width:910px;height:650px;display:flex;border-radius:20px;">
                     <div style="display:flex">
                         <div style="border:0px solid green;width:452px;height:690px ">
                             <div style="border:0px solid pink;width:440px;height:340px;">
-                                <img src="<%=request.getContextPath() %>/images/lupy.jpg" alt="" style="width: 50%;height:50%; margin:auto; display: block;margin-top:50px;border-radius:120px;">
+                                <img src="<%=request.getContextPath() %>/images/lupy.jpg" alt="" style="width:60%;height:75%;margin:auto;display:block;margin-top:50px;border-radius:120px;">
                             </div>
-                            <div style="border:0px solid pink;width:440px;height:340px;text-align: center; ">
-                                <button  onclick="window.open('친구신청하기.html','_blank','scrollbars=yes,width=600,height=600,top=100,left=300')"
-                                class="customBtn btnStyle btn btn-primary" type="button" style=" margin-top :15px;background-color: rgba(221, 160, 221, 0.508) !important;" value="친구신청하기">친구 신청하기</button>
-
+                            <div style="border:0px solid pink;width:440px;height:340px;text-align:center;">
+                                <button onclick="window.open('친구신청하기.html','_blank','scrollbars=yes,width=600,height=600,top=100,left=300')"
+                                class="customBtn btnStyle btn btn-primary" type="button" style="width:120px;margin-top:25px;background-color:rgba(221, 160, 221, 0.508) !important;"value="친구신청하기">친구 신청하기</button>
                             </div>
                         </div>
                     </div>
                     <div style="display:flex">
                         <div style="border:0px solid green;width:452px;height:690px;">
-                           <div style="border:0px solid blueviolet;width:452px;height:50px;display:flex;justify-content:center;">
-                               <div>이름:</div>
-                               <div><%=m!=null?m.getMemberId():"" %></div>
-                           </div>
-                           <div style="border:0px solid blueviolet;width:452px;height:50px;display:flex;justify-content:center;">
-                                <div>성별:</div>
-                                <div><%=m!=null?(m.getGender()=='M'?"남자":"여자"):"" %></div>
+                           <div id="do" style="border:0px solid blueviolet;width:452px;height:350px;text-align:center;">
+								<br>
+								<p>이름: <%=m!=null?m.getMemberName():"" %></p>
+								<p>성별: <%=m!=null?(m.getGender()=='M'?"남자":"여자"):"" %></p>
+								<p>Mbti: <%=f!=null?f.getMbti():"" %></p>
+								<p>희망국가: <%=f!=null?f.getNName():"" %></p>    
+								<p>취향: <%=f!=null?f.getType():"" %></p>
+								<p>워홀경험 유무: <%=f!=null?(f.getExpYn()=='Y'?"있음":"없음"):"" %></p>
+								<p>목적: <%=f!=null?f.getPurpose():"" %></p>
                             </div>
-                            <div style="border:0px solid blueviolet;width:452px;height:50px;display:flex;justify-content:center;">
-                                <div>Mbti:</div>
-                                <div><%=f!=null?f.getMbti():"" %></div>
-                           </div>
-                           <div style="border:0px solid blueviolet;width:452px;height:50px;display:flex;justify-content:center;">
-                                <div>희망국가:</div>
-                                <div><%=f!=null?f.getNName():"" %></div>    
-                            </div>
-                            <div style="border:0px solid blueviolet;width:452px;height:50px;display:flex;justify-content:center;">
-                                <div>취향:</div>
-                                <div><%=f!=null?f.getType():"" %></div>    
-                            </div>
-                            <div style="border:0px solid blueviolet;width:452px;height:50px;display:flex;justify-content:center;">
-                                <div>워홀경험 유무:</div>
-                                <div><%=f!=null?(f.getExpYn()=='Y'?"있음":"없음"):"" %></div>
-                            </div>
-                            <div style="border:0px solid blueviolet;width:452px;height:50px;display:flex;justify-content:center;">
-                                <div>목적:</div>
-                                <div><%=f!=null?f.getPurpose():"" %></div>  
-                            </div>
-                            <div style="border:0px solid blueviolet;width:452px;height:25px;">
-                                자기소개글(100자이내)
-                            </div>
-                            <div style="border:0px solid blueviolet;width:452px;height:300px;">
-                                <div style="border:0px solid rgba(238, 130, 238, 0.452);width:452px;height:180px;margin-top:30px;">
+							
+                            <div id="doo" style="border:0px solid blueviolet;width:452px;height:300px;">
+                            	<b style="margin-left:15px;"><%=f!=null?f.getFriendsTitle():"" %></b>
+                                <div style="border:1px solid rgba(238, 130, 238, 0.452);width:420px;height:235px;margin-top:10px;">
                                     <%=f!=null?f.getFriendsContents():"" %>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-        </div>
-        <div style="display:flex; border:0px solid rgb(15, 231, 231);width:100%;height:75px">
-            <div style="border:0px solid yellow;width:400px;height:60px"></div>
-            <div style="border:0px solid yellow;width:400px;height:60px"></div>
-            <div style="border:0px solid yellow;width:400px;height:60px;display: inline-flex;align-items:center; ">
+			<div style="text-align:center;">
+            <div style="border:1px solid yellow;width:910px;height:60px;display:inline-flex;align-items:center; ">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button onClick="location.href='<%=request.getContextPath() %>/friends/friendsList.do'" class="customBtn btnStyle btn btn-primary" type="button" style="margin-left:220px;background-color: rgba(221, 160, 221, 0.508) !important;" value="목록">목록</button>
-                    <%if(logInMember==null) {%>
-                	<%}else if(logInMember.getMemberId().equals("ADMIN")||logInMember.getMemberId().equals(f.getMemberId())){%>
-	                    <button onclick="location.assign('<%=request.getContextPath()%>/friends/friendsUpdate.do?memberId=<%=f.getMemberId()%>');" 
-	                    class="customBtn btnStyle btn btn-primary" type="button" style="background-color: rgba(221, 160, 221, 0.508) !important;" value="수정하기">수정하기</button>
-                    <%} %>
+                	<%if(logInMember!=null&&(logInMember.getMemberId().equals("ADMIN")||logInMember.getMemberId().equals(f.getMemberId()))){%>
+		            	<button onclick="location.assign('<%=request.getContextPath()%>/friends/friendsUpdate.do?memberId=<%=f.getMemberId()%>');" 
+		            	class="customBtn btnStyle btn btn-primary" type="button" style="width:80px;margin-left:640px;background-color: rgba(221, 160, 221, 0.508) !important;" value="수정하기">수정하기</button>
+		            	<button onclick="friend_delete();" class="customBtn btnStyle btn btn-primary" type="button" style="width:80px;background-color: rgba(221, 160, 221, 0.479) !important;" value="삭제">삭제하기</button>
+		            	<button onClick="location.href='<%=request.getContextPath() %>/friends/friendsList.do'" class="customBtn btnStyle btn btn-primary" type="button" style="width:80px;background-color: rgba(221, 160, 221, 0.508) !important;" value="목록">목록으로</button>
+	                <%}else {%>
+		            	<button onClick="location.href='<%=request.getContextPath() %>/friends/friendsList.do'" class="customBtn btnStyle btn btn-primary" type="button" style="width:80px;margin-left:815px;background-color: rgba(221, 160, 221, 0.508) !important;" value="목록">목록으로</button>
+					<%} %>
                 </div>
             </div>
-        </div>       
+            </div>
+            </div>
     </section>
     <script>
     </script>
 
      <style>
+     	#do>p{
+     		font-size:20px;
+     	}
+     	#doo>*{
+     		margin:0 auto;
+     	}
          .customBtn {
             color: #fff;
             border-radius: 5px;
@@ -343,5 +161,14 @@
             
         }
     </style>
+    
+    <script>
+		function friend_delete(){
+			let answer = confirm("정말로 삭제하시겠습니까?");
+			if(answer == true){
+				location.assign("<%=request.getContextPath()%>/friends/friendsDelete.do?memberId=<%=f.getMemberId() %>");
+			}
+		}
+	</script>
 
 <%@ include file="/views/common/footer.jsp" %>
