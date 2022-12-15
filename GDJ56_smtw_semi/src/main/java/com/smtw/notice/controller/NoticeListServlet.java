@@ -39,7 +39,7 @@ public class NoticeListServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		numPerpage=5;
+		numPerpage=8;
 		String pageBar="";
 		
 		//현재 있는 공지사항 리스트들

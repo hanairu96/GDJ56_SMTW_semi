@@ -35,7 +35,7 @@ public class SearchNoticeServlet extends HttpServlet {
 		String searchNotice=request.getParameter("searchNotice");
 		
 		int cPage;
-		int numPerpage=5;
+		int numPerpage=8;
 		String pageBar="";
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
