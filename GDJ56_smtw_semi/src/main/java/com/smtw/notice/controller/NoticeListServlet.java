@@ -49,7 +49,7 @@ public class NoticeListServlet extends HttpServlet {
 		
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);//총 페이지 수= 전체공지사항개수/5
 		
-		int pageBarsize=5;
+		int pageBarsize=3;
 		
 		int pageNo=((cPage-1)/pageBarsize)*pageBarsize+1;
 		int pageEnd=pageNo+pageBarsize-1;
@@ -62,16 +62,16 @@ public class NoticeListServlet extends HttpServlet {
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(cPage==pageNo) {
 				//보고있는 페이지
-				pageBar+="<span>"+pageNo+"</span>";
+				pageBar+="<span style='color: #7e8cd2;'>"+pageNo+"</span>";
 			}else {
-				pageBar+="<a href='"+request.getRequestURL()+"?cPage="+pageNo+"'>"+pageNo+"</a>";
+				pageBar+="<a href='"+request.getRequestURL()+"?cPage="+pageNo+"' style='color: #7e8cd2;'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
 		if(pageNo>totalPage) {
 			pageBar+="<a>&raquo;</a>";
 		}else {
-			pageBar+="<a href='"+request.getRequestURL()+"cPage="+pageNo+"'>&raquo;</a>";
+			pageBar+="<a href='"+request.getRequestURL()+"cPage="+pageNo+"' style='color: #7e8cd2;'>&raquo;</a>";
 		}
 		
 		request.setAttribute("notices", list);
