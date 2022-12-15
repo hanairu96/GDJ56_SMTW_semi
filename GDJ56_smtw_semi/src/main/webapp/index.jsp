@@ -165,17 +165,19 @@
     </div>
     <!-- 배너 -->
         <div id="banner" style="top: 350px;">
-            <div id="insurance" style="background-color: rgb(224, 185, 247);">
+            <a onclick="insurance();"><div id="insurance" style="background-color: rgb(224, 185, 247);">
                 <h5 class="txt-label">INSURANCE</h5>
                 <span class="txt-label" style="font-size: 11px">여행자(워홀) 보험</span>
-            </div>
-            <div id="mobile" style="background-color: rgb(247, 236, 186);">
+            </div></a>
+            
+            <a onclick="mobile();"><div id="mobile" style="background-color: rgb(247, 236, 186);">
                 <h5 class="txt-label">MOBILE</h5>
                 <span class="txt-label" style="font-size: 11px;">여행자 유심칩 공동구매</span>
-            </div>
-            <div id="myfly" style="background-color: rgb(181, 247, 211);">
+            </div></a>
+            
+             <a href="<%=request.getContextPath() %>/diary/firstDiary.do"><div id="myfly" style="background-color: rgb(181, 247, 211);">
                 <h5 class="txt-label">나의 출국일지</h5>
-            </div>
+            </div></a>
         </div>
     </header>
     
@@ -198,6 +200,16 @@
                 }, 500);
             }).scroll();
         });
+        
+        const insurance=()=>{
+        	open("https://b2b.travelover.co.kr/insu/18572/b97e9f8e-925d-4ef7-89f7-afe6b54e92ac","_blank","width=500 height=500");
+        }
+        
+        const mobile=()=>{
+        	open("https://www.usimstore.com/shop/","_blank","width=500 height=500");
+        }
+        
+        
     </script>
     <div id="wrap">
         <section>
