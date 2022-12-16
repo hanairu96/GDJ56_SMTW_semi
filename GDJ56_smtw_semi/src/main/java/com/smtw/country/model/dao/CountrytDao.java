@@ -63,7 +63,10 @@ public class CountrytDao {
 			pstmt=conn.prepareStatement(sql.getProperty("searchList"));
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				c.add(getCountry(rs));
+//				c.add(getCountry(rs));
+				Country co=getCountry(rs);
+				co.setInfo(getContryInfo(rs));
+				c.add(co);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
