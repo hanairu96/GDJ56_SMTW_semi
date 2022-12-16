@@ -8,6 +8,7 @@ import com.smtw.member.model.vo.Member;
 import com.smtw.mypage.model.dao.MypageDao;
 import com.smtw.mypage.model.vo.Applyfriends;
 import com.smtw.mypage.model.vo.MemberInfo;
+import com.smtw.mypage.model.vo.Note;
 
 public class MypageService {
 	
@@ -88,4 +89,21 @@ public class MypageService {
 		return result;
 	}
 	
+	public List<Note> noteList(String id){
+		Connection conn = getConnection();
+		List<Note> list = new MypageDao().noteList(conn, id);
+		close(conn);
+		return list;
+	}
+	
+	public Note noteList(int noteNo){
+		Connection conn = getConnection();
+		Note n = new MypageDao().noteList(conn, noteNo);
+		close(conn);
+		return n;
+	}
+	
+	
+	
+
 }

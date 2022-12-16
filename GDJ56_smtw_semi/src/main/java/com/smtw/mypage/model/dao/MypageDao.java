@@ -16,6 +16,7 @@ import java.util.Properties;
 import com.smtw.member.model.vo.Member;
 import com.smtw.mypage.model.vo.Applyfriends;
 import com.smtw.mypage.model.vo.MemberInfo;
+import com.smtw.mypage.model.vo.Note;
 
 public class MypageDao {
 	
@@ -55,11 +56,9 @@ public class MypageDao {
 			close(pstmt);
 		
 		}return result;
-		
-		
 	}
 	
-public int deleteMember(Connection conn, String userId) {
+	public int deleteMember(Connection conn, String userId) {
 		
 		int result = 0;
 		PreparedStatement pstmt=null;
@@ -79,10 +78,7 @@ public int deleteMember(Connection conn, String userId) {
 			close(pstmt);
 		
 		}return result;
-		
-		
 	}
-	
 
 	
 	private Applyfriends getApplyfriendsList(ResultSet rs) throws SQLException{
@@ -100,8 +96,6 @@ public int deleteMember(Connection conn, String userId) {
 				.age(rs.getString("AGE"))
 				.build();
 	}
-	
-	
 	
 	
 	public List<Applyfriends> applyfriendsList(Connection conn, String userId){
@@ -125,6 +119,7 @@ public int deleteMember(Connection conn, String userId) {
 			}return af;
 	}
 	
+	
 	public List<MemberInfo> InfoapplyfriendsList(Connection conn, String userId){
 		List<MemberInfo> m=new ArrayList();
 		PreparedStatement pstmt=null;
@@ -145,6 +140,61 @@ public int deleteMember(Connection conn, String userId) {
 				
 			}return m;
 		}
+	
+	private Note getNoteList(ResultSet rs) throws SQLException {
+		// TODO Auto-generated method stub
+		return Note.builder()
+				.ntNo(rs.getInt("NT_NO"))
+				.memberId(rs.getString("MEMBER_ID"))
+				.content(rs.getString("NOTE_CONTENTS"))
+				.date(rs.getDate("ENROLL_DATE"))
+				.sender(rs.getString("SENDER"))
+				.senderName(rs.getString("SENDER_NAME"))
+				.build();
+	}
+	
+	public List<Note> noteList(Connection conn, String id){
+		
+		List<Note> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("noteList"));
+			pstmt.setString(1,id);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(getNoteList(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public Note noteList(Connection conn, int noteNo){
+		
+		Note n = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("noteList2"));
+			pstmt.setInt(1,noteNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				n=getNoteList(rs);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return n;
+	}
+
 	
 	public List<MemberInfo> FriendsList(Connection conn,String userId){
 		List<MemberInfo> m=new ArrayList();
@@ -187,6 +237,7 @@ public int deleteMember(Connection conn, String userId) {
 			}return result;
 	}
 	
+	
 	public int rejectFriends(Connection conn, String userId, String memberFrom) {
 		
 		PreparedStatement pstmt=null;
@@ -206,6 +257,7 @@ public int deleteMember(Connection conn, String userId) {
 			System.out.println(result);
 		}return result;
 	}
+	
 	
 	public Member memberInfo(Connection conn, String userId){
 		
@@ -229,6 +281,7 @@ public int deleteMember(Connection conn, String userId) {
 		return m;
 	}
 	
+	
 	public Member pwdCk(Connection conn, String userId, String pwd) {
 		Member m = null;
 		PreparedStatement pstmt = null;
@@ -247,10 +300,10 @@ public int deleteMember(Connection conn, String userId) {
 			close(rs);
 			close(pstmt);
 		}
-		System.out.println(m);
 		return m;
 		
 	}
+	
 	
 	private Member getMember(ResultSet rs) throws SQLException {
 		return Member.builder()
@@ -266,7 +319,7 @@ public int deleteMember(Connection conn, String userId) {
 				.build();
 	}
 	
-public int updatePassword(Connection conn, String userId, String newPass) {
+	public int updatePassword(Connection conn, String userId, String newPass) {
 		
 		int result = 0;
 		PreparedStatement pstmt=null;
@@ -279,14 +332,13 @@ public int updatePassword(Connection conn, String userId, String newPass) {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
-		
 			close(pstmt);
-		
 		}return result;
-		
-		
 	}
-		
+	
+
+	
+
 	
 		
 }
