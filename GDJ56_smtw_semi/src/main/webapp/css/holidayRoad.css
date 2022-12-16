@@ -12,39 +12,29 @@ section{
                 왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
              */
             margin-top: 100px;
-             height: 1000px; 
+             height: 1100px; 
             /*
                 ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
                 높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.
             */
             
         }
-
+        /* ##### 여기부터 사이드메뉴 스타일 #####  */
         .sector{
-                display: flex;
-            }
-        .sector>*{
-            /* border: 1px solid; */
+            display: flex;
         }
 
-        #all{
-            max-width: 800px;
-            margin: 0 auto;
-            width: 80%;
-            border: 2px solid black;
-            border-radius: 10px;
-        }
-        .menuDiv{
-            width: 15%;
-        }
         .sidemenu{
             width: 20%;
             height: 100px;
             font-size: 20px;
             font-weight: bold;
-            position: fixed;
+            position: absolute;
         }
         
+        .menuDiv{
+            width: 25%;
+        }
 
         .sidemenu>*:hover{
             transform: scale(1.1);
@@ -58,8 +48,8 @@ section{
         }
         .sidemenu p{
             text-align: center;
-            
             padding-top: 6%;
+             color: purple;
         }
         .sidemenu>div:first-child{
             color: purple;
@@ -69,12 +59,102 @@ section{
             height: 70px;
             
         }
+        a{
+            text-decoration: none;
+        }
+        /* ##### 여기까지 사이드메뉴 스타일 #####  */
 
+
+		 #all{
+            max-width: 800px;
+            margin: 0 auto;
+            width: 80%;
+            border: 2px solid black;
+            border-radius: 10px;
+            text-align: center;
+            height: auto;
+            padding-bottom: 50px;
+            height: auto;
+        }
+        #all h1{
+            font-size: 30px;
+        }
+         #all h2{
+            font-size: 25px;
+            color:gray;
+            margin-top: 55px;
+        }
+        
+        #all p{
+        	font-size: 20px;
+        	padding-bottom: 0;
+        }
         div#map{
             border-radius: 20px;
             border: 2px solid navy;
+            align-items: center ;
             
         }
         div#info{
-            align-items: center ;
+            align-items: center;
+            text-align: left;
+            margin-left: 45px;
+            margin-top: 0;
         }
+        .customBtn {
+            color: #fff;
+            border-radius: 5px;
+            padding: 10px 25px;
+            font-family: 'Lato', sans-serif;
+            font-weight: 500;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+            box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+            7px 7px 20px 0px rgba(0,0,0,.1),
+            4px 4px 5px 0px rgba(0,0,0,.1);
+            outline: none;
+            }
+        .btnStyle {
+            line-height: 42px;
+            padding: 0;
+            border: none;
+            background: #7e8cd2;
+            background: linear-gradient(0deg, #7e8cd2 0%, #7e8cd2 100%);
+        }
+        .btnStyle:hover {
+            color: #7e8cd2;
+            background: transparent;
+            box-shadow:none;
+        }
+        .btnStyle:before,.btnStyle:after{
+            content:'';
+            position:absolute;
+            top:0;
+            right:0;
+            height:2px;
+            width:0;
+            background: #7e8cd2;
+            box-shadow:
+            -1px -1px 5px 0px #fff,
+            7px 7px 20px 0px #0003,
+            4px 4px 5px 0px #0002;
+            transition:400ms ease all;
+        }
+        .btnStyle:after{
+            right:inherit;
+            top:inherit;
+            left:0;
+            bottom:0;
+        }
+        .btnStyle:hover:before,.btnStyle:hover:after{
+            width:100%;
+            transition:800ms ease all;
+        }
+        #boardBtn{
+	        width: 90px;
+		    font-size: 16px;
+		    margin-left: 10px;
+		}

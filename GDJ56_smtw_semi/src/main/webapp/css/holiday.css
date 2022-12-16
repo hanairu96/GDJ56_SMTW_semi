@@ -24,29 +24,19 @@ section{
         .sector{
                 display: flex;
             }
-        .sector>*{
-            /* border: 1px solid; */
-        }
 
-        #all{
-            max-width: 800px;
-            margin: 0 auto;
-            width: 80%;
-            border: 2px solid black;
-            border-radius: 10px;
-        }
-        .menuDiv{
-            width: 15%;
-        }
+        
         .sidemenu{
             width: 20%;
             height: 100px;
             font-size: 20px;
             font-weight: bold;
-            position: fixed;
-
+            position: absolute;
         }
         
+        .menuDiv{
+            width: 25%;
+        }
 
         .sidemenu>*:hover{
             transform: scale(1.1);
@@ -60,10 +50,10 @@ section{
         }
         .sidemenu p{
             text-align: center;
-            
             padding-top: 6%;
+             color: purple;
         }
-        .sidemenu>div:nth-child(2){
+        .sidemenu>div:first-child{
             color: purple;
         }
 
@@ -71,16 +61,45 @@ section{
             height: 70px;
             
         }
-        
+        a{
+            text-decoration: none;
+        }
+        /* ##### 여기까지 사이드메뉴 스타일 #####  */
+        #all{
+            max-width: 800px;
+            margin: 0 auto;
+            width: 80%;
+            border: 2px solid black;
+            border-radius: 10px;
+            text-align: center;
+            height: auto;
+    		padding-bottom: 50px;
+        }
+        #all h1{
+            font-size: 30px;
+        }
 
         #plane{
             border-radius: 20px;
+            text-align: center;
         }
         #textContainer{
-            width: 650px;
+            width: 90%;
             height: 230px;
-            /* border: 1px solid cornflowerblue; */
             border-radius: 20px;
             margin-top: 1%;
             letter-spacing: 1px;
+            padding-left:20px;
+            text-align:left;
+            padding-right: 0;
+        }
+        #textContainer>h4{
+        	padding-left:20px;
+        	font-size:30px;
+        	margin-bottom: 0;
+        }
+         #textContainer>p{
+         padding-left: 52px;
+         font-size:20px;
+         margin-top: 10px;
         }

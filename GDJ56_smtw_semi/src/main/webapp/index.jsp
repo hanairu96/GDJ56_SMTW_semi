@@ -223,30 +223,30 @@
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
                     </div>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="textcontainer">
+                        <div class="carousel-item active" onclick="location.assign('<%=request.getContextPath()%>/logIn/enrollAgree.do')">
+                           <!--  <div class="textcontainer">
                                 <h3>회원가입</h3>
-                            </div>
+                            </div> -->
                             <img src="images/회원가입사진.jpg" class="d-block w-100" alt="...">
                         
                         </div>
-                        <div class="carousel-item">
-                            <div class="textcontainer">
+                        <div class="carousel-item" onclick="location.assign('<%=request.getContextPath()%>/holiday/holiday.do')">>
+                          <!--   <div class="textcontainer">
                                 <h3>워킹홀리데이란</h3>
-                            </div>
+                            </div>  -->
                             <img src="https://img.freepik.com/premium-vector/illustration-map-of-the-world-with-flags-of-all-countries_37674-7.jpg?w=1380" class="d-block w-100" alt="...">
                         
                         </div>
-                        <div class="carousel-item">
-                            <div class="textcontainer">
-                                <h3><a href="<%=request.getContextPath()%>/country/countryMain.do">국가정보</a></h3>
-                            </div>
+                        <div class="carousel-item" onclick="location.assign('<%=request.getContextPath()%>/country/countryMain.do')">
+                           <!--  <div class="textcontainer">
+                                <h3>국가정보</h3>
+                            </div> -->
                             <img src="https://img.freepik.com/free-vector/global-travelling-abstract-concept-vector-illustration-global-insurance-world-trip-international-tourism-travel-agency-working-holiday-luxury-vacation-resort-chain-abstract-metaphor_335657-2953.jpg?w=826&t=st=1668756054~exp=1668756654~hmac=e2c0a85010a8ffb2c9d72fbe22c4eec5b55e28218e7bd4547aac02a7bf66e63c" class="d-block w-100" alt="...">
                         </div>
-                        <div class="carousel-item">
-                            <div class="textcontainer">
+                        <div class="carousel-item" onclick="location.assign('<%=request.getContextPath()%>/friends/friendsList.do')">
+                            <!-- <div class="textcontainer">
                                 <h3>워홀프렌즈찾기</h3>
-                            </div>
+                            </div> -->
                             <img src="https://post-phinf.pstatic.net/MjAyMDA3MjFfMTY1/MDAxNTk1MzIxODI2NTA2.5wzgcsDonhkKgJa43_pny5_f9mDAsAboVqoxT18P6BMg.oAYho8D61Kx2Tx8-5n_14DzOVTU_dy95xwNH9DEJDHYg.JPEG/tid354t000040.jpg?type=w1200" class="d-block w-100" alt="...">
                         </div>
                     </div>
@@ -377,7 +377,7 @@
         <!-- 하단 로고 영역 -->
         <section>
             <div id="mainlogo">
-                <img src="images/logo.png" alt="" width="1180" height="230px">
+                <img src="images/logo.png" alt="" width="1350" height="230px">
             </div>
         </section>
 
