@@ -100,7 +100,7 @@
         		<button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/updatego.do?nName=<%=c.getNName()%>')"><span>국가정보 수정</span></button>
    			</div>
    			<%} %>
-    <p style="font-size: 13px; text-align: center;"></p>
+    	<p style="font-size: 13px; text-align: center;"></p>
     
     	
     <div id="wrapper">
@@ -150,7 +150,11 @@
         <input type="button" name="button" value="초기정착">
         <input type="button" name="button" value="취업정보">      
       <div id="explain">
-  						내용없음
+	      <pre>
+	  		내용없음
+          </pre>
+        </div>
+    </div>
   <%}else{%>
   
    	<% for(CountryPage cc : coinfo){%>
@@ -163,20 +167,19 @@
         <div id="explain">
             <pre>
   				<%=cc.getNInfo() %>	
-            </pre>
+  			</pre>
         </div>
     </div>
-    <%}
-   	} %>
+	<%}
+  }%>
     
-    
-	    
 	<%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
-    <div id="twobu">
-        <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goInsertContext.do?nName=<%=c.getNName()%>')"><span>추가</span></button>
-        <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goUpdateContent.do?nName=<%=c.getNName()%>')"><span>수정</span></button>
-    </div>
-		<%} %>
+		    <div id="twobu">
+		        <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goInsertContext.do?nName=<%=c.getNName()%>')"><span>추가</span></button>
+		        <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goUpdateContent.do?nName=<%=c.getNName()%>')"><span>수정</span></button>
+	   		</div>
+	    <%}%>
+	    
 	<style>
 		#twobu>button{
     		width:110px;

@@ -7,7 +7,7 @@
 <%@ include file="/views/common/header.jsp" %>
 <section>
 <form name="contentinfo" action="<%=request.getContextPath()%>/countryinfo/updatecontent.do" method="post">
-    <div id="insertCountrypage">
+    <div id="updateCountrypage">
         <fieldset>
             <legend><h1 style="text-align: centers;">국가 내용 수정 페이지</h1></legend>
                 <div>
@@ -17,27 +17,27 @@
                 <br>
                 <div>
                     국가/지역소개
-                    <br><textarea name="coareainfo" id="" cols="100" rows="30" value="<%=cp.getNInfo() %>" placeholder="국가/지역소개 입력" ></textarea>
+                    <br><textarea name="coareainfo" id="" cols="100" rows="30" placeholder="국가/지역소개 입력" ><%=cp.getNInfo() %></textarea>
                 </div>
                 <br>    
                 <div>
                     워홀비자 
-                    <br><textarea name="wkvisa" id="" cols="100" rows="30" value="<%=cp.getNVisa() %>" placeholder="워홀비자 입력" ></textarea>
+                    <br><textarea name="wkvisa" id="" cols="100" rows="30" placeholder="워홀비자 입력" ><%=cp.getNVisa() %></textarea>
                 </div>
                 <br>  
                 <div>
                     안전정보 
-                    <br><textarea name="safebady" id="" cols="100" rows="30" value="<%=cp.getNSafety() %>" placeholder="안전정보 입력" ></textarea>
+                    <br><textarea name="safebady" id="" cols="100" rows="30" placeholder="안전정보 입력" ><%=cp.getNSafety() %></textarea>
                 </div>
                 <br>  
                 <div>
                     초기정착 
-                    <br><textarea name="homestay" id="" cols="100" rows="30" value="<%=cp.getNSettle() %>" placeholder="초기정착 입력" ></textarea>
+                    <br><textarea name="homestay" id="" cols="100" rows="30" placeholder="초기정착 입력" ><%=cp.getNSettle() %></textarea>
                 </div>
                 <br>  
                 <div>
                     취업정보 
-                    <br><textarea name="getjob" id="" cols="100" rows="30" value="<%=cp.getNJob() %>" placeholder="취업정보 입력" ></textarea>
+                    <br><textarea name="getjob" id="" cols="100" rows="30" placeholder="취업정보 입력" ><%=cp.getNJob() %></textarea>
                 </div>
                 <br>  
 			    <div id="twobu">
@@ -47,7 +47,7 @@
         </fieldset>
     </div>
     <style>
-    	#insertCountrypage{
+    	#updateCountrypage{
  			padding-left:25%;
 	    	padding-right:25%;
     	
