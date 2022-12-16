@@ -202,15 +202,54 @@
             }).scroll();
         });
         
-        const insurance=()=>{
+        const insurance=()=>{ //배너 연결
         	open("https://b2b.travelover.co.kr/insu/18572/b97e9f8e-925d-4ef7-89f7-afe6b54e92ac","_blank","width=500 height=500");
         }
         
-        const mobile=()=>{
+        const mobile=()=>{ //배너 연결
         	open("https://www.usimstore.com/shop/","_blank","width=500 height=500");
         }
         
-        
+       //팝업창 로직
+        function getCookie(name){
+            let Found = false;
+            let start, end;
+            let i = 0;
+
+            // cookie 문자열 전체를 검색
+            while(i <= document.cookie.length){
+                start = i;
+                end = start + name.length;
+                // name과 동일한 문자가 있다면
+                if(document.cookie.substring(start, end) == name){
+                    Found = true;
+                    break;
+                }i++;
+            };
+            // name 문자열을 cookie에서 찾았다면
+            if(Found == true) {
+                start = end + 1;
+                end = document.cookie.indexOf(";", start);
+            // 마지막 부분이라 는 것을 의미(마지막에는 ";"가 없다)
+
+                if(end < start) end = document.cookie.length;
+                    // name에 해당하는 value값을 추출하여 리턴한다.
+            return document.cookie.substring(start, end);
+            };
+        // 찾지 못했다면
+        return ""
+        }
+       
+        // 팝업 실행로직
+        function openMsgBox(){
+            let eventCookie=getCookie("memo");
+            if (eventCookie != "no")
+            	 window.name = "parentPopUp";
+            	 open("<%=request.getContextPath()%>/main/popup.do","_blank","resizable=no,width=320,height=350,top=200,left=250");
+            	 
+        };
+        openMsgBox();
+        //-->
     </script>
     <div id="wrap">
         <section>
@@ -230,7 +269,7 @@
                             <img src="images/회원가입사진.jpg" class="d-block w-100" alt="...">
                         
                         </div>
-                        <div class="carousel-item" onclick="location.assign('<%=request.getContextPath()%>/holiday/holiday.do')">>
+                        <div class="carousel-item" onclick="location.assign('<%=request.getContextPath()%>/holiday/holiday.do')">
                           <!--   <div class="textcontainer">
                                 <h3>워킹홀리데이란</h3>
                             </div>  -->
