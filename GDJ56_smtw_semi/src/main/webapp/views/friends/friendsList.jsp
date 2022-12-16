@@ -132,16 +132,7 @@
                      <!-- 페이지 바 -->
                      <nav aria-label="Page navigation example" style="margin-top:30px;color:rgba(221, 160, 221, 0.508) !important;">
                          <ul class="pagination justify-content-center" style="color:rgba(221, 160, 221, 0.508) !important;">
-                             <li class="page-item disabled"  style="color:rgba(221, 160, 221, 0.508) !important;">
-                               <a class="page-link" style="color:rgba(221, 160, 221, 0.508) !important;">이전</a>
-                             </li>
-                             <li class="page-item"><a class="page-link" href="#" style="color:rgba(221, 160, 221, 0.508) !important;">1</a></li>
-                             <li class="page-item"><a class="page-link" href="#" style="color:rgba(221, 160, 221, 0.508) !important;">2</a></li>
-                             <li class="page-item"><a class="page-link" href="#" style="color:rgba(221, 160, 221, 0.508) !important;">3</a></li>
-                             <li class="page-item"><a class="page-link" href="#" style="color:rgba(221, 160, 221, 0.508) !important;">4</a></li>
-                             <li class="page-item">
-                               <a class="page-link" href="#" style="color:rgba(221, 160, 221, 0.508) !important;">다음</a>
-                             </li>
+							<%=request.getAttribute("pageBar") %>
                          </ul>
                      </nav>
                  </div>
