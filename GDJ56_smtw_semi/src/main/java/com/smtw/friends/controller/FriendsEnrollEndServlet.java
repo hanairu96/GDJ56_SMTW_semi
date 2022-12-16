@@ -61,16 +61,19 @@ public class FriendsEnrollEndServlet extends HttpServlet {
 		int result=new FriendsService().insertFriends(f);
 		String msg="", loc="";
 		if(result>0) {
-			msg="프렌즈 등록 성공!";
-			loc="/friends/friendsList.do";
+			//msg="프렌즈 등록 성공!";
+			//request.setAttribute("msg", msg);
+			request.setAttribute("id", memberId);
+			RequestDispatcher rd=request.getRequestDispatcher("/views/friends/friendsAfterEnroll.jsp");
+			rd.forward(request, response);
 		}else {
 			msg="프렌즈 등록 실패!";
 			loc="/friends/friendsEnroll.do";
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			RequestDispatcher rd=request.getRequestDispatcher("/views/common/msg.jsp");
+			rd.forward(request, response);
 		}
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		RequestDispatcher rd=request.getRequestDispatcher("/views/common/msg.jsp");
-		rd.forward(request, response);
 	
 	}
 

@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.smtw.member.model.vo.Member" %>
+<%@ page import="com.smtw.member.model.vo.Member,java.util.List,com.smtw.notice.model.vo.Notice" %>
 <%
 	Member logInMember=(Member)session.getAttribute("logInMember");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,18 +42,18 @@
                 <li id="menuli">
                     <div class="hoversection">
                         <div>
-                            <a href=""><img src="<%=request.getContextPath()%>/images/워킹홀리데이란.png" alt="" width="60px" height="60px"></a>
+                            <a href="<%=request.getContextPath()%>/holiday/holiday.do"><img src="<%=request.getContextPath()%>/images/워킹홀리데이란.png" alt="" width="60px" height="60px"></a>
                         </div>
                         <div>
-                            <a href="001워킹홀리데이란.html">워킹홀리데이란?</a>
+                            <a href="<%=request.getContextPath()%>/holiday/holiday.do">워킹홀리데이란?</a>
                         </div>
                     </div>
                     <!-- 서브메뉴영역 -->
                     <div class="sub">
                         <ul class="submenu">
-                            <li><a href="001워킹홀리데이란.html">워킹홀리데이란?</a></li>
-                            <li><a href="">찾아오시는길</a></li>
-                            <li><a href="">Show me the way</a></li>
+                            <li><a href="<%=request.getContextPath()%>/holiday/holiday.do">워킹홀리데이란?</a></li>
+                            <li><a href="<%=request.getContextPath()%>/holiday/holidayRoad.do">찾아오시는길</a></li>
+                            <li><a href="<%=request.getContextPath()%>/holiday/holidaySMTW.do">Show me the way</a></li>
                         </ul>
                     </div>
                 </li>
@@ -92,10 +93,10 @@
                 <li id="menuli">
                     <div class="hoversection">
                         <div>
-                            <a href=""><img src="<%=request.getContextPath()%>/images/커뮤니티.png" alt="" width="60px" height="60px"></a>
+                            <a href="<%=request.getContextPath()%>/friends/friendsList.do"><img src="<%=request.getContextPath()%>/images/커뮤니티.png" alt="" width="60px" height="60px"></a>
                         </div>
                         <div>
-                            <a href="">커뮤니티</a>
+                            <a href="<%=request.getContextPath()%>/friends/friendsList.do">커뮤니티</a>
                         </div>
                     </div>
                     <!-- 서브메뉴영역 -->
@@ -165,17 +166,19 @@
     </div>
     <!-- 배너 -->
         <div id="banner" style="top: 350px;">
-            <div id="insurance" style="background-color: rgb(224, 185, 247);">
+            <a onclick="insurance();"><div id="insurance" style="background-color: rgb(224, 185, 247);">
                 <h5 class="txt-label">INSURANCE</h5>
                 <span class="txt-label" style="font-size: 11px">여행자(워홀) 보험</span>
-            </div>
-            <div id="mobile" style="background-color: rgb(247, 236, 186);">
+            </div></a>
+            
+            <a onclick="mobile();"><div id="mobile" style="background-color: rgb(247, 236, 186);">
                 <h5 class="txt-label">MOBILE</h5>
                 <span class="txt-label" style="font-size: 11px;">여행자 유심칩 공동구매</span>
-            </div>
-            <div id="myfly" style="background-color: rgb(181, 247, 211);">
+            </div></a>
+            
+             <a href="<%=request.getContextPath() %>/diary/firstDiary.do"><div id="myfly" style="background-color: rgb(181, 247, 211);">
                 <h5 class="txt-label">나의 출국일지</h5>
-            </div>
+            </div></a>
         </div>
     </header>
     
@@ -198,6 +201,16 @@
                 }, 500);
             }).scroll();
         });
+        
+        const insurance=()=>{
+        	open("https://b2b.travelover.co.kr/insu/18572/b97e9f8e-925d-4ef7-89f7-afe6b54e92ac","_blank","width=500 height=500");
+        }
+        
+        const mobile=()=>{
+        	open("https://www.usimstore.com/shop/","_blank","width=500 height=500");
+        }
+        
+        
     </script>
     <div id="wrap">
         <section>
@@ -210,30 +223,30 @@
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
                     </div>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="textcontainer">
+                        <div class="carousel-item active" onclick="location.assign('<%=request.getContextPath()%>/logIn/enrollAgree.do')">
+                           <!--  <div class="textcontainer">
                                 <h3>회원가입</h3>
-                            </div>
+                            </div> -->
                             <img src="images/회원가입사진.jpg" class="d-block w-100" alt="...">
                         
                         </div>
-                        <div class="carousel-item">
-                            <div class="textcontainer">
+                        <div class="carousel-item" onclick="location.assign('<%=request.getContextPath()%>/holiday/holiday.do')">>
+                          <!--   <div class="textcontainer">
                                 <h3>워킹홀리데이란</h3>
-                            </div>
+                            </div>  -->
                             <img src="https://img.freepik.com/premium-vector/illustration-map-of-the-world-with-flags-of-all-countries_37674-7.jpg?w=1380" class="d-block w-100" alt="...">
                         
                         </div>
-                        <div class="carousel-item">
-                            <div class="textcontainer">
+                        <div class="carousel-item" onclick="location.assign('<%=request.getContextPath()%>/country/countryMain.do')">
+                           <!--  <div class="textcontainer">
                                 <h3>국가정보</h3>
-                            </div>
+                            </div> -->
                             <img src="https://img.freepik.com/free-vector/global-travelling-abstract-concept-vector-illustration-global-insurance-world-trip-international-tourism-travel-agency-working-holiday-luxury-vacation-resort-chain-abstract-metaphor_335657-2953.jpg?w=826&t=st=1668756054~exp=1668756654~hmac=e2c0a85010a8ffb2c9d72fbe22c4eec5b55e28218e7bd4547aac02a7bf66e63c" class="d-block w-100" alt="...">
                         </div>
-                        <div class="carousel-item">
-                            <div class="textcontainer">
+                        <div class="carousel-item" onclick="location.assign('<%=request.getContextPath()%>/friends/friendsList.do')">
+                            <!-- <div class="textcontainer">
                                 <h3>워홀프렌즈찾기</h3>
-                            </div>
+                            </div> -->
                             <img src="https://post-phinf.pstatic.net/MjAyMDA3MjFfMTY1/MDAxNTk1MzIxODI2NTA2.5wzgcsDonhkKgJa43_pny5_f9mDAsAboVqoxT18P6BMg.oAYho8D61Kx2Tx8-5n_14DzOVTU_dy95xwNH9DEJDHYg.JPEG/tid354t000040.jpg?type=w1200" class="d-block w-100" alt="...">
                         </div>
                     </div>
@@ -254,22 +267,67 @@
             <div class="container2">
                 <div class="notice">
                     <h5 style="margin: 10px;"><b>공지사항</b></h5>
-                    <ul style="font-size: 14px">
-                        <li><a href="">워홀러들 자주 하는 질문</a></li>
-                        <li><a href="">취업비자? 학생비자? 관광비자? 알려드립니다</a></li>
-                        <li><a href="">10월 휴무일정</a></li>
-                        <li><a href="">코로나 19관련 외국정부의 한국 여행객에 대한 조치현황</a></li>
-                        <li><a href="">워킹홀리데이 참가자들 위한 "안전행동수칙" 12가지</a></li>
+                    <ul id="noticeListUl" style="font-size: 14px">
+<!--                         <li><a href="">워홀러들 자주 하는 질문</a></li> -->
+
                     </ul>
                 </div>
+                <script>
+                	$(()=>{
+                		//공지사항
+                		$.ajax({
+                			url:"<%=request.getContextPath()%>/main/mainNoticeList.do",
+                			success:data=>{
+                				if(data!=null){
+                					const ul=$("#noticeListUl");
+                					
+                					for(i=0;i<data.length;i++){
+	                					const li=$("<li>");
+	                					const a=$("<a href='<%=request.getContextPath()%>/notice/noticeList.do'>").text(data[i].noticeTitle);
+                						li.append(a);/* li태그에 a태그 넣기 */
+                					ul.append(li); 
+                					}
+                				}else{
+                					const ul=$("#noticeListUl");
+                					const li=$("<li>");
+                					const a=$("<a>").text("데이터가 없습니다.");
+                					
+                					li.append(a); /* li태그에 a태그 넣기 */
+                					ul.append(li);
+                				}
+                			}
+                		});
+                		//질문하기 
+                		$.ajax({
+                			url:"<%=request.getContextPath()%>/main/mainQnaList.do",
+                			success:data=>{
+                				if(data!=null){
+                					const ul=$("#qnaListUl");
+                					
+                					for(i=0;i<data.length;i++){
+	                					const li=$("<li>");
+	                					const a=$("<a href='<%=request.getContextPath()%>/qna/qnaList.do'>").text(data[i].reviewTitle);
+                						li.append(a);/* li태그에 a태그 넣기 */
+                					ul.append(li); 
+                					}
+                				}else{
+                					const ul=$("#qnaListUl");
+                					const li=$("<li>");
+                					const a=$("<a>").text("데이터가 없습니다.");
+                					
+                					li.append(a); /* li태그에 a태그 넣기 */
+                					ul.append(li);
+                				}
+                			}
+                		});
+                		
+                	});
+                </script>
+                
                 <div class="notice">
-                    <h5 style="margin: 10px;"><b>자료실</b></h5>
-                    <ul style="font-size: 14px">
-                        <li><a href="">워홀러들 자주 하는 질문</a></li>
-                        <li><a href="">취업비자? 학생비자? 관광비자? 알려드립니다</a></li>
-                        <li><a href="">10월 휴무일정</a></li>
-                        <li><a href="">코로나 19관련 외국정부의 한국 여행객에 대한 조치현황</a></li>
-                        <li><a href="">워킹홀리데이 참가자들 위한 "안전행동수칙" 12가지</a></li>
+                    <h5 style="margin: 10px;"><b>질문하기</b></h5>
+                    <ul id="qnaListUl" style="font-size: 14px">
+                    
                     </ul>
                 </div>
             </div>
@@ -319,7 +377,7 @@
         <!-- 하단 로고 영역 -->
         <section>
             <div id="mainlogo">
-                <img src="images/logo.png" alt="" width="1180" height="230px">
+                <img src="images/logo.png" alt="" width="1350" height="230px">
             </div>
         </section>
 

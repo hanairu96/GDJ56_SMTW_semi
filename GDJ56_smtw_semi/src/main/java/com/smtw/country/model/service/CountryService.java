@@ -22,6 +22,13 @@ public class CountryService {
 		return result;
 	}
 	
+	public List<Country> searchList(){
+		Connection conn=getConnection();
+		List<Country> result=dao.searchList(conn);
+		close(conn);
+		return result;
+	}
+	
 	//페이징처리
 	public int searchCountryCount() {
 		Connection conn=getConnection();

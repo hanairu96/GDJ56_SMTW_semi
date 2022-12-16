@@ -32,7 +32,6 @@ public class insertGoCountryInfoServlet extends HttpServlet {
 
 		
 		String name=request.getParameter("nName");
-		
 	
 		request.setAttribute("name", name);
 		request.getRequestDispatcher("/views/countryInfo/insertcountryinfo.jsp").forward(request,response);

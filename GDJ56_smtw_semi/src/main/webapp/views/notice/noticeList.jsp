@@ -3,7 +3,6 @@
 <%@ page import="com.smtw.member.model.vo.Member,java.util.List,com.smtw.notice.model.vo.Notice" %>
 <%
 	List<Notice> list=(List<Notice>)request.getAttribute("notices");
-// 	List<Notice> searchList=(List<Notice>)request.getAttribute("searchList");
 %>
 <%@ include file="/views/common/header.jsp" %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/noticeList.css"/>

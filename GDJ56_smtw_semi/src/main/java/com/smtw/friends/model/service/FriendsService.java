@@ -48,9 +48,9 @@ public class FriendsService {
 		return m;
 	}
 	
-	public int deleteFriends(int no) {
+	public int deleteFriends(String id) {
 		Connection conn=getConnection();
-		int result=dao.deleteFriends(conn, no);
+		int result=dao.deleteFriends(conn, id);
 		close(conn);
 		return result;
 	}
@@ -58,6 +58,13 @@ public class FriendsService {
 	public int insertFriends(Friends f) {
 		Connection conn=getConnection();
 		int result=dao.insertFriends(conn, f);
+		close(conn);
+		return result;
+	}
+	
+	public int updateFriends(Friends f) {
+		Connection conn=getConnection();
+		int result=dao.updateFriends(conn, f);
 		close(conn);
 		return result;
 	}

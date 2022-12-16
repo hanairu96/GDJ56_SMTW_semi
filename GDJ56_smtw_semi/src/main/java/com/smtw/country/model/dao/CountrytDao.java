@@ -54,19 +54,30 @@ public class CountrytDao {
 	}
 	
 	
-	public static CountryPageInfo getContryInfo(ResultSet rs) throws SQLException{
-		return CountryPageInfo.builder()
-				.nName(rs.getString("N_NAME"))
-				.cLanguage(rs.getString("C_LANGUAGE"))
-				.urban(rs.getString("URBAN"))
-				.money(rs.getString("MONEY"))
-				.elect(rs.getString("ELECT"))
-				.mapAddress(rs.getString("MAPADDRESS"))
-				.englishName(rs.getString("ENGLISHNAME"))
-				.clock(rs.getString("CLOCK"))
-				.cPic(rs.getString("C_PIC"))
-				.build();
+	//국가 및 지역정보 메인페이지에 리스트를 전부 출력하기 위한 로직
+	public List<Country> searchList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Country> c=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("searchList"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+//				c.add(getCountry(rs));
+				Country co=getCountry(rs);
+				co.setInfo(getContryInfo(rs));
+				c.add(co);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return c;
+		
+		
 	}
+	
 	
 	//페이징처리
 	public int searchCountryCount(Connection conn) {
@@ -83,7 +94,6 @@ public class CountrytDao {
 			close(rs);
 			close(pstmt);
 		}return count;
-		
 	}
 	
 	
@@ -96,6 +106,20 @@ public class CountrytDao {
 				.nSeason(rs.getString("N_SEASON"))
 				.nImg(rs.getString("N_IMG"))
 				.npharse(rs.getString("N_PHARSE"))
+				.build();
+	}
+	
+	public static CountryPageInfo getContryInfo(ResultSet rs) throws SQLException{
+		return CountryPageInfo.builder()
+				.nName(rs.getString("N_NAME"))
+				.cLanguage(rs.getString("C_LANGUAGE"))
+				.urban(rs.getString("URBAN"))
+				.money(rs.getString("MONEY"))
+				.elect(rs.getString("ELECT"))
+				.mapAddress(rs.getString("MAPADDRESS"))
+				.englishName(rs.getString("ENGLISHNAME"))
+				.clock(rs.getString("CLOCK"))
+				.cPic(rs.getString("C_PIC"))
 				.build();
 	}
 	

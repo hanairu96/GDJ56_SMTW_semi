@@ -9,8 +9,11 @@
 	            <legend><h1 style="text-align: centers;">국가정보 입력페이지</h1></legend>
 	                <div>
 	                    나라이름 <br>
-	                    <select name="selectco" id="" >
-	                        <option value="네덜란드">네덜란드</option>
+	                    <select name="selectco" id="selectco" style="width:150px;height:30px;">
+	                    	<option disabled>--선택하세요--</option>
+	                    	<option value="self">나라직접입력</option>
+	                    	<option disabled>--24개국중선택--</option>
+	                        <option value="네덜란드" selected>네덜란드</option>
 	                        <option value="뉴질랜드">뉴질랜드</option>
 	                        <option value="대만">대만</option>
 	                        <option value="덴마크">덴마크</option>
@@ -34,6 +37,22 @@
 	                        <option value="호주">호주</option>
 	                        <option value="홍콩">홍콩</option>
 	                    </select>   
+						<input type="text" name="selfname" id="writeoption">
+
+                   	<script>
+                   		$(function(){
+                   			console.log($("#writeoption"));
+                   			$("#writeoption").hide();
+                   			$("#selectco").change(function(){
+                   				if($("#selectco").val()=="self"){
+                   					$("#writeoption").show();
+                   				}else{
+                   					$("#writeoption").hide();
+                   				}
+               				});
+               			})
+                   	
+                   	</script>
 	                </div>
 	                <br>
 	                <div>

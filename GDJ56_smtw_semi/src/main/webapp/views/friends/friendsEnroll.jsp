@@ -18,8 +18,8 @@
 
         <div style="height:700px">
             <div style="display:flex">
-                <div style="border:1px solid yellow;width:300px;height:700px">
-                    <div style="border:1px solid blue;width:270px;height:350px">
+                <div style="border:0px solid yellow;width:300px;height:700px">
+                    <div style="border:0px solid blue;width:270px;height:350px">
                         <header class="header" role="banner">
                             <div id="sideMenu">
                                 <h1 class="sidelogo">
@@ -156,96 +156,97 @@
                 </style>
                 
                 <form id="enrollForm" action="<%=request.getContextPath()%>/friends/friendsEnrollEnd.do">
-                <div style="border:1px solid red;width:910px;height:695px;display:flex;margin-left:50px; ">
+                <div style="border:0px solid red;width:910px;height:695px;display:flex;margin-left:50px; ">
                     <div style="display:flex">
-                        <div style="border:1px solid green;width:900px;height:690px ">
-                            <div style="border:1px solid pink;width:880px;height:200px;display:flex;">
-                                <div  style="border:1px solid rgb(210, 243, 21);width:300px;">
+                        <div style="border:0px solid green;width:900px;height:690px ">
+                            <div style="border:0px solid pink;width:880px;height:200px;display:flex;">
+                                <div  style="border:0px solid rgb(210, 243, 21);width:300px;">
                                     <img src="<%=request.getContextPath() %>/images/lupy.jpg" alt="" style="width:65%;height:90%;margin:auto; display: block;border-radius:120px;">
                                 </div>
-                                <div style="border:1px solid rgb(210, 243, 21);width:300px;">
+                                <div style="border:0px solid rgb(210, 243, 21);width:300px;">
                                 	<br><br>
-                                	<div style="border:1px solid blueviolet;width:300px;height:30px;text-align:left ">
+                                	<div style="border:0px solid blueviolet;width:300px;height:30px;text-align:left ">
                                         <b>제목</b> : <input type="text" name="title" placeholder="제목을 입력하세요.">
                                     </div>
-                                    <div style="border:1px solid blueviolet;width:300px;height:30px;text-align:left ">
+                                    <div style="border:0px solid blueviolet;width:300px;height:30px;text-align:left ">
                                         <b>이름</b> : <%=logInMember.getMemberName() %>
                                     </div>
-                                    <div style="border:1px solid blueviolet;width:300px;height:30px;text-align:left ">
+                                    <div style="border:0px solid blueviolet;width:300px;height:30px;text-align:left ">
                                    		<b>성별</b> : <%=(logInMember.getGender()=='M')?"남자":"여자" %>
                                		</div>
                                 </div>
-                                <div style="border:1px solid rgb(210, 243, 21);width:300px;">
+                                <div style="border:0px solid rgb(210, 243, 21);width:300px;">
 
                                 </div>
                             </div>
-                            <div style="border:1px solid pink;width:880px;height:580px;text-align: center; ">
-                                <div style="border:1px solid blueviolet;width:800px;height:30px;text-align:left ">
+                            <div style="border:0px solid pink;width:880px;height:580px;text-align: center; ">
+                                <div style="border:0px solid blueviolet;width:800px;height:30px;text-align:left ">
                                     <b>MBTI</b> : <input type="text" name="mbti" style="margin-top:0px;" placeholder="대문자로 입력해주세요.">
                                </div>
-                               <div style="border:1px solid blueviolet;width:800px;height:150x;text-align:left">
+                               <div style="border:0px solid blueviolet;width:800px;height:150x;text-align:left">
                                     <label><b>희망국가</b></label>
                                         <table>
                                             <tr>
-                                                <td><input type="checkbox" name="nation" value="네덜란드">네덜란드</td>
-                                                <td><input type="checkbox" name="nation" value="스웨덴">스웨덴</td>
-                                                <td><input type="checkbox" name="nation" value="이스라엘">이스라엘</td>
-                                                <td><input type="checkbox" name="nation" value="포르투갈">포르투갈</td>
+                                                <td><input type="radio" name="nation" value="네덜란드">네덜란드</td>
+                                                <td><input type="radio" name="nation" value="스웨덴">스웨덴</td>
+                                                <td><input type="radio" name="nation" value="이스라엘">이스라엘</td>
+                                                <td><input type="radio" name="nation" value="포르투갈">포르투갈</td>
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" name="nation" value="뉴질랜드">뉴질랜드</td>
-                                                <td><input type="checkbox" name="nation" value="스페인">스페인</td>
-                                                <td><input type="checkbox" name="nation" value="이탈리아">이탈리아</td>
-                                                <td><input type="checkbox" name="nation" value="폴란드">폴란드</td>
+                                                <td><input type="radio" name="nation" value="뉴질랜드">뉴질랜드</td>
+                                                <td><input type="radio" name="nation" value="스페인">스페인</td>
+                                                <td><input type="radio" name="nation" value="이탈리아">이탈리아</td>
+                                                <td><input type="radio" name="nation" value="폴란드">폴란드</td>
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" name="nation" value="대만">대만</td>
-                                                <td><input type="checkbox" name="nation" value="아르헨티나">아르헨티나</td>
-                                                <td><input type="checkbox" name="nation" value="일본">일본</td>
-                                                <td><input type="checkbox" name="nation" value="프랑스">프랑스</td>
+                                                <td><input type="radio" name="nation" value="대만">대만</td>
+                                                <td><input type="radio" name="nation" value="아르헨티나">아르헨티나</td>
+                                                <td><input type="radio" name="nation" value="일본">일본</td>
+                                                <td><input type="radio" name="nation" value="프랑스">프랑스</td>
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" name="nation" value="덴마크">덴마크</td>
-                                                <td><input type="checkbox" name="nation" value="아일랜드">아일랜드</td>
-                                                <td><input type="checkbox" name="nation" value="체코">체코</td>
-                                                <td><input type="checkbox" name="nation" value="헝가리">헝가리</td>
+                                                <td><input type="radio" name="nation" value="덴마크">덴마크</td>
+                                                <td><input type="radio" name="nation" value="아일랜드">아일랜드</td>
+                                                <td><input type="radio" name="nation" value="체코">체코</td>
+                                                <td><input type="radio" name="nation" value="헝가리">헝가리</td>
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" name="nation" value="독일">독일</td>
-                                                <td><input type="checkbox" name="nation" value="영국">영국</td>
-                                                <td><input type="checkbox" name="nation" value="칠레">칠레</td>
-                                                <td><input type="checkbox" name="nation" value="호주">호주</td>
+                                                <td><input type="radio" name="nation" value="독일">독일</td>
+                                                <td><input type="radio" name="nation" value="영국">영국</td>
+                                                <td><input type="radio" name="nation" value="칠레">칠레</td>
+                                                <td><input type="radio" name="nation" value="호주">호주</td>
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" name="nation" value="벨기에">벨기에</td>
-                                                <td><input type="checkbox" name="nation" value="오스트리아">오스트리아</td>
-                                                <td><input type="checkbox" name="nation" value="캐나다">캐나다</td>
-                                                <td><input type="checkbox" name="nation" value="홍콩">홍콩</td>
+                                                <td><input type="radio" name="nation" value="벨기에">벨기에</td>
+                                                <td><input type="radio" name="nation" value="오스트리아">오스트리아</td>
+                                                <td><input type="radio" name="nation" value="캐나다">캐나다</td>
+                                                <td><input type="radio" name="nation" value="홍콩">홍콩</td>
                                             </tr>
                                         </table>
                                 </div>
-                                <div style="border:1px solid blueviolet;width:800px;height:30px;text-align:left ">
+                                <div style="border:0px solid blueviolet;width:800px;height:30px;text-align:left ">
                                     <b>취향</b> : <input type="radio" name="type" value="집순이">집순이&nbsp 
                                     <input type="radio" name="type" value="밖돌이">밖돌이
                                </div>
-                               <div style="border:1px solid blueviolet;width:800px;height:30px;text-align:left ">
+                               <div style="border:0px solid blueviolet;width:800px;height:30px;text-align:left ">
                                 	<b>워홀경험자</b> : <input type="radio" name="expYn" value="Y">경험자&nbsp
                                 	<input type="radio" name="expYn" value="N">비경험자
                                 </div>
-                                <div style="border:1px solid blueviolet;width:800px;height:30px;text-align:left ">
+                                <div style="border:0px solid blueviolet;width:800px;height:30px;text-align:left ">
                                     <b>목적</b> : <input type="checkbox" value="스터디">스터디&nbsp
                                     <input type="checkbox" name="purpose" value="여행">여행&nbsp
                                     <input type="checkbox" name="purpose" value="워홀준비">워홀준비&nbsp
                                     <input type="checkbox" name="purpose" value="기타">기타
                                  </div>
-                                 <div style="border:1px solid blueviolet;width:452px;height:25px;text-align:left">
+                                 <div style="border:0px solid blueviolet;width:452px;height:25px;text-align:left">
                                     <b>자기소개글</b>
                                 </div>
-                                <div style="border:1px solid blueviolet;width:820px;height:200px;text-align:left">
-                                    <textarea name="friendsContents" cols="80" rows="8" style="margin-top:10px;" placeholder="내용을 입력해주세요."></textarea>
+                                <div style="border:0px solid blueviolet;width:820px;height:200px;text-align:left">
+                                    <textarea name="friendsContents" cols="80" rows="8" style="margin-top:10px;resize:none;" placeholder="내용을 입력해주세요."></textarea>
+			                    	<p>친구 요청을 수락하면 서로 쪽지 보내기가 가능합니다. 친구를 맺어 대화를 나누세요!</p>
                                 </div>
                                 <input type="hidden" name="memberId" value="<%=logInMember.getMemberId() %>">
-                                <input type="submit"> <!-- style="display: none"> -->
+                                <input type="submit" style="display: none">
                             </div>
                         </div>
                     </div>
@@ -254,11 +255,11 @@
 
         </div>
         <br><br>
-        <div style="display:flex; border:1px solid rgb(15, 231, 231);width:100%;height:75px">
-            <div style="border:1px solid yellow;width:400px;height:60px"></div>
-            <div style="border:1px solid yellow;width:400px;height:60px"></div>
-            <div style="border:1px solid yellow;width:400px;height:60px;">
-                <div style="border:1px solid yellow;width:400px;height:60px;display: inline-flex;align-items:center; ">
+        <div style="display:flex; border:0px solid rgb(15, 231, 231);width:100%;height:75px">
+            <div style="border:0px solid yellow;width:400px;height:60px"></div>
+            <div style="border:0px solid yellow;width:400px;height:60px"></div>
+            <div style="border:0px solid yellow;width:400px;height:60px;">
+                <div style="border:0px solid yellow;width:400px;height:60px;display: inline-flex;align-items:center; ">
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <button onclick="enroll_friend(this.form);" class="customBtn btnStyle btn btn-primary" type="button" style=" margin-left:250px;background-color: rgba(221, 160, 221, 0.508) !important;" value="등록">등록</button>
                         <button onclick="cancel_friend();" class="customBtn btnStyle btn btn-primary" type="button" style=" background-color: rgba(221, 160, 221, 0.508) !important;" value="취소">취소</button>

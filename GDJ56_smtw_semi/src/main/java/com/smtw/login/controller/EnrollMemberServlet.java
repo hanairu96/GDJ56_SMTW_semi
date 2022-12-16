@@ -26,6 +26,12 @@ public class EnrollMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(request.getParameter("emailAgree"));
+		char emailAgree=request.getParameter("emailAgree").charAt(0); //이메일 수신 동의 여부
+		System.out.println(emailAgree);
+		
+		request.setAttribute("emailAgree", emailAgree);
+		
 		request.getRequestDispatcher("/views/logIn/enrollMember.jsp").forward(request, response);
 	}
 

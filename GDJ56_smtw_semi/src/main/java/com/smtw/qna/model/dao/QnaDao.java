@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.smtw.notice.model.vo.Notice;
 import com.smtw.qna.model.vo.Qna;
 
 public class QnaDao {
@@ -66,6 +67,81 @@ public class QnaDao {
 			close(pstmt);
 		}return count;
 	}
+	
+	//Q&A 글 작성-> DB에 저장
+	public int insertQna(Connection conn,String writer,String title,String contents) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertQna"));
+			pstmt.setString(1, writer);
+			pstmt.setString(2, title);
+			pstmt.setString(3, contents);
+			
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	//제목,내용,작성자 별 검색
+		public List<Qna> searchQna(Connection conn, String option,String qna,int cPage,int numPerpage){
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			List<Qna> list=new ArrayList();
+			
+			String query=sql.getProperty("searchQna");
+			query=query.replace("$COL", option);
+			
+			try {
+				pstmt=conn.prepareStatement(query);
+				pstmt.setString(1,"%"+qna+"%");
+				pstmt.setInt(2, (cPage-1)*numPerpage+1);
+				pstmt.setInt(3, cPage*numPerpage);
+				
+				rs=pstmt.executeQuery();
+				
+				while(rs.next()) {
+					list.add(getQna(rs));
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}return list;
+		}
+		
+		public int selectQnaCount(Connection conn,String option,String qna) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			int result=0;
+			String query=sql.getProperty("selectQnaCountKeyword");
+			query=query.replace("$COL", option);
+			try {
+				pstmt=conn.prepareStatement(query);
+				pstmt.setString(1,"%"+qna+"%");
+				rs=pstmt.executeQuery();
+
+				if(rs.next()) result=rs.getInt(1);
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}return result;
+		}
+	
+	
+	
+	
+	
+	
 	
 	public static Qna getQna(ResultSet rs) throws SQLException {
 		return Qna.builder()

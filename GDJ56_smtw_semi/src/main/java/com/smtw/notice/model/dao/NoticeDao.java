@@ -137,6 +137,45 @@ public class NoticeDao {
 		}return result;
 	}
 	
+	//게시물 클릭시 그 게시물로 이동
+	public Notice selectNoticeNo(Connection conn, int noticeNo){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Notice n=null;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectNoticeNo"));
+			pstmt.setInt(1, noticeNo);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) n=getNotice(rs);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return n;
+	}
+	
+	public int updateNotice(Connection conn,String title,String contents,int noticeNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("updateNotice"));
+			pstmt.setString(1, title);
+			pstmt.setString(2, contents);
+			pstmt.setInt(3, noticeNo);
+			
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 	
 	
 	

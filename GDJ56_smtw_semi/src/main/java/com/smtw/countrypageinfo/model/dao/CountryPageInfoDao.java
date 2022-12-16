@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.smtw.country.model.vo.CountryPage;
 import com.smtw.country.model.vo.CountryPageInfo;
 
 public class CountryPageInfoDao {
@@ -103,7 +104,7 @@ public class CountryPageInfoDao {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("uodateinfo"));
+			pstmt=conn.prepareStatement(sql.getProperty("updateinfo"));
 			pstmt.setString(1, c.getCLanguage());
 			pstmt.setString(2, c.getUrban());
 			pstmt.setString(3,c.getMoney());
@@ -124,5 +125,54 @@ public class CountryPageInfoDao {
 	
 	
 	
+	//CountryPage의 dao항목들
+	public List<CountryPage> selectContent(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<CountryPage> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectContent"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) list.add(getCountryPage(rs));
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+		
+	}
+	
+	public static CountryPage getCountryPage(ResultSet rs) throws SQLException{
+		return CountryPage.builder()
+				.nName(rs.getString("N_NAME"))
+				.nInfo(rs.getString("N_INFO"))
+				.nVisa(rs.getString("N_VISA"))
+				.nSafety(rs.getNString("N_SAFETY"))
+				.nSettle(rs.getString("N_SETTLE"))
+				.nJob(rs.getString("N_JOB"))
+				.build();
+	}		
+	
+	
+	public int insertContent(Connection conn, CountryPage c) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertct"));
+			pstmt.setString(1, c.getNName());
+			pstmt.setString(2, c.getNInfo());
+			pstmt.setString(3,c.getNVisa());
+			pstmt.setString(4, c.getNSafety());
+			pstmt.setString(5, c.getNSettle());
+			pstmt.setString(6, c.getNJob());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 	
 }

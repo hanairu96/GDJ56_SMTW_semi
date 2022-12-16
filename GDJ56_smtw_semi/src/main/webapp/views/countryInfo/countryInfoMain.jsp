@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.List,com.smtw.country.model.vo.CountryPageInfo" %>
+<%@ page import="com.smtw.country.model.vo.CountryPage" %>
 <%
 	List<CountryPageInfo> info=(List<CountryPageInfo>)request.getAttribute("coinfo");
 	String name=(String)request.getAttribute("name");
+	List<CountryPage> coinfo=(List<CountryPage>)request.getAttribute("info");
 %>
 <%@ include file="/views/common/header.jsp" %>
 <section>
@@ -69,7 +71,7 @@
     
     
 		section{
-            border: 1px solid tomato;
+          /*   border: 1px solid tomato; */
             
             margin-left: 50px;
             margin-right: 50px;
@@ -95,12 +97,12 @@
     <%for(CountryPageInfo c : info) { 
     
     	if(c.getNName().equals(name)){
-    	%>
-
-
+    	
+    		 if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
     	    <div id="twobu">
         		<button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/updatego.do?nName=<%=c.getNName()%>')"><span>국가정보 수정</span></button>
    			</div>
+   			<%} %>
     <p style="font-size: 13px; text-align: center;"></p>
     
     	
@@ -137,7 +139,20 @@
             </div>
         </div>
     </div>
-
+    
+    
+  <%if(coinfo==null){ %>
+      <div id="buttoncollect">
+        <input type="button" name="button" value="국가/지역소개">
+        <input type="button" name="button" value="워홀비자">
+        <input type="button" name="button" value="안전정보">
+        <input type="button" name="button" value="초기정착">
+        <input type="button" name="button" value="취업정보">      
+      <div id="explain">
+  						내용없음
+  <%}else{%>
+  
+   	<% for(CountryPage cc : coinfo){%>
     <div id="buttoncollect">
         <input type="button" name="button" value="국가/지역소개">
         <input type="button" name="button" value="워홀비자">
@@ -146,15 +161,21 @@
         <input type="button" name="button" value="취업정보">      
         <div id="explain">
             <pre>
-                내용입력
+  				<%=cc.getNInfo() %>	
             </pre>
         </div>
     </div>
+    <%}
+   	} %>
+    
+    
+	    
+	<%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
     <div id="twobu">
-        <button class="customBtn btnStyle"><span>추가</span></button>
-		
+        <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goInsertContext.do?nName=<%=c.getNName()%>')"><span>추가</span></button>
+        <button class="customBtn btnStyle"><span>수정</span></button>
     </div>
-
+		<%} %>
 	<style>
 		#twobu>button{
     		width:110px;
@@ -286,11 +307,6 @@
             //                          ㄴ영국기준으로 시차 변경해주세요
         },1000);
     </script>
-    
-<%-- 	    <%}else{%>
-	    	<h1>조회된 결과가 없습니다.</h1>
-	    <%} --%>
-    
     <%}
     }%>
 </section>

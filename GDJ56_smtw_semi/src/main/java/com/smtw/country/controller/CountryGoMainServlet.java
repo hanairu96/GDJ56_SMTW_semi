@@ -82,7 +82,10 @@ public class CountryGoMainServlet extends HttpServlet {
 		
 		
 		request.setAttribute("country", country);
-
+		
+		List<Country> list=new CountryService().searchList();
+		request.setAttribute("list",list);
+//		System.out.println(list);
 		request.getRequestDispatcher("/views/country/countrymainview.jsp").forward(request, response);
 	
 	}
