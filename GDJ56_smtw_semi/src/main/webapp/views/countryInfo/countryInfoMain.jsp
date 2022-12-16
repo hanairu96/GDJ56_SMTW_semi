@@ -8,6 +8,7 @@
 	List<CountryPage> coinfo=(List<CountryPage>)request.getAttribute("info");
 %>
 <%@ include file="/views/common/header.jsp" %>
+<script defer src="https://use.fontawesome.com/releases/v5.15.2/js/all.js" integrity="sha384-vuFJ2JiSdUpXLKGK+tDteQZBqNlMwAjhZ3TvPaDfN9QmbPb7Q8qUpbSNapQev3YF" crossorigin="anonymous"></script>
 <section>
   <style>
         #wrapper{
