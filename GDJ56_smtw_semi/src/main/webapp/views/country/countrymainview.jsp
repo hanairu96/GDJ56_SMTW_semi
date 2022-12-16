@@ -76,48 +76,33 @@
 
 
 <section>
-        <h1 style="text-align: center;  font-size:40px;">국가 및 지역 정보</h1>
-	            <div id="countrymenu2">
-	            <%if(list.isEmpty()) {%>
-	            	나라를 추가해주세요!! -> <button id="btnbtn" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/insertgo.do')"><span>국가 추가</span></button>
-	            <%}else{
-	            	for(Country c : list){%>
-	                <ul>
-	                	
-	                    <li><a href="<%=request.getContextPath()%>/countryinfo/searchAll.do?nName=<%=c.getNName() %>"><%=c.getNName() %></a></li>
-	                   
-	                </ul>    
-	                
-                <%}
-            	}%>
+	<h1 style="text-align: center;  font-size:40px;">국가 및 지역 정보</h1>
+		<div id="countrymenu2">
+	            
+	        <%if(list.isEmpty()) {%>
+	        	나라를 추가중입니다!!
+	        <%}else{%>
+	            	<ul>
+	           	<%for(Country c : list){%>
+	                    <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN"))  {%>
+                    		<li><a href="<%=request.getContextPath()+(c.getInfo().getMoney()==null?"/country/updateCountry.do?nName=":"/countryinfo/searchAll.do?nName=")+c.getNName() %>"><%=c.getNName() %></a></li>
+                   		<%}else{
+							if(c.getInfo().getMoney()==null){%>
+                    		<li><a href="" onclick="nonono();"><%=c.getNName() %></a></li>
+	                    	<%}else{ %>
+                    		<li><a href="<%=request.getContextPath()%>/countryinfo/searchAll.do?nName=<%=c.getNName() %>"><%=c.getNName() %></a></li>
+	                    	<%}%>
+                	 <%}
+	               }%>
+                </ul>    
+            	<%}%>
+            	
 	            </div>
-<!-- 	                    <li><a href="">뉴질랜드</a></li>
-	                    <li><a href="">대만</a></li>
-	                    <li><a href="">덴마크</a></li>
-	                    <li><a href="">독일</a></li>
-	                    <li><a href="">벨기에</a></li>
-	                    <li><a href="">스웨덴</a></li>
-	                    <li><a href="">스페인</a></li>
-	                    <li><a href="">아르헨티나</a></li>
-	                    <li><a href="">아일랜드</a></li>
-	                    <li><a href="">영국</a></li>
-	                    <li><a href="">오스트리아</a></li>
-	                    
-	                </ul> -->
-	    <!--             <ul>
-	                    <li><a href="">이스라엘</a></li>
-	                    <li><a href="">이탈리아</a></li>
-	                    <li><a href="">일본</a></li>
-	                    <li><a href="">체코</a></li>
-	                    <li><a href="">칠레</a></li>
-	                    <li><a href="">캐나다</a></li>
-	                    <li><a href="">포르투칼</a></li>
-	                    <li><a href="">폴란드</a></li>
-	                    <li><a href="">프랑스</a></li>
-	                    <li><a href="">헝가리</a></li>
-	                    <li><a href="">호주</a></li>
-	                    <li><a href="">홍콩</a></li>
-	                </ul> -->
+	            <script>
+	            	const nonono=()=>{
+						alert("나라정보를 업데이트중입니다!!!");	
+	            	}		
+				</script>
 	      
         <div id="comaincontainer2"> 
 	        <%if(con.isEmpty()) {%>
@@ -132,10 +117,23 @@
 	                    <img src="<%=request.getContextPath()%>/images/country/noimage_view.png"  alt="" style="width: 370px; height:250px;" >
 	                    <div id="likenameinfo">
 	                        <div id="likename2">
+	                        <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN"))  {%>
 	                            <p id="font1" style="font-size:30px;">
 	                            <a href="<%=request.getContextPath()+(con.get(i).getInfo().getMoney()==null?"/countryInfo/insergo.do?nName=":"/countryinfo/searchAll.do?nName=")+con.get(i).getNName()%>">
-	                                            
-	                            <%=con.get(i).getNName() %></a></p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <%}else{
+                            	if(con.get(i).getInfo().getMoney()==null){%>
+                            	<p id="font1" style="font-size:30px;">
+	                    		<a href="" onclick="nonono()">
+		                    	<%}else{ %>
+		                    	<p id="font1" style="font-size:30px;">
+	                    		<a href="<%=request.getContextPath()%>/countryinfo/searchAll.do?nName=<%=con.get(i).getNName() %>">
+		                    	<%}%>
+                            <%}%>    
+                            
+	                            <%=con.get(i).getNName()%></a></p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	                            
+	                            
+	                            
 	                        	<div id="likebtn">
 		                            <button id="like2">좋아요</button>
 	                        	</div>	    
