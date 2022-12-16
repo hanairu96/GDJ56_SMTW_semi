@@ -37,7 +37,7 @@ public class mypageNoteReceiveServlet extends HttpServlet {
 		List<Note> list = new MypageService().noteList(id);
 		System.out.println(list);
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("/views/mypage/mypageNoteReceive.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/mypage/mypagenotereceive.jsp").forward(request, response);
 		
 	}
 

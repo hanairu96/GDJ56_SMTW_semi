@@ -34,7 +34,7 @@ public class mypageAccountUpdateServlet extends HttpServlet {
 		System.out.println("불러와짐??"+userId);
 		Member m = new MypageService().memberInfo(userId);
 		System.out.println("다시?");
-		if(!m.getAddress().equals("(),")) {
+		if(m.getAddress().length()>6) {
 		String address=m.getAddress();
 		String postcode=address.substring(1, 6);
 		System.out.println("우편번호:"+postcode);

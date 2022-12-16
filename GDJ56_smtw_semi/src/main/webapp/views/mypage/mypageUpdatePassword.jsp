@@ -20,13 +20,12 @@ out.print(userId);
             <div class="contentList">
                 <div id="menutitle"><h2 style="background-color: cornflowerblue;">계정 관리</h2></div>
             <div id="pwck">
-            <p>현재 비밀번호 입력 후, 변경할 비밀번호를 입력해주세요</p>
+            <p>message : 변경할 비밀번호를 입력해주세요</p>
            	
-           <form action="<%=request.getContextPath()%>/mypage/mypagePasswordUpdateEnd.do" method="post" onsubmit="return passwordCheck()";>
+            <form action="<%=request.getContextPath()%>/mypage/mypagePasswordUpdateEnd.do" method="post" onsubmit="return passwordCheck()";>
            	
            	 <input type="hidden" name="id" value="<%=userId%>">
-             현재 비밀번호<input type="password" name="password" id="password" required> <br><br>
-             새로운 비밀번호 <input type="password" name="password_new" id="password_chk" value="" required><br><br>
+             새로운 비밀번호 <input type="password" name="password_new" id="password_new" value="" required><br><br>
              새로운 비밀번호 확인<input type="password" name="password_chk" value="" required>
             <input type="submit" name="submit" id="" value="취소">
             <input type="submit" name="submit" id="" value="입력">
