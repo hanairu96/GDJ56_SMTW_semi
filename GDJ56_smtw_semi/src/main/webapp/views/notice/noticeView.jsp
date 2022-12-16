@@ -20,7 +20,9 @@
                                         <table id="tbl-notice">
                                         <tr>
                                             <td style="border-left: 0px; padding-left: 40px;" colspan="2">
-                                                <a href="" ><small>&raquo;&nbsp;공지사항</small></a>
+                                                <a href="<%=request.getContextPath() %>/notice/noticeList.do" style="color:  #7e8cd2">
+                                                	<small>&raquo;&nbsp;공지사항</small>
+                                                </a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -30,7 +32,7 @@
                                         
                                         <tr>
                                             <th>작성자</th>
-                                            <td><span id="insertWriter"><%=n.getMemberId()%></span></td>
+                                            <td><span id="insertWriter">관리자</span></td>
                                         </tr>
                                         <tr>
                                             <th><small style="color: #bebebe;">작성일</small></th>
@@ -47,55 +49,27 @@
                             <div style="border:0px solid pink;width:950px;height:auto;margin: 0 auto;margin-top: 30px; ">
                               
                                 <div style="padding:30px;border:1px solid lightgray;width:800px;height:auto;border-radius:10px;margin-left:75px;">
-                                     <p>
-                                        비자 신청한 지 3주가 됐는데 언제 나오는 지 궁금해요!!!!!!!!!!!!!!!!!<br>
-                                        빨리 알려주세요!!!!!!!!!!!!!!!!!!!!<br>
-                                        뉴질랜드 가고싶어요!!!!!!!!!!!!!<br>
-                                        호주도!!!!!<br>
-                                        캐나다도!!!!!!!!!!!!!<br>
-                                        <br>
-                                        외국 가고싶어요!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<br>
-                                        빨리빨리<br>
-                                        8282<br>
-
-                                        어어얼ㄹ르르르를은<br>
-                                        정보 주세요<br>
-                                        어어얼ㄹ르르르를은<br>
-                                        정보 주세요<br>
-                                        어어얼ㄹ르르르를은<br>어어얼ㄹ르르르를은<br>
-                                        정보 주세요<br>
-                                        어어얼ㄹ르르르를은<br>
-                                        정보 주세요<br>
-                                        어어얼ㄹ르르르를은<br>어어얼ㄹ르르르를은<br>
-                                        정보 주세요<br>
-                                        어어얼ㄹ르르르를은<br>
-                                        정보 주세요<br>
-                                        어어얼ㄹ르르르를은<br>어어얼ㄹ르르르를은<br>
-                                        정보 주세요<br>
-                                        어어얼ㄹ르르르를은<br>
-                                        정보 주세요<br>
-                                        어어얼ㄹ르르르를은<br>
-                                        
-
-                                     </p>
+                                	<%=n.getNoticeContents() %>
                                 </div> 
                             </div>
+                            <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")){ %>
                             <div style="display:flex; border:0px solid rgb(15, 231, 231);width:900px;height:auto;margin: 0 auto;">
                                 <div style="border:0px solid yellow;width:800px;height:60px;margin:0 auto;margin-top: 10px;">
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                         <button onclick="enroll_review('주소값');" class="customBtn btnStyle" type="button" value="수정">수정하기</button>
+                                         <button onclick="location.assign('<%=request.getContextPath() %>/notice/modifyNotice.do');" class="customBtn btnStyle" type="button" value="수정">수정하기</button>
                                         <button onclick="cancel_review('주소값');"    class="customBtn btnStyle" type="button"value="삭제">삭제하기</button> 
                                     </div>
                                 </div>
                             </div>
+                            <%} %>
                             <div style="border-top:0px solid #7e8cd2;width:850px;height:20px;margin:0 auto;margin-top: 30px; padding-left: 20px;padding-bottom: 30px;padding-top: 10px;">
-                                <span></span><a href="">&laquo; 이전글</a>
+                                <span></span><a href=""style="color:  #7e8cd2">&laquo; 이전글</a>
                                 </div>
                                 <div style="border-bottom:1px solid #7e8cd2;width:850px;height:20px;margin: 0 auto; padding-left: 20px;padding-bottom: 30px;">
-                                <a href="">&raquo; 다음글</a>
+                                <a href=""style="color:  #7e8cd2">&raquo; 다음글</a>
                                 </div>
                                 <div style="border:0px solid blue;width:850px;height:40px;margin: 0 auto;">
-                                    <button type="button" id="noticeList" class=" customBtn btnStyle"
+                                    <button onclick="location.assign('<%=request.getContextPath() %>/notice/noticeList.do');" type="button" id="noticeList" class=" customBtn btnStyle"
                                         style="margin-top: 10px;height: 30px;line-height: 20px;margin-left: 10px;">목록</button>
                                 </div>
                         </div>  
