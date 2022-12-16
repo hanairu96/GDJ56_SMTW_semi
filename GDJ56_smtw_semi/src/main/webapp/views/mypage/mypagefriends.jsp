@@ -41,6 +41,7 @@ List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendsl
                 	for(int i=0;i<friendslist.size();i++){
                 %>
                 <form name="form" action="" method="post">
+                 <input type="hidden" name="friendId" value="<%=friendslist.get(i).getMemberId()%>"> 
                 <input type="hidden" name="friendName" value="<%=friendslist.get(i).getMemberName()%>"> 
                 <input type="hidden" name="friendAge" value="<%=friendslist.get(i).getAge()%>"> 
                 <input type="hidden" name="friendGender" value="<%=friendslist.get(i).getGender()%>"> 
@@ -56,7 +57,7 @@ List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendsl
             	function goPopup(e){
             		var gsWin=window.open("","winName","width=380,height=380"); //open("주소",띄우는방식,크기)
             		var frm=$(e.target).prev()[0];
-            		frm.action="<%=request.getContextPath()%>/mapage/mapagePopUp.do";
+            		frm.action="<%=request.getContextPath()%>/mypage/mypagePopUp.do";
             		frm.target="winName";
             		frm.submit();
             	}

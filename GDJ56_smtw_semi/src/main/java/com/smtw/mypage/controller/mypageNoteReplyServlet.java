@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class mypageNoteReply
  */
 @WebServlet("/mypage/mypageNoteReply.do")
-public class mypageNoteReply extends HttpServlet {
+public class mypageNoteReplyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public mypageNoteReply() {
+    public mypageNoteReplyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,13 +29,17 @@ public class mypageNoteReply extends HttpServlet {
 		
 		//쪽지 받는 사람아이디
 		String receiver = request.getParameter("sender");
+		String receiverName = request.getParameter("friendName");
+		
 		String memberId = request.getParameter("id");
+		
 		
 		System.out.println("쪽지 보낼 아이디:"+receiver);
 		System.out.println("현재 로그인한 아이디"+memberId);
 		
 		// receibver, memberId 보내기
 		request.setAttribute("receiver", receiver);
+		request.setAttribute("receiverName", receiverName);
 		request.setAttribute("memberId", memberId);
 		
 		//쪽지 보내기 화면전환

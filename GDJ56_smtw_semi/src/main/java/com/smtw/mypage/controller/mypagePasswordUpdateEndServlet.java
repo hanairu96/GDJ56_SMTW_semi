@@ -32,16 +32,12 @@ public class mypagePasswordUpdateEndServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		// 3개 값 받아오기 : 아이디, 이전pw, 바꿀pw
 		String userId=request.getParameter("id");
-		System.out.println("아이디 불러와짐요?"+userId);
-		String oriPass=request.getParameter("password");
 		String newPass=request.getParameter("password_new");
-		
-		//1. 현재 비밀번호 맞는지 확인
-		Member m=new MypageService().pwdCk(userId,oriPass);//m이 null이면 틀림, 아니면 맞음
 		String msg = "", loc="";
-		if(m!=null) {
+		
 			// 비밀번호 변경 로직진행
 			int result=new MypageService().updatePassword(userId,newPass);
+			
 			if(result>0) {
 				msg="비밀번호 변경 완료"; 
 				loc="/logIn/logOut.do";
@@ -54,12 +50,7 @@ public class mypagePasswordUpdateEndServlet extends HttpServlet {
 				loc="<%=request.getContextPath()%>/mypage/mypagePwdCk3.do?id="+userId;
 			};
 			
-		}else {
-			//현재 비밀번호가 다릅니다. 다시 시도하세요!
-			msg="현재 비밀번호가 일치하지 않습니다. 다시 시도하세요";
-			loc="/member/updatePassword.do?userId="+userId;
-			
-		}
+		
 		request.setAttribute("msg",msg);
 		request.setAttribute("loc",loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request,response);

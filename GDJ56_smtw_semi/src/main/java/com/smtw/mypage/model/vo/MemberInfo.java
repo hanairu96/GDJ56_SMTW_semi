@@ -8,6 +8,7 @@ import lombok.Data;
 
 public class MemberInfo {
 	
+	private String memberId;
 	private String memberName;
 	private String age;
 	private char gender;

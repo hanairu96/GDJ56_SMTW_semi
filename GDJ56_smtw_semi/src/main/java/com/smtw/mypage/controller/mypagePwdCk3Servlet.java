@@ -29,7 +29,7 @@ public class mypagePwdCk3Servlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String id=request.getParameter("id");
 		request.setAttribute(id, "id");
-		request.getRequestDispatcher("/views/mypage//mypagepwdck3.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/mypage/mypagepwdck3.jsp").forward(request, response);
 	}
 
 	/**

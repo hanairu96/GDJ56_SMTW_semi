@@ -39,7 +39,7 @@ public class mypageNotePopServlet extends HttpServlet {
 		
 		//쪽지 db 불러오기
 		Note n = new MypageService().noteList(noteNo);
-		System.out.println(n);
+		//System.out.println(n);
 		
 		request.setAttribute("id", id);
 		request.setAttribute("n", n);

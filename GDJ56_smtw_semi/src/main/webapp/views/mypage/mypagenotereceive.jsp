@@ -10,9 +10,9 @@
   <section>
         <div class="sidemenu">
             <div><h4 style="text-align: center;">마이 페이지</h4></div>
-            <div><p>워홀 프렌즈</p></div>
-            <div><p>계정 관리</p></div>
-            <div><p>쪽지함</p></div>
+             <div><p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>');">워홀 프렌즈</p></div>
+            <div><p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageAccountView.do?id=<%=logInMember.getMemberId()%>');">계정 관리</p></div>
+            <div><p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">쪽지함</p></div>
             <div><p>내가 쓴 글</p></div>
             <div><p>찜한 나라</p></div>
            
