@@ -91,8 +91,8 @@ public class MypageDao {
 	
 	private MemberInfo getInfoApplyfriendsList(ResultSet rs) throws SQLException{
 		return MemberInfo.builder()
-				.memberName(rs.getString("MEMBER_NAME"))
 				.memberId(rs.getString("MEMBER_FROM"))
+				.memberName(rs.getString("MEMBER_NAME"))
 				.gender(rs.getString("GENDER").charAt(0))
 				.age(rs.getString("AGE"))
 				.build();
