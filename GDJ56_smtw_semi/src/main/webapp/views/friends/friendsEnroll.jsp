@@ -181,7 +181,25 @@
                             </div>
                             <div style="border:0px solid pink;width:880px;height:580px;text-align: center; ">
                                 <div style="border:0px solid blueviolet;width:800px;height:30px;text-align:left ">
-                                    <b>MBTI</b> : <input type="text" name="mbti" style="margin-top:0px;" placeholder="대문자로 입력해주세요.">
+                                    <b>MBTI</b> :
+                                    <select name="mbti">
+                                    	<option value="ENFJ">ENFJ</option>
+                                    	<option value="ENFP">ENFP</option>
+                                    	<option value="ENTJ">ENTJ</option>
+                                    	<option value="ENTP">ENTP</option>
+                                    	<option value="ESFJ">ESFJ</option>
+                                    	<option value="ESFP">ESFP</option>
+                                    	<option value="ESTJ">ESTJ</option>
+                                    	<option value="ESTP">ESTP</option>
+                                    	<option value="INFJ">INFJ</option>
+                                    	<option value="INFP">INFP</option>
+                                    	<option value="INTJ">INTJ</option>
+                                    	<option value="INTP">INTP</option>
+                                    	<option value="ISFJ">ISFJ</option>
+                                    	<option value="ISFP">ISFP</option>
+                                    	<option value="ISTJ">ISTJ</option>
+                                    	<option value="ISTP">ISTP</option>
+                                    </select>
                                </div>
                                <div style="border:0px solid blueviolet;width:800px;height:150x;text-align:left">
                                     <label><b>희망국가</b></label>
@@ -233,7 +251,7 @@
                                 	<input type="radio" name="expYn" value="N">비경험자
                                 </div>
                                 <div style="border:0px solid blueviolet;width:800px;height:30px;text-align:left ">
-                                    <b>목적</b> : <input type="checkbox" value="스터디">스터디&nbsp
+                                    <b>목적</b> : <input type="checkbox" name="purpose" value="스터디">스터디&nbsp
                                     <input type="checkbox" name="purpose" value="여행">여행&nbsp
                                     <input type="checkbox" name="purpose" value="워홀준비">워홀준비&nbsp
                                     <input type="checkbox" name="purpose" value="기타">기타
@@ -327,14 +345,24 @@
 	
 	</section>
 	<script>
+		//등록
 		function enroll_friend(f){
-			let answer;
-			answer=confirm("프렌즈 찾기 등록하시겠습니까?");
-			if(answer==true){
-				f.submit();
+			//입력 안 된 값이 있으면 알림	
+			if($("[name=title]").val().length==0||
+				!$("[name=nation]").is(':checked')||!$("[name=type]").is(':checked')||
+				!$("[name=expYn]").is(':checked')||!$("[name=purpose]").is(':checked')||
+				$("[name=friendsContents]")[0].value==''){
+					alert("값을 모두 입력해주세요.");
+			//확인 버튼 누르면 폼 제출
+			}else{
+				let answer;
+				answer=confirm("프렌즈 찾기 등록하시겠습니까?");
+				if(answer==true){
+					f.submit();
+				}
 			}
 		}
-        
+		
 		function cancel_friend(url){
 			location.assign("<%=request.getContextPath()%>/friends/friendsList.do");
 		}

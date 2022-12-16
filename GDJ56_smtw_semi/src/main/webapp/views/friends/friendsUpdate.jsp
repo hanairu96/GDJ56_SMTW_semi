@@ -334,10 +334,17 @@
 	</section>
 	<script>
 		const update_friend=()=>{
-			let answer;
-			answer=confirm("수정을 완료 하시겠습니까?");
-			if(answer){
-				return true;
+			if($("[name=title]").val().length==0||
+				!$("[name=nation]").is(':checked')||!$("[name=type]").is(':checked')||
+				!$("[name=expYn]").is(':checked')||!$("[name=purpose]").is(':checked')||
+				$("[name=friendsContents]")[0].value==''){
+					alert("값을 모두 입력해주세요.");
+			}else{
+				let answer;
+				answer=confirm("수정을 완료 하시겠습니까?");
+				if(answer){
+					return true;
+				}
 			}
 		}
         
@@ -345,31 +352,33 @@
 			location.assign(document.referrer); //이전 페이지 주소로 이동
 		}
 		
-		const checking=()=>({
-			for(int i=0;i<$("[name=nation]").size();i++){
-				if($("[name=nation]")[i].value==<%=f.getNName()%>){
-					$("[name=nation]")[i].prop('checked', true);
-					break;
+		
+		//저장된 값을 불러와서 체크박스에 체크
+	    for(let i=0;i<$("[name=nation]").length;i++){
+	        if($("[name=nation]")[i].value=="<%=f.getNName()%>"){
+	            $("[name=nation]")[i].setAttribute('checked', true);
+	            break;
+	        }
+	    }
+		for(let i=0;i<$("[name=type]").length;i++){
+			if($("[name=type]")[i].value=="<%=f.getType()%>"){
+				$("[name=type]")[i].setAttribute('checked', true);
+				break;
+			}
+		}
+		for(let i=0;i<$("[name=expYn]").length;i++){
+			if($("[name=expYn]")[i].value=="<%=f.getExpYn()%>"){
+				$("[name=expYn]")[i].setAttribute('checked', true);
+				break;
+			}
+		}
+		for(let i=0;i<$("[name=purpose]").length;i++){
+			for(let s of ("<%=f.getPurpose()%>".split(", "))){
+				if($("[name=purpose]")[i].value==s){
+					$("[name=purpose]")[i].setAttribute('checked', true);
 				}
 			}
-			for(int i=0;i<$("[name=type]").size();i++){
-				if($("[name=type]")[i].value==<%=f.getType()%>){
-					$("[name=type]")[i].prop('checked', true);
-					break;
-				}
-			}
-			for(int i=0;i<$("[name=expYn]").size();i++){
-				if($("[name=expYn]")[i].value==<%=f.getExpYn()%>){
-					$("[name=expYn]")[i].prop('checked', true);
-					break;
-				}
-			}
-			for(int i=0;i<$("[name=purpose]").size();i++){
-				if($("[name=purpose]")[i].value==<%=f.getPurpose()%>){
-					$("[name=purpose]")[i].prop('checked', true);
-				}
-			}
-		})();
+		}
 	</script>
 	
 	<style>

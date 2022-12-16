@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.smtw.friends.model.vo.Friends, java.util.List" %>
+<%@ page import="com.smtw.friends.model.vo.Friends, java.util.List, com.smtw.admin.model.service.MemberService" %>
 <%
 	List<Friends> fs=(List<Friends>)request.getAttribute("list");
 %>
@@ -100,7 +100,11 @@
                                 </div>
                                 <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
                                     <div>&nbsp이름:</div>
-                                    <div>&nbsp<%=f.getMemberId() %></div>
+                                    <%
+                                    	//아이디로 이름 찾기
+                                    	String name=new MemberService().selectMemberId(f.getMemberId()).getMemberName();
+                                    %>
+                                    <div>&nbsp<%=name %></div>
                                 </div>
                                 <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
                                     <div>&nbsp희망국가:</div>
