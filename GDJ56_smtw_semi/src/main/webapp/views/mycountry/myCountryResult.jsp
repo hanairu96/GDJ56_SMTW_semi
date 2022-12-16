@@ -63,7 +63,7 @@
 			    				}%>
 			    				<tr>
 			    			  <td colspan="4">
-			    			  	<button class="customBtn btnStyle" id="detailCountry" onclick="location.assign('<%=request.getContextPath()%>/country/countryMain.do')"> >> 더 알아보기 << </button>
+			    			  	<button class="customBtn btnStyle" id="detailCountry" onclick=""> >> 더 알아보기 << </button>
 			    			  </td></tr>
 			    			<% }%>
 				    	<%--  <% }%> --%>
