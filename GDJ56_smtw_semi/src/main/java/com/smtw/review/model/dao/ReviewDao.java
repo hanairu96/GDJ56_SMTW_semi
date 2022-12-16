@@ -2,6 +2,7 @@ package com.smtw.review.model.dao;
 
 import static com.smtw.common.JDBCTemplate.*;
 
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.smtw.review.model.vo.Review;
+
 
 
 public class ReviewDao {
@@ -85,11 +87,11 @@ public class ReviewDao {
 			close(rs);
 			close(pstmt);
 		}return list;
-		
-		
-		
-		
 	}
+	
+	
+	
+	
 	
 	
 	public int selectReviewCount(Connection conn) {
@@ -116,6 +118,70 @@ public class ReviewDao {
 		
 		
 	}
+	
+public List<Review> searchReviewList(Connection conn,String type,String keyword,int cPage,int numPerpage){
+		
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+	
+		List<Review> result=new ArrayList();
+		
+		String query=sql.getProperty("searchReviewListKeyword");
+		//SELECT *FROM REVIEW WHERE $COL LIKE ?
+		query=query.replace("$COL",type);
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, "%"+keyword+"%");   //  % 는   이음검색이나 아이디 검색할떄 포함하는 기호
+			
+			//시작값
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			//끝값
+			pstmt.setInt(3, cPage*numPerpage);
+			
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(getReview(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+		
+		
+		
+	}
+	
+	
+
+	public int selectReviewCount(Connection conn,String type, String keyword) {
+		   
+		  PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			int result=0;
+			String query=sql.getProperty("selectReviewCountKeyword");
+			query=query.replace("$COL", type);
+			try {
+				pstmt=conn.prepareStatement(query);
+				pstmt.setString(1,"%"+keyword+"%");
+				rs=pstmt.executeQuery();
+				if(rs.next()) result=rs.getInt(1);   //		1 대신   count(*) 여도 상관없음   성별  아이디
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}return result;
+			   
+			   
+		  }
+
+
+	
+	
 	
 	
 	
