@@ -4,6 +4,7 @@
 <%
 	String memberId = (String)request.getAttribute("memberId");
 	String receiver = (String)request.getAttribute("receiver");
+	String receiverName = (String)request.getAttribute("receiverName");
 %>
 <div id="top" width=417 height=385>
     <div height="300">
@@ -12,7 +13,7 @@
     
     <div id="box">
     <form action="<%=request.getContextPath()%>/mypage/mypageNoteEnrollEnd.do">
-    <p>받는사람 : <input type="text" name="receiver" id="receiver" value="<%=receiver %>" style="padding: 2px;" readonly></p> <br>
+    <p>받는사람 : <input type="text" name="receiver" id="receiver" value="<%=receiver %>(<%=receiverName %>)" style="padding: 2px;" readonly></p> <br>
     <textarea name="context" id="context" cols="75" rows="30"></textarea><br>
     <input type="hidden" name="memberId" value="<%=memberId %>">
     <button onclick="">보내기</button>

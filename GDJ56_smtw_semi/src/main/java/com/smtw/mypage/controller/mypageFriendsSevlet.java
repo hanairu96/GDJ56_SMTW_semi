@@ -35,9 +35,14 @@ public class mypageFriendsSevlet extends HttpServlet {
 		
 		//userId가지고 오기
 		String userId=request.getParameter("id");
+		
+		
 		List<Applyfriends> list = new MypageService().applyfriendsList(userId);
 		List<MemberInfo> infolist = new MypageService().InfoapplyfriendsList(userId);
 		List<MemberInfo> friendslist = new MypageService().FriendsList(userId);
+		
+		System.out.println(friendslist);
+		
 		request.setAttribute("list",list);
 		request.setAttribute("infolist",infolist);
 		request.setAttribute("friendslist",friendslist);
