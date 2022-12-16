@@ -56,7 +56,7 @@
                             <div style="display:flex; border:0px solid rgb(15, 231, 231);width:900px;height:auto;margin: 0 auto;">
                                 <div style="border:0px solid yellow;width:800px;height:60px;margin:0 auto;margin-top: 10px;">
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                         <button onclick="location.assign('<%=request.getContextPath() %>/notice/modifyNotice.do');" class="customBtn btnStyle" type="button" value="수정">수정하기</button>
+                                         <button onclick="location.assign('<%=request.getContextPath() %>/notice/modifyNotice.do?noticeNo=<%=n.getNoticeNo()%>');" class="customBtn btnStyle" type="button" value="수정">수정하기</button>
                                         <button onclick="cancel_review('주소값');"    class="customBtn btnStyle" type="button"value="삭제">삭제하기</button> 
                                     </div>
                                 </div>

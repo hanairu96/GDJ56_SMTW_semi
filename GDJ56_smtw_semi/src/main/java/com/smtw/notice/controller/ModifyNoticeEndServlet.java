@@ -8,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.smtw.notice.model.service.NoticeService;
-import com.smtw.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class ModifyNoticeServlet
+ * Servlet implementation class ModifyNoticeEndServlet
  */
-@WebServlet("/notice/modifyNotice.do")
-public class ModifyNoticeServlet extends HttpServlet {
+@WebServlet("/notice/modifyNoticeEnd.do")
+public class ModifyNoticeEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ModifyNoticeServlet() {
+    public ModifyNoticeEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,11 +28,24 @@ public class ModifyNoticeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String noticeTitle=request.getParameter("noticeTitle");
+		String summernote=request.getParameter("summernote");
 		int noticeNo=Integer.parseInt(request.getParameter("noticeNo"));
 		
-		Notice n=new NoticeService().selectNoticeNo(noticeNo);
-		request.setAttribute("notice", n);
-		request.getRequestDispatcher("/views/notice/modifyNotice.jsp").forward(request, response);
+		int result=new NoticeService().updateNotice(noticeTitle,summernote,noticeNo);
+		
+		String msg="",loc="";
+		if(result>0) {
+			msg="글 수정 완료!";
+			loc="/notice/noticeView.do?noticeNo="+noticeNo;
+		}else {
+			msg="글 수정 실패..";
+			loc="/notice/modifyNotice.do?noticeNo="+noticeNo;
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

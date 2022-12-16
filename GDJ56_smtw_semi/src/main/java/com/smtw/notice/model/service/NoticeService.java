@@ -53,5 +53,14 @@ public class NoticeService {
 		close(conn);
 		return n;
 	}
+	
+	public int updateNotice(String title,String contents,int noticeNo) {
+		Connection conn=getConnection();
+		int result=dao.updateNotice(conn,title,contents,noticeNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 
 }
