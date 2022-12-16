@@ -32,7 +32,7 @@
 			    			<td id="noResult">
 			    			<h1 id="radioValue">'<%=countryResult[0] %>','<%=countryResult[1] %>','<%=countryResult[2] %>','<%=countryResult[3] %>'</h1>
 			    				적합한 나라가 없네요!!<br>↓↓ 어떤 나라가 있는지 보고 싶다면 ↓↓<br>
-			    				<button class="customBtn btnStyle" id="detailCountryALL" onclick="location.assign('<%=request.getContextPath()%>/country/countryMain.do')"> >> 워홀나라 알아보기 << </button>
+			    				<button class="customBtn btnStyle" id="detailCountryALL"  onclick="location.assign('<%=request.getContextPath()%>/country/countryMain.do')"> >> 워홀나라 알아보기 << </button>
 			    			</td>
 			    		</tr>
 			    		<% } else{%>
