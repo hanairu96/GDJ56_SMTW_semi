@@ -25,7 +25,7 @@ public class ReviewService {
 		 
 		 return list;
 		 
-		// System.out.println();
+	
 		// System.out.println();
 		 
 		 
@@ -44,6 +44,31 @@ public class ReviewService {
 	 }
 	
 	
+	 public List<Review> searchReviewList(String type,String keyword, int cPage, int numPerpage){
+		 Connection conn=getConnection();
+		 
+		 List<Review> list=dao.searchReviewList(conn,type,keyword,cPage,numPerpage);
+		 
+		 close(conn);
+		 
+		 return list;
+		 
+	
+		 
+		 
+	}
+	 
+	 public int selectReviewCount(String type,String keyword) {
+		 
+		 Connection conn=getConnection();		
+		  
+		  int result=dao.selectReviewCount(conn,type,keyword);
+			 close(conn);
+			 
+			 return result;
+		 
+		 
+	 }
 	
 	
 	
