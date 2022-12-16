@@ -14,8 +14,8 @@
     	<form name="form" action="" method="post">
    	 		<div id="box">
    	 			<input type="hidden" name="sender" value="<%=n.getSender() %>">
-   	 			<input type="hidden" name="id" value="<%=id %>">
-   	 			<input type="hidden" name="senderName" value="<%=n.getSenderName() %>">
+   	 			<input type="hidden" name="userId" value="<%=id %>">
+   	 			<input type="hidden" name="friendName" value="<%=n.getSenderName() %>">
     			<p>보낸사람 : <%=n.getSenderName() %>(<%=n.getSender() %>)</p>
     			<p id="noteDate" style="color: gray;">보낸날짜 : <%=n.getDate() %></p> <br><br>
     		<textarea name="" id="" cols="75" rows="30" readonly> <%=n.getContent() %></textarea>

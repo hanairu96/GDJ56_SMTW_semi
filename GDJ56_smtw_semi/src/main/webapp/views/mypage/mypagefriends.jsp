@@ -45,6 +45,7 @@ List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendsl
                 <input type="hidden" name="friendName" value="<%=friendslist.get(i).getMemberName()%>"> 
                 <input type="hidden" name="friendAge" value="<%=friendslist.get(i).getAge()%>"> 
                 <input type="hidden" name="friendGender" value="<%=friendslist.get(i).getGender()%>"> 
+                <input type="hidden" name="userId" value="<%=logInMember.getMemberId()%>"> 
                 </form>
                 <input type="image" name="submit" id="ficon" src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
                 onclick="goPopup(event)">

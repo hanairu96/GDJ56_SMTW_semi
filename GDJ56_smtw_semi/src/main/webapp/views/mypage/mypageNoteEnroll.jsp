@@ -13,7 +13,8 @@
     
     <div id="box">
     <form action="<%=request.getContextPath()%>/mypage/mypageNoteEnrollEnd.do">
-    <p>받는사람 : <input type="text" name="receiver" id="receiver" value="<%=receiver %>(<%=receiverName %>)" style="padding: 2px;" readonly></p> <br>
+    <input type="hidden" name="receiver" value="<%=receiver %>">
+    <p>받는사람 : <input type="text" name="" id="receiver" value="<%=receiver %>(<%=receiverName %>)" style="padding: 2px;" readonly></p> <br>
     <textarea name="context" id="context" cols="75" rows="30"></textarea><br>
     <input type="hidden" name="memberId" value="<%=memberId %>">
     <button onclick="">보내기</button>

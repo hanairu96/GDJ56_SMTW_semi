@@ -175,6 +175,27 @@ public class MypageDao {
 		}return list;
 	}
 	
+	public List<Note> noteSendList(Connection conn, String id){
+		
+		List<Note> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("noteSendList"));
+			pstmt.setString(1,id);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(getNoteList(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
 	public Note noteList(Connection conn, int noteNo){
 		
 		Note n = null;

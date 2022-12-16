@@ -8,6 +8,8 @@
 	String friendName = (String)request.getParameter("friendName");
 	String friendAge = (String)request.getParameter("friendAge");
 	String friendGender = (String)request.getParameter("friendGender");
+	String userId = (String)request.getParameter("userId");
+
 %>
 
     
@@ -16,6 +18,7 @@
     	<form name="form" action="" method="post">
         		<input type="hidden" name="sender" value=<%=sender %>>
         		<input type="hidden" name="friendName" value=<%=friendName %>>
+        		<input type="hidden" name="userId" value=<%=userId %>>
             	<img src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" id="psc" alt="" width="200" height="200">
         </form>
             	<img src="<%=request.getContextPath()%>/images/mypage/mail.png" id="mail" width="60" height="60" alt="" onclick="goPopup(event)">

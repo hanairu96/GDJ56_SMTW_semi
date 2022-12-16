@@ -96,6 +96,13 @@ public class MypageService {
 		return list;
 	}
 	
+	public List<Note> noteSendList(String id){
+		Connection conn = getConnection();
+		List<Note> list = new MypageDao().noteSendList(conn, id);
+		close(conn);
+		return list;
+	}
+	
 	public Note noteList(int noteNo){
 		Connection conn = getConnection();
 		Note n = new MypageDao().noteList(conn, noteNo);
