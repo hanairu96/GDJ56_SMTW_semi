@@ -345,14 +345,24 @@
 	
 	</section>
 	<script>
+		//등록
 		function enroll_friend(f){
-			let answer;
-			answer=confirm("프렌즈 찾기 등록하시겠습니까?");
-			if(answer==true){
-				f.submit();
+			//입력 안 된 값이 있으면 알림	
+			if($("[name=title]").val().length==0||
+				!$("[name=nation]").is(':checked')||!$("[name=type]").is(':checked')||
+				!$("[name=expYn]").is(':checked')||!$("[name=purpose]").is(':checked')||
+				$("[name=friendsContents]")[0].value==''){
+					alert("값을 모두 입력해주세요.");
+			//확인 버튼 누르면 폼 제출
+			}else{
+				let answer;
+				answer=confirm("프렌즈 찾기 등록하시겠습니까?");
+				if(answer==true){
+					f.submit();
+				}
 			}
 		}
-        
+		
 		function cancel_friend(url){
 			location.assign("<%=request.getContextPath()%>/friends/friendsList.do");
 		}
