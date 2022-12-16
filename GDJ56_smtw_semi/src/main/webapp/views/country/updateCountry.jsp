@@ -49,8 +49,12 @@
                     한줄글 
                     <br><inpuT type="text" name="ontext" size="100" value="<%=c.getNpharse() %>" placeholder="예시)풍차와 나막신, 튤립과 치즈의 나라"></inpuT>
                 </div>
-                <br>    
-
+                <br>
+                <div>
+                	비상알림!
+                	<br><input type="text" name="er" size="100" value="<%=c.getEmergency()%>" placeholder="비상상황이 생기면 내용을 입력해주세요"></input>
+                </div>    
+				<br>
 		        <div id="twobu">
 		            <button class="customBtn btnStyle"><span>수정</span></button>
 		        </div>
@@ -137,7 +141,7 @@
              왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
           */
          margin-top: 100px;
-         height: 600px; 
+         height: 650px; 
          /*
              ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
              높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.

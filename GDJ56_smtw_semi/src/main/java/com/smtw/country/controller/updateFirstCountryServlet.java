@@ -39,6 +39,7 @@ public class updateFirstCountryServlet extends HttpServlet {
 		String wea=request.getParameter("weather");
 		String pic=request.getParameter("picpic");
 		String text=request.getParameter("ontext");
+		String er=request.getParameter("er");
 		
 		Country c=Country.builder()
 				.nName(name)
@@ -48,6 +49,7 @@ public class updateFirstCountryServlet extends HttpServlet {
 				.nSeason(wea)
 				.nImg(pic)
 				.npharse(text)
+				.emergency(er)
 				.build();
 //		System.out.println(c);
 		

@@ -40,9 +40,6 @@
             /* border: 5px solid blue; */
             padding-left: 5%;
         }
-    
-    
-    
         #titlecountryinfo{
             /* border: 5px solid red; */
             padding: 50px;
@@ -110,8 +107,12 @@
         <div id="titlecountryinfo">
             <div>
                 <h2 style="text-align: center;"><%=c.getNName() %></h2>
+                <%-- <%if(c.getCPic().isEmpty()){%> --%>
                 <img src="<%=request.getContextPath()%>/images/country/noimage_view.png" alt=""
                 width="200" height="130">
+				<%-- <%}else{ %>
+				<img src="<%=request.getContextPath()%>" width="200" height="130">
+				<%} %> --%>
             </div>
             <p style="font-size: 13px;">
                 - 언어 : <%=c.getCLanguage() %><br>
@@ -173,7 +174,7 @@
 	<%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
     <div id="twobu">
         <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goInsertContext.do?nName=<%=c.getNName()%>')"><span>추가</span></button>
-        <button class="customBtn btnStyle"><span>수정</span></button>
+        <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goUpdateContent.do?nName=<%=c.getNName()%>')"><span>수정</span></button>
     </div>
 		<%} %>
 	<style>

@@ -175,4 +175,40 @@ public class CountryPageInfoDao {
 		}return result;
 	}
 	
+	public CountryPage selectPageName(Connection conn, String name) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		CountryPage cc=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectPageName"));
+			pstmt.setString(1, name);
+			rs=pstmt.executeQuery();
+			if(rs.next()) cc=getCountryPage(rs);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return cc;
+		
+	}
+	
+	public int updateContent(Connection conn, CountryPage c) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("updateContent"));
+			pstmt.setString(1, c.getNInfo());
+			pstmt.setString(2, c.getNVisa());
+			pstmt.setString(3, c.getNSafety());
+			pstmt.setString(4, c.getNSettle());
+			pstmt.setString(5, c.getNJob());
+			pstmt.setString(6, c.getNName());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 }

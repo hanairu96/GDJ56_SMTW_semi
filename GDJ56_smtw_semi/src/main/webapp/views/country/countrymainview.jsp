@@ -11,7 +11,7 @@
     <style>
      a:link { color: black; text-decoration: none;}
 	 a:visited { color: black; text-decoration: none;}
-	 a:hover { color: black; text-decoration: underline;}
+	 a:hover { color: black; text-decoration: none;}
         #countrymenu2{
             width: 250px;
             float: left; 
@@ -36,11 +36,6 @@
         	width:50px;
         	height:50px;
         }
-     /*    #likebtn{
-			position: absolute;
-			top: 10px;
-			 
-        } */
         #comaincontainer2{
         	flex-wrap: wrap;
         	display:flex;
@@ -79,31 +74,37 @@
 	<h1 style="text-align: center;  font-size:40px;">국가 및 지역 정보</h1>
 		<div id="countrymenu2">
 	            
-	        <%if(list.isEmpty()) {%>
-	        	나라를 추가중입니다!!
-	        <%}else{%>
-	            	<ul>
+        <%if(list.isEmpty()) {%>
+        	나라를 추가중입니다!!
+        <%}else{%>
+			<ul>
 	           	<%for(Country c : list){%>
+			<li>
 	                    <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN"))  {%>
-                    		<li><a href="<%=request.getContextPath()+(c.getInfo().getMoney()==null?"/country/updateCountry.do?nName=":"/countryinfo/searchAll.do?nName=")+c.getNName() %>"><%=c.getNName() %></a></li>
+                    		<a href="<%=request.getContextPath()+(c.getInfo().getMoney()==null?"/country/updateCountry.do?nName=":"/countryinfo/searchAll.do?nName=")+c.getNName() %>"><%=c.getNName() %></a>
                    		<%}else{
 							if(c.getInfo().getMoney()==null){%>
-                    		<li><a href="" onclick="nonono();"><%=c.getNName() %></a></li>
+                    		<a href="" onclick="nodatano();"><%=c.getNName() %></a>
 	                    	<%}else{ %>
-                    		<li><a href="<%=request.getContextPath()%>/countryinfo/searchAll.do?nName=<%=c.getNName() %>"><%=c.getNName() %></a></li>
-	                    	<%}%>
+                    		<a href="javascript:void(0);" onclick="fn_emergency('<%=c.getEmergency()%>','<%=c.getNName() %>')" > <%=c.getNName() %> </a>
                 	 <%}
-	               }%>
-                </ul>    
-            	<%}%>
-            	
-	            </div>
-	            <script>
-	            	const nonono=()=>{
+            	}%>
+	      	</li>
+	      	<%}%>
+			</ul>    
+		</div>
+           	<%}%>
+            	<script>
+	            	const nodatano=()=>{
 						alert("나라정보를 업데이트중입니다!!!");	
-	            	}		
+	            	}	
+	            	
+	            	const fn_emergency=(em,name)=>{
+	            		if(em!='null') alert(em);
+	            		location.assign('<%=request.getContextPath()%>/countryinfo/searchAll.do?nName='+name);
+	            	}
+	        
 				</script>
-	      
         <div id="comaincontainer2"> 
 	        <%if(con.isEmpty()) {%>
 	        	<div>
@@ -123,10 +124,11 @@
                             <%}else{
                             	if(con.get(i).getInfo().getMoney()==null){%>
                             	<p id="font1" style="font-size:30px;">
-	                    		<a href="" onclick="nonono()">
+	                    		<a href="" onclick="nodatano()">
 		                    	<%}else{ %>
 		                    	<p id="font1" style="font-size:30px;">
-	                    		<a href="<%=request.getContextPath()%>/countryinfo/searchAll.do?nName=<%=con.get(i).getNName() %>">
+		                    	<a href="javascript:void(0);" onclick="fn_emergency('<%=con.get(i).getEmergency()%>','<%=con.get(i).getNName() %>')" >
+	                    		
 		                    	<%}%>
                             <%}%>    
                             
