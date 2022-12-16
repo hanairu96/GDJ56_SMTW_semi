@@ -71,4 +71,19 @@ public class CountryPageInfoService {
 		return result;
 	}
 	
+	public CountryPage selectPageName(String name) {
+		Connection conn=getConnection();
+		CountryPage cc=dao.selectPageName(conn,name);
+		close(conn);
+		return cc;
+	}
+	
+	public int updateContent(CountryPage c) {
+		Connection conn=getConnection();
+		int result=dao.updateContent(conn,c);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	
 }

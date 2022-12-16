@@ -1,46 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.smtw.country.model.vo.CountryPage" %>
 <%
-	String name=(String)request.getAttribute("name");
+	CountryPage cp=(CountryPage)request.getAttribute("countryPage");
 %>
 <%@ include file="/views/common/header.jsp" %>
 <section>
-<form name="contentinfo" action="<%=request.getContextPath()%>/countryinfo/insertcontentinfo.do" method="post">
+<form name="contentinfo" action="<%=request.getContextPath()%>/countryinfo/updatecontent.do" method="post">
     <div id="insertCountrypage">
         <fieldset>
-            <legend><h1 style="text-align: centers;">국가 내용 입력 페이지</h1></legend>
+            <legend><h1 style="text-align: centers;">국가 내용 수정 페이지</h1></legend>
                 <div>
-                	나라명 : <%=name %>
-   					<input type="hidden" name="nName" value="<%=name%>">
+                	나라명 : <%=cp.getNName() %>
+   					<input type="hidden" name="nName" value="<%=cp.getNName() %>">
                 </div>
                 <br>
                 <div>
                     국가/지역소개
-                    <br><textarea name="coareainfo" id="" cols="100" rows="30" placeholder="국가/지역소개 입력" ></textarea>
+                    <br><textarea name="coareainfo" id="" cols="100" rows="30" value="<%=cp.getNInfo() %>" placeholder="국가/지역소개 입력" ></textarea>
                 </div>
                 <br>    
                 <div>
                     워홀비자 
-                    <br><textarea name="wkvisa" id="" cols="100" rows="30" placeholder="워홀비자 입력" ></textarea>
+                    <br><textarea name="wkvisa" id="" cols="100" rows="30" value="<%=cp.getNVisa() %>" placeholder="워홀비자 입력" ></textarea>
                 </div>
                 <br>  
                 <div>
                     안전정보 
-                    <br><textarea name="safebady" id="" cols="100" rows="30" placeholder="안전정보 입력" ></textarea>
+                    <br><textarea name="safebady" id="" cols="100" rows="30" value="<%=cp.getNSafety() %>" placeholder="안전정보 입력" ></textarea>
                 </div>
                 <br>  
                 <div>
                     초기정착 
-                    <br><textarea name="homestay" id="" cols="100" rows="30" placeholder="초기정착 입력" ></textarea>
+                    <br><textarea name="homestay" id="" cols="100" rows="30" value="<%=cp.getNSettle() %>" placeholder="초기정착 입력" ></textarea>
                 </div>
                 <br>  
                 <div>
                     취업정보 
-                    <br><textarea name="getjob" id="" cols="100" rows="30" placeholder="취업정보 입력" ></textarea>
+                    <br><textarea name="getjob" id="" cols="100" rows="30" value="<%=cp.getNJob() %>" placeholder="취업정보 입력" ></textarea>
                 </div>
                 <br>  
 			    <div id="twobu">
-			        <button class="customBtn btnStyle" type="submit"><span>등록</span></button>
+			        <button class="customBtn btnStyle" type="submit"><span>수정</span></button>
 			    </div>
 		    </form>
         </fieldset>

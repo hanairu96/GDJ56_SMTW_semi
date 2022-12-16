@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.smtw.member.model.vo.Member,com.smtw.notice.model.vo.*" %>
 <%
-	Notice n=(Notice)request.getAttribute("notice");
-// 	NoticePreNext npn=(NoticePreNext)request.getAttribute("noticePreNext");
+	NoticePreNext npn=(NoticePreNext)request.getAttribute("noticePreNext");
+	int number=(int)request.getAttribute("number");
 %>
 <%@include file="/views/common/header.jsp" %>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
@@ -28,7 +28,11 @@
                                         </tr>
                                         <tr>
                                             <th>제 목</th>
-                                            <td><span id="insertTitle"><%=n.getNoticeTitle()%></span></td>
+                                            <%if(number==1){ %>
+                                            <td><span id="insertTitle"><%=npn.getPreTitle()%></span></td>
+                                            <%}else{ %>
+                                            <td><span id="insertTitle"><%=npn.getNextTitle()%></span></td>
+                                            <%}%>
                                         </tr>
                                         
                                         <tr>
@@ -38,7 +42,7 @@
                                         <tr>
                                             <th><small style="color: #bebebe;">작성일</small></th>
                                             <td>
-                                                <span id="enroll_date"><small style="color: #bebebe;"><%=n.getNoticeEnrollDate() %></small></span>
+                                                <span id="enroll_date"><small style="color: #bebebe;"></small></span>
                                             </td>
                                         </tr>
                                         </table>
@@ -50,14 +54,19 @@
                             <div style="border:0px solid pink;width:950px;height:auto;margin: 0 auto;margin-top: 30px; ">
                               
                                 <div style="padding:30px;border:1px solid lightgray;width:800px;height:auto;border-radius:10px;margin-left:75px;">
-                                	<%=n.getNoticeContents() %>
+                                	 <%if(number==1){ %>
+                                		 <%=npn.getPreContents()%>
+                                		<%}else{ %> 
+                                			<%=npn.getNextContents()%>
+                                		<%}%>
+                                	 }
                                 </div> 
                             </div>
                             <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")){ %>
                             <div style="display:flex; border:0px solid rgb(15, 231, 231);width:900px;height:auto;margin: 0 auto;">
                                 <div style="border:0px solid yellow;width:800px;height:60px;margin:0 auto;margin-top: 10px;">
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                         <button onclick="location.assign('<%=request.getContextPath() %>/notice/modifyNotice.do?noticeNo=<%=n.getNoticeNo()%>');" class="customBtn btnStyle" type="button" value="수정">수정하기</button>
+                                         <button onclick="location.assign('<%=request.getContextPath() %>/notice/modifyNotice.do?noticeNo=<%=npn.getNoticeNo()%>');" class="customBtn btnStyle" type="button" value="수정">수정하기</button>
                                         <button onclick="cancel_review('주소값');"    class="customBtn btnStyle" type="button"value="삭제">삭제하기</button> 
                                     </div>
                                 </div>
@@ -65,10 +74,10 @@
                             <%} %>
                             
                             <div style="border-top:0px solid #7e8cd2;width:850px;height:20px;margin:0 auto;margin-top: 30px; padding-left: 20px;padding-bottom: 30px;padding-top: 10px;">
-                                <a href="<%=request.getContextPath()%>/notice/preNextNoticeView.do?noticeNo=<%=n.getNoticeNo()%>&number=1" style="color:  #7e8cd2">&laquo; 이전글</a>
+                                <a href="<%=request.getContextPath()%>/notice/preNextNoticeView.do?noticeNo=<%=npn.getPreNo() %>&number=1" style="color:  #7e8cd2">&laquo; 이전글</a>
                             </div>
                             <div style="border-bottom:1px solid #7e8cd2;width:850px;height:20px;margin: 0 auto; padding-left: 20px;padding-bottom: 30px;">
-                                <a href="<%=request.getContextPath()%>/notice/preNextNoticeView.do?noticeNo=<%=n.getNoticeNo()%>&number=2"style="color:  #7e8cd2">&raquo; 다음글</a>
+                                <a href="<%=request.getContextPath()%>/notice/preNextNoticeView.do?noticeNo=<%=npn.getNextNo() %>&number=2"style="color:  #7e8cd2">&raquo; 다음글</a>
                             </div>
                             <div style="border:0px solid blue;width:850px;height:40px;margin: 0 auto;">
                             	<button onclick="location.assign('<%=request.getContextPath() %>/notice/noticeList.do');" type="button" id="noticeList" class=" customBtn btnStyle"

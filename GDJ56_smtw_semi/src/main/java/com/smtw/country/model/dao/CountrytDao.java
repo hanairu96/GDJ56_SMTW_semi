@@ -20,8 +20,6 @@ public class CountrytDao {
 
 	private Properties sql=new Properties();
 	
-//	private CountryPageInfoDao cp=new CountryPageInfoDao();
-	
 	public CountrytDao() {
 		String path=CountrytDao.class.getResource("/sql/country/country_sql.properties").getPath();
 		try {
@@ -106,6 +104,7 @@ public class CountrytDao {
 				.nSeason(rs.getString("N_SEASON"))
 				.nImg(rs.getString("N_IMG"))
 				.npharse(rs.getString("N_PHARSE"))
+				.emergency(rs.getString("N_EMERGENCY"))
 				.build();
 	}
 	
@@ -191,7 +190,8 @@ public class CountrytDao {
 			pstmt.setString(4, c.getNSeason());
 			pstmt.setString(5, c.getNImg());
 			pstmt.setString(6, c.getNpharse());
-			pstmt.setString(7, c.getNName());
+			pstmt.setString(7, c.getEmergency());
+			pstmt.setString(8, c.getNName());
 			result=pstmt.executeUpdate();	
 		}catch(SQLException e) {
 			e.printStackTrace();
