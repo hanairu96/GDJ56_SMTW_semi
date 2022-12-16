@@ -365,9 +365,9 @@ public class MypageDao {
 		
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("insertNote"));
-			pstmt.setString(1,memberId);
+			pstmt.setString(1,receiver);
 			pstmt.setString(2,context);
-			pstmt.setString(3,receiver);
+			pstmt.setString(3,memberId);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

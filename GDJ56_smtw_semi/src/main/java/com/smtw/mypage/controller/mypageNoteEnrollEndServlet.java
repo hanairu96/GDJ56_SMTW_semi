@@ -34,6 +34,8 @@ public class mypageNoteEnrollEndServlet extends HttpServlet {
 		String receiver=request.getParameter("receiver");
 		String context=request.getParameter("context");
 		
+		System.out.println("!!!:"+memberId);
+		
 		//사용자 이름가져오기
 		String name = new MypageService().getName(memberId);
 		
