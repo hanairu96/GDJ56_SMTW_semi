@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.mypage.model.service.MypageService;
-import com.smtw.mypage.model.vo.Note;
-
 /**
- * Servlet implementation class mypageNotePopServlet
+ * Servlet implementation class mypageNoteReply
  */
-@WebServlet("/mypage/mypageNotePop.do")
-public class mypageNotePopServlet extends HttpServlet {
+@WebServlet("/mypage/mypageNoteReply.do")
+public class mypageNoteReply extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public mypageNotePopServlet() {
+    public mypageNoteReply() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +27,21 @@ public class mypageNotePopServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String nNo = request.getParameter("noteNo");
-		System.out.println("noteNo :"+nNo);
-		String id = request.getParameter("id");
-		System.out.println("로그인된 아이디 :"+id);
+		//쪽지 받는 사람아이디
+		String receiver = request.getParameter("sender");
+		String memberId = request.getParameter("id");
 		
-		int noteNo = Integer.parseInt(nNo);
+		System.out.println("쪽지 보낼 아이디:"+receiver);
+		System.out.println("현재 로그인한 아이디"+memberId);
 		
-		//쪽지 db 불러오기
-		Note n = new MypageService().noteList(noteNo);
-		System.out.println(n);
+		// receibver, memberId 보내기
+		request.setAttribute("receiver", receiver);
+		request.setAttribute("memberId", memberId);
 		
-		request.setAttribute("id", id);
-		request.setAttribute("n", n);
-		request.getRequestDispatcher("/views/mypage/mypageNotePop.jsp").forward(request, response);
+		//쪽지 보내기 화면전환
+		request.getRequestDispatcher("/views/mypage/mypageNoteEnroll.jsp").forward(request, response);
+		
+		
 		
 	}
 

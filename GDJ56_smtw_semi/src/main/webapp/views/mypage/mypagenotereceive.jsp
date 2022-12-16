@@ -5,6 +5,7 @@
 <%@ page import="com.smtw.mypage.model.vo.Note" %>
 <%
 	List<Note> list = (List<Note>)request.getAttribute("list");
+	String id = (String)request.getParameter("id");
 %>
   <section>
         <div class="sidemenu">
@@ -53,6 +54,7 @@
                     		<p><%=list.get(i).getSenderName() %></p>
 	                    	<form name="form" action="" method="post">
 			                    <input type="hidden" name="noteNo" value="<%=list.get(i).getNtNo() %>">
+			                    <input type="hidden" name="id" value=<%=id %>>
 			                </form>	
 		                </td>
                     	<td onclick="goPopup(event)"><%=list.get(i).getContent() %></td>

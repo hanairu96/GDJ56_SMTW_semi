@@ -1,14 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%
+	String memberId = (String)request.getAttribute("memberId");
+	String receiver = (String)request.getAttribute("receiver");
+%>
 <div id="top" width=417 height=385>
     <div height="300">
         <h2 style="margin-left: 35%;"><span style="background-color:cornflowerblue; color: aliceblue;">쪽지 보내기</span></h2>
     </div>
     
     <div id="box">
-    <p>받는사람 : <input type="text" name="수신자" id="수신자" style="padding: 2px;"></p> <br><br>
-    <textarea name="" id="" cols="75" rows="30"></textarea><br>
-    <button>보내기</button> 
+    <form action="<%=request.getContextPath()%>/mypage/mypageNoteEnrollEnd.do">
+    <p>받는사람 : <input type="text" name="receiver" id="receiver" value="<%=receiver %>" style="padding: 2px;" readonly></p> <br>
+    <textarea name="context" id="context" cols="75" rows="30"></textarea><br>
+    <input type="hidden" name="memberId" value="<%=memberId %>">
+    <button onclick="">보내기</button>
+	</form>
     </div>
     
 </div>

@@ -334,10 +334,17 @@
 	</section>
 	<script>
 		const update_friend=()=>{
-			let answer;
-			answer=confirm("수정을 완료 하시겠습니까?");
-			if(answer){
-				return true;
+			if($("[name=title]").val().length==0||
+				!$("[name=nation]").is(':checked')||!$("[name=type]").is(':checked')||
+				!$("[name=expYn]").is(':checked')||!$("[name=purpose]").is(':checked')||
+				$("[name=friendsContents]")[0].value==''){
+					alert("값을 모두 입력해주세요.");
+			}else{
+				let answer;
+				answer=confirm("수정을 완료 하시겠습니까?");
+				if(answer){
+					return true;
+				}
 			}
 		}
         

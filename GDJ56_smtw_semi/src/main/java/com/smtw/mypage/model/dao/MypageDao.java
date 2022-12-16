@@ -336,6 +336,47 @@ public class MypageDao {
 		}return result;
 	}
 	
+	public String getName(Connection conn, String memberId) {
+		Member m = null;
+		String name = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("getName"));
+			pstmt.setString(1, memberId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=getMember(rs);
+				name=m.getMemberName();
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return name;
+		
+	}
+	
+	public int insertNote(Connection conn, String memberId, String receiver, String context) {
+		int result = 0;
+		PreparedStatement pstmt=null;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertNote"));
+			pstmt.setString(1,memberId);
+			pstmt.setString(2,context);
+			pstmt.setString(3,receiver);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	
 
 	
 
