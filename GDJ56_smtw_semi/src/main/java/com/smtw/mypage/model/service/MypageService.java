@@ -103,6 +103,21 @@ public class MypageService {
 		return n;
 	}
 	
+	public String getName(String memberId) {
+		Connection conn = getConnection();
+		String name = new MypageDao().getName(conn, memberId);
+		close(conn);
+		return name;
+		
+	}
+	
+	public int insertNote(String memberId, String receiver, String context) {
+		Connection conn = getConnection();
+		int result=new MypageDao().insertNote(conn, memberId, receiver, context);
+		close(conn);
+		return result;
+	}
+	
 	
 	
 

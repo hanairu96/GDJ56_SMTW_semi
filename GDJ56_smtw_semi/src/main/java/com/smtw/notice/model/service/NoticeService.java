@@ -1,11 +1,16 @@
 package com.smtw.notice.model.service;
 
+import static com.smtw.common.JDBCTemplate.close;
+import static com.smtw.common.JDBCTemplate.commit;
+import static com.smtw.common.JDBCTemplate.getConnection;
+import static com.smtw.common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
 import java.util.List;
 
 import com.smtw.notice.model.dao.NoticeDao;
 import com.smtw.notice.model.vo.Notice;
-import static com.smtw.common.JDBCTemplate.*;
+import com.smtw.notice.model.vo.NoticePreNext;
 
 public class NoticeService {
 	NoticeDao dao=new NoticeDao();
@@ -61,6 +66,13 @@ public class NoticeService {
 		else rollback(conn);
 		close(conn);
 		return result;
+	}
+	
+	public NoticePreNext preNextNotice(int noticeNo) {
+		Connection conn=getConnection();
+		NoticePreNext npn=dao.preNextNotice(conn, noticeNo);
+		close(conn);
+		return npn;
 	}
 
 }
