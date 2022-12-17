@@ -38,7 +38,7 @@
 						for(Qna q : qnas) {%>
 	                    <tr>
 	                        <td><%=q.getQnaNo() %></td>
-	                        <td><%=q.getReviewTitle() %></td>
+	                        <td><a href="<%=request.getContextPath()%>/qna/qnaView.do?qnaNo=<%=q.getQnaNo() %>"><%=q.getReviewTitle() %></a></td>
 	                        <td><%=q.getMemberId() %></td>
 	                        <td><%=q.getEnrollDate() %></td>
 	                    </tr>

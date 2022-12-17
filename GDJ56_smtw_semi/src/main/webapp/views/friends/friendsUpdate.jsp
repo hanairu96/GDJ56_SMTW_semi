@@ -12,286 +12,123 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <section>
-        <div id="friendTitle" style="text-align: center;">
-            <h1>워홀프렌즈 수정</h1>
-        </div>
-
-        <div style="height:25px;">
-           
-        </div>
-
-        <div style="height:700px">
-            <div style="display:flex">
-                <div style="border:0px solid yellow;width:300px;height:700px">
-                    <div style="border:0px solid blue;width:270px;height:350px">
-                        <header class="header" role="banner">
-                            <div id="sideMenu">
-                                <h1 class="sidelogo">
-                                    <a href="LeavingDiary.html"><span>커뮤니티</span></a>
-                                </h1>
-                                <div class="nav-wrap">
-                                    <nav class="main-nav" role="navigation">
-                                        <ul class="unstyled list-hover-slide">
-                                            <li><a href="LeavingDiary.html">워홀프렌즈 구하기</a></li>
-                                            <li><a href="MyCountry.html">생생후기</a></li>
-                                        </ul>
-                                    </nav>
-                              </div>
-                            </div>
-                        </header>
-        
-                    </div>
-                </div>
-                <style>
-                /* 왼쪽 사이드메뉴영역 */
-                #sideMenu{
-                    border: 1px solid black;
-                    /* border-radius: 10px; */
-                    position: absolute; 
-                    z-index: 10;
-                    width: 18%;
-                }
-                .header {
-                /* position:relative; */
-                left: 0;
-                top: 100px;
-                bottom: 0;
-                /* width: 17.5em; */
-                width: 20%;
-                /* height: 900px; */
-                /* background: #d9d9db; */
-                }
-        
-                *,
-                :before,
-                :after {
-                box-sizing: border-box;
-                }
-        
-                .unstyled {
-                    list-style: none;
-                    padding: 0;
-                    margin: 0;
-                }
-                .unstyled a {
-                    text-decoration: none;
-                }
-        
-                .list-inline {
-                    overflow: hidden;
-                }
-        
-                .sidelogo {
-                    background-color: #b5aae5;
-                    text-transform: lowercase;
-                    font: 300 2em "Source Sans Pro", Helvetica, Arial, sans-serif;
-                    text-align: center;
-                    padding: 0;
-                    margin: 0;
-                    border: 2px solid black;
-                    /* border-radius: 10px; */
-                }
-                .sidelogo a {
-                display: block;
-                padding: 1em 0;
-                color: #dfdbd9;
-                text-decoration: none;
-                transition: 0.15s linear color;
-                }
-                .sidelogo a:hover {
-                color: #fffaf8;
-                }
-                .sidelogo a:hover span {
-                color: #df4500;
-                }
-                .sidelogo span {
-                   
-                color: #131110;
-                font-weight: 700;
-                transition: 0.15s linear color;
-                }
-                .main-nav li {
-                /* border-bottom: solid 1px #3c3735; */
-                font-size: 20px;
-                font-weight: bold;
-                }
-                .main-nav a {
-                padding: 1.1em 0;
-                color: #f1f1f1;
-                font: 400 1.125em "Source Sans Pro", Helvetica, Arial, sans-serif;
-                text-align: center;
-                text-transform: lowercase;
-                }
-                .main-nav a:hover {
-                color: #f9f8f8;
-                }
-                .list-hover-slide li {
-                    border: 1px solid rgb(0, 0, 0);
-                    /* border-radius: 10px; */
-                    background-color: #d5d0e8;
-                    position: relative;
-                    overflow: hidden;
-                }
-                .list-hover-slide a {
-                display: block;
-                position: relative;
-                z-index: 1;
-                transition: 0.35s ease color;
-                color: rgb(0, 0, 0);
-                }
-                .list-hover-slide a:before {
-                content: "";
-                display: block;
-                z-index: -1;
-                position: absolute;
-                left: -100%;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                border-right: solid 5px #4300df;
-                background: #b7aee0;
-                transition: 0.35s ease left;
-                
-                }
-                .list-hover-slide a.is-current:before, .list-hover-slide a:hover:before {
-                left: 0;
-                }
-                /* 사이드메뉴바 스타일 여기까지*/
-                </style>
-                
-                <form id="updateForm" action="<%=request.getContextPath()%>/friends/friendsUpdateEnd.do"
-                onsubmit="return update_friend();">
-                <div style="border:0px solid red;width:910px;height:695px;display:flex;margin-left:50px; ">
-                    <div style="display:flex">
-                        <div style="border:0px solid green;width:900px;height:690px ">
-                            <div style="border:0px solid pink;width:880px;height:200px;display:flex;">
-                                <div  style="border:0px solid rgb(210, 243, 21);width:300px;">
-                                    <img src="<%=request.getContextPath() %>/images/lupy.jpg" alt="" style="width:65%;height:90%;margin:auto; display: block;border-radius:120px;">
-                                </div>
-                                <div style="border:0px solid rgb(210, 243, 21);width:300px;">
-                                	<br><br>
-                                	<div style="border:0px solid blueviolet;width:300px;height:30px;text-align:left ">
-                                        <b>제목</b> : <input type="text" name="title" placeholder="제목을 입력하세요." value="<%=f.getFriendsTitle()%>">
-                                    </div>
-                                    <div style="border:0px solid blueviolet;width:300px;height:30px;text-align:left ">
-                                        <b>이름</b> : <%=logInMember.getMemberName() %>
-                                    </div>
-                                    <div style="border:0px solid blueviolet;width:300px;height:30px;text-align:left ">
-                                   		<b>성별</b> : <%=(logInMember.getGender()=='M')?"남자":"여자" %>
-                               		</div>
-                                </div>
-                                <div style="border:0px solid rgb(210, 243, 21);width:300px;">
-
-                                </div>
-                            </div>
-                            <div style="border:0px solid pink;width:880px;height:580px;text-align: center; ">
-                                <div style="border:0px solid blueviolet;width:800px;height:30px;text-align:left ">
-                                    <b>MBTI</b> :
-                                    <select name="mbti">
-                                    	<option value="ENFJ">ENFJ</option>
-                                    	<option value="ENFP">ENFP</option>
-                                    	<option value="ENTJ">ENTJ</option>
-                                    	<option value="ENTP">ENTP</option>
-                                    	<option value="ESFJ">ESFJ</option>
-                                    	<option value="ESFP">ESFP</option>
-                                    	<option value="ESTJ">ESTJ</option>
-                                    	<option value="ESTP">ESTP</option>
-                                    	<option value="INFJ">INFJ</option>
-                                    	<option value="INFP">INFP</option>
-                                    	<option value="INTJ">INTJ</option>
-                                    	<option value="INTP">INTP</option>
-                                    	<option value="ISFJ">ISFJ</option>
-                                    	<option value="ISFP">ISFP</option>
-                                    	<option value="ISTJ">ISTJ</option>
-                                    	<option value="ISTP">ISTP</option>
-                                    </select>
-                               </div>
-                               <div style="border:0px solid blueviolet;width:800px;height:150x;text-align:left">
-                                    <label><b>희망국가</b></label>
-                                        <table>
-                                            <tr>
-                                                <td><input type="radio" name="nation" value="네덜란드">네덜란드</td>
-                                                <td><input type="radio" name="nation" value="스웨덴">스웨덴</td>
-                                                <td><input type="radio" name="nation" value="이스라엘">이스라엘</td>
-                                                <td><input type="radio" name="nation" value="포르투갈">포르투갈</td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="radio" name="nation" value="뉴질랜드">뉴질랜드</td>
-                                                <td><input type="radio" name="nation" value="스페인">스페인</td>
-                                                <td><input type="radio" name="nation" value="이탈리아">이탈리아</td>
-                                                <td><input type="radio" name="nation" value="폴란드">폴란드</td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="radio" name="nation" value="대만">대만</td>
-                                                <td><input type="radio" name="nation" value="아르헨티나">아르헨티나</td>
-                                                <td><input type="radio" name="nation" value="일본">일본</td>
-                                                <td><input type="radio" name="nation" value="프랑스">프랑스</td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="radio" name="nation" value="덴마크">덴마크</td>
-                                                <td><input type="radio" name="nation" value="아일랜드">아일랜드</td>
-                                                <td><input type="radio" name="nation" value="체코">체코</td>
-                                                <td><input type="radio" name="nation" value="헝가리">헝가리</td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="radio" name="nation" value="독일">독일</td>
-                                                <td><input type="radio" name="nation" value="영국">영국</td>
-                                                <td><input type="radio" name="nation" value="칠레">칠레</td>
-                                                <td><input type="radio" name="nation" value="호주">호주</td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="radio" name="nation" value="벨기에">벨기에</td>
-                                                <td><input type="radio" name="nation" value="오스트리아">오스트리아</td>
-                                                <td><input type="radio" name="nation" value="캐나다">캐나다</td>
-                                                <td><input type="radio" name="nation" value="홍콩">홍콩</td>
-                                            </tr>
-                                        </table>
-                                </div>
-                                <div style="border:0px solid blueviolet;width:800px;height:30px;text-align:left ">
-                                    <b>취향</b> : <input type="radio" name="type" value="집순이">집순이&nbsp 
-                                    <input type="radio" name="type" value="밖돌이">밖돌이
-                               </div>
-                               <div style="border:0px solid blueviolet;width:800px;height:30px;text-align:left ">
-                                	<b>워홀경험자</b> : <input type="radio" name="expYn" value="Y">경험자&nbsp
-                                	<input type="radio" name="expYn" value="N">비경험자
-                                </div>
-                                <div style="border:0px solid blueviolet;width:800px;height:30px;text-align:left ">
-                                    <b>목적</b> : <input type="checkbox" value="스터디">스터디&nbsp
-                                    <input type="checkbox" name="purpose" value="여행">여행&nbsp
-                                    <input type="checkbox" name="purpose" value="워홀준비">워홀준비&nbsp
-                                    <input type="checkbox" name="purpose" value="기타">기타
-                                 </div>
-                                 <div style="border:0px solid blueviolet;width:452px;height:25px;text-align:left">
-                                    <b>자기소개글</b>
-                                </div>
-                                <div style="border:0px solid blueviolet;width:820px;height:200px;text-align:left">
-                                    <textarea name="friendsContents" cols="80" rows="8" style="margin-top:10px;resize:none;" placeholder="내용을 입력해주세요."><%=f.getFriendsContents()%></textarea>
-                                    <p>친구 요청을 수락하면 서로 쪽지 보내기가 가능합니다. 친구를 맺어 대화를 나누세요!</p>
-                                </div>
-                                <input type="hidden" name="memberId" value="<%=logInMember.getMemberId() %>">
-                            </div>
+        <form id="updateForm" action="<%=request.getContextPath()%>/friends/friendsUpdateEnd.do"
+            onsubmit="return update_friend();">
+            <div id="contents" style="width:85%;display:flex;border:1px solid;">
+                <div style="border:1px solid black;width:900px;height:1070px;border-radius:30px;">
+			        <div id="friendTitle" style="text-align: center;">
+			            <br>
+			            <h1>워홀프렌즈 등록</h1>
+			        </div><br>
+                    <div style="border:0px solid pink;width:810px;height:200px;display:flex;">
+                        <div  style="border:0px solid rgb(210, 243, 21);width:300px;">
+                            <img src="<%=request.getContextPath() %>/images/lupy.jpg" style="width:65%;height:90%;margin-left:30px;display:block;border-radius:120px;">
+                        </div>
+                        <div style="border:0px solid rgb(210, 243, 21);width:300px;">
+                        	<br><br>
+                                <b>제목</b> : <input type="text" name="title" placeholder="제목을 입력하세요." value="<%=f.getFriendsTitle()%>"><br>
+                                <b>이름</b> : <%=logInMember.getMemberName() %><br>
+                           		<b>성별</b> : <%=(logInMember.getGender()=='M')?"남자":"여자" %>
                         </div>
                     </div>
-                </div>
+                    <div style="border:0px solid pink;width:810px;height:690px;text-align: center; ">
+                        <div style="border:0px solid blueviolet;width:800px;height:30px;text-align:left ">
+                            <b>MBTI</b> :
+                            <select name="mbti">
+                            	<option value="ENFJ">ENFJ</option>
+                            	<option value="ENFP">ENFP</option>
+                            	<option value="ENTJ">ENTJ</option>
+                            	<option value="ENTP">ENTP</option>
+                            	<option value="ESFJ">ESFJ</option>
+                            	<option value="ESFP">ESFP</option>
+                            	<option value="ESTJ">ESTJ</option>
+                            	<option value="ESTP">ESTP</option>
+                            	<option value="INFJ">INFJ</option>
+                            	<option value="INFP">INFP</option>
+                            	<option value="INTJ">INTJ</option>
+                            	<option value="INTP">INTP</option>
+                            	<option value="ISFJ">ISFJ</option>
+                            	<option value="ISFP">ISFP</option>
+                            	<option value="ISTJ">ISTJ</option>
+                            	<option value="ISTP">ISTP</option>
+                            </select>
+                       </div><br>
+                       <div style="border:0px solid blueviolet;width:800px;height:150x;text-align:left">
+                            <label><b>희망국가</b></label>
+                                <table>
+                                    <tr>
+                                        <td><input type="radio" name="nation" value="네덜란드">네덜란드</td>
+                                        <td><input type="radio" name="nation" value="뉴질랜드">뉴질랜드</td>
+                                        <td><input type="radio" name="nation" value="대만">대만</td>
+                                        <td><input type="radio" name="nation" value="덴마크">덴마크</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="radio" name="nation" value="독일">독일</td>
+                                        <td><input type="radio" name="nation" value="벨기에">벨기에</td>
+                                        <td><input type="radio" name="nation" value="스웨덴">스웨덴</td>
+                                        <td><input type="radio" name="nation" value="스페인">스페인</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="radio" name="nation" value="아르헨티나">아르헨티나</td>
+                                        <td><input type="radio" name="nation" value="아일랜드">아일랜드</td>
+                                        <td><input type="radio" name="nation" value="영국">영국</td>
+                                        <td><input type="radio" name="nation" value="오스트리아">오스트리아</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="radio" name="nation" value="이스라엘">이스라엘</td>
+                                        <td><input type="radio" name="nation" value="이탈리아">이탈리아</td>
+                                        <td><input type="radio" name="nation" value="일본">일본</td>
+                                        <td><input type="radio" name="nation" value="체코">체코</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="radio" name="nation" value="칠레">칠레</td>
+                                        <td><input type="radio" name="nation" value="캐나다">캐나다</td>
+                                        <td><input type="radio" name="nation" value="포르투갈">포르투갈</td>
+                                        <td><input type="radio" name="nation" value="폴란드">폴란드</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="radio" name="nation" value="프랑스">프랑스</td>
+                                        <td><input type="radio" name="nation" value="헝가리">헝가리</td>
+                                        <td><input type="radio" name="nation" value="호주">호주</td>
+                                        <td><input type="radio" name="nation" value="홍콩">홍콩</td>
+                                    </tr>
+                                </table>
+                        </div><br>
+                        <div style="border:0px solid blueviolet;width:800px;height:30px;text-align:left ">
+                            <b>취향</b> : <input type="radio" name="type" value="집순이">집순이&nbsp 
+                            <input type="radio" name="type" value="밖돌이">밖돌이
+                       </div><br>
+                       <div style="border:0px solid blueviolet;width:800px;height:30px;text-align:left ">
+                           	<b>워홀경험자</b> : <input type="radio" name="expYn" value="Y">경험자&nbsp
+                           	<input type="radio" name="expYn" value="N">비경험자
+                        </div><br>
+                        <div style="border:0px solid blueviolet;width:800px;height:30px;text-align:left ">
+                            <b>목적</b> : <input type="checkbox" value="스터디">스터디&nbsp
+                            <input type="checkbox" name="purpose" value="여행">여행&nbsp
+                            <input type="checkbox" name="purpose" value="워홀준비">워홀준비&nbsp
+                            <input type="checkbox" name="purpose" value="기타">기타
+                        </div><br>
+                        <div style="border:0px solid blueviolet;width:452px;height:25px;text-align:left">
+                            <b>자기소개글</b>
+                        </div>
+                        <div style="border:0px solid blueviolet;width:800px;height:215px;text-align:left">
+                            <textarea name="friendsContents" cols="85" rows="8" style="margin-top:10px;resize:none;" placeholder="내용을 입력해주세요."></textarea>
+			               	<p>친구 요청을 수락하면 서로 쪽지 보내기가 가능합니다. 친구를 맺어 대화를 나누세요!</p>
+                        </div>
+                        <input type="hidden" name="memberId" value="<%=logInMember.getMemberId() %>">
+                        <input type="submit" style="display: none"><br>
+           			 	<div style="border:0px solid yellow;width:810px;height:60px;display: inline-flex;align-items:center; ">
+                			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+		                        <input type="submit" class="customBtn btnStyle btn btn-primary" style="margin-left:690px;background-color: rgba(221, 160, 221, 0.508) !important;" value=" 수정 "></button>
+        		                <button onclick="cancel_friend();" class="customBtn btnStyle btn btn-primary" type="button" style=" background-color: rgba(221, 160, 221, 0.508) !important;" value="취소">&nbsp취소&nbsp</button>
+                			</div>
+          		      </div>
+                   </div>
+	            </div>
             </div>
+        </form>
+	</section>
 
-        </div>
-        <br><br>
-        <div style="display:flex; border:0px solid rgb(15, 231, 231);width:100%;height:75px">
-            <div style="border:0px solid yellow;width:400px;height:60px"></div>
-            <div style="border:0px solid yellow;width:400px;height:60px"></div>
-            <div style="border:0px solid yellow;width:400px;height:60px;">
-                <div style="border:0px solid yellow;width:400px;height:60px;display: inline-flex;align-items:center; ">
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <input type="submit" class="customBtn btnStyle btn btn-primary" style=" margin-left:250px;background-color: rgba(221, 160, 221, 0.508) !important;" value="수정"></button>
-                        <button onclick="cancel_friend();" class="customBtn btnStyle btn btn-primary" type="button" style=" background-color: rgba(221, 160, 221, 0.508) !important;" value="취소">취소</button>
-                    </div> 
-                </div>
-            
-            </div>
-        </div>
-            </form>
-            
     <style>
          .customBtn {
             color: #fff;
@@ -345,10 +182,8 @@
             width:100%;
             transition:800ms ease all;
         }
-
     </style>
 	
-	</section>
 	<script>
 		const update_friend=()=>{
 			if($("[name=title]").val().length==0||
@@ -356,6 +191,7 @@
 				!$("[name=expYn]").is(':checked')||!$("[name=purpose]").is(':checked')||
 				$("[name=friendsContents]")[0].value==''){
 					alert("값을 모두 입력해주세요.");
+					return false;
 			}else{
 				let answer;
 				answer=confirm("수정을 완료 하시겠습니까?");
@@ -418,7 +254,7 @@
                 왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
              */
             margin-top: 100px;
-            height: 900px; 
+            /* height: 900px; */
             /*
                 ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
                 높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.
@@ -429,6 +265,12 @@
             border: 0px solid blue;
             /* 섹션 안의 div테두리 */
             
+        }
+        #contents>*{
+        	margin:0 auto;
+        }
+        #contents>*>*{
+        	margin:0 auto;
         }
     </style>
 

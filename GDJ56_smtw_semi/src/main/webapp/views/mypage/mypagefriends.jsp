@@ -3,6 +3,7 @@
 <%@include file="/views/common/header.jsp" %>
 <%@ page import="com.smtw.mypage.model.vo.Applyfriends" %>
 <%@ page import="com.smtw.mypage.model.vo.MemberInfo" %>
+<%@ page import="com.smtw.mypage.model.vo.MemberInfo2" %>
 <%@ page import="java.util.List" %>
 
 <%
@@ -14,6 +15,13 @@ List<MemberInfo> infolist =  (List<MemberInfo>)request.getAttribute("infolist");
 <%
 List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendslist");
 %>
+<%
+List<MemberInfo2> acceptedlist =  (List<MemberInfo2>)request.getAttribute("acceptedlist");
+%>
+
+
+
+
 
     <section>
         <div class="sidemenu">
@@ -35,7 +43,7 @@ List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendsl
             <div id="flist">
                 <p>친구 목록</p>
                 <!-- 크롬은 팝업창 최대화 금지가 안됨 -->
-                <%if(friendslist.isEmpty()){ %>
+                <%if(friendslist.isEmpty()||acceptedlist.isEmpty()||(friendslist.isEmpty()&&acceptedlist.isEmpty())){ %>
                 	아직 수락한 친구가 없습니다 :(
                 <%} else{
                 	for(int i=0;i<friendslist.size();i++){
@@ -50,12 +58,33 @@ List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendsl
                 <input type="image" name="submit" id="ficon" src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
                 onclick="goPopup(event)">
                 <%}
+                	for(int j=0;j<acceptedlist.size();j++){
+                %>
+                <form name="form" action="" method="post">
+                 <input type="hidden" name="friendId" value="<%=acceptedlist.get(j).getMemberId()%>"> 
+                <input type="hidden" name="friendName" value="<%=acceptedlist.get(j).getMemberName()%>"> 
+                <input type="hidden" name="friendAge" value="<%=acceptedlist.get(j).getAge()%>"> 
+                <input type="hidden" name="friendGender" value="<%=acceptedlist.get(j).getGender()%>"> 
+                <input type="hidden" name="userId" value="<%=logInMember.getMemberId()%>"> 
+                </form>
+                <input type="image" name="submit" id="ficon" src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
+                onclick="goPopup2(event)">
+                <%}
                 }%>
+              
             </div>
             
             
                 <script>
             	function goPopup(e){
+            		var gsWin=window.open("","winName","width=380,height=380"); //open("주소",띄우는방식,크기)
+            		var frm=$(e.target).prev()[0];
+            		frm.action="<%=request.getContextPath()%>/mypage/mypagePopUp.do";
+            		frm.target="winName";
+            		frm.submit();
+            	}
+            	
+            	function goPopup2(e){
             		var gsWin=window.open("","winName","width=380,height=380"); //open("주소",띄우는방식,크기)
             		var frm=$(e.target).prev()[0];
             		frm.action="<%=request.getContextPath()%>/mypage/mypagePopUp.do";

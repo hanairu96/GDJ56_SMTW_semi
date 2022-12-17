@@ -16,6 +16,7 @@ import java.util.Properties;
 import com.smtw.member.model.vo.Member;
 import com.smtw.mypage.model.vo.Applyfriends;
 import com.smtw.mypage.model.vo.MemberInfo;
+import com.smtw.mypage.model.vo.MemberInfo2;
 import com.smtw.mypage.model.vo.Note;
 
 public class MypageDao {
@@ -98,6 +99,14 @@ public class MypageDao {
 				.build();
 	}
 	
+	private MemberInfo2 getInfoApplyfriendsList2(ResultSet rs) throws SQLException{
+		return MemberInfo2.builder()
+				.memberId(rs.getString("MEMBER_FROM"))
+				.memberName(rs.getString("MEMBER_NAME"))
+				.gender(rs.getString("GENDER").charAt(0))
+				.age(rs.getString("AGE"))
+				.build();
+	}
 	
 	public List<Applyfriends> applyfriendsList(Connection conn, String userId){
 		
@@ -234,7 +243,66 @@ public class MypageDao {
 			}finally {
 				close(rs);
 				close(pstmt);
-				System.out.println(m);
+			}return m;
+		
+	}
+	
+	public List<MemberInfo> acceptedFinfo(Connection conn,String userId){
+		List<MemberInfo> m=new ArrayList();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("acceptedFinfo"));
+			pstmt.setString(1,userId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+					m.add(getInfoApplyfriendsList(rs));
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}return m;
+		
+	}
+	
+	public List<MemberInfo2> acceptedFinfo2(Connection conn,String userId){
+		List<MemberInfo2> m=new ArrayList();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("acceptedFinfo"));
+			pstmt.setString(1,userId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+					m.add(getInfoApplyfriendsList2(rs));
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}return m;
+		
+	}
+	
+	public List<Member> acceptedFlist(Connection conn,String userId){
+		List<Member> m=new ArrayList();
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("acceptedFlist"));
+			pstmt.setString(1,userId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+					m.add(getMember(rs));
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
 			}return m;
 		
 	}
@@ -276,7 +344,6 @@ public class MypageDao {
 		}finally {
 			close(rs);
 			close(pstmt);
-			System.out.println(result);
 		}return result;
 	}
 	

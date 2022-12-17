@@ -36,6 +36,13 @@ public class ReviewBasicServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
+
+		String stateSort = request.getParameter("stateSort");
+		if(stateSort==null) {
+			stateSort="ORDER BY enroll_date DESC";
+		}
+		System.out.println(stateSort);
+		
 		
 		
 		int cPage;
@@ -49,7 +56,7 @@ public class ReviewBasicServlet extends HttpServlet {
 			
 		}
 		
-		List<Review> list=new ReviewService().searchReviewAll(cPage,numPerpage);
+		List<Review> list=new ReviewService().searchReviewAll(cPage,numPerpage,stateSort);
 		
 		
 		
@@ -77,7 +84,7 @@ public class ReviewBasicServlet extends HttpServlet {
 					
 				}else {   
 					pageBar+="<a href='"+request.getContextPath()
-					+"/community/reviewBasic.do?cPage="+(pageNo-1)+"'>[이전]</a>";
+					+"/community/reviewBasic.do?cPage="+(pageNo-1)+"&stateSort="+stateSort+"'>[이전]</a>";
 					
 				}
 				
@@ -87,7 +94,7 @@ public class ReviewBasicServlet extends HttpServlet {
 						pageBar+="<span>"+pageNo+"</span>";
 					}else {
 						pageBar+="<a href='"+request.getContextPath()
-						+"/community/reviewBasic.do?cPage="+pageNo+"'>"+pageNo+"</a>";
+						+"/community/reviewBasic.do?cPage="+pageNo+"&stateSort="+stateSort+"'>"+pageNo+"</a>";
 					}
 					
 					pageNo++;
@@ -97,7 +104,7 @@ public class ReviewBasicServlet extends HttpServlet {
 					pageBar+="<span>[다음]</span>";
 				}else {
 					pageBar+="<a href='"+request.getContextPath()
-						+"/community/reviewBasic.do?cPage="+pageNo+"'>[다음]</a>";
+						+"/community/reviewBasic.do?cPage="+pageNo+"&stateSort="+stateSort+"'>[다음]</a>";
 				}
 		
 		
@@ -107,6 +114,8 @@ public class ReviewBasicServlet extends HttpServlet {
 		
 	
 		request.setAttribute("review", list); 
+		
+		request.setAttribute("state", "basic");
 		
 		
 		request.getRequestDispatcher("/views/community/reviewBasic.jsp").forward(request, response);

@@ -1,7 +1,6 @@
 package com.smtw.qna.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,22 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.notice.model.service.NoticeService;
-import com.smtw.notice.model.vo.Notice;
 import com.smtw.qna.model.service.QnaService;
-import com.smtw.qna.model.vo.Qna;
 
 /**
- * Servlet implementation class QnaViewServlet
+ * Servlet implementation class DeleteQnaServlet
  */
-@WebServlet("/qna/qnaView.do")
-public class QnaViewServlet extends HttpServlet {
+@WebServlet("/qna/deleteQna.do")
+public class DeleteQnaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaViewServlet() {
+    public DeleteQnaServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,16 +30,21 @@ public class QnaViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int qnaNo=Integer.parseInt(request.getParameter("qnaNo"));
+		System.out.println(qnaNo);
+		int result=new QnaService().deleteQna(qnaNo);
 		
-		Qna q=new QnaService().selectQnaNo(qnaNo);//게시물 클릭시 해당번호 게시글
-		List<Qna> list=new QnaService().selectPreNextQnaNo(qnaNo);//이전글,다음글 번호 담겨있는 리스트
+		String msg="",loc="";
+		if(result>0) {
+			msg="글 삭제 완료!";
+			loc="/qna/qnaList.do";
+		}else {
+			msg="글 삭제 실패..";
+			loc="/qna/qnaView.do?qnaNo="+qnaNo;
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
 		
-		request.setAttribute("qna", q);
-		request.setAttribute("qnaList", list);
-		
-		request.getRequestDispatcher("/views/qna/qnaView.jsp").forward(request, response);
-		
-		
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

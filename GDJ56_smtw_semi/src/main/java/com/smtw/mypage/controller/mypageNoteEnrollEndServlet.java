@@ -44,15 +44,17 @@ public class mypageNoteEnrollEndServlet extends HttpServlet {
 		
 		String msg="", loc="";
 		if(result<1) {
-			msg="쪽지안보내짐...ㅋ";
+			msg="실패했습니다. 다시 시도해주세요";
+			loc="/mypage/mypageNoteReply.do?id="+memberId;
+
 		}else {
-			msg="쪽지가 보내기 완료!";
+			msg="성공! 기존에 있던 페이지로 이동합니다";
+			loc="/mypage/mypageNoteReceive.do?id="+memberId;
 		}
-		loc="/mypage/mypageNoteReceive.do?id"+memberId;
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/mypage/alert.jsp").forward(request, response);
 	}
 		
 		
