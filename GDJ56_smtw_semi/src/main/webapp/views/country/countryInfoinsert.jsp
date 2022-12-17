@@ -64,7 +64,7 @@
 	
 	                <div>
 	                    나라성향 
-	                    <br><label><input type="radio" name="tend2" value="온화" checked>온화</label>
+	                    <br><label><input type="radio" name="tend2" value="온순" checked>온순</label>
 	                    <label><input type="radio" name="tend2" value="열정">열정</label>
 	                </div> 
 	                <br>

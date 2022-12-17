@@ -1,6 +1,7 @@
 package com.smtw.country.controller;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.smtw.country.model.service.CountryService;
 import com.smtw.country.model.vo.Country;
 
@@ -32,14 +35,25 @@ public class updateFirstCountryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		String name=request.getParameter("nName");
-		String lang=request.getParameter("langEn");
-		String tend=request.getParameter("tend2");
-		String land=request.getParameter("land");
-		String wea=request.getParameter("weather");
-		String pic=request.getParameter("picpic");
-		String text=request.getParameter("ontext");
-		String er=request.getParameter("er");
+		String path=request.getServletContext().getRealPath("/upload/");
+		
+		MultipartRequest mr=new MultipartRequest(request,path,1024*1024*10,"UTF-8",new DefaultFileRenamePolicy());
+		
+		Enumeration e=mr.getFileNames();
+		String pic="";
+		if(e.hasMoreElements()) {
+			String filename=(String)e.nextElement();
+			pic = mr.getFilesystemName(filename);
+		}
+		
+		
+		String name=mr.getParameter("nName");
+		String lang=mr.getParameter("langEn");
+		String tend=mr.getParameter("tend2");
+		String land=mr.getParameter("land");
+		String wea=mr.getParameter("weather");
+		String text=mr.getParameter("ontext");
+		String er=mr.getParameter("er");
 		
 		Country c=Country.builder()
 				.nName(name)

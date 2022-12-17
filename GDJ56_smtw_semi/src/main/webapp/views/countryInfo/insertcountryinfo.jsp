@@ -97,7 +97,8 @@
     }
 </style>
 <section>
-    <form action="<%=request.getContextPath()%>/countryinfo/insertinfo.do?" method="post">
+    <form action="<%=request.getContextPath()%>/countryinfo/insertinfo.do?"
+     enctype="multipart/form-data"  method="post">
     <div id="insertpage">
         <fieldset>
             <legend><h1 style="text-align: centers;">국가정보 기본 입력 페이지</h1></legend>

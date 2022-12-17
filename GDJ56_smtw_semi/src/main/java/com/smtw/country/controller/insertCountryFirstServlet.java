@@ -28,35 +28,37 @@ public class insertCountryFirstServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//파일 업로드 하기
-		String path=getServletContext().getRealPath("/upload/");
-		MultipartRequest mr=new MultipartRequest(request,path,1024*1024*1024*10,"UTF-8",new DefaultFileRenamePolicy());
+		String path=request.getServletContext().getRealPath("/upload/");
+		
+		MultipartRequest mr=new MultipartRequest(request,path,1024*1024*10,"UTF-8",new DefaultFileRenamePolicy());
+		
 		Enumeration e=mr.getFileNames();
 		String pic="";
 		if(e.hasMoreElements()) {
-			String filename=(String)e.nextElement();
+			String filename=(String)e.nextElement();//파일을 반환
 			pic = mr.getFilesystemName(filename);
 		}
 
 		
-		
+		//multipart/form-data형식으로 전송 되었기 때문에 request.getParameter가 불가능하고 
+		//MultipartRequest 객체의 getParamter 메소드를 사용해야 한다.
 		String name=null;
-		name=request.getParameter("selectco");
-		if(request.getParameter("selectco").equals("self")) {
-			name=request.getParameter("selfname");
+		name=mr.getParameter("selectco");
+		if(mr.getParameter("selectco").equals("self")) {
+			name=mr.getParameter("selfname");
 		}else {
-			name=request.getParameter("selectco");
+			name=mr.getParameter("selectco");
 		}
-		String lang=request.getParameter("langEn");
-		String tend=request.getParameter("tend2");
-		String place=request.getParameter("land");
-		String wea=request.getParameter("weather");
-		String ontext=request.getParameter("ontext");
+		String lang=mr.getParameter("langEn");
+		String tend=mr.getParameter("tend2");
+		String place=mr.getParameter("land");
+		String wea=mr.getParameter("weather");
+		String ontext=mr.getParameter("ontext");
 		
 		Country c=Country.builder()
 				.nName(name)

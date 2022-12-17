@@ -109,10 +109,9 @@
             <div>
                 <h2 style="text-align: center;"><%=c.getNName() %></h2>
                 <%if(c.getCPic()==null){%>
-                <img src="<%=request.getContextPath()%>/images/country/noimage_view.png" alt=""
-                width="200" height="130">
+                <img src="<%=request.getContextPath()%>/images/country/noimage_view.png" alt="" width="200" height="130">
 				<%}else{%>
-				<img src="<%=request.getContextPath()%>" width="200" height="130">
+				<img src="<%=request.getContextPath()%>/upload/<%=c.getCPic()%>" alt="" width="200" height="130">
 				<%} %>
             </div>
             <p style="font-size: 13px;">
