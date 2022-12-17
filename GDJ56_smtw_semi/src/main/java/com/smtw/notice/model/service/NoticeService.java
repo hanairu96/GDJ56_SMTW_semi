@@ -10,7 +10,6 @@ import java.util.List;
 
 import com.smtw.notice.model.dao.NoticeDao;
 import com.smtw.notice.model.vo.Notice;
-import com.smtw.notice.model.vo.NoticePreNext;
 
 public class NoticeService {
 	NoticeDao dao=new NoticeDao();
@@ -68,11 +67,20 @@ public class NoticeService {
 		return result;
 	}
 	
-	public NoticePreNext preNextNotice(int noticeNo) {
+	public List<Notice> selectPreNextNoticeNo(int noticeNo){
 		Connection conn=getConnection();
-		NoticePreNext npn=dao.preNextNotice(conn, noticeNo);
+		List<Notice> list=dao.selectPreNextNoticeNo(conn,noticeNo);
 		close(conn);
-		return npn;
+		return list;
+	}
+	
+	public int deleteNotice(int noticeNo) {
+		Connection conn=getConnection();
+		int result=dao.deleteNotice(conn,noticeNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 
 }

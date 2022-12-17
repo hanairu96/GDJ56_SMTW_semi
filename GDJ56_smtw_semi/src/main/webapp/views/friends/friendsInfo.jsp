@@ -53,7 +53,7 @@
             <div style="border:1px solid yellow;width:910px;height:60px;display:inline-flex;align-items:center; ">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 	<%if(logInMember!=null&&(logInMember.getMemberId().equals("ADMIN")||logInMember.getMemberId().equals(f.getMemberId()))){%>
-		            	<button onclick="location.assign('<%=request.getContextPath()%>/friends/friendsUpdate.do?memberId=<%=f.getMemberId()%>');" 
+		            	<button onclick="location.assign('<%=request.getContextPath()%>/friends/friendsUpdate.do?friendsNo=<%=f.getFriendsNo()%>');" 
 		            	class="customBtn btnStyle btn btn-primary" type="button" style="width:80px;margin-left:640px;background-color: rgba(221, 160, 221, 0.508) !important;" value="수정하기">수정하기</button>
 		            	<button onclick="friend_delete();" class="customBtn btnStyle btn btn-primary" type="button" style="width:80px;background-color: rgba(221, 160, 221, 0.479) !important;" value="삭제">삭제하기</button>
 		            	<button onClick="location.href='<%=request.getContextPath() %>/friends/friendsList.do'" class="customBtn btnStyle btn btn-primary" type="button" style="width:80px;background-color: rgba(221, 160, 221, 0.508) !important;" value="목록">목록으로</button>

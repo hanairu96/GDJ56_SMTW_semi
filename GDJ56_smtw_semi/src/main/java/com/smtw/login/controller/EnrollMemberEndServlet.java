@@ -63,7 +63,7 @@ public class EnrollMemberEndServlet extends HttpServlet {
 		String msg="",loc="";
 		if(result>0) {
 			msg="회원가입 성공! 환영합니다!";
-			loc="/";
+			loc="/logIn/logIn.do";
 		}else {
 			msg="회원가입에 실패했습니다. 다시 시도해주세요.";
 			loc="/logIn/enrollMember.do";

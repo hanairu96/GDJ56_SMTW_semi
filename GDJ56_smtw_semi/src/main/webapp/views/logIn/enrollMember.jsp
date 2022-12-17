@@ -345,7 +345,7 @@
 		}
 		
 		//가입가능한 이메일
-   		if(!($("span#checkEmail>small").text().includes("가능한"))){//이메일 사용 가능하다는 말이 없으면
+   		if(($("span#checkEmail>small").text().includes("이미"))){//이미 가입된 이메일이 있다고 하면
    			$("#inputEmail").focus();
    			return false;
    		}

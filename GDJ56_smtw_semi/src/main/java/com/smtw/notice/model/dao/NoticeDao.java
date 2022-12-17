@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Properties;
 
 import com.smtw.notice.model.vo.Notice;
-import com.smtw.notice.model.vo.NoticePreNext;
 
 public class NoticeDao {
 	Properties sql=new Properties();
@@ -180,39 +179,46 @@ public class NoticeDao {
 	}
 	
 	//이전글, 다음글 부르는 로직
-	public NoticePreNext preNextNotice(Connection conn, int noticeNo) {
+	public List<Notice> selectPreNextNoticeNo(Connection conn, int noticeNo){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		NoticePreNext npn=null;
-		
-		String query=sql.getProperty("preNextNotice");
-		query=query.replace("$COL", "'"+"이전글이 없습니다."+"'");
-		query=query.replace("&COL", "'"+"다음글이 없습니다."+"'");
+		List<Notice> list=new ArrayList();
 		
 		try {
-			pstmt=conn.prepareStatement(query);
+			pstmt=conn.prepareStatement(sql.getProperty("selectPreNextNoticeNo"));
 			pstmt.setInt(1, noticeNo);
+			pstmt.setInt(2, noticeNo);
 			rs=pstmt.executeQuery();
 			
-			if(rs.next()) 
-				npn=NoticePreNext.builder()
-								.noticeNo(rs.getInt("notice_no"))
-								.preNo(rs.getInt("preno"))
-								.preTitle(rs.getString("pretitle"))
-								.preContents(rs.getString("precontents"))
-								.nextNo(rs.getInt("nextno"))
-								.nextTitle(rs.getString("nexttitle"))
-								.nextContents(rs.getString("nextcontents"))
-								.build();
+			while(rs.next()) {
+				list.add(getNotice(rs));
+			}
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(rs);
 			close(pstmt);
-		}return npn;
+		}return list;
 	}
 	
+	//공지사항 게시글 삭제
+	public int deleteNotice(Connection conn, int noticeNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("deleteNotice"));
+			pstmt.setInt(1, noticeNo);
+			
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 	
 	
 	
