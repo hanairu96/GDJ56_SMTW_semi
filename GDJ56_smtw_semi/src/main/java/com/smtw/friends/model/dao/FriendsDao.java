@@ -51,12 +51,54 @@ public class FriendsDao {
 		return result;
 	}
 	
+	public List<Friends> selectFriendsList(Connection conn, int cPage, int numPerpage, String nation){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Friends> result=new ArrayList();
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectFriendsNationList"));
+			
+			pstmt.setString(1, nation);
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(getFriends(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	public int selectFriendsCount(Connection conn) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int count=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectFriendsCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) count=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return count;
+	}
+
+	public int selectFriendsNationCount(Connection conn, String nation) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int count=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectFriendsNationCount"));
+			pstmt.setString(1, nation);
 			rs=pstmt.executeQuery();
 			if(rs.next()) count=rs.getInt(1);
 		}catch(SQLException e) {

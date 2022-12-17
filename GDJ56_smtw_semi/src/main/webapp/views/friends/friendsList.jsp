@@ -33,7 +33,7 @@
         <div style="height:25px;">
             <div style="display:flex;float: right;">
                 <select class="form-select" aria-label="Default select example" style="box-shadow: 0 4px 2px -2px rgba(221, 160, 221, 0.304) !important;;">
-                    <option selected>분류</option>
+                    <option selected>나라</option>
                     <option value="네덜란드">네덜란드</option>
                     <option value="스웨덴">스웨덴</option>
                     <option value="이스라엘">이스라엘</option>
@@ -73,7 +73,6 @@
 
             <div id="lists" style="border:0px solid red;width:800px;height:695px">
                 <div style="display:flex">
-                    
                       
                 <%if(fs==null||fs.isEmpty()) {%>
                        <div id="box" style="border:0px solid green;width:300px;height:300px">
@@ -159,6 +158,10 @@
     <!-- ##### 개별적으로 설정해줘야 하는 부분 있음 (각자 페이지 푸터위까지만 움직이게) ##### -->
     <!-- ##### 크롬 비율 80프로기준으로 설정했음 ##### -->
 	<script>
+		$(".form-select").change(function(){
+			location.assign("<%=request.getContextPath()%>/friends/friendsNationList.do?nation="+$(".form-select").val());
+		})
+	
 		const enroll=()=>{
 			location.assign("<%=request.getContextPath()%>/friends/friendsEnroll.do");
 		}
