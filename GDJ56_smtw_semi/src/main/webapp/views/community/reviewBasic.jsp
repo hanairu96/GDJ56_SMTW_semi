@@ -15,7 +15,7 @@
  
  <%
 	List<Review> review=(List<Review>)request.getAttribute("review");
-
+	String state=(String)request.getAttribute("state");
 %>
 
 
@@ -36,9 +36,9 @@
             <div style="display:flex;float: right;">
                 	
 	                <select  id="stateSort" class="form-select" aria-label="Default select example" style="box-shadow: 0 4px 2px -2px rgba(221, 160, 221, 0.304) !important;"> 
-	                    <option value="등록일순">등록일순</option>
-	                    <option value="별점높은순">별점높은순</option>
-	                    <option value="별점낮은순">별점낮은순</option>
+	                    <option value="ORDER BY enroll_date DESC">등록일순</option>
+	                    <option value="ORDER BY REVIEW_SAT DESC">별점높은순</option>
+	                    <option value="ORDER BY REVIEW_SAT ASC">별점낮은순</option>
 	                </select>
                 
                
@@ -80,7 +80,7 @@
                    
                         <div style="border:0px solid green;width:270px;height:300px;text-align: center; ">
                             <div style="border:0px solid magenta;width:180px;height:230px; margin-left :50px; margin-top :5px; " >
-                                <img src="./images/lupy.jpg" alt="" style="width:100%;height:100%;margin:auto;border-radius:20px;">
+                                <img src="" alt="" style="width:100%;height:100%;margin:auto;border-radius:20px;">
                             </div>
                             <div><a href="" style="color: black !important;font-size:20px !important;" ><%=r.getReviewTitle() %></a></div>
                             <div><%=r.getEnrollDate()%></div>
@@ -194,7 +194,28 @@
         </div>       
     </section>
     <script>
-     $('#searchType').change(e=>{
+    
+    
+    
+
+   	 <% String stateSort = request.getParameter("stateSort"); %>
+   	 <%if(stateSort == null){%>
+   	 	$("#stateSort").val("ORDER BY enroll_date DESC");
+   	 <%} else{%>
+   	 	$("#stateSort").val("<%=stateSort%>");
+   	 <%}%>
+
+    
+    
+    
+   
+    
+   
+    
+    
+    
+    
+    $('#searchType').change(e=>{
         	$(e.target).val();
         const type=$(e.target).val();
         	console.log($("search-"+type));
@@ -205,15 +226,48 @@
     
      
      $("#stateSort").change(e=>{
-     	$(e.target).val();
+     	
+    	
+    	console.log($(e.target).val()); 
+    	
      	
      	const stateSort=$(e.target).val()
      	
-    	location.replace('<%=request.getContextPath()%>/community/reviewBasic.do?stateSort='+$(e.target).val());
+     	let url;
+     	<%if(state.equals("search")) {%>
+     	url = '<%=request.getContextPath()%>/community/searchReview.do?stateSort='+$(e.target).val()+'&searchType='+'<%=request.getParameter("searchType")%>'+'&searchKeyword='+'<%=request.getParameter("searchKeyword")%>';
+     	location.replace(url);
+     	
+     	<% }else{ %>
+     	
+     		location.replace('<%=request.getContextPath()%>/community/reviewBasic.do?stateSort='+$(e.target).val()) ; 
+     	<%}  %>
+    	 
      	
      	
-     	
+   
      });
+     
+     
+
+     
+     
+     
+     $("#stateSort").change(e=>{
+      	
+    	 console.log($(e.target).val()); 
+    	
+      	
+      	const stateSort=$(e.target).val();
+      	
+     	<%-- location.replace('<%=request.getContextPath()%>/community/searchReview.do?stateSort='+$(e.target).val()); --%>
+      	
+      	
+      	
+      	
+      	
+      });
+     
      
      
      
