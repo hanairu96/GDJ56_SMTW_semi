@@ -115,8 +115,11 @@
            		 		
            		 		
        				 <div id="collectmain2">
+       				 	<%if(con.get(i).getNImg()==null) {%>
+	                    <img src="<%=request.getContextPath()%>/images/country/noimage_view.png"  alt="" style="width: 370px; height:250px;" >
+       				 	<%}else{ %>
 	                    <img src="<%=request.getContextPath()%>/upload/<%=con.get(i).getNImg() %>"  alt="" style="width: 370px; height:250px;" >
-<%-- 	                    <img src="<%=request.getContextPath()%>/images/country/noimage_view.png"  alt="" style="width: 370px; height:250px;" > --%>
+	                    <%} %>
 	                    <div id="likenameinfo">
 	                        <div id="likename2">
 	                        <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN"))  {%>

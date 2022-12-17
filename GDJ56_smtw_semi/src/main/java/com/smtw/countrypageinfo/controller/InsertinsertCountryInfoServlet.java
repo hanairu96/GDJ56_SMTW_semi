@@ -1,6 +1,7 @@
 package com.smtw.countrypageinfo.controller;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.smtw.country.model.vo.CountryPageInfo;
 import com.smtw.countrypageinfo.model.service.CountryPageInfoService;
 
@@ -31,15 +34,25 @@ public class InsertinsertCountryInfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String name=request.getParameter("nName");
-		String img=request.getParameter("cimage");
-		String lan=request.getParameter("langagecountry");
-		String urban=request.getParameter("urban");
-		String money=request.getParameter("moneycountry");
-		String elect=request.getParameter("elect");
-		String map=request.getParameter("contryaddress");
-		String engcity=request.getParameter("engcity");
-		String clock=request.getParameter("clockchange");
+		String path=request.getServletContext().getRealPath("/upload/");
+		
+		MultipartRequest mr=new MultipartRequest(request,path,1024*1024*10,"UTF-8",new DefaultFileRenamePolicy());
+		
+		Enumeration e=mr.getFileNames();
+		String img="";
+		if(e.hasMoreElements()) {
+			String filename=(String)e.nextElement();
+			img = mr.getFilesystemName(filename);
+		}
+		
+		String name=mr.getParameter("nName");
+		String lan=mr.getParameter("langagecountry");
+		String urban=mr.getParameter("urban");
+		String money=mr.getParameter("moneycountry");
+		String elect=mr.getParameter("elect");
+		String map=mr.getParameter("contryaddress");
+		String engcity=mr.getParameter("engcity");
+		String clock=mr.getParameter("clockchange");
 		
 		CountryPageInfo cp=CountryPageInfo.builder()
 				.nName(name)

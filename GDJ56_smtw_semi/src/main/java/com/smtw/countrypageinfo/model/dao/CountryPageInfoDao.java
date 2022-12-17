@@ -107,9 +107,10 @@ public class CountryPageInfoDao {
 			pstmt=conn.prepareStatement(sql.getProperty("updateinfo"));
 			pstmt.setString(1, c.getCLanguage());
 			pstmt.setString(2, c.getUrban());
-			pstmt.setString(3,c.getMoney());
-			pstmt.setString(4, c.getMapAddress());
-			pstmt.setString(5, c.getEnglishName());
+			pstmt.setString(3, c.getMoney());
+			pstmt.setString(4, c.getElect());
+			pstmt.setString(5, c.getMapAddress());
+			pstmt.setString(6, c.getEnglishName());
 			pstmt.setString(7, c.getClock());
 			pstmt.setString(8, c.getCPic());
 			pstmt.setString(9, c.getNName());
