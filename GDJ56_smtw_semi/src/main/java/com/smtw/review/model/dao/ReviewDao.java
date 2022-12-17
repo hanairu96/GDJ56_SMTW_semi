@@ -128,6 +128,7 @@ public List<Review> searchReviewList(Connection conn,String type,String keyword,
 		
 		String query=sql.getProperty("searchReviewListKeyword");
 		//SELECT *FROM REVIEW WHERE $COL LIKE ?
+		System.out.println(type);
 		query=query.replace("$COL",type);
 		
 		try {
