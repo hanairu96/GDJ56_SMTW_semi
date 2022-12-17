@@ -55,9 +55,9 @@ public class FriendsService {
 		return result;
 	}
 	
-	public Friends selectFriendsId(String id) {
+	public Friends selectFriendsNo(int no) {
 		Connection conn=getConnection();
-		Friends m=dao.selectFriendsId(conn, id);
+		Friends m=dao.selectFriendsNo(conn, no);
 		close(conn);
 		return m;
 	}
