@@ -182,6 +182,43 @@ public class QnaDao {
 			}return list;
 		}
 	
+		//qna 업데이트
+		public int updateQna(Connection conn,String title,String contents,int qnaNo) {
+			PreparedStatement pstmt=null;
+			int result=0;
+			
+			try {
+				pstmt=conn.prepareStatement(sql.getProperty("updateQna"));
+				pstmt.setString(1, title);
+				pstmt.setString(2, contents);
+				pstmt.setInt(3, qnaNo);
+				
+				result=pstmt.executeUpdate();
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}return result;
+		}
+		//qna 게시글 삭제
+		public int deleteQna(Connection conn, int qnaNo) {
+			PreparedStatement pstmt=null;
+			int result=0;
+			
+			try {
+				pstmt=conn.prepareStatement(sql.getProperty("deleteQna"));
+				pstmt.setInt(1, qnaNo);
+				
+				result=pstmt.executeUpdate();
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}return result;
+		}
+		
 	
 	
 	

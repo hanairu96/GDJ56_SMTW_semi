@@ -1,25 +1,26 @@
-package com.smtw.notice.controller;
+package com.smtw.qna.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.notice.model.service.NoticeService;
+import com.smtw.qna.model.service.QnaService;
 
 /**
- * Servlet implementation class DeleteNoticeServlet
+ * Servlet implementation class DeleteQnaServlet
  */
-@WebServlet("/notice/deleteNotice.do")
-public class DeleteNoticeServlet extends HttpServlet {
+@WebServlet("/qna/deleteQna.do")
+public class DeleteQnaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteNoticeServlet() {
+    public DeleteQnaServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,17 +29,17 @@ public class DeleteNoticeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int noticeNo=Integer.parseInt(request.getParameter("noticeNo"));
-		
-		int result=new NoticeService().deleteNotice(noticeNo);
+		int qnaNo=Integer.parseInt(request.getParameter("qnaNo"));
+		System.out.println(qnaNo);
+		int result=new QnaService().deleteQna(qnaNo);
 		
 		String msg="",loc="";
 		if(result>0) {
 			msg="글 삭제 완료!";
-			loc="/notice/noticeList.do";
+			loc="/qna/qnaList.do";
 		}else {
 			msg="글 삭제 실패..";
-			loc="/notice/noticeView.do?noticeNo="+noticeNo;
+			loc="/qna/qnaView.do?qnaNo="+qnaNo;
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
