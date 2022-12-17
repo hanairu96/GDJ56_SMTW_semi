@@ -57,8 +57,8 @@
              <div style="display:flex; border:0px solid rgb(15, 231, 231);width:900px;height:auto;margin: 0 auto;">
                  <div style="border:0px solid yellow;width:800px;height:60px;margin:0 auto;margin-top: 10px;">
                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                          <button onclick="location.assign('<%=request.getContextPath() %>/notice/modifyNotice.do?noticeNo=<%=n.getNoticeNo()%>');" class="customBtn btnStyle" type="button" value="수정">수정하기</button>
-                         <button onclick="cancel_review('주소값');"    class="customBtn btnStyle" type="button"value="삭제">삭제하기</button> 
+                         <button onclick="location.assign('<%=request.getContextPath() %>/notice/modifyNotice.do?noticeNo=<%=n.getNoticeNo()%>');" class="customBtn btnStyle" type="button" value="수정">수정하기</button>
+                         <button onclick="deleteNotice();"class="customBtn btnStyle" type="button"value="삭제">삭제하기</button> 
                      </div>
                  </div>
              </div>
@@ -87,6 +87,16 @@
         </div>
     </div>
 </div>
+<script>
+	const deleteNotice=()=>{
+		const result=confirm("공지사항을 삭제하시겠습니까?");
+		if(result){
+			location.assign('<%=request.getContextPath() %>/notice/deleteNotice.do?noticeNo=<%=n.getNoticeNo()%>');
+		}else{
+			return false;
+		}
+	}
+</script>
 </section>
 
 <%@include file="/views/common/footer.jsp" %>

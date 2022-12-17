@@ -73,5 +73,14 @@ public class NoticeService {
 		close(conn);
 		return list;
 	}
+	
+	public int deleteNotice(int noticeNo) {
+		Connection conn=getConnection();
+		int result=dao.deleteNotice(conn,noticeNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 
 }

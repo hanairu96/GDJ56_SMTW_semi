@@ -202,6 +202,24 @@ public class NoticeDao {
 		}return list;
 	}
 	
+	//공지사항 게시글 삭제
+	public int deleteNotice(Connection conn, int noticeNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("deleteNotice"));
+			pstmt.setInt(1, noticeNo);
+			
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
 	
 	
 	
