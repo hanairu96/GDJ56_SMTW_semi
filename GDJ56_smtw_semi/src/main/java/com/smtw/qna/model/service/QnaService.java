@@ -52,4 +52,18 @@ public class QnaService {
 		return result;
 	}
 	
+	public Qna selectQnaNo(int qnaNo) {
+		Connection conn=getConnection();
+		Qna q=dao.selectQnaNo(conn,qnaNo);
+		close(conn);
+		return q;
+	}
+	
+	public List<Qna> selectPreNextQnaNo(int qnaNo){
+		Connection conn=getConnection();
+		List<Qna> list=dao.selectPreNextQnaNo(conn,qnaNo);
+		close(conn);
+		return list;
+	}
+	
 }
