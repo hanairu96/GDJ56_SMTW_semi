@@ -42,13 +42,14 @@ public class mapagePwdCkEndServlet extends HttpServlet {
 		if(m==null) {
 			msg="비밀번호를 잘못입력하셨습니다. 다시입력해주세요";
 			loc="/mypage/mypagePwdCk.do?id="+userId;
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {
-			msg="비밀번호를 올바르게 입력하셧습니다. 개인정보 수정 페이지로 넘어갑니다";
-			loc="/mypage/mypageAccountUpdate.do?id="+userId;
+			request.setAttribute("id", userId);
+			request.getRequestDispatcher("/mypage/mypageAccountView.do").forward(request, response);
 		}
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);;
+
 		
 	}
 

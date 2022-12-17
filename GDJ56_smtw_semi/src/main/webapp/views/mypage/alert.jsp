@@ -14,7 +14,14 @@
 </head>
 
 <body>
-	
+		<%if(msg.equals("실패했습니다. 다시 시도해주세요")) {%>
+		<script>
+			alert("실패했습니다. 다시 시도해주세요");
+     		history.go(-1);//첫번째 방법
+     		history.back();//두번째 방법
+     		location.replace("<%=request.getContextPath()%><%=loc%>"); 
+	    </script>
+	    <%}else{ %>
 	    <script>
             alert('<%=msg%>');
               
@@ -22,6 +29,7 @@
             window.close();
         
         </script>
+        <%} %>
 	
 </body>
 </html>
