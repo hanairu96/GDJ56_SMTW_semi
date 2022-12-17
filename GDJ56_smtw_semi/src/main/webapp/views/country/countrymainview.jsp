@@ -35,19 +35,23 @@
         #like2{
         	width:50px;
         	height:50px;
+        	font-size:35px;
+        }
+        #likebtn{
+        	padding-top:30px;
         }
         #comaincontainer2{
         	flex-wrap: wrap;
         	display:flex;
          	position: absolute;
-        	left :300px; 
+        	left :250px; 
         	/* border: 5px solid green;  */
         	width:1350px;
-        	height:1050px;
+        	height:1100px;
         }
         #pageBar2{
         	position: absolute;
-        	top :1600px;
+        	top :1650px;
 			left:50%;
 			width:500px;
         }
@@ -116,9 +120,9 @@
            		 		
        				 <div id="collectmain2">
        				 	<%if(con.get(i).getNImg()==null) {%>
-	                    <img src="<%=request.getContextPath()%>/images/country/noimage_view.png"  alt="" style="width: 370px; height:250px;" >
+	                    <img src="<%=request.getContextPath()%>/images/country/noimage_view.png"  alt="" style="width: 400px; height:300px;" >
        				 	<%}else{ %>
-	                    <img src="<%=request.getContextPath()%>/upload/<%=con.get(i).getNImg() %>"  alt="" style="width: 370px; height:250px;" >
+	                    <img src="<%=request.getContextPath()%>/upload/<%=con.get(i).getNImg() %>"  alt="" style="width: 400px; height:300px;" >
 	                    <%} %>
 	                    <div id="likenameinfo">
 	                        <div id="likename2">
@@ -141,7 +145,7 @@
 	                            
 	                            
 	                        	<div id="likebtn">
-		                            <button id="like2">좋아요</button>
+		                            <button id="like2">❤</button>
 	                        	</div>	    
 	                        </div>
 	                        <h4 id="maininfo2"><%=con.get(i).getNpharse() %></h4>
@@ -152,7 +156,7 @@
 	                            <button id="delete" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/deleteCountry.do?nName=<%=con.get(i).getNName()%>')">삭제</button>
 	                        </div>
 	                        <%} %>
-	                    </div>
+	                     </div>
 	                 </div>
 				 <%} 
 			 	}%>  
@@ -228,7 +232,7 @@
          
          /* margin-left: 50px; */
          margin-right: 50px;
-         padding-left: 60px;
+         padding-left: 30px;
          padding-right: 100px;
          /* 
              만약 섹션 안에 div를 만든다면 여기 padding-left,padding-right에서
@@ -236,7 +240,7 @@
              왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
           */
          margin-top: 100px;
-         height: 1250px; 
+         height: 1300px; 
          /*
              ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
              높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.

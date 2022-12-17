@@ -33,7 +33,7 @@ public class selecrContentServlcet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		List<CountryPage> c=new CountryPageInfoService().selectContent();
-//		System.out.println(c);
+		System.out.println(c);
 		request.setAttribute("info", c);
 		request.getRequestDispatcher("/views/countryInfo/countryInfoMain.jsp").forward(request, response);
 	

@@ -25,7 +25,7 @@
             padding-right: 100px;
         }
         #buttoncollect{
-            max-width: 1050px;
+            width: 1050px;
             margin: 0 auto;
             /* border: 5px solid blue; */
     
@@ -64,6 +64,14 @@
         #countrymap{
         	width : 600px;
         	height : 450px;
+        }
+        #explain{
+        	border: 5px solid blue;
+        	margin-left:100px;
+        	margin-right:100px;
+        	height:auto;
+        	
+        
         }
     
     
@@ -151,7 +159,15 @@
         <input type="button" name="button" value="취업정보">      
       <div id="explain">
 	      <pre>
-	  		내용없음
+	  		내용 입력중...
+	  		.
+	  		.
+	  		.
+	  		.
+	  		.
+	  		.
+	  		.
+	  		.
           </pre>
         </div>
     </div>
@@ -175,11 +191,14 @@
     
 	<%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
 		    <div id="twobu">
+		    <%if(coinfo==null){ %>
 		        <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goInsertContext.do?nName=<%=c.getNName()%>')"><span>추가</span></button>
+		    <%}else{ %>
 		        <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goUpdateContent.do?nName=<%=c.getNName()%>')"><span>수정</span></button>
 	   		</div>
 	    <%}%>
 	    
+    <%}%>
 	<style>
 		#twobu>button{
     		width:110px;
