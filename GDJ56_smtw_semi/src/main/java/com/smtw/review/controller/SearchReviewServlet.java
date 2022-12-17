@@ -35,6 +35,15 @@ public class SearchReviewServlet extends HttpServlet {
 		String type=request.getParameter("searchType");
 		String keyword=request.getParameter("searchKeyword");
 	
+		
+		String stateSort = request.getParameter("stateSort");
+		if(stateSort==null) {
+			stateSort="ORDER BY enroll_date DESC";
+		}
+		
+		
+		
+		
 		int cPage;
 		// 페이지당 출력 갯수
 			int numPerpage=4;
@@ -47,7 +56,7 @@ public class SearchReviewServlet extends HttpServlet {
 			
 		}
 	//
-	List<Review> list=new ReviewService().searchReviewList(type,keyword,cPage,numPerpage);
+	List<Review> list=new ReviewService().searchReviewList(type,keyword,cPage,numPerpage,stateSort);
 		
 		
 	
@@ -68,7 +77,7 @@ public class SearchReviewServlet extends HttpServlet {
 		
 	}else {   
 		pageBar+="<a href='"+request.getContextPath()
-		+"/community/searchReview.do?cPage="+(pageNo-1)+"&searchType="+type+"&searchKeyword="+keyword+"'>"+pageNo+"</a>";
+		+"/community/searchReview.do?cPage="+(pageNo-1)+"&searchType="+type+"&searchKeyword="+keyword+"&stateSort="+stateSort+"'>"+pageNo+"</a>";
 		
 	}
 	
@@ -78,7 +87,7 @@ public class SearchReviewServlet extends HttpServlet {
 			pageBar+="<span>"+pageNo+"</span>";
 		}else {
 			pageBar+="<a href='"+request.getContextPath()
-			+"/community/searchReview.do?cPage="+pageNo+"&searchType="+type+"&searchKeyword="+keyword+"'>"+pageNo+"</a>";
+			+"/community/searchReview.do?cPage="+pageNo+"&searchType="+type+"&searchKeyword="+keyword+"&stateSort="+stateSort+"'>"+pageNo+"</a>";
 		}
 		
 		pageNo++;
@@ -88,7 +97,7 @@ public class SearchReviewServlet extends HttpServlet {
 		pageBar+="<span>[다음]</span>";
 	}else {
 		pageBar+="<a href='"+request.getContextPath()
-		+"/community/searchReview.do?cPage="+pageNo+"&searchType="+type+"&searchKeyword="+keyword+"'>"+pageNo+"</a>";
+		+"/community/searchReview.do?cPage="+pageNo+"&searchType="+type+"&searchKeyword="+keyword+"&stateSort="+stateSort+"'>"+pageNo+"</a>";
 	}
 	
 	
@@ -98,6 +107,9 @@ public class SearchReviewServlet extends HttpServlet {
 	
 	request.setAttribute("review", list); 
 	
+	request.setAttribute("state", "search");
+	
+
 	
 	request.getRequestDispatcher("/views/community/reviewBasic.jsp").forward(request, response);
 	

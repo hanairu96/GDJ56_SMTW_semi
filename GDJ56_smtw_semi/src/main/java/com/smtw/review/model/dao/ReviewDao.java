@@ -58,27 +58,37 @@ public class ReviewDao {
 	
 	
 	
-	public List<Review>  searchReviewAll(Connection conn,int cPage,int numPerpage){
+	public List<Review>  searchReviewAll(Connection conn,int cPage,int numPerpage,String stateSort){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		Review r=null;
 		List<Review> list=new ArrayList();
-		
+		String query=sql.getProperty("searchReviewAll");
+		String addQuery = "";
+		if(stateSort != null) {
+			addQuery += " " + stateSort +" ";
+		}
+		addQuery += ")R)WHERE rnum BETWEEN ? AND ?";
+		System.out.println(query+addQuery);
 		try {
 
+			//기존 쿼리문
+			//SELECT * FROM (SELECT rownum AS rnum, R.* FROM (SELECT * FROM REVIEW)R) WHERE rnum BETWEEN ? AND ?
+			//변경하고 싶은 쿼리문
+//			SELECT * FROM 
+//			(SELECT rownum AS rnum, R.* FROM (SELECT * FROM REVIEW ORDER BY enroll_date DESC)R)
+//			WHERE rnum BETWEEN 3 AND 5;
 			
-			pstmt=conn.prepareStatement(sql.getProperty("searchReviewAll"));
+			pstmt=conn.prepareStatement(query + addQuery);			
 			//시작값
 			pstmt.setInt(1, (cPage-1)*numPerpage+1);
 			//끝값
 			pstmt.setInt(2, cPage*numPerpage);
-			
-			
-		
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				r=getReview(rs);
 				//
+				System.out.println(r);
 				list.add(r);
 			}
 		}catch(SQLException e) {
@@ -119,7 +129,7 @@ public class ReviewDao {
 		
 	}
 	
-public List<Review> searchReviewList(Connection conn,String type,String keyword,int cPage,int numPerpage){
+public List<Review> searchReviewList(Connection conn,String type,String keyword,int cPage,int numPerpage,String stateSort){
 		
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -130,9 +140,22 @@ public List<Review> searchReviewList(Connection conn,String type,String keyword,
 		//SELECT *FROM REVIEW WHERE $COL LIKE ?
 		System.out.println(type);
 		query=query.replace("$COL",type);
+		///   여기까지가   SELECT * FROM(SELECT ROWNUM AS RNUM,R.*FROM(SELECT *FROM REVIEW WHERE $COL LIKE ?
+		
+		
+		String addQuery="";
+		if(stateSort != null) {
+			addQuery += " " + stateSort +" ";
+		}
+		addQuery += ")R)WHERE rnum BETWEEN ? AND ?";
+		
+	//  )R) WHERE RNUM BETWEEN ? AND ?
+		
+		
+		
 		
 		try {
-			pstmt=conn.prepareStatement(query);
+			pstmt=conn.prepareStatement(query+addQuery);
 			pstmt.setString(1, "%"+keyword+"%");   //  % 는   이음검색이나 아이디 검색할떄 포함하는 기호
 			
 			//시작값

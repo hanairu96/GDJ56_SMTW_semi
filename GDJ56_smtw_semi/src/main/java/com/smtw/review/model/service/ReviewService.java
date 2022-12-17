@@ -16,10 +16,10 @@ public class ReviewService {
 	
 	
 	
-	public List<Review> searchReviewAll(int cPage,int numPerpage){
+	public List<Review> searchReviewAll(int cPage,int numPerpage,String stateSort){
 		 Connection conn=getConnection();
 		 
-		 List<Review> list=dao.searchReviewAll(conn,cPage,numPerpage);
+		 List<Review> list=dao.searchReviewAll(conn,cPage,numPerpage,stateSort);
 		 
 		 close(conn);
 		 
@@ -32,7 +32,7 @@ public class ReviewService {
 	}
 	
 	
-	 public int   selectReviewCount() {
+	 public int  selectReviewCount() {
 		 Connection conn=getConnection();
 
 		 int result=dao.selectReviewCount(conn);
@@ -44,10 +44,10 @@ public class ReviewService {
 	 }
 	
 	
-	 public List<Review> searchReviewList(String type,String keyword, int cPage, int numPerpage){
+	 public List<Review> searchReviewList(String type,String keyword, int cPage, int numPerpage,String stateSort){
 		 Connection conn=getConnection();
 		 
-		 List<Review> list=dao.searchReviewList(conn,type,keyword,cPage,numPerpage);
+		 List<Review> list=dao.searchReviewList(conn,type,keyword,cPage,numPerpage,stateSort);
 		 
 		 close(conn);
 		 
