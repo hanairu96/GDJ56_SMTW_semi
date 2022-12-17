@@ -66,4 +66,22 @@ public class QnaService {
 		return list;
 	}
 	
+	public int updateQna(String title,String contents,int qnaNo) {
+		Connection conn=getConnection();
+		int result=dao.updateQna(conn,title,contents,qnaNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	public int deleteQna(int qnaNo) {
+		Connection conn=getConnection();
+		int result=dao.deleteQna(conn,qnaNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	
 }

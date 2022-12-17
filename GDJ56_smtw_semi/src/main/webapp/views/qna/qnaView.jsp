@@ -59,8 +59,10 @@
 	         <div style="display:flex; border:0px solid rgb(15, 231, 231);width:900px;height:auto;margin: 0 auto;">
 	             <div style="border:0px solid yellow;width:800px;height:60px;margin:0 auto;margin-top: 10px;">
 	                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-	                      <button onclick="enroll_review('주소값');" class="customBtn btnStyle" type="button" value="수정">수정하기</button>
-	                     <button onclick="cancel_review('주소값');"    class="customBtn btnStyle" type="button"value="삭제">삭제하기</button> 
+	                 <%if(logInMember.getMemberId().equals(q.getMemberId())){ %>
+	                     <button onclick="location.assign('<%=request.getContextPath() %>/qna/modifyQna.do?qnaNo=<%=q.getQnaNo()%>');" class="customBtn btnStyle" type="button" value="수정">수정하기</button>
+	                  <%} %>    
+	                     <button onclick="deleteQna();"    class="customBtn btnStyle" type="button"value="삭제">삭제하기</button> 
 	                 </div>
 	             </div>
 	         </div>
@@ -87,6 +89,17 @@
         </div>
     </div>
 </div>
+<script>
+	const deleteQna=()=>{
+		const result=confirm("Q&A글을 삭제하시겠습니까?");
+		if(result){
+			location.assign('<%=request.getContextPath() %>/qna/deleteQna.do?qnaNo=<%=q.getQnaNo()%>');
+		}else{
+			return false;
+		}
+	}
+</script>
+
 	<!-- 댓글 등록하기폼 -->
 	<!-- div로 form을 감아줌 -->
 	

@@ -95,7 +95,7 @@
 			        	<%} %>
 			        <%}else { %><!-- 질문내용이 없으면  -->
 			        	<li class="title">
-		                    <span style="text-align: center;">질문이 없습니다.</span>
+		                    <span style="text-align: center;">내용이 없습니다.</span>
 		                </li>
 			        <%} %>
 			        

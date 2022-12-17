@@ -37,7 +37,7 @@ public class DeleteNoticeServlet extends HttpServlet {
 			msg="글 삭제 완료!";
 			loc="/notice/noticeList.do";
 		}else {
-			msg="글 수정 실패..";
+			msg="글 삭제 실패..";
 			loc="/notice/noticeView.do?noticeNo="+noticeNo;
 		}
 		request.setAttribute("msg", msg);
