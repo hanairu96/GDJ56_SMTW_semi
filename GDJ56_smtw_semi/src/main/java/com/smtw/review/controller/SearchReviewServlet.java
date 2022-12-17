@@ -15,7 +15,7 @@ import com.smtw.review.model.vo.Review;
 /**
  * Servlet implementation class SearchReviewServlet
  */
-@WebServlet("/notice/searchReview")
+@WebServlet("/community/searchReview.do")
 public class SearchReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -62,36 +62,36 @@ public class SearchReviewServlet extends HttpServlet {
 	int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 	int pageEnd=pageNo+pageBarSize-1;
 	
-	//////////////
-	if(pageNo==1) {  // 내현제 페이이가 일일떄  이전 태그를 생성해라
-		pageBar+="<li class=\"page-item disabled\"  style=\"color:rgba(221, 160, 221, 0.508) !important;\"><a class=\"page-link\" style=\"color:rgba(221, 160, 221, 0.508) !important;\">[이전]</a> </li>";
+	
+	if(pageNo==1) {  
+		pageBar+="<span>[이전]</span>";
 		
-	}else {   // 내 현재 페이지가 일이 아니면  
-		pageBar+="<li class=\"page-item disabled\"  style=\"color:rgba(221, 160, 221, 0.508) !important;\"><a class=\"page-link\" style=\"color:rgba(221, 160, 221, 0.508) !important;\" href='"+request.getContextPath()
-		+"/community/reviewBasic.do?cPage="+(pageNo-1)+"'>[이전]</a></li>";
-		//pageNo-1  하는 이유는  10페이지 일떄  이전ㅂ버튼 누르면 9로 출력하게 하려고
+	}else {   
+		pageBar+="<a href='"+request.getContextPath()
+		+"/community/searchReview.do?cPage="+(pageNo-1)+"&searchType="+type+"&searchKeyword="+keyword+"'>"+pageNo+"</a>";
+		
 	}
 	
 	while(!(pageNo>pageEnd||pageNo>totalPage)) {
 		if(cPage==pageNo) {
 			//보고있는 페이지
-			pageBar+="<li class=\"page-item\"><a class=\"page-link\" href=\"#\" style=\"color:rgba(221, 160, 221, 0.508) !important;\">"+pageNo+"</a></li>";
+			pageBar+="<span>"+pageNo+"</span>";
 		}else {
-			pageBar+="<li class=\"page-item\"><a class=\"page-link\" href=\"#\" style=\"color:rgba(221, 160, 221, 0.508) !important;\" href='"+request.getContextPath()
-			+"/community/reviewBasic.do?cPage="+pageNo+"'>"+pageNo+"</a></li>";
+			pageBar+="<a href='"+request.getContextPath()
+			+"/community/searchReview.do?cPage="+pageNo+"&searchType="+type+"&searchKeyword="+keyword+"'>"+pageNo+"</a>";
 		}
 		
 		pageNo++;
 	}
 	
 	if(pageNo>totalPage) {
-		pageBar+="<li class=\"page-item\"><a class=\"page-link\" href=\"#\" style=\"color:rgba(221, 160, 221, 0.508) !important;\">[다음]</a> </li>";
+		pageBar+="<span>[다음]</span>";
 	}else {
-		pageBar+=" <li class=\"page-item\"><a  class=\"page-link\" href=\"#\" style=\"color:rgba(221, 160, 221, 0.508) !important;\" href='"+request.getContextPath()
-			+"/community/reviewBasic.do?cPage="+pageNo+"'>[다음]</a></li>";
-	
-	
+		pageBar+="<a href='"+request.getContextPath()
+		+"/community/searchReview.do?cPage="+pageNo+"&searchType="+type+"&searchKeyword="+keyword+"'>"+pageNo+"</a>";
 	}
+	
+	
 	
 	
 	request.setAttribute("pageBar", pageBar);

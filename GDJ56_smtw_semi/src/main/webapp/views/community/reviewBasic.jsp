@@ -34,12 +34,14 @@
 
         <div style="height:50px;">
             <div style="display:flex;float: right;">
-                <select class="form-select" aria-label="Default select example" style="box-shadow: 0 4px 2px -2px rgba(221, 160, 221, 0.304) !important;;">
-                    <option selected>분류</option>
-                    <option value="등록일순">등록일순</option>
-                    <option value="별점높은순">별점높은순</option>
-                    <option value="별점낮은순">별점낮은순</option>
-                </select>
+                	
+	                <select  id="stateSort" class="form-select" aria-label="Default select example" style="box-shadow: 0 4px 2px -2px rgba(221, 160, 221, 0.304) !important;"> 
+	                    <option value="등록일순">등록일순</option>
+	                    <option value="별점높은순">별점높은순</option>
+	                    <option value="별점낮은순">별점낮은순</option>
+	                </select>
+                
+               
             </div>
         </div>
 
@@ -102,18 +104,15 @@
                     <!-- 페이지 바 -->
                     <div style="border:0px solid blue;width:890px;height:80px;text-align: center;margin-left:100px;">
                       
-                       <!-- 페이지 바 -->
+                       
                         
                         
                        
                         
-                         <nav aria-label="Page navigation example" style="margin-top:30px;color:rgba(221, 160, 221, 0.508) !important;">
-                            <ul class="pagination justify-content-center" style="color:rgba(221, 160, 221, 0.508) !important;">
-                              
+                         
                                <%=request.getAttribute("pageBar") %>
                               
-                            </ul>  
-                          </nav> 
+                            
                           
                     </div>
                 </div>
@@ -142,35 +141,35 @@
 		                            <option value="userId">작성자(아이디)</option>
 		                        </select>
 		                        <div id=search-nation>
-			                        <form action="<%=request.getContextPath()%>/notice/searchReview"    class="d-flex" role="search">
+			                        <form action="<%=request.getContextPath()%>/community/searchReview.do"    class="d-flex" role="search">
 			                      	<input type="hidden" name="searchType" value="N_NAME">
 			                         <input name="searchKeyword" class="form-control me-2" type="text" placeholder="나라검색" aria-label="Search">
 			                         <button class="btn btn-outline-success" type="submit">Search</button>
 			                        </form>
 		                      	</div>
 		                      	<div id=search-city style="display:none;">
-			                        <form action="<%=request.getContextPath()%>/notice/searchReview" class="d-flex" role="search">
+			                        <form action="<%=request.getContextPath()%>/community/searchReview.do" class="d-flex" role="search">
 			                      	<input type="hidden" name="searchType" value="REVIEW_CITY">
 			                         <input name="searchKeyword" class="form-control me-2" type="text" placeholder="도시검색" aria-label="Search">
 			                         <button class="btn btn-outline-success" type="submit">Search</button>
 			                        </form>
 		                      	</div>
 	                      		<div id=search-title  style="display:none;">
-			                        <form action="<%=request.getContextPath()%>/notice/searchReview" class="d-flex" role="search">
+			                        <form action="<%=request.getContextPath()%>/community/searchReview.do" class="d-flex" role="search">
 			                      	<input type="hidden" name="searchType" value="REVIEW_TITLE">
 			                         <input name="searchKeyword" class="form-control me-2" type="text" placeholder="제목검색" aria-label="Search">
 			                         <button class="btn btn-outline-success" type="submit">Search</button>
 			                        </form>
 		                      	</div>
 		                      	<div id=search-content  style="display:none;">
-			                        <form action="<%=request.getContextPath()%>/notice/searchReview" class="d-flex" role="search">
+			                        <form action="<%=request.getContextPath()%>/community/searchReview.do" class="d-flex" role="search">
 			                      	<input type="hidden" name="searchType" value="REVIEW_CONTENTS">
 			                         <input name="searchKeyword" class="form-control me-2" type="text" placeholder="내용검색" aria-label="Search">
 			                         <button class="btn btn-outline-success" type="submit">Search</button>
 			                        </form>
 		                      	</div>
 		                      	<div id=search-userId  style="display:none;">
-			                        <form action="<%=request.getContextPath()%>/notice/searchReview" class="d-flex" role="search">
+			                        <form action="<%=request.getContextPath()%>/community/searchReview.do" class="d-flex" role="search">
 			                      	<input type="hidden" name="searchType" value="MEMBER_ID">
 			                         <input name="searchKeyword" class="form-control me-2" type="text" placeholder="작성자(아이디)검색" aria-label="Search">
 			                         <button class="btn btn-outline-success" type="submit">Search</button>
@@ -204,6 +203,20 @@
         
         });
     
+     
+     $("#stateSort").change(e=>{
+     	$(e.target).val();
+     	
+     	const stateSort=$(e.target).val()
+     	
+    	location.replace('<%=request.getContextPath()%>/community/reviewBasic.do?stateSort='+$(e.target).val());
+     	
+     	
+     	
+     });
+     
+     
+     
      </script>
 
     <!-- 여기까지!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->

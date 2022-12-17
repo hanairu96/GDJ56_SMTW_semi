@@ -8,6 +8,7 @@
 	List<CountryPage> coinfo=(List<CountryPage>)request.getAttribute("info");
 %>
 <%@ include file="/views/common/header.jsp" %>
+<script defer src="https://use.fontawesome.com/releases/v5.15.2/js/all.js" integrity="sha384-vuFJ2JiSdUpXLKGK+tDteQZBqNlMwAjhZ3TvPaDfN9QmbPb7Q8qUpbSNapQev3YF" crossorigin="anonymous"></script>
 <section>
   <style>
         #wrapper{
@@ -100,19 +101,19 @@
         		<button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/updatego.do?nName=<%=c.getNName()%>')"><span>국가정보 수정</span></button>
    			</div>
    			<%} %>
-    <p style="font-size: 13px; text-align: center;"></p>
+    	<p style="font-size: 13px; text-align: center;"></p>
     
     	
     <div id="wrapper">
         <div id="titlecountryinfo">
             <div>
                 <h2 style="text-align: center;"><%=c.getNName() %></h2>
-                <%-- <%if(c.getCPic().isEmpty()){%> --%>
+                <%if(c.getCPic()==null){%>
                 <img src="<%=request.getContextPath()%>/images/country/noimage_view.png" alt=""
                 width="200" height="130">
-				<%-- <%}else{ %>
+				<%}else{%>
 				<img src="<%=request.getContextPath()%>" width="200" height="130">
-				<%} %> --%>
+				<%} %>
             </div>
             <p style="font-size: 13px;">
                 - 언어 : <%=c.getCLanguage() %><br>
@@ -150,7 +151,11 @@
         <input type="button" name="button" value="초기정착">
         <input type="button" name="button" value="취업정보">      
       <div id="explain">
-  						내용없음
+	      <pre>
+	  		내용없음
+          </pre>
+        </div>
+    </div>
   <%}else{%>
   
    	<% for(CountryPage cc : coinfo){%>
@@ -163,20 +168,19 @@
         <div id="explain">
             <pre>
   				<%=cc.getNInfo() %>	
-            </pre>
+  			</pre>
         </div>
     </div>
-    <%}
-   	} %>
+	<%}
+  }%>
     
-    
-	    
 	<%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
-    <div id="twobu">
-        <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goInsertContext.do?nName=<%=c.getNName()%>')"><span>추가</span></button>
-        <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goUpdateContent.do?nName=<%=c.getNName()%>')"><span>수정</span></button>
-    </div>
-		<%} %>
+		    <div id="twobu">
+		        <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goInsertContext.do?nName=<%=c.getNName()%>')"><span>추가</span></button>
+		        <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goUpdateContent.do?nName=<%=c.getNName()%>')"><span>수정</span></button>
+	   		</div>
+	    <%}%>
+	    
 	<style>
 		#twobu>button{
     		width:110px;
