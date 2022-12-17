@@ -118,7 +118,6 @@
                        </div>
                        <%count++;
                         if(count==3){
-                    		System.out.println(count);
                        		count=0;%>
                        	</div>
                        	<div style="display:flex">

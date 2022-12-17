@@ -77,7 +77,6 @@ public class FriendsListServlet extends HttpServlet {
 		}
 
 		request.setAttribute("pageBar", pageBar);
-		System.out.println(pageBar);
 		
 		request.setAttribute("list", list);
 		

@@ -55,7 +55,7 @@ public class FriendsUpdateEndServlet extends HttpServlet {
 			.expYn(expYn)
 			.purpose(purpose)
 			.build();
-		System.out.println("객체:"+f);
+		System.out.println("Friends 값: "+f);
 		
 		int result=new FriendsService().updateFriends(f);
 		
