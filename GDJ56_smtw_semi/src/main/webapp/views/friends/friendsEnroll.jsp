@@ -53,38 +53,38 @@
                                 <table>
                                     <tr>
                                         <td><input type="radio" name="nation" value="네덜란드">네덜란드</td>
-                                        <td><input type="radio" name="nation" value="스웨덴">스웨덴</td>
-                                        <td><input type="radio" name="nation" value="이스라엘">이스라엘</td>
-                                        <td><input type="radio" name="nation" value="포르투갈">포르투갈</td>
-                                    </tr>
-                                    <tr>
                                         <td><input type="radio" name="nation" value="뉴질랜드">뉴질랜드</td>
-                                        <td><input type="radio" name="nation" value="스페인">스페인</td>
-                                        <td><input type="radio" name="nation" value="이탈리아">이탈리아</td>
-                                        <td><input type="radio" name="nation" value="폴란드">폴란드</td>
-                                    </tr>
-                                    <tr>
                                         <td><input type="radio" name="nation" value="대만">대만</td>
-                                        <td><input type="radio" name="nation" value="아르헨티나">아르헨티나</td>
-                                        <td><input type="radio" name="nation" value="일본">일본</td>
-                                        <td><input type="radio" name="nation" value="프랑스">프랑스</td>
-                                    </tr>
-                                    <tr>
                                         <td><input type="radio" name="nation" value="덴마크">덴마크</td>
-                                        <td><input type="radio" name="nation" value="아일랜드">아일랜드</td>
-                                        <td><input type="radio" name="nation" value="체코">체코</td>
-                                        <td><input type="radio" name="nation" value="헝가리">헝가리</td>
                                     </tr>
                                     <tr>
                                         <td><input type="radio" name="nation" value="독일">독일</td>
-                                        <td><input type="radio" name="nation" value="영국">영국</td>
-                                        <td><input type="radio" name="nation" value="칠레">칠레</td>
-                                        <td><input type="radio" name="nation" value="호주">호주</td>
+                                        <td><input type="radio" name="nation" value="벨기에">벨기에</td>
+                                        <td><input type="radio" name="nation" value="스웨덴">스웨덴</td>
+                                        <td><input type="radio" name="nation" value="스페인">스페인</td>
                                     </tr>
                                     <tr>
-                                        <td><input type="radio" name="nation" value="벨기에">벨기에</td>
+                                        <td><input type="radio" name="nation" value="아르헨티나">아르헨티나</td>
+                                        <td><input type="radio" name="nation" value="아일랜드">아일랜드</td>
+                                        <td><input type="radio" name="nation" value="영국">영국</td>
                                         <td><input type="radio" name="nation" value="오스트리아">오스트리아</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="radio" name="nation" value="이스라엘">이스라엘</td>
+                                        <td><input type="radio" name="nation" value="이탈리아">이탈리아</td>
+                                        <td><input type="radio" name="nation" value="일본">일본</td>
+                                        <td><input type="radio" name="nation" value="체코">체코</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="radio" name="nation" value="칠레">칠레</td>
                                         <td><input type="radio" name="nation" value="캐나다">캐나다</td>
+                                        <td><input type="radio" name="nation" value="포르투갈">포르투갈</td>
+                                        <td><input type="radio" name="nation" value="폴란드">폴란드</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="radio" name="nation" value="프랑스">프랑스</td>
+                                        <td><input type="radio" name="nation" value="헝가리">헝가리</td>
+                                        <td><input type="radio" name="nation" value="호주">호주</td>
                                         <td><input type="radio" name="nation" value="홍콩">홍콩</td>
                                     </tr>
                                 </table>
@@ -114,7 +114,7 @@
                         <input type="submit" style="display: none"><br>
            			 	<div style="border:0px solid yellow;width:810px;height:60px;display: inline-flex;align-items:center; ">
                 			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    			<button onclick="enroll_friend(this.form);" class="customBtn btnStyle btn btn-primary" type="button" style=" margin-left:690px;background-color: rgba(221, 160, 221, 0.508) !important;" value="등록">&nbsp등록&nbsp</button>
+                    			<button onclick="enroll_friend(this.form);" class="customBtn btnStyle btn btn-primary" type="button" style="margin-left:690px;background-color: rgba(221, 160, 221, 0.508) !important;" value="등록">&nbsp등록&nbsp</button>
                     			<button onclick="cancel_friend();" class="customBtn btnStyle btn btn-primary" type="button" style=" background-color: rgba(221, 160, 221, 0.508) !important;" value="취소">&nbsp취소&nbsp</button>
                 			</div>
           		      </div>
