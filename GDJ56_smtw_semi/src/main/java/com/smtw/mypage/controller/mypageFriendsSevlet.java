@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.smtw.member.model.vo.Member;
 import com.smtw.mypage.model.service.MypageService;
 import com.smtw.mypage.model.vo.Applyfriends;
 import com.smtw.mypage.model.vo.MemberInfo;
+import com.smtw.mypage.model.vo.MemberInfo2;
 
 /**
  * Servlet implementation class mapageFriendsSevlet
@@ -40,12 +42,25 @@ public class mypageFriendsSevlet extends HttpServlet {
 		List<Applyfriends> list = new MypageService().applyfriendsList(userId);
 		List<MemberInfo> infolist = new MypageService().InfoapplyfriendsList(userId);
 		List<MemberInfo> friendslist = new MypageService().FriendsList(userId);
+		List<Member> acceptedFlist = new MypageService().acceptedFlist(userId);
+		List<MemberInfo2> acceptedlist=null;
+		if(!acceptedFlist.isEmpty()) {
+			for(int i=0;i<acceptedFlist.size();i++){
+				System.out.println(acceptedFlist.get(i).getMemberId());
+				acceptedlist=new MypageService().acceptedFinfo2(acceptedFlist.get(i).getMemberId());
+			}
+		}
+		System.out.println("신청수락받은 리스트:"+acceptedlist);
 		
-		System.out.println(friendslist);
+		
+		
+		System.out.println("친구리스트:"+friendslist);
 		
 		request.setAttribute("list",list);
 		request.setAttribute("infolist",infolist);
 		request.setAttribute("friendslist",friendslist);
+		request.setAttribute("acceptedlist",acceptedlist);
+		
 		
 		request.getRequestDispatcher("/views/mypage/mypagefriends.jsp").forward(request, response);
 		

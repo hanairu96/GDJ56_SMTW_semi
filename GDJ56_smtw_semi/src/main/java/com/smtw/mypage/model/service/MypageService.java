@@ -8,6 +8,7 @@ import com.smtw.member.model.vo.Member;
 import com.smtw.mypage.model.dao.MypageDao;
 import com.smtw.mypage.model.vo.Applyfriends;
 import com.smtw.mypage.model.vo.MemberInfo;
+import com.smtw.mypage.model.vo.MemberInfo2;
 import com.smtw.mypage.model.vo.Note;
 
 public class MypageService {
@@ -30,6 +31,20 @@ public class MypageService {
 	public List<MemberInfo>  FriendsList(String userId){
 		Connection conn = getConnection();
 		List<MemberInfo> m=new MypageDao().FriendsList(conn,userId);
+		close(conn);
+		return m;
+	}
+	
+	public List<MemberInfo>  acceptedFinfo(String userId){
+		Connection conn = getConnection();
+		List<MemberInfo> m=new MypageDao().acceptedFinfo(conn,userId);
+		close(conn);
+		return m;
+	}
+	
+	public List<MemberInfo2>  acceptedFinfo2(String userId){
+		Connection conn = getConnection();
+		List<MemberInfo2> m=new MypageDao().acceptedFinfo2(conn,userId);
 		close(conn);
 		return m;
 	}
@@ -123,6 +138,13 @@ public class MypageService {
 		int result=new MypageDao().insertNote(conn, memberId, receiver, context);
 		close(conn);
 		return result;
+	}
+	
+	public List<Member>  acceptedFlist(String userId){
+		Connection conn = getConnection();
+		List<Member> m=new MypageDao().acceptedFlist(conn,userId);
+		close(conn);
+		return m;
 	}
 	
 	
