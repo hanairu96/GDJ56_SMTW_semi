@@ -52,4 +52,36 @@ public class QnaService {
 		return result;
 	}
 	
+	public Qna selectQnaNo(int qnaNo) {
+		Connection conn=getConnection();
+		Qna q=dao.selectQnaNo(conn,qnaNo);
+		close(conn);
+		return q;
+	}
+	
+	public List<Qna> selectPreNextQnaNo(int qnaNo){
+		Connection conn=getConnection();
+		List<Qna> list=dao.selectPreNextQnaNo(conn,qnaNo);
+		close(conn);
+		return list;
+	}
+	
+	public int updateQna(String title,String contents,int qnaNo) {
+		Connection conn=getConnection();
+		int result=dao.updateQna(conn,title,contents,qnaNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	public int deleteQna(int qnaNo) {
+		Connection conn=getConnection();
+		int result=dao.deleteQna(conn,qnaNo);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	
 }

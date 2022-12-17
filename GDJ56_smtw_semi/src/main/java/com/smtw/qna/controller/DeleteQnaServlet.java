@@ -1,4 +1,4 @@
-package com.smtw.friends.controller;
+package com.smtw.qna.controller;
 
 import java.io.IOException;
 
@@ -8,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.friends.model.service.FriendsService;
-import com.smtw.friends.model.vo.Friends;
+import com.smtw.qna.model.service.QnaService;
 
 /**
- * Servlet implementation class FriendsUpdateServlet
+ * Servlet implementation class DeleteQnaServlet
  */
-@WebServlet("/friends/friendsUpdate.do")
-public class FriendsUpdateServlet extends HttpServlet {
+@WebServlet("/qna/deleteQna.do")
+public class DeleteQnaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FriendsUpdateServlet() {
+    public DeleteQnaServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,15 +29,22 @@ public class FriendsUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int no=Integer.parseInt(request.getParameter("friendsNo"));
+		int qnaNo=Integer.parseInt(request.getParameter("qnaNo"));
+		System.out.println(qnaNo);
+		int result=new QnaService().deleteQna(qnaNo);
 		
-		Friends f=new FriendsService().selectFriendsNo(no);
+		String msg="",loc="";
+		if(result>0) {
+			msg="글 삭제 완료!";
+			loc="/qna/qnaList.do";
+		}else {
+			msg="글 삭제 실패..";
+			loc="/qna/qnaView.do?qnaNo="+qnaNo;
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
 		
-		request.setAttribute("friends", f);
-		
-		request.getRequestDispatcher("/views/friends/friendsUpdate.jsp")
-		.forward(request, response);
-		
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

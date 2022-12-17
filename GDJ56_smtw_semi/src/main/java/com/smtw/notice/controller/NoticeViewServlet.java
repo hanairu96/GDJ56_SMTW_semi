@@ -1,6 +1,7 @@
 package com.smtw.notice.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,7 +34,10 @@ public class NoticeViewServlet extends HttpServlet {
 		int noticeNo=Integer.parseInt(request.getParameter("noticeNo"));
 		
 		Notice n=new NoticeService().selectNoticeNo(noticeNo);
-		request.setAttribute("notice", n);
+		List<Notice> list=new NoticeService().selectPreNextNoticeNo(noticeNo);//이전글,다음글 번호 담겨있는 리스트
+		
+		request.setAttribute("notice", n);//게시글 번호와 일치하는 게시글 내용
+		request.setAttribute("noticeList", list);//이전글,다음글 번호 담겨있는 리스트
 		
 		request.getRequestDispatcher("/views/notice/noticeView.jsp").forward(request, response);
 	}

@@ -1,6 +1,7 @@
-package com.smtw.friends.controller;
+package com.smtw.qna.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,20 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.friends.model.service.FriendsService;
-import com.smtw.friends.model.vo.Friends;
+import com.smtw.notice.model.service.NoticeService;
+import com.smtw.notice.model.vo.Notice;
+import com.smtw.qna.model.service.QnaService;
+import com.smtw.qna.model.vo.Qna;
 
 /**
- * Servlet implementation class FriendsUpdateServlet
+ * Servlet implementation class QnaViewServlet
  */
-@WebServlet("/friends/friendsUpdate.do")
-public class FriendsUpdateServlet extends HttpServlet {
+@WebServlet("/qna/qnaView.do")
+public class QnaViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FriendsUpdateServlet() {
+    public QnaViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,14 +33,16 @@ public class FriendsUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int no=Integer.parseInt(request.getParameter("friendsNo"));
+		int qnaNo=Integer.parseInt(request.getParameter("qnaNo"));
 		
-		Friends f=new FriendsService().selectFriendsNo(no);
+		Qna q=new QnaService().selectQnaNo(qnaNo);//게시물 클릭시 해당번호 게시글
+		List<Qna> list=new QnaService().selectPreNextQnaNo(qnaNo);//이전글,다음글 번호 담겨있는 리스트
 		
-		request.setAttribute("friends", f);
+		request.setAttribute("qna", q);
+		request.setAttribute("qnaList", list);
 		
-		request.getRequestDispatcher("/views/friends/friendsUpdate.jsp")
-		.forward(request, response);
+		request.getRequestDispatcher("/views/qna/qnaView.jsp").forward(request, response);
+		
 		
 	}
 

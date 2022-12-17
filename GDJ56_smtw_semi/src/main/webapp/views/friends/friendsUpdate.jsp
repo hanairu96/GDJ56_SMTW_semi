@@ -186,8 +186,25 @@
                             </div>
                             <div style="border:0px solid pink;width:880px;height:580px;text-align: center; ">
                                 <div style="border:0px solid blueviolet;width:800px;height:30px;text-align:left ">
-                                    <b>MBTI</b> : <input type="text" name="mbti" style="margin-top:0px;" placeholder="대문자로 입력해주세요."
-                                    value="<%=f.getMbti()%>">
+                                    <b>MBTI</b> :
+                                    <select name="mbti">
+                                    	<option value="ENFJ">ENFJ</option>
+                                    	<option value="ENFP">ENFP</option>
+                                    	<option value="ENTJ">ENTJ</option>
+                                    	<option value="ENTP">ENTP</option>
+                                    	<option value="ESFJ">ESFJ</option>
+                                    	<option value="ESFP">ESFP</option>
+                                    	<option value="ESTJ">ESTJ</option>
+                                    	<option value="ESTP">ESTP</option>
+                                    	<option value="INFJ">INFJ</option>
+                                    	<option value="INFP">INFP</option>
+                                    	<option value="INTJ">INTJ</option>
+                                    	<option value="INTP">INTP</option>
+                                    	<option value="ISFJ">ISFJ</option>
+                                    	<option value="ISFP">ISFP</option>
+                                    	<option value="ISTJ">ISTJ</option>
+                                    	<option value="ISTP">ISTP</option>
+                                    </select>
                                </div>
                                <div style="border:0px solid blueviolet;width:800px;height:150x;text-align:left">
                                     <label><b>희망국가</b></label>
@@ -354,7 +371,13 @@
 		
 		
 		//저장된 값을 불러와서 체크박스에 체크
-	    for(let i=0;i<$("[name=nation]").length;i++){
+	    for(let i=0;i<$("[name=mbti]").length;i++){
+	        if($("[name=mbti]")[i].value=="<%=f.getMbti()%>"){
+	            $("[name=mbti]")[i].setAttribute('selected', true);
+	            break;
+	        }
+	    }
+		for(let i=0;i<$("[name=nation]").length;i++){
 	        if($("[name=nation]")[i].value=="<%=f.getNName()%>"){
 	            $("[name=nation]")[i].setAttribute('checked', true);
 	            break;

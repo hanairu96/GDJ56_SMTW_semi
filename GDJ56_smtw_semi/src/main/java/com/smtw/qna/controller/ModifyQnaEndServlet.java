@@ -1,4 +1,4 @@
-package com.smtw.friends.controller;
+package com.smtw.qna.controller;
 
 import java.io.IOException;
 
@@ -8,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.friends.model.service.FriendsService;
-import com.smtw.friends.model.vo.Friends;
+import com.smtw.qna.model.service.QnaService;
 
 /**
- * Servlet implementation class FriendsUpdateServlet
+ * Servlet implementation class ModifyQnaEndServlet
  */
-@WebServlet("/friends/friendsUpdate.do")
-public class FriendsUpdateServlet extends HttpServlet {
+@WebServlet("/qna/modifyQnaEnd.do")
+public class ModifyQnaEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FriendsUpdateServlet() {
+    public ModifyQnaEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,15 +29,24 @@ public class FriendsUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int no=Integer.parseInt(request.getParameter("friendsNo"));
+		String qnaTitle=request.getParameter("qnaTitle");
+		String summernote=request.getParameter("summernote");
+		int qnaNo=Integer.parseInt(request.getParameter("qnaNo"));
 		
-		Friends f=new FriendsService().selectFriendsNo(no);
+		int result=new QnaService().updateQna(qnaTitle,summernote,qnaNo);
 		
-		request.setAttribute("friends", f);
+		String msg="",loc="";
+		if(result>0) {
+			msg="글 수정 완료!";
+			loc="/qna/qnaView.do?qnaNo="+qnaNo;
+		}else {
+			msg="글 수정 실패..";
+			loc="/qna/modifyQna.do?qnaNo="+qnaNo;
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
 		
-		request.getRequestDispatcher("/views/friends/friendsUpdate.jsp")
-		.forward(request, response);
-		
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

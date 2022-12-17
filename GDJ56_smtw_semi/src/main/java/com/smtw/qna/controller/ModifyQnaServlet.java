@@ -1,4 +1,4 @@
-package com.smtw.friends.controller;
+package com.smtw.qna.controller;
 
 import java.io.IOException;
 
@@ -8,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.friends.model.service.FriendsService;
-import com.smtw.friends.model.vo.Friends;
+import com.smtw.qna.model.service.QnaService;
+import com.smtw.qna.model.vo.Qna;
 
 /**
- * Servlet implementation class FriendsUpdateServlet
+ * Servlet implementation class ModifyQnaServlet
  */
-@WebServlet("/friends/friendsUpdate.do")
-public class FriendsUpdateServlet extends HttpServlet {
+@WebServlet("/qna/modifyQna.do")
+public class ModifyQnaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FriendsUpdateServlet() {
+    public ModifyQnaServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,15 +30,12 @@ public class FriendsUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int no=Integer.parseInt(request.getParameter("friendsNo"));
+		int qnaNo=Integer.parseInt(request.getParameter("qnaNo"));
 		
-		Friends f=new FriendsService().selectFriendsNo(no);
-		
-		request.setAttribute("friends", f);
-		
-		request.getRequestDispatcher("/views/friends/friendsUpdate.jsp")
-		.forward(request, response);
-		
+		Qna q=new QnaService().selectQnaNo(qnaNo);
+		request.setAttribute("qna", q);
+		request.getRequestDispatcher("/views/qna/modifyQna.jsp").forward(request, response);
+				
 	}
 
 	/**

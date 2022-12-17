@@ -32,8 +32,7 @@ public class FriendsUpdateEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		//int friendsNo=Integer.parseInt(request.getParameter("friendsNo"));
-		//String nName=Arrays.toString(request.getParameterValues("nation"));
+		
 		String nName=request.getParameter("nation");
 		String friendsTitle=request.getParameter("title");
 		String friendsContents=request.getParameter("friendsContents");
@@ -41,7 +40,8 @@ public class FriendsUpdateEndServlet extends HttpServlet {
 		String mbti=request.getParameter("mbti");
 		String type=request.getParameter("type");
 		char expYn=request.getParameter("expYn").charAt(0);
-		String purpose=Arrays.toString(request.getParameterValues("purpose"));
+		String purArr=Arrays.toString(request.getParameterValues("purpose"));  //[여행, 공부]
+		String purpose=purArr.substring(1, purArr.length()-1);  //여행, 공부
 		
 		Friends f=Friends.builder()
 			//.friendsNo(friendsNo)

@@ -9,7 +9,8 @@
     <div id="updatetpage">
         <fieldset>
             <legend><h1 style="text-align: centers;">국가정보 수정페이지</h1></legend>
-            <form name="countryinfo" action="<%=request.getContextPath()%>/country/updateFirstCountry.do" method="post">
+            <form name="countryinfo" action="<%=request.getContextPath()%>/country/updateFirstCountry.do" 
+            		enctype="multipart/form-data" method="post">
                 <div>
                 	나라명 : <%=c.getNName()%>
                    	<input type="hidden" name="nName" value="<%=c.getNName()%>" readonly>
@@ -24,7 +25,7 @@
 
                 <div>
                     나라성향 
-                    <br><label><input type="radio" name="tend2" value="온화" <%=c.getNTend().equals("온화")?"checked":""%>>온화</label>
+                    <br><label><input type="radio" name="tend2" value="온순" <%=c.getNTend().equals("온화")?"checked":""%>>온순</label>
                     <label><input type="radio" name="tend2" value="열정" <%=c.getNTend().equals("열정")?"checked":""%>>열정</label>
                 </div> 
                 <br>

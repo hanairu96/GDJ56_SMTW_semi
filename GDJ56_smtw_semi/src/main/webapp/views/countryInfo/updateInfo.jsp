@@ -98,7 +98,8 @@
     }
 </style>
 <section>
-    <form action="<%=request.getContextPath()%>/countryinfo/updatecoinfo.do" method="post">
+    <form action="<%=request.getContextPath()%>/countryinfo/updatecoinfo.do"
+     enctype="multipart/form-data" method="post">
     <div id="insertpage">
         <fieldset>
             <legend><h1 style="text-align: centers;">국가정보 수정 페이지</h1></legend>

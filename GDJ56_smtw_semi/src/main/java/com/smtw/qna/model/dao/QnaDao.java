@@ -136,8 +136,89 @@ public class QnaDao {
 				close(pstmt);
 			}return result;
 		}
+		
+		//게시물 클릭시 그 게시물로 이동
+		public Qna selectQnaNo(Connection conn,int qnaNo) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			Qna q=null;
+			
+			try {
+				pstmt=conn.prepareStatement(sql.getProperty("selectQnaNo"));
+				pstmt.setInt(1, qnaNo);
+				rs=pstmt.executeQuery();
+				
+				if(rs.next()) q=getQna(rs);
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}return q;
+					
+		}
+		//이전글, 다음글 부르는 로직
+		public List<Qna> selectPreNextQnaNo(Connection conn, int qnaNo){
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			List<Qna> list=new ArrayList();
+			
+			try {
+				pstmt=conn.prepareStatement(sql.getProperty("selectPreNextQnaNo"));
+				pstmt.setInt(1, qnaNo);
+				pstmt.setInt(2, qnaNo);
+				rs=pstmt.executeQuery();
+				
+				while(rs.next()) {
+					list.add(getQna(rs));
+				}
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}return list;
+		}
 	
-	
+		//qna 업데이트
+		public int updateQna(Connection conn,String title,String contents,int qnaNo) {
+			PreparedStatement pstmt=null;
+			int result=0;
+			
+			try {
+				pstmt=conn.prepareStatement(sql.getProperty("updateQna"));
+				pstmt.setString(1, title);
+				pstmt.setString(2, contents);
+				pstmt.setInt(3, qnaNo);
+				
+				result=pstmt.executeUpdate();
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}return result;
+		}
+		//qna 게시글 삭제
+		public int deleteQna(Connection conn, int qnaNo) {
+			PreparedStatement pstmt=null;
+			int result=0;
+			
+			try {
+				pstmt=conn.prepareStatement(sql.getProperty("deleteQna"));
+				pstmt.setInt(1, qnaNo);
+				
+				result=pstmt.executeUpdate();
+				
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}return result;
+		}
+		
 	
 	
 	

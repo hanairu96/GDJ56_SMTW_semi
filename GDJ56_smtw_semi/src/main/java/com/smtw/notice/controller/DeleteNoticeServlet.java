@@ -1,27 +1,25 @@
-package com.smtw.friends.controller;
+package com.smtw.notice.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.friends.model.service.FriendsService;
-import com.smtw.friends.model.vo.Friends;
+import com.smtw.notice.model.service.NoticeService;
 
 /**
- * Servlet implementation class FriendsUpdateServlet
+ * Servlet implementation class DeleteNoticeServlet
  */
-@WebServlet("/friends/friendsUpdate.do")
-public class FriendsUpdateServlet extends HttpServlet {
+@WebServlet("/notice/deleteNotice.do")
+public class DeleteNoticeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FriendsUpdateServlet() {
+    public DeleteNoticeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,15 +28,22 @@ public class FriendsUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int no=Integer.parseInt(request.getParameter("friendsNo"));
+		int noticeNo=Integer.parseInt(request.getParameter("noticeNo"));
 		
-		Friends f=new FriendsService().selectFriendsNo(no);
+		int result=new NoticeService().deleteNotice(noticeNo);
 		
-		request.setAttribute("friends", f);
+		String msg="",loc="";
+		if(result>0) {
+			msg="글 삭제 완료!";
+			loc="/notice/noticeList.do";
+		}else {
+			msg="글 삭제 실패..";
+			loc="/notice/noticeView.do?noticeNo="+noticeNo;
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
 		
-		request.getRequestDispatcher("/views/friends/friendsUpdate.jsp")
-		.forward(request, response);
-		
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

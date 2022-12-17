@@ -84,18 +84,18 @@
 				        <li class="title">
 				            <span class="number">번호</span>제목<span class="right">작성일</span><span class="right">작성자</span>
 				        </li>	        	
-			        	<%for(Qna n : qnas){%>
+			        	<%for(Qna qn : qnas){%>
 					        <li class="content">
-					        	<span class="number">　　<%=n.getQnaNo() %>　　</span>
-					        	<a href=""><%=n.getReviewTitle()%></a>
-					        	<span class="right"><%=n.getEnrollDate() %></span>
-					        	<span class="right"><%=n.getMemberId() %></span>
+					        	<span class="number">　　<%=qn.getQnaNo() %>　　</span>
+					        	<a href="<%=request.getContextPath()%>/qna/qnaView.do?qnaNo=<%=qn.getQnaNo()%>"><%=qn.getReviewTitle()%></a>
+					        	<span class="right"><%=qn.getEnrollDate() %></span>
+					        	<span class="right"><%=qn.getMemberId() %></span>
 					        </li>
 			        	
 			        	<%} %>
 			        <%}else { %><!-- 질문내용이 없으면  -->
 			        	<li class="title">
-		                    <span style="text-align: center;">질문이 없습니다.</span>
+		                    <span style="text-align: center;">내용이 없습니다.</span>
 		                </li>
 			        <%} %>
 			        
