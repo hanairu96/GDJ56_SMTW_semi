@@ -35,33 +35,28 @@
                 <select class="form-select" aria-label="Default select example" style="box-shadow: 0 4px 2px -2px rgba(221, 160, 221, 0.304) !important;;">
                     <option selected>나라</option>
                     <option value="네덜란드">네덜란드</option>
-                    <option value="스웨덴">스웨덴</option>
-                    <option value="이스라엘">이스라엘</option>
-                    <option value="포르투갈">포르투갈</option>
-                    
                     <option value="뉴질랜드">뉴질랜드</option>
-                    <option value="스페인">스페인</option>
-                    <option value="이탈리아">이탈리아</option>
-                    <option value="폴란드">폴란드</option>
-                    
                     <option value="대만">대만</option>
-                    <option value="아르헨티나">아르헨티나</option>
-                    <option value="일본">일본</option>
-                    <option value="프랑스">프랑스</option>
-                    
                     <option value="덴마크">덴마크</option>
-                    <option value="아일랜드">아일랜드</option>
-                    <option value="체코">체코</option>
-                    <option value="헝가리">헝가리</option>
-                   
                     <option value="독일">독일</option>
-                    <option value="영국">영국</option>
-                    <option value="칠레">칠레</option>
-                    <option value="호주">호주</option>
-                   
                     <option value="벨기에">벨기에</option>
+                    <option value="스웨덴">스웨덴</option>
+                    <option value="스페인">스페인</option>
+                    <option value="아르헨티나">아르헨티나</option>
+                    <option value="아일랜드">아일랜드</option>
+                    <option value="영국">영국</option>
                     <option value="오스트리아">오스트리아</option>
+                    <option value="이스라엘">이스라엘</option>
+                    <option value="이탈리아">이탈리아</option>
+                    <option value="일본">일본</option>
+                    <option value="체코">체코</option>
+                    <option value="칠레">칠레</option>
                     <option value="캐나다">캐나다</option>
+                    <option value="포르투갈">포르투갈</option>
+                    <option value="폴란드">폴란드</option>
+                    <option value="프랑스">프랑스</option>
+                    <option value="헝가리">헝가리</option>
+                    <option value="호주">호주</option>
                     <option value="홍콩">홍콩</option>
                 </select>
             </div>
