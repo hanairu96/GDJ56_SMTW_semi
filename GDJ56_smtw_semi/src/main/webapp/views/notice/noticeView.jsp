@@ -66,16 +66,17 @@
              
              <div style="border-top:0px solid #7e8cd2;width:850px;height:20px;margin:0 auto;margin-top: 30px; padding-left: 20px;padding-bottom: 30px;padding-top: 10px;">
                	<%if(list.size()==3) {%>
-               		<a href="<%=request.getContextPath()%>/notice/noticeView.do?noticeNo=<%=list.get(0).getNoticeNo()%>" style="color:#7e8cd2">&laquo; 이전글</a>
+                 	<a href="<%=request.getContextPath()%>/notice/noticeView.do?noticeNo=<%=list.get(2).getNoticeNo()%>" style="color:#7e8cd2">△ 다음글</a>
                	<%} else{%>
-               		<a href="<%=request.getContextPath()%>/notice/noticeView.do?noticeNo=<%=list.get(0).getNoticeNo()%>" style="color:#7e8cd2">&laquo; 이전글</a>
+                	<a href="<%=request.getContextPath()%>/notice/noticeView.do?noticeNo=<%=list.get(1).getNoticeNo()%>" style="color:#7e8cd2">△ 다음글</a>
                	<%} %>
              </div>
              <div style="border-bottom:1px solid #7e8cd2;width:850px;height:20px;margin:0 auto; padding-left: 20px;padding-bottom: 30px;">
              	<%if(list.size()==3) {%>
-                 	<a href="<%=request.getContextPath()%>/notice/noticeView.do?noticeNo=<%=list.get(2).getNoticeNo()%>" style="color:#7e8cd2">&raquo; 다음글</a>
+             	
+               		<a href="<%=request.getContextPath()%>/notice/noticeView.do?noticeNo=<%=list.get(0).getNoticeNo()%>" style="color:#7e8cd2">▽ 이전글</a>
                 <%} else{%>
-                	<a href="<%=request.getContextPath()%>/notice/noticeView.do?noticeNo=<%=list.get(1).getNoticeNo()%>" style="color:#7e8cd2">&raquo; 다음글</a>
+               		<a href="<%=request.getContextPath()%>/notice/noticeView.do?noticeNo=<%=list.get(0).getNoticeNo()%>" style="color:#7e8cd2">▽ 이전글</a>
                 <%} %>
              </div>
              <div style="border:0px solid blue;width:850px;height:40px;margin: 0 auto;">
