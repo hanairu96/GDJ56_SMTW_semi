@@ -96,7 +96,10 @@
 .d-grid.gap-2{
     padding-top: 20px;
 }
-
+.email_ee{
+    width:200px;
+    display:table-cell;
+}
 /* <!-- 생년월일 --> */
 .bir_yy,.bir_mm,.bir_dd{
     width:160px;

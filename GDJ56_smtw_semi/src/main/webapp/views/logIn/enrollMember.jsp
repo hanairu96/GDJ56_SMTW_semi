@@ -211,8 +211,14 @@
                 <div class="form-group">
                		<label for="inputEmail" class="form-label mt-4">이메일<span class="obli">(필수)</span></label>
                		<span class="check" id="checkEmail"><small></small></span>
-                    <input type="email" class="form-control" name="inputEmail" id="inputEmail"
+               		<div class="email_ee address">
+                    	<input type="email" class="form-control" name="inputEmail" id="inputEmail"
                     	  placeholder="이메일을 입력해주세요" required>
+                   	</div>
+                    <div class="bir_yy address">
+                        <input id="searchAddr" name="emailconfirm_btn" type="button" value="인증"
+                        onclick="emailcheck();">
+                    </div>
                 </div>
                 
                 <script>
@@ -232,8 +238,26 @@
 	             			}
 	             		})
 	             	});
-	        		
-	        		
+	              
+	              //정규식 확인
+	              const emailcheck=()=>{
+		              	const inputEmail=$("#inputEmail").val().trim();
+						var emailReg=/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+							if(inputEmail==""){
+								$("span#checkEmail>small").text("이메일을 입력해주세요.").css("color","red");
+								$("#inputEmail").focus();
+								return false;
+							}else{
+								if(!emailReg.test(inputEmail)){
+									$("span#checkEmail>small").text("올바른 이메일을 입력해주세요.").css("color","red");
+									$("#inputEmail").focus();
+									return false;
+								}
+							}
+							var url="<%=request.getContextPath()%>/gmailCheck.do?email="+inputEmail;
+							open(url,"emailwindow", "statusbar=no, scrollbar=no, menubar=no,width=400, height=200" );
+		              }
+	              
                 </script>
                 
                 <div class ="adddressContainer">
