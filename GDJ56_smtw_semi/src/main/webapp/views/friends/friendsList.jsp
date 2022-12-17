@@ -88,7 +88,7 @@
 					int count=0;
 					for(Friends f : fs) {%>
                        <div id="box" style="border:0px solid green;width:300px;height:300px">
-						<button onclick="location.assign('<%=request.getContextPath() %>/friends/friendsInfo.do?memberId=<%=f.getMemberId() %>')"
+						<button onclick="location.assign('<%=request.getContextPath() %>/friends/friendsInfo.do?friendsNo=<%=f.getFriendsNo() %>')"
 						style="border:0px;background-color: white;">
                             <div style="border:0px solid magenta;width:210px;height:270px; margin-left :0px; margin-top :5px;background-color:rgba(128, 128, 128, 0.342);border-radius:20px;">
                                 <div style="border:0px solid blue;width:100%;height:110px;display:flex;justify-content: center;">

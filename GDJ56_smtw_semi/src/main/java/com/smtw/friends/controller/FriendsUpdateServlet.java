@@ -30,9 +30,9 @@ public class FriendsUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id=request.getParameter("memberId");
+		int no=Integer.parseInt(request.getParameter("friendsNo"));
 		
-		Friends f=new FriendsService().selectFriendsId(id);
+		Friends f=new FriendsService().selectFriendsNo(no);
 		
 		request.setAttribute("friends", f);
 		

@@ -158,13 +158,13 @@ public class FriendsDao {
 		}return result;
 	}
 	
-	public Friends selectFriendsId(Connection conn, String id) {
+	public Friends selectFriendsNo(Connection conn, int no) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		Friends m=null;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectFriendsId"));
-			pstmt.setString(1, id);
+			pstmt=conn.prepareStatement(sql.getProperty("selectFriendsNo"));
+			pstmt.setInt(1, no);
 			rs=pstmt.executeQuery();
 			if(rs.next()) m=getFriends(rs);
 		}catch(SQLException e) {
