@@ -1,7 +1,6 @@
 package com.smtw.qna.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,22 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.notice.model.service.NoticeService;
-import com.smtw.notice.model.vo.Notice;
 import com.smtw.qna.model.service.QnaService;
-import com.smtw.qna.model.vo.Qna;
 
 /**
- * Servlet implementation class QnaViewServlet
+ * Servlet implementation class ModifyQnaEndServlet
  */
-@WebServlet("/qna/qnaView.do")
-public class QnaViewServlet extends HttpServlet {
+@WebServlet("/qna/modifyQnaEnd.do")
+public class ModifyQnaEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaViewServlet() {
+    public ModifyQnaEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,17 +29,24 @@ public class QnaViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String qnaTitle=request.getParameter("qnaTitle");
+		String summernote=request.getParameter("summernote");
 		int qnaNo=Integer.parseInt(request.getParameter("qnaNo"));
 		
-		Qna q=new QnaService().selectQnaNo(qnaNo);//게시물 클릭시 해당번호 게시글
-		List<Qna> list=new QnaService().selectPreNextQnaNo(qnaNo);//이전글,다음글 번호 담겨있는 리스트
+		int result=new QnaService().updateQna(qnaTitle,summernote,qnaNo);
 		
-		request.setAttribute("qna", q);
-		request.setAttribute("qnaList", list);
+		String msg="",loc="";
+		if(result>0) {
+			msg="글 수정 완료!";
+			loc="/qna/qnaView.do?qnaNo="+qnaNo;
+		}else {
+			msg="글 수정 실패..";
+			loc="/qna/modifyQna.do?qnaNo="+qnaNo;
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
 		
-		request.getRequestDispatcher("/views/qna/qnaView.jsp").forward(request, response);
-		
-		
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**
