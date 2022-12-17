@@ -23,7 +23,7 @@ public class MypageDao {
 	private Properties sql=new Properties();
 
 	public MypageDao() {
-		String path=MypageDao.class.getResource("/sql/mypage/mypage.properties").getPath();
+		String path=MypageDao.class.getResource("/sql/mypage/mypage_sql.properties").getPath();
 		try {
 			sql.load(new FileReader(path));
 		}catch(IOException e) {
@@ -91,8 +91,8 @@ public class MypageDao {
 	
 	private MemberInfo getInfoApplyfriendsList(ResultSet rs) throws SQLException{
 		return MemberInfo.builder()
-				.memberName(rs.getString("MEMBER_NAME"))
 				.memberId(rs.getString("MEMBER_FROM"))
+				.memberName(rs.getString("MEMBER_NAME"))
 				.gender(rs.getString("GENDER").charAt(0))
 				.age(rs.getString("AGE"))
 				.build();
@@ -162,6 +162,27 @@ public class MypageDao {
 		
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("noteList"));
+			pstmt.setString(1,id);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(getNoteList(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public List<Note> noteSendList(Connection conn, String id){
+		
+		List<Note> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("noteSendList"));
 			pstmt.setString(1,id);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {

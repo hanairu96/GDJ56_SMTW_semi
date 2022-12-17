@@ -20,9 +20,23 @@ public class FriendsService {
 		return list;
 	}
 	
+	public List<Friends> selectFriendsList(int cPage, int numPerpage, String nation) {
+		Connection conn=getConnection();
+		List<Friends> list=dao.selectFriendsList(conn, cPage, numPerpage, nation);
+		close(conn);
+		return list;
+	}
+	
 	public int selectFriendsCount() {
 		Connection conn=getConnection();
 		int result=dao.selectFriendsCount(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int selectFriendsNationCount(String nation) {
+		Connection conn=getConnection();
+		int result=dao.selectFriendsNationCount(conn, nation);
 		close(conn);
 		return result;
 	}

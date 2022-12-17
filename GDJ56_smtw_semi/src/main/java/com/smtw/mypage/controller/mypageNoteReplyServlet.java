@@ -31,7 +31,7 @@ public class mypageNoteReplyServlet extends HttpServlet {
 		String receiver = request.getParameter("sender");
 		String receiverName = request.getParameter("friendName");
 		
-		String memberId = request.getParameter("id");
+		String memberId = request.getParameter("userId");
 		
 		
 		System.out.println("쪽지 보낼 아이디:"+receiver);

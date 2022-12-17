@@ -13,16 +13,16 @@ import com.smtw.friends.model.service.FriendsService;
 import com.smtw.friends.model.vo.Friends;
 
 /**
- * Servlet implementation class FriendsListServlet
+ * Servlet implementation class FriendsNationListServlet
  */
-@WebServlet("/friends/friendsList.do")
-public class FriendsListServlet extends HttpServlet {
+@WebServlet("/friends/friendsNationList.do")
+public class FriendsNationListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FriendsListServlet() {
+    public FriendsNationListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,9 +39,11 @@ public class FriendsListServlet extends HttpServlet {
 			cPage=1;
 		}
 		
-		List<Friends> list=new FriendsService().selectFriendsList(cPage, numPerpage);
+		String nation=request.getParameter("nation");
 		
-		int totalData=new FriendsService().selectFriendsCount();
+		List<Friends> list=new FriendsService().selectFriendsList(cPage, numPerpage, nation);
+		
+		int totalData=new FriendsService().selectFriendsNationCount(nation);
 		
 		String pageBar="";
 		int pageBarSize=5;
@@ -53,7 +55,7 @@ public class FriendsListServlet extends HttpServlet {
 			pageBar+="<li class='page-item disabled' style='color:rgba(221, 160, 221, 0.508) !important;'>"
 					+"<a class='page-link' style='color:rgba(221, 160, 221, 0.508) !important;'>이전</a></li>";
 		}else {
-			pageBar+="<li><a class='page-link' href='"+request.getContextPath()+"/friends/friendsList.do?cPage="+(pageNo-1)
+			pageBar+="<li><a class='page-link' href='"+request.getContextPath()+"/friends/friendsNationList.do?nation="+nation+"&cPage="+(pageNo-1)
 					+"' style='color:rgba(221, 160, 221, 0.508) !important;'>이전</a></li>";
 		}
 		
@@ -62,7 +64,7 @@ public class FriendsListServlet extends HttpServlet {
 				pageBar+="<li class='page-item'><a class='page-link' style='color:rgba(221, 160, 221, 0.508) !important;'>"+pageNo+"</a></li>";
 			}else {
 				pageBar+="<li class='page-item'><a class='page-link' href='"
-						+request.getContextPath()+"/friends/friendsList.do?cPage="+pageNo
+						+request.getContextPath()+"/friends/friendsNationList.do?nation="+nation+"&cPage="+pageNo
 						+"' style='color:rgba(221, 160, 221, 0.508) !important;'>"+pageNo+"</a></li>";
 			}
 			pageNo++;
@@ -72,7 +74,7 @@ public class FriendsListServlet extends HttpServlet {
 			pageBar+="<li class='page-item disabled'><a class='page-link' style='color:rgba(221, 160, 221, 0.508) !important;'>다음</a></li>";
 		}else {
 			pageBar+="<li class='page-item'><a class='page-link' href='"
-					+request.getContextPath()+"/friends/friendsList.do?cPage="+pageNo
+					+request.getContextPath()+"/friends/friendsNationList.do?nation="+nation+"&cPage="+pageNo
 					+"' style='color:rgba(221, 160, 221, 0.508) !important;'>다음</a></li>";
 		}
 
