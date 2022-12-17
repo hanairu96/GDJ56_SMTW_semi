@@ -56,7 +56,7 @@ public class FriendsEnrollEndServlet extends HttpServlet {
 			.expYn(expYn)
 			.purpose(purpose)
 			.build();
-		System.out.println("객체:"+f);
+		System.out.println("Friends 값: "+f);
 		
 		int result=new FriendsService().insertFriends(f);
 		String msg="", loc="";
