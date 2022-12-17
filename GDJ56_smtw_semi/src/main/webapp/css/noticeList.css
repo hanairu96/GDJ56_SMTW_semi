@@ -137,6 +137,7 @@
         #notice {
             width: 1500px;
             margin: 0 auto;
+            margin-left: 150px;
             padding-right: 50px;
             box-sizing: border-box;
             border: 2px solid black; /* ##### */
