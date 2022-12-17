@@ -43,7 +43,7 @@ List<MemberInfo2> acceptedlist =  (List<MemberInfo2>)request.getAttribute("accep
             <div id="flist">
                 <p>친구 목록</p>
                 <!-- 크롬은 팝업창 최대화 금지가 안됨 -->
-                <%if(friendslist.isEmpty()&&acceptedlist.isEmpty()){ %>
+                <%if(friendslist.isEmpty()||acceptedlist.isEmpty()||(friendslist.isEmpty()&&acceptedlist.isEmpty())){ %>
                 	아직 수락한 친구가 없습니다 :(
                 <%} else{
                 	for(int i=0;i<friendslist.size();i++){
