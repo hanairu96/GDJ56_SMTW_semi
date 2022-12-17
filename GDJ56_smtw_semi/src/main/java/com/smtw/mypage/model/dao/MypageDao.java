@@ -23,7 +23,7 @@ public class MypageDao {
 	private Properties sql=new Properties();
 
 	public MypageDao() {
-		String path=MypageDao.class.getResource("/sql/mypage/mypage.properties").getPath();
+		String path=MypageDao.class.getResource("/sql/mypage/mypage_sql.properties").getPath();
 		try {
 			sql.load(new FileReader(path));
 		}catch(IOException e) {
