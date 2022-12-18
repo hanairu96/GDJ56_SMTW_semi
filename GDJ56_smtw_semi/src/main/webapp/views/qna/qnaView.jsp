@@ -112,7 +112,7 @@
            <input type="hidden" name="qnaNo" value="<%=q.getQnaNo()%>">
 <!--            <input type="hidden" name="level" value="1"/> -->
 <!--            <input type="hidden" name="commentref" value="0"/> -->
-           <input type="hidden" id="commentWriter" name="commentWriter" value="<%=logInMember.getMemberId()%>"><!-- 댓글작성자 아이디 넘기기  -->   				
+           <input type="hidden" id="commentWriter" name="commentWriter" value="<%=logInMember!=null?logInMember.getMemberId():""%>"><!-- 댓글작성자 아이디 넘기기  -->   				
            <div style="width:100%;">
                <button type="submit" class="submit customBtn btnStyle" id="btn-insert" style="width:80px;height:47px;float:right;"
                		>댓글등록</button>
@@ -197,8 +197,7 @@
 			//아무것도 작성하지 않으면 재작성 요구
 			if($("#comment_1").val().trim()==""){
 				alert("댓글을 작성해주세요.");
-				console.log("댓글작성필요");
-				$("#comment_1").focus();
+				$("#comment_1").blur();
 				return false;
 			}
 // 			else{
