@@ -15,9 +15,14 @@ import java.util.Properties;
 
 import com.smtw.member.model.vo.Member;
 import com.smtw.mypage.model.vo.Applyfriends;
+import com.smtw.mypage.model.vo.FriendsWroteList;
 import com.smtw.mypage.model.vo.MemberInfo;
 import com.smtw.mypage.model.vo.MemberInfo2;
 import com.smtw.mypage.model.vo.Note;
+import com.smtw.mypage.model.vo.ReviewList;
+import com.smtw.mypage.model.vo.WroteList;
+import com.smtw.mypage.model.vo.qnaList;
+import com.smtw.qna.model.vo.Qna;
 
 public class MypageDao {
 	
@@ -394,6 +399,7 @@ public class MypageDao {
 	}
 	
 	
+	
 	private Member getMember(ResultSet rs) throws SQLException {
 		return Member.builder()
 				.memberId(rs.getString("MEMBER_ID"))
@@ -465,12 +471,346 @@ public class MypageDao {
 		}return result;
 	}
 	
-	
-
-	
-
-	
+	public List<ReviewList> reviewList(Connection conn, String userId, int cPage, int numPerpage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<ReviewList> result=new ArrayList();
 		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("wroteReviewList"));
+			
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, cPage);
+			pstmt.setInt(3, numPerpage);
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(getWroteReview(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}System.out.println("내가 쓴 리뷰"+result);
+		return result;
+	}
+	
+	private ReviewList getWroteReview(ResultSet rs) throws SQLException {
+		return ReviewList.builder()
+				.type("reivew")
+				.reviewNo(rs.getInt("review_no"))
+				.title(rs.getString("review_title"))
+				.date(rs.getDate("enroll_date"))
+				.build();
+	}
+	
+	public List<ReviewList> fworiteList(Connection conn, String userId, int cPage, int numPerpage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<ReviewList> result=new ArrayList();
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("fworiteList"));
+			
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, cPage);
+			pstmt.setInt(3, numPerpage);
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(getFriendsWroteList(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	private ReviewList getFriendsWroteList(ResultSet rs) throws SQLException {
+		return ReviewList.builder()
+				.type("friends")
+				.reviewNo(rs.getInt("friends_no"))
+				.title(rs.getString("friends_title"))
+				.date(rs.getDate("enroll_date"))
+				.build();
+	}
+	
+	public List<ReviewList> qnaList(Connection conn, String userId, int cPage, int numPerpage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<ReviewList> result=new ArrayList();
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("qnaList"));
+			
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, cPage);
+			pstmt.setInt(3, numPerpage);
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(getqnaList(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	private ReviewList getqnaList(ResultSet rs) throws SQLException {
+		return ReviewList.builder()
+				.type("qna")
+				.reviewNo(rs.getInt("qna_no"))
+				.title(rs.getString("review_title"))
+				.date(rs.getDate("enroll_date"))
+				.build();
+	}
+	
+	
+
+public int getrCpage(Connection conn, String userId) {
+	int cPage=0;
+	PreparedStatement pstmt = null;
+	ResultSet rs=null;
+	try {
+		pstmt=conn.prepareStatement(sql.getProperty("rCpage"));
+		pstmt.setString(1, userId);
+		rs=pstmt.executeQuery();
+		if(rs.next()) {
+			cPage=rs.getInt("MIN");
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rs);
+		close(pstmt);
+
+	}
+	return cPage;
+}
+
+public int getrnumPerpage(Connection conn, String userId) {
+	int numperpage=0;
+	PreparedStatement pstmt = null;
+	ResultSet rs=null;
+	try {
+		pstmt=conn.prepareStatement(sql.getProperty("rNumperpage"));
+		pstmt.setString(1, userId);
+		rs=pstmt.executeQuery();
+		if(rs.next()) {
+			numperpage=rs.getInt("MAX");
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rs);
+		close(pstmt);
+		
+	}
+	return numperpage;
+}
+
+public int getfCpage(Connection conn, String userId) {
+	int cPage=0;
+	PreparedStatement pstmt = null;
+	ResultSet rs=null;
+	try {
+		pstmt=conn.prepareStatement(sql.getProperty("fCpage"));
+		pstmt.setString(1, userId);
+		rs=pstmt.executeQuery();
+		if(rs.next()) {
+			cPage=rs.getInt("MIN");
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rs);
+		close(pstmt);
+	
+	}
+	return cPage;
+}
+
+public int getfnumPerpage(Connection conn, String userId) {
+	int numperpage=0;
+	PreparedStatement pstmt = null;
+	ResultSet rs=null;
+	try {
+		pstmt=conn.prepareStatement(sql.getProperty("fNumperpage"));
+		pstmt.setString(1, userId);
+		rs=pstmt.executeQuery();
+		if(rs.next()) {
+			numperpage=rs.getInt("MAX");
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rs);
+		close(pstmt);
+		
+	}
+	return numperpage;
+}
+
+public int getqCpage(Connection conn, String userId) {
+	int cPage=0;
+	PreparedStatement pstmt = null;
+	ResultSet rs=null;
+	try {
+		pstmt=conn.prepareStatement(sql.getProperty("qCpage"));
+		pstmt.setString(1, userId);
+		rs=pstmt.executeQuery();
+		if(rs.next()) {
+			cPage=rs.getInt("MIN");
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rs);
+		close(pstmt);
+		System.out.println("cPage"+cPage);
+	}
+	return cPage;
+}
+
+public int getqnumPerpage(Connection conn, String userId) {
+	int numperpage=0;
+	PreparedStatement pstmt = null;
+	ResultSet rs=null;
+	try {
+		pstmt=conn.prepareStatement(sql.getProperty("qNumperpage"));
+		pstmt.setString(1, userId);
+		rs=pstmt.executeQuery();
+		if(rs.next()) {
+			numperpage=rs.getInt("MAX");
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rs);
+		close(pstmt);
+		
+	}
+	return numperpage;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		public List<WroteList> selectWroteList(Connection conn, String userId,int cPage, int numPerpage){
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			List<WroteList> result=new ArrayList();
+			
+			try {
+				pstmt=conn.prepareStatement(sql.getProperty("wroteList"));
+				
+				pstmt.setString(1, userId);
+				pstmt.setInt(2, (cPage-1)*numPerpage+1);
+				pstmt.setInt(3, cPage*numPerpage);
+				
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					result.add(getWroteList(rs));
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			return result;
+		}
+		
+		private WroteList getWroteList(ResultSet rs) throws SQLException {
+			return WroteList.builder()
+					.pkNo(rs.getInt("pk_no"))
+					.title(rs.getString("title"))
+					.date(rs.getDate("enroll_date"))
+					.build();
+		}
+		
+		public int selectWroteCount(Connection conn,String userId) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			int count=0;
+			try {
+				pstmt=conn.prepareStatement(sql.getProperty("selectWroteCount"));
+				pstmt.setString(1, userId);
+				rs=pstmt.executeQuery();
+				if(rs.next()) count=rs.getInt(1);
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}return count;
+		}
+		
+		public int getCpage(Connection conn, String userId) {
+			int cPage=0;
+			PreparedStatement pstmt = null;
+			ResultSet rs=null;
+			try {
+				pstmt=conn.prepareStatement(sql.getProperty("cPage"));
+				pstmt.setString(1, userId);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					cPage=rs.getInt("MIN");
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			return cPage;
+		}
+
+		public int getNumPerpage(Connection conn, String userId) {
+			int numperpage=0;
+			PreparedStatement pstmt = null;
+			ResultSet rs=null;
+			try {
+				pstmt=conn.prepareStatement(sql.getProperty("numPerPage"));
+				pstmt.setString(1, userId);
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					numperpage=rs.getInt("MAX");
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			return numperpage;
+		}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 
