@@ -30,4 +30,13 @@ public class QnaCommentsService {
 		close(conn);
 		return result;
 	}
+	
+	public int insertQnaComments(String comment,int qnaNo, String writer) {
+		Connection conn=getConnection();
+		int result=dao.insertQnaComments(conn,comment,qnaNo,writer);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 }

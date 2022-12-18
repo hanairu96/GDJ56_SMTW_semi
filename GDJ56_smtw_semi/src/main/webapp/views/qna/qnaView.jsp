@@ -106,14 +106,16 @@
 	
 	<div class="comment-editor" style="border:0px solid green;width:850px;height:auto;margin: 0 auto;margin-top:50px;"> 
 	  
-	   <form class="form comment-form" style="display:flex;flex-direction:column;align-items:center;">
-           <textarea placeholder="댓글을 남겨보세요" style="width:100%;"></textarea>
-           <input type="hidden" name="boardref" value="">
-           <input type="hidden" name="level" value="1"/>
-           <input type="hidden" name="commentref" value="0"/>
-           <input type="hidden" name="commentWriter" value="">   				
+	   <form class="form comment-form" style="display:flex;flex-direction:column;align-items:center;"
+	   		action="<%=request.getContextPath()%>/qna/insertQC.do" onsubmit="return insertComment();">
+           <textarea id="comment_1" onclick="logInCheck();" name="comment_1" placeholder="댓글을 남겨보세요" style="width:100%;"></textarea>
+           <input type="hidden" name="qnaNo" value="<%=q.getQnaNo()%>">
+<!--            <input type="hidden" name="level" value="1"/> -->
+<!--            <input type="hidden" name="commentref" value="0"/> -->
+           <input type="hidden" id="commentWriter" name="commentWriter" value="<%=logInMember.getMemberId()%>"><!-- 댓글작성자 아이디 넘기기  -->   				
            <div style="width:100%;">
-               <button type="button" class="submit customBtn btnStyle" id="btn-insert" style="width:80px;height:47px;float:right;">댓글등록</button>
+               <button type="submit" class="submit customBtn btnStyle" id="btn-insert" style="width:80px;height:47px;float:right;"
+               		>댓글등록</button>
            </div>
 	    </form>
 	</div>
@@ -180,6 +182,35 @@
 			if(result){//확인버튼 누르면
 				location.assign("<%=request.getContextPath()%>/qna/DeleteQnaComment.do?qnaNo=<%=q.getQnaNo()%>&qcNo="+qcNo);
 			}
+		}
+		
+		//댓글창 누를 시 로그인멤버 아니면 댓글 못 달게하기
+		const logInCheck=()=>{
+			if(<%=logInMember==null%>){
+				alert("로그인 한 사용자만 댓글을 등록할 수 있습니다.");
+				$("#comment_1").blur();
+			}
+		}
+		
+		//댓글등록 버튼 누를 시
+		const insertComment=()=>{
+			//아무것도 작성하지 않으면 재작성 요구
+			if($("#comment_1").val().trim()==""){
+				alert("댓글을 작성해주세요.");
+				console.log("댓글작성필요");
+				$("#comment_1").focus();
+				return false;
+			}
+// 			else{
+// 				$.ajax({
+<%-- 					url:"<%=request.getContextPath()%>/qna/insertQC.do", --%>
+// 					data:{"comment_1":$("#comment_1").val().trim(),
+// 						"commentWriter":$("#commentWriter").val()},
+// 					success:data=>{
+// 						console.log(data);
+// 					}
+// 				})
+// 			}
 		}
 	</script>
 
