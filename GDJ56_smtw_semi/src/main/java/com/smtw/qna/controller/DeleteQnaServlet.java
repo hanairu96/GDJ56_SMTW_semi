@@ -30,7 +30,7 @@ public class DeleteQnaServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int qnaNo=Integer.parseInt(request.getParameter("qnaNo"));
-		System.out.println(qnaNo);
+//		System.out.println(qnaNo);
 		int result=new QnaService().deleteQna(qnaNo);
 		
 		String msg="",loc="";

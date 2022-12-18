@@ -4,6 +4,7 @@
 <%
 	Qna q=(Qna)request.getAttribute("qna");
 	List<Qna> list=(List<Qna>)request.getAttribute("qnaList");
+	List<QnaComments> qcList=(List<QnaComments>)request.getAttribute("qcList");
 %>
 <%@include file="/views/common/header.jsp" %>
 <!-- 부트스트랩 CSS -->
@@ -117,22 +118,26 @@
 	    </form>
 	</div>
     <!-- 등록된 댓글 -->
+    <%if(!qcList.isEmpty()) {%>
+    	<%for(QnaComments qc : qcList) {%>
 	<div class="comments level1" style="border:0px solid green;width:850px;height:auto;margin: 0 auto;">
 	   <div class="comment replies" style="border:5px solid #ddd;width:850px;height:auto;margin: 0 auto;background-color: #f2f2f2;margin-bottom:10px;margin-top:10px;">
 	   		<div class="content">
 		       <header class="top">
-		         <div class="username">이동훈</div>
+		         <div class="username" style="color:#7e8cd2"><%=qc.getMemberId()%></div>
 		         <div class="utility"> 
 					<!-- 현재버튼의 위치 -->
 				    <button class="menu btn-reply customBtn btnStyle">답글등록</button>  
 				    <!-- 관리자와 해당 작성자만 보이게 -->
-					<button class="menu customBtn btnStyle">댓글삭제</button>    
+				    <%if(logInMember!=null&&(logInMember.getMemberId().equals("ADMIN")||logInMember.getMemberId().equals(qc.getMemberId()))) {%>
+						<button class="menu customBtn btnStyle" onclick="deleteComment('<%=qc.getQnaCoNo()%>');">댓글삭제</button>    
+					<%} %>
 	             </div>
 	           </header>
                 
-	          	<p>잘봤습니다.잘 보고 가요 !!</p>
+	          	<p><%=qc.getQcContents()%></p>
 	            <ul class="bottom">
-	              <li class="menu time">2022-12-05</li>
+	              <li class="menu time"><%=qc.getEnrollDate() %></li>
 	              <li class="divider"></li> 
 	              <li class="menu show-reply">답글 (1)</li> 
 	            </ul>
@@ -165,6 +170,17 @@
              </div>
             </form>       
 	</div> 
+	<%} %>
+	<%} %>
 </section>
+	<script>
+		//댓글 삭제
+		const deleteComment=(qcNo)=>{
+			const result=confirm("댓글 삭제 시 댓글에 달린 답글도 전부 삭제됩니다. 삭제하시겠습니까?");
+			if(result){//확인버튼 누르면
+				location.assign("<%=request.getContextPath()%>/qna/DeleteQnaComment.do?qnaNo=<%=q.getQnaNo()%>&qcNo="+qcNo);
+			}
+		}
+	</script>
 
 <%@include file="/views/common/footer.jsp" %>
