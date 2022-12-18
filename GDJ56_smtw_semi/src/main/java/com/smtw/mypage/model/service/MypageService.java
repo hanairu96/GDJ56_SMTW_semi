@@ -7,9 +7,15 @@ import static com.smtw.common.JDBCTemplate.*;
 import com.smtw.member.model.vo.Member;
 import com.smtw.mypage.model.dao.MypageDao;
 import com.smtw.mypage.model.vo.Applyfriends;
+import com.smtw.mypage.model.vo.FriendsWroteList;
 import com.smtw.mypage.model.vo.MemberInfo;
 import com.smtw.mypage.model.vo.MemberInfo2;
 import com.smtw.mypage.model.vo.Note;
+import com.smtw.mypage.model.vo.ReviewList;
+import com.smtw.mypage.model.vo.WroteList;
+import com.smtw.qna.model.vo.Qna;
+import com.smtw.review.model.vo.Review;
+import com.smtw.mypage.model.vo.qnaList;
 
 public class MypageService {
 	
@@ -147,7 +153,99 @@ public class MypageService {
 		return m;
 	}
 	
+	public List<ReviewList> reviewList(String userId,int cPage, int numPerpage) {
+		Connection conn=getConnection();
+		List<ReviewList> list=new MypageDao().reviewList(conn, userId,cPage, numPerpage);
+		close(conn);
+		return list;
+	}
 	
+	public List<ReviewList> fworiteList(String userId,int cPage, int numPerpage) {
+		Connection conn=getConnection();
+		List<ReviewList> list=new MypageDao().fworiteList(conn, userId,cPage, numPerpage);
+		close(conn);
+		return list;
+	}
+	public List<ReviewList> qnaList(String userId,int cPage, int numPerpage) {
+		Connection conn=getConnection();
+		List<ReviewList> list=new MypageDao().qnaList(conn, userId,cPage, numPerpage);
+		close(conn);
+		return list;
+	}
+	
+	public int getrCpage(String userId) {
+		Connection conn = getConnection();
+		int result=new MypageDao().getrCpage(conn, userId);
+		close(conn);
+		return result;
+	}
+	
+	public int getrnumPerpage(String userId) {
+		Connection conn = getConnection();
+		int result=new MypageDao().getrnumPerpage(conn, userId);
+		close(conn);
+		return result;
+	}
+	
+	
+	public int getfCpage(String userId) {
+		Connection conn = getConnection();
+		int result=new MypageDao().getfCpage(conn, userId);
+		close(conn);
+		return result;
+	}
+	
+	public int getfnumPerpage(String userId) {
+		Connection conn = getConnection();
+		int result=new MypageDao().getfnumPerpage(conn, userId);
+		close(conn);
+		return result;
+	}
+	
+	
+	public int getqCpage(String userId) {
+		Connection conn = getConnection();
+		int result=new MypageDao().getqCpage(conn, userId);
+		close(conn);
+		return result;
+	}
+	
+	public int getqnumPerpage(String userId) {
+		Connection conn = getConnection();
+		int result=new MypageDao().getqnumPerpage(conn, userId);
+		close(conn);
+		return result;
+	}
+	
+	
+	
+	public List<WroteList> selectWroteList(int cPage, int numPerpage, String userId) {
+		Connection conn=getConnection();
+		List<WroteList> list=new MypageDao().selectWroteList(conn, userId,cPage, numPerpage);
+		close(conn);
+		return list;
+	}
+	
+	public int selectWroteCount(String userId) {
+		Connection conn=getConnection();
+		int result=new MypageDao().selectWroteCount(conn, userId);
+		close(conn);
+		return result;
+	}
+	
+	public int getCpage(String userId) {
+		Connection conn = getConnection();
+		int result=new MypageDao().getCpage(conn, userId);
+		close(conn);
+		return result;
+	}
+	
+	public int getNumPerpage(String userId) {
+		Connection conn = getConnection();
+		int result=new MypageDao().getNumPerpage(conn, userId);
+		close(conn);
+		return result;
+	}
 	
 
 }
