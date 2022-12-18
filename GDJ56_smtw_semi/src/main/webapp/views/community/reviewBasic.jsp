@@ -80,9 +80,9 @@
                    
                         <div style="border:0px solid green;width:270px;height:300px;text-align: center; ">
                             <div style="border:0px solid magenta;width:180px;height:230px; margin-left :50px; margin-top :5px; " >
-                                <img src="" alt="" style="width:100%;height:100%;margin:auto;border-radius:20px;">
+                                <img src="<%=request.getContextPath() %>/upload/<%=r.getReviewFileName() %>" alt="" style="width:100%;height:100%;margin:auto;border-radius:20px;">
                             </div>
-                            <div><a href="" style="color: black !important;font-size:20px !important;" ><%=r.getReviewTitle() %></a></div>
+                            <div><a href="<%=request.getContextPath()%>/community/readReview.do?ReviewNo=<%=r.getReviewNo()%>" style="color: black !important;font-size:20px !important;" ><%=r.getReviewTitle() %></a></div>
                             <div><%=r.getEnrollDate()%></div>
                         </div>
                        
@@ -104,16 +104,9 @@
                     <!-- 페이지 바 -->
                     <div style="border:0px solid blue;width:890px;height:80px;text-align: center;margin-left:100px;">
                       
-                       
-                        
-                        
-                       
-                        
-                         
                                <%=request.getAttribute("pageBar") %>
                               
-                            
-                          
+                             
                     </div>
                 </div>
             </div>
@@ -187,7 +180,8 @@
            
             <div style="border:0px solid yellow;width:400px;height:60px">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button class="btn btn-primary customBtn btnStyle" type="button" style=" margin-left :300px; margin-top :15px;background-color: rgba(221, 160, 221, 0.508) !important;" value="작성">
+                    <button  onclick="location.assign('<%=request.getContextPath()%>/community/enrollReview.do');"
+                    class="btn btn-primary customBtn btnStyle" type="button" style=" margin-left :300px; margin-top :15px;background-color: rgba(221, 160, 221, 0.508) !important;" value="작성">
                     작성하기</button>
                 </div>
             </div>

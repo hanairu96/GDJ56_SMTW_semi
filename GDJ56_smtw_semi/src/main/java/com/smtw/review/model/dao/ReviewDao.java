@@ -18,8 +18,7 @@ import com.smtw.review.model.vo.Review;
 
 
 public class ReviewDao {
-	// System.out.println();
-	// System.out.println();
+	
 	private Properties sql=new Properties();
 	
 	public ReviewDao() {
@@ -51,6 +50,7 @@ public class ReviewDao {
 				.enrollDate(rs.getDate("ENROLL_DATE"))
 				.reviewCity(rs.getString("REVIEW_CITY"))
 				.reviewSat(rs.getInt("REVIEW_SAT"))
+				.reviewFileName(rs.getString("FILENAME"))
 				.build();
 	}
 		
@@ -69,7 +69,7 @@ public class ReviewDao {
 			addQuery += " " + stateSort +" ";
 		}
 		addQuery += ")R)WHERE rnum BETWEEN ? AND ?";
-		System.out.println(query+addQuery);
+		//System.out.println(query+addQuery);
 		try {
 
 			//기존 쿼리문
@@ -88,7 +88,7 @@ public class ReviewDao {
 			while(rs.next()) {
 				r=getReview(rs);
 				//
-				System.out.println(r);
+			
 				list.add(r);
 			}
 		}catch(SQLException e) {
@@ -138,7 +138,7 @@ public List<Review> searchReviewList(Connection conn,String type,String keyword,
 		
 		String query=sql.getProperty("searchReviewListKeyword");
 		//SELECT *FROM REVIEW WHERE $COL LIKE ?
-		System.out.println(type);
+		//System.out.println(type);
 		query=query.replace("$COL",type);
 		///   여기까지가   SELECT * FROM(SELECT ROWNUM AS RNUM,R.*FROM(SELECT *FROM REVIEW WHERE $COL LIKE ?
 		
@@ -205,7 +205,40 @@ public List<Review> searchReviewList(Connection conn,String type,String keyword,
 
 
 	
+	///상세화면에대한 메소드
 	
+	public Review readReview(Connection conn,int ReviewNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Review readReview=null;
+	
+		//String query=sql.getProperty("readReview");
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("readReview"));
+			pstmt.setInt(1,ReviewNo);
+			//
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				readReview=getReview(rs);
+				
+			}
+			
+		
+			
+		}catch(SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+			
+		}return readReview;
+		
+		
+		
+	}
+
 	
 	
 	

@@ -25,7 +25,7 @@ public class ReviewBasicServlet extends HttpServlet {
     public ReviewBasicServlet() {
         super();
         // TODO Auto-generated constructor stub
-     // System.out.println();  // System.out.println();
+     
     }
 
 	/**
@@ -41,7 +41,7 @@ public class ReviewBasicServlet extends HttpServlet {
 		if(stateSort==null) {
 			stateSort="ORDER BY enroll_date DESC";
 		}
-		System.out.println(stateSort);
+		
 		
 		
 		
