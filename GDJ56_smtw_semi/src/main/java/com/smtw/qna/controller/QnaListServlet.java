@@ -41,7 +41,7 @@ public class QnaListServlet extends HttpServlet {
 			}catch(NumberFormatException e) {
 				cPage=1;
 			}
-			numPerpage=8;
+			numPerpage=7;
 			String pageBar="";
 			
 			List<Qna> list=new QnaService().selectQnaList(cPage, numPerpage);

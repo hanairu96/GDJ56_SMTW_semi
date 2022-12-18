@@ -69,6 +69,25 @@ public class QnaCommentsDao {
 			close(pstmt);
 		}return result;
 	}
+	//댓글등록
+	public int insertQnaComments(Connection conn, String comment,int qnaNo, String writer) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertQnaComments"));
+			pstmt.setString(1, comment);
+			pstmt.setInt(2, qnaNo);
+			pstmt.setString(3, writer);
+			
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 	
 	
 	

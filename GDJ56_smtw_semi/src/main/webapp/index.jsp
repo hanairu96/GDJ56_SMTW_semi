@@ -219,44 +219,34 @@
         }
         
        //팝업창 로직
-        function getCookie(name){
-            let Found = false;
-            let start, end;
-            let i = 0;
-
-            // cookie 문자열 전체를 검색
-            while(i <= document.cookie.length){
-                start = i;
-                end = start + name.length;
-                // name과 동일한 문자가 있다면
-                if(document.cookie.substring(start, end) == name){
-                    Found = true;
-                    break;
-                }i++;
-            };
-            // name 문자열을 cookie에서 찾았다면
-            if(Found == true) {
-                start = end + 1;
-                end = document.cookie.indexOf(";", start);
-            // 마지막 부분이라 는 것을 의미(마지막에는 ";"가 없다)
-
-                if(end < start) end = document.cookie.length;
-                    // name에 해당하는 value값을 추출하여 리턴한다.
-            return document.cookie.substring(start, end);
-            };
-        // 찾지 못했다면
-        return ""
-        }
+       //쿠키가 있는지 찾음(보지않음 체크시)
+        function getCookie( name ){
+			var nameOfCookie = name + "=";
+			var x = 0;
+			while ( x <= document.cookie.length )
+			{
+					var y = (x+nameOfCookie.length);
+					if ( document.cookie.substring( x, y ) == nameOfCookie ) {
+							if ( (endOfCookie=document.cookie.indexOf( ";", y )) == -1 )
+									endOfCookie = document.cookie.length;
+							return unescape( document.cookie.substring( y, endOfCookie ) );
+					}
+					x = document.cookie.indexOf( " ", x ) + 1;
+					if ( x == 0 )
+							break;
+			}
+			return "";
+		}
        
-        // 팝업 실행로직
-        function openMsgBox(){
-            let eventCookie=getCookie("memo");
-            if (eventCookie != "no")
-            	 window.name = "parentPopUp";
-            	 open("<%=request.getContextPath()%>/main/popup.do","_blank","resizable=no,width=320,height=350,top=200,left=250");
-            	 
-        };
-        openMsgBox();
+     	// 팝업창에서 만들어진 쿠키 popclose의 값이 done이 아니면(즉, 체크하지 않으면,) 
+    	// 팝업창을 띄웁니다
+		
+        if ( getCookie("popclose") !="done") {
+			popUpWindow=window.open("<%=request.getContextPath()%>/main/popup.do","_blank","resizable=no,width=320,height=350,top=200,left=250");
+			popUpWindow.opener = self;
+		}
+       
+        
         //-->
     </script>
     <div id="wrap">
