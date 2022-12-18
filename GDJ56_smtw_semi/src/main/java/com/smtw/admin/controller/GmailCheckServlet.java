@@ -29,15 +29,18 @@ public class GmailCheckServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email=request.getParameter("email");
+		String email=request.getParameter("email");//입력받은 이메일
 		
 		String crtfcNo=EmailSendModule.gmailSend(email);//전송된 인증번호;
 		System.out.println(crtfcNo);
-		request.setAttribute("email",email);
-		request.setAttribute("crtfcNo", crtfcNo);
+//		request.setAttribute("email",email);
+//		request.setAttribute("crtfcNo", crtfcNo);
+		
+		response.setContentType("application/json;charset=utf-8");
+		new Gson().toJson(crtfcNo, response.getWriter());
 		
 		
-		request.getRequestDispatcher("/views/logIn/emailCheck.jsp").forward(request, response);
+//		request.getRequestDispatcher("/views/logIn/emailCheck.jsp").forward(request, response);
 	}
 
 	/**

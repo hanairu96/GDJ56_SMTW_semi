@@ -219,44 +219,114 @@
                         <input id="searchAddr" name="emailconfirm_btn" type="button" value="인증"
                         onclick="emailcheck();">
                     </div>
+                    <span class="check" id="checkCrtfcNo" style="display:none;"><small></small></span>
+                    <div class="bir_yy address crtfcNo" style="display:none;">
+                    	<input type="text" class="form-control" name="inputEmail" id="crtfcNoCheck"
+                    	  placeholder="인증번호 입력">
+               	  	</div>
+               	  	<div class="bir_yy address crtfcNo" style="display:none;">
+	               	  	<input id="crtfcButton" name="emailconfirm_btn" type="button" value="확인"
+                       onclick="crtNoCheck();">
+                    </div>
                 </div>
                 
                 <script>
 	              //이메일 중복확인
-	             	$("input#inputEmail").keyup(e=>{
-	             		$.ajax({
-	             			url:"<%=request.getContextPath()%>/logIn/emailDuplicateCheck.do",
-	             			data:{inputEmail:$("input#inputEmail").val().trim()},
-	             			dataType:"json",
-	             			success:data=>{
-	             				console.log(data);
-	             				if(data!=null){
-	             					$("span#checkEmail>small").text("이미 가입된 이메일 입니다.").css("color","red");
-	             				}else{
-	             					$("span#checkEmail>small").text(" ");
-	             				}
-	             			}
-	             		})
-	             	});
+// 	             	$("input#inputEmail").keyup(e=>{
+// 	             		$.ajax({
+<%-- 	             			url:"<%=request.getContextPath()%>/logIn/emailDuplicateCheck.do", --%>
+// 	             			data:{inputEmail:$("input#inputEmail").val().trim()},
+// 	             			dataType:"json",
+// 	             			success:data=>{
+// 	             				console.log(data);
+// 	             				if(data!=null){
+// 	             					$("span#checkEmail>small").text("이미 가입된 이메일 입니다.").css("color","red");
+// 	             				}else{
+// 	             					$("span#checkEmail>small").text(" ");
+// 	             				}
+// 	             			}
+// 	             		})
+// 	             	});
 	              
 	              //정규식 확인
-	              const emailcheck=()=>{
-		              	const inputEmail=$("#inputEmail").val().trim();
+						var crtfcNoData="";//변수에 인증번호를 저장하기 위함
+					//인증번호전송 눌렀을 때
+	    	          const emailcheck=()=>{
+		            	  $("span#checkEmail>small").text("");
+		 	          	const inputEmail=$("#inputEmail").val().trim();
 						var emailReg=/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 							if(inputEmail==""){
 								$("span#checkEmail>small").text("이메일을 입력해주세요.").css("color","red");
 								$("#inputEmail").focus();
 								return false;
-							}else{
-								if(!emailReg.test(inputEmail)){
-									$("span#checkEmail>small").text("올바른 이메일을 입력해주세요.").css("color","red");
-									$("#inputEmail").focus();
-									return false;
-								}
 							}
-							var url="<%=request.getContextPath()%>/gmailCheck.do?email="+inputEmail;
-							open(url,"emailwindow", "statusbar=no, scrollbar=no, menubar=no,width=400, height=200" );
-		              }
+							if(!emailReg.test(inputEmail)){
+								$("span#checkEmail>small").text("올바른 이메일을 입력해주세요.").css("color","red");
+								$("#inputEmail").focus();
+								return false;
+							}
+							
+							
+							$("span#checkCrtfcNo>small").text("인증번호를 발송했습니다. 인증번호를 입력해주세요.").css("color","#7e8cd2");
+							$("span#checkCrtfcNo").show();
+							$("div.crtfcNo").show();
+							
+							
+							//인증번호 확인하기 위한 ajax
+						$.ajax({
+							url:"<%=request.getContextPath()%>/gmailCheck.do",
+							data:{"email":inputEmail},//입력받은 이메일 넘기기
+							success:data=>{//ajax로 돌려받은 인증번호
+								// 인증번호 값이 없을 경우
+								if(data==null){
+									alert("인증에 실패하였습니다. 다시 시도해주세요");
+									$("span#checkCrtfcNo>small").text(" ");//인증번호 발신메세지 지우기
+									return false;
+							    // ajax가 돌아가서 제대로 값이 돌아온 경우
+								}else{
+									crtfcNoData=data;//인증번호를 변수에 저장
+								}
+							
+							}
+						})
+	              }
+						//인증번호 입력 후 확인버튼 눌렀을 때
+						const crtNoCheck=()=>{
+//							console.log("인증번호 : "+crtfcNoData);
+							//인증번호 칸에 아무것도 입력하지 않았을 경우
+							if($("#crtfcNoCheck").val()==""){
+								$("span#checkCrtfcNo>small").text("인증번호를 입력해주세요.").css("color","red");
+								$("span#checkEmail>small").text("");
+								console.log("인증번호 칸 비어있음");
+							}
+							//인증번호가 틀렸을 경우
+							else if(crtfcNoData!=$("#crtfcNoCheck").val()||$("#crtfcNoCheck").val()==""){
+								$("span#checkCrtfcNo>small").text("인증에 실패하였습니다. 다시 시도해주세요.").css("color","red");//인증번호 실패메세지
+								$("span#checkEmail>small").text("");
+								console.log("인증코드 틀림");
+								return false;
+								
+							//올바른 인증번호 입력
+							}else if(crtfcNoData == $("#crtfcNoCheck").val()){
+								
+								$.ajax({
+			             			url:"<%=request.getContextPath()%>/logIn/emailDuplicateCheck.do",
+			             			data:{inputEmail:$("input#inputEmail").val().trim()},
+			             			dataType:"json",
+			             			success:data=>{
+			             				console.log(data);
+			             				if(data!=null){
+			             					$("span#checkEmail>small").text("이미 가입된 이메일 입니다.").css("color","red");
+			             					$("span#checkCrtfcNo>small").text("인증에 성공하였습니다.").css("color","green");
+			             				}else{
+			             					$("span#checkEmail>small").text("사용 가능한 이메일입니다.").css("color","green");
+			             					$("span#checkCrtfcNo>small").text("인증에 성공하였습니다.").css("color","green");
+			             				}
+			             			}
+			             		})
+								
+							}
+						}
 	              
                 </script>
                 
@@ -369,7 +439,7 @@
 		}
 		
 		//가입가능한 이메일
-   		if(($("span#checkEmail>small").text().includes("이미"))){//이미 가입된 이메일이 있다고 하면
+   		if(!($("span#checkEmail>small").text().includes("가능"))){//가능한 이메일이라는 말이 없으면 빠꾸
    			$("#inputEmail").focus();
    			return false;
    		}
