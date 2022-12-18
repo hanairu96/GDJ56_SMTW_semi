@@ -147,8 +147,8 @@
         </div>
     </div>
 	
-	<%for(CountryPage cc : coinfo) {
-		if(cc.getNName().equals(name)){%>
+<%-- 	<%for(CountryPage cc : coinfo) {
+		if(cc.getNName().equals(name)){%> --%>
     <div id="buttoncollect">
         <input type="button" id="cobtn1" name="button" value="국가/지역소개">
         <input type="button" id="cobtn2" name="button" value="워홀비자">
@@ -156,7 +156,7 @@
         <input type="button" id="cobtn4" name="button" value="초기정착">
         <input type="button" id="cobtn5" name="button" value="취업정보">      
         <div id="explain">
-        	<%=cc.getNInfo() %>
+       <%--  	<%=cc.getNInfo() %> --%>
         </div>
     </div>
 	
@@ -209,8 +209,8 @@
     	});
     </script>
 	
-	<%} 
-	}%>	
+<%-- 	<%} 
+	}%>	 --%>
     
 	<%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
 		    <div id="twobu">

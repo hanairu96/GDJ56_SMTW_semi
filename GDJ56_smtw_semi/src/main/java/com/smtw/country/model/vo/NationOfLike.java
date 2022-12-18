@@ -12,4 +12,6 @@ import lombok.NoArgsConstructor;
 public class NationOfLike {
 	private String memberId2;
 	private String nName;
+	private String ckLike;
+	
 }

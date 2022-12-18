@@ -22,7 +22,7 @@
         	flex-wrap: wrap;
             padding: 30px;
             /* border: 3px solid brown; */
-            width:370px;
+            width:400px;
             height: 450px;
         }
         #maininfo2{
@@ -46,7 +46,7 @@
          	position: absolute;
         	left :250px; 
         	/* border: 5px solid green;  */
-        	width:1350px;
+        	width:1400px;
         	height:1100px;
         }
         #pageBar2{
@@ -123,9 +123,9 @@
            		 		
        				 <div id="collectmain2">
        				 	<%if(con.get(i).getNImg()==null) {%>
-	                    <img src="<%=request.getContextPath()%>/images/country/noimage_view.png"  alt="" style="width: 400px; height:300px;" >
+	                    <img src="<%=request.getContextPath()%>/images/country/noimage_view.png"  alt="" style="width: 400px; height:300px;border-radius:10%;" >
        				 	<%}else{ %>
-	                    <img src="<%=request.getContextPath()%>/upload/<%=con.get(i).getNImg() %>"  alt="" style="width: 400px; height:300px;" >
+	                    <img src="<%=request.getContextPath()%>/upload/<%=con.get(i).getNImg() %>"  alt="" style="width: 400px; height:300px;border-radius:10%;" >
 	                    <%} %>
 	                    <div id="likenameinfo">
 	                        <div id="likename2">
@@ -151,6 +151,8 @@
 	                            
 	                            
 	                        	<div id="likebtn">
+	                        		<%-- <img src="<%=request.getContextPath()%>/images/country/heart_like.png" 
+	                        		style="width:50px;height:50px;cursor:pointer;color:yellow;" onclikc="liketoggle"> --%>
 		                            <button id="like2">❤</button>
 	                        	</div>	    
 	                        </div>
@@ -161,12 +163,29 @@
 	                            <button id="update" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/updateCountry.do?nName=<%=con.get(i).getNName()%>')">수정</button>
 	                            <button id="delete" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/deleteCountry.do?nName=<%=con.get(i).getNName()%>')">삭제</button>
 	                        </div>
-	                        <%} %>
+	                        <%} %> 
 	                     </div>
 	                 </div>
 				 <%} 
 			 	}%>  
    		</div>
+   		<script>
+ <%--   			$(function(){
+   				$("#like2").click(function(){
+   					$.ajax({
+   						url:"<%=request.getContextPath()%>/likecountry.do",
+   						type:"get",
+   						data:{
+   							id:
+   							name : '${}'
+   						}
+   					})
+   				})
+   			})
+   				
+   				
+   			} --%>
+   		</script>
    	<div id="pageBar2">
 		<%=request.getAttribute("pageBar")%>
 	</div>
