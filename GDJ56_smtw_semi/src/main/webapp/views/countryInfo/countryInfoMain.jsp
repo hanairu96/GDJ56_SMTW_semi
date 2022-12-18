@@ -98,12 +98,10 @@
         }
  
     </style>  
-    <body>
     <h1 style="text-align: center;">국가 및 지역 정보</h1>
     <%for(CountryPageInfo c : info) { 
-    
+    /* 받아온 나라 이름의 정보만 출력해줌*/
     	if(c.getNName().equals(name)){
-    	
     		 if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
     	    <div id="twobu">
         		<button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/updatego.do?nName=<%=c.getNName()%>')"><span>국가정보 수정</span></button>
@@ -116,6 +114,7 @@
         <div id="titlecountryinfo">
             <div>
                 <h2 style="text-align: center;"><%=c.getNName() %></h2>
+                <!-- 사진이 없을때 대체 사진 -->
                 <%if(c.getCPic()==null){%>
                 <img src="<%=request.getContextPath()%>/images/country/noimage_view.png" alt="" width="200" height="130">
 				<%}else{%>
@@ -139,7 +138,6 @@
                 <div class="City"></div>
             </div>
             <div id="time" style="text-align: center;">
-                <!-- 해당 국가의 도시명, 나라명 순서로 변경해주세요 -->
                 <h5><%=c.getUrban() %>,<%=c.getNName() %></h5>
                 <span id="countryname" style="font-size: 25px;"></span>
                 <!-- 한국시간 -->
@@ -148,46 +146,71 @@
             </div>
         </div>
     </div>
-    
-    
-  <%if(coinfo==null){ %>
-      <div id="buttoncollect">
-        <input type="button" name="button" value="국가/지역소개">
-        <input type="button" name="button" value="워홀비자">
-        <input type="button" name="button" value="안전정보">
-        <input type="button" name="button" value="초기정착">
-        <input type="button" name="button" value="취업정보">      
-      <div id="explain">
-	      <pre>
-	  		내용 입력중...
-	  		.
-	  		.
-	  		.
-	  		.
-	  		.
-	  		.
-	  		.
-	  		.
-          </pre>
-        </div>
-    </div>
-  <%}else{%>
-  
-   	<% for(CountryPage cc : coinfo){%>
+	
+	<%for(CountryPage cc : coinfo) {
+		if(cc.getNName().equals(name)){%>
     <div id="buttoncollect">
-        <input type="button" name="button" value="국가/지역소개">
-        <input type="button" name="button" value="워홀비자">
-        <input type="button" name="button" value="안전정보">
-        <input type="button" name="button" value="초기정착">
-        <input type="button" name="button" value="취업정보">      
+        <input type="button" id="cobtn1" name="button" value="국가/지역소개">
+        <input type="button" id="cobtn2" name="button" value="워홀비자">
+        <input type="button" id="cobtn3" name="button" value="안전정보">
+        <input type="button" id="cobtn4" name="button" value="초기정착">
+        <input type="button" id="cobtn5" name="button" value="취업정보">      
         <div id="explain">
-            <pre>
-  				<%=cc.getNInfo() %>	
-  			</pre>
+        	<%=cc.getNInfo() %>
         </div>
     </div>
-	<%}
-  }%>
+	
+    <script>
+    	$("#cobtn1").click(e=>{
+    		$.ajax({
+    			type:"get",
+    			<%-- url:"<%=request.getContextPath()%>/countrypage/selecontent.do?nName=<%=c.getNName()%>", --%>
+    			data:"text",
+    			success:function(data){
+		    		$("#explain").text("모르겠다");
+    			}
+    		});
+    	});
+    	$("#cobtn2").click(e=>{
+    		$.ajax({
+    			type:"get",
+    			data:"text",
+    			success:function(data){
+		    		$("#explain").text("정말로");
+    			}
+    		});
+    	});
+    	$("#cobtn3").click(e=>{
+    		$.ajax({
+    			type:"get",
+    			data:"text",
+    			success:function(data){
+		    		$("#explain").text("디비에서 값을 어떻게 불러오는거죠?");
+    			}
+    		});
+    	});
+    	$("#cobtn4").click(e=>{
+    		$.ajax({
+    			type:"get",
+    			data:"text",
+    			success:function(data){
+		    		$("#explain").text("힘들어 증말 ㅠㅜㅠㅜ");
+    			}
+    		});
+    	});
+    	$("#cobtn5").click(e=>{
+    		$.ajax({
+    			type:"get",
+    			data:"text",
+    			success:function(data){
+		    		$("#explain").text("모르겠다구ㅜㅠㅜㅠㅜ");
+    			}
+    		});
+    	});
+    </script>
+	
+	<%} 
+	}%>	
     
 	<%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
 		    <div id="twobu">
@@ -197,7 +220,6 @@
 		        <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goUpdateContent.do?nName=<%=c.getNName()%>')"><span>수정</span></button>
 	   		</div>
 	    <%}%>
-	    
     <%}%>
 	<style>
 		#twobu>button{
@@ -284,7 +306,6 @@
         };
         $.ajax({
         url:'http://api.openweathermap.org/data/2.5/weather?q=<%=c.getEnglishName()%>&APPID=c31c0d10b1ec01d97120f16587305b9c&units=metric',
-    //                                                           ㄴ도시명만 변경해주세요
         dataType:'json',
         type:'GET',
         success:function(data){
@@ -327,7 +348,6 @@
             
             const con=document.getElementById("countryname");
             con.innerHTML=getWorldTime(<%=c.getClock()%>);
-            //                          ㄴ영국기준으로 시차 변경해주세요
         },1000);
     </script>
     <%}

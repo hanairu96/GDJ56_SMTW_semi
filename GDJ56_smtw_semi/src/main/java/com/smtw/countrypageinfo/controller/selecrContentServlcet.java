@@ -32,6 +32,7 @@ public class selecrContentServlcet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+//		String name=request.getParameter("nName");
 		List<CountryPage> c=new CountryPageInfoService().selectContent();
 		System.out.println(c);
 		request.setAttribute("info", c);

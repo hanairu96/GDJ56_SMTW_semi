@@ -82,12 +82,15 @@
         	나라를 추가중입니다!!
         <%}else{%>
 			<ul>
+			<!-- 페이지 왼편에 나라 리스트 -->
 	           	<%for(Country c : list){%>
 			<li>
 	                    <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN"))  {%>
+	                    <!-- 나라 상세 페이지가 없으면 수정페이지로 이동한다 -->
                     		<a href="<%=request.getContextPath()+(c.getInfo().getMoney()==null?"/country/updateCountry.do?nName=":"/countryinfo/searchAll.do?nName=")+c.getNName() %>"><%=c.getNName() %></a>
                    		<%}else{
 							if(c.getInfo().getMoney()==null){%>
+							<!-- 회원이 상세페이지를 보려고 할때 정보가 없을 경우 분기처리 -->
                     		<a href="" onclick="nodatano();"><%=c.getNName() %></a>
 	                    	<%}else{ %>
                     		<a href="javascript:void(0);" onclick="fn_emergency('<%=c.getEmergency()%>','<%=c.getNName() %>')" > <%=c.getNName() %> </a>
@@ -126,14 +129,17 @@
 	                    <%} %>
 	                    <div id="likenameinfo">
 	                        <div id="likename2">
+	                        
 	                        <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN"))  {%>
 	                            <p id="font1" style="font-size:30px;">
 	                            <a href="<%=request.getContextPath()+(con.get(i).getInfo().getMoney()==null?"/countryInfo/insergo.do?nName=":"/countryinfo/searchAll.do?nName=")+con.get(i).getNName()%>">
                             <%}else{
                             	if(con.get(i).getInfo().getMoney()==null){%>
+                            	<!-- 내용이 없을경우 준비중 팝업이 뜬다 -->
                             	<p id="font1" style="font-size:30px;">
 	                    		<a href="" onclick="nodatano()">
 		                    	<%}else{ %>
+		                    	<!-- 내용이 있을 경우 상세페이지로 이동한다 -->
 		                    	<p id="font1" style="font-size:30px;">
 		                    	<a href="javascript:void(0);" onclick="fn_emergency('<%=con.get(i).getEmergency()%>','<%=con.get(i).getNName() %>')" >
 	                    		
