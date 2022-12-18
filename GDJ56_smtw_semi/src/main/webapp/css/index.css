@@ -6,6 +6,88 @@
 body{
     font-family: "Hahmlet";
 }
+
+/* 메뉴아이콘 설정 */
+.holiday1{
+	position: relative;
+	display: none;
+}
+.holiday2{
+	position: relative;
+}
+.holidayhover:hover .holiday1 {
+  display: block;
+}
+.holidayhover:hover .holiday2 {
+  display: none;
+}
+.country1{
+	position: relative;
+	display: none;
+}
+.country2{
+	position: relative;
+}
+.hovercountry:hover .country1 {
+  display: block;
+}
+.hovercountry:hover .country2 {
+  display: none;
+}
+.diary1{
+	position: relative;
+	display: none;
+}
+.diary2{
+	position: relative;
+}
+.hoverdiary:hover .diary1 {
+  display: block;
+}
+.hoverdiary:hover .diary2 {
+  display: none;
+}
+.friends1{
+	position: relative;
+	display: none;
+}
+.friends2{
+	position: relative;
+}
+.hoverfirends:hover .friends1 {
+  display: block;
+}
+.hoverfirends:hover .friends2 {
+  display: none;
+}
+.notice1{
+	position: relative;
+	display: none;
+}
+.notice2{
+	position: relative;
+}
+.hovernotice:hover .notice1 {
+  display: block;
+}
+.hovernotice:hover .notice2 {
+  display: none;
+}
+.logIn1{
+	position: relative;
+	display: none;
+}
+.logIn2{
+	position: relative;
+}
+.hoverlogIn:hover .logIn1 {
+  display: block;
+}
+.hoverlogIn:hover .logIn2 {
+  display: none;
+}
+
+
  /* 배너설정 */
 .txt-label{
    /* 배너 안의 글자 */
