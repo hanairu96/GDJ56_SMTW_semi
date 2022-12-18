@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.notice.model.service.NoticeService;
-import com.smtw.notice.model.vo.Notice;
+import com.smtw.qna.model.service.QnaCommentsService;
 import com.smtw.qna.model.service.QnaService;
 import com.smtw.qna.model.vo.Qna;
+import com.smtw.qna.model.vo.QnaComments;
 
 /**
  * Servlet implementation class QnaViewServlet
@@ -37,9 +37,12 @@ public class QnaViewServlet extends HttpServlet {
 		
 		Qna q=new QnaService().selectQnaNo(qnaNo);//게시물 클릭시 해당번호 게시글
 		List<Qna> list=new QnaService().selectPreNextQnaNo(qnaNo);//이전글,다음글 번호 담겨있는 리스트
+		List<QnaComments> qcList=new QnaCommentsService().selectQnaComments(qnaNo);//누른 게시글의 댓글들
+		
 		
 		request.setAttribute("qna", q);
 		request.setAttribute("qnaList", list);
+		request.setAttribute("qcList", qcList);
 		
 		request.getRequestDispatcher("/views/qna/qnaView.jsp").forward(request, response);
 		
