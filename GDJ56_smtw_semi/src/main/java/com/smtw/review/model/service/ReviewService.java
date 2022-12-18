@@ -26,7 +26,7 @@ public class ReviewService {
 		 return list;
 		 
 	
-		// System.out.println();
+		
 		 
 		 
 	}
@@ -70,7 +70,27 @@ public class ReviewService {
 		 
 	 }
 	
-	
+	 
+	 
+	 /// 여기까지  reviewBasic.jsp에 사용되는 메소드
+	 
+	 
+	//상세화면
+	 
+	 
+	public Review readReview(int ReviewNo) {
+		
+		Connection conn=getConnection();
+		
+		Review readReview=dao.readReview(conn,ReviewNo);
+		
+		return  readReview;
+		
+		
+	}
+	 
+	 
+	 
 	
 	
 	
