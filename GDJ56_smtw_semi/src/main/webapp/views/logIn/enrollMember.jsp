@@ -309,6 +309,7 @@
 							//올바른 인증번호 입력
 							}else if(crtfcNoData == $("#crtfcNoCheck").val()){
 								
+								//이메일 중복확인
 								$.ajax({
 			             			url:"<%=request.getContextPath()%>/logIn/emailDuplicateCheck.do",
 			             			data:{inputEmail:$("input#inputEmail").val().trim()},
@@ -376,7 +377,7 @@
 		const pwdReg=/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 		
 		if(inputPwd.match(pwdReg)==null){//비밀번호가 양식대로 입력되지 않았으면(==실패)
-			alert("비밀번호는 숫자, 특수문자 및 영문자를 포함하여 8자리 이상이여야합니다.");
+			alert("비밀번호는 숫자, 영문자를 포함하여 8자리 이상 입력하세요");
 			$("#inputPwd").focus();
 			return false;
 		}
