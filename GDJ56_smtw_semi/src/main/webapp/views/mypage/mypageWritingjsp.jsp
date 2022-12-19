@@ -100,6 +100,7 @@
             /* border-top: 1px solid; */
             border-bottom: 1px solid;
             text-align: center;
+            cursor: pointer;
         }
         #list td:nth-child(1){
             font-weight: bold;

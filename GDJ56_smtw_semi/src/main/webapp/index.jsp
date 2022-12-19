@@ -31,7 +31,7 @@
                       alt="카카오톡 공유 보내기 버튼" />
                 </a>
                 <!-- 인스타그램 링크 로고 아이콘 -->
-                <a href="https://www.instagram.com/" id="instarLogoAddress">
+                <a href="https://www.instagram.com/showmetheway_korea/" id="instarLogoAddress">
                     <img src="https://t1.daumcdn.net/cfile/tistory/99D8D7485D09F21432" alt="">
                 </a>  
             </div>
@@ -318,9 +318,10 @@
                 				if(data!=null){
                 					const ul=$("#noticeListUl");
                 					
-                					for(i=0;i<data.length;i++){
+                					for(let i=0;i<data.length;i++){
+                						
 	                					const li=$("<li>");
-	                					const a=$("<a href='<%=request.getContextPath()%>/notice/noticeList.do'>").text(data[i].noticeTitle);
+	                					const a=$("<a href='<%=request.getContextPath()%>/notice/noticeView.do?noticeNo="+data[i].noticeNo+"'>").text(data[i].noticeTitle);
                 						li.append(a);/* li태그에 a태그 넣기 */
                 					ul.append(li); 
                 					}
@@ -343,7 +344,7 @@
                 					
                 					for(i=0;i<data.length;i++){
 	                					const li=$("<li>");
-	                					const a=$("<a href='<%=request.getContextPath()%>/qna/qnaList.do'>").text(data[i].reviewTitle);
+	                					const a=$("<a href='<%=request.getContextPath()%>/qna/qnaView.do?qnaNo="+data[i].qnaNo+"'>").text(data[i].reviewTitle);
                 						li.append(a);/* li태그에 a태그 넣기 */
                 					ul.append(li); 
                 					}

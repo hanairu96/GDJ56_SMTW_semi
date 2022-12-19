@@ -1,7 +1,6 @@
-package com.smtw.main.controller;
+package com.smtw.qna.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,21 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.smtw.notice.model.service.NoticeService;
-import com.smtw.notice.model.vo.Notice;
+import com.smtw.qna.model.service.FaqService;
 
 /**
- * Servlet implementation class MainNoticeListServlet
+ * Servlet implementation class ModifyFaqServlet
  */
-@WebServlet("/main/mainNoticeList.do")
-public class MainNoticeListServlet extends HttpServlet {
+@WebServlet("/qna/modifyFaq.do")
+public class ModifyFaqServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MainNoticeListServlet() {
+    public ModifyFaqServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,14 +29,26 @@ public class MainNoticeListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//현재 있는 공지사항 리스트들
-		List<Notice> list=new NoticeService().selectNoticeList(1,5);
+		String[] faqQue=request.getParameterValues("faqQue_1_");
+		String[] faqAns=request.getParameterValues("faqAns_1_");
+		String[] faqNo=request.getParameterValues("faqNo_");
 		
-		//전체 공지사항 개수
-//		int totalData=new NoticeService().selectNoticeCount();
-		response.setContentType("application/json;charset=utf-8");
-		new Gson().toJson(list, response.getWriter());
+		int result=0;
+		for(int i=0;i<faqQue.length;i++) {
+			result=new FaqService().updateFaq(faqQue[i],faqAns[i],faqNo[i]);
+		}
+		String msg="",loc="";
+		if(result>0) {
+			msg="글 수정 완료!";
+			loc="/qna/qnaList.do";
+		}else {
+			msg="글 수정 실패..";
+			loc="/qna/qnaList.do";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
 		
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

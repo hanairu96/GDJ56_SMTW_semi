@@ -60,6 +60,7 @@
     border: 2px solid black; /* ##### */
     border-radius: 10px; /* ##### */
     margin-left: 150px;
+    height:auto;
 }
 .sector{
     display: flex;
@@ -108,7 +109,7 @@
 li {
     list-style: none;
 }
-#writeQna,#modifyQna{
+#writeQna,#modifyFaq,#completeFaq{
     float: right;
 }
 h2{
@@ -229,7 +230,7 @@ li {
     margin: 0 auto;
     padding-right: 50px;
     box-sizing: border-box;
-    margin-top: 120px;
+    margin-top: 70px;
     
 }
 /* 공지사항 글자 */

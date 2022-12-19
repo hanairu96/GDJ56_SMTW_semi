@@ -22,8 +22,11 @@
                                 <img src="<%=request.getContextPath() %>/images/lupy.jpg" alt="" style="width:60%;height:75%;margin:auto;display:block;margin-top:50px;border-radius:120px;">
                             </div>
                             <div style="border:0px solid pink;width:440px;height:340px;text-align:center;">
-                                <button onclick="window.open('친구신청하기.html','_blank','scrollbars=yes,width=600,height=600,top=100,left=300')"
+                            <%if(logInMember!=null&&!logInMember.getMemberId().equals(f.getMemberId())) {%>
+                                <button onclick="window.open('<%=request.getContextPath() %>/friends/friendsApply.do?memberFrom=<%=logInMember.getMemberId() %>&friendsNo=<%=f.getFriendsNo() %>&nName=<%=f.getNName() %>',
+                                '_blank','scrollbars=yes,width=500,height=500,top=100,left=300')"
                                 class="customBtn btnStyle btn btn-primary" type="button" style="width:120px;margin-top:25px;background-color:rgba(221, 160, 221, 0.508) !important;"value="친구신청하기">친구 신청하기</button>
+							<%} %>
                             </div>
                         </div>
                     </div>
@@ -55,7 +58,7 @@
                 	<%if(logInMember!=null&&(logInMember.getMemberId().equals("ADMIN")||logInMember.getMemberId().equals(f.getMemberId()))){%>
 		            	<button onclick="location.assign('<%=request.getContextPath()%>/friends/friendsUpdate.do?friendsNo=<%=f.getFriendsNo()%>');" 
 		            	class="customBtn btnStyle btn btn-primary" type="button" style="width:80px;margin-left:640px;background-color: rgba(221, 160, 221, 0.508) !important;" value="수정하기">수정하기</button>
-		            	<button onclick="friend_delete();" class="customBtn btnStyle btn btn-primary" type="button" style="width:80px;background-color: rgba(221, 160, 221, 0.479) !important;" value="삭제">삭제하기</button>
+		            	<button onclick="friendDelete();" class="customBtn btnStyle btn btn-primary" type="button" style="width:80px;background-color: rgba(221, 160, 221, 0.479) !important;" value="삭제">삭제하기</button>
 		            	<button onClick="location.href='<%=request.getContextPath() %>/friends/friendsList.do'" class="customBtn btnStyle btn btn-primary" type="button" style="width:80px;background-color: rgba(221, 160, 221, 0.508) !important;" value="목록">목록으로</button>
 	                <%}else {%>
 		            	<button onClick="location.href='<%=request.getContextPath() %>/friends/friendsList.do'" class="customBtn btnStyle btn btn-primary" type="button" style="width:80px;margin-left:815px;background-color: rgba(221, 160, 221, 0.508) !important;" value="목록">목록으로</button>
@@ -65,8 +68,6 @@
             </div>
             </div>
     </section>
-    <script>
-    </script>
 
      <style>
      	#do>p{
@@ -131,9 +132,6 @@
 
      </style>
 
-
-
-
     <style>
         section{
             border: 0px solid tomato;
@@ -163,10 +161,10 @@
     </style>
     
     <script>
-		function friend_delete(){
+		function friendDelete(){
 			let answer = confirm("정말로 삭제하시겠습니까?");
 			if(answer == true){
-				location.assign("<%=request.getContextPath()%>/friends/friendsDelete.do?memberId=<%=f.getMemberId() %>");
+				location.assign("<%=request.getContextPath()%>/friends/friendsDelete.do?friendsNo=<%=f.getFriendsNo() %>");
 			}
 		}
 	</script>
