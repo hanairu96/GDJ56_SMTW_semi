@@ -65,6 +65,10 @@
                 } %>
 
             </table>
+            
+            <div id="pageBar">
+					<%=request.getAttribute("pageBar") %>
+				</div>
 
 			  <script>
             	function goPopup(e){
@@ -101,6 +105,12 @@
             top: 630px;
             left: 450px;
             
+        }
+        
+        #pageBar{
+        	position: absolute;
+            top: 1000px;
+            left: 900px;
         }
 
         #postcontroll{

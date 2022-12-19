@@ -110,16 +110,16 @@ public class MypageService {
 		return result;
 	}
 	
-	public List<Note> noteList(String id){
+	public List<Note> noteList(String userId,int cPage, int numPerpage){
 		Connection conn = getConnection();
-		List<Note> list = new MypageDao().noteList(conn, id);
+		List<Note> list = new MypageDao().noteList2(conn, userId, cPage, numPerpage);
 		close(conn);
 		return list;
 	}
 	
-	public List<Note> noteSendList(String id){
+	public List<Note> noteSendList(String id,int cPage, int numPerpage){
 		Connection conn = getConnection();
-		List<Note> list = new MypageDao().noteSendList(conn, id);
+		List<Note> list = new MypageDao().noteSendList(conn, id, cPage, numPerpage);
 		close(conn);
 		return list;
 	}
@@ -229,6 +229,20 @@ public class MypageService {
 	public int selectWroteCount(String userId) {
 		Connection conn=getConnection();
 		int result=new MypageDao().selectWroteCount(conn, userId);
+		close(conn);
+		return result;
+	}
+	
+	public int selectNoteCount(String userId) {
+		Connection conn=getConnection();
+		int result=new MypageDao().selectNoteCount(conn, userId);
+		close(conn);
+		return result;
+	}
+	
+	public int selectSendCount(String userId) {
+		Connection conn=getConnection();
+		int result=new MypageDao().selectSendCount(conn, userId);
 		close(conn);
 		return result;
 	}

@@ -168,15 +168,19 @@ public class MypageDao {
 				.build();
 	}
 	
-	public List<Note> noteList(Connection conn, String id){
+	public List<Note> noteList2(Connection conn, String userId, int cPage, int numPerpage){
 		
 		List<Note> list = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
+		System.out.println(userId+":"+cPage+":"+numPerpage);
+		
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("noteList"));
-			pstmt.setString(1,id);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				list.add(getNoteList(rs));
@@ -189,7 +193,7 @@ public class MypageDao {
 		}return list;
 	}
 	
-	public List<Note> noteSendList(Connection conn, String id){
+	public List<Note> noteSendList(Connection conn, String id ,int cPage, int numPerpage){
 		
 		List<Note> list = new ArrayList();
 		PreparedStatement pstmt = null;
@@ -197,7 +201,9 @@ public class MypageDao {
 		
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("noteSendList"));
-			pstmt.setString(1,id);
+			pstmt.setString(1, id);
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				list.add(getNoteList(rs));
@@ -793,7 +799,39 @@ public int getqnumPerpage(Connection conn, String userId) {
 		}
 	
 
-
+		public int selectNoteCount(Connection conn,String userId) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			int count=0;
+			try {
+				pstmt=conn.prepareStatement(sql.getProperty("selectNoteCount"));
+				pstmt.setString(1, userId);
+				rs=pstmt.executeQuery();
+				if(rs.next()) count=rs.getInt(1);
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}return count;
+		}
+		
+		public int selectSendCount(Connection conn,String userId) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			int count=0;
+			try {
+				pstmt=conn.prepareStatement(sql.getProperty("selectSendCount"));
+				pstmt.setString(1, userId);
+				rs=pstmt.executeQuery();
+				if(rs.next()) count=rs.getInt(1);
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}return count;
+		}
 
 
 

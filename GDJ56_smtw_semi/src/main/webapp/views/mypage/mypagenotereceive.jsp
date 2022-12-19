@@ -46,26 +46,30 @@
                 	<td colspan="4" height="100">아직 도착한 쪽지가 없습니다 :(</td>
                 </tr>
                 <%}else{
-                	for(int i=0;i<list.size();i++){
+                	for(Note n : list){
                 %>
                		<tr>
                     	<td><input type="checkbox" name="" id=""></td>
                     	<td>
-                    		<p><%=list.get(i).getSenderName() %></p>
+                    		<p><%=n.getSenderName() %></p>
 	                    	<form name="form" action="" method="post">
-			                    <input type="hidden" name="noteNo" value="<%=list.get(i).getNtNo() %>">
-			                    <input type="hidden" name="friendName" value="<%=list.get(i).getSenderName() %>">
-			                    <input type="hidden" name="sender" value="<%=list.get(i).getSender() %>">
+			                    <input type="hidden" name="noteNo" value="<%=n.getNtNo() %>">
+			                    <input type="hidden" name="friendName" value="<%=n.getSenderName() %>">
+			                    <input type="hidden" name="sender" value="<%=n.getSender() %>">
 			                    <input type="hidden" name="id" value=<%=logInMember.getMemberId() %>>
 			                </form>	
 		                </td>
-                    	<td onclick="goPopup(event)"><%=list.get(i).getContent() %></td>
-                    	<td><%=list.get(i).getDate()%></td>
+                    	<td onclick="goPopup(event)"><%=n.getContent() %></td>
+                    	<td><%=n.getDate()%></td>
                 	</tr>
                 <%}
                 } %>
 
             </table>
+            
+            	<div id="pageBar">
+					<%=request.getAttribute("pageBar") %>
+				</div>
             
               <script>
             	function goPopup(e){
@@ -105,6 +109,12 @@
             top: 630px;
             left: 450px;
             
+        }
+        
+        #pageBar{
+        	position: absolute;
+            top: 1000px;
+            left: 900px;
         }
 
         #postcontroll{

@@ -146,7 +146,7 @@ public class mypageWritingServlet extends HttpServlet {
 			pageBar+="<button class='customBtn btnStyle'>이전</button>";
 		}else {
 			pageBar+="<button class='customBtn btnStyle'><a href='"+request.getContextPath()
-				+"/admin/qnaManage.do?cPage="+(pageNo-1)+"'>이전</a></button>";
+				+"/mypage/mypageWriting.do?cPage="+(pageNo-1)+"'>이전</a></button>";
 		}
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
@@ -154,7 +154,7 @@ public class mypageWritingServlet extends HttpServlet {
 				pageBar+="<button class='customBtn btnStyle'>"+pageNo+"</button>";
 			}else {
 				pageBar+="<a href='"+request.getContextPath()
-				+"/admin/qnaManage.do?cPage="+pageNo+"'><button class='customBtn btnStyle'>"+pageNo+"</button></a>";
+				+"/mypage/mypageWriting.do?cPage="+pageNo+"'><button class='customBtn btnStyle'>"+pageNo+"</button></a>";
 			}
 			pageNo++;
 		}
@@ -163,7 +163,8 @@ public class mypageWritingServlet extends HttpServlet {
 			pageBar+="<button class='customBtn btnStyle'>다음</button>";
 		}else {
 			pageBar+="<a href='"+request.getContextPath()
-				+"/admin/qnaManage.do?cPage="+pageNo+"'>다음</a>";
+				+"/mypage/mypageWriting.do?cPage="+pageNo+"'>다음</a>";
+			/* String userId=request.setParameter("id"); */
 		}
 
 		request.setAttribute("pageBar", pageBar);
@@ -172,33 +173,6 @@ public class mypageWritingServlet extends HttpServlet {
 		
 		request.getRequestDispatcher("/views/mypage/mypageWritingjsp.jsp")
 		.forward(request, response);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		
