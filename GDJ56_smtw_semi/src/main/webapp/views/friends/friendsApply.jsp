@@ -14,7 +14,7 @@
 <body>
 	<h2>친구 신청</h2>
 	<p>자기소개</p>
-	<form action="<%=request.getContextPath() %>/friends/friendsApplyEnd.do">
+	<form action="<%=request.getContextPath() %>/friends/friendsApplyEnd.do" onsubmit="return false;">
 		<textarea name="propose" cols="80" rows="15" style="resize:none;" placeholder="자기소개 내용을 입력해주세요."></textarea>
 		<input type="hidden" name="memberFrom" value=<%=memberFrom%>>
 		<input type="hidden" name="friendsNo" value=<%=friendsNo%>>
@@ -30,7 +30,8 @@
 			if(check){
 				f.submit();
 			}
-			//취소해도 왜 등록으로 넘어가는지??
+			//check가 false여도 자동 submit이 되는 문제가 있었는데
+			//form 태그에 onsubmit="return false;"를 추가하면서 해결함
 		}
 		
 		const cancel=()=>{
