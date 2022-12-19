@@ -34,6 +34,7 @@ public class MainNoticeListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//현재 있는 공지사항 리스트들
 		List<Notice> list=new NoticeService().selectNoticeList(1,5);
+		
 		//전체 공지사항 개수
 //		int totalData=new NoticeService().selectNoticeCount();
 		response.setContentType("application/json;charset=utf-8");
