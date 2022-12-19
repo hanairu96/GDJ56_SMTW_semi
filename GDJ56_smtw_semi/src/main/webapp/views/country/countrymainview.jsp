@@ -161,7 +161,7 @@
 	                        <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
 	                        <div id="btninsertdelete">
 	                            <button id="update" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/updateCountry.do?nName=<%=con.get(i).getNName()%>')">수정</button>
-	                            <button id="delete" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/deleteCountry.do?nName=<%=con.get(i).getNName()%>')">삭제</button>
+	                            <button id="delete" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/deleteCountry.do?nName=<%=con.get(i).getNName()%>&&nImg=<%=con.get(i).getNImg()%>')">삭제</button>
 	                        </div>
 	                        <%} %> 
 	                     </div>
