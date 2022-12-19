@@ -55,12 +55,12 @@ public class CountryPageInfoService {
 //////countrypage의 service항목들
 	
 	//ajax전체 출력
-	public List<CountryPage> selectCoAll(){
-		Connection conn=getConnection();
-		List<CountryPage> result=dao.selectCoAll(conn);
-		close(conn);
-		return result;
-	}
+//	public List<CountryPage> selectCoAll(){
+//		Connection conn=getConnection();
+//		List<CountryPage> result=dao.selectCoAll(conn);
+//		close(conn);
+//		return result;
+//	}
 	
 	//내용들
 	public CountryPage coArea(String name) {

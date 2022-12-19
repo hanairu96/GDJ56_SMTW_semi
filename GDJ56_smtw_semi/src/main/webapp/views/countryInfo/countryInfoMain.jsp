@@ -89,7 +89,7 @@
                 왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
              */
             margin-top: 100px;
-            height: 900px; 
+            height: auto; 
             /*
                 ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
                 높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.
@@ -148,26 +148,30 @@
     </div>
 	
     <div id="buttoncollect">
-        <input type="button" id="cobtn1" name="button" value="국가/지역소개">
+        <input type="button" id="cobtn1" name="button" value="국가지역소개">
         <input type="button" id="cobtn2" name="button" value="워홀비자">
         <input type="button" id="cobtn3" name="button" value="안전정보">
         <input type="button" id="cobtn4" name="button" value="초기정착">
         <input type="button" id="cobtn5" name="button" value="취업정보">      
        
 		<div id="explain">
-
+			<pre>
+			</pre>
 		</div>
     </div>
 	
     <script>
+    	
+    	$("#cobtn1").show()
+    
     	$("#buttoncollect>input").click(e=>{
     		$.ajax({
     			type:'get',
-    			url:"<%=request.getContextPath()%>/countryinfo/searchAll.do",
+    			url:"<%=request.getContextPath()%>/countryInfo/selectcountry.do?nName="+name,
     			data:{"info":$(e.target).val(),
     				  "name":"<%=name%>"},
     			success:data=>{
-    				$("#explain").html(data);
+    				$("#explain>pre").html(data);
     				
     			}
     		});
@@ -177,12 +181,12 @@
     
 	<%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
 		    <div id="twobu">
-		    <%if(coinfo==null){ %>
+		    <%-- <%if(coinfo==null){ %> --%>
 		        <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goInsertContext.do?nName=<%=c.getNName()%>')"><span>추가</span></button>
-		    <%}else{ %>
+		    <%-- <%}else{ %> --%>
 		        <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goUpdateContent.do?nName=<%=c.getNName()%>')"><span>수정</span></button>
 	   		</div>
-	    <%}%>
+	    <%-- <%}%> --%>
     <%}%>
 	<style>
 		#twobu>button{

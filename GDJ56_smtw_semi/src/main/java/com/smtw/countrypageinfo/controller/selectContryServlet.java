@@ -33,18 +33,17 @@ public class selectContryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		List<CountryPage> all=new CountryPageInfoService().selectCoAll();
-		System.out.println(all);
-		request.setAttribute("allinfo", all);
+//		List<CountryPage> all=new CountryPageInfoService().selectCoAll();
+//		System.out.println(all);
+//		request.setAttribute("allinfo", all);
 
-		String name=request.getParameter("nName");
+		String name=request.getParameter("name");
 		
-		System.out.println(name);
 	
 		//CountryPage의 내용을 출력해주는 구문
 		String info=request.getParameter("info");
 		String page="";
-		if(info.contains("국가/지역소개")) {
+		if(info.contains("국가지역소개")) {
 			request.setAttribute("data", new CountryPageInfoService().coArea(name));
 			page="coarea.jsp";
 		}else if(info.contains("워홀비자")) {

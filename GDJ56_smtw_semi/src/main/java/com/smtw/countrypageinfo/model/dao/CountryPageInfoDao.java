@@ -128,21 +128,21 @@ public class CountryPageInfoDao {
 	
 	//CountryPage의 dao항목들
 	//전체출력
-	public List<CountryPage> selectCoAll(Connection conn) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		List<CountryPage> list=new ArrayList();
-		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectCoAll"));
-			rs=pstmt.executeQuery();
-			while(rs.next()) list.add(getCountryPage(rs));
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}return list;
-	}
+//	public List<CountryPage> selectCoAll(Connection conn) {
+//		PreparedStatement pstmt=null;
+//		ResultSet rs=null;
+//		List<CountryPage> list=new ArrayList();
+//		try {
+//			pstmt=conn.prepareStatement(sql.getProperty("selectCoAll"));
+//			rs=pstmt.executeQuery();
+//			while(rs.next()) list.add(getCountryPage(rs));
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close(rs);
+//			close(pstmt);
+//		}return list;
+//	}
 	
 
 	public CountryPage coArea(Connection conn,String name) {

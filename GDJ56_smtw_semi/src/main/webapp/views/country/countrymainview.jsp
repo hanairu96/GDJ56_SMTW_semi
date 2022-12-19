@@ -169,23 +169,7 @@
 				 <%} 
 			 	}%>  
    		</div>
-   		<script>
- <%--   			$(function(){
-   				$("#like2").click(function(){
-   					$.ajax({
-   						url:"<%=request.getContextPath()%>/likecountry.do",
-   						type:"get",
-   						data:{
-   							id:
-   							name : '${}'
-   						}
-   					})
-   				})
-   			})
-   				
-   				
-   			} --%>
-   		</script>
+
    	<div id="pageBar2">
 		<%=request.getAttribute("pageBar")%>
 	</div>
