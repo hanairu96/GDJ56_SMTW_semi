@@ -22,8 +22,11 @@
                                 <img src="<%=request.getContextPath() %>/images/lupy.jpg" alt="" style="width:60%;height:75%;margin:auto;display:block;margin-top:50px;border-radius:120px;">
                             </div>
                             <div style="border:0px solid pink;width:440px;height:340px;text-align:center;">
-                                <button onclick="window.open('친구신청하기.html','_blank','scrollbars=yes,width=600,height=600,top=100,left=300')"
+                            <%if(logInMember!=null&&!logInMember.getMemberId().equals(f.getMemberId())) {%>
+                                <button onclick="window.open('<%=request.getContextPath() %>/friends/friendsApply.do?memberFrom=<%=logInMember.getMemberId() %>&friendsNo=<%=f.getFriendsNo() %>&nName=<%=f.getNName() %>',
+                                '_blank','scrollbars=yes,width=500,height=500,top=100,left=300')"
                                 class="customBtn btnStyle btn btn-primary" type="button" style="width:120px;margin-top:25px;background-color:rgba(221, 160, 221, 0.508) !important;"value="친구신청하기">친구 신청하기</button>
+							<%} %>
                             </div>
                         </div>
                     </div>
@@ -65,8 +68,6 @@
             </div>
             </div>
     </section>
-    <script>
-    </script>
 
      <style>
      	#do>p{
@@ -130,9 +131,6 @@
 
 
      </style>
-
-
-
 
     <style>
         section{

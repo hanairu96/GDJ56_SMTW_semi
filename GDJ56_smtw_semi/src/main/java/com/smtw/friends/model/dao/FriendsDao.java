@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.smtw.friends.model.vo.ApplyFriends;
 import com.smtw.friends.model.vo.Friends;
 
 public class FriendsDao {
@@ -226,6 +227,24 @@ public class FriendsDao {
 			pstmt.setString(7, String.valueOf(f.getExpYn()));
 			pstmt.setString(8, f.getPurpose());
 			pstmt.setString(9, f.getMemberId());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertFriendsApply(Connection conn, ApplyFriends af) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertFriendsApply"));
+			pstmt.setString(1, af.getPropose());
+			pstmt.setString(2, af.getMemberFrom());
+			pstmt.setInt(3, af.getFriendsNo());
+			pstmt.setString(4, af.getNName());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
