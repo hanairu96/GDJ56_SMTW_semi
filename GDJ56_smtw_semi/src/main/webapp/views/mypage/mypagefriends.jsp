@@ -40,38 +40,48 @@ List<MemberInfo2> acceptedlist =  (List<MemberInfo2>)request.getAttribute("accep
                 <p><%=logInMember.getMemberName()%>님 어서 오세요!</p>
                 <img src="<%=request.getContextPath()%>/images/mypage/tomcat.png" alt="" width="200" height="200">
             </div>
-            <div id="flist">
-                <p>친구 목록</p>
+            
+            <div id="flist" style="overflow:scroll">
+                <p><b>친구 목록</b></p>
                 <!-- 크롬은 팝업창 최대화 금지가 안됨 -->
                 <%if(friendslist.isEmpty()||acceptedlist.isEmpty()||(friendslist.isEmpty()&&acceptedlist.isEmpty())){ %>
                 	아직 수락한 친구가 없습니다 :(
                 <%} else{
                 	for(int i=0;i<friendslist.size();i++){
                 %>
-                <form name="form" action="" method="post">
-                 <input type="hidden" name="friendId" value="<%=friendslist.get(i).getMemberId()%>"> 
-                <input type="hidden" name="friendName" value="<%=friendslist.get(i).getMemberName()%>"> 
-                <input type="hidden" name="friendAge" value="<%=friendslist.get(i).getAge()%>"> 
-                <input type="hidden" name="friendGender" value="<%=friendslist.get(i).getGender()%>"> 
-                <input type="hidden" name="userId" value="<%=logInMember.getMemberId()%>"> 
-                </form>
-                <input type="image" name="submit" id="ficon" src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
-                onclick="goPopup(event)">
+                <div id="fname">
+                <form id="" action="" method="post">
+                 	<input type="hidden" name="friendId" value="<%=friendslist.get(i).getMemberId()%>"> 
+                	<input type="hidden" name="friendName" value="<%=friendslist.get(i).getMemberName()%>"> 
+               		<input type="hidden" name="friendAge" value="<%=friendslist.get(i).getAge()%>"> 
+                	<input type="hidden" name="friendGender" value="<%=friendslist.get(i).getGender()%>"> 
+                	<input type="hidden" name="userId" value="<%=logInMember.getMemberId()%>"> 
+				
+               	</form>
+                	<input type="image" name="submit" id="fname" src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="width: 100px; height: 100px;cursor:pointer;"
+               		onclick="goPopup(event)">
+                	<p><<%=friendslist.get(i).getMemberName()%>><p>
+                
+                </div>
                 <%}
+               
                 	for(int j=0;j<acceptedlist.size();j++){
                 %>
-                <form name="form" action="" method="post">
-                 <input type="hidden" name="friendId" value="<%=acceptedlist.get(j).getMemberId()%>"> 
-                <input type="hidden" name="friendName" value="<%=acceptedlist.get(j).getMemberName()%>"> 
-                <input type="hidden" name="friendAge" value="<%=acceptedlist.get(j).getAge()%>"> 
-                <input type="hidden" name="friendGender" value="<%=acceptedlist.get(j).getGender()%>"> 
-                <input type="hidden" name="userId" value="<%=logInMember.getMemberId()%>"> 
+                <div id="fname">
+                <form id="" action="" method="post">
+                 	<input type="hidden" name="friendId" value="<%=acceptedlist.get(j).getMemberId()%>"> 
+                	<input type="hidden" name="friendName" value="<%=acceptedlist.get(j).getMemberName()%>"> 
+               		<input type="hidden" name="friendAge" value="<%=acceptedlist.get(j).getAge()%>"> 
+               	    <input type="hidden" name="friendGender" value="<%=acceptedlist.get(j).getGender()%>"> 
+                	<input type="hidden" name="userId" value="<%=logInMember.getMemberId()%>"> 
                 </form>
-                <input type="image" name="submit" id="ficon" src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
+                <input type="image" name="submit" id="fname" src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="width: 100px; height: 100px;cursor:pointer"
                 onclick="goPopup2(event)">
+                <p><<%=acceptedlist.get(j).getMemberName()%>><p>
                 <%}
                 }%>
-              
+                
+              </div>
             </div>
             
             
@@ -79,6 +89,7 @@ List<MemberInfo2> acceptedlist =  (List<MemberInfo2>)request.getAttribute("accep
             	function goPopup(e){
             		var gsWin=window.open("","winName","width=380,height=380"); //open("주소",띄우는방식,크기)
             		var frm=$(e.target).prev()[0];
+            		
             		frm.action="<%=request.getContextPath()%>/mypage/mypagePopUp.do";
             		frm.target="winName";
             		frm.submit();
@@ -96,9 +107,9 @@ List<MemberInfo2> acceptedlist =  (List<MemberInfo2>)request.getAttribute("accep
         
          
 
-            <div id="recievelist">
+            <div id="recievelist"" style="overflow:scroll">
 
-                <p>친구신청 받은 목록<p>
+                <p><b>친구신청 받은 목록</b><p>
 
 
                 <%if(list.isEmpty()){ %>
@@ -181,12 +192,17 @@ List<MemberInfo2> acceptedlist =  (List<MemberInfo2>)request.getAttribute("accep
             width: 600px;
             height: 300px;
         }
-        #ficon{
-            float: left;
+        /* #fname>img{
+            
             margin: 5px;
-            height:100px;
-            width:100px;
-        }
+            height:50%;
+            width:;
+            float: left;
+        } */
+       #fname{
+            float: left;
+             margin: 3px;
+        } 
         #recievelist{
             border: 1px solid;
             border-bottom: 3px solid;
@@ -197,7 +213,15 @@ List<MemberInfo2> acceptedlist =  (List<MemberInfo2>)request.getAttribute("accep
             
             width: 1000px;
             height: 300px;
+            
+            -ms-overflow-style: none; /* IE and Edge */
+    		scrollbar-width: none; /* Firefox */
         }
+        
+        #recievelist::-webkit-scrollbar {
+   		 display: none; /* Chrome, Safari, Opera*/
+		}
+
         section{
             display: flex;
         }
