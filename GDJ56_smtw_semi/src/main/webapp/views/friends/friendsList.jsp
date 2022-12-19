@@ -32,8 +32,8 @@
 
         <div style="height:25px;">
             <div style="display:flex;float: right;">
-                <select class="form-select" aria-label="Default select example" style="box-shadow: 0 4px 2px -2px rgba(221, 160, 221, 0.304) !important;;">
-                    <option selected>나라</option>
+                <select class="form-select" aria-label="Default select example" style="box-shadow: 0 4px 2px -2px rgba(221, 160, 221, 0.304) !important;">
+                    <option value="전체">전체</option>
                     <option value="네덜란드">네덜란드</option>
                     <option value="뉴질랜드">뉴질랜드</option>
                     <option value="대만">대만</option>
@@ -153,9 +153,18 @@
     <!-- ##### 크롬 비율 80프로기준으로 설정했음 ##### -->
 	<script>
 		$(".form-select").change(function(){
-			location.assign("<%=request.getContextPath()%>/friends/friendsNationList.do?nation="+$(".form-select").val());
-		})
-	
+			if($(".form-select").val()=="전체"){
+				location.assign("<%=request.getContextPath()%>/friends/friendsList.do");
+			}else{
+				location.assign("<%=request.getContextPath()%>/friends/friendsNationList.do?nation="+$(".form-select").val());
+			}
+		});
+		
+		//select 박스 값이 선택한 나라대로 나오게 함
+		<%if(request.getParameter("nation")!=null){%>
+			$(".form-select").val("<%=request.getParameter("nation")%>").prop("selected",true);
+		<%}%>
+		
 		const enroll=()=>{
 			location.assign("<%=request.getContextPath()%>/friends/friendsEnroll.do");
 		}
@@ -165,7 +174,7 @@
 	
 	        $(window).scroll(function() {
 	            var scrollTop = $(window).scrollTop(); // 현재 스크롤 위치를 가져온다.
-	            console.log(scrollTop); //스크롤위치 콘솔창에 출력해보면서 본인 페이지의 푸터위에 
+	            //console.log(scrollTop); //스크롤위치 콘솔창에 출력해보면서 본인 페이지의 푸터위에 
 	                                    //사이드메뉴바가 딱 정지하는 위치값 확인할것
 	
 	            var newPosition=scrollTop +floatPosition + "px"; //사이드메뉴바의 처음위치+ 현재스크롤위치
