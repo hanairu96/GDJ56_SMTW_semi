@@ -152,6 +152,7 @@
     <!-- ##### 개별적으로 설정해줘야 하는 부분 있음 (각자 페이지 푸터위까지만 움직이게) ##### -->
     <!-- ##### 크롬 비율 80프로기준으로 설정했음 ##### -->
 	<script>
+		//select 박스 값을 변경하면 선택한 나라가 희망국가인 것만 리스트로 나옴
 		$(".form-select").change(function(){
 			if($(".form-select").val()=="전체"){
 				location.assign("<%=request.getContextPath()%>/friends/friendsList.do");
