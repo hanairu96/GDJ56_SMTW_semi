@@ -391,7 +391,7 @@
 		}
 		//이름 정규식 표현
 		const inputName=$("#inputName").val().trim();
-		const nameReg=/^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;//한글이름2~4자or영문 이름 2~10자 이내 : 띄어쓰기(\s)가 들어가며 First, Last Name 형식
+		const nameReg=/^[가-힣]{2,5}$/;//한글이름2~5자
 		if(!nameReg.test(inputName)){//이름이 틀렸으면
 			$("span#checkName>small").text("올바른 이름을 입력해주세요.").css("color","red");
 			$("#inputName").focus();

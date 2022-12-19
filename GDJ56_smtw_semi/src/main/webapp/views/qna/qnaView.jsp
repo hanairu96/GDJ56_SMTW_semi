@@ -129,7 +129,7 @@
 		         <div class="username" style="color:#7e8cd2"><%=qc.getMemberId()%></div>
 		         <div class="utility"> 
 					<!-- 현재버튼의 위치 -->
-				    <button class="menu btn-reply customBtn btnStyle">답글등록</button>  
+				    <button class="menu btn-reply customBtn btnStyle" onclick="btnReply(event);">답글등록</button>  
 				    <!-- 관리자와 해당 작성자만 보이게 -->
 				    <%if(logInMember!=null&&(logInMember.getMemberId().equals("ADMIN")||logInMember.getMemberId().equals(qc.getMemberId()))) {%>
 						<button class="menu customBtn btnStyle" onclick="deleteComment('<%=qc.getQnaCoNo()%>');">댓글삭제</button>    
@@ -146,31 +146,36 @@
 			</div>
 		</div>            
             <!-- 이위치에 태그를 추가해줘야함 -->
+			<!-- 답글  -->
+            <form class="form reply-form"style="display:none;flex-direction:column;align-items:center;"  onsubmit="return insertComment();">
+              <textarea id="replyText" onclick="logInCheck();" placeholder="답글을 남겨보세요"style="width:100%;"></textarea>
+              <div style="width:100%;">
+                <button type="button" class="submit customBtn btnStyle" style="width:80px;height:47px;float:right;"
+                	onclick="insertComment();">댓글등록</button>
+             </div>
+            </form>   
 	</div>
 	
           <!--등록된 답글  -->
-        <div class="replies level2" style="border-left:5px solid #ddd;border-right:5px solid #ddd;border-bottom:5px solid #ddd;width:850px;height:auto;margin: 0 auto;">
-            <div class="reply">
-              <div class="content">
-              	<header class="top">
-                	<div class="username">워홀러</div>
-              		<div class="utility"> 
-                		<button class="menu">메뉴</button>
-               		</div>
-                </header>
-	                <p>감사!!</p>
-	                <ul class="bottom">
-	                  <li class="menu time">2022-12-06</li>
-	                </ul>
-         		</div>
-         	</div>
+<!--         <div class="replies level2" style="border-left:5px solid #ddd;border-right:5px solid #ddd;border-bottom:5px solid #ddd;width:850px;height:auto;margin: 0 auto;"> -->
+<!--             <div class="reply"> -->
+<!--               <div class="content"> -->
+<!--               	<header class="top"> -->
+<!--                 	<div class="username">워홀러</div> -->
+<!--                 </header> -->
+<!-- 	                <p>감사!!</p> -->
+<!-- 	                <ul class="bottom"> -->
+<!-- 	                  <li class="menu time">2022-12-06</li> -->
+<!-- 	                </ul> -->
+<!--          		</div> -->
+<!--          	</div> -->
             
-            <form class="form reply-form"style="display:flex;flex-direction:column;align-items:center;">
-              <textarea placeholder="답글을 남겨보세요"style="width:100%;"></textarea>
-              <div style="width:100%;">
-                <button type="button" class="submit customBtn btnStyle" style="width:80px;height:47px;float:right;">댓글등록</button>
-             </div>
-            </form>       
+<!--             <form class="form reply-form"style="display:flex;flex-direction:column;align-items:center;"> -->
+<!--               <textarea placeholder="답글을 남겨보세요"style="width:100%;"></textarea> -->
+<!--               <div style="width:100%;"> -->
+<!--                 <button type="button" class="submit customBtn btnStyle" style="width:80px;height:47px;float:right;">댓글등록</button> -->
+<!--              </div> -->
+<!--             </form>        -->
 	</div> 
 	<%} %>
 	<%} %>
@@ -189,6 +194,7 @@
 			if(<%=logInMember==null%>){
 				alert("로그인 한 사용자만 댓글을 등록할 수 있습니다.");
 				$("#comment_1").blur();
+				$("#replyText").blur();
 			}
 		}
 		
@@ -198,18 +204,13 @@
 			if($("#comment_1").val().trim()==""){
 				alert("댓글을 작성해주세요.");
 				$("#comment_1").blur();
+				$("#replyText").blur();
 				return false;
 			}
-// 			else{
-// 				$.ajax({
-<%-- 					url:"<%=request.getContextPath()%>/qna/insertQC.do", --%>
-// 					data:{"comment_1":$("#comment_1").val().trim(),
-// 						"commentWriter":$("#commentWriter").val()},
-// 					success:data=>{
-// 						console.log(data);
-// 					}
-// 				})
-// 			}
+		}
+		//답글 등록 클릭 시
+		const btnReply=(e)=>{
+			$(e.target).parentsUntil("section").find("form").show();
 		}
 	</script>
 
