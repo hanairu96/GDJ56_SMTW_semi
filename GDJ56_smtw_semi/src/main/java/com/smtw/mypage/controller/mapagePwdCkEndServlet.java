@@ -50,7 +50,7 @@ public class mapagePwdCkEndServlet extends HttpServlet {
 			request.setAttribute("msg", msg);
 			loc="/mypage/mypageAccountUpdate.do?id="+userId;
 			request.setAttribute("loc", loc);
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			request.getRequestDispatcher("/mypage/mypageAccountUpdate.do?id="+userId).forward(request, response);
 		}
 
 		

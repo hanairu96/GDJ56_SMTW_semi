@@ -269,7 +269,7 @@ out.print(bYear);
             left: 500px;
          
             width: 300px;
-            height: 443px;
+            height: 420px;
         }
 
         #menutitle{
