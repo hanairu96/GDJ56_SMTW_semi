@@ -118,6 +118,27 @@ public class MemberDao {
 			close(pstmt);
 		}return m;
 	}
+	//아이디,이름,이메일로 비밀번호 찾기
+	public Member searchPwd(Connection conn,String searchName,String searchEmail,String searchId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("searchPwd"));
+			pstmt.setString(1, searchName);
+			pstmt.setString(2, searchEmail);
+			pstmt.setString(3, searchId);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) m=getMember(rs);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return m;
+	}
 	
 	//이메일 중복확인
 	public Member emailDuplicateCheck(Connection conn,String inputEmail) {
@@ -139,6 +160,26 @@ public class MemberDao {
 		}return m;
 	}
 	
+	//비밀번호 재설정
+	public int changePwd(Connection conn,String memberId,String inputPwd) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("changePwd"));
+			pstmt.setString(1, inputPwd);
+			pstmt.setString(2, memberId);
+			
+			result=pstmt.executeUpdate();
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 		
 	
 	private Member getMember(ResultSet rs) throws SQLException {
