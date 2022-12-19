@@ -49,7 +49,7 @@ public class mypageAcceptFriendsServlet extends HttpServlet {
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/mypage/alert.jsp").forward(request, response);
 		
 	}
 
