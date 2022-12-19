@@ -52,15 +52,56 @@ public class CountryPageInfoService {
 	
 	
 	
-	//countrypage의 service항목들
+//////countrypage의 service항목들
 	
-	
-	public List<CountryPage> selectContent(){
+	//ajax전체 출력
+	public List<CountryPage> selectCoAll(){
 		Connection conn=getConnection();
-		List<CountryPage> result=dao.selectContent(conn);
+		List<CountryPage> result=dao.selectCoAll(conn);
 		close(conn);
 		return result;
 	}
+	
+	//내용들
+	public CountryPage coArea(String name) {
+		Connection conn=getConnection();
+		CountryPage result=dao.coArea(conn,name);
+		close(conn);
+		return result;
+	}
+	
+	public CountryPage whVisa(String name) {
+		Connection conn=getConnection();
+		CountryPage result=dao.whVisa(conn,name);
+		close(conn);
+		return result;
+	}
+	
+	public CountryPage safe(String name) {
+		Connection conn=getConnection();
+		CountryPage result=dao.safe(conn,name);
+		close(conn);
+		return result;
+	}
+	
+	public CountryPage stay(String name) {
+		Connection conn=getConnection();
+		CountryPage result=dao.stay(conn,name);
+		close(conn);
+		return result;
+	}
+	public CountryPage job(String name) {
+		Connection conn=getConnection();
+		CountryPage result=dao.job(conn,name);
+		close(conn);
+		return result;
+	}
+	
+	
+	
+
+	
+	
 	
 	
 	public int insertContent(CountryPage c) {

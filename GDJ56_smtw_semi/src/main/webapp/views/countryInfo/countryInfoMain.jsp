@@ -3,9 +3,9 @@
 <%@ page import="java.util.List,com.smtw.country.model.vo.CountryPageInfo" %>
 <%@ page import="com.smtw.country.model.vo.CountryPage" %>
 <%
-	List<CountryPageInfo> info=(List<CountryPageInfo>)request.getAttribute("coinfo");
+	List<CountryPageInfo> cpi=(List<CountryPageInfo>)request.getAttribute("copageinfo");
 	String name=(String)request.getAttribute("name");
-	List<CountryPage> coinfo=(List<CountryPage>)request.getAttribute("info");
+	List<CountryPage> coinfo=(List<CountryPage>)request.getAttribute("allinfo");
 %>
 <%@ include file="/views/common/header.jsp" %>
 <script defer src="https://use.fontawesome.com/releases/v5.15.2/js/all.js" integrity="sha384-vuFJ2JiSdUpXLKGK+tDteQZBqNlMwAjhZ3TvPaDfN9QmbPb7Q8qUpbSNapQev3YF" crossorigin="anonymous"></script>
@@ -99,7 +99,7 @@
  
     </style>  
     <h1 style="text-align: center;">국가 및 지역 정보</h1>
-    <%for(CountryPageInfo c : info) { 
+    <%for(CountryPageInfo c : cpi) { 
     /* 받아온 나라 이름의 정보만 출력해줌*/
     	if(c.getNName().equals(name)){
     		 if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
@@ -153,66 +153,22 @@
         <input type="button" id="cobtn3" name="button" value="안전정보">
         <input type="button" id="cobtn4" name="button" value="초기정착">
         <input type="button" id="cobtn5" name="button" value="취업정보">      
-        <div id="explain">
-        <textarea name="coarea" type="none" style="display:none" value="국가/지역소개"></textarea>
-        <textarea name="covisa" type="none" style="display:none" value="워홀비자"></textarea>
-        <textarea name="safe" type="none" style="display:none" value="안전정보"></textarea>
-        <textarea name="stay" type="none" style="display:none" value="초기정착"></textarea>
-        <textarea name="job" type="none" style="display:none" value="취업정보"></textarea>
+       
+		<div id="explain">
+
 		</div>
     </div>
 	
     <script>
-    	$("#cobtn1").click(e=>{
+    	$("#buttoncollect>input").click(e=>{
     		$.ajax({
     			type:'get',
-    			url:"<%=request.getContextPath()%>/countrypage/selecontent.do",
-    			data:{info:$("#coarea").val()},
-    			success:function(){
-    				if(data==null){
-	    				console.log(info);
-    				}else{
-    					console.log(data);
-    				}
-    			}
-    		});
-    	});
-    		
-    		
-    		
-    	$("#cobtn2").click(e=>{
-    		$.ajax({
-    			type:"get",
-    			data:"text",
-    			success:function(data){
-		    		$("#explain").text("정말로");
-    			}
-    		});
-    	});
-    	$("#cobtn3").click(e=>{
-    		$.ajax({
-    			type:"get",
-    			data:"text",
-    			success:function(data){
-		    		$("#explain").text("디비에서 값을 어떻게 불러오는거죠?");
-    			}
-    		});
-    	});
-    	$("#cobtn4").click(e=>{
-    		$.ajax({
-    			type:"get",
-    			data:"text",
-    			success:function(data){
-		    		$("#explain").text("힘들어 증말 ㅠㅜㅠㅜ");
-    			}
-    		});
-    	});
-    	$("#cobtn5").click(e=>{
-    		$.ajax({
-    			type:"get",
-    			data:"text",
-    			success:function(data){
-		    		$("#explain").text("모르겠다구ㅜㅠㅜㅠㅜ");
+    			url:"<%=request.getContextPath()%>/countryinfo/searchAll.do",
+    			data:{"info":$(e.target).val(),
+    				  "name":"<%=name%>"},
+    			success:data=>{
+    				$("#explain").html(data);
+    				
     			}
     		});
     	});
