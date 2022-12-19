@@ -35,22 +35,22 @@
                         <div style="border:0px solid blueviolet;width:800px;height:30px;text-align:left ">
                             <b>MBTI</b> :
                             <select name="mbti">
-                            	<option value="ENFJ">ENFJ</option>
-                            	<option value="ENFP">ENFP</option>
-                            	<option value="ENTJ">ENTJ</option>
-                            	<option value="ENTP">ENTP</option>
-                            	<option value="ESFJ">ESFJ</option>
-                            	<option value="ESFP">ESFP</option>
-                            	<option value="ESTJ">ESTJ</option>
-                            	<option value="ESTP">ESTP</option>
-                            	<option value="INFJ">INFJ</option>
-                            	<option value="INFP">INFP</option>
-                            	<option value="INTJ">INTJ</option>
-                            	<option value="INTP">INTP</option>
-                            	<option value="ISFJ">ISFJ</option>
-                            	<option value="ISFP">ISFP</option>
-                            	<option value="ISTJ">ISTJ</option>
-                            	<option value="ISTP">ISTP</option>
+                            	<option name="mbti" value="ENFJ">ENFJ</option>
+                            	<option name="mbti" value="ENFP">ENFP</option>
+                            	<option name="mbti" value="ENTJ">ENTJ</option>
+                            	<option name="mbti" value="ENTP">ENTP</option>
+                            	<option name="mbti" value="ESFJ">ESFJ</option>
+                            	<option name="mbti" value="ESFP">ESFP</option>
+                            	<option name="mbti" value="ESTJ">ESTJ</option>
+                            	<option name="mbti" value="ESTP">ESTP</option>
+                            	<option name="mbti" value="INFJ">INFJ</option>
+                            	<option name="mbti" value="INFP">INFP</option>
+                            	<option name="mbti" value="INTJ">INTJ</option>
+                            	<option name="mbti" value="INTP">INTP</option>
+                            	<option name="mbti" value="ISFJ">ISFJ</option>
+                            	<option name="mbti" value="ISFP">ISFP</option>
+                            	<option name="mbti" value="ISTJ">ISTJ</option>
+                            	<option name="mbti" value="ISTP">ISTP</option>
                             </select>
                        </div><br>
                        <div style="border:0px solid blueviolet;width:800px;height:150x;text-align:left">
