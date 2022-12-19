@@ -114,8 +114,8 @@
                         <input type="submit" style="display: none"><br>
            			 	<div style="border:0px solid yellow;width:810px;height:60px;display: inline-flex;align-items:center; ">
                 			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    			<button onclick="enroll_friend(this.form);" class="customBtn btnStyle btn btn-primary" type="button" style="margin-left:690px;background-color: rgba(221, 160, 221, 0.508) !important;" value="등록">&nbsp등록&nbsp</button>
-                    			<button onclick="cancel_friend();" class="customBtn btnStyle btn btn-primary" type="button" style=" background-color: rgba(221, 160, 221, 0.508) !important;" value="취소">&nbsp취소&nbsp</button>
+                    			<button onclick="enrollFriend(this.form);" class="customBtn btnStyle btn btn-primary" type="button" style="margin-left:690px;background-color: rgba(221, 160, 221, 0.508) !important;" value="등록">&nbsp등록&nbsp</button>
+                    			<button onclick="cancelFriend();" class="customBtn btnStyle btn btn-primary" type="button" style=" background-color: rgba(221, 160, 221, 0.508) !important;" value="취소">&nbsp취소&nbsp</button>
                 			</div>
           		      </div>
                    </div>
@@ -182,24 +182,24 @@
 	
 	<script>
 		//등록
-		function enroll_friend(f){
+		function enrollFriend(f){
 			//입력 안 된 값이 있으면 알림	
 			if($("[name=title]").val().length==0||
 				!$("[name=nation]").is(':checked')||!$("[name=type]").is(':checked')||
 				!$("[name=expYn]").is(':checked')||!$("[name=purpose]").is(':checked')||
 				$("[name=friendsContents]")[0].value==''){
-					alert("값을 모두 입력해주세요.");
+					alert("내용을 모두 입력해주세요.");
 			//확인 버튼 누르면 폼 제출
 			}else{
 				let answer;
 				answer=confirm("프렌즈 찾기 등록하시겠습니까?");
-				if(answer==true){
+				if(answer){
 					f.submit();
 				}
 			}
 		}
 		
-		function cancel_friend(url){
+		function cancelFriend(url){
 			location.assign("<%=request.getContextPath()%>/friends/friendsList.do");
 		}
 	</script>

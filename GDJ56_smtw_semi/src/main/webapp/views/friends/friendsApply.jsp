@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>친구 신청</title>
 </head>
 <body>
 	<h2>친구 신청</h2>

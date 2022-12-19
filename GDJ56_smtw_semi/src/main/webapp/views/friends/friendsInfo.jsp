@@ -58,7 +58,7 @@
                 	<%if(logInMember!=null&&(logInMember.getMemberId().equals("ADMIN")||logInMember.getMemberId().equals(f.getMemberId()))){%>
 		            	<button onclick="location.assign('<%=request.getContextPath()%>/friends/friendsUpdate.do?friendsNo=<%=f.getFriendsNo()%>');" 
 		            	class="customBtn btnStyle btn btn-primary" type="button" style="width:80px;margin-left:640px;background-color: rgba(221, 160, 221, 0.508) !important;" value="수정하기">수정하기</button>
-		            	<button onclick="friend_delete();" class="customBtn btnStyle btn btn-primary" type="button" style="width:80px;background-color: rgba(221, 160, 221, 0.479) !important;" value="삭제">삭제하기</button>
+		            	<button onclick="friendDelete();" class="customBtn btnStyle btn btn-primary" type="button" style="width:80px;background-color: rgba(221, 160, 221, 0.479) !important;" value="삭제">삭제하기</button>
 		            	<button onClick="location.href='<%=request.getContextPath() %>/friends/friendsList.do'" class="customBtn btnStyle btn btn-primary" type="button" style="width:80px;background-color: rgba(221, 160, 221, 0.508) !important;" value="목록">목록으로</button>
 	                <%}else {%>
 		            	<button onClick="location.href='<%=request.getContextPath() %>/friends/friendsList.do'" class="customBtn btnStyle btn btn-primary" type="button" style="width:80px;margin-left:815px;background-color: rgba(221, 160, 221, 0.508) !important;" value="목록">목록으로</button>
@@ -161,7 +161,7 @@
     </style>
     
     <script>
-		function friend_delete(){
+		function friendDelete(){
 			let answer = confirm("정말로 삭제하시겠습니까?");
 			if(answer == true){
 				location.assign("<%=request.getContextPath()%>/friends/friendsDelete.do?friendsNo=<%=f.getFriendsNo() %>");
