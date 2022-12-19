@@ -316,14 +316,12 @@
                 			url:"<%=request.getContextPath()%>/main/mainNoticeList.do",
                 			success:data=>{
                 				if(data!=null){
-                					console.log(data);
-                					console.log(data[0].noticeNo);
                 					const ul=$("#noticeListUl");
                 					
                 					for(let i=0;i<data.length;i++){
                 						
 	                					const li=$("<li>");
-	                					const a=$("<a href='<%=request.getContextPath()%>/notice/noticeView.do?noticeNo=<%=12%>'>").text(data[i].noticeTitle);
+	                					const a=$("<a href='<%=request.getContextPath()%>/notice/noticeView.do?noticeNo="+data[i].noticeNo+"'>").text(data[i].noticeTitle);
                 						li.append(a);/* li태그에 a태그 넣기 */
                 					ul.append(li); 
                 					}
@@ -346,7 +344,7 @@
                 					
                 					for(i=0;i<data.length;i++){
 	                					const li=$("<li>");
-	                					const a=$("<a href='<%=request.getContextPath()%>/qna/qnaList.do'>").text(data[i].reviewTitle);
+	                					const a=$("<a href='<%=request.getContextPath()%>/qna/qnaView.do?qnaNo="+data[i].qnaNo+"'>").text(data[i].reviewTitle);
                 						li.append(a);/* li태그에 a태그 넣기 */
                 					ul.append(li); 
                 					}
