@@ -26,7 +26,7 @@ out.print(userId);
            	
            	 <input type="hidden" name="id" value="<%=userId%>">
              새로운 비밀번호 <input type="password" name="password_new" id="password_new" value="" required><br><br>
-             새로운 비밀번호 확인<input type="password" name="password_chk" value="" required>
+             새로운 비밀번호 확인<input type="password" id="password_chk" value="" required>
             <input type="submit" name="submit" id="" value="취소">
             <input type="submit" name="submit" id="" value="입력">
              
@@ -39,7 +39,9 @@ out.print(userId);
         <script>
 		const passwordCheck=()=>{
 			const password=document.querySelector("[name=password_new]").value;
+			console.log(password);
 			const passwordck=document.querySelector("#password_chk").value;
+			console.log(passwordck);
 			if(password.trim().length<8){
 			alert("비밀번호는 8글자 이상 작성해야합니다")
 			return false;
@@ -48,6 +50,23 @@ out.print(userId);
 			alert("비밀번호가 일치하지않습니다");
 			return false;
 			}
+			//비밀번호 필수입력
+			/* const inputPwd=document.querySelector("[name=password_new]").val().trim(); */
+			//숫자,영문 1개 이상씩 사용하여 8자리 이상 입력조건
+			const pwdReg=/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+			
+			if(password.trim().match(pwdReg)==null){//비밀번호가 양식대로 입력되지 않았으면(==실패)
+				alert("비밀번호는 숫자, 영문자를 포함하여 8자리 이상 입력하세요");
+				return false;
+			}
+			/* if($("span#checkPwd>small").text().includes("불")){//비밀번호가 불일치하면 
+				$("#pwdCheck").focus();//다시 입력
+				return false;
+			}
+			if($("#pwdCheck").val().trim()==""){
+				$("#pwdCheck").focus();
+				return false;
+			} */
 		}
 		
 	</script>
