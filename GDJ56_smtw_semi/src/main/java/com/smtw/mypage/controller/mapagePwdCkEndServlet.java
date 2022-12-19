@@ -36,7 +36,7 @@ public class mapagePwdCkEndServlet extends HttpServlet {
 		System.out.println(userId+" : "+pwd);
 		Member m = new MypageService().pwdCk(userId,pwd);
 		
-		request.setAttribute("userId", userId);
+		//request.setAttribute("userId", userId);
 		
 		String msg="",loc="";
 		if(m==null) {
@@ -47,7 +47,10 @@ public class mapagePwdCkEndServlet extends HttpServlet {
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {
 			request.setAttribute("id", userId);
-			request.getRequestDispatcher("/mypage/mypageAccountView.do").forward(request, response);
+			request.setAttribute("msg", msg);
+			loc="/mypage/mypageAccountUpdate.do?id="+userId;
+			request.setAttribute("loc", loc);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 
 		

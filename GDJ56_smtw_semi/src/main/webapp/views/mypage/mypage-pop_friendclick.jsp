@@ -32,11 +32,11 @@
     
 	<script>
        function goPopup(e){
-           var gsWin=window.open("","winName","width=520,height=630"); //open("주소",띄우는방식,크기)
+           var gsWin=window.open("","winName2","width=600,height=600"); //open("주소",띄우는방식,크기)
            var frm=$(e.target).prev()[0];
            console.log(frm);
            frm.action="<%=request.getContextPath()%>/mypage/mypageNoteReply.do";
-           frm.target="winName";
+           frm.target="winName2";
            frm.submit();
         }
     </script>

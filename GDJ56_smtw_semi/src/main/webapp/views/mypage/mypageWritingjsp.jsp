@@ -42,7 +42,7 @@
 	                    <tr>
 	                    	
 	                        <%if(q.getTitle().contains("REVIEW")){%>
-	                        <td onclick="location.replace('<%=request.getContextPath()%>/review/mypageFriends.do?id=<%=q.getPkNo()%>');">
+	                        <td onclick="location.replace('<%=request.getContextPath()%>/community/readReview.do?ReviewNo=<%=q.getPkNo()%>');">
 	                        	<%=q.getTitle() %>
 	                        </td>
 	                        <%}else if(q.getTitle().contains("QNA")){%>
