@@ -33,9 +33,9 @@
         	display: flex;
         }
         #like2{
-        	width:50px;
+        	width:65px;
         	height:50px;
-        	font-size:35px;
+        	/* font-size:35px; */
         }
         #likebtn{
         	padding-top:30px;
@@ -153,7 +153,8 @@
 	                        	<div id="likebtn">
 	                        		<%-- <img src="<%=request.getContextPath()%>/images/country/heart_like.png" 
 	                        		style="width:50px;height:50px;cursor:pointer;color:yellow;" onclikc="liketoggle"> --%>
-		                            <button id="like2">❤</button>
+		                            <!-- <button id="like2">❤</button> -->
+		                            <button type="hidden" id="like2"><img src="<%=request.getContextPath() %>/images/country/heart_like.png" id="likeimg" style="width:50px;height:50px;"></button>
 	                        	</div>	    
 	                        </div>
 	                        <h4 id="maininfo2"><%=con.get(i).getNpharse() %></h4>
@@ -169,7 +170,12 @@
 				 <%} 
 			 	}%>  
    		</div>
-
+	<script>
+		$(document).ready(function(){
+			
+		})
+	
+	</script>
    	<div id="pageBar2">
 		<%=request.getAttribute("pageBar")%>
 	</div>

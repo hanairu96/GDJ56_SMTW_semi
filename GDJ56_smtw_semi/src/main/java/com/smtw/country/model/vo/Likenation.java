@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class NationOfLike {
-	private String memberId2;
+public class Likenation {
+	private String memId;
 	private String nName;
 	private String ckLike;
 	

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.smtw.country.model.vo.Likenation;
+
 /**
  * Servlet implementation class LikeCountryServlet
  */
@@ -27,10 +29,17 @@ public class LikeCountryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String name=request.getParameter("memberId");
+		String id=request.getParameter("memberId");
 		String country=request.getParameter("nNmae");
 		String like=request.getParameter("like");
-	
+		Likenation ln=Likenation.builder()
+				.memId(id)
+				.nName(country)
+				.ckLike(like)
+				.build();
+		System.out.println(ln);
+		
+		
 	}
 
 	/**
