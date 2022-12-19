@@ -147,8 +147,6 @@
         </div>
     </div>
 	
-<%-- 	<%for(CountryPage cc : coinfo) {
-		if(cc.getNName().equals(name)){%> --%>
     <div id="buttoncollect">
         <input type="button" id="cobtn1" name="button" value="국가/지역소개">
         <input type="button" id="cobtn2" name="button" value="워홀비자">
@@ -156,21 +154,32 @@
         <input type="button" id="cobtn4" name="button" value="초기정착">
         <input type="button" id="cobtn5" name="button" value="취업정보">      
         <div id="explain">
-       <%--  	<%=cc.getNInfo() %> --%>
-        </div>
+        <textarea name="coarea" type="none" style="display:none" value="국가/지역소개"></textarea>
+        <textarea name="covisa" type="none" style="display:none" value="워홀비자"></textarea>
+        <textarea name="safe" type="none" style="display:none" value="안전정보"></textarea>
+        <textarea name="stay" type="none" style="display:none" value="초기정착"></textarea>
+        <textarea name="job" type="none" style="display:none" value="취업정보"></textarea>
+		</div>
     </div>
 	
     <script>
     	$("#cobtn1").click(e=>{
     		$.ajax({
-    			type:"get",
-    			<%-- url:"<%=request.getContextPath()%>/countrypage/selecontent.do?nName=<%=c.getNName()%>", --%>
-    			data:"text",
-    			success:function(data){
-		    		$("#explain").text("모르겠다");
+    			type:'get',
+    			url:"<%=request.getContextPath()%>/countrypage/selecontent.do",
+    			data:{info:$("#coarea").val()},
+    			success:function(){
+    				if(data==null){
+	    				console.log(info);
+    				}else{
+    					console.log(data);
+    				}
     			}
     		});
     	});
+    		
+    		
+    		
     	$("#cobtn2").click(e=>{
     		$.ajax({
     			type:"get",
@@ -209,8 +218,6 @@
     	});
     </script>
 	
-<%-- 	<%} 
-	}%>	 --%>
     
 	<%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
 		    <div id="twobu">

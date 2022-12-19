@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.smtw.country.model.vo.CountryPage;
 import com.smtw.countrypageinfo.model.service.CountryPageInfoService;
 
@@ -16,13 +17,13 @@ import com.smtw.countrypageinfo.model.service.CountryPageInfoService;
  * Servlet implementation class selecrContentServlcet
  */
 @WebServlet("/countrypage/selecontent.do")
-public class selecrContentServlcet extends HttpServlet {
+public class selectContentServlcet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public selecrContentServlcet() {
+    public selectContentServlcet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,10 +33,12 @@ public class selecrContentServlcet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//		String name=request.getParameter("nName");
+		
+		String info=request.getParameter("coarea");
+		System.out.println(info);
 		List<CountryPage> c=new CountryPageInfoService().selectContent();
-		System.out.println(c);
-		request.setAttribute("info", c);
+		response.setContentType("application/json;charset=utf-8");
+	      new Gson().toJson(c, response.getWriter());
 		request.getRequestDispatcher("/views/countryInfo/countryInfoMain.jsp").forward(request, response);
 	
 	
