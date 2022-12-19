@@ -1,4 +1,4 @@
-package com.smtw.countrypageinfo.controller;
+package com.smtw.qna.controller;
 
 import java.io.IOException;
 
@@ -8,21 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.country.model.vo.CountryPage;
-import com.smtw.country.model.vo.CountryPageInfo;
-import com.smtw.countrypageinfo.model.service.CountryPageInfoService;
+import com.smtw.qna.model.service.FaqService;
 
 /**
- * Servlet implementation class updateGoContentServlet
+ * Servlet implementation class ModifyFaqServlet
  */
-@WebServlet("/countryinfo/goUpdateContent.do")
-public class updateGoContentServlet extends HttpServlet {
+@WebServlet("/qna/modifyFaq.do")
+public class ModifyFaqServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public updateGoContentServlet() {
+    public ModifyFaqServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,15 +29,26 @@ public class updateGoContentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		String[] faqQue=request.getParameterValues("faqQue_1_");
+		String[] faqAns=request.getParameterValues("faqAns_1_");
+		String[] faqNo=request.getParameterValues("faqNo_");
 		
-		String name=request.getParameter("nName");
-		CountryPage cp=new CountryPageInfoService().selectPageName(name);
-		request.setAttribute("countryPage", cp);
-		request.getRequestDispatcher("/views/countryInfo/updatecontent.jsp").forward(request, response);
+		int result=0;
+		for(int i=0;i<faqQue.length;i++) {
+			result=new FaqService().updateFaq(faqQue[i],faqAns[i],faqNo[i]);
+		}
+		String msg="",loc="";
+		if(result>0) {
+			msg="글 수정 완료!";
+			loc="/qna/qnaList.do";
+		}else {
+			msg="글 수정 실패..";
+			loc="/qna/qnaList.do";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
 		
-	
-	
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

@@ -13,7 +13,7 @@
 
     <section>
         <form id="updateForm" action="<%=request.getContextPath()%>/friends/friendsUpdateEnd.do"
-            onsubmit="return update_friend();">
+            onsubmit="return updateFriend();">
             <div id="contents" style="width:85%;display:flex;border:1px solid;">
                 <div style="border:1px solid black;width:900px;height:1070px;border-radius:30px;">
 			        <div id="friendTitle" style="text-align: center;">
@@ -35,22 +35,22 @@
                         <div style="border:0px solid blueviolet;width:800px;height:30px;text-align:left ">
                             <b>MBTI</b> :
                             <select name="mbti">
-                            	<option value="ENFJ">ENFJ</option>
-                            	<option value="ENFP">ENFP</option>
-                            	<option value="ENTJ">ENTJ</option>
-                            	<option value="ENTP">ENTP</option>
-                            	<option value="ESFJ">ESFJ</option>
-                            	<option value="ESFP">ESFP</option>
-                            	<option value="ESTJ">ESTJ</option>
-                            	<option value="ESTP">ESTP</option>
-                            	<option value="INFJ">INFJ</option>
-                            	<option value="INFP">INFP</option>
-                            	<option value="INTJ">INTJ</option>
-                            	<option value="INTP">INTP</option>
-                            	<option value="ISFJ">ISFJ</option>
-                            	<option value="ISFP">ISFP</option>
-                            	<option value="ISTJ">ISTJ</option>
-                            	<option value="ISTP">ISTP</option>
+                            	<option name="mbti" value="ENFJ">ENFJ</option>
+                            	<option name="mbti" value="ENFP">ENFP</option>
+                            	<option name="mbti" value="ENTJ">ENTJ</option>
+                            	<option name="mbti" value="ENTP">ENTP</option>
+                            	<option name="mbti" value="ESFJ">ESFJ</option>
+                            	<option name="mbti" value="ESFP">ESFP</option>
+                            	<option name="mbti" value="ESTJ">ESTJ</option>
+                            	<option name="mbti" value="ESTP">ESTP</option>
+                            	<option name="mbti" value="INFJ">INFJ</option>
+                            	<option name="mbti" value="INFP">INFP</option>
+                            	<option name="mbti" value="INTJ">INTJ</option>
+                            	<option name="mbti" value="INTP">INTP</option>
+                            	<option name="mbti" value="ISFJ">ISFJ</option>
+                            	<option name="mbti" value="ISFP">ISFP</option>
+                            	<option name="mbti" value="ISTJ">ISTJ</option>
+                            	<option name="mbti" value="ISTP">ISTP</option>
                             </select>
                        </div><br>
                        <div style="border:0px solid blueviolet;width:800px;height:150x;text-align:left">
@@ -120,7 +120,7 @@
            			 	<div style="border:0px solid yellow;width:810px;height:60px;display: inline-flex;align-items:center; ">
                 			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 		                        <input type="submit" class="customBtn btnStyle btn btn-primary" style="margin-left:690px;background-color: rgba(221, 160, 221, 0.508) !important;" value=" 수정 "></button>
-        		                <button onclick="cancel_friend();" class="customBtn btnStyle btn btn-primary" type="button" style=" background-color: rgba(221, 160, 221, 0.508) !important;" value="취소">&nbsp취소&nbsp</button>
+        		                <button onclick="cancelFriend();" class="customBtn btnStyle btn btn-primary" type="button" style=" background-color: rgba(221, 160, 221, 0.508) !important;" value="취소">&nbsp취소&nbsp</button>
                 			</div>
           		      </div>
                    </div>
@@ -185,7 +185,7 @@
     </style>
 	
 	<script>
-		const update_friend=()=>{
+		const updateFriend=()=>{
 			if($("[name=title]").val().length==0||
 				!$("[name=nation]").is(':checked')||!$("[name=type]").is(':checked')||
 				!$("[name=expYn]").is(':checked')||!$("[name=purpose]").is(':checked')||
@@ -201,7 +201,7 @@
 			}
 		}
         
-		function cancel_friend(url){
+		function cancelFriend(url){
 			location.assign(document.referrer); //이전 페이지 주소로 이동
 		}
 		

@@ -70,7 +70,7 @@ public class insertCountryFirstServlet extends HttpServlet {
 				.npharse(ontext)
 				.build();
 		
-		System.out.println(c);
+//		System.out.println(c);
 		int result=new CountryService().insertCountry(c);
 		System.out.println(result);
 		

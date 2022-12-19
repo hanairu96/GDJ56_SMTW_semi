@@ -22,7 +22,7 @@
         	flex-wrap: wrap;
             padding: 30px;
             /* border: 3px solid brown; */
-            width:370px;
+            width:400px;
             height: 450px;
         }
         #maininfo2{
@@ -46,7 +46,7 @@
          	position: absolute;
         	left :250px; 
         	/* border: 5px solid green;  */
-        	width:1350px;
+        	width:1400px;
         	height:1100px;
         }
         #pageBar2{
@@ -82,12 +82,15 @@
         	나라를 추가중입니다!!
         <%}else{%>
 			<ul>
+			<!-- 페이지 왼편에 나라 리스트 -->
 	           	<%for(Country c : list){%>
 			<li>
 	                    <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN"))  {%>
+	                    <!-- 나라 상세 페이지가 없으면 수정페이지로 이동한다 -->
                     		<a href="<%=request.getContextPath()+(c.getInfo().getMoney()==null?"/country/updateCountry.do?nName=":"/countryinfo/searchAll.do?nName=")+c.getNName() %>"><%=c.getNName() %></a>
                    		<%}else{
 							if(c.getInfo().getMoney()==null){%>
+							<!-- 회원이 상세페이지를 보려고 할때 정보가 없을 경우 분기처리 -->
                     		<a href="" onclick="nodatano();"><%=c.getNName() %></a>
 	                    	<%}else{ %>
                     		<a href="javascript:void(0);" onclick="fn_emergency('<%=c.getEmergency()%>','<%=c.getNName() %>')" > <%=c.getNName() %> </a>
@@ -120,20 +123,23 @@
            		 		
        				 <div id="collectmain2">
        				 	<%if(con.get(i).getNImg()==null) {%>
-	                    <img src="<%=request.getContextPath()%>/images/country/noimage_view.png"  alt="" style="width: 400px; height:300px;" >
+	                    <img src="<%=request.getContextPath()%>/images/country/noimage_view.png"  alt="" style="width: 400px; height:300px;border-radius:10%;" >
        				 	<%}else{ %>
-	                    <img src="<%=request.getContextPath()%>/upload/<%=con.get(i).getNImg() %>"  alt="" style="width: 400px; height:300px;" >
+	                    <img src="<%=request.getContextPath()%>/upload/<%=con.get(i).getNImg() %>"  alt="" style="width: 400px; height:300px;border-radius:10%;" >
 	                    <%} %>
 	                    <div id="likenameinfo">
 	                        <div id="likename2">
+	                        
 	                        <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN"))  {%>
 	                            <p id="font1" style="font-size:30px;">
 	                            <a href="<%=request.getContextPath()+(con.get(i).getInfo().getMoney()==null?"/countryInfo/insergo.do?nName=":"/countryinfo/searchAll.do?nName=")+con.get(i).getNName()%>">
                             <%}else{
                             	if(con.get(i).getInfo().getMoney()==null){%>
+                            	<!-- 내용이 없을경우 준비중 팝업이 뜬다 -->
                             	<p id="font1" style="font-size:30px;">
 	                    		<a href="" onclick="nodatano()">
 		                    	<%}else{ %>
+		                    	<!-- 내용이 있을 경우 상세페이지로 이동한다 -->
 		                    	<p id="font1" style="font-size:30px;">
 		                    	<a href="javascript:void(0);" onclick="fn_emergency('<%=con.get(i).getEmergency()%>','<%=con.get(i).getNName() %>')" >
 	                    		
@@ -145,6 +151,8 @@
 	                            
 	                            
 	                        	<div id="likebtn">
+	                        		<%-- <img src="<%=request.getContextPath()%>/images/country/heart_like.png" 
+	                        		style="width:50px;height:50px;cursor:pointer;color:yellow;" onclikc="liketoggle"> --%>
 		                            <button id="like2">❤</button>
 	                        	</div>	    
 	                        </div>
@@ -155,12 +163,13 @@
 	                            <button id="update" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/updateCountry.do?nName=<%=con.get(i).getNName()%>')">수정</button>
 	                            <button id="delete" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/deleteCountry.do?nName=<%=con.get(i).getNName()%>')">삭제</button>
 	                        </div>
-	                        <%} %>
+	                        <%} %> 
 	                     </div>
 	                 </div>
 				 <%} 
 			 	}%>  
    		</div>
+
    	<div id="pageBar2">
 		<%=request.getAttribute("pageBar")%>
 	</div>

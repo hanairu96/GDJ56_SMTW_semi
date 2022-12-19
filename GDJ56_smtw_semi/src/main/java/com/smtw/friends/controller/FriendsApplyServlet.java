@@ -1,28 +1,23 @@
-package com.smtw.countrypageinfo.controller;
+package com.smtw.friends.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.country.model.vo.CountryPage;
-import com.smtw.country.model.vo.CountryPageInfo;
-import com.smtw.countrypageinfo.model.service.CountryPageInfoService;
-
 /**
- * Servlet implementation class updateGoContentServlet
+ * Servlet implementation class FriendsApplyServlet
  */
-@WebServlet("/countryinfo/goUpdateContent.do")
-public class updateGoContentServlet extends HttpServlet {
+@WebServlet("/friends/friendsApply.do")
+public class FriendsApplyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public updateGoContentServlet() {
+    public FriendsApplyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,14 +26,19 @@ public class updateGoContentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		String memberFrom=request.getParameter("memberFrom");
+		int friendsNo=Integer.parseInt(request.getParameter("friendsNo"));
+		String nName=request.getParameter("nName");
+		System.out.println(memberFrom);
+		System.out.println(friendsNo);
+		System.out.println(nName);
 		
-		String name=request.getParameter("nName");
-		CountryPage cp=new CountryPageInfoService().selectPageName(name);
-		request.setAttribute("countryPage", cp);
-		request.getRequestDispatcher("/views/countryInfo/updatecontent.jsp").forward(request, response);
+		request.setAttribute("memberFrom", memberFrom);
+		request.setAttribute("friendsNo", friendsNo);
+		request.setAttribute("nName", nName);
 		
-	
+		request.getRequestDispatcher("/views/friends/friendsApply.jsp")
+		.forward(request, response);
 	
 	}
 

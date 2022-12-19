@@ -3,9 +3,9 @@
 <%@ page import="java.util.List,com.smtw.country.model.vo.CountryPageInfo" %>
 <%@ page import="com.smtw.country.model.vo.CountryPage" %>
 <%
-	List<CountryPageInfo> info=(List<CountryPageInfo>)request.getAttribute("coinfo");
+	List<CountryPageInfo> cpi=(List<CountryPageInfo>)request.getAttribute("copageinfo");
 	String name=(String)request.getAttribute("name");
-	List<CountryPage> coinfo=(List<CountryPage>)request.getAttribute("info");
+	List<CountryPage> coinfo=(List<CountryPage>)request.getAttribute("allinfo");
 %>
 <%@ include file="/views/common/header.jsp" %>
 <script defer src="https://use.fontawesome.com/releases/v5.15.2/js/all.js" integrity="sha384-vuFJ2JiSdUpXLKGK+tDteQZBqNlMwAjhZ3TvPaDfN9QmbPb7Q8qUpbSNapQev3YF" crossorigin="anonymous"></script>
@@ -89,7 +89,7 @@
                 왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
              */
             margin-top: 100px;
-            height: 900px; 
+            height: auto; 
             /*
                 ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
                 높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.
@@ -98,12 +98,10 @@
         }
  
     </style>  
-    <body>
     <h1 style="text-align: center;">국가 및 지역 정보</h1>
-    <%for(CountryPageInfo c : info) { 
-    
+    <%for(CountryPageInfo c : cpi) { 
+    /* 받아온 나라 이름의 정보만 출력해줌*/
     	if(c.getNName().equals(name)){
-    	
     		 if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
     	    <div id="twobu">
         		<button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/updatego.do?nName=<%=c.getNName()%>')"><span>국가정보 수정</span></button>
@@ -116,6 +114,7 @@
         <div id="titlecountryinfo">
             <div>
                 <h2 style="text-align: center;"><%=c.getNName() %></h2>
+                <!-- 사진이 없을때 대체 사진 -->
                 <%if(c.getCPic()==null){%>
                 <img src="<%=request.getContextPath()%>/images/country/noimage_view.png" alt="" width="200" height="130">
 				<%}else{%>
@@ -139,7 +138,6 @@
                 <div class="City"></div>
             </div>
             <div id="time" style="text-align: center;">
-                <!-- 해당 국가의 도시명, 나라명 순서로 변경해주세요 -->
                 <h5><%=c.getUrban() %>,<%=c.getNName() %></h5>
                 <span id="countryname" style="font-size: 25px;"></span>
                 <!-- 한국시간 -->
@@ -148,56 +146,47 @@
             </div>
         </div>
     </div>
-    
-    
-  <%if(coinfo==null){ %>
-      <div id="buttoncollect">
-        <input type="button" name="button" value="국가/지역소개">
-        <input type="button" name="button" value="워홀비자">
-        <input type="button" name="button" value="안전정보">
-        <input type="button" name="button" value="초기정착">
-        <input type="button" name="button" value="취업정보">      
-      <div id="explain">
-	      <pre>
-	  		내용 입력중...
-	  		.
-	  		.
-	  		.
-	  		.
-	  		.
-	  		.
-	  		.
-	  		.
-          </pre>
-        </div>
-    </div>
-  <%}else{%>
-  
-   	<% for(CountryPage cc : coinfo){%>
+	
     <div id="buttoncollect">
-        <input type="button" name="button" value="국가/지역소개">
-        <input type="button" name="button" value="워홀비자">
-        <input type="button" name="button" value="안전정보">
-        <input type="button" name="button" value="초기정착">
-        <input type="button" name="button" value="취업정보">      
-        <div id="explain">
-            <pre>
-  				<%=cc.getNInfo() %>	
-  			</pre>
-        </div>
+        <input type="button" id="cobtn1" name="button" value="국가지역소개">
+        <input type="button" id="cobtn2" name="button" value="워홀비자">
+        <input type="button" id="cobtn3" name="button" value="안전정보">
+        <input type="button" id="cobtn4" name="button" value="초기정착">
+        <input type="button" id="cobtn5" name="button" value="취업정보">      
+       
+		<div id="explain">
+			<pre>
+			</pre>
+		</div>
     </div>
-	<%}
-  }%>
+	
+    <script>
+    	
+    	$("#cobtn1").show()
+    
+    	$("#buttoncollect>input").click(e=>{
+    		$.ajax({
+    			type:'get',
+    			url:"<%=request.getContextPath()%>/countryInfo/selectcountry.do?nName="+name,
+    			data:{"info":$(e.target).val(),
+    				  "name":"<%=name%>"},
+    			success:data=>{
+    				$("#explain>pre").html(data);
+    				
+    			}
+    		});
+    	});
+    </script>
+	
     
 	<%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
 		    <div id="twobu">
-		    <%if(coinfo==null){ %>
+		    <%-- <%if(coinfo==null){ %> --%>
 		        <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goInsertContext.do?nName=<%=c.getNName()%>')"><span>추가</span></button>
-		    <%}else{ %>
+		    <%-- <%}else{ %> --%>
 		        <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goUpdateContent.do?nName=<%=c.getNName()%>')"><span>수정</span></button>
 	   		</div>
-	    <%}%>
-	    
+	    <%-- <%}%> --%>
     <%}%>
 	<style>
 		#twobu>button{
@@ -284,7 +273,6 @@
         };
         $.ajax({
         url:'http://api.openweathermap.org/data/2.5/weather?q=<%=c.getEnglishName()%>&APPID=c31c0d10b1ec01d97120f16587305b9c&units=metric',
-    //                                                           ㄴ도시명만 변경해주세요
         dataType:'json',
         type:'GET',
         success:function(data){
@@ -327,7 +315,6 @@
             
             const con=document.getElementById("countryname");
             con.innerHTML=getWorldTime(<%=c.getClock()%>);
-            //                          ㄴ영국기준으로 시차 변경해주세요
         },1000);
     </script>
     <%}

@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.smtw.qna.model.vo.Qna, java.util.List" %>
+<%@ page import="com.smtw.qna.model.vo.*, java.util.List" %>
 <%
 	List<Qna> qnas=(List<Qna>)request.getAttribute("qnaLists");
+	List<Faq> faqs=(List<Faq>)request.getAttribute("faqList");
 %>
 <%@include file="/views/common/header.jsp" %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/qnaList.css"/>
@@ -20,45 +21,64 @@
             <h1 style="text-align: center;">질문하기</h1>
             <!-- 검색창 -->
             
-
+ 		<form id="modifyFaQ" action="<%=request.getContextPath()%>/qna/modifyFaq.do" method="post" > 
             <div id="Accordion_wrap">
                 <h2>FAQ</h2><span>자주 묻는 질문들</span>
+                <%if(!faqs.isEmpty()) {%>
+                	<%for(Faq f : faqs) {%>
                 <div class="que">
-                    <span> 워킹홀리데이 도중 어학학원을 등록할 수 있나요?</span>
+                	<input type="hidden" name="faqNo_" value="<%=f.getFaqNo()%>"/>
+                    <span id="faqQue_1"  class="faqQue faqAll"><%=f.getFaqTitle() %></span>
+                    <textarea id="faqQue_1_" name="faqQue_1_" class="textArea textQue" rows="1px" cols="120px" style="display:none;resize: none;"></textarea>
                     <div class="arrow-wrap">
                         <span class="arrow-top">↑</span>
                         <span class="arrow-bottom">↓</span>
                     </div>
                 </div>
                 <div class="anw">
-                    <span>사립어학원은 가능합니다.</span>
+                    <span id="faqAns_1" class="faqAnswer faqAll"><%=f.getFaqContents() %></span>
+                    <textarea id="faqAns_1_" name="faqAns_1_" class="textArea textAns" rows="2px" cols="120px" style="display:none;resize: none;"></textarea>
                 </div>
-                <div class="que">
-                    <span>워킹홀리데이 체류 중 비자를 중간에 학생비자로 바꿀 수 있나요?</span>
-                    <div class="arrow-wrap">
-                        <span class="arrow-top">↑</span>
-                        <span class="arrow-bottom">↓</span>
-                    </div>
-                </div>
-                <div class="anw">
-                    <span>워킹홀리데이는 변경이 안되는 비자입니다. 또한 학생비자는 국가 입국전에 받아야하는 비자이기때문에 거주국에서 먼저 발급받아야합니다.</span>
-                </div>
-                <div class="que">
-                    <span>전에 워킹홀리데이 비자를 받았지만 코로나 19로 인해 쓰지 못하고 기간이 만료 되었습니다. 이런 경우에도 워홀 비자 재신청이 가능한가요?</span>
-                    <div class="arrow-wrap">
-                        <span class="arrow-top">↑</span>
-                        <span class="arrow-bottom">↓</span>
-                    </div>
-                </div>
-                <div class="anw">
-                    <span>네. 가능합니다. 신청시 기존 워킹홀리데이 비자와 같이 제출해 주세요.</span>
-                </div>
+                	<%} %>
+                <%} %>
                 <!-- 관리자만 글쓰기 버튼 보이게  -->
 			    <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) { %>
-			    	<button id="modifyQna" type="button" class="write customBtn btnStyle"
-			    	onclick="location.assign('<%=request.getContextPath()%>/qna/faqModify.do');">수정</button>	    
+			    	<button id="completeFaq" type="submit" class="write customBtn btnStyle"
+			    	 style="display:none;">완료</button>	  
+			    	<button id="modifyFaq" type="button" class="write customBtn btnStyle"
+			    	onclick="modifyFaqText();">수정</button>
 			    <%} %>
             </div>
+		</form> 
+            <script>
+            	//수정버튼 눌렀을 때
+            	function modifyFaqText(){
+            		for(i=0;i<<%=faqs.size()%>;i++){
+            			//질문 textarea에 값 넣기
+            			let faqQue=document.querySelectorAll(".faqQue")[i].innerText;
+            			document.querySelectorAll(".textQue")[i].innerText=faqQue;
+            			
+            			//대답 textarea에 값 넣기
+            			let faqAns=document.querySelectorAll(".faqAnswer")[i].innerText;
+            			document.querySelectorAll(".textAns")[i].innerText=faqAns;
+            		};
+            		$(".textArea").show();
+            		$(".faqAll").hide();
+            		$("#completeFaq").show();
+            	};
+            	
+            	//완료버튼 눌렀을 때 DB로 저장하게 하기
+//             	const completeFaq=()=>{
+//             		console.log($(".textArea")[0].innerText);
+//             		$.ajax({
+<%--             			url:"<%=request.getContextPath()%>/qna/ModifyFaq.do", --%>
+//             			data:{"faqQue":$(".faqQue")[0].innerText,
+//             				}
+//             		})
+//             	};
+            </script>
+            
+            
             
             <div id="notice">
                 <h2>Q&A</h2><span>질문 게시판</span>

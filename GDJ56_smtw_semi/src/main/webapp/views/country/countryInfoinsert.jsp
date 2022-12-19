@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.smtw.country.model.vo.Country" %>
 <%@ include file="/views/common/header.jsp" %>
 <section>
 	<form name="countryinfo" action="<%=request.getContextPath()%>/country/insertCountryFirst.do" 

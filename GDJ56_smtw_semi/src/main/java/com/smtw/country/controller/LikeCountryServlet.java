@@ -1,28 +1,23 @@
-package com.smtw.countrypageinfo.controller;
+package com.smtw.country.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.country.model.vo.CountryPage;
-import com.smtw.countrypageinfo.model.service.CountryPageInfoService;
-
 /**
- * Servlet implementation class selecrContentServlcet
+ * Servlet implementation class LikeCountryServlet
  */
-@WebServlet("/countrypage/selecontent.do")
-public class selecrContentServlcet extends HttpServlet {
+@WebServlet("/likecountry.do")
+public class LikeCountryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public selecrContentServlcet() {
+    public LikeCountryServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +26,10 @@ public class selecrContentServlcet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		List<CountryPage> c=new CountryPageInfoService().selectContent();
-		System.out.println(c);
-		request.setAttribute("info", c);
-		request.getRequestDispatcher("/views/countryInfo/countryInfoMain.jsp").forward(request, response);
-	
-	
+		
+		String name=request.getParameter("memberId");
+		String country=request.getParameter("nNmae");
+		String like=request.getParameter("like");
 	
 	}
 
