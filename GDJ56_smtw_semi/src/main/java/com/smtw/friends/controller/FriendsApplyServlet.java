@@ -1,26 +1,23 @@
 package com.smtw.friends.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.friends.model.service.FriendsService;
-
 /**
- * Servlet implementation class FriendsDeleteServlet
+ * Servlet implementation class FriendsApplyServlet
  */
-@WebServlet("/friends/friendsDelete.do")
-public class FriendsDeleteServlet extends HttpServlet {
+@WebServlet("/friends/friendsApply.do")
+public class FriendsApplyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FriendsDeleteServlet() {
+    public FriendsApplyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,23 +26,18 @@ public class FriendsDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int no=Integer.parseInt(request.getParameter("friendsNo"));
+		String memberFrom=request.getParameter("memberFrom");
+		int friendsNo=Integer.parseInt(request.getParameter("friendsNo"));
+		String nName=request.getParameter("nName");
+		System.out.println(memberFrom);
+		System.out.println(friendsNo);
+		System.out.println(nName);
 		
-		int result=new FriendsService().deleteFriends(no);
+		request.setAttribute("memberFrom", memberFrom);
+		request.setAttribute("friendsNo", friendsNo);
+		request.setAttribute("nName", nName);
 		
-		String msg, loc;
-		if(result>0) {
-			msg="삭제가 완료됐습니다.";
-			loc="/friends/friendsList.do";
-		}else {
-			msg="삭제에 실패하였습니다.";
-			loc="/friends/friendsInfo.do";
-		}
-		
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		
-		request.getRequestDispatcher("/views/common/msg.jsp")
+		request.getRequestDispatcher("/views/friends/friendsApply.jsp")
 		.forward(request, response);
 	
 	}
