@@ -176,12 +176,12 @@ public class FriendsDao {
 		}return m;
 	}
 	
-	public int deleteFriends(Connection conn, String id) {
+	public int deleteFriends(Connection conn, int no) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("deleteFriends"));
-			pstmt.setString(1, id);
+			pstmt.setInt(1, no);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
