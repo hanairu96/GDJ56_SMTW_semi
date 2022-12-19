@@ -238,6 +238,10 @@
 				}
 			}
 		}
+		
+		//저장된 자기소개글을 불러와서 textarea에 출력
+		$("[name=friendsContents]").val("<%=f.getFriendsContents()%>");
+		
 	</script>
 	
 	<style>
