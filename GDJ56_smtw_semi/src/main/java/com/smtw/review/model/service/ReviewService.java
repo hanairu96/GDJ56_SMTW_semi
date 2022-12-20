@@ -7,6 +7,7 @@ import static com.smtw.common.JDBCTemplate.commit;
 import static com.smtw.common.JDBCTemplate.getConnection;
 import static com.smtw.common.JDBCTemplate.rollback;
 
+
 import java.sql.Connection;
 import java.util.List;
 
@@ -94,6 +95,8 @@ public class ReviewService {
 	}
 	 
 	
+	// 작성하기
+	
 	public  int insertReview(Review r) {
 		Connection conn=getConnection();
 		
@@ -106,6 +109,18 @@ public class ReviewService {
 		
 	}
 	
+	
+	//삭제하기
+	public int  deleteReview(int no) {
+		Connection conn=getConnection();
+		
+		int result=dao.deleteReview(conn,no);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+		
+	}
 	
 	 
 	

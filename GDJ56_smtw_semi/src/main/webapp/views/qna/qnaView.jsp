@@ -147,21 +147,21 @@
 	            </ul>
 			</div>
 		</div>   
-		<%}else {%>         
             <!-- 이위치에 태그를 추가해줘야함 -->
 			<!-- 답글  -->
-            <form class="form reply-form"style="display:none;flex-direction:column;align-items:center;"
+            <form id="refly-Form" class="form reply-form"style="display:none;flex-direction:column;align-items:center;"
             	action="<%=request.getContextPath()%>/qna/insertQC.do" onsubmit="return checkReply(event);">
 	              <textarea id="replyText" name="comment_1" class="commentText" onclick="logInCheck();" placeholder="답글을 남겨보세요"style="width:100%;"></textarea>
 	              	<input type="hidden" name="qnaNo" value="<%=q.getQnaNo()%>">
            			<input type="hidden" name="qcLevel" value="2"/> <!-- 댓글레벨 2 -->
-           			<input type="hidden" name="qnaQcRef" value="<%=qc.getQnaCoRef()%>"/>	<!-- 답글이라서 해당 댓글번호 -->
+           			<input type="hidden" name="qnaQcRef" value="<%=qc.getQnaCoNo()%>"/>	<!-- 답글이라서 해당 댓글번호 -->
            			<input type="hidden" id="commentWriter" name="commentWriter" value="<%=logInMember!=null?logInMember.getMemberId():""%>"><!-- 댓글작성자 아이디 넘기기  -->
 	              	<div style="width:100%;">
 	                	<button type="submit" class="submit customBtn btnStyle" id="btn-ReplyInsert" style="width:80px;height:47px;float:right;"
 	                		>댓글등록</button>
 	             </div>
             </form>   
+		<%}else {%>         
 	</div>
 	
 <!--           등록된 답글  -->
@@ -228,6 +228,10 @@
 		
 		//댓글에 ->답글 등록 클릭 시
 		const btnReply=(e)=>{
+			console.log($(e.target).parentsUntil("section").find("form"));
+// 			if($(e.target).parentsUntil("section").find("form").length==0){
+// 				$("#refly-Form").show();
+// 			}
 			$(e.target).parentsUntil("section").find("form").show();
 		}
 	</script>

@@ -33,6 +33,8 @@ public class mypageMemberDeleteServlet extends HttpServlet {
 		String userId=request.getParameter("id");
 		String pwd=request.getParameter("password");
 		
+		
+		
 		System.out.println(userId+" : "+pwd);
 		Member m = new MypageService().pwdCk(userId,pwd);
 		

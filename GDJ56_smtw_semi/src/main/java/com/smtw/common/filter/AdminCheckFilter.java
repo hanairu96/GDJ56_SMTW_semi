@@ -13,21 +13,19 @@ import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.smtw.common.exception.LoginException;
+import com.smtw.common.exception.AccessException;
 import com.smtw.member.model.vo.Member;
 
 /**
- * Servlet Filter implementation class LoginCheckFilter
+ * Servlet Filter implementation class AdminCheckFilter
  */
-@WebFilter(servletNames= {
-		"firstDiary"
-})
-public class LoginCheckFilter extends HttpFilter implements Filter {
+@WebFilter("/admin/*")
+public class AdminCheckFilter extends HttpFilter implements Filter {
        
     /**
      * @see HttpFilter#HttpFilter()
      */
-    public LoginCheckFilter() {
+    public AdminCheckFilter() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,27 +43,15 @@ public class LoginCheckFilter extends HttpFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
-		//요청한 사용자에 대한 정보(로그인여부)를 확인 후 처리
 		HttpSession session=((HttpServletRequest)request).getSession(false);
-	      Member logInMember=(Member)session.getAttribute("logInMember");
-	      if(logInMember!=null) { //로그인을 했다면
-	    	  chain.doFilter(request, response); // 화면 보여줌
-	      }
-	      else {
-
-
-	    	
-
-
-	    	  throw new LoginException("로그인 시 이용할 수 있는 서비스입니다.");
-//	    	  request.setAttribute("msg", "로그인 시 이용할 수 있는 서비스 입니다 :(");
-//	    	  request.setAttribute("loc", "/");
-//	    	  request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-
-
-	      }
+		Member logInMember=(Member)session.getAttribute("logInMember");
+		if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {
+			chain.doFilter(request, response);			
+		}else {
+			throw new AccessException("권한 없는 접근입니다.");
+		}
 	}
-			
+
 	/**
 	 * @see Filter#init(FilterConfig)
 	 */

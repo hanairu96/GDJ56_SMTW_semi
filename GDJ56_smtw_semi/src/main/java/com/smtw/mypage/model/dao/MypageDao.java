@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.smtw.friends.model.vo.Friends;
 import com.smtw.member.model.vo.Member;
 import com.smtw.mypage.model.vo.Applyfriends;
 import com.smtw.mypage.model.vo.FriendsWroteList;
@@ -23,6 +24,7 @@ import com.smtw.mypage.model.vo.ReviewList;
 import com.smtw.mypage.model.vo.WroteList;
 import com.smtw.mypage.model.vo.qnaList;
 import com.smtw.qna.model.vo.Qna;
+import com.smtw.review.model.vo.Review;
 
 public class MypageDao {
 	
@@ -832,13 +834,162 @@ public int getqnumPerpage(Connection conn, String userId) {
 				close(pstmt);
 			}return count;
 		}
+		
+		public List<Qna> getQnaList(Connection conn, String userId,int cPage, int numPerpage){
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			List<Qna> result=new ArrayList();
+			
+			try {
+				pstmt=conn.prepareStatement(sql.getProperty("getQnaList"));
+				
+				pstmt.setString(1, userId);
+				pstmt.setInt(2, (cPage-1)*numPerpage+1);
+				pstmt.setInt(3, cPage*numPerpage);
+				
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					result.add(getQnaList(rs));
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			return result;
+		}
+		
+		private Qna getQnaList(ResultSet rs) throws SQLException {
+			return Qna.builder()
+					.qnaNo(rs.getInt("QNA_NO"))
+					.memberId(rs.getString("MEMBER_ID"))
+					.reviewTitle(rs.getString("REVIEW_title"))
+					.enrollDate(rs.getDate("ENROLL_DATE"))
+					.build();
+		}
 
+		
+		public int selectQnaListCount(Connection conn,String userId) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			int count=0;
+			try {
+				pstmt=conn.prepareStatement(sql.getProperty("selectQnaListCount"));
+				pstmt.setString(1, userId);
+				rs=pstmt.executeQuery();
+				if(rs.next()) count=rs.getInt(1);
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}return count;
+		}
 
+//리뷰 글 구하기
+		public List<Review> getReviewList(Connection conn, String userId,int cPage, int numPerpage){
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			List<Review> result=new ArrayList();
+			
+			try {
+				pstmt=conn.prepareStatement(sql.getProperty("getReviewList"));
+				
+				pstmt.setString(1, userId);
+				pstmt.setInt(2, (cPage-1)*numPerpage+1);
+				pstmt.setInt(3, cPage*numPerpage);
+				
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					result.add(getReviewList(rs));
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			return result;
+		}
+		
+		private Review getReviewList(ResultSet rs) throws SQLException {
+			return Review.builder()
+					.reviewNo(rs.getInt("REVIEW_NO"))
+					.memberId(rs.getString("MEMBER_ID"))
+					.reviewTitle(rs.getString("REVIEW_title"))
+					.enrollDate(rs.getDate("ENROLL_DATE"))
+					.build();
+		}
 
+		public int selectrReviewListCount(Connection conn,String userId) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			int count=0;
+			try {
+				pstmt=conn.prepareStatement(sql.getProperty("selectrReviewListCount"));
+				pstmt.setString(1, userId);
+				rs=pstmt.executeQuery();
+				if(rs.next()) count=rs.getInt(1);
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}return count;
+		}
 
+///프렌즈 글 구하기
+		public List<Friends> getFriendsList(Connection conn, String userId,int cPage, int numPerpage){
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			List<Friends> result=new ArrayList();
+			
+			try {
+				pstmt=conn.prepareStatement(sql.getProperty("getFriendsList"));
+				
+				pstmt.setString(1, userId);
+				pstmt.setInt(2, (cPage-1)*numPerpage+1);
+				pstmt.setInt(3, cPage*numPerpage);
+				
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					result.add(getFriendsList(rs));
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}
+			return result;
+		}
+		
+		private Friends getFriendsList(ResultSet rs) throws SQLException {
+			return Friends.builder()
+					.friendsNo(rs.getInt("FRIENDS_NO"))
+					.memberId(rs.getString("MEMBER_ID"))
+					.friendsTitle(rs.getString("FRIENDS_title"))
+					.enrollDate(rs.getDate("ENROLL_DATE"))
+					.build();
+		}
 
-
-
+		public int selectFriendsListCount(Connection conn,String userId) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			int count=0;
+			try {
+				pstmt=conn.prepareStatement(sql.getProperty("selectrFriendsListCount"));
+				pstmt.setString(1, userId);
+				rs=pstmt.executeQuery();
+				if(rs.next()) count=rs.getInt(1);
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}return count;
+		}
 
 
 
