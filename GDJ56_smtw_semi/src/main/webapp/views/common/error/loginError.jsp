@@ -15,7 +15,7 @@
 			 confirmButtonText: '확인'})
 				.then((result)=>{
 						if(result.isConfirmed){
-							location.assign(document.referrer); 
+							history.back();
 						}
 		})
 		
