@@ -8,9 +8,9 @@
    <section>
         <div class="sidemenu">
             <div><h4 style="text-align: center;">마이 페이지</h4></div>
-             <div><p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>');">워홀 프렌즈</p></div>
-            <div><p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageAccountView.do?id=<%=logInMember.getMemberId()%>');">계정 관리</p></div>
-            <div><p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">쪽지함</p></div>
+             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>');">워홀 프렌즈</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageAccountView.do?id=<%=logInMember.getMemberId()%>');">계정 관리</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">쪽지함</p></div>
             <div><p>내가 쓴 글</p></div>
             <div><p>찜한 나라</p></div>
            
@@ -23,8 +23,8 @@
                 <img src="<%=request.getContextPath()%>/upload/account/<%=m.getMyImg() %>" alt="" width="200" height="200" style="border">
                 <br>
                 
-                <button onclick="location.replace('<%=request.getContextPath()%>/mypage/mypagePwdCk.do?id=<%=m.getMemberId()%>');"; style="box-shadow: 3px 3px;background-color: lavender;">수정하기</button>
-                <button onclick="location.replace('<%=request.getContextPath()%>/mypage/mypagePwdCk2.do?id=<%=m.getMemberId()%>');" style="box-shadow: 3px 3px;background-color: lavender;">탈퇴하기</button>
+                <button onclick="location.assign('<%=request.getContextPath()%>/mypage/mypagePwdCk.do?id=<%=m.getMemberId()%>');"; style="box-shadow: 3px 3px;background-color: lavender;">수정하기</button>
+                <button onclick="location.assign('<%=request.getContextPath()%>/mypage/mypagePwdCk2.do?id=<%=m.getMemberId()%>');" style="box-shadow: 3px 3px;background-color: lavender;">탈퇴하기</button>
         </div>
         <div id="myimpo">
             <div>아이디 : <%=m.getMemberId() %></div>
@@ -34,7 +34,7 @@
             <div>주소 : <%=m.getAddress() %></div>
             <div>전화번호 : <%=m.getPhone() %></div>
             <div>이메일 : <%=m.getEmail() %></div>
-            <div>비밀번호 : <button onclick="location.replace('<%=request.getContextPath()%>/mypage/mypagePwdCk3.do?id=<%=m.getMemberId()%>');">수정하기</button></div>
+            <div>비밀번호 : <button onclick="location.assign('<%=request.getContextPath()%>/mypage/mypagePwdCk3.do?id=<%=m.getMemberId()%>');">수정하기</button></div>
         </div>
 
 

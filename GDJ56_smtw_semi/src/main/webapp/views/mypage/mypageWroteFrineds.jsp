@@ -78,6 +78,7 @@
     </section>
     <style>
        #listmenu>p{
+       cursor:pointer;
     		margin-right: 0 auto;
     	}
     	#listmenu{

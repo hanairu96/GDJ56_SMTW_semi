@@ -81,8 +81,7 @@
     <style>
     	#listmenu>p{
     		margin-right: 0 auto;
-    		
-    		
+    		cursor:pointer;
     	}
     	#listmenu{
     	position: fixed;
