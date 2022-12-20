@@ -3,6 +3,7 @@ package com.smtw.review.model.dao;
 import static com.smtw.common.JDBCTemplate.*;
 import static com.smtw.common.JDBCTemplate.close;
 
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -277,6 +278,39 @@ public List<Review> searchReviewList(Connection conn,String type,String keyword,
 		
 		
 	}
+	
+	
+	
+	//삭제하기에 대한 메소드
+	
+	
+	public int deleteReview(Connection conn, int no) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("deleteReview"));
+			pstmt.setInt(1,no);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
