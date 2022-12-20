@@ -218,5 +218,20 @@ public class CountrytDao {
 		}
 		return result;
 	}
+	
+	public int deletLikeCountry(Connection conn, String id) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("deletLikeCountry"));
+			pstmt.setString(1,id);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 		
 }

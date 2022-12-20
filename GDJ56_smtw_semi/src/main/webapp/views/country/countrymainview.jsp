@@ -167,18 +167,23 @@
 	                        <%} %> 
 	                     </div>
 	                 </div>
-				 <%} 
-			 	}%>  
-   		</div>
 	<script>
 		//좋아요 하트 버튼
 		$(".likeimg").hide();
 		const likebtn=(e)=>{
 			console.log(e);
-			$(e.target).parent().find("img").toggle();
+			$(e.target).parent().find("img").toggle(); 
+			if($(".likeimg").is(':visible')){
+				location.assign('<%=request.getContextPath()%>/likecountry.do?ld=<%=logInMember.getMemberId()%>&&name=<%=con.get(i).getNName()%>');
+			}else if($(".dislikeimg").is(':visible')){
+				location.assign('<%=request.getContextPath()%>/dislikecountry.do?ld=<%=logInMember.getMemberId()%>')
+			}
 		} 
 		
 	</script>
+				 <%} 
+			 	}%>  
+   		</div>
 	
 	
 	
