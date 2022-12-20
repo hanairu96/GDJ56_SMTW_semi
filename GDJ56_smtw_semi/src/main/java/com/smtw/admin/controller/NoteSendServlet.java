@@ -13,16 +13,16 @@ import com.smtw.mypage.model.service.MypageService;
 import com.smtw.mypage.model.vo.Note;
 
 /**
- * Servlet implementation class NoteReceiveServlet
+ * Servlet implementation class NoteSendServlet
  */
-@WebServlet("/admin/noteReceive.do")
-public class NoteReceiveServlet extends HttpServlet {
+@WebServlet("/admin/noteSend.do")
+public class NoteSendServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoteReceiveServlet() {
+    public NoteSendServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,7 +31,6 @@ public class NoteReceiveServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String id = request.getParameter("id");
 		System.out.println(id);
 		
@@ -43,11 +42,10 @@ public class NoteReceiveServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		System.out.println("cpage : "+cPage);
-		List<Note> list = new MypageService().noteList(id, cPage, numPerpage);
-		System.out.println(list);
 		
-		int totalData=new MypageService().selectNoteCount(id);
+		List<Note> list = new MypageService().noteSendList(id, cPage, numPerpage);
+		
+		int totalData=new MypageService().selectSendCount(id);
 		System.out.println(totalData);
 		
 		String pageBar="";
@@ -60,7 +58,7 @@ public class NoteReceiveServlet extends HttpServlet {
 			pageBar+="<li class='page-item disabled' style='color:rgba(221, 160, 221, 0.508) !important;'>"
 					+"<a class='page-link' style='color:rgba(221, 160, 221, 0.508) !important;'>이전</a></li>";
 		}else {
-			pageBar+="<li><a class='page-link' href='"+request.getContextPath()+"/admin/noteReceive.do?cPage="+(pageNo-1)
+			pageBar+="<li><a class='page-link' href='"+request.getContextPath()+"/admin/noteSend.do?cPage="+(pageNo-1)
 					+"' style='color:rgba(221, 160, 221, 0.508) !important;'>이전</a></li>";
 		}
 		
@@ -69,7 +67,7 @@ public class NoteReceiveServlet extends HttpServlet {
 				pageBar+="<li class='page-item'><a class='page-link' style='color:rgba(221, 160, 221, 0.508) !important;'>"+pageNo+"</a></li>";
 			}else {
 				pageBar+="<li class='page-item'><a class='page-link' href='"
-						+request.getContextPath()+"/admin/noteReceive.do?cPage="+pageNo+"&id="+id
+						+request.getContextPath()+"/admin/noteSend.do?cPage="+pageNo+"&id="+id
 						+"' style='color:rgba(221, 160, 221, 0.508) !important;'>"+pageNo+"</a></li>";
 			}
 			pageNo++;
@@ -79,16 +77,17 @@ public class NoteReceiveServlet extends HttpServlet {
 			pageBar+="<li class='page-item disabled'><a class='page-link' style='color:rgba(221, 160, 221, 0.508) !important;'>다음</a></li>";
 		}else {
 			pageBar+="<li class='page-item'><a class='page-link' href='"
-					+request.getContextPath()+"/admin/noteReceive.do?cPage="+pageNo+"&id="+id
+					+request.getContextPath()+"/admin/noteSend.do?cPage="+pageNo+"&id="+id
 					+"' style='color:rgba(221, 160, 221, 0.508) !important;'>다음</a></li>";
 		}
 
 		request.setAttribute("pageBar", pageBar);
 		
-		
+		System.out.println("보낸쪽지"+list);
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("/views/admin/noteReceive.jsp").forward(request, response);
 		
+		request.getRequestDispatcher("/views/admin/noteSend.jsp").forward(request, response); 
+	
 	}
 
 	/**

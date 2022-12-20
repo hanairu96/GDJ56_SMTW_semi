@@ -13,8 +13,7 @@
   	String phone = (String)request.getAttribute("phone");
   	String name = (String)request.getAttribute("name");
   	String email = (String)request.getAttribute("email");
-  	
-out.print(bYear);
+
   %>
  <section>
         <div class="sidemenu">
