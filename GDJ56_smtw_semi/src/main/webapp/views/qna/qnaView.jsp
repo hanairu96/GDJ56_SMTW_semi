@@ -109,10 +109,10 @@
 	  
 	   <form class="form comment-form" style="display:flex;flex-direction:column;align-items:center;"
 	   		action="<%=request.getContextPath()%>/qna/insertQC.do" onsubmit="return insertComment();">
-           <textarea id="comment_1" onclick="logInCheck();" name="comment_1" placeholder="댓글을 남겨보세요" style="width:100%;"></textarea>
+           <textarea id="comment_1" onclick="logInCheck();" name="comment_1" class="commentText" placeholder="댓글을 남겨보세요" style="width:100%;"></textarea>
            <input type="hidden" name="qnaNo" value="<%=q.getQnaNo()%>">
            <input type="hidden" name="qcLevel" value="1"/> <!-- 댓글레벨  -->
-           <input type="hidden" name="qnaQcRef" value="0"/>	<!-- 답글이 아니라 그냥 댓글이라서 null -->
+           <input type="hidden" name="qnaQcRef" value="0"/>	<!-- 답글이 아니라 그냥 댓글이라서 0 -->
            <input type="hidden" id="commentWriter" name="commentWriter" value="<%=logInMember!=null?logInMember.getMemberId():""%>"><!-- 댓글작성자 아이디 넘기기  -->   				
            <div style="width:100%;">
                <button type="submit" class="submit customBtn btnStyle" id="btn-insert" style="width:80px;height:47px;float:right;"
@@ -150,12 +150,17 @@
 		<%}else {%>         
             <!-- 이위치에 태그를 추가해줘야함 -->
 			<!-- 답글  -->
-            <form class="form reply-form"style="display:none;flex-direction:column;align-items:center;"  onsubmit="return insertComment();">
-              <textarea id="replyText" onclick="logInCheck();" placeholder="답글을 남겨보세요"style="width:100%;"></textarea>
-              <div style="width:100%;">
-                <button type="button" class="submit customBtn btnStyle" style="width:80px;height:47px;float:right;"
-                	onclick="insertComment();">댓글등록</button>
-             </div>
+            <form class="form reply-form"style="display:none;flex-direction:column;align-items:center;"
+            	action="<%=request.getContextPath()%>/qna/insertQC.do" onsubmit="return checkReply(event);">
+	              <textarea id="replyText" name="comment_1" class="commentText" onclick="logInCheck();" placeholder="답글을 남겨보세요"style="width:100%;"></textarea>
+	              	<input type="hidden" name="qnaNo" value="<%=q.getQnaNo()%>">
+           			<input type="hidden" name="qcLevel" value="2"/> <!-- 댓글레벨 2 -->
+           			<input type="hidden" name="qnaQcRef" value="<%=qc.getQnaCoRef()%>"/>	<!-- 답글이라서 해당 댓글번호 -->
+           			<input type="hidden" id="commentWriter" name="commentWriter" value="<%=logInMember!=null?logInMember.getMemberId():""%>"><!-- 댓글작성자 아이디 넘기기  -->
+	              	<div style="width:100%;">
+	                	<button type="submit" class="submit customBtn btnStyle" id="btn-ReplyInsert" style="width:80px;height:47px;float:right;"
+	                		>댓글등록</button>
+	             </div>
             </form>   
 	</div>
 	
@@ -173,12 +178,12 @@
          		</div>
          	</div>
             
-            <form class="form reply-form"style="display:flex;flex-direction:column;align-items:center;">
-              <textarea placeholder="답글을 남겨보세요"style="width:100%;"></textarea>
-              <div style="width:100%;">
-                <button type="button" class="submit customBtn btnStyle" style="width:80px;height:47px;float:right;">댓글등록</button>
-             </div>
-            </form>       
+<!--             <form class="form reply-form"style="display:flex;flex-direction:column;align-items:center;"> -->
+<!--               <textarea placeholder="답글을 남겨보세요"style="width:100%;"></textarea> -->
+<!--               <div style="width:100%;"> -->
+<!--                 <button type="button" class="submit customBtn btnStyle" style="width:80px;height:47px;float:right;">댓글등록</button> -->
+<!--              </div> -->
+<!--             </form>        -->
 	</div> 
 	<%} %><!-- 댓글,답글 구별if문  -->
 	<%} %>
@@ -196,9 +201,10 @@
 		//댓글창 누를 시 로그인멤버 아니면 댓글 못 달게하기
 		const logInCheck=()=>{
 			if(<%=logInMember==null%>){
-				alert("로그인 한 사용자만 댓글을 등록할 수 있습니다.");
-				$("#comment_1").blur();
-				$("#replyText").blur();
+				Swal.fire({
+					title:"로그인 한 사용자만 댓글을 \n등록할 수 있습니다."
+					,icon: 'error'});
+				$(".commentText").blur();
 			}
 		}
 		
@@ -206,13 +212,21 @@
 		const insertComment=()=>{
 			//아무것도 작성하지 않으면 재작성 요구
 			if($("#comment_1").val().trim()==""){
-				alert("댓글을 작성해주세요.");
-				$("#comment_1").blur();
-				$("#replyText").blur();
+				Swal.fire("댓글을 작성해주세요.");
+				$(".commentText").blur();
 				return false;
 			}
 		}
-		//답글 등록 클릭 시
+		//답글등록 클릭 시
+		const checkReply=(e)=>{
+			if($(e.target).parent().find("textarea").val().trim()==""){//해당 버튼의 답글을 아무것도 달지 않으면
+				Swal.fire("댓글을 작성해주세요.");
+				$(".commentText").blur();
+				return false;
+			}
+		}
+		
+		//댓글에 ->답글 등록 클릭 시
 		const btnReply=(e)=>{
 			$(e.target).parentsUntil("section").find("form").show();
 		}
