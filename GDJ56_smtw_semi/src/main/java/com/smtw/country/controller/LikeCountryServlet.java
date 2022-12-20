@@ -1,12 +1,14 @@
 package com.smtw.country.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.smtw.country.model.service.CountryService;
 import com.smtw.country.model.vo.Likenation;
 
 /**
@@ -31,14 +33,12 @@ public class LikeCountryServlet extends HttpServlet {
 		
 		String id=request.getParameter("memberId");
 		String country=request.getParameter("nNmae");
-		String like=request.getParameter("like");
 		Likenation ln=Likenation.builder()
 				.memId(id)
 				.nName(country)
-				.ckLike(like)
 				.build();
 		System.out.println(ln);
-		
+		int like=new CountryService().insertlike(id,country);
 		
 	}
 
