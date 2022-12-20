@@ -86,7 +86,7 @@
 
             <div id="postcontroll">
                 <button>삭제하기</button>
-                <button onclick="window.open('mypage-pop_sendnote.html','_blank','scrollbars=yes,width=600,height=600,top=100,left=300')">쪽지보내기</button>
+                <!-- <button onclick="window.open('mypage-pop_sendnote.html','_blank','scrollbars=yes,width=600,height=600,top=100,left=300')">쪽지보내기</button> -->
             </div>
             
             
