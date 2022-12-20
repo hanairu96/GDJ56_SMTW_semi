@@ -45,7 +45,7 @@ Show Me The Way(SMTW) 이용약관(이하 ‘본 약관’이라 함)은 Show Me
 	                </li>
 	            </ul>
 	            <div id="button">
-	                <button class="agree customBtn btnStyle">동의하고 가입하기</button>
+	                <button class="agree customBtn btnStyle" onclick="agreeEmailBtn();">동의하고 가입하기</button>
 	            </div>
 	        </form>
 	    </div>
@@ -76,7 +76,32 @@ Show Me The Way(SMTW) 이용약관(이하 ‘본 약관’이라 함)은 Show Me
 				else $("#allcheck").prop("checked", true); 
 			});
 			
+			if(!$("#join3").is(":checked")){ //이메일 수신 동의 여부 체크 한번더 확인
+				Swal.fire({
+					  text:"체크 해제시 메일 서비스를 받을 수 없습니다.",
+					  icon: 'warning',
+					  showCancelButton: true,
+					  confirmButtonColor: '#3085d6',
+					  cancelButtonColor: '#d33',
+					  confirmButtonText: 'Yes'
+					}).then((result) => {
+					  if (result.isConfirmed) {
+						  Swal.fire(
+							      '확인하셨습니다.',
+							      'success'
+							    )
+							    
+					  }
+					})
 		});
+		
+		
+		const agreeEmailBtn=()=>{
+			
+		    	 console.log( $("#emailAgree").val());
+		      }
+		}
+	
 		
 		//필수 체크 로직
 		const fn_agree=()=>{
@@ -90,6 +115,8 @@ Show Me The Way(SMTW) 이용약관(이하 ‘본 약관’이라 함)은 Show Me
 				Swal.fire("필수 개인정보 수집 \n및 이용에 동의해주세요.");
 				return false;
 			}
+			
+			
 		}
 		
 		//이메일 수신 동의 체크 로직
@@ -98,9 +125,9 @@ Show Me The Way(SMTW) 이용약관(이하 ‘본 약관’이라 함)은 Show Me
 	    		 $("#emailAgree").attr("value","Y");
 	    	 }else{
 	    		 $("#emailAgree").attr("value","N");
-	    	 }
+		      }
 	    	 console.log( $("#emailAgree").val());
-	      });
+	  });
 			
 	</script>
 </section>
