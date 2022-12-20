@@ -24,6 +24,7 @@
                             <form action="<%=request.getContextPath()%>/diary/myDiary.do?memberId=<%=memberId%>" method="post" id="insertDateform">
                                 출국일 : <input type="date" name="leavingdate" id="leavingdate"><br>
                                 <input type="checkbox" name="alarm" id="alarm">출국 10일전 알람서비스<br>
+                                <small style="font-size:12px;color:black;font-weight:border;">가입시 이메일 수신동의 했다면 메일로도 알림 서비스를 받을 수 있습니다.</small><br>
                                 <input type="hidden" name="alarmcheck" value="N" id="alarmcheck"/>
                                 <button class="customBtn btnStyle" type="submit" name="leabingDiaryBtn" id="leabingDiaryBtn">확인</button>
                             </form>

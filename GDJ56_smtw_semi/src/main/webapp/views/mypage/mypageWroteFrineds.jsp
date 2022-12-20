@@ -17,10 +17,10 @@
     <section>
         <div class="sidemenu2">
            	<div><h4 style="text-align: center;">마이 페이지</h4></div>
-            <div><p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>');">워홀 프렌즈</p></div>
-            <div><p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageAccountView.do?id=<%=logInMember.getMemberId()%>');">계정 관리</p></div>
-            <div><p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">쪽지함</p></div>
-            <div><p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageWriting.do?id=<%=logInMember.getMemberId()%>');">내가 쓴 글</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>');">워홀 프렌즈</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageAccountView.do?id=<%=logInMember.getMemberId()%>');">계정 관리</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">쪽지함</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageWriting.do?id=<%=logInMember.getMemberId()%>');">내가 쓴 글</p></div>
             <div><p>찜한 나라</p></div>
            
         </div>
@@ -29,10 +29,10 @@
 		
         <div class="texts">
         <div id="listmenu">
-        <p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageWriting.do?id=<%=logInMember.getMemberId()%>');">전체글</p>
-        <p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageWroteQna.do?id=<%=logInMember.getMemberId()%>');">질문 글</p>
-        <p style="background-color: lavender;" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageWroteFriends.do?id=<%=logInMember.getMemberId()%>');">프렌즈 구하기 글</p>
-        <p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageWroteReview.do?id=<%=logInMember.getMemberId()%>');">리뷰 글</p>
+        <p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageWriting.do?id=<%=logInMember.getMemberId()%>');">전체글</p>
+        <p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageWroteQna.do?id=<%=logInMember.getMemberId()%>');">질문 글</p>
+        <p style="background-color: lavender;" onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageWroteFriends.do?id=<%=logInMember.getMemberId()%>');">프렌즈 구하기 글</p>
+        <p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageWroteReview.do?id=<%=logInMember.getMemberId()%>');">리뷰 글</p>
         </div>
             <h1>내가 쓴 글</h1>
             <br>
@@ -57,7 +57,7 @@
 						for(Friends f : flist) {%>
 	                    <tr>
 	                    	<td>프렌즈 구하기</td>
-	                        <td onclick="location.replace('<%=request.getContextPath()%>/qna/qnaView.do?qnaNo=<%=f.getFriendsNo()%>');">
+	                        <td onclick="location.assign('<%=request.getContextPath()%>/qna/qnaView.do?qnaNo=<%=f.getFriendsNo()%>');">
 	                        	<%=f.getFriendsTitle() %>
 	                        </td>
 	                        <td><%=f.getEnrollDate()%></td>
