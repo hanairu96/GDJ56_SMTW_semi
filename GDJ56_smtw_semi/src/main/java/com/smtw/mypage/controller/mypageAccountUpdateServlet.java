@@ -42,10 +42,15 @@ public class mypageAccountUpdateServlet extends HttpServlet {
 		System.out.println("전체주소:"+ad);
 		String[] datail=ad.split(",");
 		System.out.println("주소:"+datail[0]);
-		System.out.println("상세주소:"+datail[1]);
+		//System.out.println("상세주소:"+datail[1]);
 		request.setAttribute("postcode",postcode);
 		request.setAttribute("address",datail[0]);
-		request.setAttribute("detialadd",datail[1]);
+			if(datail.length>1) {
+				request.setAttribute("detialadd",datail[1]);
+			}else {
+				String detialadd="상세주소 미입력";
+				request.setAttribute("detialadd",detialadd);
+			}
 		}else {
 			String address="주소를 입력해주세요";
 			request.setAttribute("address",address);

@@ -19,9 +19,7 @@ import com.smtw.member.model.vo.Member;
 /**
  * Servlet Filter implementation class LoginCheckFilter
  */
-@WebFilter(servletNames= {
-		"firstDiary"
-})
+@WebFilter(servletNames = {"firstDiary"}, urlPatterns = "/mypage/*")
 public class LoginCheckFilter extends HttpFilter implements Filter {
        
     /**

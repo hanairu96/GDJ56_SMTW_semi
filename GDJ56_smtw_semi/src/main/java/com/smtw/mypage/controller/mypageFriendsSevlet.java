@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.smtw.admin.model.service.MemberService;
 import com.smtw.member.model.vo.Member;
 import com.smtw.mypage.model.service.MypageService;
 import com.smtw.mypage.model.vo.Applyfriends;
@@ -37,6 +38,8 @@ public class mypageFriendsSevlet extends HttpServlet {
 		
 		//userId가지고 오기
 		String userId=request.getParameter("id");
+		//내 이미지 가지고 오기 
+		
 		
 		// 친구 신청한 리스트
 		List<Applyfriends> list = new MypageService().applyfriendsList(userId);

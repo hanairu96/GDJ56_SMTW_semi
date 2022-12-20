@@ -17,7 +17,7 @@
     <section>
         <div id="friendTitle">
             <h1 style="text-align: center;">워홀프렌즈 찾기</h1><br>
-                <div style="margin:0 auto;border:1px solid rgba(238, 130, 238, 0.315);width:910px;height:650px;display:flex;border-radius:20px;">
+                <div style="margin:0 auto;border:2px solid rgba(238, 130, 238, 0.315);width:910px;height:650px;display:flex;border-radius:20px;">
                     <div style="display:flex">
                         <div style="border:0px solid green;width:452px;height:690px ">
                             <div style="border:0px solid pink;width:440px;height:340px;">
@@ -76,7 +76,7 @@
                     </div>
                 </div>
 			<div style="text-align:center;">
-            <div style="border:1px solid yellow;width:910px;height:60px;display:inline-flex;align-items:center; ">
+            <div style="border:0px solid yellow;width:910px;height:60px;display:inline-flex;align-items:center; ">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 	<%if(logInMember!=null&&(logInMember.getMemberId().equals("ADMIN")||logInMember.getMemberId().equals(f.getMemberId()))){%>
 		            	<button onclick="location.assign('<%=request.getContextPath()%>/friends/friendsUpdate.do?friendsNo=<%=f.getFriendsNo()%>');" 

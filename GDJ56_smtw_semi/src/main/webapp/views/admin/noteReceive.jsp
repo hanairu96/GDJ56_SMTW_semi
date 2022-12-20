@@ -5,20 +5,18 @@
 <%@ page import="com.smtw.mypage.model.vo.Note" %>
 <%
 	List<Note> list = (List<Note>)request.getAttribute("list");
-	String id = (String)request.getParameter("id");
+	String id = "ADMIN";
 %>
-
   <section>
         <div class="sidemenu">
-            <div><h4 style="text-align: center;">마이 페이지</h4></div>
-             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>');">워홀 프렌즈</p></div>
-            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageAccountView.do?id=<%=logInMember.getMemberId()%>');">계정 관리</p></div>
-            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">쪽지함</p></div>
-            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageWriting.do?id=<%=logInMember.getMemberId()%>');">내가 쓴 글</p></div>
-            <div><p>찜한 나라</p></div>
-           
+            <div><a href="<%=request.getContextPath()%>/admin/memberList.do"><p>관리자 페이지</p></a></div>
+            <div><a href="<%=request.getContextPath()%>/admin/memberList.do"><p id="purple">회원 관리</p></a></div>
+            <div><a href="<%=request.getContextPath()%>/admin/qnaManage.do"><p>Q&A 관리</p></a></div>
+            <div><a href="<%=request.getContextPath()%>/admin/noteReceive.do"><p>쪽지함</p></a></div>
         </div>
+        
         <div class="menuDiv"></div>
+        
         <div class="contentList">
             <div>
                 <div id="menutitle"><h2 style="background-color: cornflowerblue;">쪽지함</h2></div><br>
@@ -26,10 +24,10 @@
             </div>
 
             
-             <div id="postrecieve"><h2 style="background-color: rgb(239, 239, 239);" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">수신함</h2></div><br>
+            <div id="postrecieve"><h2 style="background-color: cornflowerblue;" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">수신함</h2></div><br>
             
 
-            <div id="postsend"><h2 style="background-color: cornflowerblue;" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteSend.do?id=<%=logInMember.getMemberId()%>');">발신함</h2></div><br>
+            <div id="postsend"><h2 style="background-color: rgb(239, 239, 239);" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteSend.do?id=<%=logInMember.getMemberId()%>');">발신함</h2></div><br>
             
 
             <table id="postbox" style="width: 1000px;">
@@ -37,40 +35,42 @@
                 
                 <tr>
                     <td style="width: 50px;"><input type="checkbox" name="전체선택" id=""></td>
-                    <td style="width: 80px;"><p>TO</p></td>
+                    <td style="width: 80px;"><p>FROM</p></td>
                     <td style="width: 700px;">내용</td>
                     <td style="width: 100px;">보낸날짜</td>
                 </tr>
                 
                 <%if(list.isEmpty()){ %>
                 <tr>
-                	<td colspan="4" height="100">아직 보낸 쪽지가 없습니다 :(</td>
+                	<td colspan="4" height="100">아직 도착한 쪽지가 없습니다 :(</td>
                 </tr>
                 <%}else{
-                	for(int i=0;i<list.size();i++){
+                	for(Note n : list){
                 %>
                		<tr>
                     	<td><input type="checkbox" name="" id=""></td>
                     	<td>
-                    		<p><%=list.get(i).getSenderName() %></p>
+                    		<p><%=n.getSenderName() %></p>
 	                    	<form name="form" action="" method="post">
-			                    <input type="hidden" name="noteNo" value="<%=list.get(i).getNtNo() %>">
-			                    <input type="hidden" name="id" value=<%=id %>>
+			                    <input type="hidden" name="noteNo" value="<%=n.getNtNo() %>">
+			                    <input type="hidden" name="friendName" value="<%=n.getSenderName() %>">
+			                    <input type="hidden" name="sender" value="<%=n.getSender() %>">
+			                    <input type="hidden" name="id" value=<%=logInMember.getMemberId() %>>
 			                </form>	
 		                </td>
-                    	<td onclick="goPopup(event)"><%=list.get(i).getContent() %></td>
-                    	<td><%=list.get(i).getDate()%></td>
+                    	<td onclick="goPopup(event)"><%=n.getContent() %></td>
+                    	<td><%=n.getDate()%></td>
                 	</tr>
                 <%}
                 } %>
 
             </table>
             
-            <div id="pageBar">
+            	<div id="pageBar">
 					<%=request.getAttribute("pageBar") %>
 				</div>
-
-			  <script>
+            
+              <script>
             	function goPopup(e){
             		var gsWin=window.open("","winName","width=520,height=630"); //open("주소",띄우는방식,크기)
             		var frm=$(e.target).prev().find("form")[0];
@@ -80,21 +80,24 @@
             	}
             </script>
             
-           
+ 
+
+
             <div id="postcontroll">
                 <button>삭제하기</button>
                 <!-- <button onclick="window.open('mypage-pop_sendnote.html','_blank','scrollbars=yes,width=600,height=600,top=100,left=300')">쪽지보내기</button> -->
             </div>
+            
+            
+            
         </div>
-   </section>
-	 <style>
+</section>
+ <style>
        table,th,td{
             border: 1px solid rgb(112, 112, 112);
             border-collapse: collapse;
             padding: 2px;
-            
-
-           
+                      
         }
         table{
             border-bottom: hidden;
@@ -117,6 +120,7 @@
             position: absolute;
             top: 550px;
             left: 450px;
+            cursor: pointer;
             
         }
 
@@ -132,7 +136,6 @@
             left: 580px;
             width: 300px;
             height: 100px;
-            cursor: pointer;
         }
 
         #postsend{
@@ -141,7 +144,6 @@
             left: 1000px;
             width: 300px;
             height: 100px;
-            cursor: pointer;
         }
 
         #menutitle{

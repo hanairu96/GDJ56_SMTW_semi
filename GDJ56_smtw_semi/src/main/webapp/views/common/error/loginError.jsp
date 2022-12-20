@@ -5,11 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>에러 페이지</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body>
 	<script>
-		alert("로그인 시 이용할 수 있는 서비스입니다.");
-		location.assign(document.referrer);
+		Swal.fire({ 
+			title:"로그인 시에만 \n이용할 수 있는 서비스 :(",
+			icon:"error",
+			 confirmButtonText: '확인'})
+				.then((result)=>{
+						if(result.isConfirmed){
+							history.back();
+						}
+		})
+		
 	</script>
 </body>
 </html>
