@@ -71,13 +71,13 @@ public class mypageAccountUpdateEndServlet extends HttpServlet {
 			msg="실패했습니다. 다시 시도해주세요";
 			loc="/mypage/mypageAccountUpdate.do?id="+id;
 		}else {
-			msg="성공! 기존에 있던 페이지로 이동합니다";
+			msg="회원정보가 수정되었습니다";
 			loc="/mypage/mypageAccountView.do?id="+id;
 		}
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/mypage/alert.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

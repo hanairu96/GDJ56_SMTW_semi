@@ -63,27 +63,31 @@ public class SearchMemberListServlet extends HttpServlet {
 		int pageEnd=pageNo+pageBarSize-1;
 		
 		if(pageNo==1) {
-			pageBar+="<button class='customBtn btnStyle'>이전</button>";
+			pageBar+="<li class='page-item disabled' style='color:rgba(221, 160, 221, 0.508) !important;'>"
+					+"<a class='page-link' style='color:rgba(221, 160, 221, 0.508) !important;'>이전</a></li>";
 		}else {
-			pageBar+="<button class='customBtn btnStyle'><a href='"+request.getRequestURI()
-			+"?searchType="+type+"&searchKeyword="+keyword+"&cPage="+(pageNo-1)+"'>이전</a></button>";
+			pageBar+="<li><a class='page-link' href='"
+					+request.getRequestURI()+"?searchType="+type+"&searchKeyword="+keyword+"&cPage="+(pageNo-1)
+					+"' style='color:rgba(221, 160, 221, 0.508) !important;'>이전</a></li>";
 		}
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
-			if(pageNo==cPage) {
-				pageBar+="<button class='customBtn btnStyle'>"+pageNo+"</button>";
+			if(cPage==pageNo) {
+				pageBar+="<li class='page-item'><a class='page-link' style='color:rgba(221, 160, 221, 0.508) !important;'>"+pageNo+"</a></li>";
 			}else {
-				pageBar+="<button class='customBtn btnStyle'><a href='"+request.getRequestURI()
-				+"?searchType="+type+"&searchKeyword="+keyword+"&cPage="+pageNo+"'>"+pageNo+"</a></button>";
+				pageBar+="<li class='page-item'><a class='page-link' href='"
+						+request.getRequestURI()+"?searchType="+type+"&searchKeyword="+keyword+"&cPage="+pageNo
+						+"' style='color:rgba(221, 160, 221, 0.508) !important;'>"+pageNo+"</a></li>";
 			}
 			pageNo++;
 		}
 		
 		if(pageNo>totalPage) {
-			pageBar+="<button class='customBtn btnStyle'>다음</button>";
+			pageBar+="<li class='page-item disabled'><a class='page-link' style='color:rgba(221, 160, 221, 0.508) !important;'>다음</a></li>";
 		}else {
-			pageBar+="<button class='customBtn btnStyle'><a href='"+request.getRequestURI()
-			+"?searchType="+type+"&searchKeyword="+keyword+"&cPage="+pageNo+"'>다음</a></button>";
+			pageBar+="<li class='page-item'><a class='page-link' href='"
+					+request.getRequestURI()+"?searchType="+type+"&searchKeyword="+keyword+"&cPage="+pageNo
+					+"' style='color:rgba(221, 160, 221, 0.508) !important;'>다음</a></li>";
 		}
 		
 		request.setAttribute("pageBar", pageBar);

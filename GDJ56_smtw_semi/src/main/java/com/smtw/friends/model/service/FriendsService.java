@@ -91,4 +91,11 @@ public class FriendsService {
 		return result;
 	}
 	
+	public List<ApplyFriends> selectFriendsApply(String memberId) {
+		Connection conn=getConnection();
+		List<ApplyFriends> af=dao.selectFriendsApply(conn, memberId);
+		close(conn);
+		return af;
+	}
+	
 }

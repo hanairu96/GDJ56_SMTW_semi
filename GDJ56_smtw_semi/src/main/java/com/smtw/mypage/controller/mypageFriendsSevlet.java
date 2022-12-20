@@ -38,19 +38,26 @@ public class mypageFriendsSevlet extends HttpServlet {
 		//userId가지고 오기
 		String userId=request.getParameter("id");
 		
-		
+		// 친구 신청한 리스트
 		List<Applyfriends> list = new MypageService().applyfriendsList(userId);
+		//친구 신청한 사람들의 정보
 		List<MemberInfo> infolist = new MypageService().InfoapplyfriendsList(userId);
+		//친구 리스트
 		List<MemberInfo> friendslist = new MypageService().FriendsList(userId);
+		// (상대방이 나의 친구 신청을 받아준=)친구 수락받은 리스트
 		List<Member> acceptedFlist = new MypageService().acceptedFlist(userId);
+		// 그의 정보
 		List<MemberInfo2> acceptedlist=null;
+		
+		System.out.println("신청수락받은 리스트:"+acceptedFlist);
+		
 		if(!acceptedFlist.isEmpty()) {
 			for(int i=0;i<acceptedFlist.size();i++){
 				System.out.println(acceptedFlist.get(i).getMemberId());
 				acceptedlist=new MypageService().acceptedFinfo2(acceptedFlist.get(i).getMemberId());
 			}
 		}
-		System.out.println("신청수락받은 리스트:"+acceptedlist);
+		System.out.println("신청수락받은 리스트의 친구 정보:"+acceptedlist);
 		
 		
 		

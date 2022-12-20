@@ -2,6 +2,10 @@ package com.smtw.review.model.service;
 
 import static com.smtw.common.JDBCTemplate.close;
 import static com.smtw.common.JDBCTemplate.getConnection;
+import static com.smtw.common.JDBCTemplate.close;
+import static com.smtw.common.JDBCTemplate.commit;
+import static com.smtw.common.JDBCTemplate.getConnection;
+import static com.smtw.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -89,7 +93,20 @@ public class ReviewService {
 		
 	}
 	 
-	 
+	
+	public  int insertReview(Review r) {
+		Connection conn=getConnection();
+		
+		int result=dao.insertReview(conn,r);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+		
+		
+	}
+	
+	
 	 
 	
 	

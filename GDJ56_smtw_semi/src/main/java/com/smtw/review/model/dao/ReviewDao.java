@@ -1,7 +1,7 @@
 package com.smtw.review.model.dao;
 
 import static com.smtw.common.JDBCTemplate.*;
-
+import static com.smtw.common.JDBCTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -53,7 +53,7 @@ public class ReviewDao {
 				.reviewFileName(rs.getString("FILENAME"))
 				.build();
 	}
-		
+	
 	
 	
 	
@@ -239,6 +239,46 @@ public List<Review> searchReviewList(Connection conn,String type,String keyword,
 		
 	}
 
+	
+	//리뷰 작성에 대한 메소드
+	public int  insertReview(Connection conn, Review r) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertReview"));
+			//sql 문에 ? 설정
+//			1.작성자 아이디
+//			2.나라
+//			3.제목
+//			4내용
+//			5도시
+//			6만족도
+//			7파일명
+			pstmt.setString(1, r.getMemberId());
+			pstmt.setString(2, r.getNationName());
+			pstmt.setString(3, r.getReviewTitle());
+			pstmt.setString(4, r.getReviewCity());
+			pstmt.setInt(5, r.getReviewSat());
+			pstmt.setString(6, r.getReviewFileName());
+			pstmt.setString(7, r.getReviewContnet());
+			//
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+		
+		
+		
+		
+		
+		
+	}
+	
+	
 	
 	
 	

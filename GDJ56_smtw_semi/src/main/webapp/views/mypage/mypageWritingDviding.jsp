@@ -28,7 +28,7 @@
                 <table id="list">
                 	<thead>
 	                    <tr>
-	                        <th>글 목록</th>
+	                        <th>글 제목</th>
 	                        <th>작성일</th>
 	                    </tr>
 					</thead>

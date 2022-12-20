@@ -65,6 +65,10 @@
                 } %>
 
             </table>
+            
+            <div id="pageBar">
+					<%=request.getAttribute("pageBar") %>
+				</div>
 
 			  <script>
             	function goPopup(e){
@@ -79,7 +83,7 @@
            
             <div id="postcontroll">
                 <button>삭제하기</button>
-                <button onclick="window.open('mypage-pop_sendnote.html','_blank','scrollbars=yes,width=600,height=600,top=100,left=300')">쪽지보내기</button>
+                <!-- <button onclick="window.open('mypage-pop_sendnote.html','_blank','scrollbars=yes,width=600,height=600,top=100,left=300')">쪽지보내기</button> -->
             </div>
         </div>
    </section>
@@ -101,6 +105,12 @@
             top: 630px;
             left: 450px;
             
+        }
+        
+        #pageBar{
+        	position: absolute;
+            top: 1000px;
+            left: 900px;
         }
 
         #postcontroll{

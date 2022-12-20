@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.smtw.member.model.vo.Member;
 import com.smtw.mypage.model.service.MypageService;
 import com.smtw.mypage.model.vo.Note;
 
@@ -34,9 +35,59 @@ public class mypageNoteSendServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String id = request.getParameter("id");
 		System.out.println(id);
-		List<Note> list = new MypageService().noteSendList(id);
+		
+		int cPage;
+		int numPerpage=5;
+		
+		try {
+			cPage=Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			cPage=1;
+		}
+		
+		List<Note> list = new MypageService().noteSendList(id, cPage, numPerpage);
+		
+		int totalData=new MypageService().selectSendCount(id);
+		System.out.println(totalData);
+		
+		String pageBar="";
+		int pageBarSize=5;
+		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;//5
+		int pageEnd=pageNo+pageBarSize-1;//9
+		
+		if(pageNo==1) {
+			pageBar+="<button class='customBtn btnStyle'>이전</button>";
+		}else {
+			pageBar+="<button class='customBtn btnStyle'><a href='"+request.getContextPath()
+				+"/mypage/mypageNoteSend.do?cPage="+(pageNo-1)+"'>이전</a></button>";
+		}
+		
+		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+			if(cPage==pageNo) {
+				pageBar+="<button class='customBtn btnStyle'>"+pageNo+"</button>";
+			}else {
+				pageBar+="<a href='"+request.getContextPath()
+				+"/mypage/mypageNoteSend.do?cPage="+pageNo+"&id="+id+"'><button class='customBtn btnStyle'>"+pageNo+"</button></a>";
+			}
+			pageNo++;
+		}
+		
+		if(pageNo>totalPage) {
+			pageBar+="<button class='customBtn btnStyle'>다음</button>";
+		}else {
+			pageBar+="<a href='"+request.getContextPath()
+				+"/mypage/mypageNoteSend.do?cPage="+pageNo+"&id="+id+"'>다음</a>";
+		}
+
+		request.setAttribute("pageBar", pageBar);
+		
+		
+		
+		
 		System.out.println("보낸쪽지"+list);
 		request.setAttribute("list", list);
+		
 		request.getRequestDispatcher("/views/mypage/mypageNoteSend.jsp").forward(request, response); 
 	}
 

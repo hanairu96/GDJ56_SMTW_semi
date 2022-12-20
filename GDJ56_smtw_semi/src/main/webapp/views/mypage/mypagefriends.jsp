@@ -44,9 +44,10 @@ List<MemberInfo2> acceptedlist =  (List<MemberInfo2>)request.getAttribute("accep
             <div id="flist" style="overflow:scroll">
                 <p><b>친구 목록</b></p>
                 <!-- 크롬은 팝업창 최대화 금지가 안됨 -->
-                <%if(friendslist.isEmpty()||acceptedlist.isEmpty()||(friendslist.isEmpty()&&acceptedlist.isEmpty())){ %>
+                <%if(friendslist.isEmpty()&&acceptedlist==null){ %>
                 	아직 수락한 친구가 없습니다 :(
-                <%} else{
+                <%} else{ 
+                	if(friendslist!=null){
                 	for(int i=0;i<friendslist.size();i++){
                 %>
                 <div id="fname">
@@ -64,6 +65,7 @@ List<MemberInfo2> acceptedlist =  (List<MemberInfo2>)request.getAttribute("accep
                 
                 </div>
                 <%}
+                }if(acceptedlist!=null){
                
                 	for(int j=0;j<acceptedlist.size();j++){
                 %>
@@ -79,6 +81,7 @@ List<MemberInfo2> acceptedlist =  (List<MemberInfo2>)request.getAttribute("accep
                 onclick="goPopup2(event)">
                 <p><<%=acceptedlist.get(j).getMemberName()%>><p>
                 <%}
+                }
                 }%>
                 
               </div>

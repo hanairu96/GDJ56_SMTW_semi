@@ -22,11 +22,12 @@
      		location.replace("<%=request.getContextPath()%><%=loc%>"); 
 	    </script>
 	    <%}else{ %>
-	    <script>
+	    <script type="text/javascript">
             alert('<%=msg%>');
               
-            opener.parent.location.reload("<%=request.getContextPath()%><%=loc%>");
+            opener.document.location.href="<%=request.getContextPath()%><%=loc%>";
             window.close();
+            
         
         </script>
         <%} %>
