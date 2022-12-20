@@ -1,5 +1,7 @@
 package com.smtw.country.controller;
 
+
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -30,10 +32,25 @@ public class deleteCountryServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String fileName=request.getParameter("nImg");
 		Country c=Country.builder().nName(request.getParameter("nName")).build();
 		int result=new CountryService().deleteCountry(c);
-		request.setAttribute("msg",result>0?"삭제가 완료되었습니다.":"삭제되지 않았습니다. 다시시도해주세요");
-		request.setAttribute("loc","/country/countryMain.do");
+		String msg="",loc="";
+		if(result>0) {
+			msg="삭제가 완료되었습니다.";
+			loc="/country/countryMain.do";
+			String path=getServletContext()
+					.getRealPath("/upload/");
+			File delFile=new File(path+fileName);
+			if(delFile.exists()) delFile.delete();
+			
+		}else {
+			msg="삭제되지 않았습니다. 다시시도해주세요";
+			loc="/country/countryMain.do";
+			
+		}
+		request.setAttribute("msg",msg);
+		request.setAttribute("loc",loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request,response);
 	
 	

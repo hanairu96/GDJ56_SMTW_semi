@@ -201,4 +201,22 @@ public class CountrytDao {
 		return result;
 	}
 	
+	
+	//좋아요 기능에 대한 dao
+	public int insertlike(Connection conn,String id,String name ) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertlike"));
+			pstmt.setString(1, id);
+			pstmt.setString(2, name);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+		
 }

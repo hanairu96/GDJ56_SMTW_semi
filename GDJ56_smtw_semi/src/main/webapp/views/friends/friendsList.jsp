@@ -15,8 +15,8 @@
      <!-- ##### 여기 왼쪽 사이드메뉴 div ##### -->
 	<div class="sector">
 	    <div class="sidemenu">
-	        <div><a href="<%=request.getContextPath()%>/friends/friendsList.do"><p>커뮤니티</p></a></div><br>
-	        <div><a href="<%=request.getContextPath()%>/friends/friendsList.do"><p>워홀프렌즈 구하기</p></a></div><br>
+	        <div><a href="<%=request.getContextPath()%>/friends/friendsList.do"><p>커뮤니티</p></a></div>
+	        <div><a href="<%=request.getContextPath()%>/friends/friendsList.do"><p id="purple">워홀프렌즈 구하기</p></a></div>
 	        <div><a href="<%=request.getContextPath()%>/community/reviewBasic.do"><p>생생후기</p></a></div>
 	    </div>
 	<!-- ##### 사이드메뉴랑 본내용 구분하는 div ##### -->
@@ -82,31 +82,31 @@
 				<%}else {
 					int count=0;
 					for(Friends f : fs) {%>
-                       <div id="box" style="border:0px solid green;width:300px;height:300px">
+                       <div id="box" style="border:0px solid green;width:300px;height:320px">
 						<button onclick="location.assign('<%=request.getContextPath() %>/friends/friendsInfo.do?friendsNo=<%=f.getFriendsNo() %>')"
 						style="border:0px;background-color: white;">
-                            <div style="border:0px solid magenta;width:210px;height:270px; margin-left :0px; margin-top :5px;background-color:rgba(128, 128, 128, 0.342);border-radius:20px;">
-                                <div style="border:0px solid blue;width:100%;height:110px;display:flex;justify-content: center;">
+                            <div style="border:0px solid magenta;width:210px;height:290px;margin-left:0px;margin-top:5px;background-color:rgba(128, 128, 128, 0.342);border-radius:20px;">
+                                <div style="border:0px solid blue;width:100%;height:110px;display:flex;justify-content:center;">
                                     <img src="<%=request.getContextPath() %>/images/lupy.jpg" alt="" style="width:50%;height:80%;margin:auto;border-radius:120px;">
                                 </div>
                                 <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
                                     <div>&nbsp<strong><%=f.getFriendsTitle() %></strong></div>
                                 </div>
                                 <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
-                                    <div>&nbsp이름:</div>
-                                    <%
-                                    	//아이디로 이름 찾기
-                                    	String name=new MemberService().selectMemberId(f.getMemberId()).getMemberName();
-                                    %>
-                                    <div>&nbsp<%=name %></div>
+                                    <div>
+	                                    &nbsp이름:
+	                                    <%
+	                                    	//아이디로 이름 찾기
+	                                    	String name=new MemberService().selectMemberId(f.getMemberId()).getMemberName();
+	                                    %>
+	                                    <%=name %>
+                                    </div>
                                 </div>
                                 <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
-                                    <div>&nbsp희망국가:</div>
-                                    <div>&nbsp<%=f.getNName() %></div>
+                                    <div>&nbsp희망국가: <%=f.getNName() %></div>
                                 </div>
                                 <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
-                                    <div>&nbsp목적:</div>
-                                    <div>&nbsp<%=f.getPurpose() %></div>
+                                    <div>&nbsp목적: <%=f.getPurpose() %></div>
                                 </div>
                             </div>
                         </button>
@@ -147,6 +147,12 @@
         </div>
     </div>
     </section>
+
+    <style>
+        .sidemenu>div{
+        	margin-top:20px;
+        }
+	</style>
     
     <!-- ##### 사이드바 스크롤 위치 따라 움직이는 스크립트문 ##### -->
     <!-- ##### 개별적으로 설정해줘야 하는 부분 있음 (각자 페이지 푸터위까지만 움직이게) ##### -->

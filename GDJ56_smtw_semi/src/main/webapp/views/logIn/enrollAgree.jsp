@@ -82,12 +82,12 @@ Show Me The Way(SMTW) 이용약관(이하 ‘본 약관’이라 함)은 Show Me
 		const fn_agree=()=>{
 			if($("#join1").is(":checked")==false){//필수 동의에 체크하지 않으면
 				console.log($("#join1").is(":checked"))
-				alert("필수 이용약관에 동의해주세요.");
+				Swal.fire("필수 이용약관에 \n동의해주세요.");
 				return false;
 			}
 			if($("#join2").is(":checked")==false){//개인정보 수집 및 이용동의에 체크하지 않으면
 				console.log($("#join2").is(":checked"))
-				alert("필수 개인정보 수집 및 이용에 동의해주세요.");
+				Swal.fire("필수 개인정보 수집 \n및 이용에 동의해주세요.");
 				return false;
 			}
 		}

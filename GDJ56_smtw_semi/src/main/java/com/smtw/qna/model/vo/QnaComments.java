@@ -9,6 +9,8 @@ import lombok.Data;
 @Builder
 public class QnaComments {
 	private int qnaCoNo;
+	private int qnaCoLevel;
+	private String qnaCoRef;
 	private String qcContents;
 	private Date enrollDate;
 	private int qnaNo2;

@@ -95,7 +95,7 @@
 				success:data=>{//ajax로 돌려받은 인증번호
 					// 인증번호 값이 없을 경우
 					if(data==null){
-						alert("인증에 실패하였습니다. 다시 시도해주세요");
+						Swal.fire("인증에 실패하였습니다. \n다시 시도해주세요");
 						$("span#checkCrtfcNo>small").text(" ");//인증번호 발신메세지 지우기
 						return false;
 				    // ajax가 돌아가서 제대로 값이 돌아온 경우
@@ -132,7 +132,7 @@
 			const fn_searchIdPwd=()=>{
 				//이메일인증 성공
 		   		if(!($("span#checkCrtfcNo>small").text().includes("성공"))){
-		   			alert("이메일인증이 필요합니다.")
+		   			Swal.fire("이메일인증이 필요합니다.")
 		   			$("#exampleInputEmail").focus();
 		   			return false;
 		   		}

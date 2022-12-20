@@ -5,17 +5,26 @@
 	List<Qna> qnas=(List<Qna>)request.getAttribute("list");
 %>
 <%@ include file="/views/common/header.jsp" %>
+
+<!-- 부트스트랩 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+<!-- 부트스트랩 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/index.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/admin.css"/>
 
     <section>
         <div class="sidemenu">
-            <div><p>회원 관리</p></div>
-            <div><p>Q&A 관리</p></div>
+            <div><a href="<%=request.getContextPath()%>/admin/memberList.do"><p>관리자 페이지</p></a></div>
+            <div><a href="<%=request.getContextPath()%>/admin/memberList.do"><p>회원 관리</p></a></div>
+            <div><a href="<%=request.getContextPath()%>/admin/qnaManage.do"><p id="purple">Q&A 관리</p></a></div>
         </div>
 
         <div class="menuDiv"></div>
 
-        <div class="texts">
+        <div class="texts" style="border:2px solid;border-radius:10px">
             <h1>Q&A 관리</h1>
             <br>
 
@@ -47,18 +56,24 @@
                     </tbody>
                 </table>
                 <br>
-               	<div id="pageBar">
-					<%=request.getAttribute("pageBar") %>
-				</div>
+                <div style="border:0px solid blue;width:100%;height:80px;text-align: center;">
+                     <!-- 페이지 바 -->
+                     <nav aria-label="Page navigation example" style="margin-top:30px;color:rgba(221, 160, 221, 0.508) !important;">
+                         <ul class="pagination justify-content-center" style="color:rgba(221, 160, 221, 0.508) !important;">
+							<%=request.getAttribute("pageBar") %>
+                         </ul>
+                     </nav>
+                </div>
             </div>
         </div>
 
     </section>
     <style>
         .texts{
-            width: 85%;  
-            margin-left: 0 auto;
-            margin-right: 0 auto;
+            width: 70%;  
+            padding: 20px;
+            padding-top:30px;
+            margin-right: 150px;
             text-align: center;
         }
         .texts h1{
@@ -88,16 +103,38 @@
             font-weight: bold;
         }
 
-        .sidemenu>div:nth-child(2){
+/*      .sidemenu>div:nth-child(2){
             color: purple;
+        } */
+        .sidemenu #purple{
+            color: purple;
+        }
+        
+        .sidemenu>div{
+        	margin-top:20px;
         }
     </style>
     <script>
-	    $(".sidemenu>div:nth-child(1)").click(e=>{
+<%-- 	    $(".sidemenu>div:nth-child(1)").click(e=>{
 	    	location.assign('<%=request.getContextPath()%>/admin/memberList.do');
 	    })
 	    $(".sidemenu>div:nth-child(2)").click(e=>{
 	        location.assign("<%=request.getContextPath()%>/admin/qnaManage.do");
-	    })
+	    }) --%>
+	    
+		$(document).ready(function() {
+		    // 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
+		    var floatPosition = parseInt($(".sidemenu").css('top'));
+		    // 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
+		
+		    $(window).scroll(function() {
+		        // 현재 스크롤 위치를 가져온다.
+		        var scrollTop = $(window).scrollTop();
+		        var newPosition = scrollTop + floatPosition + "px";
+		        $(".sidemenu").stop().animate({
+		            "top" : newPosition
+		        }, 500);
+		    }).scroll();
+		});
     </script>
 <%@ include file="/views/common/footer.jsp" %>

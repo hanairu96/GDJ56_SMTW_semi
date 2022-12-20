@@ -75,4 +75,14 @@ public class CountryService {
 		return result;
 		
 	}
+	
+	//좋아요 버튼에 대한  service
+	public int insertlike(String id, String name) {
+		Connection conn=getConnection();
+		int result=dao.insertlike(conn,id,name);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 }
