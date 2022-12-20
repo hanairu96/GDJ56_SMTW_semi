@@ -13,6 +13,13 @@ public class MemberService {
 	
 	private MemberDao dao=new MemberDao();
 
+	public List<Member> selectMemberListAll() {
+		Connection conn=getConnection();
+		List<Member> list=dao.selectMemberListAll(conn);
+		close(conn);
+		return list;
+	}
+	
 	public List<Member> selectMemberList(int cPage, int numPerpage) {
 		Connection conn=getConnection();
 		List<Member> list=dao.selectMemberList(conn, cPage, numPerpage);
