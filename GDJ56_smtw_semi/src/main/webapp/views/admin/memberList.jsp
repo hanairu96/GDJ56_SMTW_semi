@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.smtw.member.model.vo.Member, java.util.List" %>
+<%@ page import="com.smtw.member.model.vo.Member, com.smtw.diary.model.vo.Diary ,java.util.List" %>
 <%
 	List<Member> members=(List<Member>)request.getAttribute("list");
 	List<Member> listAll=(List<Member>)request.getAttribute("listAll");
+	List<Diary> diaryAll=(List<Diary>)request.getAttribute("diaryAll");
 %>
 <%@ include file="/views/common/header.jsp" %>
 
@@ -163,12 +164,28 @@
 	   	$(document).ready(function() {
 	   		let memberEmailAgree=[];
 	   		let memberEmail=[];
-	   		<%if(!listAll.isEmpty()) {%>
-		   		<%for(Member m : listAll) {%>
-		   			memberEmailAgree.push("<%=m.getEmailAgree()==('Y')?m.getEmail():"X"%>"); /* 회원의 이메일 수신 동의 여부 */
-		   		<%}
-	   		}%>
+	   		let memberID;
+	   		if(!listAll.isEmpty()) { /* 회원리스트가 있다면 */
+		   		 for(Member m : listAll) { /* 회원리스트에서 반복 */
+		   			 if(m.getEmailAgree()=='Y'){ /* 회원 중 이메일 수신동의 여부 Y인 사람의 경우 */
+		   				for(Diary d : diaryAll){ /* 출국일지 테이블에서 반복 */
+		   					if(d.getMemberId().equals(m.getMemberId())){ /* 이메일 수신동의 여부 Y인 회원이 출국일지를 가진 경우*/
+		   						//D-DAY구하기
+			   			        LocalDate today = LocalDate.now(); // 오늘 날짜 구하기 (YYYY-MM-DD)
+			   			        LocalDate diaryDate = LocalDate.parse(d.getDDay()); // 출국일 : 문자열 -> LocalDate 타입변환
+			   					//날짜 사이의 간격을 계산해주는 메소드
+			   					int diaryDday=(int) ChronoUnit.DAYS.between(today, diaryDate);  //출국일-오늘 DDAY계산	
+		   						if(diaryDday==10){ //디데이 10인 경우
+		   							memberEmailAgree.push(m.getEmail()); //회원의 이메일을 memberEmailAgree에 추가
+		   						}
+		   					}
+		   				}
+		   			}
+		   		 }
+		   	}
+		   		
 	   		console.log(memberEmailAgree);
+	   		
 	   		for(let i = 0; i < memberEmailAgree.length; i++) {
 	   		  if(memberEmailAgree[i] === 'X')  {
 	   			memberEmailAgree.splice(i, 1);
@@ -181,7 +198,7 @@
 	         const memberEmailtotal = [...set];
 				
 			//출국10일전 알림 메일 발송을 위한 ajax
-			 $.ajax({
+			<%--  $.ajax({
 					url:"<%=request.getContextPath()%>/diary/mailAlarm.do",
 					data:{
 						memberEmailtotal:JSON.stringify(memberEmailtotal)//사용자 이메일 넘기기
@@ -189,8 +206,8 @@
 					success:data=>{//ajax로 돌려받은 결과값
 						Swal.fire(data);
 					}
-				}) 
-	   		})
+				}) --%> 
+	   		}) 
 	   	
 				
 	   	

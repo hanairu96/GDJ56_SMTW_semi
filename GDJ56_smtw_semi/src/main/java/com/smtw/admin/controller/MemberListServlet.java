@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.smtw.admin.model.service.MemberService;
+import com.smtw.diary.model.service.DiaryService;
+import com.smtw.diary.model.vo.Diary;
 import com.smtw.member.model.vo.Member;
 
 /**
@@ -77,7 +79,8 @@ public class MemberListServlet extends HttpServlet {
 		}
 		
 		List<Member> listAll=new MemberService().selectMemberListAll(); //페이징 처리 되지 않은 회원 전체 리스트
-
+		List<Diary> diaryAll=new DiaryService().searchDiaryAll();
+		
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("listAll", listAll);
 		request.setAttribute("list", list);

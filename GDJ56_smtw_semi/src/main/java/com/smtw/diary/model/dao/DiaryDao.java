@@ -1,16 +1,19 @@
 package com.smtw.diary.model.dao;
 
+import static com.smtw.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
-
-import static com.smtw.common.JDBCTemplate.close;
 
 import com.smtw.diary.model.vo.CheckList;
 import com.smtw.diary.model.vo.Diary;
+import com.smtw.member.model.vo.Member;
 
 public class DiaryDao {
 
@@ -58,6 +61,28 @@ public class DiaryDao {
 	               .dailyNecessity(rs.getString("DAILY_NECESSITY").charAt(0))
 	               .build();
 	   }
+	   
+	public List<Diary> searchDiaryAll(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Diary> result=new ArrayList();
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("searchDiaryAll"));
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(getDiary(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	
 	public Diary searchDiary(Connection conn, String memberId) {
 		PreparedStatement pstmt=null;
