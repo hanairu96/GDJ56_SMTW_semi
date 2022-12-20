@@ -1,5 +1,6 @@
 package com.smtw.mypage.controller;
 
+import java.io.File;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,12 +31,21 @@ public class mypageMemberDeleteEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId= request.getParameter("id");
+		String img= request.getParameter("img");
 		
 		int delete = new MypageService().deleteMember(userId);
+		
+		
 		
 		String msg="",loc="";
 		
 		if(delete>0) {
+			
+		      String path=getServletContext()
+		               .getRealPath("/upload/account/");
+		         File delFile=new File(path+img);
+		         if(delFile.exists()) delFile.delete();
+			
 			HttpSession session = request.getSession(false);
 			if(session!=null) {
 				session.invalidate();

@@ -38,7 +38,7 @@ List<MemberInfo2> acceptedlist =  (List<MemberInfo2>)request.getAttribute("accep
             <div id="menutitle"><h2 style="background-color: cornflowerblue;">워홀 프렌즈</h2></div>
             <div id="mypsc">
                 <p><%=logInMember.getMemberName()%>님 어서 오세요!</p>
-                <img src="<%=request.getContextPath()%>/images/mypage/tomcat.png" alt="" width="200" height="200">
+                <img src="<%=request.getContextPath()%>/upload/account/<%=logInMember.getMyImg() %>" alt="" width="200" height="200">
             </div>
             
             <div id="flist" style="overflow:scroll">

@@ -30,7 +30,7 @@ out.print(bYear);
         <div class="contentList">
             <div id="menutitle"><h2 style="background-color: cornflowerblue;">계정 관리</h2></div>
         
-        <form action="<%=request.getContextPath()%>/mypageAccountUpdateEnd.do" method="post">
+        <form action="<%=request.getContextPath()%>/mypageAccountUpdateEnd.do" method="post" enctype="multipart/form-data">
         <div id="mypsc">
                 <img src="<%=m.getMyImg()%>" alt="" width="200" height="200" >
                 <br>
@@ -41,7 +41,7 @@ out.print(bYear);
         </div>
         <div id="myimpo">
             <div>아이디 : <input type="text" name="id" value="<%=m.getMemberId()%>" readonly></div>
-            <div>이름 : <input type="text" name="name" value="<%=name %>" required ></div>
+            <div>이름 : <input type="text" name="name" value="<%=m.getMemberName() %>" required ></div>
             
             <div>성별 : 
                 <input type="radio" name="gender" id="gender0" value="M" <%=gender=='M'? "checked":"" %>>

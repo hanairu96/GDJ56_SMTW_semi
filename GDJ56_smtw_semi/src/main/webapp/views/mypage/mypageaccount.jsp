@@ -20,7 +20,7 @@
             <div id="menutitle"><h2 style="background-color: cornflowerblue;">계정 관리</h2></div>
         
         <div id="mypsc">
-                <img src="./사진/tomcat.png" alt="" width="200" height="200" style="border">
+                <img src="<%=request.getContextPath()%>/upload/account/<%=m.getMyImg() %>" alt="" width="200" height="200" style="border">
                 <br>
                 
                 <button onclick="location.replace('<%=request.getContextPath()%>/mypage/mypagePwdCk.do?id=<%=m.getMemberId()%>');"; style="box-shadow: 3px 3px;background-color: lavender;">수정하기</button>
