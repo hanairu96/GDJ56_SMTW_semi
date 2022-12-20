@@ -155,8 +155,7 @@
         <input type="button" id="cobtn5" name="button" value="취업정보">      
        
 		<div id="explain">
-			<pre>
-			</pre>
+			
 		</div>
     </div>
 	
@@ -171,7 +170,7 @@
     			data:{"info":$(e.target).val(),
     				  "name":"<%=name%>"},
     			success:data=>{
-    				$("#explain>pre").html(data);
+    				$("#explain").html(data);
     				
     			}
     		});
