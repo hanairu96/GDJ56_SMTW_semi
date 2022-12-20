@@ -9,8 +9,8 @@
 
     <section>
         <div class="sidemenu">
-            <div><p>회원 관리</p></div>
-            <div><p>Q&A 관리</p></div>
+            <div><a href="<%=request.getContextPath()%>/admin/memberList.do"><p id="purple">회원 관리</p></a></div><br>
+            <div><a href="<%=request.getContextPath()%>/admin/qnaManage.do"><p>Q&A 관리</p></a></div><br>
         </div>
 
         <div class="menuDiv"></div>
@@ -124,17 +124,20 @@
             font-weight: bold;
         }
 
-        .sidemenu>div:nth-child(1){
+/*      .sidemenu>div:nth-child(1){
+            color: purple;
+        } */
+        .sidemenu #purple{
             color: purple;
         }
     </style>
     <script>
-        $(".sidemenu>div:nth-child(1)").click(e=>{
+<%--         $(".sidemenu>div:nth-child(1)").click(e=>{
         	location.assign('<%=request.getContextPath()%>/admin/memberList.do');
         })
         $(".sidemenu>div:nth-child(2)").click(e=>{
             location.assign("<%=request.getContextPath()%>/admin/qnaManage.do");
-        })
+        }) --%>
         
        	const deleteMember=()=>{
        		let check=confirm("정말로 삭제하겠습니까?");
