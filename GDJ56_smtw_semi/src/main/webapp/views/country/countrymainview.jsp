@@ -153,11 +153,8 @@
 	                            
 	                            <!-- 좋아요 버튼 -->
 	                        	<div id="likebtn">
-	                        		<%-- <img src="<%=request.getContextPath()%>/images/country/heart_like.png" 
-	                        		style="width:50px;height:50px;cursor:pointer;color:yellow;" onclikc="liketoggle"> --%>
-		                            <!-- <button id="like2">❤</button> -->
-		                            <button type="hidden" id="togBtn"><img src="<%=request.getContextPath() %>/images/country/heart_like.png" id="likeimg" style="width:50px;height:50px;"></button>
-	                        		<i class="far fa-heart"></i>
+	                        		<img class="likeimg"  src="<%=request.getContextPath() %>/images/country/like.png" style="width:50px;height:50px;" onclick="likebtn(event)">
+	                        		<img class="dislikeimg" src="<%=request.getContextPath() %>/images/country/dislike.png" style="width:50px;height:50px;" onclick="likebtn(event)">
 	                        	</div>	    
 	                        </div>
 	                        <h4 id="maininfo2"><%=con.get(i).getNpharse() %></h4>
@@ -174,13 +171,13 @@
 			 	}%>  
    		</div>
 	<script>
-		const toggleBtn = document.querySelectorAll('#togBtn'); 
-	
-		toggleBtn.forEach(function(btn){
-			btn.addEventListener('click', function(){
-				btn.classList.toggle('fas');
-			});
-		});
+		//좋아요 하트 버튼
+		$(".likeimg").hide();
+		const likebtn=(e)=>{
+			console.log(e);
+			$(e.target).parent().find("img").toggle();
+		} 
+		
 	</script>
 	
 	
