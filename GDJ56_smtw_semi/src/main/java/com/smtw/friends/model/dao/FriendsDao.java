@@ -254,6 +254,28 @@ public class FriendsDao {
 		return result;
 	}
 	
+	public List<ApplyFriends> selectFriendsApply(Connection conn, String id) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<ApplyFriends> result=new ArrayList();
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectFriendsApply"));
+			pstmt.setString(1, id);
+			pstmt.setString(2, id);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(getApplyFriends(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	public static Friends getFriends(ResultSet rs) throws SQLException {
 		return Friends.builder()
 				.friendsNo(rs.getInt("Friends_No"))
@@ -266,6 +288,18 @@ public class FriendsDao {
 				.type(rs.getString("type"))
 				.expYn(rs.getString("exp_yn").charAt(0))
 				.purpose(rs.getString("purpose"))
+				.build();
+	}
+	
+	public static ApplyFriends getApplyFriends(ResultSet rs) throws SQLException {
+		return ApplyFriends.builder()
+				.pNo(rs.getInt("p_no"))
+				.propose(rs.getString("propose"))
+				.memberFrom(rs.getString("member_from"))
+				.fAdd(rs.getString("f_add").charAt(0))
+				.friendsNo(rs.getInt("friends_no"))
+				.fEnroll(rs.getDate("f_enroll"))
+				.nName(rs.getString("n_name"))
 				.build();
 	}
 	

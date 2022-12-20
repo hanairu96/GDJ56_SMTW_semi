@@ -37,7 +37,7 @@ public class updateFirstCountryServlet extends HttpServlet {
 		
 		String path=request.getServletContext().getRealPath("/upload/");
 		
-		MultipartRequest mr=new MultipartRequest(request,path,1024*1024*10,"UTF-8",new DefaultFileRenamePolicy());
+		MultipartRequest mr=new MultipartRequest(request,path,1024*1024*10,"UTF-8",new DefaultFileRenamePolicy());//파일 객체생성
 		
 		Enumeration e=mr.getFileNames();
 		String pic="";

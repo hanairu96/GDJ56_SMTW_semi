@@ -32,7 +32,7 @@
     
 	<script>
        function goPopup(e){
-           var gsWin=window.open("","winName2","width=600,height=600"); //open("주소",띄우는방식,크기)
+           var gsWin=window.open("","winName2","width=500,height=600"); //open("주소",띄우는방식,크기)
            var frm=$(e.target).prev()[0];
            console.log(frm);
            frm.action="<%=request.getContextPath()%>/mypage/mypageNoteReply.do";
@@ -55,7 +55,7 @@
             border-bottom: 3px solid; */
 
             position: absolute;
-            top: 235px;
+            top: 200px;
             left: 300px;
             cursor:pointer
 

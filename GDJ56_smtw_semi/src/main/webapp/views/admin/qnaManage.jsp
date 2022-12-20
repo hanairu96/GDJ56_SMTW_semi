@@ -5,12 +5,20 @@
 	List<Qna> qnas=(List<Qna>)request.getAttribute("list");
 %>
 <%@ include file="/views/common/header.jsp" %>
+
+<!-- 부트스트랩 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+<!-- 부트스트랩 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/index.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/admin.css"/>
 
     <section>
         <div class="sidemenu">
-            <div><p>회원 관리</p></div>
-            <div><p>Q&A 관리</p></div>
+            <div><a href="<%=request.getContextPath()%>/admin/memberList.do"><p>회원 관리</p></a></div><br>
+            <div><a href="<%=request.getContextPath()%>/admin/qnaManage.do"><p id="purple">Q&A 관리</p></a></div><br>
         </div>
 
         <div class="menuDiv"></div>
@@ -47,9 +55,14 @@
                     </tbody>
                 </table>
                 <br>
-               	<div id="pageBar">
-					<%=request.getAttribute("pageBar") %>
-				</div>
+                <div style="border:0px solid blue;width:100%;height:80px;text-align: center;">
+                     <!-- 페이지 바 -->
+                     <nav aria-label="Page navigation example" style="margin-top:30px;color:rgba(221, 160, 221, 0.508) !important;">
+                         <ul class="pagination justify-content-center" style="color:rgba(221, 160, 221, 0.508) !important;">
+							<%=request.getAttribute("pageBar") %>
+                         </ul>
+                     </nav>
+                </div>
             </div>
         </div>
 
@@ -88,7 +101,10 @@
             font-weight: bold;
         }
 
-        .sidemenu>div:nth-child(2){
+/*      .sidemenu>div:nth-child(2){
+            color: purple;
+        } */
+        .sidemenu #purple{
             color: purple;
         }
     </style>

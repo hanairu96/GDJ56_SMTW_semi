@@ -25,7 +25,7 @@
 <%@include file="/views/common/header.jsp" %>
 
     <!-- 가운데 섹션 부분!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-    <section>
+    <section style=height:auto;>
         <div style="border:1px solid;width:100%;height:150px;text-align: center;font-size: x-large;justify-content: center;display: flex;">
             <div style="margin-top:50px"> <%=r.getReviewTitle() %> </div> 
         </div>
@@ -105,12 +105,15 @@
                             <div style="border:0px solid pink;width:950px;height:550px;text-align:center;margin-left:270px;margin-top: 30px; ">
                                <div style="border:1px solid rgba(137, 43, 226, 0.247);width:950px;height:800x;text-align:left;border-radius:20px;">
                                 
-                                 <img src="<%=request.getContextPath() %>/upload/<%=r.getReviewFileName() %>" alt="" style="width: 50%;height:50%;margin:auto; display:block;border-radius:20px;">
+                                 <img src="<%=request.getContextPath() %>/upload/review/<%=r.getReviewFileName() %>" alt="" style="width: 50%;height:50%;margin:auto; display:block;border-radius:20px;">
                                 </div>
-                                <div style="border:1px solid rgba(137, 43, 226, 0.301);width:950px;height:55%;text-align:center;border-radius:20px;;">
+                                <div  class="product-title" style="border:1px solid rgba(137, 43, 226, 0.301);width:950px;height:auto;text-align:center;border-radius:20px;;">
+                                    <div class="product-img-div"  style="width:100%;"  style="height:auto;">
                                      <p>
                                         <%=r.getReviewContnet() %>
                                      </p>
+                                     </div>
+                                     
                                 </div> 
                             </div>
                         </div>  
@@ -118,6 +121,31 @@
                 </div>
             </div>
         </div>
+       
+       
+       <style>
+		  .product-title {
+		    text-align:center;
+		    display:table;
+		    border:1px solid #cecece;
+		    width:280px;
+		    height:250px;
+		}
+		
+		.product-img-div {
+		    display:table-cell;
+		    vertical-align:middle;
+		}
+       
+       .product-img-div img {
+		    max-width:100%;
+   			 max-height:100%;
+		}
+       
+       
+       
+       </style>
+       
        
         
         
@@ -215,7 +243,7 @@
        <!-- 댓글 등록하기폼 -->
         <!-- div로 form을 감아줌 -->
        
-        <div class="comment-editor"> 
+        <div style="margin-top:300px" class="comment-editor"> 
            
             <form class="form comment-form">
                     <textarea placeholder="댓글을 남겨보세요"></textarea>

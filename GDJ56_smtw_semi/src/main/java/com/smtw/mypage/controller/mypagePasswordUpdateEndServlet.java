@@ -39,7 +39,7 @@ public class mypagePasswordUpdateEndServlet extends HttpServlet {
 			int result=new MypageService().updatePassword(userId,newPass);
 			
 			if(result>0) {
-				msg="비밀번호 변경 완료"; 
+				msg="비밀번호 변경 완료! 새로 변경된 비밀번호로 다시 로그인 해주세요"; 
 				loc="/logIn/logOut.do";
 				String script="opener.location.replace('"+request.getContextPath()+"/logIn/logOut.do');close();";
 				//openr =  부모페이지(지금 이 페이지는 새창에 뜨기 때문)

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.smtw.friends.model.vo.Friends, com.smtw.member.model.vo.Member" %>
+<%@ page import="com.smtw.friends.model.vo.Friends, com.smtw.member.model.vo.Member, 
+	com.smtw.friends.model.vo.ApplyFriends, java.util.List, java.util.ArrayList, 
+	com.smtw.friends.model.service.FriendsService" %>
 <%
 	Friends f=(Friends)request.getAttribute("friends");
 	Member m=(Member)request.getAttribute("member");
@@ -22,10 +24,31 @@
                                 <img src="<%=request.getContextPath() %>/images/lupy.jpg" alt="" style="width:60%;height:75%;margin:auto;display:block;margin-top:50px;border-radius:120px;">
                             </div>
                             <div style="border:0px solid pink;width:440px;height:340px;text-align:center;">
-                            <%if(logInMember!=null&&!logInMember.getMemberId().equals(f.getMemberId())) {%>
+                            <%
+	                            ApplyFriends myFriends=null;
+                            	if(logInMember!=null){
+	                            	List<ApplyFriends> afs=new FriendsService().selectFriendsApply(logInMember.getMemberId());
+	                            	List myFriendsList=new ArrayList();
+	                            	for(ApplyFriends af : afs){
+	                            		if(af.getMemberFrom().equals(f.getMemberId())){
+	                            			myFriends=af;
+	                            		}
+	                            		myFriendsList.add(af.getMemberFrom());
+	                            	}
+									System.out.println("내 친구 목록: "+myFriendsList);
+									System.out.println("이 프렌즈의 아이디: "+f.getMemberId());
+									System.out.println("친구 여부: "+(myFriends!=null?"친구":"친구 아님"));
+                            	}
+                            %>
+                            <!-- 내 아이디가 아닐 때, 친구가 아닐 때 친구신청 버튼 보임 -->
+                            <%if((logInMember!=null&&!logInMember.getMemberId().equals(f.getMemberId()))
+                            		&&myFriends==null){%>
                                 <button onclick="window.open('<%=request.getContextPath() %>/friends/friendsApply.do?memberFrom=<%=logInMember.getMemberId() %>&friendsNo=<%=f.getFriendsNo() %>&nName=<%=f.getNName() %>',
                                 '_blank','scrollbars=yes,width=500,height=500,top=100,left=300')"
                                 class="customBtn btnStyle btn btn-primary" type="button" style="width:120px;margin-top:25px;background-color:rgba(221, 160, 221, 0.508) !important;"value="친구신청하기">친구 신청하기</button>
+                            <!-- 친구일 때 이미 친구입니다 버튼 보임 -->    
+							<%}else if(myFriends!=null) {%>
+								<button class="customBtn btnStyle btn btn-primary" style="width:120px;margin-top:25px;background-color:rgba(221, 160, 221, 0.508);font-size:13px !important;">이미 친구입니다.</button>
 							<%} %>
                             </div>
                         </div>
