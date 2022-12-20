@@ -18,7 +18,7 @@
     <section>
         <div class="sidemenu">
             <div><a href="<%=request.getContextPath()%>/admin/memberList.do"><p id="purple">회원 관리</p></a></div><br>
-            <div><a href="<%=request.getContextPath()%>/admin/qnaManage.do"><p>Q&A 관리</p></a></div>
+            <div><a href="<%=request.getContextPath()%>/admin/qnaManage.do"><p>Q&A 관리</p></a></div><br>
         </div>
 
         <div class="menuDiv"></div>
@@ -35,16 +35,16 @@
 	        		<form action="<%=request.getContextPath()%>/admin/searchMember.do">
 	        			<input type="hidden" name="searchType" value="userId" >
 	        			<input type="text" name="searchKeyword" size="25" 
-	        			placeholder="검색할 아이디를 입력하세요">
-	        			<button type="submit">검색</button>
+	        			placeholder="검색할 아이디를 입력하세요.">
+	        			<button type="submit" class="customBtn btnStyle btn btn-primary" style="height:30px;padding-bottom:40px; margin-left:10px; margin-bottom :5px;background-color: rgba(221, 160, 221, 0.508) !important;">&nbsp검색&nbsp</button>
 	        		</form>
 	        	</div>
 	        	<div id="search-userName">
 	        		<form action="<%=request.getContextPath()%>/admin/searchMember.do">
 	        			<input type="hidden" name="searchType" value="userName">
 	        			<input type="text" name="searchKeyword" size="25" 
-	        			placeholder="검색할 이름을 입력하세요">
-	        			<button type="submit">검색</button>
+	        			placeholder="검색할 이름을 입력하세요.">
+	        			<button type="submit" class="customBtn btnStyle btn btn-primary" style="height:30px;padding-bottom:40px; margin-left:10px; margin-bottom :5px;background-color: rgba(221, 160, 221, 0.508) !important;">&nbsp검색&nbsp</button>
 	        		</form>
 	        	</div>
 	        </div>

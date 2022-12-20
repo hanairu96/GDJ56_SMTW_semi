@@ -18,7 +18,7 @@
     <section>
         <div class="sidemenu">
             <div><a href="<%=request.getContextPath()%>/admin/memberList.do"><p>회원 관리</p></a></div><br>
-            <div><a href="<%=request.getContextPath()%>/admin/qnaManage.do"><p id="purple">Q&A 관리</p></a></div>
+            <div><a href="<%=request.getContextPath()%>/admin/qnaManage.do"><p id="purple">Q&A 관리</p></a></div><br>
         </div>
 
         <div class="menuDiv"></div>
