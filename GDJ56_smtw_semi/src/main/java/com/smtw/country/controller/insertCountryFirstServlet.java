@@ -33,7 +33,7 @@ public class insertCountryFirstServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//파일 업로드 하기
-		String path=request.getServletContext().getRealPath("/upload/");
+		String path=request.getServletContext().getRealPath("/upload/country/");
 		
 		MultipartRequest mr=new MultipartRequest(request,path,1024*1024*10,"UTF-8",new DefaultFileRenamePolicy());
 		
