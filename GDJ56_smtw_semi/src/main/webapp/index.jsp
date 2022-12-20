@@ -19,6 +19,7 @@
 	<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js"
 	      integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>
 	<script>Kakao.init('e746f3ea1bb3e8aa8d89a08b85a3f035'); // 사용하려는 앱의 JavaScript 키 입력</script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body>
 <header>
@@ -438,6 +439,28 @@
     $(".carousel-item").mouseleave(e=>{
         $("h3").hide();
     });
+    
+ 	$(()=>{
+ 			const memberId="<%=logInMember!=null?logInMember.getMemberId():""%>";
+ 			console.log(memberId);
+ 			
+ 				$.ajax({
+ 	 				url:"<%=request.getContextPath()%>/diary/DdayAlert.do",
+ 	 				type:"post",
+ 	 				data:{
+ 	 						"memberId":memberId	
+ 	 					 },
+ 	 				success:data=>{
+ 	 					if(data==10){
+ 	 						Swal.fire({
+ 	 							title:'★두근두근 출국 10일전★',
+ 	 							text:'출국 준비는 다 마쳤는지 한번 더 확인해보세요 :)'
+ 	 						})
+ 	 					}
+ 	 				}
+ 	 			});
+	});
+	 
   </script>
   
   <!-- 카카오톡 공유하기 아이콘 스크립트 구문 -->
