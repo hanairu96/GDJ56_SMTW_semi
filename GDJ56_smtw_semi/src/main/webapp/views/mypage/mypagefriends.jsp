@@ -26,10 +26,10 @@ List<MemberInfo2> acceptedlist =  (List<MemberInfo2>)request.getAttribute("accep
     <section>
         <div class="sidemenu">
             <div><h4 style="text-align: center;">마이 페이지</h4></div>
-             <div><p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>');">워홀 프렌즈</p></div>
-            <div><p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageAccountView.do?id=<%=logInMember.getMemberId()%>');">계정 관리</p></div>
-            <div><p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">쪽지함</p></div>
-            <div><p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageWriting.do?id=<%=logInMember.getMemberId()%>');">내가 쓴 글</p></div>
+             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>');">워홀 프렌즈</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageAccountView.do?id=<%=logInMember.getMemberId()%>');">계정 관리</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">쪽지함</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageWriting.do?id=<%=logInMember.getMemberId()%>');">내가 쓴 글</p></div>
             <div><p>찜한 나라</p></div>
            
         </div>
@@ -38,7 +38,7 @@ List<MemberInfo2> acceptedlist =  (List<MemberInfo2>)request.getAttribute("accep
             <div id="menutitle"><h2 style="background-color: cornflowerblue;">워홀 프렌즈</h2></div>
             <div id="mypsc">
                 <p><%=logInMember.getMemberName()%>님 어서 오세요!</p>
-                <img src="<%=request.getContextPath()%>/images/mypage/tomcat.png" alt="" width="200" height="200">
+                <img src="<%=request.getContextPath()%>/upload/account/<%=logInMember.getMyImg() %>" alt="" width="200" height="200">
             </div>
             
             <div id="flist" style="overflow:scroll">

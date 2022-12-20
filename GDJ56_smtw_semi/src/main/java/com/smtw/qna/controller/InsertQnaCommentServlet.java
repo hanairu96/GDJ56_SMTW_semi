@@ -34,8 +34,11 @@ public class InsertQnaCommentServlet extends HttpServlet {
 		String writer=request.getParameter("commentWriter");
 		int qcLevel=Integer.parseInt(request.getParameter("qcLevel"));//댓글레벨
 		String qnaQcRef=request.getParameter("qnaQcRef");//특정댓글에 대한 답글인 경우 그 댓글 번호/그냥 댓글이면 0 
-		System.out.println(qcLevel);
-		System.out.println(qnaQcRef);
+//		System.out.println(comment);
+//		System.out.println(qnaNo);
+//		System.out.println(writer);
+//		System.out.println(qcLevel);
+//		System.out.println(qnaQcRef);
 		int result=new QnaCommentsService().insertQnaComments(qcLevel,qnaQcRef,comment,qnaNo,writer);
 		
 		String msg="",loc="";
