@@ -3,6 +3,7 @@
 <%@ page import="com.smtw.member.model.vo.Member, java.util.List" %>
 <%
 	List<Member> members=(List<Member>)request.getAttribute("list");
+	List<Member> listAll=(List<Member>)request.getAttribute("listAll");
 %>
 <%@ include file="/views/common/header.jsp" %>
 
@@ -14,7 +15,6 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/index.css"/>
 <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/admin.css"/>
-
     <section>
         <div class="sidemenu">
             <div><a href="<%=request.getContextPath()%>/admin/memberList.do"><p>관리자 페이지</p></a></div>
@@ -158,5 +158,41 @@
 	    	$("#search-container>div").hide();
 	    	$("#search-"+type).css("display", "inline-block");
 	   	})
+	   	
+	   	
+	   	$(document).ready(function() {
+	   		let memberEmailAgree=[];
+	   		let memberEmail=[];
+	   		<%if(!listAll.isEmpty()) {%>
+		   		<%for(Member m : listAll) {%>
+		   			memberEmailAgree.push("<%=m.getEmailAgree()==('Y')?m.getEmail():"X"%>"); /* 회원의 이메일 수신 동의 여부 */
+		   		<%}
+	   		}%>
+	   		console.log(memberEmailAgree);
+	   		for(let i = 0; i < memberEmailAgree.length; i++) {
+	   		  if(memberEmailAgree[i] === 'X')  {
+	   			memberEmailAgree.splice(i, 1);
+	   		    i--;
+	   		  }
+	   		}
+	   		console.log(memberEmailAgree);
+	   		
+		   	 const set = new Set(memberEmailAgree);
+	         const memberEmailtotal = [...set];
+				
+			//출국10일전 알림 메일 발송을 위한 ajax
+			 $.ajax({
+					url:"<%=request.getContextPath()%>/diary/mailAlarm.do",
+					data:{
+						memberEmailtotal:JSON.stringify(memberEmailtotal)//사용자 이메일 넘기기
+					},
+					success:data=>{//ajax로 돌려받은 결과값
+						Swal.fire(data);
+					}
+				}) 
+	   		})
+	   	
+				
+	   	
     </script>
 <%@ include file="/views/common/footer.jsp" %>
