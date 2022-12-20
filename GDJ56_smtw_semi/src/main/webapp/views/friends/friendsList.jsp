@@ -82,31 +82,31 @@
 				<%}else {
 					int count=0;
 					for(Friends f : fs) {%>
-                       <div id="box" style="border:0px solid green;width:300px;height:300px">
+                       <div id="box" style="border:0px solid green;width:300px;height:320px">
 						<button onclick="location.assign('<%=request.getContextPath() %>/friends/friendsInfo.do?friendsNo=<%=f.getFriendsNo() %>')"
 						style="border:0px;background-color: white;">
-                            <div style="border:0px solid magenta;width:210px;height:270px; margin-left :0px; margin-top :5px;background-color:rgba(128, 128, 128, 0.342);border-radius:20px;">
-                                <div style="border:0px solid blue;width:100%;height:110px;display:flex;justify-content: center;">
+                            <div style="border:0px solid magenta;width:210px;height:290px;margin-left:0px;margin-top:5px;background-color:rgba(128, 128, 128, 0.342);border-radius:20px;">
+                                <div style="border:0px solid blue;width:100%;height:110px;display:flex;justify-content:center;">
                                     <img src="<%=request.getContextPath() %>/images/lupy.jpg" alt="" style="width:50%;height:80%;margin:auto;border-radius:120px;">
                                 </div>
                                 <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
                                     <div>&nbsp<strong><%=f.getFriendsTitle() %></strong></div>
                                 </div>
                                 <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
-                                    <div>&nbsp이름:</div>
-                                    <%
-                                    	//아이디로 이름 찾기
-                                    	String name=new MemberService().selectMemberId(f.getMemberId()).getMemberName();
-                                    %>
-                                    <div>&nbsp<%=name %></div>
+                                    <div>
+	                                    &nbsp이름:
+	                                    <%
+	                                    	//아이디로 이름 찾기
+	                                    	String name=new MemberService().selectMemberId(f.getMemberId()).getMemberName();
+	                                    %>
+	                                    <%=name %>
+                                    </div>
                                 </div>
                                 <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
-                                    <div>&nbsp희망국가:</div>
-                                    <div>&nbsp<%=f.getNName() %></div>
+                                    <div>&nbsp희망국가: <%=f.getNName() %></div>
                                 </div>
                                 <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
-                                    <div>&nbsp목적:</div>
-                                    <div>&nbsp<%=f.getPurpose() %></div>
+                                    <div>&nbsp목적: <%=f.getPurpose() %></div>
                                 </div>
                             </div>
                         </button>
