@@ -102,10 +102,11 @@
 		</div>
            	<%}%>
             	<script>
+            		/* 회원일경우 나라 상세정보가 없을때 뜨는 알림팝업 */
 	            	const nodatano=()=>{
 						alert("나라정보를 업데이트중입니다!!!");	
 	            	}	
-	            	
+	            	/* 비상상황문구를 넣었을 경우 알림팝업 */
 	            	const fn_emergency=(em,name)=>{
 	            		if(em!='null') alert(em);
 	            		location.assign('<%=request.getContextPath()%>/countryinfo/searchAll.do?nName='+name);
@@ -122,6 +123,7 @@
            		 		
            		 		
        				 <div id="collectmain2">
+       				 <!-- 메인 이미지가 있을때 없을때 분기처리 -->
        				 	<%if(con.get(i).getNImg()==null) {%>
 	                    <img src="<%=request.getContextPath()%>/images/country/noimage_view.png"  alt="" style="width: 400px; height:300px;border-radius:10%;" >
        				 	<%}else{ %>
@@ -149,12 +151,13 @@
 	                            <%=con.get(i).getNName()%></a></p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	                            
 	                            
-	                            
+	                            <!-- 좋아요 버튼 -->
 	                        	<div id="likebtn">
 	                        		<%-- <img src="<%=request.getContextPath()%>/images/country/heart_like.png" 
 	                        		style="width:50px;height:50px;cursor:pointer;color:yellow;" onclikc="liketoggle"> --%>
 		                            <!-- <button id="like2">❤</button> -->
-		                            <button type="hidden" id="like2"><img src="<%=request.getContextPath() %>/images/country/heart_like.png" id="likeimg" style="width:50px;height:50px;"></button>
+		                            <button type="hidden" id="togBtn"><img src="<%=request.getContextPath() %>/images/country/heart_like.png" id="likeimg" style="width:50px;height:50px;"></button>
+	                        		<i class="far fa-heart"></i>
 	                        	</div>	    
 	                        </div>
 	                        <h4 id="maininfo2"><%=con.get(i).getNpharse() %></h4>
@@ -171,9 +174,18 @@
 			 	}%>  
    		</div>
 	<script>
-
+		const toggleBtn = document.querySelectorAll('#togBtn'); 
 	
+		toggleBtn.forEach(function(btn){
+			btn.addEventListener('click', function(){
+				btn.classList.toggle('fas');
+			});
+		});
 	</script>
+	
+	
+	
+	<!-- 페이징 처리 -->
    	<div id="pageBar2">
 		<%=request.getAttribute("pageBar")%>
 	</div>

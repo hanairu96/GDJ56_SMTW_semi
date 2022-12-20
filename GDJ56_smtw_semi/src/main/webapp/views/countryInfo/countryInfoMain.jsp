@@ -161,8 +161,7 @@
 	
     <script>
     	
-    	$("#cobtn1").show()
-    
+
     	$("#buttoncollect>input").click(e=>{
     		$.ajax({
     			type:'get',
