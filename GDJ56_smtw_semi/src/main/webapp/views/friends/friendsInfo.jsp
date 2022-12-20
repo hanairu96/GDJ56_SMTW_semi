@@ -25,18 +25,20 @@
                             </div>
                             <div style="border:0px solid pink;width:440px;height:340px;text-align:center;">
                             <%
-                            	List<ApplyFriends> afs=new FriendsService().selectFriendsApply(logInMember.getMemberId());
-                            	ApplyFriends myFriends=null;
-                            	List myFriendsList=new ArrayList();
-                            	for(ApplyFriends af : afs){
-                            		if(af.getMemberFrom().equals(f.getMemberId())){
-                            			myFriends=af;
-                            		}
-                            		myFriendsList.add(af.getMemberFrom());
+	                            ApplyFriends myFriends=null;
+                            	if(logInMember!=null){
+	                            	List<ApplyFriends> afs=new FriendsService().selectFriendsApply(logInMember.getMemberId());
+	                            	List myFriendsList=new ArrayList();
+	                            	for(ApplyFriends af : afs){
+	                            		if(af.getMemberFrom().equals(f.getMemberId())){
+	                            			myFriends=af;
+	                            		}
+	                            		myFriendsList.add(af.getMemberFrom());
+	                            	}
+									System.out.println("내 친구 목록: "+myFriendsList);
+									System.out.println("이 프렌즈의 아이디: "+f.getMemberId());
+									System.out.println("친구 여부: "+(myFriends!=null?"친구":"친구 아님"));
                             	}
-								System.out.println("내 친구 목록: "+myFriendsList);
-								System.out.println("이 프렌즈의 아이디: "+f.getMemberId());
-								System.out.println("친구 여부: "+(myFriends!=null?"친구":"친구 아님"));
                             %>
                             <!-- 내 아이디가 아닐 때, 친구가 아닐 때 친구신청 버튼 보임 -->
                             <%if((logInMember!=null&&!logInMember.getMemberId().equals(f.getMemberId()))
