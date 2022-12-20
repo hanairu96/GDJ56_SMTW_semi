@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/index.css"/>
 	<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400&display=swap" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body>
 <header>
