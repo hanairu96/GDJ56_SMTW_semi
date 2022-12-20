@@ -416,12 +416,12 @@
         <!-- 하단 로고 영역 -->
         <section>
             <div id="mainlogo">
-                <img src="images/logo.png" alt="" width="1350" height="230px">
+                <img src="images/logo.png" alt="" width="1350" height="230px"  onclick="mainlogoClick();">
             </div>
         </section>
 
         <!-- 하단 주소 -->
-        <footer>
+        <footer onclick="footerClick();">
             <p>
                 <span id="footmain">SHOW ME THE WAY</span><br>
                 <span id="foot">상호명 : SHOW ME THE WAY</span><br>
@@ -433,6 +433,14 @@
     </div>
     
     <script>
+     const mainlogoClick=()=>{
+    	 location.assign("<%=request.getContextPath()%>/holiday/holidaySMTW.do");
+     }
+     
+     const footerClick=()=>{
+    	 location.assign("<%=request.getContextPath()%>/holiday/holidayRoad.do");
+     }
+    
     $(".carousel-item").mouseenter(e=>{
         $("h3").show(300);
     });
