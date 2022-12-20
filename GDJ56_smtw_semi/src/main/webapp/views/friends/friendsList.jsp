@@ -15,8 +15,8 @@
      <!-- ##### 여기 왼쪽 사이드메뉴 div ##### -->
 	<div class="sector">
 	    <div class="sidemenu">
-	        <div><a href="<%=request.getContextPath()%>/friends/friendsList.do"><p>커뮤니티</p></a></div><br>
-	        <div><a href="<%=request.getContextPath()%>/friends/friendsList.do"><p>워홀프렌즈 구하기</p></a></div><br>
+	        <div><a href="<%=request.getContextPath()%>/friends/friendsList.do"><p>커뮤니티</p></a></div>
+	        <div><a href="<%=request.getContextPath()%>/friends/friendsList.do"><p id="purple">워홀프렌즈 구하기</p></a></div>
 	        <div><a href="<%=request.getContextPath()%>/community/reviewBasic.do"><p>생생후기</p></a></div>
 	    </div>
 	<!-- ##### 사이드메뉴랑 본내용 구분하는 div ##### -->
@@ -147,6 +147,12 @@
         </div>
     </div>
     </section>
+
+    <style>
+        .sidemenu>div{
+        	margin-top:20px;
+        }
+	</style>
     
     <!-- ##### 사이드바 스크롤 위치 따라 움직이는 스크립트문 ##### -->
     <!-- ##### 개별적으로 설정해줘야 하는 부분 있음 (각자 페이지 푸터위까지만 움직이게) ##### -->

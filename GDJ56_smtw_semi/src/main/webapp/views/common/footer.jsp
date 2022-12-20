@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div id="wrap">
-        <footer>    
+        <footer onclick="footerClick();">    
             <p>
                 <span id="footmain">SHOW ME THE WAY</span><br>
                 <span id="foot">상호명 : SHOW ME THE WAY</span><br>
@@ -12,6 +12,12 @@
         </footer>
     </div>
 
+<script>
+	const footerClick=()=>{
+		 location.assign("<%=request.getContextPath()%>/holiday/holidayRoad.do");
+	}
+</script>
 
 </body>
+
 </html>

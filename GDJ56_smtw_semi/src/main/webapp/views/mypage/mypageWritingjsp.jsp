@@ -18,9 +18,16 @@
            
         </div>
 
-        <div class="menuDiv"></div>
+        <div class="menuDiv">
+        </div>
 
-        <div class="texts">
+       <div class="texts">
+        <div id="listmenu">
+        <p style="background-color: lavender;"  onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageWriting.do?id=<%=logInMember.getMemberId()%>');">전체글</p>
+        <p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageWroteQna.do?id=<%=logInMember.getMemberId()%>');">질문 글</p>
+        <p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageWroteFriends.do?id=<%=logInMember.getMemberId()%>');">프렌즈 구하기 글</p>
+        <p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageWroteReview.do?id=<%=logInMember.getMemberId()%>');">리뷰 글</p>
+        </div>
             <h1>내가 쓴 글</h1>
             <br>
 
@@ -72,6 +79,14 @@
 
     </section>
     <style>
+    	#listmenu>p{
+    		margin-right: 0 auto;
+    		cursor:pointer;
+    	}
+    	#listmenu{
+    	position: fixed;
+    	margin-left : 5%;
+    	}
         .texts{
             width: 85%;  
             margin-left: 0 auto;

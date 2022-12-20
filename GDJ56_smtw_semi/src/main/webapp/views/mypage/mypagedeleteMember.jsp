@@ -21,7 +21,7 @@
             <p style="color:red">warning! : 탈퇴하면 다시 복구할수 없습니다. 정말 탈퇴하시겠습니까?</p>
            	
            	 <input type="hidden" name="id" value="<%=userId%>">
-            <input type="button" name="agree" value="탈퇴하기" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageMemberDeleteEnd.do?id=<%=userId%>');">
+            <input type="button" name="agree" value="탈퇴하기" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageMemberDeleteEnd.do?id=<%=userId%>&&img=<%=logInMember.getMyImg()%>');">
              <input type="button" name="cancle" value="취소하기" onclick="location.replace('<%=request.getContextPath()%>');"> 
             </form>
             </div>

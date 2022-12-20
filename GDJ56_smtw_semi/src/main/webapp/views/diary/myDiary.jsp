@@ -192,7 +192,7 @@
 					checkList:JSON.stringify(newCheckList)	
 				 },
 			success:data=>{
-				alert(data);
+				Swal.fire(data);
 			}
 		}); 
 		 
@@ -200,8 +200,38 @@
      }
      
      const deleteBtn=()=>{
-    	 var deleteConfirm=confirm("복구 할 수 없습니다. 정말 삭제 하시겠습니까?");
+    	 /* var deleteConfirm=confirm("복구 할 수 없습니다. 정말 삭제 하시겠습니까?"); */
     	 
+    	 Swal.fire({
+    			title:'정말 삭제 하시겠습니까?',
+    			text:"복구 할 수 없습니다.",
+    			icon: 'warning',
+    			showCancelButton: true,
+    			confirmButtonColor: '#3085d6',
+    			cancelButtonColor: '#d33',
+    			confirmButtonText: 'Yes'
+    		}).then((result)=>{
+    			if(result.isConfirmed){
+    				
+    				 $.ajax({
+    		     			url:"<%=request.getContextPath()%>/diary/deleteDiary.do",
+    		     			type:"get",
+    		     			data:{memberId:"<%=diary.getMemberId()%>"},
+    		     			success:data=>{
+    		     				Swal.fire(
+    		     						data
+    		        				)
+    		     				location.replace("<%=request.getContextPath()%>/diary/firstDiary.do");
+    		     			}
+    		     		}); 
+    			}else{
+    				Swal.fire(
+        					'삭제취소'
+        			)
+    			}
+    		})
+    	 
+    	<%--  
          if(deleteConfirm==true){
         	 
         	 $.ajax({
@@ -216,7 +246,7 @@
         	 
          }else{
         	 alert("삭제취소");
-         }  
+         }  --%> 
      }
    
      

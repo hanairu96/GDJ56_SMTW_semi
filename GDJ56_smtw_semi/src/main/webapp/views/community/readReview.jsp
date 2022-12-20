@@ -19,7 +19,7 @@
 
 <%
 	Review  r=(Review)request.getAttribute("readReview");
-	
+	Member m=(Member)request.getAttribute("member");
 %>
 
 <%@include file="/views/common/header.jsp" %>
@@ -53,27 +53,33 @@
             <div style="border:0px solid yellow;width:500px;height:60px"></div>
             <div style="border:0px solid yellow;width:400px;height:60px;margin-left: 50px;">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button onclick="update_check('주소값');"   class="btn btn-primary customBtn btnStyle" type="button" style=" background-color: rgba(221, 160, 221, 0.508) !important;" value="수정">수정하기</button>
-                    <button onclick="delete_check('주소값');" class="btn btn-primary customBtn btnStyle" type="button" style=" background-color: rgba(221, 160, 221, 0.479) !important;" value="삭제">삭제하기</button>
+                   <%if(logInMember!=null&&(logInMember.getMemberId().equals("ADMIN")||logInMember.getMemberId().equals(r.getMemberId()))){%>
+                    <button onclick="update_check('<%=r.getReviewNo()%>','<%=r.getReviewFileName()%>');"   class="btn btn-primary customBtn btnStyle" type="button" style=" background-color: rgba(221, 160, 221, 0.508) !important;" value="수정">수정하기</button>
+                    <button onclick="delete_check('<%=r.getReviewNo()%>','<%=r.getReviewFileName()%>');" class="btn btn-primary customBtn btnStyle" type="button" style=" background-color: rgba(221, 160, 221, 0.479) !important;" value="삭제">삭제하기</button>
+               		<%} %>
                 </div>
             </div>
         </div>       
         </div>
         <script>
-           function update_check(url){
+           function update_check(reviewNo,fileName){
            var answer;
             answer = confirm("후기를 수정하시겠습니까?");
             if(answer == true){
-			location = url;
+			
+			location.assign("<%=request.getContextPath()%>/community/reviewUpdate.do?reviewNo="+reviewNo+"&fileName="+fileName);
+	
+            	
 		       }
          }
            
             
-           function delete_check(url){
+           function delete_check(reviewNo,fileName){
            var answer;
             answer = confirm("후기를 삭제하시겠습니까?");
             if(answer == true){
-			location = url;
+				location.assign("<%=request.getContextPath()%>/community/reviewDelete.do?reviewNo="+reviewNo+"&fileName="+fileName);
+
 		       }
          }
         </script>

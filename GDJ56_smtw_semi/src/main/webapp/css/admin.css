@@ -31,36 +31,46 @@
 	    display: flex;
 	}
 
-	.sidemenu{
-	    padding: 10px;
-	    /* margin-top: 1000px; */
-	    /* margin: 0 auto; */
-	    /* border: 1px solid; */
-	    font-size: 18px;
-	    font-weight: bold;
-	    position: fixed;
-	}
+.sidemenu{
+    width: 20%;
+    height: 100px;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+}
 	
-	.menuDiv{
-	    width: 15%;
-	}
+.menuDiv{
+    width: 40%;
+}
 	
-	.sidemenu>*:hover{
-	    transform: scale(1.1);
-	    transition-property: transform;
-	    transition-duration: 1s;
-	}
-	.sidemenu>*{
-	    width: 200px;
-	    height: 50px;
-	    background-color: lavender;
-	    border-radius: 50px;
-	    box-shadow: 5px 2px 8px lavender;
-	}
-	.sidemenu p{
-	    text-align: center;
-	    padding: 13px;
-	}
+.sidemenu>*:hover{
+    transform: scale(1.1);
+    transition-property: transform;
+    transition-duration: 1s;
+}
+.sidemenu>*:not(div:nth-child(1)){
+    background-color: lavender;
+    border-radius: 50px;
+    box-shadow: 5px 2px 8px lavender;
+}
+.sidemenu p{
+    text-align: center;
+    padding-top: 6%;
+}
+/* .sidemenu>div:first-child{
+    color: purple;
+}
+
+.sidemenu>div:nth-child(3) p{
+    color: purple;
+} */
+
+.sidemenu>div{
+    height: 70px;
+}
+a{
+    text-decoration: none;
+}
 	
 .customBtn {
     color: #fff;

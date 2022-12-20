@@ -40,65 +40,7 @@ public class mypageWritingServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId=request.getParameter("id");
-		
-		
-		
-//		String id = request.getParameter("id");
-//		System.out.println(id);
-//		
-//		int cPage;
-//		int numPerpage=5;
-//		
-//		try {
-//			cPage=Integer.parseInt(request.getParameter("cPage"));
-//		}catch(NumberFormatException e) {
-//			cPage=1;
-//		}
-//		List<Note> list = new MypageService().noteList(id, cPage, numPerpage);
-//		
-//		int totalData=new MypageService().selectNoteCount(id);
-//		System.out.println(totalData);
-//		
-//		String pageBar="";
-//		int pageBarSize=5;
-//		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
-//		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
-//		int pageEnd=pageNo+pageBarSize-1;
-//		
-//		if(pageNo==1) {
-//			pageBar+="<button class='customBtn btnStyle'>이전</button>";
-//		}else {
-//			pageBar+="<button class='customBtn btnStyle'><a href='"+request.getContextPath()
-//				+"/mypage/mypageWriting.do?cPage="+(pageNo-1)+"'>이전</a></button>";
-//		}
-//		
-//		while(!(pageNo>pageEnd||pageNo>totalPage)) {
-//			if(cPage==pageNo) {
-//				pageBar+="<button class='customBtn btnStyle'>"+pageNo+"</button>";
-//			}else {
-//				pageBar+="<a href='"+request.getContextPath()
-//				+"/mypage/mypageWriting.do?cPage="+pageNo+"&id="+id+"'><button class='customBtn btnStyle'>"+pageNo+"</button></a>";
-//			}
-//			pageNo++;
-//		}
-//		
-//		if(pageNo>totalPage) {
-//			pageBar+="<button class='customBtn btnStyle'>다음</button>";
-//		}else {
-//			pageBar+="<a href='"+request.getContextPath()
-//				+"/mypage/mypageWriting.do?cPage="+pageNo+"&id="+id+"'>다음</a>";
-//		}
-//
-//		request.setAttribute("pageBar", pageBar);
-//		
-//		
-//		request.setAttribute("list", list);
-//		request.getRequestDispatcher("/views/mypage/mypageWritingjsp.jsp").forward(request, response);
-//		
-//		
-//		
 
-		
 		
 		//전체글 보내기 : 보류
 		int cPage=new MypageService().getCpage(userId);

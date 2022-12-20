@@ -138,7 +138,7 @@
              }
          }
         if(count<4){
-            alert("모든 값을 선택해주세요!");
+        	Swal.fire("모든 값을 선택해주세요!");
         }else{
            location.assign("<%=request.getContextPath()%>/mycountry/myCountryResult.do?result="+countryResult);
         } 

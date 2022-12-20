@@ -17,13 +17,14 @@
 
     <section>
         <div class="sidemenu">
-            <div><a href="<%=request.getContextPath()%>/admin/memberList.do"><p>회원 관리</p></a></div><br>
-            <div><a href="<%=request.getContextPath()%>/admin/qnaManage.do"><p id="purple">Q&A 관리</p></a></div><br>
+            <div><a href="<%=request.getContextPath()%>/admin/memberList.do"><p>관리자 페이지</p></a></div>
+            <div><a href="<%=request.getContextPath()%>/admin/memberList.do"><p>회원 관리</p></a></div>
+            <div><a href="<%=request.getContextPath()%>/admin/qnaManage.do"><p id="purple">Q&A 관리</p></a></div>
         </div>
 
         <div class="menuDiv"></div>
 
-        <div class="texts">
+        <div class="texts" style="border:2px solid;border-radius:10px">
             <h1>Q&A 관리</h1>
             <br>
 
@@ -69,9 +70,10 @@
     </section>
     <style>
         .texts{
-            width: 85%;  
-            margin-left: 0 auto;
-            margin-right: 0 auto;
+            width: 70%;  
+            padding: 20px;
+            padding-top:30px;
+            margin-right: 150px;
             text-align: center;
         }
         .texts h1{
@@ -107,13 +109,32 @@
         .sidemenu #purple{
             color: purple;
         }
+        
+        .sidemenu>div{
+        	margin-top:20px;
+        }
     </style>
     <script>
-	    $(".sidemenu>div:nth-child(1)").click(e=>{
+<%-- 	    $(".sidemenu>div:nth-child(1)").click(e=>{
 	    	location.assign('<%=request.getContextPath()%>/admin/memberList.do');
 	    })
 	    $(".sidemenu>div:nth-child(2)").click(e=>{
 	        location.assign("<%=request.getContextPath()%>/admin/qnaManage.do");
-	    })
+	    }) --%>
+	    
+		$(document).ready(function() {
+		    // 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
+		    var floatPosition = parseInt($(".sidemenu").css('top'));
+		    // 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
+		
+		    $(window).scroll(function() {
+		        // 현재 스크롤 위치를 가져온다.
+		        var scrollTop = $(window).scrollTop();
+		        var newPosition = scrollTop + floatPosition + "px";
+		        $(".sidemenu").stop().animate({
+		            "top" : newPosition
+		        }, 500);
+		    }).scroll();
+		});
     </script>
 <%@ include file="/views/common/footer.jsp" %>

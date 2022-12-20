@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.smtw.qna.model.service.FaqService;
+import com.smtw.qna.model.service.QnaCommentsService;
 import com.smtw.qna.model.service.QnaService;
 import com.smtw.qna.model.vo.Faq;
 import com.smtw.qna.model.vo.Qna;
@@ -45,7 +46,7 @@ public class QnaListServlet extends HttpServlet {
 			String pageBar="";
 			
 			List<Qna> list=new QnaService().selectQnaList(cPage, numPerpage);//qna질문
-			List<Faq> faqList=new FaqService().selectFaqList();
+			List<Faq> faqList=new FaqService().selectFaqList();//faq리스트
 			
 			int totalData=new QnaService().selectQnaCount();
 			

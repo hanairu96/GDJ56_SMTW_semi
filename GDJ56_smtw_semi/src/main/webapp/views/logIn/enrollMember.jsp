@@ -279,7 +279,7 @@
 							success:data=>{//ajax로 돌려받은 인증번호
 								// 인증번호 값이 없을 경우
 								if(data==null){
-									alert("인증에 실패하였습니다. 다시 시도해주세요");
+									Swal.fire("인증에 실패하였습니다. \n다시 시도해주세요");
 									$("span#checkCrtfcNo>small").text(" ");//인증번호 발신메세지 지우기
 									return false;
 							    // ajax가 돌아가서 제대로 값이 돌아온 경우
@@ -377,7 +377,7 @@
 		const pwdReg=/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 		
 		if(inputPwd.match(pwdReg)==null){//비밀번호가 양식대로 입력되지 않았으면(==실패)
-			alert("비밀번호는 숫자, 영문자를 포함하여 8자리 이상 입력하세요");
+			Swal.fire("비밀번호는 숫자, 영문자를 \n포함하여 8자리 이상 입력하세요");
 			$("#inputPwd").focus();
 			return false;
 		}
