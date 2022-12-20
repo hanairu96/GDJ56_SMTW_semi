@@ -52,7 +52,6 @@ public class LoginCheckFilter extends HttpFilter implements Filter {
 	    	  chain.doFilter(request, response); // 화면 보여줌
 	      }
 	      else {
-
 	    	  throw new LoginException("로그인 시 이용할 수 있는 서비스입니다.");
 //	    	  request.setAttribute("msg", "로그인 시 이용할 수 있는 서비스 입니다 :(");
 //	    	  request.setAttribute("loc", "/");
