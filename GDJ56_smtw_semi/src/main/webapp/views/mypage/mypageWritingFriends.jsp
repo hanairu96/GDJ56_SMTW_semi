@@ -1,9 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.smtw.mypage.model.vo.WroteList, java.util.List" %>
+<%@ page import="com.smtw.qna.model.vo.Qna, java.util.List" %>
+<%@ page import="com.smtw.review.model.vo.Review" %>
+<%@ page import="com.smtw.friends.model.vo.Friends" %>
+
 <%
-	List<WroteList> list=(List<WroteList>)request.getAttribute("list");
+	List<Qna> qlist=(List<Qna>)request.getAttribute("qlist");
+	List<Review> rlist=(List<Review>)request.getAttribute("rlist");
+	List<Friends> flist=(List<Friends>)request.getAttribute("flist");
 %>
+
 <%@ include file="/views/common/header.jsp" %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/admin.css"/>
 
@@ -18,52 +25,35 @@
            
         </div>
 
-        <div class="menuDiv">
-        </div>
+        <div class="menuDiv"></div>
 
-       <div class="texts">
-        <div id="listmenu">
-        <p style="background-color: lavender;"  onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageWriting.do?id=<%=logInMember.getMemberId()%>');">전체글</p>
-        <p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageWroteQna.do?id=<%=logInMember.getMemberId()%>');">질문 글</p>
-        <p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageWroteFriends.do?id=<%=logInMember.getMemberId()%>');">프렌즈 구하기 글</p>
-        <p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageWroteReview.do?id=<%=logInMember.getMemberId()%>');">리뷰 글</p>
-        </div>
+        <div class="texts">
             <h1>내가 쓴 글</h1>
             <br>
-
-            <div>
+			
+			<!-- 내가 쓴 프렌즈  글-->
+			<div>
                 <table id="list">
                 	<thead>
 	                    <tr>
-	                        <th>글 목록</th>
+	                    	
+	                        <th>제목</th>
 	                        <th>작성일</th>
 	                    </tr>
 					</thead>
 					<tbody>
-					<%if(list.isEmpty()) {%>
+					<%if(qlist.isEmpty()) {%>
 						<tr>
-							<td colspan="4">아직 작성한 글이 없습니다:(</td>
+							<td colspan="4">아직 작성한 질문 글이 없습니다:(</td>
 						</tr>
 					<%}else {
-						for(WroteList q : list) {%>
+						for(Friends f : flist) {%>
 	                    <tr>
-	                    	
-	                        <%if(q.getTitle().contains("REVIEW")){%>
-	                        <td onclick="location.replace('<%=request.getContextPath()%>/community/readReview.do?ReviewNo=<%=q.getPkNo()%>');">
-	                        	<%=q.getTitle() %>
+	                        <td onclick="location.replace('<%=request.getContextPath()%>/friends/friendsInfo.do?friendsNo=<%=f.getFriendsNo()%>');">
+	                        	<%=f.getFriendsTitle() %>
 	                        </td>
-	                        <%}else if(q.getTitle().contains("QNA")){%>
-	                         <td onclick="location.replace('<%=request.getContextPath()%>/qna/qnaView.do?qnaNo=<%=q.getPkNo()%>');">
-	                        	<%=q.getTitle() %>
-	                        </td>
-	                        <%}else{ %>
-	                        <td onclick="location.replace('<%=request.getContextPath()%>/friends/friendsInfo.do?friendsNo=<%=q.getPkNo()%>');">
-	                        	<%=q.getTitle() %>
-	                        </td>
-	                        <%} 
+	                        <td><%=f.getEnrollDate() %></td>
 	                        
-	                       %>
-	                        <td><%=q.getDate()%></td>
 	                    </tr>
 	                	<%}
 	                	}%>
@@ -71,23 +61,16 @@
                     </tbody>
                 </table>
                 <br>
-               	<div id="pageBar">
-					<%=request.getAttribute("pageBar") %>
+               	<div id="pageBar2">
+					<%=request.getAttribute("pageBar2") %>
 				</div>
+				
+				
             </div>
         </div>
 
     </section>
     <style>
-    	#listmenu>p{
-    		margin-right: 0 auto;
-    		
-    		
-    	}
-    	#listmenu{
-    	position: fixed;
-    	margin-left : 5%;
-    	}
         .texts{
             width: 85%;  
             margin-left: 0 auto;
@@ -168,7 +151,7 @@
                     왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
                  */
                 margin-top: 100px;
-                height: 900px; 
+                height: auto; 
                 /*
                     ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
                     높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 import static com.smtw.common.JDBCTemplate.*;
 
+import com.smtw.friends.model.vo.Friends;
 import com.smtw.member.model.vo.Member;
 import com.smtw.mypage.model.dao.MypageDao;
 import com.smtw.mypage.model.vo.Applyfriends;
@@ -260,6 +261,58 @@ public class MypageService {
 		close(conn);
 		return result;
 	}
+	
+	public List<Qna>getQnaList(String userId, int cPage, int numPerpage){
+		Connection conn=getConnection();
+		List<Qna> list=new MypageDao().getQnaList(conn, userId,cPage, numPerpage);
+		close(conn);
+		return list;
+	}
+	
+	public int selectQnaListCount(String userId) {
+		Connection conn=getConnection();
+		int result=new MypageDao().selectQnaListCount(conn, userId);
+		close(conn);
+		return result;
+	}
+	
+	public List<Review>getReviewList(String userId, int cPage, int numPerpage){
+		Connection conn=getConnection();
+		List<Review> list=new MypageDao().getReviewList(conn, userId,cPage, numPerpage);
+		close(conn);
+		return list;
+	}
+	
+	public int selectReviewListCount(String userId) {
+		Connection conn=getConnection();
+		int result=new MypageDao().selectrReviewListCount(conn, userId);
+		close(conn);
+		return result;
+	}
+	
+	public List<Friends>getFriendsList(String userId, int cPage, int numPerpage){
+		Connection conn=getConnection();
+		List<Friends> list=new MypageDao().getFriendsList(conn, userId,cPage, numPerpage);
+		close(conn);
+		return list;
+	}
+	
+	public int selectFriendsListCount(String userId) {
+		Connection conn=getConnection();
+		int result=new MypageDao().selectFriendsListCount(conn, userId);
+		close(conn);
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 }
