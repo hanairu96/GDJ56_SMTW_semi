@@ -5,6 +5,7 @@
 	Qna q=(Qna)request.getAttribute("qna");
 	List<Qna> list=(List<Qna>)request.getAttribute("qnaList");
 	List<QnaComments> qcList=(List<QnaComments>)request.getAttribute("qcList");
+// 	int qcCount=(int)request.getAttribute("qcCount");
 %>
 <%@include file="/views/common/header.jsp" %>
 <!-- 부트스트랩 CSS -->
@@ -110,8 +111,8 @@
 	   		action="<%=request.getContextPath()%>/qna/insertQC.do" onsubmit="return insertComment();">
            <textarea id="comment_1" onclick="logInCheck();" name="comment_1" placeholder="댓글을 남겨보세요" style="width:100%;"></textarea>
            <input type="hidden" name="qnaNo" value="<%=q.getQnaNo()%>">
-<!--            <input type="hidden" name="level" value="1"/> -->
-<!--            <input type="hidden" name="commentref" value="0"/> -->
+           <input type="hidden" name="qcLevel" value="1"/> <!-- 댓글레벨  -->
+           <input type="hidden" name="qnaQcRef" value="0"/>	<!-- 답글이 아니라 그냥 댓글이라서 null -->
            <input type="hidden" id="commentWriter" name="commentWriter" value="<%=logInMember!=null?logInMember.getMemberId():""%>"><!-- 댓글작성자 아이디 넘기기  -->   				
            <div style="width:100%;">
                <button type="submit" class="submit customBtn btnStyle" id="btn-insert" style="width:80px;height:47px;float:right;"
@@ -122,6 +123,7 @@
     <!-- 등록된 댓글 -->
     <%if(!qcList.isEmpty()) {%>
     	<%for(QnaComments qc : qcList) {%>
+    	<%if(qc.getQnaCoLevel()==1) {%>
 	<div class="comments level1" style="border:0px solid green;width:850px;height:auto;margin: 0 auto;">
 	   <div class="comment replies" style="border:5px solid #ddd;width:850px;height:auto;margin: 0 auto;background-color: #f2f2f2;margin-bottom:10px;margin-top:10px;">
 	   		<div class="content">
@@ -144,7 +146,8 @@
 	              <li class="menu show-reply">답글 (1)</li> 
 	            </ul>
 			</div>
-		</div>            
+		</div>   
+		<%}else {%>         
             <!-- 이위치에 태그를 추가해줘야함 -->
 			<!-- 답글  -->
             <form class="form reply-form"style="display:none;flex-direction:column;align-items:center;"  onsubmit="return insertComment();">
@@ -156,27 +159,28 @@
             </form>   
 	</div>
 	
-          <!--등록된 답글  -->
-<!--         <div class="replies level2" style="border-left:5px solid #ddd;border-right:5px solid #ddd;border-bottom:5px solid #ddd;width:850px;height:auto;margin: 0 auto;"> -->
-<!--             <div class="reply"> -->
-<!--               <div class="content"> -->
-<!--               	<header class="top"> -->
-<!--                 	<div class="username">워홀러</div> -->
-<!--                 </header> -->
-<!-- 	                <p>감사!!</p> -->
-<!-- 	                <ul class="bottom"> -->
-<!-- 	                  <li class="menu time">2022-12-06</li> -->
-<!-- 	                </ul> -->
-<!--          		</div> -->
-<!--          	</div> -->
+<!--           등록된 답글  -->
+        <div class="replies level2" style="border-left:5px solid #ddd;border-right:5px solid #ddd;border-bottom:5px solid #ddd;width:850px;height:auto;margin: 0 auto;">
+            <div class="reply">
+              <div class="content">
+              	<header class="top">
+                	<div class="username"><%=qc.getMemberId()%></div>
+                </header>
+	                <p><%=qc.getQcContents()%></p>
+	                <ul class="bottom">
+	                  <li class="menu time"><%=qc.getEnrollDate() %></li>
+	                </ul>
+         		</div>
+         	</div>
             
-<!--             <form class="form reply-form"style="display:flex;flex-direction:column;align-items:center;"> -->
-<!--               <textarea placeholder="답글을 남겨보세요"style="width:100%;"></textarea> -->
-<!--               <div style="width:100%;"> -->
-<!--                 <button type="button" class="submit customBtn btnStyle" style="width:80px;height:47px;float:right;">댓글등록</button> -->
-<!--              </div> -->
-<!--             </form>        -->
+            <form class="form reply-form"style="display:flex;flex-direction:column;align-items:center;">
+              <textarea placeholder="답글을 남겨보세요"style="width:100%;"></textarea>
+              <div style="width:100%;">
+                <button type="button" class="submit customBtn btnStyle" style="width:80px;height:47px;float:right;">댓글등록</button>
+             </div>
+            </form>       
 	</div> 
+	<%} %><!-- 댓글,답글 구별if문  -->
 	<%} %>
 	<%} %>
 </section>

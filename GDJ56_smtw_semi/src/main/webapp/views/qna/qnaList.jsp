@@ -107,7 +107,7 @@
 			        	<%for(Qna qn : qnas){%>
 					        <li class="content">
 					        	<span class="number">　　<%=qn.getQnaNo() %>　　</span>
-					        	<a href="<%=request.getContextPath()%>/qna/qnaView.do?qnaNo=<%=qn.getQnaNo()%>"><%=qn.getReviewTitle()%></a>
+					        	<a href="<%=request.getContextPath()%>/qna/qnaView.do?qnaNo=<%=qn.getQnaNo()%>"><%=qn.getReviewTitle()%><span></span></a>
 					        	<span class="right"><%=qn.getEnrollDate() %></span>
 					        	<span class="right"><%=qn.getMemberId() %></span>
 					        </li>
@@ -118,7 +118,6 @@
 		                    <span style="text-align: center;">내용이 없습니다.</span>
 		                </li>
 			        <%} %>
-			        
                 </ul>
                 <!-- 로그인 한 사용자만 글쓰기 버튼 보이게  -->
 			    <%if(logInMember!=null) { %>

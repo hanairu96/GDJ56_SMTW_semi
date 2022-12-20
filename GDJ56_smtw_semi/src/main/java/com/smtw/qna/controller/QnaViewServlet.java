@@ -38,11 +38,12 @@ public class QnaViewServlet extends HttpServlet {
 		Qna q=new QnaService().selectQnaNo(qnaNo);//게시물 클릭시 해당번호 게시글
 		List<Qna> list=new QnaService().selectPreNextQnaNo(qnaNo);//이전글,다음글 번호 담겨있는 리스트
 		List<QnaComments> qcList=new QnaCommentsService().selectQnaComments(qnaNo);//누른 게시글의 댓글들
-		
+//		int qcCount=new QnaCommentsService().qcCount(qnaNo);//답글 개수->댓글 레벨과 댓글번호 필요
 		
 		request.setAttribute("qna", q);
 		request.setAttribute("qnaList", list);
 		request.setAttribute("qcList", qcList);
+//		request.setAttribute("qcCount", qcCount);
 		
 		request.getRequestDispatcher("/views/qna/qnaView.jsp").forward(request, response);
 		

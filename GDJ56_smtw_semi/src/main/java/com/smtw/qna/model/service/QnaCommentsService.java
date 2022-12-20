@@ -31,11 +31,18 @@ public class QnaCommentsService {
 		return result;
 	}
 	
-	public int insertQnaComments(String comment,int qnaNo, String writer) {
+	public int insertQnaComments(int qcLevel,String qnaQcRef,String comment,int qnaNo, String writer) {
 		Connection conn=getConnection();
-		int result=dao.insertQnaComments(conn,comment,qnaNo,writer);
+		int result=dao.insertQnaComments(conn,qcLevel,qnaQcRef,comment,qnaNo,writer);
 		if(result>0) commit(conn);
 		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int qcCount(int qnaNo) {
+		Connection conn=getConnection();
+		int result=dao.qcCount(conn,qnaNo);
 		close(conn);
 		return result;
 	}
