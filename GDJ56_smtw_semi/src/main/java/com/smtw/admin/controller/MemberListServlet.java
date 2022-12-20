@@ -75,9 +75,11 @@ public class MemberListServlet extends HttpServlet {
 					+request.getContextPath()+"/admin/memberList.do?cPage="+pageNo
 					+"' style='color:rgba(221, 160, 221, 0.508) !important;'>다음</a></li>";
 		}
+		
+		List<Member> listAll=new MemberService().selectMemberListAll(); //페이징 처리 되지 않은 회원 전체 리스트
 
 		request.setAttribute("pageBar", pageBar);
-		
+		request.setAttribute("listAll", listAll);
 		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("/views/admin/memberList.jsp")
