@@ -171,9 +171,7 @@
 			 	}%>  
    		</div>
 	<script>
-		$(document).ready(function(){
-			
-		})
+
 	
 	</script>
    	<div id="pageBar2">
