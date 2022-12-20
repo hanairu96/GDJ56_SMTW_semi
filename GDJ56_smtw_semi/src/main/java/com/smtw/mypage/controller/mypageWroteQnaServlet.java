@@ -45,7 +45,7 @@ public class mypageWroteQnaServlet extends HttpServlet {
 				}
 				
 				//test용 id 
-				id = "USER01";
+				
 				List<Qna>qlist = new MypageService().getQnaList(id,cPage,numPerpage);
 				System.out.println("내가 쓴 질문 리스트"+qlist);
 			
