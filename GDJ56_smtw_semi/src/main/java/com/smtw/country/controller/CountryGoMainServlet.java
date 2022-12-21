@@ -56,7 +56,7 @@ public class CountryGoMainServlet extends HttpServlet {
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
-		int pageEnd=pageNo+pageBarSize-1;		
+		int pageEnd=pageNo+pageBarSize-1;			
 		//부트스트랩 적용....ㅠㅜ
 //		if(pageNo==1) {
 //			pageBar+="<li class='page-item disabled' style='color:rgba(221, 160, 221, 0.508) !important;'>"+
@@ -69,8 +69,9 @@ public class CountryGoMainServlet extends HttpServlet {
 			pageBar+="<span>[이전]</span>";
 		}else {
 			pageBar+="<a href='"+request.getContextPath()
-			+"/country/countryMain.do?id="+id+"cPage="+(pageNo-1)+"'>[이전]</a>";
+			+"/country/countryMain.do?id="+id+"&cPage="+(pageNo-1)+"'>[이전]</a>";
 		}
+		
 		
 //		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 //			if(cPage==pageNo) {
@@ -82,13 +83,13 @@ public class CountryGoMainServlet extends HttpServlet {
 //			}
 //			pageNo++;
 //		}
-		
+		//페이징 처리 숫자 적용하기
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(cPage==pageNo) {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
 				pageBar+="<a href='"+request.getContextPath()
-				+"/country/countryMain.do?id="+id+"cPage="+pageNo+"'>"+pageNo+"</a>";
+				+"/country/countryMain.do?id="+id+"&cPage="+pageNo+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
@@ -104,7 +105,7 @@ public class CountryGoMainServlet extends HttpServlet {
 			pageBar+="<span>[다음]</span>";
 		}else {
 			pageBar+="<a href='"+request.getContextPath()
-			+"/country/countryMain.do?id="+id+"cPage="+pageNo+"'>[다음]</a>";
+			+"/country/countryMain.do?id="+id+"&cPage="+pageNo+"'>[다음]</a>";
 		}
 		
 		

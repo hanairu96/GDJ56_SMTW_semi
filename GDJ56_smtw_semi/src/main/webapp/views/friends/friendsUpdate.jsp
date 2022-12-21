@@ -18,7 +18,7 @@
                 <div style="border:1px solid black;width:900px;height:1070px;border-radius:30px;">
 			        <div id="friendTitle" style="text-align: center;">
 			            <br>
-			            <h1>워홀프렌즈 등록</h1>
+			            <h1>워홀프렌즈 수정</h1>
 			        </div><br>
                     <div style="border:0px solid pink;width:810px;height:200px;display:flex;">
                         <div  style="border:0px solid rgb(210, 243, 21);width:300px;">
@@ -116,6 +116,7 @@
 			               	<p>친구 요청을 수락하면 서로 쪽지 보내기가 가능합니다. 친구를 맺어 대화를 나누세요!</p>
                         </div>
                         <input type="hidden" name="memberId" value="<%=logInMember.getMemberId() %>">
+                        <input type="hidden" name="friendsNo" value="<%=f.getFriendsNo() %>">
                         <input type="submit" style="display: none"><br>
            			 	<div style="border:0px solid yellow;width:810px;height:60px;display: inline-flex;align-items:center; ">
                 			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
