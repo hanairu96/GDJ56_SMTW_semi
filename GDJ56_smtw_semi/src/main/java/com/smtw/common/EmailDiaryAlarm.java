@@ -1,5 +1,6 @@
 package com.smtw.common;
 
+import java.util.Arrays;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -48,8 +49,14 @@ public class EmailDiaryAlarm {
             // Subject
             message.setSubject("[Show Me The Way] ★★ 두근두근 출국 10일전!!! ★★ "); //메일 제목을 입력
 
+            String diaryMailText="<br><div style='text-align:center;'>====================================================================<br><br>"
+            		+ "<span style='font-size:20px;'>※ 두근두근 출국 10일전입니다!!!! ※</span><br>"
+            		+ "<span style='font-size:20px;'>출국 준비 다 되셨나요?! </span><br>"
+            		+ "<span style='font-size:20px;'>저희 </span> <a href='http://localhost:9090/GDJ56_smtw_semi/' style='color:red;font-size:30px;font-weight:bord;'>Show Me The Way</a><span style='font-size:20px;'> 와 함께 완벽히 준비하세요!!</span>"
+            		+ "<br><br>==================================================================== </div>";
+            
             // Text
-            message.setText("두근두근 출국 10일전입니다!!!!! 완벽히 준비 되었는지 다시 한번 확인하세요!"); //메일 내용을 입력
+            message.setContent(diaryMailText,"text/html;charset=utf-8");
 
             // send the message
             Transport.send(message); ////전송
@@ -62,7 +69,7 @@ public class EmailDiaryAlarm {
 				e.printStackTrace(); 
 				result="메일 전송 실패";
 			 }
-			 
+        
         	return result; 
     }
 }
