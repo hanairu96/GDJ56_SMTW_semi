@@ -124,6 +124,7 @@ public class QnaCommentsDao {
 				.enrollDate(rs.getDate("enroll_date"))
 				.qnaNo2(rs.getInt("qna_no2"))
 				.memberId(rs.getString("member_id"))
+				.qcCount(rs.getInt("count"))
 				.build();
 	}
 	
