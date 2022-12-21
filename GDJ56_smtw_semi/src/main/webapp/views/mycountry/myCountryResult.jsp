@@ -47,7 +47,7 @@
 						    	<%for(MyCountry mc : mycountry){ %>
 					    			<%if(count<4){ %>
 							    		<td>
-							    			<img src="<%=request.getContextPath()%>/upload/<%=mc.getNImg() %>" width="400" height="300">
+							    			<img src="<%=request.getContextPath()%>/upload/<%=mc.getNImg() %>" width="250" height="200">
 							    			<h1 id="resultName">" <%=mc.getNName() %> "</h1>
 							    		</td>
 					    		 <% count++;
