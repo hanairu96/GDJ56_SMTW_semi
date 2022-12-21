@@ -16,7 +16,7 @@
 <body>
     <form id="myform">
         <div>
-            <img id="popupImg" onclick="javascript();" src="<%=request.getContextPath() %>/images/팝업창 사진.jpg" alt="" width="400px", height="435px">
+            <img id="popupImg" onclick="javascript();" src="<%=request.getContextPath() %>/images/팝업창 사진.jpg" alt="" width="200px", height="235px">
         </div>
         <input type="checkbox" name="popclose" value="">하루동안 이 창을 열지않음
         <button onclick="closeWin();">닫기</button>
