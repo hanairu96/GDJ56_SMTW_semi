@@ -74,9 +74,11 @@ public class updateFirstCountryServlet extends HttpServlet {
 		if(result>0) {
 			msg="국가 정보 수정이 완료되었습니다.";
 			loc="/country/countryMain.do?id="+id;
+			
 			String deletepath=getServletContext().getRealPath("/upload/country/");
 			File delFile=new File(deletepath+ori);
 			if(delFile.exists()) delFile.delete();
+			
 			request.getSession().setAttribute("country", c);
 			request.setAttribute("id", id);
 		}else {
