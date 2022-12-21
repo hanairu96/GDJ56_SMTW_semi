@@ -35,25 +35,22 @@ public class DiaryMailAlarmServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String memberEmailtotal = request.getParameter("memberEmailtotal");
+		String memberEmailtotal=request.getParameter("memberEmailtotal");
 		
-		List<String> list=new Gson().fromJson(memberEmailtotal, List.class);
-		 
-        // List를 배열로 변환
-        int arrListSize = list.size();
-        String arrmemberEmail[] = list.toArray(new String[arrListSize]);
-        
-        System.out.println(Arrays.toString(arrmemberEmail));
+        String arrEmailTotal[] = memberEmailtotal.split(",");
         
         response.setContentType("application/json;charset=utf-8"); 
         String result="";
-        if(arrmemberEmail.length==0) {
-        	result="메일 전송 실패";
-    		response.getWriter().append(result);
+        
+        if(arrEmailTotal.length==0) {
+        	result="출국10일전인 사람이 없습니다.";
+//    		response.getWriter().append(result);
         }else {
-        	result=EmailDiaryAlarm.gmailSend(arrmemberEmail);//메일 전송
-        	response.getWriter().append(result);
+        	result=EmailDiaryAlarm.gmailSend(arrEmailTotal);//메일 전송
+//        	response.getWriter().append(result);
         }
+        
+        new Gson().toJson(result,response.getWriter());
         System.out.println(result);
 		 
 	}
