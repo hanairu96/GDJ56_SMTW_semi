@@ -72,9 +72,11 @@ public class UpdateCountryInfoServlet extends HttpServlet {
 		if(result>0) {
 			msg="수정이 완료되었습니다.";
 			loc="/countryinfo/searchAll.do?nName="+name;
+			
 			String deletepath=getServletContext().getRealPath("/upload/country/");
 			File delFile=new File(deletepath+ori);
 			if(delFile.exists()) delFile.delete();
+			
 			request.getSession().setAttribute("country", cp);
 		}else {
 			msg="수정을 실패하였습니다. 다시 시도해주세요";
