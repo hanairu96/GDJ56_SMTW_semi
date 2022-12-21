@@ -505,25 +505,26 @@ public class MypageDao {
 		return result;
 	}
 	
+	
 	public String getImg(Connection conn, String userId){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		String result = "";
 		
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("getImg"));
+			pstmt=conn.prepareStatement(sql.getProperty("getmyImg"));
 			pstmt.setString(1, userId);
 			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				result=rs.getString("MYIMG");
-				System.out.println(result);
-			}
+			
+			
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(rs);
 			close(pstmt);
 		}
+		System.out.println("내이미지 디에이오"+result);
 		return result;
 	}
 	
