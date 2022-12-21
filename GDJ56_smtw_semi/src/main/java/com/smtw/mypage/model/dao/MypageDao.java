@@ -505,6 +505,30 @@ public class MypageDao {
 		return result;
 	}
 	
+	public String getImg(Connection conn, String userId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String result = "";
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("getImg"));
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getString("MYIMG");
+				System.out.println(result);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	
 	private ReviewList getWroteReview(ResultSet rs) throws SQLException {
 		return ReviewList.builder()
 				.type("reivew")

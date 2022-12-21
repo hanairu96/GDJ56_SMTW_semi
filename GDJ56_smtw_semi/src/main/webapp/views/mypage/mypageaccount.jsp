@@ -3,6 +3,7 @@
 <%@include file="/views/common/header.jsp" %>
  <%
   	Member m = (Member)request.getAttribute("member");
+ 
  %>
   
    <section>

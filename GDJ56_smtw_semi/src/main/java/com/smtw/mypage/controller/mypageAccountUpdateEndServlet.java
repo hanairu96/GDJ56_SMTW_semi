@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -78,7 +79,7 @@ public class mypageAccountUpdateEndServlet extends HttpServlet {
 						.address(address)
 						.myImg(pic)
 						.build();
-		
+							
 		int result=new MypageService().updateMember(updateMember);
 		
 		String msg="", loc="";

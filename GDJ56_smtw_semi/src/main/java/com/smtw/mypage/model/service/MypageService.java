@@ -312,6 +312,13 @@ public class MypageService {
 		return n;
 	}
 	
+	public String getImg(String userId) {
+		Connection conn = getConnection();
+		String result=new MypageDao().getImg(conn, userId);
+		close(conn);
+		return result;
+	}
+	
 	
 	
 	
