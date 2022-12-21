@@ -219,34 +219,18 @@
                         <input id="searchAddr" name="emailconfirm_btn" type="button" value="인증"
                         onclick="emailcheck();">
                     </div>
-                    <span class="check" id="checkCrtfcNo" style="display:none;"><small></small></span>
-                    <div class="bir_yy address crtfcNo" style="display:none;">
+                    <span class="check" id="checkCrtfcNo"style="display:none;"><small></small></span>
+                    <div class="bir_yy address crtfcNo" style="display:none;" >
                     	<input type="text" class="form-control" name="inputEmail" id="crtfcNoCheck"
                     	  placeholder="인증번호 입력">
                	  	</div>
                	  	<div class="bir_yy address crtfcNo" style="display:none;">
-	               	  	<input id="crtfcButton" name="emailconfirm_btn" type="button" value="확인"
+	               	  	<input id="crtfcButton" name="emailconfirm_btn" type="button" value="확인" style="margin-left:10px;height:35px;"
                        onclick="crtNoCheck();">
                     </div>
                 </div>
                 
                 <script>
-	              //이메일 중복확인
-// 	             	$("input#inputEmail").keyup(e=>{
-// 	             		$.ajax({
-<%-- 	             			url:"<%=request.getContextPath()%>/logIn/emailDuplicateCheck.do", --%>
-// 	             			data:{inputEmail:$("input#inputEmail").val().trim()},
-// 	             			dataType:"json",
-// 	             			success:data=>{
-// 	             				console.log(data);
-// 	             				if(data!=null){
-// 	             					$("span#checkEmail>small").text("이미 가입된 이메일 입니다.").css("color","red");
-// 	             				}else{
-// 	             					$("span#checkEmail>small").text(" ");
-// 	             				}
-// 	             			}
-// 	             		})
-// 	             	});
 	              
 	              //정규식 확인
 						var crtfcNoData="";//변수에 인증번호를 저장하기 위함
