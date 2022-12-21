@@ -32,12 +32,12 @@ public class LikeListCountryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String id=request.getParameter("id");
-		Likenation n=new CountryService().selectLike(id);
-		System.out.println(n);
-		request.setAttribute("nation", n);
-		//request.getRequestDispatcher("/views/country/countrymainview.jsp").forward(request, response);
-		response.sendRedirect(request.getContextPath()+"/country/countryMain.do");
-	
+		if(id!=null) {
+			Likenation n=new CountryService().selectLike(id);
+			System.out.println(n);
+			request.setAttribute("nation", n);
+		}
+			response.sendRedirect(request.getContextPath()+"/country/countryMain.do");
 	}
 
 	/**

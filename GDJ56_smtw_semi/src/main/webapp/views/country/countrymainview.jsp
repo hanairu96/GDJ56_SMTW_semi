@@ -192,11 +192,11 @@
 					}
 				};
 				
- 				if(true){
-					location.assign('<%=request.getContextPath()%>/likelistcountry.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>');
-					if(logInMember.equals("<%=ln.getMemId()%>")&&<%=ln.getCkLike()%>!=null){
+ 			<%-- 	if(true){
+					location.assign('<%=request.getContextPath()%>/likelistcountry.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>'); --%>
+				<%-- 	if(logInMember.equals("<%=ln.getMemId()%>")&&<%=ln.getCkLike()%>!=null){
 						$(".likeimg").show();
-					}
+					} --%>
 				}
 				
 		
