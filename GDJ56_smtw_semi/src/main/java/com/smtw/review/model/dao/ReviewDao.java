@@ -306,6 +306,34 @@ public List<Review> searchReviewList(Connection conn,String type,String keyword,
 	
 	
 	
+	public int   updateReview(Connection conn,Review newR) {
+	
+		
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("updateReview"));
+			pstmt.setString(1,newR.getNationName());
+			pstmt.setString(2,newR.getReviewTitle());
+			pstmt.setString(3,newR.getReviewCity());
+			pstmt.setInt(4,newR.getReviewSat());
+			pstmt.setString(5,newR.getReviewFileName());
+			pstmt.setString(6,newR.getReviewContnet());
+			pstmt.setInt(7,newR.getReviewNo());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+		
+		
+		
+		
+		
+		
+	}
+	
 	
 	
 	

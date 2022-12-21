@@ -1,7 +1,6 @@
-
- 
 package com.smtw.review.controller;
 
+import java.io.File;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,16 +16,16 @@ import com.smtw.review.model.service.ReviewService;
 import com.smtw.review.model.vo.Review;
 
 /**
- * Servlet implementation class EnrollReviewEndServlet
+ * Servlet implementation class ReviewUpdateEndServlet
  */
-@WebServlet("/community/enrollReviewEnd.do")
-public class EnrollReviewEndServlet extends HttpServlet {
+@WebServlet("/community/updateReviewEnd.do")
+public class ReviewUpdateEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EnrollReviewEndServlet() {
+    public ReviewUpdateEndServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,7 +35,11 @@ public class EnrollReviewEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//1.
+	
+	
+		
+		
+		
 		if(!ServletFileUpload.isMultipartContent(request)) {
 			response.sendRedirect(request.getContextPath());
 		}else {
@@ -56,6 +59,8 @@ public class EnrollReviewEndServlet extends HttpServlet {
 		MultipartRequest mr=new MultipartRequest(request, 
 				path,maxSize,encoding,dfr);
 		
+		
+		int reviewNo=Integer.parseInt(mr.getParameter("reviewNo"));
 		String userId=mr.getParameter("userId"); // 작성자
 		String reviewTitle=mr.getParameter("reviewTitle"); //제목
 		
@@ -74,57 +79,92 @@ public class EnrollReviewEndServlet extends HttpServlet {
 		//리네임  파일 내용
 		//대표사진 파일 첨부
 		String fileName=mr.getFilesystemName("upFile");
-		String oriName=mr.getOriginalFileName("upFile");
+	//	String oriName=mr.getOriginalFileName("upFile");
+		
 		
 		
 		// 객체 생성
-		Review r= Review.builder()
-				.memberId(userId)
-				.reviewTitle(reviewTitle)
-				.nationName(reviewNation)
-				.reviewCity(reviewCity)
-				.reviewSat(reviewSat)
-				.reviewFileName(fileName)
-				.reviewContnet(content)
-				.build();
+				Review newR= Review.builder()
+						.reviewNo(reviewNo)
+						.memberId(userId)
+						.reviewTitle(reviewTitle)
+						.nationName(reviewNation)
+						.reviewCity(reviewCity)
+						.reviewSat(reviewSat)
+						.reviewFileName(fileName)
+						.reviewContnet(content)
+						.build();
 		
-		//db에 데이터 보내기
-	int result=new ReviewService().insertReview(r);
-	
-	
-	
-		String msg="", loc="";
+				
+				
+				int result=new ReviewService().updateReview(newR);
+				
+				
+				
+			
+				
+				
+				
+				String msg="", loc="";
+				
+				if(result>0) {
+					msg="리뷰가 수정됨";
+					loc="/community/reviewBasic.do";	
+					
+					
+					//기존업로드 파일 삭제 #1
+					//oriFile
+				String oriFile=mr.getParameter("oriFile");
+					
+			System.out.println("oriFile가뵤 : "+oriFile);
+				
+					//방안들
+					
+					
+					//mr.getParameter  // 
+					//mr.getFilesystemName // 
+					
+					//request.getParameter  // 
+			
+			//request.getFilesystemName // 쓸수없음
+					
+					
+					
+					//기존 업로드 파일 삭제하기  #2
+					
+					// path 설정도 다시해야함
+			String deletepath=getServletContext().getRealPath("/upload/review/");
+			
+			
+					
+					File delFile=new File(deletepath+oriFile);
+					if(delFile.exists()) delFile.delete();
+					
+					
+					
+					
+				}else {
+					msg="리뷰가 수정 실패 다시수정해주세요";
+					loc="/community/updateReviewEnd.do?reviewNo="+newR.getReviewNo();
+					
+				}
+				
+				request.setAttribute("msg", msg);
+				request.setAttribute("loc", loc);
+				
+				request.getRequestDispatcher("/views/common/msg.jsp")
+				.forward(request, response);
+				
+				
+				
+				
+				
+				
 		
-		if(result>0) {
-			msg="리뷰가 등록됨";
-			loc="/community/reviewBasic.do";	
-			
-		}else {
-			msg="리뷰가 등록 실패 다시등록해주세요";
-			loc="/community/enrollReviewEnd.do";
-			
 		}
 		
-		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
-		
-		request.getRequestDispatcher("/views/common/msg.jsp")
-		.forward(request, response);
-		
 	
 	
-	
-	
-	
-	
-	
-		
-			
-		}//else  문 끝
-		
-		
-		
-		
 	}
 
 	/**

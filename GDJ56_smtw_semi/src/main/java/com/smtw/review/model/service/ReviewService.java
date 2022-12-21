@@ -123,6 +123,19 @@ public class ReviewService {
 	}
 	
 	 
+	//수정하기
+	public int  updateReview(Review newR) {
+		Connection conn=getConnection();
+		int result=dao.updateReview(conn,newR);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		 close(conn); 
+		 return result;
+		
+		
+		
+	}
+	
 	
 	
 	
