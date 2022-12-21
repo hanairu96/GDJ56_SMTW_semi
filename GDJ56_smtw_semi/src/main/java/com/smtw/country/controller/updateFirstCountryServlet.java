@@ -1,5 +1,6 @@
 package com.smtw.country.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
 
@@ -34,8 +35,7 @@ public class updateFirstCountryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		String path=request.getServletContext().getRealPath("/upload/");
+		String path=request.getServletContext().getRealPath("/upload/country/");
 		
 		MultipartRequest mr=new MultipartRequest(request,path,1024*1024*10,"UTF-8",new DefaultFileRenamePolicy());//파일 객체생성
 		
@@ -46,7 +46,8 @@ public class updateFirstCountryServlet extends HttpServlet {
 			pic = mr.getFilesystemName(filename);
 		}
 		
-		
+		String ori=mr.getParameter("orifilename");
+				
 		String name=mr.getParameter("nName");
 		String lang=mr.getParameter("langEn");
 		String tend=mr.getParameter("tend2");
@@ -72,6 +73,8 @@ public class updateFirstCountryServlet extends HttpServlet {
 		if(result>0) {
 			msg="국가 정보 수정이 완료되었습니다.";
 			loc="/country/countryMain.do";
+			File delFile=new File(path+ori);
+			if(delFile.exists()) delFile.delete();
 			request.getSession().setAttribute("country", c);
 		}else {
 			msg="국가정보 수정을 실패하였습니다.";
