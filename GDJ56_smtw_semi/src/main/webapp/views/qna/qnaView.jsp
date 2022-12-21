@@ -53,7 +53,7 @@
 	         </div>
 	         <div style="border:0px solid pink;width:950px;height:auto;margin: 0 auto;margin-top: 30px; ">
 	           
-	             <div style="padding:30px;border:1px solid lightgray;width:800px;height:auto;border-radius:10px;margin-left:75px;">
+	             <div style="overflow: hidden; padding:10px;border:1px solid lightgray;width:800px;height:auto;border-radius:10px;margin-left:75px;">
 	                <%=q.getReviewContents() %>
 	             </div> 
 	         </div>

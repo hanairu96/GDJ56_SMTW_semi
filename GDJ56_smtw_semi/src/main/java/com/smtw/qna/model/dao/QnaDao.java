@@ -47,8 +47,6 @@ public class QnaDao {
 						.reviewTitle(rs.getString("review_Title"))
 						.reviewContents(rs.getString("review_Contents"))
 						.enrollDate(rs.getDate("enroll_Date"))
-						.lockYn(rs.getString("lock_Yn").charAt(0))
-						.password(rs.getString("password"))
 						.qnaCommentsCount(rs.getInt("count"))
 						.build());
 			}
@@ -240,9 +238,6 @@ public class QnaDao {
 				.reviewTitle(rs.getString("review_Title"))
 				.reviewContents(rs.getString("review_Contents"))
 				.enrollDate(rs.getDate("enroll_Date"))
-				.lockYn(rs.getString("lock_Yn").charAt(0))
-				.password(rs.getString("password"))
-//				.qnaCommentsCount(rs.getInt("count"))
 				.build();
 	}
 	

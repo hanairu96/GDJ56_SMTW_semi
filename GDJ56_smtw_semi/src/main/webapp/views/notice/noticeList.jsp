@@ -5,6 +5,7 @@
 	List<Notice> list=(List<Notice>)request.getAttribute("notices");
 %>
 <%@ include file="/views/common/header.jsp" %>
+
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/noticeList.css"/>
 <section>
  <!-- ##### 여기 왼쪽 사이드메뉴 div ##### -->
