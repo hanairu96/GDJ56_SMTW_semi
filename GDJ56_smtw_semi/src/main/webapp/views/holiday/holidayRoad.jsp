@@ -53,7 +53,7 @@
                     
                     <h2>고객센터</h2>
                     <p>문의사항 : 질문게시판 <button class="customBtn btnStyle" id="boardBtn" onclick="location.assign('<%=request.getContextPath()%>/qna/qnaList.do')">이동</button></p>
-                    <p>대표전화 : 010-0000-0000  운영시간 : 항시대기</p>
+                    <p>대표전화 : 02-2108-5900  운영시간 : 항시대기</p>
                 </div>
             </div>
         </div>
