@@ -1044,7 +1044,24 @@ public int getqnumPerpage(Connection conn, String userId) {
                .build();
       }
 
-
+      public int deleteNote(Connection conn, String checkNum) {
+    	   
+          PreparedStatement pstmt=null;
+          ResultSet rs=null;
+          int result=0;
+          try {
+             pstmt=conn.prepareStatement(sql.getProperty("deleteNote"));
+             pstmt.setInt(1, Integer.parseInt(checkNum));
+             result=pstmt.executeUpdate();
+          
+          }catch(SQLException e) {
+             e.printStackTrace();
+          }finally {
+             close(rs);
+             close(pstmt);
+          
+          }return result;
+    }
 
 
 

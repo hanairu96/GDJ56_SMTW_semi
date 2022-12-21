@@ -319,7 +319,12 @@ public class MypageService {
 		return result;
 	}
 	
-	
+	public int deleteNote(String checkNum) {
+		Connection conn = getConnection();
+		int result=new MypageDao().deleteNote(conn, checkNum);
+		close(conn);
+		return result;
+	}
 	
 	
 	
