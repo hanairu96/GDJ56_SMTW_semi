@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List,com.smtw.country.model.vo.Country" %>
+<%@ page import="java.util.List,com.smtw.country.model.vo.Country,com.smtw.country.model.vo.Likenation" %>
 <%
 	List<Country> con=(List<Country>)request.getAttribute("country");
 	List<Country> list=(List<Country>)request.getAttribute("list");
+	Likenation ln=(Likenation)request.getAttribute("nation");
 	
 %>
 <!-- 부트스트랩 CSS -->
@@ -183,14 +184,21 @@
 					const coname=$(e.target).parent().find("input").val();
 					console.log(coname);
 					if($(e.target).parent().find("img.dislikeimg").css('display')=='none'){
-						//저장(아이디 값이 없을때의 분기처리를 해줘야한다)
+						//저장(아이디 값이 없을때의 분기처리함)
  						location.assign('<%=request.getContextPath()%>/likecountry.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>&name='+coname+'&ckLike=Y'); 
 					}else{
 						//삭제
  						location.assign('<%=request.getContextPath()%>/dislikecountry.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>&name='+coname);
 					}
 				};
-				if()
+				
+ 				if(true){
+					location.assign('<%=request.getContextPath()%>/likelistcountry.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>');
+					if(logInMember.equals("<%=ln.getMemId()%>")&&<%=ln.getCkLike()%>!=null){
+						$(".likeimg").show();
+					}
+				}
+				
 		
 			</script>
    		</div>

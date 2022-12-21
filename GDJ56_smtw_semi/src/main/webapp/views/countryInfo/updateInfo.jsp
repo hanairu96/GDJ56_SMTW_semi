@@ -115,37 +115,37 @@
                 <br>
                 <div>
                     언어 
-                    <br><inpuT type="text" name="langagecountry" value="<%=cp.getCLanguage() %>" placeholder="예시) 영어, 프랑스어, 독일어"></inpuT>
+                    <br><inpuT type="text" name="langagecountry" value="<%=cp.getCLanguage() %>" placeholder="예시) 영어, 프랑스어, 독일어" required></inpuT>
                 </div>
                 <br>
                 <div>
                     수도 
-                    <br><inpuT type="text" name="urban" value="<%=cp.getUrban() %>" placeholder="예시) 암스트르담"></inpuT>
+                    <br><inpuT type="text" name="urban" value="<%=cp.getUrban() %>" placeholder="예시) 암스트르담" required></inpuT>
                 </div>
                 <br>
                 <div>
                     화폐단위 
-                    <br><inpuT type="text" name="moneycountry" value="<%=cp.getMoney() %>" placeholder="예시) 유로(Euro, €, EUR)" ></inpuT>
+                    <br><inpuT type="text" name="moneycountry" value="<%=cp.getMoney() %>" placeholder="예시) 유로(Euro, €, EUR)" required></inpuT>
                 </div>
                 <br>
                 <div>
                     전기 
-                    <br><inpuT type="text" name="elect" value="<%=cp.getElect() %>" placeholder="예시) 220V"></inpuT>
+                    <br><inpuT type="text" name="elect" value="<%=cp.getElect() %>" placeholder="예시) 220V" required></inpuT>
                 </div>
                 <br>
                 <div>
                     구글 주소 링크
-                    <br><textarea name="contryaddress" id="contryaddress" cols="80" rows="5"  placeholder="예시) 구글지도 링크"><%=cp.getMapAddress() %></textarea>
+                    <br><textarea name="contryaddress" id="contryaddress" cols="80" rows="5"  placeholder="예시) 구글지도 링크" required><%=cp.getMapAddress() %></textarea>
                 </div>
                 <br>    
                 <div>
                     영문 수도명  
-                    <br><inpuT type="text" name="engcity" value="<%=cp.getEnglishName() %>" placeholder="예시) amsterdam"></inpuT>
+                    <br><inpuT type="text" name="engcity" value="<%=cp.getEnglishName() %>" placeholder="예시) amsterdam" required></inpuT>
                 </div>
                 <br>    
                 <div>
                     시차 (영국기준) 
-                    <br><inpuT type="text" name="clockchange" value="<%=cp.getClock() %>" placeholder="예시) +1"></inpuT>
+                    <br><inpuT type="text" name="clockchange" value="<%=cp.getClock() %>" placeholder="예시) +1" required></inpuT>
                 </div>
                 <br>
 

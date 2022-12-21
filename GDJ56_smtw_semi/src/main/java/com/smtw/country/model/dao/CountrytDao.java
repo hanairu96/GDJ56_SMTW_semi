@@ -14,7 +14,7 @@ import java.util.Properties;
 
 import com.smtw.country.model.vo.Country;
 import com.smtw.country.model.vo.CountryPageInfo;
-import com.smtw.countrypageinfo.model.dao.CountryPageInfoDao;
+import com.smtw.country.model.vo.Likenation;
 
 public class CountrytDao {
 
@@ -233,5 +233,33 @@ public class CountrytDao {
 		}
 		return result;
 	}
+	
+	public Likenation selectLike(Connection conn, String id) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Likenation n=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectLike"));
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			if(rs.next()) n=getLikenation(rs);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return n;
+	}
+	
+	public static Likenation getLikenation(ResultSet rs) throws SQLException{
+		return Likenation.builder()
+				.memId(rs.getString("MEMBER_ID"))
+				.nName(rs.getString("N_NAME"))
+				.ckLike(rs.getString("CK_LIKE"))
+				.build();
+	}
+	
+	
 		
 }

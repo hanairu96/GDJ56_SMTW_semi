@@ -34,7 +34,7 @@ public class deleteLikeCountryServlet extends HttpServlet {
 		String id=request.getParameter("id");
 		Likenation c=Likenation.builder().memId(request.getParameter("id")).build();
 		int result=new CountryService().deletLikeCountry(id);
-	
+		//값을 받는 서블릿으로 이동함
 		response.sendRedirect(request.getContextPath()+"/country/countryMain.do");
 	
 	

@@ -1,11 +1,15 @@
 package com.smtw.country.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.smtw.country.model.service.CountryService;
+import com.smtw.country.model.vo.Likenation;
 
 /**
  * Servlet implementation class LikeListCountryServlet
@@ -27,8 +31,12 @@ public class LikeListCountryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		
-	
+		String id=request.getParameter("id");
+		Likenation n=new CountryService().selectLike(id);
+		System.out.println(n);
+		request.setAttribute("nation", n);
+		//request.getRequestDispatcher("/views/country/countrymainview.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath()+"/country/countryMain.do");
 	
 	}
 

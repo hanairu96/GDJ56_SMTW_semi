@@ -90,6 +90,9 @@ public class CountryGoMainServlet extends HttpServlet {
 		request.setAttribute("list",list);
 //		System.out.println(list);
 		
+		
+		
+		
 		request.getRequestDispatcher("/views/country/countrymainview.jsp").forward(request, response);
 	
 	}
