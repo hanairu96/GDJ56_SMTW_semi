@@ -44,7 +44,7 @@ public class LikeCountryServlet extends HttpServlet {
 		
 		//request.getRequestDispatcher("/country/countryMain.do").forward(request, response);
 		//바로 countrymain.jsp로 가면 데이터 값이 같이 오지 않기 때문에 데이터 값이 있는 서블릿으로 가서 데이터 전송을 해준다
-		response.sendRedirect(request.getContextPath()+"/country/countryMain.do");
+		response.sendRedirect(request.getContextPath()+"/country/countryMain.do?id="+id);
 	}
 
 	/**

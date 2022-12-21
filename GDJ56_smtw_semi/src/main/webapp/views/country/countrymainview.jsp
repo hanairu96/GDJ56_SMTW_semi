@@ -4,8 +4,13 @@
 <%
 	List<Country> con=(List<Country>)request.getAttribute("country");
 	List<Country> list=(List<Country>)request.getAttribute("list");
-	Likenation ln=(Likenation)request.getAttribute("nation");
-	
+	List<Likenation> ln=(List<Likenation>)request.getAttribute("nation");
+	String id=(String)request.getAttribute("id");
+	String likeName="";
+	for(Likenation l : ln){
+		likeName+=l.getNName()+",";
+		out.print(likeName);
+	}
 %>
 <!-- 부트스트랩 CSS -->
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"> -->
@@ -153,14 +158,21 @@
                             <%}%>    
 	                            <%=con.get(i).getNName()%></a></p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	                            
+	                            
+	                            
 	                            <!-- 좋아요 버튼 -->
 	                            <%if(logInMember!=null){ %>
 		                        	<div id="likebtn">
 		                        		<input type="hidden" id="conameinput" value="<%=con.get(i).getNName() %>">
-		                        		<img class="likeimg"  src="<%=request.getContextPath() %>/images/country/like.png" style="width:50px;height:50px;" onclick="likebtn(event)">
-		                        		<img class="dislikeimg" src="<%=request.getContextPath() %>/images/country/dislike.png" style="width:50px;height:50px;" onclick="likebtn(event)">
+		                        		<img class="likeimg"  src="<%=request.getContextPath() %>/images/country/like.png" 
+		                        		style="width:50px;height:50px;<%=likeName.contains(con.get(i).getNName())?"display:inline":"display:none" %>" onclick="likebtn(event)">
+		                        		<img class="dislikeimg" src="<%=request.getContextPath() %>/images/country/dislike.png" 
+		                        		style="width:50px;height:50px;<%=likeName.contains(con.get(i).getNName())?"display:none":"display:inline" %>"" onclick="likebtn(event)">
 		                        	</div>	 
 	                        	<%} %>   
+	                        	
+	                        	
+	                        	
 	                        </div>
 	                        <h4 id="maininfo2"><%=con.get(i).getNpharse() %></h4>
 	                        
@@ -176,7 +188,7 @@
 			 }%>  
 		    <script>
 				//좋아요 하트 버튼
-				$(".likeimg").hide();
+				//$(".likeimg").hide();
 				
 				const likebtn=(e)=>{
 					$(e.target).parent().find("img").toggle();
@@ -192,24 +204,16 @@
 					}
 				};
 				
- 			<%-- 	if(true){
-					location.assign('<%=request.getContextPath()%>/likelistcountry.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>'); --%>
-				<%-- 	if(logInMember.equals("<%=ln.getMemId()%>")&&<%=ln.getCkLike()%>!=null){
-						$(".likeimg").show();
-					} --%>
-				}
-				
-		
-			</script>
+			</script>			
    		</div>
 	
 	<!-- 페이징 처리 -->
    	<div id="pageBar2">
-             <nav aria-label="Page navigation example" style="margin-top:30px;color:rgba(221, 160, 221, 0.508) !important;">
-                    <ul class="pagination justify-content-center" style="color:rgba(221, 160, 221, 0.508) !important;">
-		<%=request.getAttribute("pageBar") %>
-                    </ul>
-                </nav>
+		<nav aria-label="Page navigation example" style="margin-top:30px;color:rgba(221, 160, 221, 0.508) !important;">
+			<ul class="pagination justify-content-center" style="color:rgba(221, 160, 221, 0.508) !important;">
+				<%=request.getAttribute("pageBar") %>
+			</ul>
+		</nav>
 	</div>
 	
 	

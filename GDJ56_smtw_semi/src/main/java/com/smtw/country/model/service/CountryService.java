@@ -87,18 +87,18 @@ public class CountryService {
 		return result;
 	}
 	
-	public int deletLikeCountry(String id) {
+	public int deletLikeCountry(String name) {
 		Connection conn=getConnection();
-		int result=dao.deletLikeCountry(conn,id);
+		int result=dao.deletLikeCountry(conn,name);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
 		return result;
 	}
 	
-	public Likenation selectLike(String id) {
+	public List<Likenation> selectLike(String id) {
 		Connection conn=getConnection();
-		Likenation result=dao.selectLike(conn,id);
+		List<Likenation> result=dao.selectLike(conn,id);
 		close(conn);
 		return result;
 	}
