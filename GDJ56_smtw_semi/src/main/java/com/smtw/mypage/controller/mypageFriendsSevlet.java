@@ -43,7 +43,7 @@ public class mypageFriendsSevlet extends HttpServlet {
 		//userId가지고 오기
 		System.out.println("내아이디!!!"+id);
 		//내 이미지 가지고 오기 
-		String myImg=new MypageService().getImg("id");
+		String myImg=new MypageService().getImg(id);
 		request.setAttribute("myImg", myImg);
 		System.out.println("내사진"+myImg);
 		// 친구 신청한 리스트

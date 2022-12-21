@@ -218,15 +218,16 @@ public class FriendsDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("updateFriends"));
-			pstmt.setString(1, f.getNName());
-			pstmt.setString(2, f.getFriendsTitle());
-			pstmt.setString(3, f.getFriendsContents());
-			pstmt.setString(4, f.getMemberId());
-			pstmt.setString(5, f.getMbti());
-			pstmt.setString(6, f.getType());
-			pstmt.setString(7, String.valueOf(f.getExpYn()));
-			pstmt.setString(8, f.getPurpose());
-			pstmt.setString(9, f.getMemberId());
+			pstmt.setInt(1, f.getFriendsNo());
+			pstmt.setString(2, f.getNName());
+			pstmt.setString(3, f.getFriendsTitle());
+			pstmt.setString(4, f.getFriendsContents());
+			pstmt.setString(5, f.getMemberId());
+			pstmt.setString(6, f.getMbti());
+			pstmt.setString(7, f.getType());
+			pstmt.setString(8, String.valueOf(f.getExpYn()));
+			pstmt.setString(9, f.getPurpose());
+			pstmt.setInt(10, f.getFriendsNo());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
