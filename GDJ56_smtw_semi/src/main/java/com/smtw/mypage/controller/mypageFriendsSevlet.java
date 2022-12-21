@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.smtw.admin.model.service.MemberService;
 import com.smtw.member.model.vo.Member;
@@ -36,19 +37,23 @@ public class mypageFriendsSevlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HttpSession session=request.getSession();
+		Member m=(Member) session.getAttribute("logInMember");
+		String id = m.getMemberId();
 		//userId가지고 오기
-		String userId=request.getParameter("id");
+		
 		//내 이미지 가지고 오기 
-		
-		
+		String myImg=new MypageService().getImg("id");
+		request.setAttribute("myImg", myImg);
+		System.out.println("내사진"+myImg);
 		// 친구 신청한 리스트
-		List<Applyfriends> list = new MypageService().applyfriendsList(userId);
+		List<Applyfriends> list = new MypageService().applyfriendsList(id);
 		//친구 신청한 사람들의 정보
-		List<MemberInfo> infolist = new MypageService().InfoapplyfriendsList(userId);
+		List<MemberInfo> infolist = new MypageService().InfoapplyfriendsList(id);
 		//친구 리스트
-		List<MemberInfo> friendslist = new MypageService().FriendsList(userId);
+		List<MemberInfo> friendslist = new MypageService().FriendsList(id);
 		// (상대방이 나의 친구 신청을 받아준=)친구 수락받은 리스트
-		List<Member> acceptedFlist = new MypageService().acceptedFlist(userId);
+		List<Member> acceptedFlist = new MypageService().acceptedFlist(id);
 		// 그의 정보
 		List<MemberInfo2> acceptedlist=null;
 		

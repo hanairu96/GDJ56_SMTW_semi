@@ -110,7 +110,8 @@
             	<br>
                 <div>
                     국기사진
-                    <br><input type="file" name="cimage" >
+                    <br><input type="file" name="cimage" value="<%=cp.getCPic()%>">
+                    <input type="hidden" name="orifilename" value="<%=cp.getCPic()%>"></input>
                 </div> 
                 <br>
                 <div>
