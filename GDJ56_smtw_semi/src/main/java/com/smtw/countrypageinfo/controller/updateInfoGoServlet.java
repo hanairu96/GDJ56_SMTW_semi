@@ -34,6 +34,9 @@ public class updateInfoGoServlet extends HttpServlet {
 		String name=request.getParameter("nName");
 		CountryPageInfo cp=new CountryPageInfoService().searchName(name);
 		
+		//COUNTRYPAGE정보를 가져온다
+		
+		
 		request.setAttribute("coinfo", cp);
 		request.getRequestDispatcher("/views/countryInfo/updateInfo.jsp").forward(request, response);
 		

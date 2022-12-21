@@ -51,16 +51,15 @@ public class CountryPageInfoService {
 	}
 	
 	
+	public List<CountryPageInfo> selectjoinpage(String name) {
+		Connection conn=getConnection();
+		List<CountryPageInfo> result=dao.selectjoinpage(conn,name);
+		close(conn);
+		return result;
+	}
 	
 //////countrypage의 service항목들
 	
-	//ajax전체 출력
-//	public List<CountryPage> selectCoAll(){
-//		Connection conn=getConnection();
-//		List<CountryPage> result=dao.selectCoAll(conn);
-//		close(conn);
-//		return result;
-//	}
 	
 	//내용들
 	public CountryPage coArea(String name) {
