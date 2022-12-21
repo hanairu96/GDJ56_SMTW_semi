@@ -143,7 +143,11 @@
 	            <ul class="bottom">
 	              <li class="menu time"><%=qc.getEnrollDate() %></li>
 	              <li class="divider"></li> 
-	              <li class="menu show-reply" onclick="showReply(event);" style="cursor: pointer;">답글 (<%=qc.getQcCount()%>)</li> 
+	              <%if(qc.getQcCount()!=0) {%>
+		              <li class="menu show-reply" onclick="showReply(event);" style="cursor: pointer;">
+		              		답글 (<%=qc.getQcCount()%>)
+		              </li> 
+	              <%} %>
 	            </ul>
 			</div>
 		</div>   
