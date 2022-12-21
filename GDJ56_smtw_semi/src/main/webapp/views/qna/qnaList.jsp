@@ -66,16 +66,6 @@
             		$(".faqAll").hide();
             		$("#completeFaq").show();
             	};
-            	
-            	//완료버튼 눌렀을 때 DB로 저장하게 하기
-//             	const completeFaq=()=>{
-//             		console.log($(".textArea")[0].innerText);
-//             		$.ajax({
-<%--             			url:"<%=request.getContextPath()%>/qna/ModifyFaq.do", --%>
-//             			data:{"faqQue":$(".faqQue")[0].innerText,
-//             				}
-//             		})
-//             	};
             </script>
             
             
@@ -107,7 +97,9 @@
 			        	<%for(Qna qn : qnas){%>
 					        <li class="content">
 					        	<span class="number">　　<%=qn.getQnaNo() %>　　</span>
-					        	<a href="<%=request.getContextPath()%>/qna/qnaView.do?qnaNo=<%=qn.getQnaNo()%>"><%=qn.getReviewTitle()%><span></span></a>
+					        	<a href="<%=request.getContextPath()%>/qna/qnaView.do?qnaNo=<%=qn.getQnaNo()%>"><%=qn.getReviewTitle()%>
+					        		<%if(qn.getQnaCommentsCount()!=0) {%><small><span> (<%=qn.getQnaCommentsCount() %>)</span></small><%} %>
+					        	</a>
 					        	<span class="right"><%=qn.getEnrollDate() %></span>
 					        	<span class="right"><%=qn.getMemberId() %></span>
 					        </li>

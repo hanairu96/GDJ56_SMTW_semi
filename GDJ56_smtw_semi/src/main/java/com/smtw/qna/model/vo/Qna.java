@@ -15,4 +15,5 @@ public class Qna {
 	private Date enrollDate;
 	private char lockYn;
 	private String password;
+	private int qnaCommentsCount;
 }

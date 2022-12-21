@@ -31,15 +31,20 @@ public class LikeCountryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String id=request.getParameter("memberId");
-		String country=request.getParameter("nNmae");
+		String id=request.getParameter("id");
+		String country=request.getParameter("name");
+		String ck=request.getParameter("ckLike");
 		Likenation ln=Likenation.builder()
 				.memId(id)
 				.nName(country)
+				.ckLike(ck)
 				.build();
 		System.out.println(ln);
 		int like=new CountryService().insertlike(id,country);
 		
+		//request.getRequestDispatcher("/country/countryMain.do").forward(request, response);
+		//바로 countrymain.jsp로 가면 데이터 값이 같이 오지 않기 때문에 데이터 값이 있는 서블릿으로 가서 데이터 전송을 해준다
+		response.sendRedirect(request.getContextPath()+"/country/countryMain.do");
 	}
 
 	/**

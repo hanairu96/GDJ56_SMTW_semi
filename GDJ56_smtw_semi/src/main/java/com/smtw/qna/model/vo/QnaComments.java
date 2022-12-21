@@ -15,4 +15,6 @@ public class QnaComments {
 	private Date enrollDate;
 	private int qnaNo2;
 	private String memberId;
+	private int qcCount;
+	
 }

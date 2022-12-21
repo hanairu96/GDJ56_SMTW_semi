@@ -55,28 +55,31 @@ public class CountryGoMainServlet extends HttpServlet {
 		int pageEnd=pageNo+pageBarSize-1;		
 		
 		if(pageNo==1) {
-			pageBar+="<span>[이전]</span>";
+			pageBar+="<li class='page-item disabled' style='color:rgba(221, 160, 221, 0.508) !important;'>"+
+			"<a class='page-link' style='color:rgba(221, 160, 221, 0.508) !important;'>[이전]</a></li>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()
-			+"/country/countryMain.do?cPage="+(pageNo-1)+"'>[이전]</a>";
+			pageBar+="<li><a class='page-link' href='"+request.getContextPath()+"/country/countryMain.do?cPage="+(pageNo-1)
+					+"' style='color:rgba(221, 160, 221, 0.508) !important;'>이전</a></li>";
 		}
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(cPage==pageNo) {
-				pageBar+="<span>"+pageNo+"</span>";
+				pageBar+="<li class='page-item'><a class='page-link' style='color:rgba(221, 160, 221, 0.508) !important;'>"+pageNo+"</a></li>";
 			}else {
-				pageBar+="<a href='"+request.getContextPath()
-				+"/country/countryMain.do?cPage="+pageNo+"'>"+pageNo+"</a>";
+				pageBar+="<li class='page-item'><a class='page-link' href='"
+						+request.getContextPath()+"/country/countryMain.do?cPage="+pageNo
+						+"' style='color:rgba(221, 160, 221, 0.508) !important;'>"+pageNo+"</a></li>";
+				
 			}
 			pageNo++;
 		}
 		
 		if(pageNo>totalPage) {
-			pageBar+="<span>[다음]</span>";
+			pageBar+="<li class='page-item disabled'><a class='page-link' style='color:rgba(221, 160, 221, 0.508) !important;'>다음</a></li>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()
-			+"/country/countryMain.do?cPage="+pageNo+"'>[다음]</a>";
-		
+			pageBar+="<li class='page-item'><a class='page-link' href='"
+					+request.getContextPath()+"/country/countryMain.do?cPage="+pageNo
+					+"' style='color:rgba(221, 160, 221, 0.508) !important;'>다음</a></li>";
 		}
 		request.setAttribute("pageBar", pageBar);
 		
@@ -86,6 +89,9 @@ public class CountryGoMainServlet extends HttpServlet {
 		List<Country> list=new CountryService().searchList();
 		request.setAttribute("list",list);
 //		System.out.println(list);
+		
+		
+		
 		
 		request.getRequestDispatcher("/views/country/countrymainview.jsp").forward(request, response);
 	

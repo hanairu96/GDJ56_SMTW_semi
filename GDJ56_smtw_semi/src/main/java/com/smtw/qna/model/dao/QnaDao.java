@@ -41,7 +41,16 @@ public class QnaDao {
 			
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				result.add(getQna(rs));
+				result.add(Qna.builder()
+						.qnaNo(rs.getInt("Qna_No"))
+						.memberId(rs.getString("member_Id"))
+						.reviewTitle(rs.getString("review_Title"))
+						.reviewContents(rs.getString("review_Contents"))
+						.enrollDate(rs.getDate("enroll_Date"))
+						.lockYn(rs.getString("lock_Yn").charAt(0))
+						.password(rs.getString("password"))
+						.qnaCommentsCount(rs.getInt("count"))
+						.build());
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -233,6 +242,7 @@ public class QnaDao {
 				.enrollDate(rs.getDate("enroll_Date"))
 				.lockYn(rs.getString("lock_Yn").charAt(0))
 				.password(rs.getString("password"))
+//				.qnaCommentsCount(rs.getInt("count"))
 				.build();
 	}
 	

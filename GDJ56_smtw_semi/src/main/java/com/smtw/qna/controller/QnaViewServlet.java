@@ -40,6 +40,7 @@ public class QnaViewServlet extends HttpServlet {
 		List<QnaComments> qcList=new QnaCommentsService().selectQnaComments(qnaNo);//누른 게시글의 댓글들
 //		int qcCount=new QnaCommentsService().qcCount(qnaNo);//답글 개수->댓글 레벨과 댓글번호 필요
 		
+		
 		request.setAttribute("qna", q);
 		request.setAttribute("qnaList", list);
 		request.setAttribute("qcList", qcList);

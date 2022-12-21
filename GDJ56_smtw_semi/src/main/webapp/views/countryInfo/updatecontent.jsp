@@ -17,27 +17,27 @@
                 <br>
                 <div>
                     국가/지역소개
-                    <br><textarea name="coareainfo" id="" cols="100" rows="30" placeholder="국가/지역소개 입력" ><%=cp.getNInfo() %></textarea>
+                    <br><textarea name="coareainfo" id="" cols="100" rows="30" placeholder="국가/지역소개 입력" required><%=cp.getNInfo() %></textarea>
                 </div>
                 <br>    
                 <div>
                     워홀비자 
-                    <br><textarea name="wkvisa" id="" cols="100" rows="30" placeholder="워홀비자 입력" ><%=cp.getNVisa() %></textarea>
+                    <br><textarea name="wkvisa" id="" cols="100" rows="30" placeholder="워홀비자 입력" required><%=cp.getNVisa() %></textarea>
                 </div>
                 <br>  
                 <div>
                     안전정보 
-                    <br><textarea name="safebady" id="" cols="100" rows="30" placeholder="안전정보 입력" ><%=cp.getNSafety() %></textarea>
+                    <br><textarea name="safebady" id="" cols="100" rows="30" placeholder="안전정보 입력" required><%=cp.getNSafety() %></textarea>
                 </div>
                 <br>  
                 <div>
                     초기정착 
-                    <br><textarea name="homestay" id="" cols="100" rows="30" placeholder="초기정착 입력" ><%=cp.getNSettle() %></textarea>
+                    <br><textarea name="homestay" id="" cols="100" rows="30" placeholder="초기정착 입력" required><%=cp.getNSettle() %></textarea>
                 </div>
                 <br>  
                 <div>
                     취업정보 
-                    <br><textarea name="getjob" id="" cols="100" rows="30" placeholder="취업정보 입력" ><%=cp.getNJob() %></textarea>
+                    <br><textarea name="getjob" id="" cols="100" rows="30" placeholder="취업정보 입력" required><%=cp.getNJob() %></textarea>
                 </div>
                 <br>  
 			    <div id="twobu">

@@ -62,12 +62,12 @@
         </div>       
         </div>
         <script>
-           function update_check(reviewNo,fileName){
+           function update_check(reviewNo,orifileName){
            var answer;
             answer = confirm("후기를 수정하시겠습니까?");
             if(answer == true){
 			
-			location.assign("<%=request.getContextPath()%>/community/reviewUpdate.do?reviewNo="+reviewNo+"&fileName="+fileName);
+			location.assign("<%=request.getContextPath()%>/community/reviewUpdate.do?reviewNo="+reviewNo+"&orifileName="+orifileName);
 	
             	
 		       }

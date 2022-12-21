@@ -33,18 +33,24 @@ public class insertCountryFirstServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//파일 업로드 하기
-		String path=request.getServletContext().getRealPath("/upload/");
+		String path=request.getServletContext().getRealPath("/upload/country/");
 		
 		MultipartRequest mr=new MultipartRequest(request,path,1024*1024*10,"UTF-8",new DefaultFileRenamePolicy());
 		
-		Enumeration e=mr.getFileNames();
+		Enumeration e=mr.getFileNames();//파일 이름을 순서화 시켜서 저장
 		String pic="";
 		if(e.hasMoreElements()) {
 			String filename=(String)e.nextElement();//파일을 반환
 			pic = mr.getFilesystemName(filename);
-		}
 
+		 if (filename != null) {
+			 
+		 }else{
+			 
+		 }
 		
+		
+		}
 		//multipart/form-data형식으로 전송 되었기 때문에 request.getParameter가 불가능하고 
 		//MultipartRequest 객체의 getParamter 메소드를 사용해야 한다.
 		String name=null;

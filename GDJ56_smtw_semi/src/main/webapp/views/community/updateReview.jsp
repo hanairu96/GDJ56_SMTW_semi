@@ -8,7 +8,7 @@
 <%
 
 Review oriReview=(Review)request.getAttribute("oriReview"); 
-
+String orifileName=(String)request.getAttribute("orifileName"); 
 
 %>
 
@@ -44,17 +44,18 @@ Review oriReview=(Review)request.getAttribute("oriReview");
     <!-- 가운데 섹션 부분!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
     <section id="review-container">
         <div>
-            <form  id="reviewfrm" action="<%=request.getContextPath()%>/community/" method="post"   enctype="multipart/form-data">
+            <form  id="reviewfrm" action="<%=request.getContextPath()%>/community/updateReviewEnd.do" method="post"   enctype="multipart/form-data">
                 <table id="tbl-review">
-                <input name="userId"  type="hidden" readonly value="<%=logInMember.getMemberId()%>">
+                <input name="userId"  type="hidden" readonly value="<%=oriReview.getMemberId()%>">
+                <input  value="<%=oriReview.getReviewNo()%>"  type="hidden"  name="reviewNo" >
                 <tr>
                     <th>제 목</th>
-                    <td><input   name="reviewTitle"  id="title"  type="text" placeholder="제목" size="65"></td>
+                    <td><input   value="<%=oriReview.getReviewTitle()%>"    name="reviewTitle"  id="title"  type="text" placeholder="제목" size="65"></td>
                 </tr>
                 <tr>
                     <th>나라</th>
                     <td>
-                        <select   name="reviewNation"  required   id="nation" class="form-select" aria-label="Default select example" style="box-shadow: 0 4px 2px -2px rgba(221, 160, 221, 0.304) !important;;">
+                        <select value="<%=oriReview.getNationName()%>"  class="form-select"   name="reviewNation"  required   id="nation"  aria-label="Default select example" style="box-shadow: 0 4px 2px -2px rgba(221, 160, 221, 0.304) !important;;">
                             
                             <!-- <input  name="reviewNationValue"  type="hidden"> -->
                             
@@ -89,27 +90,34 @@ Review oriReview=(Review)request.getAttribute("oriReview");
                             <option value="캐나다">캐나다</option>
                             <option value="홍콩">홍콩</option>
                         </select>
+                        
+                        
+                        
+                        
+                
                     </td>
                 </tr>
                 <tr>
                     <th>도시</th>
-                    <td><input  name="reviewCity"  id="city" type="text" placeholder="도시" size="65"></td>
+                    <td><input  value="<%=oriReview.getReviewCity()%>"  name="reviewCity"  id="city" type="text" placeholder="도시" size="65"></td>
                 </tr>
                 <tr>
                     <th>만족도</th>
                     <td>
-                        <input   name="reviewSat"  id="sat" type="range" placeholder="만족도" size="65" min="1" max="5" step="1" oninput="document.getElementById('value1').innerHTML=this.value;">
+                        <input  value="<%=oriReview.getReviewSat()%>"   name="reviewSat"  id="sat" type="range" placeholder="만족도" size="65" min="1" max="5" step="1" oninput="document.getElementById('value1').innerHTML=this.value;">
                         <span id="value1"></span>
                     </td>
                 </tr>
                  <tr>
                     <th>대표사진</th>
-                    <td><input  name="upFile"   type="file" placeholder="" size="65"></td>
+                    <td><input  value="<%=oriReview.getReviewFileName()%>"  name="upFile"   type="file" placeholder="" size="65"></td>
+                		<input  type="hidden"  name="oriFile"  value="<%=oriReview.getReviewFileName()%>" >
+                
                 </tr>
                 <tr>
                     <th colspan="2">
                         <div class="cont">
-                            <textarea  style="width:100%;"  style="height:100%;"   name="summernote" id="summernote" placeholder="내용 입력"></textarea>
+                            <textarea    style="width:100%;"  style="height:100%;"   name="summernote" id="summernote" placeholder="내용 입력"><%=oriReview.getReviewContnet()%></textarea>
                         	<!-- rows="10" cols="100" -->
                         </div>
                     </th>
@@ -130,7 +138,7 @@ Review oriReview=(Review)request.getAttribute("oriReview");
                     <!-- <a href="">취소</a> -->
                     <!-- <a  onclick="chk_form(this.form))" href="" class="on">등록</a> -->
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    			<button onclick="enroll_review(this.form);" class="customBtn btnStyle btn btn-primary" type="button" style="margin-left:690px;background-color: rgba(221, 160, 221, 0.508) !important;" value="등록">&nbsp등록&nbsp</button>
+                    			<button onclick="update_review(this.form);" class="customBtn btnStyle btn btn-primary" type="button" style="margin-left:690px;background-color: rgba(221, 160, 221, 0.508) !important;" value="수정">수정</button>
                     			<button onclick="cancel_review();" class="customBtn btnStyle btn btn-primary" type="button" style=" background-color: rgba(221, 160, 221, 0.508) !important;" value="취소">&nbsp취소&nbsp</button>
                 			</div>
                     
@@ -139,7 +147,7 @@ Review oriReview=(Review)request.getAttribute("oriReview");
         </div>
     </section>
     <script>
-    function enroll_review(f){
+    function update_review(f){
 		//입력 안 된 값이 있으면 알림	
     	if(document.getElementById("title").value==''){
     		alert("제목을 입력해주십시오.");
@@ -167,8 +175,7 @@ Review oriReview=(Review)request.getAttribute("oriReview");
     	
     	
 		
-	
-		
+
 		
     	if(document.getElementById("summernote").value==''){
     		alert("텍스트를 입력해주십시오.");
@@ -178,7 +185,7 @@ Review oriReview=(Review)request.getAttribute("oriReview");
     	
 		
 			let answer;
-			answer=confirm("리뷰를 등록하시겠습니까?");
+			answer=confirm("리뷰를 수정하시겠습니까?");
 			if(answer==true){
 				f.submit();
 			}

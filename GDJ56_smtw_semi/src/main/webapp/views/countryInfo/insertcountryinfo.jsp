@@ -114,37 +114,37 @@
                 <br>
                 <div>
                     언어 
-                    <br><inpuT type="text" name="langagecountry" placeholder="예시) 영어, 프랑스어, 독일어"></inpuT>
+                    <br><inpuT type="text" name="langagecountry" placeholder="예시) 영어, 프랑스어, 독일어" required></inpuT>
                 </div>
                 <br>
                 <div>
                     수도 
-                    <br><inpuT type="text" name="urban" placeholder="예시) 암스트르담"></inpuT>
+                    <br><inpuT type="text" name="urban" placeholder="예시) 암스트르담" required></inpuT>
                 </div>
                 <br>
                 <div>
                     화폐단위 
-                    <br><inpuT type="text" name="moneycountry" placeholder="예시) 유로(Euro, €, EUR)" ></inpuT>
+                    <br><inpuT type="text" name="moneycountry" placeholder="예시) 유로(Euro, €, EUR)" required></inpuT>
                 </div>
                 <br>
                 <div>
                     전기 
-                    <br><inpuT type="text" name="elect" placeholder="예시) 220V"></inpuT>
+                    <br><inpuT type="text" name="elect" placeholder="예시) 220V" required></inpuT>
                 </div>
                 <br>
                 <div>
                     구글 주소 링크
-                    <br><textarea name="contryaddress" id="contryaddress" cols="80" rows="5"  placeholder="예시) 구글지도 링크를 받아와서 입력해주세요."></textarea>
+                    <br><textarea name="contryaddress" id="contryaddress" cols="80" rows="5"  placeholder="예시) 구글지도 링크를 받아와서 입력해주세요." required></textarea>
                 </div>
                 <br>    
                 <div>
                     영문 수도명  
-                    <br><inpuT type="text" name="engcity" placeholder="예시) amsterdam"></inpuT>
+                    <br><inpuT type="text" name="engcity" placeholder="예시) amsterdam" required></inpuT>
                 </div>
                 <br>    
                 <div>
                     시차 (영국기준) 
-                    <br><inpuT type="text" name="clockchange" placeholder="예시) +1"></inpuT>
+                    <br><inpuT type="text" name="clockchange" placeholder="예시) +1" required></inpuT>
                 </div>
                 <br>
 

@@ -34,7 +34,7 @@ public class InsertinsertCountryInfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String path=request.getServletContext().getRealPath("/upload/");
+		String path=request.getServletContext().getRealPath("/upload/country/");
 		
 		MultipartRequest mr=new MultipartRequest(request,path,1024*1024*10,"UTF-8",new DefaultFileRenamePolicy());
 		
