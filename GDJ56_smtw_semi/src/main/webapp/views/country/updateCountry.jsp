@@ -3,13 +3,14 @@
 <%@ page import="com.smtw.country.model.vo.Country" %>
 <%
 	Country c=(Country)request.getAttribute("country");
+	String id=(String)request.getAttribute("id");
 %>
 <%@ include file="/views/common/header.jsp" %>
 <section>
     <div id="updatetpage">
         <fieldset>
             <legend><h1 style="text-align: centers;">국가정보 수정페이지</h1></legend>
-            <form name="countryinfo" action="<%=request.getContextPath()%>/country/updateFirstCountry.do" 
+            <form name="countryinfo" action="<%=request.getContextPath()%>/country/updateFirstCountry.do?id=<%=id%>" 
             		enctype="multipart/form-data" method="post">
                 <div>
                 	나라명 : <%=c.getNName()%>

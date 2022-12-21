@@ -134,7 +134,7 @@
        				 	<%if(con.get(i).getNImg()==null) {%>
 	                    <img src="<%=request.getContextPath()%>/images/country/noimage_view.png"  alt="" style="width: 400px; height:300px;border-radius:10%;" >
        				 	<%}else{ %>
-	                    <img src="<%=request.getContextPath()%>/upload/<%=con.get(i).getNImg() %>"  alt="" style="width: 400px; height:300px;border-radius:10%;" >
+	                    <img src="<%=request.getContextPath()%>/upload/country/<%=con.get(i).getNImg() %>"  alt="" style="width: 400px; height:300px;border-radius:10%;" >
 	                    <%} %>
 	                    
 	                    <div id="likenameinfo">
@@ -177,8 +177,8 @@
 	                        
 	                        <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
 		                        <div id="btninsertdelete">
-		                            <button id="update" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/updateCountry.do?nName=<%=con.get(i).getNName()%>')">수정</button>
-		                            <button id="delete" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/deleteCountry.do?nName=<%=con.get(i).getNName()%>&&nImg=<%=con.get(i).getNImg()%>')">삭제</button>
+		                            <button id="update" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/updateCountry.do?nName=<%=con.get(i).getNName()%>&id=<%=logInMember.getMemberId()%>')">수정</button>
+		                            <button id="delete" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/deleteCountry.do?nName=<%=con.get(i).getNName()%>&&nImg=<%=con.get(i).getNImg()%>&id=<%=logInMember.getMemberId()%>')">삭제</button>
 		                        </div>
 	                        <%} %> 
 	                     </div> 
@@ -208,11 +208,12 @@
 	
 	<!-- 페이징 처리 -->
    	<div id="pageBar2">
-		<nav aria-label="Page navigation example" style="margin-top:30px;color:rgba(221, 160, 221, 0.508) !important;">
-			<ul class="pagination justify-content-center" style="color:rgba(221, 160, 221, 0.508) !important;">
+   	<!-- 부트스트랩 ㅠㅜㅠㅜ -->
+<!-- 		<nav aria-label="Page navigation example" style="margin-top:30px;color:rgba(221, 160, 221, 0.508) !important;">
+			<ul class="pagination justify-content-center" style="color:rgba(221, 160, 221, 0.508) !important;"> -->
 				<%=request.getAttribute("pageBar") %>
-			</ul>
-		</nav>
+<!-- 			</ul>
+		</nav> -->
 	</div>
 	
 	
@@ -220,7 +221,7 @@
 	 <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
 	<!-- 페이지 우측 상단으로 자리 강제 이동함 -->
 	<div id="positionbtn">
-    	<button id="btnbtn" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/insertgo.do')"><span>국가 추가</span></button>
+    	<button id="btnbtn" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/insertgo.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>')"><span>국가 추가</span></button>
     </div>
     <%} %>
 </section>
