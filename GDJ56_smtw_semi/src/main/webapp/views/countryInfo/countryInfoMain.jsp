@@ -70,7 +70,8 @@
         	margin-left:100px;
         	margin-right:100px;
         	height:auto;
-        	
+        	white-space: pre-wrap;
+        	overflow: visible;
         
         }
     
@@ -187,6 +188,7 @@
 	    <%-- <%}%> --%>
     <%}%>
 	<style>
+		
 		#twobu>button{
     		width:110px;
     	}

@@ -37,14 +37,20 @@ public class insertCountryFirstServlet extends HttpServlet {
 		
 		MultipartRequest mr=new MultipartRequest(request,path,1024*1024*10,"UTF-8",new DefaultFileRenamePolicy());
 		
-		Enumeration e=mr.getFileNames();
+		Enumeration e=mr.getFileNames();//파일 이름을 순서화 시켜서 저장
 		String pic="";
 		if(e.hasMoreElements()) {
 			String filename=(String)e.nextElement();//파일을 반환
 			pic = mr.getFilesystemName(filename);
-		}
 
+		 if (filename != null) {
+			 
+		 }else{
+			 
+		 }
 		
+		
+		}
 		//multipart/form-data형식으로 전송 되었기 때문에 request.getParameter가 불가능하고 
 		//MultipartRequest 객체의 getParamter 메소드를 사용해야 한다.
 		String name=null;

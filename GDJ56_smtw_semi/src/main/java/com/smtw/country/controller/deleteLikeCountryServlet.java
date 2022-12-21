@@ -1,6 +1,7 @@
 package com.smtw.country.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.smtw.country.model.service.CountryService;
+import com.smtw.country.model.vo.Likenation;
 
 /**
  * Servlet implementation class deleteLikeCountryServlet
@@ -30,6 +32,7 @@ public class deleteLikeCountryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String id=request.getParameter("id");
+		Likenation c=Likenation.builder().memId(request.getParameter("id")).build();
 		int result=new CountryService().deletLikeCountry(id);
 	
 	

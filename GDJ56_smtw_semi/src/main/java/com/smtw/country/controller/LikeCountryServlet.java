@@ -31,11 +31,13 @@ public class LikeCountryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String id=request.getParameter("memberId");
-		String country=request.getParameter("nNmae");
+		String id=request.getParameter("id");
+		String country=request.getParameter("name");
+		String ck=request.getParameter("ckLike");
 		Likenation ln=Likenation.builder()
 				.memId(id)
 				.nName(country)
+				.ckLike(ck)
 				.build();
 		System.out.println(ln);
 		int like=new CountryService().insertlike(id,country);
