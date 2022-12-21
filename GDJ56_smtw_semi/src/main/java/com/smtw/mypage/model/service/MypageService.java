@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 import static com.smtw.common.JDBCTemplate.*;
 
+import com.smtw.country.model.vo.Country;
 import com.smtw.friends.model.vo.Friends;
 import com.smtw.member.model.vo.Member;
 import com.smtw.mypage.model.dao.MypageDao;
@@ -304,7 +305,12 @@ public class MypageService {
 		return result;
 	}
 	
-	
+	public List<Country> getNation(String userId){
+		Connection conn = getConnection();
+		List<Country> n=new MypageDao().getNation(conn,userId);
+		close(conn);
+		return n;
+	}
 	
 	
 	
