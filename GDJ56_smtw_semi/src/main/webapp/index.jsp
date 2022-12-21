@@ -4,7 +4,6 @@
 <%
 	Member logInMember=(Member)session.getAttribute("logInMember");
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,26 +19,6 @@
 	      integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>
 	<script>Kakao.init('e746f3ea1bb3e8aa8d89a08b85a3f035'); // 사용하려는 앱의 JavaScript 키 입력</script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-	<script>
-		const memberEmailAgree="<%=logInMember!=null?logInMember.getEmailAgree():""%>"; /* 로그인한 사용자의 이메일 수신동의 여부 */
-			console.log(memberEmailAgree);
-			
-				<%-- $.ajax({
-					url:"<%=request.getContextPath()%>/diary/DdayAlert.do",
-					type:"post",
-					data:{
-							"memberId":memberId	
-						 },
-					success:data=>{
-						if(data==10){
-							Swal.fire({
-								title:'★두근두근 출국 10일전★',
-								text:'출국 준비는 다 마쳤는지 한번 더 확인해보세요 :)'
-							})
-						}
-					}
-				}); --%>
-	</script>
 </head>
 <body>
 <header>

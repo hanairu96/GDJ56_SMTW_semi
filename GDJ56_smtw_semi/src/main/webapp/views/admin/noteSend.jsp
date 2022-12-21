@@ -19,7 +19,7 @@
             <div><a href="<%=request.getContextPath()%>/admin/qnaManage.do"><p>Q&A 관리</p></a></div>
             <div><a href="<%=request.getContextPath()%>/admin/noteReceive.do"><p id="purple">쪽지함</p></a></div>
         </div>
-        
+
         <div class="menuDiv"></div>
         
         <div class="contentList">
@@ -29,10 +29,10 @@
             </div>
 
             
-            <div id="postrecieve"><h2 style="background-color: cornflowerblue;" onclick="location.assign('<%=request.getContextPath()%>/admin/noteReceive.do?id=ADMIN');">수신함</h2></div><br>
+             <div id="postrecieve"><h2 style="background-color: rgb(239, 239, 239);" onclick="location.assign('<%=request.getContextPath()%>/admin/noteReceive.do?id=ADMIN');">수신함</h2></div><br>
             
 
-            <div id="postsend"><h2 style="background-color: rgb(239, 239, 239);" onclick="location.assign('<%=request.getContextPath()%>/admin/noteSend.do?id=ADMIN');">발신함</h2></div><br>
+            <div id="postsend"><h2 style="background-color: cornflowerblue;" onclick="location.assign('<%=request.getContextPath()%>/admin/noteSend.do?id=ADMIN');">발신함</h2></div><br>
             
 
             <table id="postbox" style="width: 1000px;">
@@ -40,31 +40,29 @@
                 
                 <tr>
                     <td style="width: 50px;"><input type="checkbox" name="전체선택" id=""></td>
-                    <td style="width: 80px;"><p>FROM</p></td>
+                    <td style="width: 80px;"><p>TO</p></td>
                     <td style="width: 700px;">내용</td>
                     <td style="width: 100px;">보낸날짜</td>
                 </tr>
                 
                 <%if(list.isEmpty()){ %>
                 <tr>
-                	<td colspan="4" height="100">아직 도착한 쪽지가 없습니다 :(</td>
+                	<td colspan="4" height="100">아직 보낸 쪽지가 없습니다 :(</td>
                 </tr>
                 <%}else{
-                	for(Note n : list){
+                	for(int i=0;i<list.size();i++){
                 %>
                		<tr>
                     	<td><input type="checkbox" name="" id=""></td>
                     	<td>
-                    		<p><%=n.getSenderName() %></p>
+                    		<p><%=list.get(i).getSenderName() %></p>
 	                    	<form name="form" action="" method="post">
-			                    <input type="hidden" name="noteNo" value="<%=n.getNtNo() %>">
-			                    <input type="hidden" name="friendName" value="<%=n.getSenderName() %>">
-			                    <input type="hidden" name="sender" value="<%=n.getSender() %>">
-			                    <input type="hidden" name="id" value=<%=logInMember.getMemberId() %>>
+			                    <input type="hidden" name="noteNo" value="<%=list.get(i).getNtNo() %>">
+			                    <input type="hidden" name="id" value=<%=id %>>
 			                </form>	
 		                </td>
-                    	<td onclick="goPopup(event)"><%=n.getContent() %></td>
-                    	<td><%=n.getDate()%></td>
+                    	<td onclick="goPopup(event)"><%=list.get(i).getContent() %></td>
+                    	<td><%=list.get(i).getDate()%></td>
                 	</tr>
                 <%}
                 } %>
@@ -79,8 +77,8 @@
                     </ul>
                 </nav>
             </div>
-            
-              <script>
+
+			  <script>
             	function goPopup(e){
             		var gsWin=window.open("","winName","width=520,height=630"); //open("주소",띄우는방식,크기)
             		var frm=$(e.target).prev().find("form")[0];
@@ -90,18 +88,13 @@
             	}
             </script>
             
- 
-
-
+           
             <div id="postcontroll">
                 <button>삭제하기</button>
                 <!-- <button onclick="window.open('mypage-pop_sendnote.html','_blank','scrollbars=yes,width=600,height=600,top=100,left=300')">쪽지보내기</button> -->
             </div>
-            
-            
-            
         </div>
-</section>
+   </section>
 	 <style>
 	   body, pre{
           font-family: "Hahmlet";
@@ -362,6 +355,7 @@
                 ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
                 높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.
             */
+            
         }
         section>div{
             /* border: 1px solid blue; */
@@ -369,7 +363,7 @@
             
         }
     </style>
-        <script>
+    <script>
 		$(document).ready(function() {
 		    // 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
 		    var floatPosition = parseInt($(".sidemenu").css('top'));

@@ -79,7 +79,15 @@
                 </tr>
             </table>
             <br><br>
-            <button id="del" onclick="deleteMember();" class="customBtn btnStyle btn btn-primary" style="height:30px;padding-bottom:40px;background-color: rgba(221, 160, 221, 0.508) !important;">&nbsp회원 삭제&nbsp</button>
+            <div id="btns">
+            	<form name="msgForm" action="<%=request.getContextPath()%>/mypage/mypageNoteReply.do" method="post">
+        			<input type="hidden" name="sender" value=<%=m.getMemberId() %>>
+        			<input type="hidden" name="friendName" value=<%=m.getMemberName() %>>
+        			<input type="hidden" name="userId" value=<%=logInMember.getMemberId() %>>
+        		</form>
+	            <button id="sendNote" onclick="sendNote();" class="customBtn btnStyle btn btn-primary" style="height:30px;padding-bottom:40px;background-color: rgba(221, 160, 221, 0.508) !important;">&nbsp쪽지 보내기&nbsp</button>&nbsp&nbsp
+    	        <button id="del" onclick="deleteMember();" class="customBtn btnStyle btn btn-primary" style="height:30px;padding-bottom:40px;background-color: rgba(221, 160, 221, 0.508) !important;">&nbsp회원 삭제&nbsp</button>
+            </div>
         </div>
     </section>
     <style>
@@ -101,10 +109,14 @@
             margin-left: 50px;
             margin-right: 30px;
         }
+		
+		#btns{
+			display:flex;
+            margin-left: 780px;
+		}
         
-        #del{
+        #del, #sendNote{
             text-align: right;
-            margin-left: 880px;
             margin-top: 5px;
             margin-bottom: 20px;
         }
@@ -157,6 +169,13 @@
 		    }).scroll();
 		});
         
+		const sendNote=()=>{
+			open("", "note", "width=500px,height=600px");
+			let frm=$("[name=msgForm]")[0];
+			frm.target="note";
+			frm.submit();
+		}
+		
        	const deleteMember=()=>{
        		let check=confirm("정말로 삭제하겠습니까?");
        		if(check==true){
