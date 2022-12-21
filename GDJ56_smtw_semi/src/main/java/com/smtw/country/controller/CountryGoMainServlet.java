@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.smtw.country.model.service.CountryService;
 import com.smtw.country.model.vo.Country;
+import com.smtw.country.model.vo.Likenation;
 
 /**
  * Servlet implementation class CountryWriteServlet
@@ -41,7 +42,6 @@ public class CountryGoMainServlet extends HttpServlet {
 			cPage=1;
 		}
 		
-	
 		List<Country> country=new CountryService().searchCountry(cPage, numPerpage);
 		
 //		System.out.println(country);
@@ -69,7 +69,6 @@ public class CountryGoMainServlet extends HttpServlet {
 				pageBar+="<li class='page-item'><a class='page-link' href='"
 						+request.getContextPath()+"/country/countryMain.do?cPage="+pageNo
 						+"' style='color:rgba(221, 160, 221, 0.508) !important;'>"+pageNo+"</a></li>";
-				
 			}
 			pageNo++;
 		}
@@ -86,13 +85,19 @@ public class CountryGoMainServlet extends HttpServlet {
 		
 		request.setAttribute("country", country);
 		
+		
+		//나라 좋아요 한 아이디값으로 값을 받아오는 구문
+		String id=request.getParameter("id");
+//		System.out.println(id);
+		if(id!=null) {
+			List<Likenation> n=new CountryService().selectLike(id);
+//			System.out.println(n);
+			request.setAttribute("nation", n);
+		}
+		
 		List<Country> list=new CountryService().searchList();
 		request.setAttribute("list",list);
-//		System.out.println(list);
-		
-		
-		
-		
+		request.setAttribute("id", id);
 		request.getRequestDispatcher("/views/country/countrymainview.jsp").forward(request, response);
 	
 	}

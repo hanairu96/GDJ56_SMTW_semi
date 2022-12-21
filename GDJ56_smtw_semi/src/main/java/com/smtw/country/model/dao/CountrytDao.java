@@ -219,12 +219,12 @@ public class CountrytDao {
 		return result;
 	}
 	
-	public int deletLikeCountry(Connection conn, String id) {
+	public int deletLikeCountry(Connection conn, String name) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("deletLikeCountry"));
-			pstmt.setString(1,id);
+			pstmt.setString(1,name);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -234,16 +234,17 @@ public class CountrytDao {
 		return result;
 	}
 	
-	public Likenation selectLike(Connection conn, String id) {
+	public List<Likenation> selectLike(Connection conn, String id) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		Likenation n=null;
+		List<Likenation> n=new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectLike"));
 			pstmt.setString(1, id);
 			rs=pstmt.executeQuery();
-			if(rs.next()) n=getLikenation(rs);
-			
+			while(rs.next()) {
+				n.add(getLikenation(rs));
+			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -251,6 +252,7 @@ public class CountrytDao {
 			close(pstmt);
 		}return n;
 	}
+	
 	
 	public static Likenation getLikenation(ResultSet rs) throws SQLException{
 		return Likenation.builder()

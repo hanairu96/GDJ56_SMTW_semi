@@ -163,7 +163,7 @@
 	                    <!-- 서브메뉴영역 -->
 	                    <div class="sub">
 	                        <ul class="submenu">
-	                            <li><a href="">쪽지함</a></li>
+	                            <li><a href="<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>">쪽지함</a></li>
 	                            <li><a href="<%=request.getContextPath()%>/logIn/logOut.do">로그아웃</a></li>
 	                        </ul>
 	                    </div>

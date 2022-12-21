@@ -31,11 +31,12 @@ public class deleteLikeCountryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		String name=request.getParameter("name");
 		String id=request.getParameter("id");
-		Likenation c=Likenation.builder().memId(request.getParameter("id")).build();
-		int result=new CountryService().deletLikeCountry(id);
+		Likenation c=Likenation.builder().memId(request.getParameter("name")).build();
+		int result=new CountryService().deletLikeCountry(name);
 		//값을 받는 서블릿으로 이동함
-		response.sendRedirect(request.getContextPath()+"/country/countryMain.do");
+		response.sendRedirect(request.getContextPath()+"/country/countryMain.do?id="+id);
 	
 	
 	
