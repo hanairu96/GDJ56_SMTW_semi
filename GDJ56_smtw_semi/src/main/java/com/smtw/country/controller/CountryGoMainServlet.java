@@ -88,10 +88,10 @@ public class CountryGoMainServlet extends HttpServlet {
 		
 		//나라 좋아요 한 아이디값으로 값을 받아오는 구문
 		String id=request.getParameter("id");
-		System.out.println(id);
+//		System.out.println(id);
 		if(id!=null) {
 			List<Likenation> n=new CountryService().selectLike(id);
-			System.out.println(n);
+//			System.out.println(n);
 			request.setAttribute("nation", n);
 		}
 		

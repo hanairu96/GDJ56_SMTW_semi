@@ -9,7 +9,6 @@
 	String likeName="";
 	for(Likenation l : ln){
 		likeName+=l.getNName()+",";
-		out.print(likeName);
 	}
 %>
 <!-- 부트스트랩 CSS -->
