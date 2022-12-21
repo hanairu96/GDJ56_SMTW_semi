@@ -7,9 +7,9 @@
 	
 %>
 <!-- 부트스트랩 CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"> -->
 <!-- 부트스트랩 JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script> -->
 <%@ include file="/views/common/header.jsp" %>
     <style>
      a:link { color: black; text-decoration: none;}
@@ -183,14 +183,14 @@
 					const coname=$(e.target).parent().find("input").val();
 					console.log(coname);
 					if($(e.target).parent().find("img.dislikeimg").css('display')=='none'){
-						//저장
- 						location.assign('<%=request.getContextPath()%>/likecountry.do?id=<%=logInMember.getMemberId()%>&name='+coname+'&ckLike=Y'); 
+						//저장(아이디 값이 없을때의 분기처리를 해줘야한다)
+ 						location.assign('<%=request.getContextPath()%>/likecountry.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>&name='+coname+'&ckLike=Y'); 
 					}else{
 						//삭제
- 						location.assign('<%=request.getContextPath()%>/dislikecountry.do?id=<%=logInMember.getMemberId()%>&name='+coname);
+ 						location.assign('<%=request.getContextPath()%>/dislikecountry.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>&name='+coname);
 					}
-					
 				};
+				if()
 		
 			</script>
    		</div>

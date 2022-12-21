@@ -35,8 +35,8 @@ public class deleteLikeCountryServlet extends HttpServlet {
 		Likenation c=Likenation.builder().memId(request.getParameter("id")).build();
 		int result=new CountryService().deletLikeCountry(id);
 	
+		response.sendRedirect(request.getContextPath()+"/country/countryMain.do");
 	
-		request.getRequestDispatcher("/views/country/countrymainview.jsp").forward(request, response);
 	
 	
 	}
