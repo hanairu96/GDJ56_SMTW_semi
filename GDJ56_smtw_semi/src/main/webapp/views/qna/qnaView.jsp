@@ -93,12 +93,24 @@
 </div>
 <script>
 	const deleteQna=()=>{
-		const result=confirm("Q&A글을 삭제하시겠습니까?");
-		if(result){
-			location.assign('<%=request.getContextPath() %>/qna/deleteQna.do?qnaNo=<%=q.getQnaNo()%>');
-		}else{
-			return false;
-		}
+		 Swal.fire({
+             title:'Q&A글을 삭제하시겠습니까?',
+             text:"복구 할 수 없습니다.",
+             icon: 'warning',
+             showCancelButton: true,
+             confirmButtonColor: '#3085d6',
+             cancelButtonColor: '#d33',
+             confirmButtonText: 'Yes'
+          }).then((result)=>{
+             if(result.isConfirmed){
+            	 location.assign('<%=request.getContextPath() %>/qna/deleteQna.do?qnaNo=<%=q.getQnaNo()%>');
+             }else{
+                Swal.fire(
+                       '삭제취소'
+                 )
+                 return false;
+             }
+          });
 	}
 </script>
 
@@ -195,17 +207,45 @@
 	<script>
 		//댓글 삭제
 		const deleteComment=(qcNo)=>{
-			const result=confirm("댓글 삭제 시 댓글에 달린 답글도 전부 삭제됩니다. 삭제하시겠습니까?");
-			if(result){//확인버튼 누르면
-				location.assign("<%=request.getContextPath()%>/qna/DeleteQnaComment.do?qnaNo=<%=q.getQnaNo()%>&qcNo="+qcNo);
-			}
+			Swal.fire({
+	             title:'답글도 전부 삭제됩니다. \n삭제하시겠습니까?',
+	             text:"복구 할 수 없습니다.",
+	             icon: 'warning',
+	             showCancelButton: true,
+	             confirmButtonColor: '#3085d6',
+	             cancelButtonColor: '#d33',
+	             confirmButtonText: 'Yes'
+	          }).then((result)=>{
+	             if(result.isConfirmed){
+	            	 location.assign("<%=request.getContextPath()%>/qna/DeleteQnaComment.do?qnaNo=<%=q.getQnaNo()%>&qcNo="+qcNo);
+	             }else{
+	                Swal.fire(
+	                       '삭제취소'
+	                 )
+	                 return false;
+	             }
+	          });
 		}
 		//답글 삭제
 		const deleteQC=(qcNo)=>{
-			const result=confirm("답글을 삭제하시겠습니까?");
-			if(result){//확인버튼 누르면
-				location.assign("<%=request.getContextPath()%>/qna/DeleteQnaComment.do?qnaNo=<%=q.getQnaNo()%>&qcNo="+qcNo);
-			}
+			Swal.fire({
+	             title:'답글을 삭제하시겠습니까?',
+	             text:"복구 할 수 없습니다.",
+	             icon: 'warning',
+	             showCancelButton: true,
+	             confirmButtonColor: '#3085d6',
+	             cancelButtonColor: '#d33',
+	             confirmButtonText: 'Yes'
+	          }).then((result)=>{
+	             if(result.isConfirmed){
+	            	 location.assign("<%=request.getContextPath()%>/qna/DeleteQnaComment.do?qnaNo=<%=q.getQnaNo()%>&qcNo="+qcNo);
+	             }else{
+	                Swal.fire(
+	                       '삭제취소'
+	                 )
+	                 return false;
+	             }
+	          });
 		}
 		
 		//댓글창 누를 시 로그인멤버 아니면 댓글 못 달게하기
