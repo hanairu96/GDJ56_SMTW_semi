@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.smtw.member.model.vo.Member, com.smtw.diary.model.vo.Diary ,java.util.List" %>
+<%@ page import="com.smtw.member.model.vo.Member, com.smtw.diary.model.vo.Diary ,java.util.List, java.util.Arrays" %>
 <%
 	List<Member> members=(List<Member>)request.getAttribute("list");
-	List<Member> listAll=(List<Member>)request.getAttribute("listAll");
-	List<Diary> diaryAll=(List<Diary>)request.getAttribute("diaryAll");
+	String[] arrmemberEmail=(String[])request.getAttribute("arrmemberEmail");
 %>
 <%@ include file="/views/common/header.jsp" %>
 
@@ -27,7 +26,9 @@
         <div class="menuDiv"></div>
 
         <div class="contentList" style="border:2px solid;border-radius:10px">
-            <h1>회원 리스트</h1>
+        	
+            <h1>회원 리스트 </h1>
+            <button class="customBtn btnStyle allmail" style="width:400px;font-size:20px;margin-top:20px;margin-bottom:20px;" onclick="fn_AllMail();">출국10일전 회원 메일 전송</button>
             <br>
             <div id="search-container">
 	            <select id="searchType">
@@ -80,6 +81,7 @@
                 </tbody>
             </table>
             <br>
+           
             <div style="border:0px solid blue;width:100%;height:80px;text-align: center;">
                 <!-- 페이지 바 -->
                 <nav aria-label="Page navigation example" style="margin-top:30px;color:rgba(221, 160, 221, 0.508) !important;">
@@ -132,13 +134,6 @@
     	}
     </style>
     <script>
-<%-- 	    $(".sidemenu>div:nth-child(1)").click(e=>{
-	    	location.assign('<%=request.getContextPath()%>/admin/memberList.do');
-	    })
-	    $(".sidemenu>div:nth-child(2)").click(e=>{
-	        location.assign("<%=request.getContextPath()%>/admin/qnaManage.do");
-	    }) --%>
-	    
  		$(document).ready(function() {
 		    // 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
 		    var floatPosition = parseInt($(".sidemenu").css('top'));
@@ -160,56 +155,43 @@
 	    	$("#search-"+type).css("display", "inline-block");
 	   	})
 	   	
-	   	
-	   	$(document).ready(function() {
-	   		let memberEmailAgree=[];
-	   		let memberEmail=[];
-	   		let memberID;
-	   		if(!listAll.isEmpty()) { /* 회원리스트가 있다면 */
-		   		 for(Member m : listAll) { /* 회원리스트에서 반복 */
-		   			 if(m.getEmailAgree()=='Y'){ /* 회원 중 이메일 수신동의 여부 Y인 사람의 경우 */
-		   				for(Diary d : diaryAll){ /* 출국일지 테이블에서 반복 */
-		   					if(d.getMemberId().equals(m.getMemberId())){ /* 이메일 수신동의 여부 Y인 회원이 출국일지를 가진 경우*/
-		   						//D-DAY구하기
-			   			        LocalDate today = LocalDate.now(); // 오늘 날짜 구하기 (YYYY-MM-DD)
-			   			        LocalDate diaryDate = LocalDate.parse(d.getDDay()); // 출국일 : 문자열 -> LocalDate 타입변환
-			   					//날짜 사이의 간격을 계산해주는 메소드
-			   					int diaryDday=(int) ChronoUnit.DAYS.between(today, diaryDate);  //출국일-오늘 DDAY계산	
-		   						if(diaryDday==10){ //디데이 10인 경우
-		   							memberEmailAgree.push(m.getEmail()); //회원의 이메일을 memberEmailAgree에 추가
-		   						}
-		   					}
-		   				}
-		   			}
-		   		 }
-		   	}
-		   		
-	   		console.log(memberEmailAgree);
+	   	const fn_AllMail=()=>{ //이메일 수신동의 'Y' 한 사람 중 출국일 10일 전인 사람들에게 메일 보냄
+	   		console.log("<%=Arrays.toString(arrmemberEmail)%>")
+	   		let newEmail="<%=Arrays.toString(arrmemberEmail)%>".replace('[', '');
+	   		newEmail=newEmail.replace(']','');
+	   		console.log(newEmail);
 	   		
-	   		for(let i = 0; i < memberEmailAgree.length; i++) {
-	   		  if(memberEmailAgree[i] === 'X')  {
-	   			memberEmailAgree.splice(i, 1);
-	   		    i--;
-	   		  }
-	   		}
-	   		console.log(memberEmailAgree);
+		   	 Swal.fire({
+	             title:'정말 메일을 전송하시겠습니까?',
+	             text:"출국10일전 회원 전체에게 전송됩니다.",
+	             icon: 'warning',
+	             showCancelButton: true,
+	             confirmButtonColor: '#3085d6',
+	             cancelButtonColor: '#d33',
+	             confirmButtonText: 'Yes'
+	          }).then((result)=>{
+	             if(result.isConfirmed){
+	            	//출국10일전 알림 메일 전송을 위한 ajax
+	  			   $.ajax({
+	  					url:"<%=request.getContextPath()%>/diary/mailAlarm.do",
+	  					data:{
+	  						memberEmailtotal:newEmail
+	  					},
+	  					success:data=>{//ajax로 돌려받은 결과값
+	  						Swal.fire(data);
+	  					}
+	  				});
+	             }else{
+	                Swal.fire(
+	                       '전송취소'
+	                 )
+	             }
+	          })
 	   		
-		   	 const set = new Set(memberEmailAgree);
-	         const memberEmailtotal = [...set];
-				
-			//출국10일전 알림 메일 발송을 위한 ajax
-			<%--  $.ajax({
-					url:"<%=request.getContextPath()%>/diary/mailAlarm.do",
-					data:{
-						memberEmailtotal:JSON.stringify(memberEmailtotal)//사용자 이메일 넘기기
-					},
-					success:data=>{//ajax로 돌려받은 결과값
-						Swal.fire(data);
-					}
-				}) --%> 
-	   		}) 
-	   	
-				
+	   		
+	   		
+			 
+	   	}
 	   	
     </script>
 <%@ include file="/views/common/footer.jsp" %>
