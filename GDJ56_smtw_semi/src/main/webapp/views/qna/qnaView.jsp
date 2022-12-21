@@ -143,7 +143,7 @@
 	            <ul class="bottom">
 	              <li class="menu time"><%=qc.getEnrollDate() %></li>
 	              <li class="divider"></li> 
-	              <li class="menu show-reply">답글 (1)</li> 
+	              <li class="menu show-reply" onclick="showReply(event);" style="cursor: pointer;">답글 (<%=qc.getQcCount()%>)</li> 
 	            </ul>
 			</div>
 		</div>   
@@ -159,17 +159,23 @@
 	              	<div style="width:100%;">
 	                	<button type="submit" class="submit customBtn btnStyle" id="btn-ReplyInsert" style="width:80px;height:47px;float:right;"
 	                		>댓글등록</button>
-	             </div>
+	             	</div>
             </form>   
-		<%}else {%>         
 	</div>
-	
+		<%}else {%>         
 <!--           등록된 답글  -->
-        <div class="replies level2" style="border-left:5px solid #ddd;border-right:5px solid #ddd;border-bottom:5px solid #ddd;width:850px;height:auto;margin: 0 auto;">
+        <div class="replies level2" style="border-left:5px solid #ddd;border-right:5px solid #ddd;
+        	border-bottom:5px solid #ddd;width:850px;height:auto;margin: 0 auto;display:none;">
             <div class="reply">
               <div class="content">
               	<header class="top">
                 	<div class="username"><%=qc.getMemberId()%></div>
+                	<div class="utility">   
+				    <!-- 관리자와 해당 작성자만 보이게 -->
+				    <%if(logInMember!=null&&(logInMember.getMemberId().equals("ADMIN")||logInMember.getMemberId().equals(qc.getMemberId()))) {%>
+						<button class="menu customBtn btnStyle" onclick="deleteQC('<%=qc.getQnaCoNo()%>');">답글삭제</button>    
+					<%} %>
+	             </div>
                 </header>
 	                <p><%=qc.getQcContents()%></p>
 	                <ul class="bottom">
@@ -177,14 +183,7 @@
 	                </ul>
          		</div>
          	</div>
-            
-<!--             <form class="form reply-form"style="display:flex;flex-direction:column;align-items:center;"> -->
-<!--               <textarea placeholder="답글을 남겨보세요"style="width:100%;"></textarea> -->
-<!--               <div style="width:100%;"> -->
-<!--                 <button type="button" class="submit customBtn btnStyle" style="width:80px;height:47px;float:right;">댓글등록</button> -->
-<!--              </div> -->
-<!--             </form>        -->
-	</div> 
+		</div> 
 	<%} %><!-- 댓글,답글 구별if문  -->
 	<%} %>
 	<%} %>
@@ -193,6 +192,13 @@
 		//댓글 삭제
 		const deleteComment=(qcNo)=>{
 			const result=confirm("댓글 삭제 시 댓글에 달린 답글도 전부 삭제됩니다. 삭제하시겠습니까?");
+			if(result){//확인버튼 누르면
+				location.assign("<%=request.getContextPath()%>/qna/DeleteQnaComment.do?qnaNo=<%=q.getQnaNo()%>&qcNo="+qcNo);
+			}
+		}
+		//답글 삭제
+		const deleteQC=(qcNo)=>{
+			const result=confirm("답글을 삭제하시겠습니까?");
 			if(result){//확인버튼 누르면
 				location.assign("<%=request.getContextPath()%>/qna/DeleteQnaComment.do?qnaNo=<%=q.getQnaNo()%>&qcNo="+qcNo);
 			}
@@ -228,11 +234,13 @@
 		
 		//댓글에 ->답글 등록 클릭 시
 		const btnReply=(e)=>{
-			console.log($(e.target).parentsUntil("section").find("form"));
-// 			if($(e.target).parentsUntil("section").find("form").length==0){
-// 				$("#refly-Form").show();
-// 			}
 			$(e.target).parentsUntil("section").find("form").show();
+		}
+		//답글 버튼 클릭 시 밑에 답글만 열리게 하기
+		const showReply=(e)=>{
+// 			console.log($(e.target).parentsUntil("section").nextUntil(".level1").not("form"));
+			$(e.target).parentsUntil("section").nextUntil(".level1").not("form").toggle(300);
+			
 		}
 	</script>
 
