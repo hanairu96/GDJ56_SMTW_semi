@@ -8,6 +8,7 @@
 	List<Country> n = (List<Country>)request.getAttribute("likeNation");
 %>
   <section>
+  <div class="sector">
         <div class="sidemenu">
             <div><h4 style="text-align: center;">마이 페이지</h4></div>
              <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>');">워홀 프렌즈</p></div>
@@ -64,9 +65,27 @@
            		</div>
            	<%}%>
         </div>
+        </div>
    </section>
 
-    
+    <script>
+      $(document).ready(function() {
+          var floatPosition = parseInt($(".sidemenu").css('top')); //사이드메뉴바의 top위치 가져옴
+
+          $(window).scroll(function() {
+              var scrollTop = $(window).scrollTop(); // 현재 스크롤 위치를 가져온다.
+              console.log(scrollTop); //스크롤위치 콘솔창에 출력해보면서 본인 페이지의 푸터위에 
+                                      //사이드메뉴바가 딱 정지하는 위치값 확인할것
+
+              var newPosition=scrollTop +floatPosition + "px"; //사이드메뉴바의 처음위치+ 현재스크롤위치
+
+              if(scrollTop<=400){ //해당 페이지의 푸터위 스크롤값이 620이여서 scrollTop이 620까지만 이동하게 설정했음
+                  $(".sidemenu").stop().animate({
+                      "top" : newPosition
+                  }, 500);}
+          }).scroll();
+      });
+    </script> 
     
     <style>
       .npicdiv{
@@ -95,11 +114,6 @@
             height: 100px;
         }
 
-       
-        section{
-            display: flex;
-        }
-
         .contentList{
             width: 85%;  
             margin-left: 0 auto;
@@ -121,41 +135,54 @@
         #list td{
             border: 1px solid;
         }
+         /* ##### 여기부터 사이드메뉴 스타일 #####  */
+        .sector{
+            display: flex;
+        }
         .sidemenu{
-            padding: 10px;
-            /* margin-top: 1000px; */
-            /* margin: 0 auto; */
-            /* border: 1px solid; */
-            font-size: 18px;
+            width: 15%;
+            height: 100px;
+            font-size: 20px;
             font-weight: bold;
-            position: fixed;
+            position: absolute;
         }
         
         .menuDiv{
-            width: 15%;
+            width: 25%;
         }
 
-        .sidemenu p:hover{
+        .sidemenu>*:hover{
             transform: scale(1.1);
             transition-property: transform;
             transition-duration: 1s;
         }
         .sidemenu>*:not(div:nth-child(1)){
-            width: 200px;
-            height: 50px;
             background-color: lavender;
             border-radius: 50px;
             box-shadow: 5px 2px 8px lavender;
         }
         .sidemenu p{
             text-align: center;
-            padding: 13px;
-            cursor:pointer
+            padding-top: 6%;
+             color: black;
         }
-        .sidemenu>div:nth-child(6){
+        .sidemenu p:hover{
+            text-align: center;
+            padding-top: 6%;
+             color: purple;
+        }
+        .sidemenu>div:first-child{
             color: purple;
+        }
+
+        .sidemenu>div{
+            height: 70px;
             
         }
+        a{
+            text-decoration: none;
+        }
+        /* ##### 여기까지 사이드메뉴 스타일 #####  */
         section{
             border: 1px solid tomato;
             
