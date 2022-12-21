@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String id=(String)request.getAttribute("id");
+%>
 <%@ page import="com.smtw.country.model.vo.Country" %>
 <%@ include file="/views/common/header.jsp" %>
 <section>
@@ -39,7 +42,7 @@
 	                        <option value="홍콩">홍콩</option>
 	                    </select>   
 						<input type="text" name="selfname" style="width:150px;height:30px;" id="writeoption">
-
+						<input type="hidden" name="id" value="<%=id%>"> 
                    	<script>
                    		$(function(){
                    			console.log($("#writeoption"));

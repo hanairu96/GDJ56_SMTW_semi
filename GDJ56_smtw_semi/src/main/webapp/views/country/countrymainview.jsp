@@ -177,8 +177,8 @@
 	                        
 	                        <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
 		                        <div id="btninsertdelete">
-		                            <button id="update" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/updateCountry.do?nName=<%=con.get(i).getNName()%>')">수정</button>
-		                            <button id="delete" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/deleteCountry.do?nName=<%=con.get(i).getNName()%>&&nImg=<%=con.get(i).getNImg()%>')">삭제</button>
+		                            <button id="update" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/updateCountry.do?nName=<%=con.get(i).getNName()%>&id=<%=logInMember.getMemberId()%>')">수정</button>
+		                            <button id="delete" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/deleteCountry.do?nName=<%=con.get(i).getNName()%>&&nImg=<%=con.get(i).getNImg()%>&id=<%=logInMember.getMemberId()%>')">삭제</button>
 		                        </div>
 	                        <%} %> 
 	                     </div> 
@@ -220,7 +220,7 @@
 	 <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
 	<!-- 페이지 우측 상단으로 자리 강제 이동함 -->
 	<div id="positionbtn">
-    	<button id="btnbtn" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/insertgo.do')"><span>국가 추가</span></button>
+    	<button id="btnbtn" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/insertgo.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>')"><span>국가 추가</span></button>
     </div>
     <%} %>
 </section>

@@ -42,14 +42,6 @@ public class insertCountryFirstServlet extends HttpServlet {
 		if(e.hasMoreElements()) {
 			String filename=(String)e.nextElement();//파일을 반환
 			pic = mr.getFilesystemName(filename);
-
-		 if (filename != null) {
-			 
-		 }else{
-			 
-		 }
-		
-		
 		}
 		//multipart/form-data형식으로 전송 되었기 때문에 request.getParameter가 불가능하고 
 		//MultipartRequest 객체의 getParamter 메소드를 사용해야 한다.
@@ -76,14 +68,16 @@ public class insertCountryFirstServlet extends HttpServlet {
 				.npharse(ontext)
 				.build();
 		
-//		System.out.println(c);
 		int result=new CountryService().insertCountry(c);
-		System.out.println(result);
+//		System.out.println(result);
+		
+		String id=request.getParameter("id");
 		
 		String msg="",loc="";
 		if(result>0) {
 			msg="국가정보가 정상적으로 등록되었습니다.";
-			loc="/country/countryMain.do";
+			loc="/country/countryMain.do?id="+id;
+			request.setAttribute("id", id);
 		}else {
 			msg="등록을 실패하였습니다. 다시 시도해주세요.";
 			loc="/country/insertgo.do";
