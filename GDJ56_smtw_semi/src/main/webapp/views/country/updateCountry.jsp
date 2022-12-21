@@ -49,7 +49,7 @@
                 <br>
                 <div>
                     한줄글 
-                    <br><inpuT type="text" name="ontext" size="100" value="<%=c.getNpharse() %>" placeholder="예시)풍차와 나막신, 튤립과 치즈의 나라"></inpuT>
+                    <br><inpuT type="text" name="ontext" size="100" value="<%=c.getNpharse() %>" placeholder="예시)풍차와 나막신, 튤립과 치즈의 나라" required></inpuT>
                 </div>
                 <br>
                 <div>

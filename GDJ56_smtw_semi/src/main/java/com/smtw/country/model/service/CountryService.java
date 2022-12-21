@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.smtw.country.model.dao.CountrytDao;
 import com.smtw.country.model.vo.Country;
+import com.smtw.country.model.vo.Likenation;
 
 public class CountryService {
 	private CountrytDao dao=new CountrytDao();
@@ -91,6 +92,13 @@ public class CountryService {
 		int result=dao.deletLikeCountry(conn,id);
 		if(result>0) commit(conn);
 		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public Likenation selectLike(String id) {
+		Connection conn=getConnection();
+		Likenation result=dao.selectLike(conn,id);
 		close(conn);
 		return result;
 	}

@@ -1,6 +1,10 @@
 package com.smtw.admin.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -79,14 +83,45 @@ public class MemberListServlet extends HttpServlet {
 		}
 		
 		List<Member> listAll=new MemberService().selectMemberListAll(); //페이징 처리 되지 않은 회원 전체 리스트
-		List<Diary> diaryAll=new DiaryService().searchDiaryAll();
+		List<Diary> diaryAll=new DiaryService().searchDiaryAll(); //전체 회원의 출국일지 리스트
 		
-		request.setAttribute("pageBar", pageBar);
-		request.setAttribute("listAll", listAll);
-		request.setAttribute("list", list);
+		List<String> memberEmailAgree=new ArrayList();
+		List<String> memberIdDiary=new ArrayList();
 		
-		request.getRequestDispatcher("/views/admin/memberList.jsp")
-		.forward(request, response);
+   		 if(!listAll.isEmpty()) { /* 회원리스트가 있다면 */
+	   		for(Member m : listAll) { /* 회원리스트에서 반복 */
+	   			 if(m.getEmailAgree()=='Y'){ /* 회원 중 이메일 수신동의 여부 Y인 사람의 경우 */
+	   				for(Diary d : diaryAll){ /* 출국일지 테이블에서 반복 */
+	   					if(d.getMemberId().equals(m.getMemberId())){ /* 이메일 수신동의 여부 Y인 회원이 출국일지를 가진 경우*/
+	   						//D-DAY구하기
+		   			        LocalDate today = LocalDate.now(); // 오늘 날짜 구하기 (YYYY-MM-DD)
+		   			        LocalDate diaryDate = LocalDate.parse(d.getDDay()); // 출국일 : 문자열 -> LocalDate 타입변환
+		   					//날짜 사이의 간격을 계산해주는 메소드
+		   					int diaryDday=(int) ChronoUnit.DAYS.between(today, diaryDate);  //출국일-오늘 DDAY계산	
+	   						
+		   					if(diaryDday==10){ //디데이 10인 경우
+		   						memberIdDiary.add(m.getMemberId()); //회원의 아이디를 memberIdDiary에 추가
+		   						memberEmailAgree.add(m.getEmail()); //회원의 이메일을 memberEmailAgree에 추가
+	   						}
+	   					}
+	   				}
+	   			}
+	   		 }
+	   	}
+   		 // List를 배열로 변환
+         int arrListSize = memberEmailAgree.size();
+         String arrmemberEmail[] = memberEmailAgree.toArray(new String[arrListSize]);
+   		 
+   		System.out.println("D-10인 회원ID:"+memberIdDiary);
+		System.out.println("D-10인 회원Email:"+Arrays.toString(arrmemberEmail));
+		
+		
+		 request.setAttribute("arrmemberEmail", arrmemberEmail);
+		 request.setAttribute("pageBar", pageBar); request.setAttribute("list", list);
+		 
+		 request.getRequestDispatcher("/views/admin/memberList.jsp") .forward(request,
+		 response);
+		 
 	}
 
 	/**
