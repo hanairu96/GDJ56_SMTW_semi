@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.smtw.country.model.vo.Country;
 import com.smtw.friends.model.vo.Friends;
 import com.smtw.member.model.vo.Member;
 import com.smtw.mypage.model.vo.Applyfriends;
@@ -992,7 +993,31 @@ public int getqnumPerpage(Connection conn, String userId) {
 		}
 
 
-
+		public List<Country> getNation(Connection conn,String userId) {
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			List<Country> n=new ArrayList();
+			try {
+				pstmt=conn.prepareStatement(sql.getProperty("getNation"));
+				pstmt.setString(1, userId);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					n.add(getNation(rs));
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}return n;
+		}
+		
+		private Country getNation(ResultSet rs) throws SQLException {
+			return Country.builder()
+					.nName(rs.getString("N_NAME"))
+					.nImg(rs.getString("N_IMG"))
+					.build();
+		}
 
 
 
