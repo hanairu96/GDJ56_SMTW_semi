@@ -10,90 +10,80 @@
   <section>
         <div class="sidemenu">
             <div><h4 style="text-align: center;">마이 페이지</h4></div>
-            <div><p>워홀 프렌즈</p></div>
-            <div><p>계정 관리</p></div>
-            <div><p>쪽지함</p></div>
-            <div><p>내가 쓴 글</p></div>
-            <div><p>찜한 나라</p></div>
+             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>');">워홀 프렌즈</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageAccountView.do?id=<%=logInMember.getMemberId()%>');">계정 관리</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">쪽지함</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageWriting.do?id=<%=logInMember.getMemberId()%>');">내가 쓴 글</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNation.do?id=<%=logInMember.getMemberId()%>');">찜한 나라</p></div>
+           
            
         </div>
+        
         <div class="menuDiv"></div>
+        
         <div class="contentList">
             <div id="menutitle"><h2 style="background-color: cornflowerblue;">내가 찜한 나라</h2></div>
             <div style="margin-top: 5%;"><h2 >지금 전 세계가 <%=logInMember.getMemberName() %>님을 기다리고 있어요!</h2></div>
-            <div id="recievelist">
-                <div style="width:1000; height:1000;border: 1px solid;">
-         		
-         		<%if(n.isEmpty()){ %>
-         			아직 찜한 나라가 없습니다:(
-         			<button>나에게 맞는 나라 찾기 테스트 하러 가기</button>
-         		<%}%>
-         		<%-- <%if(n.size()<3){
-         			for(int i=0;i<n.size();i++){
-         				n.get(i).getNName();
-         				n.get(i).getNImg();
-         			
-         			}
-         		}else{ 
-         			for(int i=0;i<n.size();i++){
-         				n.get(i).getNName();
-         				n.get(i).getNImg();
-         			}
-         		}
-         		%> --%>
-         		
-					         			
-         		
-                </div>
-            </div>
+            
+            <%if(n.isEmpty()){ %>
+             <div class="npicdiv">
+            	<div class="nPic" style="width:500; height:500;border: 1px solid;">
+           			<b>아직 찜한 나라가 없습니다 :(</b> <br>
+         			<b>아직 워킹홀리데이 나라를 못정하셨나요?</b>
+           		</div>
+           	 </div>
+            	<div style="width:500; height:500;border: 1px solid;">
+           		<button onclick="location.assign('<%=request.getContextPath()%>/mycountry/myCountry.do');">나에게 맞는 나라 찾기 테스트 하러 가기</button><br>
+         		<button onclick="location.assign('<%=request.getContextPath()%>/community/reviewBasic.do');">생생후기 보러 가기</botton>
+           		</div>
+           	<%}else if(n.size()<3){%>
+     			<div class="npicdiv">
+	     			<%for(int i=0;i<n.size();i++){%>
+	            	<div class="nPic" style="width:500; height:500;border: 1px solid;">
+	          			<p><%=n.get(i).getNName() %></p>
+	         		 	<img src="<%=request.getContextPath()%>/upload/<%=n.get(i).getNImg() %>" 
+	         		 	onclick="location.assign('<%=request.getContextPath()%>/countryinfo/searchAll.do?nName=<%=n.get(i).getNName() %>');" alt="" width="200" height="200">
+	           		</div>
+           		<%} %>
+           		</div>
+            	<div id="nBt" style="width:500; height:500;border: 1px solid;">
+           			<button onclick="location.assign('<%=request.getContextPath()%>/country/countryMain.do');">더 많은 나라 보러가기</botton>
+           		</div>
+            <%}else{ %>
+         	<div class="npicdiv">
+         		<%for(int i=0;i<n.size();i++){%>
+         		<div class="nPic" style="width:500; height:500;border: 1px solid;">
+          			<p><%=n.get(i).getNName() %></p>
+         		 	<img src="<%=request.getContextPath()%>/upload/<%=n.get(i).getNImg() %>" 
+         		 	onclick="location.assign('<%=request.getContextPath()%>/countryinfo/searchAll.do?nName=<%=n.get(i).getNName() %>');" alt="" width="200" height="200">
+           		</div>
+           		<%}%>
+           	</div>
+           		<div id="nBt" style="width:500; height:500;border: 1px solid;">
+           			<button onclick="location.assign('<%=request.getContextPath()%>/diary/firstDiary.do');">나의 출국일지로 이동하기</button>
+           		</div>
+           	<%}%>
         </div>
-    </section>
+   </section>
 
     
-      <style>
-
-    #recievelist{
-        /* position: absolute;
-        top: 500px;
-        left: 500px; */
-        flex-direction: row;
-        justify-content: center;
-        display: flex;      
-
-    }
-   #recievelist>*{
-        width: 1000px;
-        height: 600px;
-        
-    } 
-    #myimpo{
-       
-        position: absolute;
-        top: 500px;
-        left: 800px;
-        width: 600px;
-        height: 300px;
-       
-        
-    }
-    #myimpo>*{
-        border: 1px solid;
-        padding: 2%;
-    }
-       
-
-    #mypsc{
-            border: 1px solid;
-            border-bottom: 3px solid;
-
-            position: absolute;
-            top: 500px;
-            left: 500px;
+    
+    <style>
+      .npicdiv{
+		display:flex;
+      	justify-content: center;
+      	
+      }
+     .nPic{
+     	float: left;
+         margin: 20px;
          
-            width: 300px;
-            height: 390px;
-        }
-
+     }
+     
+     #nBt{
+     	clear:both
+     }
+ 
         #menutitle{
             /* border: 1px solid;
             border-bottom: 3px solid; */
@@ -115,6 +105,7 @@
             margin-left: 0 auto;
             margin-right: 0 auto;
             text-align: center;
+            
         }
         
 
