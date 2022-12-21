@@ -21,7 +21,7 @@
 <!--                     <input id="idCheck" type="button" value="중복확인"> -->
                     <span class="check" id="checkId"><small></small></span>
                     <input type="text" class="form-control" name="inputId" id="inputId" 
-                    	aria-describedby="emailHelp" placeholder="아이디를 입력해주세요" required>
+                    	aria-describedby="emailHelp" placeholder="아이디를 입력해주세요" required maxlength="8">
                     <small class="form-text text-muted">아이디는 5자리 이상 입력하세요</small>
                 </div>
                 <script>
