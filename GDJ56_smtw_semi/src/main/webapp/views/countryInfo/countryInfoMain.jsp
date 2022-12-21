@@ -70,7 +70,8 @@
         	margin-left:100px;
         	margin-right:100px;
         	height:auto;
-        	
+        	white-space: pre-wrap;
+        	overflow: visible;
         
         }
     
@@ -161,8 +162,7 @@
 	
     <script>
     	
-    	$("#cobtn1").show()
-    
+
     	$("#buttoncollect>input").click(e=>{
     		$.ajax({
     			type:'get',
@@ -188,6 +188,7 @@
 	    <%-- <%}%> --%>
     <%}%>
 	<style>
+		
 		#twobu>button{
     		width:110px;
     	}

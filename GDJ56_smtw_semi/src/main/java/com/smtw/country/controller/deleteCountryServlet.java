@@ -40,7 +40,7 @@ public class deleteCountryServlet extends HttpServlet {
 			msg="삭제가 완료되었습니다.";
 			loc="/country/countryMain.do";
 			String path=getServletContext()
-					.getRealPath("/upload/");
+					.getRealPath("/upload/country/");
 			File delFile=new File(path+fileName);
 			if(delFile.exists()) delFile.delete();
 			

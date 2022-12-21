@@ -85,4 +85,13 @@ public class CountryService {
 		close(conn);
 		return result;
 	}
+	
+	public int deletLikeCountry(String id) {
+		Connection conn=getConnection();
+		int result=dao.deletLikeCountry(conn,id);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 }

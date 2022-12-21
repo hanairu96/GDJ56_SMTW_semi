@@ -1,7 +1,6 @@
 package com.smtw.country.controller;
 
 import java.io.IOException;
-import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.smtw.country.model.service.CountryService;
-import com.smtw.country.model.vo.Country;
+import com.smtw.country.model.vo.Likenation;
 
 /**
- * Servlet implementation class UpdateCountryServlet
+ * Servlet implementation class deleteLikeCountryServlet
  */
-@WebServlet("/country/updateCountry.do")
-public class UpdateCountryServlet extends HttpServlet {
+@WebServlet("/dislikecountry.do")
+public class deleteLikeCountryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateCountryServlet() {
+    public deleteLikeCountryServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +30,12 @@ public class UpdateCountryServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String name=request.getParameter("nName");
-		Country c=new CountryService().searchNName(name);
 
-		request.setAttribute("country", c);
-		request.getRequestDispatcher("/views/country/updateCountry.jsp").forward(request, response);
+		String id=request.getParameter("id");
+		Likenation c=Likenation.builder().memId(request.getParameter("id")).build();
+		int result=new CountryService().deletLikeCountry(id);
+	
+		response.sendRedirect(request.getContextPath()+"/country/countryMain.do");
 	
 	
 	

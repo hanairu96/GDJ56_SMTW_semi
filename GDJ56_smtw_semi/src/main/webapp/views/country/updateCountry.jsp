@@ -44,6 +44,7 @@
                 <div>
                     나라사진
                     <br><input type="file" name="picpic" value="<%=c.getNImg()%>"></input>
+                    <input type="hidden" name="orifilename" value="<%=c.getNImg()%>"></input>
                 </div>
                 <br>
                 <div>
@@ -52,7 +53,7 @@
                 </div>
                 <br>
                 <div>
-                	비상알림!
+                	<h3>비상알림!</h3>
                 	<br><input type="text" name="er" size="100" value="<%=c.getEmergency()%>" placeholder="비상상황이 생기면 내용을 입력해주세요"></input>
                 </div>    
 				<br>

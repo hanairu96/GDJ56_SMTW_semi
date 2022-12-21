@@ -1015,7 +1015,7 @@ public int getqnumPerpage(Connection conn, String userId) {
 		private Country getNation(ResultSet rs) throws SQLException {
 			return Country.builder()
 					.nName(rs.getString("N_NAME"))
-					.nImg(rs.getString("N_IMG"))
+					.nImg(rs.getString("C_PIC"))
 					.build();
 		}
 
