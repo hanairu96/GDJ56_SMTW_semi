@@ -134,7 +134,7 @@
        				 	<%if(con.get(i).getNImg()==null) {%>
 	                    <img src="<%=request.getContextPath()%>/images/country/noimage_view.png"  alt="" style="width: 400px; height:300px;border-radius:10%;" >
        				 	<%}else{ %>
-	                    <img src="<%=request.getContextPath()%>/upload/<%=con.get(i).getNImg() %>"  alt="" style="width: 400px; height:300px;border-radius:10%;" >
+	                    <img src="<%=request.getContextPath()%>/upload/country/<%=con.get(i).getNImg() %>"  alt="" style="width: 400px; height:300px;border-radius:10%;" >
 	                    <%} %>
 	                    
 	                    <div id="likenameinfo">
@@ -208,11 +208,12 @@
 	
 	<!-- 페이징 처리 -->
    	<div id="pageBar2">
-		<nav aria-label="Page navigation example" style="margin-top:30px;color:rgba(221, 160, 221, 0.508) !important;">
-			<ul class="pagination justify-content-center" style="color:rgba(221, 160, 221, 0.508) !important;">
+   	<!-- 부트스트랩 ㅠㅜㅠㅜ -->
+<!-- 		<nav aria-label="Page navigation example" style="margin-top:30px;color:rgba(221, 160, 221, 0.508) !important;">
+			<ul class="pagination justify-content-center" style="color:rgba(221, 160, 221, 0.508) !important;"> -->
 				<%=request.getAttribute("pageBar") %>
-			</ul>
-		</nav>
+<!-- 			</ul>
+		</nav> -->
 	</div>
 	
 	
