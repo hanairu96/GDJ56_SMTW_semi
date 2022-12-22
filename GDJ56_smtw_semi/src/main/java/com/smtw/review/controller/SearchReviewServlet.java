@@ -46,7 +46,7 @@ public class SearchReviewServlet extends HttpServlet {
 		
 		int cPage;
 		// 페이지당 출력 갯수
-			int numPerpage=4;
+			int numPerpage=8;
 				
 		
 		try {
