@@ -4,8 +4,4 @@
 <%
 	CountryPage coarea=(CountryPage)request.getAttribute("data");
 %>
-
-	<div>
-		<%=coarea.getNVisa() %>
-	</div>
-
+<%=coarea.getNVisa() %>

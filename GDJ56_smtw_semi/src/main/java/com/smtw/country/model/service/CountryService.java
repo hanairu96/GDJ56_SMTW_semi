@@ -102,4 +102,13 @@ public class CountryService {
 		close(conn);
 		return result;
 	}
+	
+	
+	//나라 입력시 분기처리 해줄 나라 전체 찾기 
+	public List<Country> selectAllcountry(){
+		Connection conn=getConnection();
+		List<Country> co=dao.selectAllcountry(conn);
+		close(conn);
+		return co;
+	}
 }

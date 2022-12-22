@@ -53,7 +53,7 @@
         	flex-wrap: wrap;
         	display:flex;
          	position: absolute;
-        	left :250px; 
+        	left :280px; 
         	/* border: 5px solid green;  */
         	width:1400px;
         	height:1100px;
@@ -61,7 +61,7 @@
         #pageBar2{
         	position: absolute;
         	top :1650px;
-			left:50%;
+			left:42%;
 			width:500px;
         }
 		#btnbtn{
@@ -80,6 +80,9 @@
 		#btninsertdelete>button{
 			width:80px;
 		}
+		#listlist>a{
+			font-size:20px;
+		}
     </style>
 
 
@@ -93,7 +96,7 @@
 			<ul>
 			<!-- 페이지 왼편에 나라 리스트 -->
 	           	<%for(Country c : list){%>
-				<li>
+				<li id="listlist">
                     <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN"))  {%>
                     <!-- 나라 상세 페이지가 없으면 수정페이지로 이동한다 -->
                    		<a href="<%=request.getContextPath()+(c.getInfo().getMoney()==null?"/country/updateCountry.do?nName=":"/countryinfo/searchAll.do?nName=")+c.getNName() %>"><%=c.getNName() %></a>
@@ -110,6 +113,7 @@
 			</ul>    
 		</div>
         <%}%>
+        
            	<script>
            		/* 회원일경우 나라 상세정보가 없을때 뜨는 알림팝업 */
             	const nodatano=()=>{
@@ -117,10 +121,13 @@
             	}	
             	/* 비상상황문구를 넣었을 경우 알림팝업 */
             	const fn_emergency=(em,name)=>{
-            		if(em!='null') swal('비상상황발생',em,'warning')
+            		if(em!='null'){ swal('국가비상 상황이 발생되었습니다.',em,'error')
             		.then(function(){
             		location.assign('<%=request.getContextPath()%>/countryinfo/searchAll.do?nName='+name);
-					})            		
+					})            	
+            		}else{
+            		location.assign('<%=request.getContextPath()%>/countryinfo/searchAll.do?nName='+name);
+            		}
             	}
 			</script>
         <div id="comaincontainer2"> 
@@ -287,7 +294,7 @@
          section{
         /*  border: 1px solid tomato; */
          
-         /* margin-left: 50px; */
+          margin-left: 50px; 
          margin-right: 50px;
          padding-left: 30px;
          padding-right: 100px;

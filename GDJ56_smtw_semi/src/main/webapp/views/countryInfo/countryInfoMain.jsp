@@ -161,7 +161,7 @@
 			<%if(cj.getPage().getNInfo()==null) {%>
 				나라정보 업데이트 중입니다.
 			<%}else{ %>
-		    	<%=cj.getPage().getNInfo()%>
+<%=cj.getPage().getNInfo()%>
 			<%} 
 			}%>
 		</div>
