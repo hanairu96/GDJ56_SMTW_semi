@@ -19,8 +19,7 @@
             <div id="all">
                 <h1><span style="background-color: rgb(178 183 239);">찾아오시는길</span></h1>
                 <div id="map" style="width:700px;height:400px;margin:0 auto;"></div>
-                
-                <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=63790162820e52da6fdb26e25b092596"></script>
+                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=63790162820e52da6fdb26e25b092596"></script>
                 <script>
                     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                     mapOption = { 
