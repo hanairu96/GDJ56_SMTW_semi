@@ -96,7 +96,7 @@
                 <tr>
                     <th colspan="2">
                         <div class="cont">
-                            <textarea  style="width:100%;"  style="height:100%;"   name="summernote" id="summernote" placeholder="내용 입력"></textarea>
+                            <textarea  style="width:100%;"  style="height:auto;"   name="summernote" id="summernote" placeholder="내용 입력"></textarea>
                         	<!-- rows="10" cols="100" -->
                         </div>
                     </th>
@@ -256,7 +256,7 @@
                 왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
              */
             margin-top: 100px;
-            height: 900px; 
+            height: auto; 
             /*
                 ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
                 높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.

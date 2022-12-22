@@ -196,7 +196,7 @@
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                   <%if(logInMember!=null) {%>  
                     <button  onclick="location.assign('<%=request.getContextPath()%>/community/enrollReview.do');"
-                    class="btn btn-primary customBtn btnStyle" type="button" style=" margin-left :300px; margin-top :15px;background-color: rgba(221, 160, 221, 0.508) !important;" value="작성">
+                    class="btn btn-primary customBtn btnStyle" type="button" style=" margin-left :300px; margin-top :15px; !important;" value="작성">
                     작성하기</button>
                <% }	%>
                 </div>

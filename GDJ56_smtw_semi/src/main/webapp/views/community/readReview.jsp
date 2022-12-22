@@ -35,7 +35,7 @@
 <%@include file="/views/common/header.jsp" %>
 
     <!-- 가운데 섹션 부분!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-    <section style=height:auto;>
+    <section style="height:auto;">
         <div style="border:1px solid;width:100%;height:150px;text-align: center;font-size: x-large;justify-content: center;display: flex;">
             <div style="margin-top:50px"> <%=r.getReviewTitle() %> </div> 
         </div>
