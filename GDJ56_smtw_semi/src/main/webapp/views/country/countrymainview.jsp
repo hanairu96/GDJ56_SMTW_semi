@@ -93,7 +93,7 @@
 			<ul>
 			<!-- 페이지 왼편에 나라 리스트 -->
 	           	<%for(Country c : list){%>
-				<li>
+				<li id="listlist">
                     <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN"))  {%>
                     <!-- 나라 상세 페이지가 없으면 수정페이지로 이동한다 -->
                    		<a href="<%=request.getContextPath()+(c.getInfo().getMoney()==null?"/country/updateCountry.do?nName=":"/countryinfo/searchAll.do?nName=")+c.getNName() %>"><%=c.getNName() %></a>
@@ -110,6 +110,7 @@
 			</ul>    
 		</div>
         <%}%>
+        
            	<script>
            		/* 회원일경우 나라 상세정보가 없을때 뜨는 알림팝업 */
             	const nodatano=()=>{

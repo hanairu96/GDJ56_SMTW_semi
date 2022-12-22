@@ -4,6 +4,10 @@
 <%
 	String id=(String)request.getAttribute("id");
 	List<Country> co=(List<Country>)request.getAttribute("allcountry");
+	String cty="";
+	for(Country cc : co){
+		cty+=cc.getNName()+"/";
+	}
 %>
 <%@ page import="com.smtw.country.model.vo.Country" %>
 <%@ include file="/views/common/header.jsp" %>
@@ -14,37 +18,35 @@
 	        <fieldset id="wrap2">
 	            <legend><h1 style="text-align: centers;">국가정보 입력페이지</h1></legend>
 	                <div>
-	                	<%for(Country cc : co) {%>
 	                    나라이름 <br>
 	                    <select name="selectco" id="selectco" style="width:150px;height:30px;">
 	                    	<option disabled>--선택하세요--</option>
 	                    	<option value="self">나라직접입력</option>
 	                    	<option disabled>--24개국중선택--</option>
-	                        <option value="네덜란드" selected <%=cc.getNName().equals("네덜란드")?"disabled":""%>>네덜란드</option>
-	                        <option value="뉴질랜드" <%=cc.getNName().equals("뉴질랜드")?"disabled":""%>>뉴질랜드</option>
-	                        <option value="대만" <%=cc.getNName().equals("대만")?"disabled":""%>>대만</option>
-	                        <option value="덴마크" <%=cc.getNName().equals("덴마크")?"disabled":""%>>덴마크</option>
-	                        <option value="독일" <%=cc.getNName().equals("독일")?"disabled":""%>>독일</option>
-	                        <option value="벨기에" <%=cc.getNName().equals("벨기에")?"disabled":""%>>벨기에</option>
-	                        <option value="스웨덴" <%=cc.getNName().equals("스웨덴")?"disabled":""%>>스웨덴</option>
-	                        <option value="아르헨티나" <%=cc.getNName().equals("아르헨티나")?"disabled":""%>>아르헨티나</option>
-	                        <option value="아일랜드" <%=cc.getNName().equals("아일랜드")?"disabled":""%>>아일랜드</option>
-	                        <option value="영국" <%=cc.getNName().equals("영국")?"disabled":""%>>영국</option>
-	                        <option value="오스트이라" <%=cc.getNName().equals("오스트이라")?"disabled":""%>>오스트이라</option>
-	                        <option value="이스라엘" <%=cc.getNName().equals("이스라엘")?"disabled":""%>>이스라엘</option>
-	                        <option value="이탈리아" <%=cc.getNName().equals("이탈리아")?"disabled":""%>>이탈리아</option>
-	                        <option value="일본" <%=cc.getNName().equals("일본")?"disabled":""%>>일본</option>
-	                        <option value="체코" <%=cc.getNName().equals("체코")?"disabled":""%>>체코</option>
-	                        <option value="칠레" <%=cc.getNName().equals("칠레")?"disabled":""%>>칠레</option>
-	                        <option value="캐나다" <%=cc.getNName().equals("캐나다")?"disabled":""%>>캐나다</option>
-	                        <option value="포르투칼" <%=cc.getNName().equals("포르투칼")?"disabled":""%>>포르투칼</option>
-	                        <option value="폴란드" <%=cc.getNName().equals("폴란드")?"disabled":""%>>폴란드</option>
-	                        <option value="프랑스" <%=cc.getNName().equals("프랑스")?"disabled":""%>>프랑스</option>
-	                        <option value="헝가리" <%=cc.getNName().equals("헝가리")?"disabled":""%>>헝가리</option>
-	                        <option value="호주" <%=cc.getNName().equals("호주")?"disabled":""%>>호주</option>
-	                        <option value="홍콩" <%=cc.getNName().equals("홍콩")?"disabled":""%>>홍콩</option>
+	                        <option value="네덜란드" selected <%=cty.contains("네덜란드")?"disabled":""%>>네덜란드</option>
+	                        <option value="뉴질랜드" <%=cty.contains("뉴질랜드")?"disabled":""%>>뉴질랜드</option>
+	                        <option value="대만" <%=cty.contains("대만")?"disabled":""%>>대만</option>
+	                        <option value="덴마크" <%=cty.contains("덴마크")?"disabled":""%>>덴마크</option>
+	                        <option value="독일" <%=cty.contains("독일")?"disabled":""%>>독일</option>
+	                        <option value="벨기에" <%=cty.contains("벨기에")?"disabled":""%>>벨기에</option>
+	                        <option value="스웨덴" <%=cty.contains("스웨덴")?"disabled":""%>>스웨덴</option>
+	                        <option value="아르헨티나" <%=cty.contains("아르헨티나")?"disabled":""%>>아르헨티나</option>
+	                        <option value="아일랜드" <%=cty.contains("아일랜드")?"disabled":""%>>아일랜드</option>
+	                        <option value="영국" <%=cty.contains("영국")?"disabled":""%>>영국</option>
+	                        <option value="오스트리아" <%=cty.contains("오스트리아")?"disabled":""%>>오스트리아</option>
+	                        <option value="이스라엘" <%=cty.contains("이스라엘")?"disabled":""%>>이스라엘</option>
+	                        <option value="이탈리아" <%=cty.contains("이탈리아")?"disabled":""%>>이탈리아</option>
+	                        <option value="일본" <%=cty.contains("일본")?"disabled":""%>>일본</option>
+	                        <option value="체코" <%=cty.contains("체코")?"disabled":""%>>체코</option>
+	                        <option value="칠레" <%=cty.contains("칠레")?"disabled":""%>>칠레</option>
+	                        <option value="캐나다" <%=cty.contains("캐나다")?"disabled":""%>>캐나다</option>
+	                        <option value="포르투갈" <%=cty.contains("포르투갈")?"disabled":""%>>포르투갈</option>
+	                        <option value="폴란드" <%=cty.contains("폴란드")?"disabled":""%>>폴란드</option>
+	                        <option value="프랑스" <%=cty.contains("프랑스")?"disabled":""%>>프랑스</option>
+	                        <option value="헝가리" <%=cty.contains("헝가리")?"disabled":""%>>헝가리</option>
+	                        <option value="호주" <%=cty.contains("호주")?"disabled":""%>>호주</option>
+	                        <option value="홍콩" <%=cty.contains("홍콩")?"disabled":""%>>홍콩</option>
 	                    </select>   
-	                    <%} %>
 						<input type="text" name="selfname" style="width:150px;height:30px;" id="writeoption">
 						<input type="hidden" name="id" value="<%=id%>"> 
                    	<script>
