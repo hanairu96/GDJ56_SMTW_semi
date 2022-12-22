@@ -101,7 +101,7 @@
                 <div style="border:0px solid red;width:100%;height:695px;display:flex; ">
                     <div style="display:flex">
                         <div style="border:0px solid green;width:1390px;;height:690px;">
-                            <div style="border:0px solid pink;width:950px;height:110px;margin-left:270px;">
+                            <div style="border:0px solid pink;width:950px;height:110px;margin-left:250px;">
                                 <table class="table table-bordered">
                                     <tr>
                                         <td style="background-color: rgba(231, 123, 231, 0.534);">나라</td>
@@ -118,19 +118,146 @@
                                   </table>
                               
                             </div>
-                            <div style="border:0px solid pink;width:950px;height:550px;text-align:center;margin-left:270px;margin-top: 30px; ">
-                               <div style="border:1px solid rgba(137, 43, 226, 0.247);width:950px;height:800x;text-align:left;border-radius:20px;">
+                            <div style="border:0px solid pink;width:950px;height:550px;text-align:center;margin-left:0px;margin-top: 30px; ">
+                               <div style="border:1px solid rgba(137, 43, 226, 0.247);width:950px;height:800x;text-align:left;border-radius:20px;margin-left:250px;">
                                 
-                                 <img src="<%=request.getContextPath() %>/upload/review/<%=r.getReviewFileName() %>" alt="" style="width: 50%;height:50%;margin:auto; display:block;border-radius:20px;">
+                                	 <img src="<%=request.getContextPath() %>/upload/review/<%=r.getReviewFileName() %>" alt="" style="width: 50%;height:50%;margin:auto; display:block;border-radius:20px;">
                                 </div>
-                                <div  class="product-title" style="border:1px solid rgba(137, 43, 226, 0.301);width:950px;height:auto;text-align:center;border-radius:20px;;">
-                                    <div class="product-img-div"  style="width:100%;"  style="height:auto;">
-                                     <p>
-                                        <%=r.getReviewContnet() %>
-                                     </p>
-                                     </div>
+                                <div  class="product-title" style="border:1px solid rgba(137, 43, 226, 0.301);width:950px;height:auto;text-align:center;border-radius:20px;
+                                	margin-left:250px;
+                                ">
+	                                    <div class="product-img-div"  style="width:100%;"  style="height:auto;">
+	                                     <p>
+	                                        <%=r.getReviewContnet() %>
+	                                     </p>
+	                                     </div>
                                      
                                 </div> 
+                                
+                                <!--영역  -->
+                                <div style="border:0px solid rgba(137, 43, 226, 0.247);width:1400px;height:800x;text-align:left;border-radius:20px;margin-right:800px;">
+                                
+                                	
+							        <div style="display:flex; border:0px solid rgb(15, 231, 231);width:100%;height:75px">
+							            <div style="border:0px solid yellow;width:500px;height:60px"></div>
+							            <div style="border:0px solid yellow;width:500px;height:60px"></div>
+							            <div style="border:0px solid yellow;width:400px;height:60px;margin-left: 50px;">
+							                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+							                    <!-- <button onclick="enroll_review('주소값');" class="btn btn-primary customBtn btnStyle" type="button" style=" background-color: rgba(221, 160, 221, 0.508) !important;" value="등록">등록하기</button>
+							                    <button onclick="cancel_review('주소값');"    class="btn btn-primary customBtn btnStyle" type="button" style=" background-color: rgba(221, 160, 221, 0.479) !important;" value="취소">취소하기</button> -->
+							                </div>
+							            </div>
+							        </div>
+                                
+                                
+		<!-- 댓글 등록하기폼 -->
+	<!-- div로 form을 감아줌 -->
+	
+	<div class="comment-editor" style="border:0px solid green;width:850px;height:auto;margin: 0 auto;margin-top:50px;"> 
+	  
+	   <form class="form comment-form" style="display:flex;flex-direction:column;align-items:center;"
+	   		action="<%=request.getContextPath()%>/community/insertRC.do" onsubmit="return insertComment();">
+           <textarea id="comment_1" onclick="logInCheck();" name="comment_1" class="commentText" placeholder="댓글을 남겨보세요" style="width:100%;"></textarea>
+           <input type="hidden" name="qnaNo" value="<%=r.getReviewNo()%>">
+           <input type="hidden" name="qcLevel" value="1"/> <!-- 댓글레벨  -->
+           <input type="hidden" name="qnaQcRef" value="0"/>	<!-- 답글이 아니라 그냥 댓글이라서 0 -->
+           <input type="hidden" id="commentWriter" name="commentWriter" value="<%=logInMember!=null?logInMember.getMemberId():""%>"><!-- 댓글작성자 아이디 넘기기  -->   				
+           <div style="width:100%;">
+               <button type="submit" class="submit customBtn btnStyle" id="btn-insert" style="width:80px;height:47px;float:right;"
+               		>댓글등록</button>
+           </div>
+	    </form>
+	</div>
+    <!-- 등록된 댓글 -->
+     <%if(!rcList.isEmpty()) {%>
+					<%for(ReviewComments rc : rcList) {%>
+							<%if(rc.getReviewCommentLevel()==1) {%>
+	<div class="comments level1" style="border:0px solid green;width:850px;height:auto;margin: 0 auto;">
+	   <div class="comment replies" style="border:5px solid #ddd;width:850px;height:auto;margin: 0 auto;background-color: #f2f2f2;margin-bottom:10px;margin-top:10px;">
+	   		<div class="content">
+		       <header class="top">
+		         <div class="username" style="color:#7e8cd2"><%=rc.getMemberId()%></div>
+		         <div class="utility"> 
+					<!-- 현재버튼의 위치 -->
+				    <button class="menu btn-reply customBtn btnStyle" onclick="btnReply(event);">답글등록</button>  
+				    <!-- 관리자와 해당 작성자만 보이게 -->
+				    <%if(logInMember!=null&&(logInMember.getMemberId().equals("ADMIN")||logInMember.getMemberId().equals(rc.getMemberId()))) {%>
+						<button class="menu customBtn btnStyle" onclick="deleteComment('<%=rc.getRcNo()%>');">댓글삭제</button>    
+					<%} %>
+	             </div>
+	           </header>
+                
+	          	<p><%=rc.getRcContents()%></p>
+	            <ul class="bottom">
+	              <li class="menu time"><%=rc.getEnrollDate()%></li>
+	              <li class="divider"></li> 
+	              <%if(rc.getQcCount()!=0 ){%>
+		              <li class="menu show-reply" onclick="showReply(event);" style="cursor: pointer;">
+		              		답글 (<%=rc.getQcCount()%>)
+		              </li> 
+	              <%} %>
+	            </ul>
+			</div>
+		</div>   
+           
+            <!-- 이위치에 태그를 추가해줘야함 -->
+			<!-- 답글  -->
+            <form id="refly-Form" class="form reply-form"style="display:none;flex-direction:column;align-items:center;"
+            	action="<%=request.getContextPath()%>/community/insertRC.do" onsubmit="return checkReply(event);">
+	              <textarea id="replyText" name="comment_1" class="commentText" onclick="logInCheck();" placeholder="답글을 남겨보세요"style="width:100%;"></textarea>
+	              	<input type="hidden" name="qnaNo" value="<%=r.getReviewNo()%>">
+           			<input type="hidden" name="qcLevel" value="2"/> <!-- 댓글레벨 2 -->
+           			<input type="hidden" name="qnaQcRef" value="<%=rc.getRcNo()%>"/>	<!-- 답글이라서 해당 댓글번호 -->
+           			<input type="hidden" id="commentWriter" name="commentWriter" value="<%=logInMember!=null?logInMember.getMemberId():""%>"><!-- 댓글작성자 아이디 넘기기  -->
+	              	<div style="width:100%;">
+	                	<button type="submit" class="submit customBtn btnStyle" id="btn-ReplyInsert" style="width:80px;height:47px;float:right;"
+	                		>댓글등록</button>
+	             	</div>
+            </form>   
+	</div>
+		<%}else {%>         
+<!--           등록된 답글  -->
+        <div class="replies level2" style="border-left:5px solid #ddd;border-right:5px solid #ddd;
+        	border-bottom:5px solid #ddd;width:850px;height:auto;margin: 0 auto;display:none;">
+            <div class="reply">
+              <div class="content">
+              	<header class="top">
+                	<div class="username"><%=rc.getMemberId()%></div>
+                	<div class="utility">   
+				    <!-- 관리자와 해당 작성자만 보이게 -->
+				    <%if(logInMember!=null&&(logInMember.getMemberId().equals("ADMIN")||logInMember.getMemberId().equals(rc.getMemberId()))) {%>
+						<button class="menu customBtn btnStyle" onclick="deleteQC('<%=rc.getRcNo()%>');">답글삭제</button>    
+					<%} %>
+	             </div>
+                </header>
+	                <p><%=rc.getRcContents()%></p>
+	                <ul class="bottom">
+	                  <li class="menu time"><%=rc.getEnrollDate()%></li>
+	                </ul>
+         		</div>
+         	</div>
+		</div> 
+	<%} %><!-- 댓글,답글 구별if문  -->
+	<%} %>
+	<%} %>
+	
+		  <div style="border:0px solid yellow;width:100%;height:30px;"></div>
+        <div style="border:0px solid yellow;width:100%;height:20px;">
+      <!--   <a href="">다음글</a> -->
+        </div>
+        <div style="border:0px solid yellow;width:100%;height:20px;">
+       <!--  <a href="">이전글</a> -->
+        </div>
+        <div style="background-color:rgba(128, 0, 128, 0.4);width:100%;height:3px;"></div>
+        <div style="border:0px solid yellow;width:100%;height:30px;">
+        <button type="button" class="submit customBtn btnStyle"><a href="<%=request.getContextPath()%>/community/reviewBasic.do"><p>목록</p></a></button>
+        </div>
+	
+	
+                                
+                                
+                           
+                                </div>
                             </div>
                         </div>  
                     </div>
@@ -139,23 +266,33 @@
         </div>
        
        
-       <style>
+       
+     
+       
+       
+        
+
+
+
+    </section> 
+    
+     <style>
 		  .product-title {
-		    text-align:center;
-		    display:table;
-		    border:1px solid #cecece;
-		    width:280px;
-		    height:250px;
+		    text-align:center !important;
+		    display:table !important;
+		    border:1px solid #cecece !important;
+		    width:950px !important;
+		    height:100px !important;
 		}
 		
 		.product-img-div {
-		    display:table-cell;
-		    vertical-align:middle;
+		    display:table-cell !important;
+		    vertical-align:middle !important;
 		}
        
        .product-img-div img {
-		    max-width:100%;
-   			 max-height:100%;
+		    max-width:50% !important;
+   			 max-height:50% !important;
 		}
        
        
@@ -165,16 +302,21 @@
        
         
         
-        <div style="display:flex; border:0px solid rgb(15, 231, 231);width:100%;height:75px">
-            <div style="border:0px solid yellow;width:500px;height:60px"></div>
-            <div style="border:0px solid yellow;width:500px;height:60px"></div>
-            <div style="border:0px solid yellow;width:400px;height:60px;margin-left: 50px;">
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <!-- <button onclick="enroll_review('주소값');" class="btn btn-primary customBtn btnStyle" type="button" style=" background-color: rgba(221, 160, 221, 0.508) !important;" value="등록">등록하기</button>
-                    <button onclick="cancel_review('주소값');"    class="btn btn-primary customBtn btnStyle" type="button" style=" background-color: rgba(221, 160, 221, 0.479) !important;" value="취소">취소하기</button> -->
-                </div>
-            </div>
-        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+       
+       
         <style>
             .customBtn {
             color: #fff;
@@ -231,11 +373,17 @@
 
 
         </style>
-        
-
-
-
-        <script>
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    <script>
             function enroll_review(url){
             var answer;
              answer = confirm("후기를 등록하시겠습니까?");
@@ -253,143 +401,117 @@
                 }
           }
          </script>
-
-
-
-       <!-- 댓글 등록하기폼 -->
-        <!-- div로 form을 감아줌 -->
-       
-        <div  class="comment-editor"  style="margin-top:300px" class="comment-editor"> 
-            <form class="form comment-form" 
-            action="<%=request.getContextPath()%>/community/insertRC.do"
-            onsubmit="return insertComment();">
-            
-           <textarea id="comment_1" onclick="logInCheck();" name="comment_1" class="commentText" placeholder="댓글을 남겨보세요" style="width:100%;"></textarea>
-           <input type="hidden" name="qnaNo" value="<%=r.getReviewNo()%>">
-           <input type="hidden" name="qcLevel" value="1"/> <!-- 댓글레벨  -->
-           <input type="hidden" name="qnaQcRef" value="0"/>	<!-- 답글이 아니라 그냥 댓글이라서 0 -->
-           <input type="hidden" id="commentWriter" name="commentWriter" value="<%=logInMember!=null?logInMember.getMemberId():""%>"><!-- 댓글작성자 아이디 넘기기  -->   				
-           <div style="width:100%;">
-               <button type="submit" class="submit customBtn btnStyle" id="btn-insert" style="width:80px;height:47px;float:right;"
-               		>댓글등록</button>
-           </div>
-                
-            </form>
-            <!-- <div>
-            비밀댓글<input type="checkbox" style="margin-left: 800px;">
-            </div> -->
-        </div>
-
-
-        <!-- 등록된 댓글 -->
-          <%if(!rcList.isEmpty()) {%>
-    	<%for(ReviewComments rc : rcList) {%>
-    	<%if(rc.getReviewCommentLevel()==1) {%>
-        <div class="comments level1">
-            <div class="comment replies">
-              <div class="content">
-                <header class="top">
-                  <div class="username"><%=rc.getMemberId()%></div>
-                  <div class="utility">
-                    <!-- 현재버튼의 위치 -->
-                    <button class="menu btn-reply customBtn btnStyle" onclick="btnReply(event);" >답글등록</button>  
-                    <!-- 관리자와 해당 작성자만 보이게 -->
-                    <%if(logInMember!=null&&(logInMember.getMemberId().equals("ADMIN")||logInMember.getMemberId().equals(rc.getMemberId()))) {%>
-                    <button class="menu customBtn btnStyle" onclick="deleteComment('<%=rc.getRcNo()%>');">댓글삭제</button>    
-                <%} %>
-                </div>
-                </header>
-                <p><%=rc.getRcContents()%></p>
-                <ul class="bottom">
-                  <li class="menu time"><%=rc.getEnrollDate()%></li>
-                  <li class="divider"></li>
-                     <%if(rc.getQcCount()!=0) {%>
-                   <li class="menu show-reply" onclick="showReply(event);" style="cursor: pointer;" >
-                   	답글(<%=rc.getQcCount()%>)
-                   </li> 
-                   <%} %>
-                </ul>
-              </div>
-            </div>
-           
-        </div>
-          <!-- 이위치에 태그를 추가해줘야함 -->
-       <!-- 답글  -->
-        <form class="form reply-form" style="display:none;flex-direction:column;align-items:center;" 
-         action="<%=request.getContextPath()%>/community/insertRC.do"  onsubmit="return checkReply(event);">
-            <textarea id="replyText" name="comment_1" class="commentText" onclick="logInCheck();" placeholder="답글을 남겨보세요"style="width:100%;"></textarea>
-	              	<input type="hidden" name="qnaNo" value="<%=r.getReviewNo()%>">
-           			<input type="hidden" name="qcLevel" value="2"/> <!-- 댓글레벨 2 -->
-           			<input type="hidden" name="qnaQcRef" value="<%=rc.getRcNo()%>"/>	<!-- 답글이라서 해당 댓글번호 -->
-           			<input type="hidden" id="commentWriter" name="commentWriter" value="<%=logInMember!=null?logInMember.getMemberId():""%>"><!-- 댓글작성자 아이디 넘기기  -->
-	              	<div style="width:100%;">
-	                	<button type="submit" class="submit customBtn btnStyle" id="btn-ReplyInsert" style="width:80px;height:47px;float:right;"
-	                		>댓글등록</button>
-	             	</div>
-           
-            </form>       
-        </div>
-        
-        
-        
-      <%}else {%>      
-         
-           
-         
-          <!--등록된 답글  -->
-        <div class="replies level2" style="border-left:5px solid #ddd;border-right:5px solid #ddd;
-        	border-bottom:5px solid #ddd;width:850px;height:auto;margin: 0 auto;display:none;">
-        	
-            <div class="reply">
-              <div class="content">
-                <header class="top">
-                  <div class="username"><%=rc.getMemberId()%></div>
-                  <div class="utility">
-                    <%if(logInMember!=null&&(logInMember.getMemberId().equals("ADMIN")||logInMember.getMemberId().equals(rc.getMemberId()))) {%>
-						<button class="menu customBtn btnStyle" onclick="deleteQC('<%=rc.getRcNo()%>');">답글삭제</button>    
-					<%} %>
-                  
-                  </div>
-                </header>
-                <p><%=rc.getRcContents()%></p>
-                <ul class="bottom">
-                  <li class="menu time"><%=rc.getEnrollDate()%></li>
-                </ul>
-              </div>
-            </div>
-            
-
-           <!--  <form class="form reply-form">
-              <textarea placeholder="답글을 남겨보세요"></textarea>
-              <button type="button" class="submit customBtn btnStyle">등록하기</button>
-            </form>        -->
-        </div>
-       
-	    <%} %><!-- 댓글,답글 구별if문  -->
-		<%} %>
-		<%} %>
-       
-       
-       
-       
-        <div style="border:0px solid yellow;width:100%;height:30px;"></div>
-        <div style="border:0px solid yellow;width:100%;height:20px;">
-      <!--   <a href="">다음글</a> -->
-        </div>
-        <div style="border:0px solid yellow;width:100%;height:20px;">
-       <!--  <a href="">이전글</a> -->
-        </div>
-        <div style="background-color:rgba(128, 0, 128, 0.4);width:100%;height:3px;"></div>
-        <div style="border:0px solid yellow;width:100%;height:30px;">
-        <button type="button" class="submit customBtn btnStyle">목록</button>
-        </div>
-
-        
-
-
-    </section> 
+    
+    
+    
+    
+    
     
     <script>
+		//댓글 삭제
+		const deleteComment=(qcNo)=>{
+			Swal.fire({
+	             title:'답글도 전부 삭제됩니다. \n삭제하시겠습니까?',
+	             text:"복구 할 수 없습니다.",
+	             icon: 'warning',
+	             showCancelButton: true,
+	             confirmButtonColor: '#3085d6',
+	             cancelButtonColor: '#d33',
+	             confirmButtonText: 'Yes'
+	          }).then((result)=>{
+	             if(result.isConfirmed){
+	            	 location.assign("<%=request.getContextPath()%>/community/DeleteReviewComment.do?qnaNo=<%=r.getReviewNo()%>&qcNo="+qcNo);
+	             }else{
+	                Swal.fire(
+	                       '삭제취소'
+	                 )
+	                 return false;
+	             }
+	          });
+		}
+		//답글 삭제
+		const deleteQC=(qcNo)=>{
+			Swal.fire({
+	             title:'답글을 삭제하시겠습니까?',
+	             text:"복구 할 수 없습니다.",
+	             icon: 'warning',
+	             showCancelButton: true,
+	             confirmButtonColor: '#3085d6',
+	             cancelButtonColor: '#d33',
+	             confirmButtonText: 'Yes'
+	          }).then((result)=>{
+	             if(result.isConfirmed){
+	            	 location.assign("<%=request.getContextPath()%>/community/DeleteReviewComment.do?qnaNo=<%=r.getReviewNo()%>&qcNo="+qcNo);
+	             }else{
+	                Swal.fire(
+	                       '삭제취소'
+	                 )
+	                 return false;
+	             }
+	          });
+		}
+		
+		//댓글창 누를 시 로그인멤버 아니면 댓글 못 달게하기
+		const logInCheck=()=>{
+			if(<%=logInMember==null%>){
+				$(".commentText").blur();
+				Swal.fire({
+					title:"로그인 한 사용자만 댓글을 \n등록할 수 있습니다."
+					,icon: 'error'});
+			}
+		}
+		
+		//댓글등록 버튼 누를 시
+		const insertComment=()=>{
+			//아무것도 작성하지 않으면 재작성 요구
+			if($("#comment_1").val().trim()==""){
+				$(".commentText").blur();
+				Swal.fire("댓글을 작성해주세요.");
+				return false;
+			}
+		}
+		//답글등록 클릭 시
+		const checkReply=(e)=>{
+			if($(e.target).parent().find("textarea").val().trim()==""){//해당 버튼의 답글을 아무것도 달지 않으면
+				$(".commentText").blur();
+				Swal.fire("댓글을 작성해주세요.");
+				return false;
+			}
+		}
+		
+		//댓글에 ->답글 등록 클릭 시
+		const btnReply=(e)=>{
+			$(e.target).parentsUntil("section").find("form").show();
+		}
+		//답글 버튼 클릭 시 밑에 답글만 열리게 하기
+		const showReply=(e)=>{
+// 			console.log($(e.target).parentsUntil("section").nextUntil(".level1").not("form"));
+			$(e.target).parentsUntil("section").nextUntil(".level1").not("form").toggle(300);
+			
+		}
+	</script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   <%--  <script>
   //댓글창 누를 시 로그인멤버 아니면 댓글 못 달게하기  *
 	const logInCheck=()=>{
 		if(<%=logInMember==null%>){
@@ -412,7 +534,8 @@
 	
 	//댓글에 ->답글 등록 클릭 시    *
 	const btnReply=(e)=>{
-		$(e.target).parentsUntil("section").find("form").show();
+		console.log($(e.target).parents("section").find("form.reply-form"));
+		$(e.target).parents("section").find("form.reply-form").show();
 	}
 	
 	
@@ -460,7 +583,7 @@
 	
     
     
-    </script>
+    </script> --%>
     
     
     
@@ -525,5 +648,12 @@
     
     <!-- 여기까지!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <%@include file="/views/community/readReviewFooter.jsp" %>
-<%@include file="/views/common/footer.jsp" %>
+<%--  <%@include file="/views/common/footer.jsp" %> --%>
+ 
+ 
+ 
+</body>
+
+</html>
+ 
     

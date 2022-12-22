@@ -48,9 +48,9 @@
             <div style="display:flex">
                 <div style="border:0px solid yellow;width:400px;height:700px">
 				<div class="sidemenu">
-			        <div><a href="<%=request.getContextPath()%>/notice/noticeList.do"><p>커뮤니티</p></a></div>
-			        <div><a href="<%=request.getContextPath()%>/notice/noticeList.do"><p>워홀 프렌즈 구하기</p></a></div>
-			        <div><a href="<%=request.getContextPath()%>/qna/qnaList.do"><p>생생후기</p></a></div>
+			        <div><a href="<%=request.getContextPath()%>/community/reviewBasic.do"><p>커뮤니티</p></a></div>
+			        <div><a href="<%=request.getContextPath()%>/friends/friendsList.do"><p>워홀 프렌즈 구하기</p></a></div>
+			        <div><a href="<%=request.getContextPath()%>/community/reviewBasic.do"><p>생생후기</p></a></div>
 			    </div>
 <!--                     <header class="header" role="banner"> -->
 <!--                         <div id="sideMenu"> -->
@@ -128,7 +128,7 @@
         <div style="display:flex; border:0px solid rgb(15, 231, 231);width:100%;height:75px;margin-left: 0px;">
             <div style="border:0px solid yellow;width:400px;height:70px;"></div>
            
-            <div style="border:0px solid yellow;width:600px;height:70px;">
+            <div style="border:0px solid yellow;width:600px;height:70px;margin-right:300px">
                 <!-- 검색창 위치 -->
                 <!-- <input type="text" style="margin-top:25px;margin-left:120px;margin-bottom:100px !important;" value="검색창 API 부트스트랩위치 " >  -->
                 
