@@ -80,6 +80,9 @@
 		#btninsertdelete>button{
 			width:80px;
 		}
+		#listlist>a{
+			font-size:20px;
+		}
     </style>
 
 

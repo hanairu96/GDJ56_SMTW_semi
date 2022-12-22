@@ -4,8 +4,5 @@
 <%
 	CountryPage coarea=(CountryPage)request.getAttribute("data");
 %>
-
-	<div>
-		<%=coarea.getNSettle() %>
-	</div>
+<%=coarea.getNSettle() %>
 

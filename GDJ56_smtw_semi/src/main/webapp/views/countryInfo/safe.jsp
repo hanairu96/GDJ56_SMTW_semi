@@ -4,6 +4,4 @@
 <%
 	CountryPage coarea=(CountryPage)request.getAttribute("data");
 %>
-	<div id="safe">
-		<%=coarea.getNSafety() %>
-	</div>
+<%=coarea.getNSafety() %>
