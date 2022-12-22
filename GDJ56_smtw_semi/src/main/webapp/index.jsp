@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.smtw.member.model.vo.Member" %>
+<%@ page import="com.smtw.member.model.vo.Member,java.util.List,com.smtw.notice.model.vo.Notice" %>
 <%
 	Member logInMember=(Member)session.getAttribute("logInMember");
 %>
@@ -18,6 +18,7 @@
 	<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js"
 	      integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/" crossorigin="anonymous"></script>
 	<script>Kakao.init('e746f3ea1bb3e8aa8d89a08b85a3f035'); // 사용하려는 앱의 JavaScript 키 입력</script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body>
 <header>
@@ -30,7 +31,7 @@
                       alt="카카오톡 공유 보내기 버튼" />
                 </a>
                 <!-- 인스타그램 링크 로고 아이콘 -->
-                <a href="https://www.instagram.com/" id="instarLogoAddress">
+                <a href="https://www.instagram.com/showmetheway_korea/" id="instarLogoAddress">
                     <img src="https://t1.daumcdn.net/cfile/tistory/99D8D7485D09F21432" alt="">
                 </a>  
             </div>
@@ -40,42 +41,45 @@
             <ul class="menu">
                 <li id="menuli">
                     <div class="hoversection">
-                        <div>
-                            <a href=""><img src="<%=request.getContextPath()%>/images/워킹홀리데이란.png" alt="" width="60px" height="60px"></a>
+                        <div class="holidayhover">
+                            <a href="<%=request.getContextPath()%>/holiday/holiday.do"><img src="<%=request.getContextPath()%>/images/워킹홀리데이란.png" alt="" width="60px" height="60px" class="holiday1"></a>
+                       		<a href="<%=request.getContextPath()%>/holiday/holiday.do"><img src="<%=request.getContextPath()%>/images/보라워킹홀리데이란.png" alt="" width="60px" height="60px" class="holiday2"></a>
                         </div>
                         <div>
-                            <a href="001워킹홀리데이란.html">워킹홀리데이란?</a>
-                        </div>
-                    </div>
-                    <!-- 서브메뉴영역 -->
-                    <div class="sub">
-                        <ul class="submenu">
-                            <li><a href="001워킹홀리데이란.html">워킹홀리데이란?</a></li>
-                            <li><a href="">찾아오시는길</a></li>
-                            <li><a href="">Show me the way</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li id="menuli">
-                    <div class="hoversection">
-                        <div>
-                            <a href="<%=request.getContextPath()%>/country/countryMain.do"><img src="<%=request.getContextPath()%>/images/국가정보.png" alt="" width="60px" height="60px"></a>
-                        </div>
-                        <div>
-                            <a href="<%=request.getContextPath()%>/country/countryMain.do">국가정보</a>
+                            <a href="<%=request.getContextPath()%>/holiday/holiday.do">워킹홀리데이란?</a>
                         </div>
                     </div>
                     <!-- 서브메뉴영역 -->
                     <div class="sub">
                         <ul class="submenu">
-                            <li><a href="">국가 및 지역별 정보</a></li>
+                            <li><a href="<%=request.getContextPath()%>/holiday/holiday.do">워킹홀리데이란?</a></li>
+                            <li><a href="<%=request.getContextPath()%>/holiday/holidayRoad.do">찾아오시는길</a></li>
+                            <li><a href="<%=request.getContextPath()%>/holiday/holidaySMTW.do">Show me the way</a></li>
                         </ul>
                     </div>
                 </li>
                 <li id="menuli">
                     <div class="hoversection">
+                        <div class="hovercountry">
+                            <a href="<%=request.getContextPath()%>/country/countryMain.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>"><img src="<%=request.getContextPath()%>/images/국가정보.png" alt="" width="60px" height="60px" class="country1"></a>
+                        	 <a href="<%=request.getContextPath()%>/country/countryMain.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>"><img src="<%=request.getContextPath()%>/images/보라국가정보.png" alt="" width="60px" height="60px" class="country2"></a>
+                        </div>
                         <div>
-                            <a href="<%=request.getContextPath()%>/diary/firstDiary.do"><img src="<%=request.getContextPath()%>/images/참여하기.png" alt="" width="60px" height="60px"></a>
+                            <a href="<%=request.getContextPath()%>/country/countryMain.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>">국가정보</a>
+                        </div>
+                    </div>
+                    <!-- 서브메뉴영역 -->
+                    <div class="sub">
+                        <ul class="submenu">
+                            <li><a href="<%=request.getContextPath()%>/country/countryMain.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>">국가 및 지역별 정보</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li id="menuli">
+                    <div class="hoversection">
+                        <div class="hoverdiary">
+                            <a href="<%=request.getContextPath()%>/diary/firstDiary.do"><img src="<%=request.getContextPath()%>/images/참여하기.png" alt="" width="60px" height="60px" class="diary1"></a>
+                        	<a href="<%=request.getContextPath()%>/diary/firstDiary.do"><img src="<%=request.getContextPath()%>/images/보라참여하기.png" alt="" width="60px" height="60px" class="diary2"></a>
                         </div>
                         <div>
                             <a href="<%=request.getContextPath()%>/diary/firstDiary.do">참여하기</a>
@@ -91,25 +95,27 @@
                 </li>
                 <li id="menuli">
                     <div class="hoversection">
-                        <div>
-                            <a href=""><img src="<%=request.getContextPath()%>/images/커뮤니티.png" alt="" width="60px" height="60px"></a>
+                        <div class="hoverfirends">
+                            <a href="<%=request.getContextPath()%>/friends/friendsList.do"><img src="<%=request.getContextPath()%>/images/커뮤니티.png" alt="" width="60px" height="60px" class="friends1"></a>
+                        	<a href="<%=request.getContextPath()%>/friends/friendsList.do"><img src="<%=request.getContextPath()%>/images/보라커뮤니티.png" alt="" width="60px" height="60px" class="friends2"></a>
                         </div>
                         <div>
-                            <a href="">커뮤니티</a>
+                            <a href="<%=request.getContextPath()%>/friends/friendsList.do">커뮤니티</a>
                         </div>
                     </div>
                     <!-- 서브메뉴영역 -->
                     <div class="sub">
                         <ul class="submenu">
-                            <li><a href="">워홀 프렌즈 구하기</a></li>
-                            <li><a href="">생생후기</a></li>
+                            <li><a href="<%=request.getContextPath()%>/friends/friendsList.do">워홀 프렌즈 구하기</a></li>
+                            <li><a href="<%=request.getContextPath()%>/community/reviewBasic.do">생생후기</a></li>
                         </ul>
                     </div>
                 </li>
                 <li id="menuli">
                     <div class="hoversection">
-                        <div>
-                            <a href="<%=request.getContextPath()%>/notice/noticeList.do"><img src="<%=request.getContextPath()%>/images/게시판.png" alt="" width="60px" height="60px"></a>
+                        <div class="hovernotice">
+                            <a href="<%=request.getContextPath()%>/notice/noticeList.do"><img src="<%=request.getContextPath()%>/images/게시판.png" alt="" width="60px" height="60px" class="notice1"></a>
+                        	<a href="<%=request.getContextPath()%>/notice/noticeList.do"><img src="<%=request.getContextPath()%>/images/보라게시판.png" alt="" width="60px" height="60px" class="notice2"></a>
                         </div>
                         <div>
                             <a href="<%=request.getContextPath()%>/notice/noticeList.do">게시판</a>
@@ -127,8 +133,9 @@
                     <div class="hoversection">
                         <!-- 로그인 유무에 따라 메뉴 다르게 보임 -->
                         <%if(logInMember==null){ %>
-                        <div>
-                            <a href="<%=request.getContextPath()%>/logIn/logIn.do"><img src="<%=request.getContextPath()%>/images/로그인.png" alt="" width="60px" height="60px"></a>
+                        <div class="hoverlogIn">
+                            <a href="<%=request.getContextPath()%>/logIn/logIn.do"><img src="<%=request.getContextPath()%>/images/로그인.png" alt="" width="60px" height="60px" class="logIn1"></a>
+                        	<a href="<%=request.getContextPath()%>/logIn/logIn.do"><img src="<%=request.getContextPath()%>/images/보라로그인.png" alt="" width="60px" height="60px" class="logIn2"></a>
                         </div>
                         	<div>
                             	<a href="<%=request.getContextPath()%>/logIn/logIn.do">로그인</a>
@@ -136,17 +143,19 @@
                         </div>
                         <%}else{ %>
                         	<%if(logInMember.getMemberId().equals("ADMIN")) {%>
-		                        <div>
-		                        <a href="<%=request.getContextPath()%>/admin/memberList.do"><img src="<%=request.getContextPath()%>/images/로그인.png" alt="" width="60px" height="60px"></a>
-		                           </div>
-		                           <div> 
-		                         <a href="<%=request.getContextPath()%>/admin/memberList.do">관리자페이지</a>
+		                        <div class="hoverlogIn">
+		                       		<a href="<%=request.getContextPath()%>/admin/memberList.do"><img src="<%=request.getContextPath()%>/images/로그인.png" alt="" width="60px" height="60px" class="logIn1"></a>
+		                        	<a href="<%=request.getContextPath()%>/admin/memberList.do"><img src="<%=request.getContextPath()%>/images/보라로그인.png" alt="" width="60px" height="60px" class="logIn2"></a>
+                        	    </div>
+		                        <div> 
+		                         	<a href="<%=request.getContextPath()%>/admin/memberList.do">관리자페이지</a>
 		                        </div>
                         	<%}else{%>
-		                        <div>
-		                         <a href="<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>"><img src="<%=request.getContextPath()%>/images/로그인.png" alt="" width="60px" height="60px"></a>
-		                            </div>
-		                           <div> 
+		                        <div class="hoverlogIn">
+		                         	<a href="<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>"><img src="<%=request.getContextPath()%>/images/로그인.png" alt="" width="60px" height="60px" class="logIn1"></a>
+		                        	<a href="<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>"><img src="<%=request.getContextPath()%>/images/보라로그인.png" alt="" width="60px" height="60px" class="logIn2"></a>
+		                        </div>
+		                        <div> 
 		                            <a href="<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>">마이페이지</a>
 		                        </div>
                         	<%} %>
@@ -154,7 +163,7 @@
 	                    <!-- 서브메뉴영역 -->
 	                    <div class="sub">
 	                        <ul class="submenu">
-	                            <li><a href="">쪽지함</a></li>
+	                            <li><a href="<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>">쪽지함</a></li>
 	                            <li><a href="<%=request.getContextPath()%>/logIn/logOut.do">로그아웃</a></li>
 	                        </ul>
 	                    </div>
@@ -165,17 +174,19 @@
     </div>
     <!-- 배너 -->
         <div id="banner" style="top: 350px;">
-            <div id="insurance" style="background-color: rgb(224, 185, 247);">
+            <a onclick="insurance();"><div id="insurance" style="background-color: rgb(224, 185, 247);">
                 <h5 class="txt-label">INSURANCE</h5>
                 <span class="txt-label" style="font-size: 11px">여행자(워홀) 보험</span>
-            </div>
-            <div id="mobile" style="background-color: rgb(247, 236, 186);">
+            </div></a>
+            
+            <a onclick="mobile();"><div id="mobile" style="background-color: rgb(247, 236, 186);">
                 <h5 class="txt-label">MOBILE</h5>
                 <span class="txt-label" style="font-size: 11px;">여행자 유심칩 공동구매</span>
-            </div>
-            <div id="myfly" style="background-color: rgb(181, 247, 211);">
+            </div></a>
+            
+             <a href="<%=request.getContextPath() %>/diary/firstDiary.do"><div id="myfly" style="background-color: rgb(181, 247, 211);">
                 <h5 class="txt-label">나의 출국일지</h5>
-            </div>
+            </div></a>
         </div>
     </header>
     
@@ -198,6 +209,45 @@
                 }, 500);
             }).scroll();
         });
+        
+        const insurance=()=>{ //배너 연결
+        	open("https://b2b.travelover.co.kr/insu/18572/b97e9f8e-925d-4ef7-89f7-afe6b54e92ac","_blank","width=500 height=500");
+        }
+        
+        const mobile=()=>{ //배너 연결
+        	open("https://www.usimstore.com/shop/","_blank","width=500 height=500");
+        }
+        
+       //팝업창 로직
+       //쿠키가 있는지 찾음(보지않음 체크시)
+        function getCookie( name ){
+			var nameOfCookie = name + "=";
+			var x = 0;
+			while ( x <= document.cookie.length )
+			{
+					var y = (x+nameOfCookie.length);
+					if ( document.cookie.substring( x, y ) == nameOfCookie ) {
+							if ( (endOfCookie=document.cookie.indexOf( ";", y )) == -1 )
+									endOfCookie = document.cookie.length;
+							return unescape( document.cookie.substring( y, endOfCookie ) );
+					}
+					x = document.cookie.indexOf( " ", x ) + 1;
+					if ( x == 0 )
+							break;
+			}
+			return "";
+		}
+       
+     	// 팝업창에서 만들어진 쿠키 popclose의 값이 done이 아니면(즉, 체크하지 않으면,) 
+    	// 팝업창을 띄웁니다
+		
+        if ( getCookie("popclose") !="done") {
+			popUpWindow=window.open("<%=request.getContextPath()%>/main/popup.do","_blank","resizable=no,width=320,height=350,top=200,left=250");
+			popUpWindow.opener = self;
+		}
+       
+        
+        //-->
     </script>
     <div id="wrap">
         <section>
@@ -210,30 +260,30 @@
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
                     </div>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="textcontainer">
+                        <div class="carousel-item active" onclick="location.assign('<%=request.getContextPath()%>/logIn/enrollAgree.do')">
+                           <!--  <div class="textcontainer">
                                 <h3>회원가입</h3>
-                            </div>
+                            </div> -->
                             <img src="images/회원가입사진.jpg" class="d-block w-100" alt="...">
                         
                         </div>
-                        <div class="carousel-item">
-                            <div class="textcontainer">
+                        <div class="carousel-item" onclick="location.assign('<%=request.getContextPath()%>/holiday/holiday.do')">
+                          <!--   <div class="textcontainer">
                                 <h3>워킹홀리데이란</h3>
-                            </div>
+                            </div>  -->
                             <img src="https://img.freepik.com/premium-vector/illustration-map-of-the-world-with-flags-of-all-countries_37674-7.jpg?w=1380" class="d-block w-100" alt="...">
                         
                         </div>
-                        <div class="carousel-item">
-                            <div class="textcontainer">
+                        <div class="carousel-item" onclick="location.assign('<%=request.getContextPath()%>/country/countryMain.do')">
+                           <!--  <div class="textcontainer">
                                 <h3>국가정보</h3>
-                            </div>
+                            </div> -->
                             <img src="https://img.freepik.com/free-vector/global-travelling-abstract-concept-vector-illustration-global-insurance-world-trip-international-tourism-travel-agency-working-holiday-luxury-vacation-resort-chain-abstract-metaphor_335657-2953.jpg?w=826&t=st=1668756054~exp=1668756654~hmac=e2c0a85010a8ffb2c9d72fbe22c4eec5b55e28218e7bd4547aac02a7bf66e63c" class="d-block w-100" alt="...">
                         </div>
-                        <div class="carousel-item">
-                            <div class="textcontainer">
+                        <div class="carousel-item" onclick="location.assign('<%=request.getContextPath()%>/friends/friendsList.do')">
+                            <!-- <div class="textcontainer">
                                 <h3>워홀프렌즈찾기</h3>
-                            </div>
+                            </div> -->
                             <img src="https://post-phinf.pstatic.net/MjAyMDA3MjFfMTY1/MDAxNTk1MzIxODI2NTA2.5wzgcsDonhkKgJa43_pny5_f9mDAsAboVqoxT18P6BMg.oAYho8D61Kx2Tx8-5n_14DzOVTU_dy95xwNH9DEJDHYg.JPEG/tid354t000040.jpg?type=w1200" class="d-block w-100" alt="...">
                         </div>
                     </div>
@@ -254,22 +304,68 @@
             <div class="container2">
                 <div class="notice">
                     <h5 style="margin: 10px;"><b>공지사항</b></h5>
-                    <ul style="font-size: 14px">
-                        <li><a href="">워홀러들 자주 하는 질문</a></li>
-                        <li><a href="">취업비자? 학생비자? 관광비자? 알려드립니다</a></li>
-                        <li><a href="">10월 휴무일정</a></li>
-                        <li><a href="">코로나 19관련 외국정부의 한국 여행객에 대한 조치현황</a></li>
-                        <li><a href="">워킹홀리데이 참가자들 위한 "안전행동수칙" 12가지</a></li>
+                    <ul id="noticeListUl" style="font-size: 14px">
+<!--                         <li><a href="">워홀러들 자주 하는 질문</a></li> -->
+
                     </ul>
                 </div>
+                <script>
+                	$(()=>{
+                		//공지사항
+                		$.ajax({
+                			url:"<%=request.getContextPath()%>/main/mainNoticeList.do",
+                			success:data=>{
+                				if(data!=null){
+                					const ul=$("#noticeListUl");
+                					
+                					for(let i=0;i<data.length;i++){
+                						
+	                					const li=$("<li>");
+	                					const a=$("<a href='<%=request.getContextPath()%>/notice/noticeView.do?noticeNo="+data[i].noticeNo+"'>").text(data[i].noticeTitle);
+                						li.append(a);/* li태그에 a태그 넣기 */
+                					ul.append(li); 
+                					}
+                				}else{
+                					const ul=$("#noticeListUl");
+                					const li=$("<li>");
+                					const a=$("<a>").text("데이터가 없습니다.");
+                					
+                					li.append(a); /* li태그에 a태그 넣기 */
+                					ul.append(li);
+                				}
+                			}
+                		});
+                		//질문하기 
+                		$.ajax({
+                			url:"<%=request.getContextPath()%>/main/mainQnaList.do",
+                			success:data=>{
+                				if(data!=null){
+                					const ul=$("#qnaListUl");
+                					
+                					for(i=0;i<data.length;i++){
+	                					const li=$("<li>");
+	                					const a=$("<a href='<%=request.getContextPath()%>/qna/qnaView.do?qnaNo="+data[i].qnaNo+"'>").text(data[i].reviewTitle);
+                						li.append(a);/* li태그에 a태그 넣기 */
+                					ul.append(li); 
+                					}
+                				}else{
+                					const ul=$("#qnaListUl");
+                					const li=$("<li>");
+                					const a=$("<a>").text("데이터가 없습니다.");
+                					
+                					li.append(a); /* li태그에 a태그 넣기 */
+                					ul.append(li);
+                				}
+                			}
+                		});
+                		
+                	});
+                </script>
+                
                 <div class="notice">
-                    <h5 style="margin: 10px;"><b>자료실</b></h5>
-                    <ul style="font-size: 14px">
-                        <li><a href="">워홀러들 자주 하는 질문</a></li>
-                        <li><a href="">취업비자? 학생비자? 관광비자? 알려드립니다</a></li>
-                        <li><a href="">10월 휴무일정</a></li>
-                        <li><a href="">코로나 19관련 외국정부의 한국 여행객에 대한 조치현황</a></li>
-                        <li><a href="">워킹홀리데이 참가자들 위한 "안전행동수칙" 12가지</a></li>
+                    <h5 style="margin: 10px;"><b>질문하기</b></h5>
+                    <ul id="qnaListUl" style="font-size: 14px">
+                    
                     </ul>
                 </div>
             </div>
@@ -319,12 +415,12 @@
         <!-- 하단 로고 영역 -->
         <section>
             <div id="mainlogo">
-                <img src="images/logo.png" alt="" width="1180" height="230px">
+                <img src="images/logo.png" alt="" width="1350" height="230px"  onclick="mainlogoClick();">
             </div>
         </section>
 
         <!-- 하단 주소 -->
-        <footer>
+        <footer onclick="footerClick();">
             <p>
                 <span id="footmain">SHOW ME THE WAY</span><br>
                 <span id="foot">상호명 : SHOW ME THE WAY</span><br>
@@ -336,12 +432,42 @@
     </div>
     
     <script>
+     const mainlogoClick=()=>{
+    	 location.assign("<%=request.getContextPath()%>/holiday/holidaySMTW.do");
+     }
+     
+     const footerClick=()=>{
+    	 location.assign("<%=request.getContextPath()%>/holiday/holidayRoad.do");
+     }
+    
     $(".carousel-item").mouseenter(e=>{
         $("h3").show(300);
     });
     $(".carousel-item").mouseleave(e=>{
         $("h3").hide();
     });
+    
+ 	$(()=>{
+ 			const memberId="<%=logInMember!=null?logInMember.getMemberId():""%>";
+ 			console.log(memberId);
+ 			
+ 				$.ajax({
+ 	 				url:"<%=request.getContextPath()%>/diary/DdayAlert.do",
+ 	 				type:"post",
+ 	 				data:{
+ 	 						"memberId":memberId	
+ 	 					 },
+ 	 				success:data=>{
+ 	 					if(data==10){
+ 	 						Swal.fire({
+ 	 							title:'★두근두근 출국 10일전★',
+ 	 							text:'출국 준비는 다 마쳤는지 한번 더 확인해보세요 :)'
+ 	 						})
+ 	 					}
+ 	 				}
+ 	 			});
+	});
+	 
   </script>
   
   <!-- 카카오톡 공유하기 아이콘 스크립트 구문 -->

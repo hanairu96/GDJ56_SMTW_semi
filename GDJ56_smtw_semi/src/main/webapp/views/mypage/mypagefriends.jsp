@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <%@include file="/views/common/header.jsp" %>
 <%@ page import="com.smtw.mypage.model.vo.Applyfriends" %>
 <%@ page import="com.smtw.mypage.model.vo.MemberInfo" %>
+<%@ page import="com.smtw.mypage.model.vo.MemberInfo2" %>
 <%@ page import="java.util.List" %>
 
 <%
@@ -14,49 +15,97 @@ List<MemberInfo> infolist =  (List<MemberInfo>)request.getAttribute("infolist");
 <%
 List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendslist");
 %>
+<%
+List<MemberInfo2> acceptedlist =  (List<MemberInfo2>)request.getAttribute("acceptedlist");
+String myImg = (String)request.getAttribute("myImg");
+out.print(myImg);
+%>
+
+
+
+
 
     <section>
+    <div class="sector">
         <div class="sidemenu">
-            <div><h4 style="text-align: center;">¸¶ÀÌ ÆäÀÌÁö</h4></div>
-            <div><p>¿öÈ¦ ÇÁ·»Áî</p></div>
-            <div><p>°èÁ¤ °ü¸®</p></div>
-            <div><p>ÂÊÁöÇÔ</p></div>
-            <div><p>³»°¡ ¾´ ±Û</p></div>
-            <div><p>ÂòÇÑ ³ª¶ó</p></div>
+            <div><h4 style="text-align: center;">ë§ˆì´ í˜ì´ì§€</h4></div>
+             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>');">ì›Œí™€ í”„ë Œì¦ˆ</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageAccountView.do?id=<%=logInMember.getMemberId()%>');">ê³„ì • ê´€ë¦¬</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">ìª½ì§€í•¨</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageWriting.do?id=<%=logInMember.getMemberId()%>');">ë‚´ê°€ ì“´ ê¸€</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNation.do?id=<%=logInMember.getMemberId()%>');">ì°œí•œ ë‚˜ë¼</p></div>
            
         </div>
         <div class="menuDiv"></div>
         <div class="contentList">
-            <div id="menutitle"><h2 style="background-color: cornflowerblue;">¿öÈ¦ ÇÁ·»Áî</h2></div>
+            <div id="menutitle"><h2 style="background-color: cornflowerblue;">ì›Œí™€ í”„ë Œì¦ˆ</h2></div>
             <div id="mypsc">
-                <p><%=logInMember.getMemberName()%>´Ô ¾î¼­ ¿À¼¼¿ä!</p>
-                <img src="<%=request.getContextPath()%>/images/mypage/tomcat.png" alt="" width="200" height="200">
+                <p><%=logInMember.getMemberName()%>ë‹˜ ì–´ì„œ ì˜¤ì„¸ìš”!</p>
+                <img src="<%=request.getContextPath()%>/upload/account/<%=myImg%>" alt="" width="200" height="200">
             </div>
-            <div id="flist">
-                <p>Ä£±¸ ¸ñ·Ï</p>
-                <!-- Å©·ÒÀº ÆË¾÷Ã¢ ÃÖ´ëÈ­ ±İÁö°¡ ¾ÈµÊ -->
-                <%if(friendslist.isEmpty()){ %>
-                	¾ÆÁ÷ ¼ö¶ôÇÑ Ä£±¸°¡ ¾ø½À´Ï´Ù :(
-                <%} else{
+            
+            <div id="flist" style="overflow:scroll">
+                <p><b>ì¹œêµ¬ ëª©ë¡</b></p>
+                <!-- í¬ë¡¬ì€ íŒì—…ì°½ ìµœëŒ€í™” ê¸ˆì§€ê°€ ì•ˆë¨ -->
+                <%if(friendslist.isEmpty()&&acceptedlist==null){ %>
+                	ì•„ì§ ìˆ˜ë½í•œ ì¹œêµ¬ê°€ ì—†ìŠµë‹ˆë‹¤ :(
+                <%} else{ 
+                	if(friendslist!=null){
                 	for(int i=0;i<friendslist.size();i++){
                 %>
-                <form name="form" action="" method="post">
-                <input type="hidden" name="friendName" value="<%=friendslist.get(i).getMemberName()%>"> 
-                <input type="hidden" name="friendAge" value="<%=friendslist.get(i).getAge()%>"> 
-                <input type="hidden" name="friendGender" value="<%=friendslist.get(i).getGender()%>"> 
-                </form>
-                <input type="image" name="submit" id="ficon" src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="cursor:pointer"
-                onclick="goPopup(event)">
+                <div id="fname">
+                <form id="" action="" method="post">
+                 	<input type="hidden" name="friendId" value="<%=friendslist.get(i).getMemberId()%>"> 
+                	<input type="hidden" name="friendName" value="<%=friendslist.get(i).getMemberName()%>"> 
+               		<input type="hidden" name="friendAge" value="<%=friendslist.get(i).getAge()%>"> 
+                	<input type="hidden" name="friendGender" value="<%=friendslist.get(i).getGender()%>"> 
+                	<input type="hidden" name="userId" value="<%=logInMember.getMemberId()%>"> 
+				
+               	</form>
+                	<input type="image" name="submit" id="fname" src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="width: 100px; height: 100px;cursor:pointer;"
+               		onclick="goPopup(event)">
+                	<p><<%=friendslist.get(i).getMemberName()%>><p>
+                
+                </div>
                 <%}
+                }if(acceptedlist!=null){
+               
+                	for(int j=0;j<acceptedlist.size();j++){
+                %>
+                <div id="fname">
+                <form id="" action="" method="post">
+                 	<input type="hidden" name="friendId" value="<%=acceptedlist.get(j).getMemberId()%>"> 
+                	<input type="hidden" name="friendName" value="<%=acceptedlist.get(j).getMemberName()%>"> 
+               		<input type="hidden" name="friendAge" value="<%=acceptedlist.get(j).getAge()%>"> 
+               	    <input type="hidden" name="friendGender" value="<%=acceptedlist.get(j).getGender()%>"> 
+                	<input type="hidden" name="userId" value="<%=logInMember.getMemberId()%>"> 
+                </form>
+                <input type="image" name="submit" id="fname" src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="width: 100px; height: 100px;cursor:pointer"
+                onclick="goPopup2(event)">
+                <p><<%=acceptedlist.get(j).getMemberName()%>><p>
+                <%}
+                }
                 }%>
+                
+              </div>
             </div>
+          </div>
             
             
                 <script>
             	function goPopup(e){
-            		var gsWin=window.open("","winName","width=380,height=380"); //open("ÁÖ¼Ò",¶ç¿ì´Â¹æ½Ä,Å©±â)
+            		var gsWin=window.open("","winName","width=380,height=380"); //open("ì£¼ì†Œ",ë„ìš°ëŠ”ë°©ì‹,í¬ê¸°)
             		var frm=$(e.target).prev()[0];
-            		frm.action="<%=request.getContextPath()%>/mapage/mapagePopUp.do";
+            		
+            		frm.action="<%=request.getContextPath()%>/mypage/mypagePopUp.do";
+            		frm.target="winName";
+            		frm.submit();
+            	}
+            	
+            	function goPopup2(e){
+            		var gsWin=window.open("","winName","width=380,height=380"); //open("ì£¼ì†Œ",ë„ìš°ëŠ”ë°©ì‹,í¬ê¸°)
+            		var frm=$(e.target).prev()[0];
+            		frm.action="<%=request.getContextPath()%>/mypage/mypagePopUp.do";
             		frm.target="winName";
             		frm.submit();
             	}
@@ -65,25 +114,25 @@ List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendsl
         
          
 
-            <div id="recievelist">
+            <div id="recievelist"" style="overflow:scroll">
 
-                <p>Ä£±¸½ÅÃ» ¹ŞÀº ¸ñ·Ï<p>
+                <p><b>ì¹œêµ¬ì‹ ì²­ ë°›ì€ ëª©ë¡</b><p>
 
 
                 <%if(list.isEmpty()){ %>
-                	¾ÆÁ÷ Ä£±¸ ½ÅÃ»À» º¸³½ È¸¿øÀÌ ¾ø½À´Ï´Ù :(
+                	ì•„ì§ ì¹œêµ¬ ì‹ ì²­ì„ ë³´ë‚¸ íšŒì›ì´ ì—†ìŠµë‹ˆë‹¤ :(
                 <%} else{
                 	for(int i=0;i<list.size();i++){
                 %>
                 <div style="width:800; height:100;border: 1px solid;">
-                    <p style="color: gray; float: right;">Ä£±¸½ÅÃ»ÀÏ : <%=list.get(i).getFEnroll()%></p>
+                    <p style="color: gray; float: right;">ì¹œêµ¬ì‹ ì²­ì¼ : <%=list.get(i).getFEnroll()%></p>
                     <p style="text-align: center; float: left;">
                     <%=infolist.get(i).getMemberName()%>(<%=infolist.get(i).getAge()%>/<%=infolist.get(i).getGender()%>)</p>
                     
                     
                     <p style="text-align: center;"><%=list.get(i).getPropose()%>
-                        <button name="¼ö¶ô" value="¼ö¶ô" type="submit" onclick="window.open('<%=request.getContextPath()%>/mypage/acceptFriends.do?id=<%=logInMember.getMemberId()%>&&memberfrom=<%=list.get(i).getMemberId()%>','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');">¼ö¶ô</button>
-                        <button name="°ÅÀı" value="°ÅÀı" type="submit" onclick="window.open('<%=request.getContextPath()%>/mypage/rejectFriends.do?id=<%=logInMember.getMemberId()%>&&memberfrom=<%=list.get(i).getMemberId()%>','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');">°ÅÀı</button>
+                        <button name="ìˆ˜ë½" value="ìˆ˜ë½" type="submit" onclick="window.open('<%=request.getContextPath()%>/mypage/acceptFriends.do?id=<%=logInMember.getMemberId()%>&&memberfrom=<%=list.get(i).getMemberId()%>','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');">ìˆ˜ë½</button>
+                        <button name="ê±°ì ˆ" value="ê±°ì ˆ" type="submit" onclick="window.open('<%=request.getContextPath()%>/mypage/rejectFriends.do?id=<%=logInMember.getMemberId()%>&&memberfrom=<%=list.get(i).getMemberId()%>','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');">ê±°ì ˆ</button>
                     </p>
                 </div>
                 <br>
@@ -98,22 +147,22 @@ List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendsl
     </section>
     
       <script>
-        $(document).ready(function() {
-            var floatPosition = parseInt($(".sidemenu").css('top')); //»çÀÌµå¸Ş´º¹ÙÀÇ topÀ§Ä¡ °¡Á®¿È
+      $(document).ready(function() {
+          var floatPosition = parseInt($(".sidemenu").css('top')); //ì‚¬ì´ë“œë©”ë‰´ë°”ì˜ topìœ„ì¹˜ ê°€ì ¸ì˜´
 
-            $(window).scroll(function() {
-                var scrollTop = $(window).scrollTop(); // ÇöÀç ½ºÅ©·Ñ À§Ä¡¸¦ °¡Á®¿Â´Ù.
-                console.log(scrollTop); //½ºÅ©·ÑÀ§Ä¡ ÄÜ¼ÖÃ¢¿¡ Ãâ·ÂÇØº¸¸é¼­ º»ÀÎ ÆäÀÌÁöÀÇ ÇªÅÍÀ§¿¡ 
-                                        //»çÀÌµå¸Ş´º¹Ù°¡ µü Á¤ÁöÇÏ´Â À§Ä¡°ª È®ÀÎÇÒ°Í
+          $(window).scroll(function() {
+              var scrollTop = $(window).scrollTop(); // í˜„ì¬ ìŠ¤í¬ë¡¤ ìœ„ì¹˜ë¥¼ ê°€ì ¸ì˜¨ë‹¤.
+              console.log(scrollTop); //ìŠ¤í¬ë¡¤ìœ„ì¹˜ ì½˜ì†”ì°½ì— ì¶œë ¥í•´ë³´ë©´ì„œ ë³¸ì¸ í˜ì´ì§€ì˜ í‘¸í„°ìœ„ì— 
+                                      //ì‚¬ì´ë“œë©”ë‰´ë°”ê°€ ë”± ì •ì§€í•˜ëŠ” ìœ„ì¹˜ê°’ í™•ì¸í• ê²ƒ
 
-                var newPosition=scrollTop +floatPosition + "px"; //»çÀÌµå¸Ş´º¹ÙÀÇ Ã³À½À§Ä¡+ ÇöÀç½ºÅ©·ÑÀ§Ä¡
+              var newPosition=scrollTop +floatPosition + "px"; //ì‚¬ì´ë“œë©”ë‰´ë°”ì˜ ì²˜ìŒìœ„ì¹˜+ í˜„ì¬ìŠ¤í¬ë¡¤ìœ„ì¹˜
 
-                if(scrollTop<=300){ //ÇØ´ç ÆäÀÌÁöÀÇ ÇªÅÍÀ§ ½ºÅ©·Ñ°ªÀÌ 620ÀÌ¿©¼­ scrollTopÀÌ 620±îÁö¸¸ ÀÌµ¿ÇÏ°Ô ¼³Á¤ÇßÀ½
-                    $(".sidemenu").stop().animate({
-                        "top" : newPosition
-                    }, 50);}
-            }).scroll();
-        });
+              if(scrollTop<=500){ //í•´ë‹¹ í˜ì´ì§€ì˜ í‘¸í„°ìœ„ ìŠ¤í¬ë¡¤ê°’ì´ 620ì´ì—¬ì„œ scrollTopì´ 620ê¹Œì§€ë§Œ ì´ë™í•˜ê²Œ ì„¤ì •í–ˆìŒ
+                  $(".sidemenu").stop().animate({
+                      "top" : newPosition
+                  }, 500);}
+          }).scroll();
+      });
     </script> 
       <style>
 
@@ -150,12 +199,17 @@ List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendsl
             width: 600px;
             height: 300px;
         }
-        #ficon{
-            float: left;
+        /* #fname>img{
+            
             margin: 5px;
-            height:100px;
-            width:100px;
-        }
+            height:50%;
+            width:;
+            float: left;
+        } */
+       #fname{
+            float: left;
+             margin: 3px;
+        } 
         #recievelist{
             border: 1px solid;
             border-bottom: 3px solid;
@@ -166,15 +220,19 @@ List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendsl
             
             width: 1000px;
             height: 300px;
+            
+            -ms-overflow-style: none; /* IE and Edge */
+    		scrollbar-width: none; /* Firefox */
         }
-        section{
-            display: flex;
-        }
+        
+        #recievelist::-webkit-scrollbar {
+   		 display: none; /* Chrome, Safari, Opera*/
+		}
         .contentList{
        		height: 1000px;
-            width: 85%;  
-            margin-left: 0 auto;
-            margin-right: 0 auto;
+            width: 80%;  
+            /* margin-left: 0 auto;
+            margin-right: 0 auto; */
             text-align: center;
         }
 
@@ -190,66 +248,81 @@ List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendsl
         #list td{
             border: 1px solid;
         }
+       
+       /* ##### ì—¬ê¸°ë¶€í„° ì‚¬ì´ë“œë©”ë‰´ ìŠ¤íƒ€ì¼ #####  */
+        .sector{
+            display: flex;
+        }
         .sidemenu{
-            padding: 10px;
-            /* margin-top: 1000px; */
-            /* margin: 0 auto; */
-            /* border: 1px solid; */
-            font-size: 18px;
+            width: 15%;
+            height: 100px;
+            font-size: 20px;
             font-weight: bold;
-            position: fixed;
+            position: absolute;
         }
         
         .menuDiv{
-            width: 15%;
+            width: 25%;
         }
 
-        .sidemenu p:hover{
+        .sidemenu>*:hover{
             transform: scale(1.1);
             transition-property: transform;
             transition-duration: 1s;
         }
         .sidemenu>*:not(div:nth-child(1)){
-            width: 200px;
-            height: 50px;
             background-color: lavender;
             border-radius: 50px;
             box-shadow: 5px 2px 8px lavender;
         }
         .sidemenu p{
             text-align: center;
-            padding: 13px;
-            cursor:pointer
+            padding-top: 6%;
+             color: black;
         }
-        .sidemenu>div:nth-child(2){
+        .sidemenu p:hover{
+            text-align: center;
+            padding-top: 6%;
+             color: purple;
+        }
+        .sidemenu>div:first-child{
             color: purple;
+        }
+
+        .sidemenu>div{
+            height: 70px;
             
         }
+        a{
+            text-decoration: none;
+        }
+        /* ##### ì—¬ê¸°ê¹Œì§€ ì‚¬ì´ë“œë©”ë‰´ ìŠ¤íƒ€ì¼ #####  */
+        
         section{
-            border: 1px solid tomato;
+            /* border: 1px solid tomato; */
             
             margin-left: 50px;
             margin-right: 50px;
-            /* ¡Ú¼öÁ¤ÇÑ ºÎºĞ */
+            /* â˜…ìˆ˜ì •í•œ ë¶€ë¶„ */
             /* padding-left: 100px;
             padding-right: 100px; */
-            /* ¡Ú¼öÁ¤ÇÑºÎºĞ */
+            /* â˜…ìˆ˜ì •í•œë¶€ë¶„ */
             /* 
-                ¸¸¾à ¼½¼Ç ¾È¿¡ div¸¦ ¸¸µç´Ù¸é ¿©±â padding-left,padding-right¿¡¼­
-                ÁÂ¿ì °£°İÀ» Á¶Á¤ÇÏ¼¼¿ä
-                ¿ŞÂÊ ¿À¸¥ÂÊµµ À¢¸¸ÇÏ¸é ´Ù°°ÀÌ ¸ÂÃß¸é ÁÁÀ» µí ÇÏ´Ï °¢ÀÚ ¸¸µé¾îº¸°í ÀÇ°ßÁÖ¼¼¿ä
+                ë§Œì•½ ì„¹ì…˜ ì•ˆì— divë¥¼ ë§Œë“ ë‹¤ë©´ ì—¬ê¸° padding-left,padding-rightì—ì„œ
+                ì¢Œìš° ê°„ê²©ì„ ì¡°ì •í•˜ì„¸ìš”
+                ì™¼ìª½ ì˜¤ë¥¸ìª½ë„ ì›¬ë§Œí•˜ë©´ ë‹¤ê°™ì´ ë§ì¶”ë©´ ì¢‹ì„ ë“¯ í•˜ë‹ˆ ê°ì ë§Œë“¤ì–´ë³´ê³  ì˜ê²¬ì£¼ì„¸ìš”
              */
             margin-top: 100px;
-            height: 900px; 
+            height: auto; 
             /*
-                ->³»°¡ »ç¿ëÇÏ´Â Áß°£ ¼½¼ÇºÎºĞÀÇ Å©±â¸¦ Á¶ÀıÇÏ·Á¸é ÀÌ height¸¦ Á¶Á¤ÇÏ¼¼¿ä¡Ú¡Ú
-                ³ô³·ÀÌ Á¶ÀıÇØµµ footerÄ§¹üÇÏÁö ¾Êµµ·Ï ¼³Á¤ÇØ³ùÀ¸´Ï ¸¶À½²¯ ´Ã·Áµµ µË´Ï´Ù.
+                ->ë‚´ê°€ ì‚¬ìš©í•˜ëŠ” ì¤‘ê°„ ì„¹ì…˜ë¶€ë¶„ì˜ í¬ê¸°ë¥¼ ì¡°ì ˆí•˜ë ¤ë©´ ì´ heightë¥¼ ì¡°ì •í•˜ì„¸ìš”â˜…â˜…
+                ë†’ë‚®ì´ ì¡°ì ˆí•´ë„ footerì¹¨ë²”í•˜ì§€ ì•Šë„ë¡ ì„¤ì •í•´ë†¨ìœ¼ë‹ˆ ë§ˆìŒê» ëŠ˜ë ¤ë„ ë©ë‹ˆë‹¤.
             */
             
         }
         section>div{
-            border: 1px solid blue;
-            /* ¼½¼Ç ¾ÈÀÇ divÅ×µÎ¸® */
+            /* border: 1px solid blue; */
+            /* ì„¹ì…˜ ì•ˆì˜ diví…Œë‘ë¦¬ */
             
         }
     </style>

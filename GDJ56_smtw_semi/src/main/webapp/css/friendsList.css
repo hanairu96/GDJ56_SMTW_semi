@@ -1,0 +1,155 @@
+@charset "UTF-8";
+
+.sector{
+	display: flex;
+}
+
+.sidemenu{
+    width: 20%;
+    height: 100px;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+}
+
+.menuDiv{
+    width: 40%;
+}
+
+.sidemenu>*:hover{
+    transform: scale(1.1);
+    transition-property: transform;
+    transition-duration: 1s;
+}
+.sidemenu>*:not(div:nth-child(1)){
+    background-color: lavender;
+    border-radius: 50px;
+    box-shadow: 5px 2px 8px lavender;
+}
+.sidemenu p{
+    text-align: center;
+    padding-top: 6%;
+}
+
+/* .sidemenu>div:first-child{
+    color: purple;
+} */
+
+/* .sidemenu>div:nth-child(3) p{
+    color: purple;
+} */
+
+.sidemenu #purple{
+    color: purple;
+}
+
+.sidemenu>div{
+    height: 70px;
+}
+a{
+    text-decoration: none;
+}
+/* ##### 여기까지 사이드메뉴 스타일 #####  */
+
+section{
+    border: 0px solid tomato;
+    font-family: "Hahmlet";
+    margin-left: 50px;
+    margin-right: 50px;
+    /* padding-left: 100px; */
+    /* padding-right: 100px; */
+    /* 
+        만약 섹션 안에 div를 만든다면 여기 padding-left,padding-right에서
+        좌우 간격을 조정하세요
+        왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
+     */
+    margin-top: 100px;
+    /*height: 900px;*/ 
+    /*
+        ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
+        높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.
+    */
+}
+
+/* 모든 a태그 밑줄과 글자색 변경 */
+section a {
+    text-decoration: none;
+    color: #404040;
+}
+
+section>div{
+    border: 0px solid blue;
+    /* 섹션 안의 div테두리 */
+}
+
+#friendsList {
+    width: 1500px;
+    margin: 0 auto;
+    margin-right:50px;
+    padding-right: 50px;
+    padding-top: 30px;	
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+#lists{
+	margin: 0 auto;
+}
+
+.customBtn {
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+    7px 7px 20px 0px rgba(0,0,0,.1),
+    4px 4px 5px 0px rgba(0,0,0,.1);
+    outline: none;
+}
+.btnStyle {
+    line-height: 42px;
+    padding: 0;
+    border: none;
+    background: #d27ec492;
+    background: linear-gradient(0deg, #d27ec492 0%, #d27ec492 100%);
+}
+.btnStyle:hover {
+    color: #d27ec492;
+    background: transparent;
+    box-shadow:none;
+}
+.btnStyle:before,.btnStyle:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #d27ec492;
+    box-shadow:
+    -1px -1px 5px 0px #fff,
+    7px 7px 20px 0px #0003,
+    4px 4px 5px 0px #0002;
+    transition:400ms ease all;
+}
+.btnStyle:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+}
+.btnStyle:hover:before,.btnStyle:hover:after{
+    width:100%;
+    transition:800ms ease all;
+}
+
+#box{
+ text-align: center;
+}

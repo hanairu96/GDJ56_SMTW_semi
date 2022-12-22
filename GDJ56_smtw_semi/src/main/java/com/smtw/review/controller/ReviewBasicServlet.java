@@ -25,7 +25,7 @@ public class ReviewBasicServlet extends HttpServlet {
     public ReviewBasicServlet() {
         super();
         // TODO Auto-generated constructor stub
-     // System.out.println();  // System.out.println();
+     
     }
 
 	/**
@@ -34,20 +34,29 @@ public class ReviewBasicServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		//페이징 바처리하기11
+		request.setCharacterEncoding("UTF-8");
+		
+
+		String stateSort = request.getParameter("stateSort");
+		if(stateSort==null) {
+			stateSort="ORDER BY enroll_date DESC";
+		}
+		
+		
+		
 		
 		int cPage;
-		int numPerpage=8;
+		int numPerpage=4;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
-			//null 을 파싱할수 없으니
+			
 			cPage=1;
 			
 			
 		}
 		
-		List<Review> list=new ReviewService().searchReviewAll(cPage,numPerpage);
+		List<Review> list=new ReviewService().searchReviewAll(cPage,numPerpage,stateSort);
 		
 		
 		
@@ -63,16 +72,20 @@ public class ReviewBasicServlet extends HttpServlet {
 		
 		
 		
-		//3단게
-				//html 코드 생성하기
-				//pageNo는  이전 앞에 있는 수
-				if(pageNo==1) {  // 내현제 페이이가 일일떄  이전 태그를 생성해라
+		
+		
+		
+		
+
+		
+		
+				if(pageNo==1) {  
 					pageBar+="<span>[이전]</span>";
 					
-				}else {   // 내 현재 페이지가 일이 아니면  
+				}else {   
 					pageBar+="<a href='"+request.getContextPath()
-					+"/admin/memberList.do?cPage="+(pageNo-1)+"'>[이전]</a>";
-					//pageNo-1  하는 이유는  10페이지 일떄  이전ㅂ버튼 누르면 9로 출력하게 하려고
+					+"/community/reviewBasic.do?cPage="+(pageNo-1)+"&stateSort="+stateSort+"'>[이전]</a>";
+					
 				}
 				
 				while(!(pageNo>pageEnd||pageNo>totalPage)) {
@@ -81,7 +94,7 @@ public class ReviewBasicServlet extends HttpServlet {
 						pageBar+="<span>"+pageNo+"</span>";
 					}else {
 						pageBar+="<a href='"+request.getContextPath()
-						+"/admin/memberList.do?cPage="+pageNo+"'>"+pageNo+"</a>";
+						+"/community/reviewBasic.do?cPage="+pageNo+"&stateSort="+stateSort+"'>"+pageNo+"</a>";
 					}
 					
 					pageNo++;
@@ -91,18 +104,24 @@ public class ReviewBasicServlet extends HttpServlet {
 					pageBar+="<span>[다음]</span>";
 				}else {
 					pageBar+="<a href='"+request.getContextPath()
-						+"/admin/memberList.do?cPage="+pageNo+"'>[다음]</a>";
+						+"/community/reviewBasic.do?cPage="+pageNo+"&stateSort="+stateSort+"'>[다음]</a>";
 				}
 		
 		
-		//4단계     // pageBar를 키,벨류형식을 이용 해서 세견에 저장
+		
 		request.setAttribute("pageBar", pageBar);
 		
-		//세션에   리스트를 저장
+		
+	
 		request.setAttribute("review", list); 
+		
+		request.setAttribute("state", "basic");
 		
 		
 		request.getRequestDispatcher("/views/community/reviewBasic.jsp").forward(request, response);
+		
+	
+		
 		
 	}
 

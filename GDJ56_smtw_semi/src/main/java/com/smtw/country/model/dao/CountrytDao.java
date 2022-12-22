@@ -1,6 +1,6 @@
 package com.smtw.country.model.dao;
 
-import static com.smtw.common.JDBCTemplate.*;
+import static com.smtw.common.JDBCTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,8 +13,11 @@ import java.util.List;
 import java.util.Properties;
 
 import com.smtw.country.model.vo.Country;
+import com.smtw.country.model.vo.CountryPageInfo;
+import com.smtw.country.model.vo.Likenation;
 
 public class CountrytDao {
+
 	private Properties sql=new Properties();
 	
 	public CountrytDao() {
@@ -36,7 +39,9 @@ public class CountrytDao {
 			pstmt.setInt(2,cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				c.add(getCountry(rs));
+				Country co=getCountry(rs);
+				co.setInfo(getContryInfo(rs));
+				c.add(co);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -45,6 +50,32 @@ public class CountrytDao {
 			close(pstmt);
 		}return c;
 	}
+	
+	
+	//국가 및 지역정보 메인페이지에 리스트를 전부 출력하기 위한 로직
+	public List<Country> searchList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Country> c=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("searchList"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+//				c.add(getCountry(rs));
+				Country co=getCountry(rs);
+				co.setInfo(getContryInfo(rs));
+				c.add(co);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return c;
+		
+		
+	}
+	
 	
 	//페이징처리
 	public int searchCountryCount(Connection conn) {
@@ -61,7 +92,6 @@ public class CountrytDao {
 			close(rs);
 			close(pstmt);
 		}return count;
-		
 	}
 	
 	
@@ -74,6 +104,21 @@ public class CountrytDao {
 				.nSeason(rs.getString("N_SEASON"))
 				.nImg(rs.getString("N_IMG"))
 				.npharse(rs.getString("N_PHARSE"))
+				.emergency(rs.getString("N_EMERGENCY"))
+				.build();
+	}
+	
+	public static CountryPageInfo getContryInfo(ResultSet rs) throws SQLException{
+		return CountryPageInfo.builder()
+				.nName(rs.getString("N_NAME"))
+				.cLanguage(rs.getString("C_LANGUAGE"))
+				.urban(rs.getString("URBAN"))
+				.money(rs.getString("MONEY"))
+				.elect(rs.getString("ELECT"))
+				.mapAddress(rs.getString("MAPADDRESS"))
+				.englishName(rs.getString("ENGLISHNAME"))
+				.clock(rs.getString("CLOCK"))
+				.cPic(rs.getString("C_PIC"))
 				.build();
 	}
 	
@@ -145,7 +190,8 @@ public class CountrytDao {
 			pstmt.setString(4, c.getNSeason());
 			pstmt.setString(5, c.getNImg());
 			pstmt.setString(6, c.getNpharse());
-			pstmt.setString(7, c.getNName());
+			pstmt.setString(7, c.getEmergency());
+			pstmt.setString(8, c.getNName());
 			result=pstmt.executeUpdate();	
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -155,4 +201,67 @@ public class CountrytDao {
 		return result;
 	}
 	
+	
+	//좋아요 기능에 대한 dao
+	public int insertlike(Connection conn,String id,String name ) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertlike"));
+			pstmt.setString(1, id);
+			pstmt.setString(2, name);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int deletLikeCountry(Connection conn, String name) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("deletLikeCountry"));
+			pstmt.setString(1,name);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public List<Likenation> selectLike(Connection conn, String id) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Likenation> n=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectLike"));
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				n.add(getLikenation(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return n;
+	}
+	
+	
+	public static Likenation getLikenation(ResultSet rs) throws SQLException{
+		return Likenation.builder()
+				.memId(rs.getString("MEMBER_ID"))
+				.nName(rs.getString("N_NAME"))
+				.ckLike(rs.getString("CK_LIKE"))
+				.build();
+	}
+	
+	
+		
 }

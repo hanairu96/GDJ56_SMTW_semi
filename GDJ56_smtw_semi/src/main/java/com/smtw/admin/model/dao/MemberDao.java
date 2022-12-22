@@ -27,6 +27,27 @@ public class MemberDao {
 		}
 	}
 	
+	public List<Member> selectMemberListAll(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Member> result=new ArrayList();
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectMemberListAll"));
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(getMember(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	public List<Member> selectMemberList(Connection conn, int cPage, int numPerpage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;

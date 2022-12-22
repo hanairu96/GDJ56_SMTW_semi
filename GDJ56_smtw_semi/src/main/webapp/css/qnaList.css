@@ -1,9 +1,12 @@
 @charset "UTF-8";
+.navbar select {
+    height: 30px;
+}
 .customBtn {
     color: #fff;
     border-radius: 5px;
     padding: 10px 25px;
-    /* font-family: 'Lato', sans-serif; */
+    font-family: "Hahmlet";
     font-weight: 500;
     background: transparent;
     cursor: pointer;
@@ -54,11 +57,10 @@
 }
 .all{
     width: 1500px;
-    /* margin: 0 auto; */
-    /* width: 100%;  */
     border: 2px solid black; /* ##### */
     border-radius: 10px; /* ##### */
-    margin-left: 6%;
+    margin-left: 150px;
+    height:auto;
 }
 .sector{
     display: flex;
@@ -107,7 +109,7 @@
 li {
     list-style: none;
 }
-#write{
+#writeQna,#modifyFaq,#completeFaq{
     float: right;
 }
 h2{
@@ -228,7 +230,7 @@ li {
     margin: 0 auto;
     padding-right: 50px;
     box-sizing: border-box;
-    margin-top: 120px;
+    margin-top: 70px;
     
 }
 /* 공지사항 글자 */
@@ -301,7 +303,7 @@ ul>li.title span.number,ul>li.content span.number{
     font-size: 18px;
     width: 150px;
     margin: 0 auto;
-    margin-top: 80px;
+    margin-top: 50px;
     margin-bottom: 30px;
     letter-spacing: 3px;
     text-align: end;

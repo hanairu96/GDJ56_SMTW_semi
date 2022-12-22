@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.smtw.qna.model.vo.*, java.util.List" %>
+<%
+	List<Qna> qnas=(List<Qna>)request.getAttribute("qnaLists");
+	List<Faq> faqs=(List<Faq>)request.getAttribute("faqList");
+%>
 <%@include file="/views/common/header.jsp" %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/qnaList.css"/>
 <section>
@@ -15,75 +20,105 @@
         <div class="all">
             <h1 style="text-align: center;">질문하기</h1>
             <!-- 검색창 -->
-            <nav class="navbar navbar-expand-sm " style="background-color: white;" >
+            
+ 		<form id="modifyFaQ" action="<%=request.getContextPath()%>/qna/modifyFaq.do" method="post" > 
+            <div id="Accordion_wrap">
+                <h2>FAQ</h2><span>자주 묻는 질문들</span>
+                <%if(!faqs.isEmpty()) {%>
+                	<%for(Faq f : faqs) {%>
+                <div class="que">
+                	<input type="hidden" name="faqNo_" value="<%=f.getFaqNo()%>"/>
+                    <span id="faqQue_1"  class="faqQue faqAll"><%=f.getFaqTitle() %></span>
+                    <textarea id="faqQue_1_" name="faqQue_1_" class="textArea textQue" rows="1px" cols="120px" style="display:none;resize: none;"></textarea>
+                    <div class="arrow-wrap">
+                        <span class="arrow-top">↑</span>
+                        <span class="arrow-bottom">↓</span>
+                    </div>
+                </div>
+                <div class="anw">
+                    <span id="faqAns_1" class="faqAnswer faqAll"><%=f.getFaqContents() %></span>
+                    <textarea id="faqAns_1_" name="faqAns_1_" class="textArea textAns" rows="2px" cols="120px" style="display:none;resize: none;"></textarea>
+                </div>
+                	<%} %>
+                <%} %>
+                <!-- 관리자만 글쓰기 버튼 보이게  -->
+			    <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) { %>
+			    	<button id="completeFaq" type="submit" class="write customBtn btnStyle"
+			    	 style="display:none;">완료</button>	  
+			    	<button id="modifyFaq" type="button" class="write customBtn btnStyle"
+			    	onclick="modifyFaqText();">수정</button>
+			    <%} %>
+            </div>
+		</form> 
+            <script>
+            	//수정버튼 눌렀을 때
+            	function modifyFaqText(){
+            		for(i=0;i<<%=faqs.size()%>;i++){
+            			//질문 textarea에 값 넣기
+            			let faqQue=document.querySelectorAll(".faqQue")[i].innerText;
+            			document.querySelectorAll(".textQue")[i].innerText=faqQue;
+            			
+            			//대답 textarea에 값 넣기
+            			let faqAns=document.querySelectorAll(".faqAnswer")[i].innerText;
+            			document.querySelectorAll(".textAns")[i].innerText=faqAns;
+            		};
+            		$(".textArea").show();
+            		$(".faqAll").hide();
+            		$("#completeFaq").show();
+            	};
+            </script>
+            
+            
+            
+            <div id="notice">
+                <h2>Q&A</h2><span>질문 게시판</span>
+                <nav class="navbar navbar-expand-sm " style="background-color: white;" >
                 <div class="container-fluid position-absolute top-0 end-0" >
                    <div class=" navbar-collapse" id="navbarSupportedContent">
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm  example">
-                        <option selected>선택</option>
-                        <option value="제목">제목</option>
-                        <option value="내용">내용</option>
-                        <option value="작성자">작성자</option>
-                    </select>
-                    <form class="d-flex" role="search">
-                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                      <button class="customBtn btnStyle" type="submit">Search</button>
+                    <form action="<%=request.getContextPath() %>/qna/searchQna.do" class="d-flex" role="search">
+	                    <select name="searchOption" class="form-select">
+	                        <option value="REVIEW_TITLE">제목</option>
+	                        <option value="REVIEW_CONTENTS">내용</option>
+	                        <option value="MEMBER_ID">작성자</option>
+	                    </select>
+	                      <input class="form-control me-2" name="searchQna" type="search" placeholder="Search">
+	                      <button class="customBtn btnStyle" type="submit">검색</button>
                     </form>
                   </div>
                 </div>
               </nav>
-
-            <div id="Accordion_wrap">
-                <h2>FAQ</h2><span>자주 묻는 질문들</span>
-                <div class="que">
-                    <span>This is first question.</span>
-                    <div class="arrow-wrap">
-                        <span class="arrow-top">↑</span>
-                        <span class="arrow-bottom">↓</span>
-                    </div>
-                </div>
-                <div class="anw">
-                    <span>This is first answer.</span>
-                </div>
-                <div class="que">
-                    <span>This is second question.</span>
-                    <div class="arrow-wrap">
-                        <span class="arrow-top">↑</span>
-                        <span class="arrow-bottom">↓</span>
-                    </div>
-                </div>
-                <div class="anw">
-                    <span>This is second answer.</span>
-                </div>
-                <div class="que">
-                    <span>This is third question.</span>
-                    <div class="arrow-wrap">
-                        <span class="arrow-top">↑</span>
-                        <span class="arrow-bottom">↓</span>
-                    </div>
-                </div>
-                <div class="anw">
-                    <span>This is third answer.</span>
-                </div>
-                <button id="write" type="button" class="customBtn btnStyle">수정</button>
-            </div>
-            <div id="notice">
-                <h2>Q&A</h2><span>질문 게시판</span>
                 
                 <ul>
-                    <li class="title">
-                        <span class="number">번호</span>내용<span class="right">작성일</span><span class="right">작성자</span>
-                    </li>
-                    <li class="content"><span class="number">　　1　　</span><a href="#">아무거라도 좋으니 내용을 입력하세요!!!</a><span class="right">2018-10-24</span><span class="right">hnr616</span></li>
-                    <li class="content"><span class="number">　　2　　</span><a href="#">아무거라도 좋으니 내용을 입력하세요!!!</a><span class="right">2018-10-24</span><span class="right">hnr616</span></li>
-                    <li class="content"><span class="number">　　3　　</span><a href="#">아무거라도 좋으니 내용을 입력하세요!!!</a><span class="right">2018-10-24</span><span class="right">hnr616</span></li>
-                    <li class="content"><span class="number">　　4　　</span><a href="#">아무거라도 좋으니 내용을 입력하세요!!!</a><span class="right">2018-10-24</span><span class="right">hnr616</span></li>
-                    <li class="content"><span class="number">　　5　　</span><a href="#">아무거라도 좋으니 내용을 입력하세요!!!</a><span class="right">2018-10-24</span><span class="right">hnr616</span></li>
-                    <li class="content"><span class="number">　　6　　</span><a href="#">아무거라도 좋으니 내용을 입력하세요!!!</a><span class="right">2018-10-24</span><span class="right">hnr616</span></li>
+		                <!-- 질문이 있으면  -->
+			        <%if(!qnas.isEmpty()) {%>
+				        <li class="title">
+				            <span class="number">번호</span>제목<span class="right">작성일</span><span class="right">작성자</span>
+				        </li>	        	
+			        	<%for(Qna qn : qnas){%>
+					        <li class="content">
+					        	<span class="number">　　<%=qn.getQnaNo() %>　　</span>
+					        	<a href="<%=request.getContextPath()%>/qna/qnaView.do?qnaNo=<%=qn.getQnaNo()%>"><%=qn.getReviewTitle()%>
+					        		<%if(qn.getQnaCommentsCount()!=0) {%><small><span> (<%=qn.getQnaCommentsCount() %>)</span></small><%} %>
+					        	</a>
+					        	<span class="right"><%=qn.getEnrollDate() %></span>
+					        	<span class="right"><%=qn.getMemberId() %></span>
+					        </li>
+			        	
+			        	<%} %>
+			        <%}else { %><!-- 질문내용이 없으면  -->
+			        	<li class="title">
+		                    <span style="text-align: center;">내용이 없습니다.</span>
+		                </li>
+			        <%} %>
                 </ul>
-                <button id="write" type="button" class="customBtn btnStyle">글쓰기</button>
+                <!-- 로그인 한 사용자만 글쓰기 버튼 보이게  -->
+			    <%if(logInMember!=null) { %>
+			    	<button id="writeQna" type="button" class="write customBtn btnStyle"
+			    	onclick="location.assign('<%=request.getContextPath()%>/qna/qnaWrite.do');">글쓰기</button>	    
+			    <%} %>
                 <div id="pagination">
-                    <a href="#">&laquo;</a><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><a href="#">&raquo;</a>
-                </div>
+			        <%=request.getAttribute("pageBar") %>
+			    </div>
             </div>
         </div>
     </div>

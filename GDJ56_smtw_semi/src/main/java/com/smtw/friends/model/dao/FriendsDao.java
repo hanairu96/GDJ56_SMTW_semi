@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.smtw.friends.model.vo.ApplyFriends;
 import com.smtw.friends.model.vo.Friends;
 
 public class FriendsDao {
@@ -51,12 +52,54 @@ public class FriendsDao {
 		return result;
 	}
 	
+	public List<Friends> selectFriendsList(Connection conn, int cPage, int numPerpage, String nation){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Friends> result=new ArrayList();
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectFriendsNationList"));
+			
+			pstmt.setString(1, nation);
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(getFriends(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	public int selectFriendsCount(Connection conn) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int count=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectFriendsCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) count=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return count;
+	}
+
+	public int selectFriendsNationCount(Connection conn, String nation) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int count=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectFriendsNationCount"));
+			pstmt.setString(1, nation);
 			rs=pstmt.executeQuery();
 			if(rs.next()) count=rs.getInt(1);
 		}catch(SQLException e) {
@@ -116,13 +159,13 @@ public class FriendsDao {
 		}return result;
 	}
 	
-	public Friends selectFriendsId(Connection conn, String id) {
+	public Friends selectFriendsNo(Connection conn, int no) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		Friends m=null;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectFriendsId"));
-			pstmt.setString(1, id);
+			pstmt=conn.prepareStatement(sql.getProperty("selectFriendsNo"));
+			pstmt.setInt(1, no);
 			rs=pstmt.executeQuery();
 			if(rs.next()) m=getFriends(rs);
 		}catch(SQLException e) {
@@ -148,22 +191,117 @@ public class FriendsDao {
 		return result;
 	}
 	
+	public int insertFriends(Connection conn, Friends f) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertFriends"));
+			pstmt.setString(1, f.getNName());
+			pstmt.setString(2, f.getFriendsTitle());
+			pstmt.setString(3, f.getFriendsContents());
+			pstmt.setString(4, f.getMemberId());
+			pstmt.setString(5, f.getMbti());
+			pstmt.setString(6, f.getType());
+			pstmt.setString(7, String.valueOf(f.getExpYn()));
+			pstmt.setString(8, f.getPurpose());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int updateFriends(Connection conn, Friends f) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("updateFriends"));
+			pstmt.setInt(1, f.getFriendsNo());
+			pstmt.setString(2, f.getNName());
+			pstmt.setString(3, f.getFriendsTitle());
+			pstmt.setString(4, f.getFriendsContents());
+			pstmt.setString(5, f.getMemberId());
+			pstmt.setString(6, f.getMbti());
+			pstmt.setString(7, f.getType());
+			pstmt.setString(8, String.valueOf(f.getExpYn()));
+			pstmt.setString(9, f.getPurpose());
+			pstmt.setInt(10, f.getFriendsNo());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertFriendsApply(Connection conn, ApplyFriends af) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertFriendsApply"));
+			pstmt.setString(1, af.getPropose());
+			pstmt.setString(2, af.getMemberFrom());
+			pstmt.setInt(3, af.getFriendsNo());
+			pstmt.setString(4, af.getNName());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public List<ApplyFriends> selectFriendsApply(Connection conn, String id) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<ApplyFriends> result=new ArrayList();
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectFriendsApply"));
+			pstmt.setString(1, id);
+			pstmt.setString(2, id);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(getApplyFriends(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	public static Friends getFriends(ResultSet rs) throws SQLException {
 		return Friends.builder()
 				.friendsNo(rs.getInt("Friends_No"))
 				.nName(rs.getString("n_Name"))
 				.friendsTitle(rs.getString("friends_Title"))
-				//.friendsContents(rs.getString("friends_Contents"))
+				.friendsContents(rs.getString("friends_Contents"))
 				.enrollDate(rs.getDate("enroll_Date"))
 				.memberId(rs.getString("member_Id"))
 				.mbti(rs.getString("mbti"))
 				.type(rs.getString("type"))
-				.introduce(rs.getString("introduce"))
-				.filed(rs.getString("filed").charAt(0))
+				.expYn(rs.getString("exp_yn").charAt(0))
 				.purpose(rs.getString("purpose"))
 				.build();
 	}
 	
-	//
-
+	public static ApplyFriends getApplyFriends(ResultSet rs) throws SQLException {
+		return ApplyFriends.builder()
+				.pNo(rs.getInt("p_no"))
+				.propose(rs.getString("propose"))
+				.memberFrom(rs.getString("member_from"))
+				.fAdd(rs.getString("f_add").charAt(0))
+				.friendsNo(rs.getInt("friends_no"))
+				.fEnroll(rs.getDate("f_enroll"))
+				.nName(rs.getString("n_name"))
+				.build();
+	}
+	
 }

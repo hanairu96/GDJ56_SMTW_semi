@@ -83,6 +83,14 @@
             text-align: center;
         }
         /* "나의출국일지"폰트스타일 */
+        .DiaryTitle h1{
+            font-size: 30px;
+        }
+        .DiaryTitle{
+            display:inline-flex;
+            flex-direction:row;
+        }
+        
         #leavingDiary>h1{
             font-size: 30px;
         }
@@ -183,6 +191,7 @@
             width: 50px;
             height: 40px;
         }
+       
         /* 체크리스트 영역 */
         #leavingCheckList{
             padding-top: 30px;
@@ -293,6 +302,66 @@
             bottom:0;
         }
         .btnStyle:hover:before,.btnStyle:hover:after{
+            width:100%;
+            transition:800ms ease all;
+        }
+        
+        /* 삭제버튼 */
+         #deleteBtn{
+         	width: 100px;
+            height: 50px;
+            font-size:20px;
+        }
+         /* 삭제버튼 효과 */
+        .customdeleteBtn {
+            color: #fff;
+            border-radius: 5px;
+            padding: 10px 25px;
+            font-family: 'Lato', sans-serif;
+            font-weight: 500;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+            box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+            7px 7px 20px 0px rgba(0,0,0,.1),
+            4px 4px 5px 0px rgba(0,0,0,.1);
+            outline: none;
+            }
+        .deletebtnStyle {
+            line-height: 42px;
+            padding: 0;
+            border: none;
+            background: #ff0000;
+            background: linear-gradient(0deg, #ff0000 0%, #ff0000 100%);
+        }
+        .deletebtnStyle:hover {
+            color: #ff0000;
+            background: transparent;
+            box-shadow:none;
+        }
+        .deletebtnStyle:before,.deletebtnStyle:after{
+            content:'';
+            position:absolute;
+            top:0;
+            right:0;
+            height:2px;
+            width:0;
+            background: #ff0000;
+            box-shadow:
+            -1px -1px 5px 0px #fff,
+            7px 7px 20px 0px #0003,
+            4px 4px 5px 0px #0002;
+            transition:400ms ease all;
+        }
+        .deletebtnStyle:after{
+            right:inherit;
+            top:inherit;
+            left:0;
+            bottom:0;
+        }
+        .deletebtnStyle:hover:before,.deletebtnStyle:hover:after{
             width:100%;
             transition:800ms ease all;
         }

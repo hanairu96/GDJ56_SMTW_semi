@@ -1,16 +1,19 @@
 package com.smtw.diary.model.dao;
 
+import static com.smtw.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
-
-import static com.smtw.common.JDBCTemplate.close;
 
 import com.smtw.diary.model.vo.CheckList;
 import com.smtw.diary.model.vo.Diary;
+import com.smtw.member.model.vo.Member;
 
 public class DiaryDao {
 
@@ -27,7 +30,7 @@ public class DiaryDao {
 	   
 	   public static Diary getDiary(ResultSet rs) throws SQLException{
 	         return Diary.builder()
-	               .memberId(rs.getString("MEMBER_ID"))
+	               .memberId(rs.getString("MEMBER_ID2"))
 	               .dDay(rs.getString("D_DAY"))
 	               .alarm(rs.getString("ALARM"))
 	               .build();
@@ -35,7 +38,7 @@ public class DiaryDao {
 	   
 	   public static CheckList getCheckList(ResultSet rs) throws SQLException{
 	         return CheckList.builder()
-	               .memberId(rs.getString("MEMBER_ID"))
+	               .memberId(rs.getString("MEMBER_ID2"))
 	               .passport(rs.getString("PASSPORT").charAt(0))
 	               .doller(rs.getString("DOLLER").charAt(0))
 	               .resume(rs.getString("RESUME").charAt(0))
@@ -58,6 +61,28 @@ public class DiaryDao {
 	               .dailyNecessity(rs.getString("DAILY_NECESSITY").charAt(0))
 	               .build();
 	   }
+	   
+	public List<Diary> searchDiaryAll(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Diary> result=new ArrayList();
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("searchDiaryAll"));
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result.add(getDiary(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	
 	public Diary searchDiary(Connection conn, String memberId) {
 		PreparedStatement pstmt=null;
@@ -216,5 +241,24 @@ public class DiaryDao {
 		   }
 		   return result;
 		
+	}
+	
+	public int deleteDiary(Connection conn,String memberId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("deleteDiary"));
+			pstmt.setString(1, memberId);
+			
+			result=pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 }

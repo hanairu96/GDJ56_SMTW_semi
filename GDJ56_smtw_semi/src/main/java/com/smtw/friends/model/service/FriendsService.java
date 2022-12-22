@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.smtw.friends.model.dao.FriendsDao;
+import com.smtw.friends.model.vo.ApplyFriends;
 import com.smtw.friends.model.vo.Friends;
 
 public class FriendsService {
@@ -20,9 +21,23 @@ public class FriendsService {
 		return list;
 	}
 	
+	public List<Friends> selectFriendsList(int cPage, int numPerpage, String nation) {
+		Connection conn=getConnection();
+		List<Friends> list=dao.selectFriendsList(conn, cPage, numPerpage, nation);
+		close(conn);
+		return list;
+	}
+	
 	public int selectFriendsCount() {
 		Connection conn=getConnection();
 		int result=dao.selectFriendsCount(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int selectFriendsNationCount(String nation) {
+		Connection conn=getConnection();
+		int result=dao.selectFriendsNationCount(conn, nation);
 		close(conn);
 		return result;
 	}
@@ -41,9 +56,9 @@ public class FriendsService {
 		return result;
 	}
 	
-	public Friends selectFriendsId(String id) {
+	public Friends selectFriendsNo(int no) {
 		Connection conn=getConnection();
-		Friends m=dao.selectFriendsId(conn, id);
+		Friends m=dao.selectFriendsNo(conn, no);
 		close(conn);
 		return m;
 	}
@@ -55,6 +70,32 @@ public class FriendsService {
 		return result;
 	}
 	
-	//
-
+	public int insertFriends(Friends f) {
+		Connection conn=getConnection();
+		int result=dao.insertFriends(conn, f);
+		close(conn);
+		return result;
+	}
+	
+	public int updateFriends(Friends f) {
+		Connection conn=getConnection();
+		int result=dao.updateFriends(conn, f);
+		close(conn);
+		return result;
+	}
+	
+	public int insertFriendsApply(ApplyFriends af) {
+		Connection conn=getConnection();
+		int result=dao.insertFriendsApply(conn, af);
+		close(conn);
+		return result;
+	}
+	
+	public List<ApplyFriends> selectFriendsApply(String memberId) {
+		Connection conn=getConnection();
+		List<ApplyFriends> af=dao.selectFriendsApply(conn, memberId);
+		close(conn);
+		return af;
+	}
+	
 }

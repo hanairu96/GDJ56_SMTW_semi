@@ -32,7 +32,7 @@ public class FriendsListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int cPage;
-		int numPerpage=10;
+		int numPerpage=6;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
@@ -50,37 +50,38 @@ public class FriendsListServlet extends HttpServlet {
 		int pageEnd=pageNo+pageBarSize-1;
 		
 		if(pageNo==1) {
-			pageBar+="<button class='customBtn btnStyle'>이전</button>";
+			pageBar+="<li class='page-item disabled' style='color:rgba(221, 160, 221, 0.508) !important;'>"
+					+"<a class='page-link' style='color:rgba(221, 160, 221, 0.508) !important;'>이전</a></li>";
 		}else {
-			pageBar+="<button class='customBtn btnStyle'><a href='"+request.getContextPath()
-				+"/admin/FriendsList.do?cPage="+(pageNo-1)+"'>이전</a></button>";
+			pageBar+="<li><a class='page-link' href='"+request.getContextPath()+"/friends/friendsList.do?cPage="+(pageNo-1)
+					+"' style='color:rgba(221, 160, 221, 0.508) !important;'>이전</a></li>";
 		}
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(cPage==pageNo) {
-				pageBar+="<button class='customBtn btnStyle'>"+pageNo+"</button>";
+				pageBar+="<li class='page-item'><a class='page-link' style='color:rgba(221, 160, 221, 0.508) !important;'>"+pageNo+"</a></li>";
 			}else {
-				pageBar+="<button class='customBtn btnStyle'><a href='"+request.getContextPath()
-				+"/admin/FriendsList.do?cPage="+pageNo+"'>"+pageNo+"</a></button>";
+				pageBar+="<li class='page-item'><a class='page-link' href='"
+						+request.getContextPath()+"/friends/friendsList.do?cPage="+pageNo
+						+"' style='color:rgba(221, 160, 221, 0.508) !important;'>"+pageNo+"</a></li>";
 			}
 			pageNo++;
 		}
 		
 		if(pageNo>totalPage) {
-			pageBar+="<button class='customBtn btnStyle'>다음</button>";
+			pageBar+="<li class='page-item disabled'><a class='page-link' style='color:rgba(221, 160, 221, 0.508) !important;'>다음</a></li>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()
-				+"/admin/FriendsList.do?cPage="+pageNo+"'>다음</a>";
+			pageBar+="<li class='page-item'><a class='page-link' href='"
+					+request.getContextPath()+"/friends/friendsList.do?cPage="+pageNo
+					+"' style='color:rgba(221, 160, 221, 0.508) !important;'>다음</a></li>";
 		}
 
 		request.setAttribute("pageBar", pageBar);
-		System.out.println(pageBar);
 		
 		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("/views/friends/friendsList.jsp")
 		.forward(request, response);
-	
 	
 	}
 
@@ -91,7 +92,5 @@ public class FriendsListServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-	
-	//
 
 }

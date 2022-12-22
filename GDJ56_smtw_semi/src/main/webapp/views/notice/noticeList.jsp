@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="/views/common/header.jsp" %>
+<%@ page import="com.smtw.member.model.vo.Member,java.util.List,com.smtw.notice.model.vo.Notice" %>
+<%
+	List<Notice> list=(List<Notice>)request.getAttribute("notices");
+%>
+<%@ include file="/views/common/header.jsp" %>
+
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/noticeList.css"/>
 <section>
  <!-- ##### 여기 왼쪽 사이드메뉴 div ##### -->
@@ -14,30 +19,51 @@
 	    <div class="menuDiv"></div>
 	    
 	<div id="notice">
-	    <h1>공지사항</h1>
+	    <h1>공지사항</h1>	    
 	    <nav class="navbar"style="background-color: white;">
-	        <div class="container-fluid">
-	            <a class="navbar-brand"></a>
-	            <form class="d-flex" role="search">
-	                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-	            <button class="customBtn btnStyle" type="submit">Search</button>
-	          </form>
-	        </div>
-	    </nav>
+                <div class="container-fluid">
+                    <a class="navbar-brand"></a>
+                    <form action="<%=request.getContextPath() %>/notice/searchNotice.do" class="d-flex" role="search">
+                        <select name="searchOption" class="form-select">
+                            <option value="NOTICE_TITLE">제목</option>
+                            <option value="NOTICE_CONTENTS">내용</option>
+                        </select>
+                        <input class="form-control me-2" name="searchNotice" type="search" placeholder="Search">
+                    <button class="customBtn btnStyle" type="submit">검색</button>
+                  </form>
+                </div>
+            </nav>
+	    
+	    
+	    
 	    <ul>
-	        <li class="title">
-	            <span class="number">번호</span>내용<span class="right">작성일</span>
-	        </li>
-	        <li class="content"><span class="number">　　1　　</span><a href="#">아무거라도 좋으니 내용을 입력하세요!!!</a><span class="right">2018-10-24</span></li>
-	        <li class="content"><span class="number">　　2　　</span><a href="#">아무거라도 좋으니 내용을 입력하세요!!!</a><span class="right">2018-10-24</span></li>
-	        <li class="content"><span class="number">　　3　　</span><a href="#">아무거라도 좋으니 내용을 입력하세요!!!</a><span class="right">2018-10-24</span></li>
-	        <li class="content"><span class="number">　　4　　</span><a href="#">아무거라도 좋으니 내용을 입력하세요!!!</a><span class="right">2018-10-24</span></li>
-	        <li class="content"><span class="number">　　5　　</span><a href="#">아무거라도 좋으니 내용을 입력하세요!!!</a><span class="right">2018-10-24</span></li>
-	        <li class="content"><span class="number">　　6　　</span><a href="#">아무거라도 좋으니 내용을 입력하세요!!!</a><span class="right">2018-10-24</span></li>
+	    	<!-- 공지사항이 있으면  -->
+	        <%if(!list.isEmpty()) {%>
+		        <li class="title">
+		            <span class="number">번호</span>제목<span class="right">작성일</span>
+		        </li>	        	
+	        	<%for(Notice n : list){%>
+			        <li class="content">
+			        	<span class="number">　　<%=n.getNoticeNo()%>　　</span>
+			        	<a href="<%=request.getContextPath()%>/notice/noticeView.do?noticeNo=<%=n.getNoticeNo()%>"><%=n.getNoticeTitle()%></a>
+			        	<span class="right"><%=n.getNoticeEnrollDate()%></span>
+			        </li>
+	        	
+	        	<%} %>
+	        
+	        <%}else { %><!-- 공지사항이 없으면  -->
+	        	<li class="title">
+                    <span style="text-align: center;">조회된 공지사항이 없습니다.</span>
+                </li>
+	        <%} %>
 	    </ul>
-	    <button id="write" type="button" class="write customBtn btnStyle">글쓰기</button>
+	    <!-- 관리자만 글쓰기 버튼 보이게  -->
+		    <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) { %>
+		    	<button id="write" type="button" class="write customBtn btnStyle"
+		    	onclick="location.assign('<%=request.getContextPath()%>/notice/noticeWrite.do');">글쓰기</button>	    
+		    <%} %>
 	    <div id="pagination">
-	        <a href="#">&laquo;</a><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><a href="#">&raquo;</a>
+	        <%=request.getAttribute("pageBar") %>
 	    </div>
 	</div>
 	</div>

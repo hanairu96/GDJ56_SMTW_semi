@@ -40,6 +40,7 @@ Show Me The Way(SMTW) 이용약관(이하 ‘본 약관’이라 함)은 Show Me
 	                </li>
 	                <li>
 		                <input type="checkbox" name="joinMember" id="join3" value='join3'>
+		                <input type="hidden" name="emailAgree" id="emailAgree" value="N" />
 		                <label for="join3">　이메일 마케팅 수신 동의(선택)</label>
 	                </li>
 	            </ul>
@@ -58,8 +59,13 @@ Show Me The Way(SMTW) 이용약관(이하 ‘본 약관’이라 함)은 Show Me
 		$(document).ready(function() {//페이지 로드가 끝나면 실행하는 함수
 			
 			$("#allcheck").click(function() {//전체선택을 클릭했을 때
-				if($("#allcheck").is(":checked")) $("input[name=joinMember]").prop("checked", true);//전부 체크
-				else $("input[name=joinMember]").prop("checked", false);//전부체크해제
+				if($("#allcheck").is(":checked")) {
+					$("input[name=joinMember]").prop("checked", true);//전부 체크
+					$("#emailAgree").attr("value","Y"); //이메일 수신동의 값 'Y'
+				}else {
+					$("input[name=joinMember]").prop("checked", false);//전부체크해제
+					$("#emailAgree").attr("value","N"); //이메일 수신동의 값 'N'
+				}
 			});
 			
 			$("input[name=joinMember]").click(function() {
@@ -69,22 +75,41 @@ Show Me The Way(SMTW) 이용약관(이하 ‘본 약관’이라 함)은 Show Me
 				if(total != checked) $("#allcheck").prop("checked", false);//개수가 다르면 전체선택 체크 해제
 				else $("#allcheck").prop("checked", true); 
 			});
+			Swal.fire({ //이메일 마케팅 수신 동의 서비스 소개
+    				html:"이메일 마케팅 수신 동의 시 <br>메일 서비스를 받으실 수 있습니다.",
+    				icon: 'info',
+    		 })
 			
 		});
-		
 		//필수 체크 로직
 		const fn_agree=()=>{
 			if($("#join1").is(":checked")==false){//필수 동의에 체크하지 않으면
 				console.log($("#join1").is(":checked"))
-				alert("필수 이용약관에 동의해주세요.");
+				Swal.fire("필수 이용약관에 \n동의해주세요.");
 				return false;
 			}
 			if($("#join2").is(":checked")==false){//개인정보 수집 및 이용동의에 체크하지 않으면
 				console.log($("#join2").is(":checked"))
-				alert("필수 개인정보 수집 및 이용에 동의해주세요.");
+				Swal.fire("필수 개인정보 수집 \n및 이용에 동의해주세요.");
 				return false;
 			}
+			
+			
 		}
+		
+		//이메일 수신 동의 체크 로직
+	  $("#join3").change(function(){  //이메일 수신 동의 체크시 Y, 체크 해제시 N
+	    	 if($("#join3").is(":checked")){
+	    		 $("#emailAgree").attr("value","Y");
+	    	 }else{
+	    		 $("#emailAgree").attr("value","N");
+	    		 Swal.fire({
+	    				text:"체크 해제시 메일 알림 서비스를 받을 수 없습니다.",
+	    				icon: 'warning',
+	    		 })
+		    	 console.log( $("#emailAgree").val());
+		      }
+	  });
 			
 	</script>
 </section>

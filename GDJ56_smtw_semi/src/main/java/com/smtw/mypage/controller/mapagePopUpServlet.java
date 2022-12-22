@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class mapagePopUpServlet
  */
-@WebServlet("/mapage/mapagePopUp.do")
+@WebServlet("/mypage/mypagePopUp.do")
 public class mapagePopUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,12 +30,16 @@ public class mapagePopUpServlet extends HttpServlet {
 		String friendName = request.getParameter("friendName");
 		String friendAge = request.getParameter("friendAge");
 		String friendGender = request.getParameter("friendGender");
+		String friendId = request.getParameter("friendId");
 		
+		
+		
+		request.setAttribute(friendName, "friendId");
 		request.setAttribute(friendName, "friendName");
 		request.setAttribute(friendAge, "friendAge");
 		request.setAttribute(friendGender, "friendGender");
 		
-		request.getRequestDispatcher("/views/mypage/mypage-pop_friendclick.jsp").forward(request, response);;
+		request.getRequestDispatcher("/views/mypage/mypage-pop_friendclick.jsp").forward(request, response);
 	}
 
 	/**

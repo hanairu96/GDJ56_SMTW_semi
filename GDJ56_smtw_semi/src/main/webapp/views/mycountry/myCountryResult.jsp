@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.smtw.mycountry.model.vo.MyCountry,java.util.List" %>
+<%
+	List<MyCountry> mycountry=(List<MyCountry>)request.getAttribute("mycountry");
+	int count=0,checkCount=1;
+	boolean check=true;
+	String[] countryResult=(String[])request.getAttribute("countryResult");
+%>
+
 <%@include file="/views/common/header.jsp" %>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/myCountryResult.css"/>
 
@@ -16,12 +24,51 @@
           <div id="myCountryResult">
              <fieldset>
                  <legend id="sectiontitle">나에게 맞는 나라 찾기 결과!!!</legend>
-                 <div id="countryResultDiv">
-                     <img src="" alt="" width="400" height="400">
-                     <h1 id="radioValue"></h1>
-                     <h1 id="resultName">" 대만 "</h1>
-                     <button class="customBtn btnStyle" id="detailCountry"> >> 더 알아보기 << </button>
-                 </div>
+                 
+		          <table id="countryResultDiv" align="center">
+		            <tbody>
+			    	<% if(mycountry.isEmpty()){ %>
+			    		<tr>
+			    			<td id="noResult">
+			    			<h1 id="radioValue">'<%=countryResult[0] %>','<%=countryResult[1] %>','<%=countryResult[2] %>','<%=countryResult[3] %>'</h1>
+			    				적합한 나라가 없네요!!<br>↓↓ 어떤 나라가 있는지 보고 싶다면 ↓↓<br>
+			    				<button class="customBtn btnStyle" id="detailCountryALL"  onclick="location.assign('<%=request.getContextPath()%>/country/countryMain.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>')"> >> 워홀나라 알아보기 << </button>
+			    			</td>
+			    		</tr>
+			    		<% } else{%>
+			    			<% System.out.println(mycountry.size());%>
+			    			
+			    		<tr>
+			    			<td colspan="4">
+			    				<h1 id="radioValue">'<%=countryResult[0] %>','<%=countryResult[1] %>','<%=countryResult[2] %>','<%=countryResult[3] %>'에 적합한 나라 ↓↓</h1>
+			    			<td>
+			    		</tr>
+						    	<tr class="countryTr"> 
+						    	<%for(MyCountry mc : mycountry){ %>
+					    			<%if(count<4){ %>
+							    		<td>
+							    			<img src="<%=request.getContextPath()%>/upload/country/<%=mc.getNImg() %>" width="300" height="250">
+							    			<h1 id="resultName">" <%=mc.getNName() %> "</h1>
+							    		</td>
+					    		 <% count++;
+					    		    checkCount++;
+					    			} else{ %>
+					    		 		</tr>
+					    		 		
+					    			<% count=0; 
+					    			   checkCount++; }%>  
+			    				<% }
+						    	if(checkCount==mycountry.size()){
+			    					check=false;
+			    				}%>
+			    				<tr>
+			    			  <td colspan="4">
+			    			  	<button class="customBtn btnStyle" id="detailCountry"  onclick="location.assign('<%=request.getContextPath()%>/country/countryMain.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>')"> >> 더 알아보기 << </button>
+			    			  </td></tr>
+			    			<% }%>
+		            </tbody>
+		        </table>
+                 
              </fieldset>
           </div>
     </div>
@@ -44,20 +91,6 @@
                 }, 500);}
         }).scroll();
     });
-
-    const radioValue=document.querySelector("#radioValue");
-    const urlParams = new URL(location.href).searchParams;
-
-    //console.log(urlParams);
-     const select = urlParams.get('selectText');
-     const select1 = urlParams.get('selectText1');
-     const select2 = urlParams.get('selectText2');
-     const select3 = urlParams.get('selectText3');
-     // console.log(select+select1+select2+select3);
-    let text=select+", "+select1+", "+select2+", "+select3+" 을 고른 당신!!!";
-     radioValue.innerHTML=text;
-
- 
  </script>
         
 
