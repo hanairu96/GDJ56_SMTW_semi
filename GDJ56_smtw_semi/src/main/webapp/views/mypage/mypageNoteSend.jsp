@@ -16,8 +16,6 @@
             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">쪽지함</p></div>
             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageWriting.do?id=<%=logInMember.getMemberId()%>');">내가 쓴 글</p></div>
             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNation.do?id=<%=logInMember.getMemberId()%>');">찜한 나라</p></div>
-           
-           
         </div>
         <div class="menuDiv"></div>
         <div class="contentList">
@@ -26,16 +24,11 @@
                 
             </div>
 
+            <div id="postrecieve"><h2 style="background-color: rgb(239, 239, 239);" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">수신함</h2></div><br>
             
-             <div id="postrecieve"><h2 style="background-color: rgb(239, 239, 239);" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">수신함</h2></div><br>
-            
-
             <div id="postsend"><h2 style="background-color: cornflowerblue;" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteSend.do?id=<%=logInMember.getMemberId()%>');">발신함</h2></div><br>
-            
 
-            <table id="postbox" style="width: 1000px;">
-
-                
+              <table id="postbox" style="width: 90%;">
                 <tr>
                     <td style="width: 50px;"><input type="checkbox" name="전체선택" id="" onclick='selectAll(this)'></td>
                     <td style="width: 80px;"><p>TO</p></td>
@@ -69,7 +62,7 @@
             
             <div id="pageBar">
 					<%=request.getAttribute("pageBar") %>
-				</div>
+			</div>
 
 			  <script>
             	function goPopup(e){
@@ -79,7 +72,7 @@
             		frm.target="winName";
             		frm.submit();
             	}
-            </script>
+            	</script>
             
            
             <div id="postcontroll">
@@ -88,22 +81,23 @@
             </div>
         </div>
         <script>
-        function selectAll(selectAll)  {
-      	  const checkboxes 
+        	function selectAll(selectAll)  {
+      	  		const checkboxes 
       	       = document.getElementsByName('check');
       	  
-      	  checkboxes.forEach((checkbox) => {
-      	    checkbox.checked = selectAll.checked;
-      	  })
-      	}
+      	  		checkboxes.forEach((checkbox) => {
+      	    	checkbox.checked = selectAll.checked;
+      	  		})
+      		}
       
-      	function noteDeleteClick(){
-      		var checkBoxArr=[];
-      		$("input:checkbox[name='check']:checked").each(function(){
+      		function noteDeleteClick(){
+      			var checkBoxArr=[];
+      			$("input:checkbox[name='check']:checked").each(function(){
       			checkBoxArr.push($(this).val());
       			console.log(checkBoxArr);
-      		});
-      		$.ajax({
+      			});
+      			
+      			$.ajax({
       			type:"POST",
       			url : "<%=request.getContextPath()%>/mypage/mypageNoteDelete.do",
       			data : {
@@ -117,9 +111,10 @@
       				alert("실패");
       			}
       		});
-      	}
+      		}
       	</script>
    </section>
+   
 	 <style>
        table,th,td{
             border: 1px solid rgb(112, 112, 112);
@@ -229,10 +224,15 @@
             display: flex;
         }
         .contentList{
-            width: 85%;  
-            margin-left: 0 auto;
-            margin-right: 0 auto;
-            text-align: center;
+            width:50%;
+            height:700px;
+       		margin-left:0 auto;
+       		margin-left: 0 auto;
+       		text-alian : center;
+       		border : 2px solid;
+       		border-radius : 10px;
+       		padding 20px;
+       		margin-right : 150px;
         }
 
         #list{

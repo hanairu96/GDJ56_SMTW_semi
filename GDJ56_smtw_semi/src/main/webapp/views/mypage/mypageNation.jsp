@@ -115,10 +115,14 @@
         }
 
         .contentList{
-            width: 85%;  
-            margin-left: 0 auto;
-            margin-right: 0 auto;
-            text-align: center;
+          	width:80%;
+       		margin-left:0 auto;
+       		margin-left: 0 auto;
+       		text-alian : center;
+       		border : 2px solid;
+       		border-radius : 10px;
+       		padding 20px;
+       		margin-right : 150px;
             
         }
         

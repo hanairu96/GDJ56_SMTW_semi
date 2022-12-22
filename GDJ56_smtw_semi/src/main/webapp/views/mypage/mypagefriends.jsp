@@ -34,8 +34,106 @@ String myImg = (String)request.getAttribute("myImg");
         </div>
         <div class="menuDiv"></div>
         <div class="contentList">
-            <div id="menutitle"><h2 style="background-color: cornflowerblue;">워홀 프렌즈</h2></div>
-            <div id="mypsc">
+        	<h1>마이페이지</h1>
+        	<div id="mypsc">
+                <p><%=logInMember.getMemberName()%>님 어서 오세요!</p>
+                <img src="<%=request.getContextPath()%>/upload/account/<%=myImg%>" alt="" width="200" height="200">
+            </div>
+            
+            <div id="flist" style="overflow:scroll">
+                <p><b>친구 목록</b></p>
+                <!-- 크롬은 팝업창 최대화 금지가 안됨 -->
+                <%if(friendslist.isEmpty()&&acceptedlist==null){ %>
+                	아직 수락한 친구가 없습니다 :(
+                <%} else{ 
+                	if(friendslist!=null){
+                	for(int i=0;i<friendslist.size();i++){
+                %>
+                <div id="fname">
+                	<form id="" action="" method="post">
+                 		<input type="hidden" name="friendId" value="<%=friendslist.get(i).getMemberId()%>"> 
+                		<input type="hidden" name="friendName" value="<%=friendslist.get(i).getMemberName()%>"> 
+               			<input type="hidden" name="friendAge" value="<%=friendslist.get(i).getAge()%>"> 
+                		<input type="hidden" name="friendGender" value="<%=friendslist.get(i).getGender()%>"> 
+                		<input type="hidden" name="userId" value="<%=logInMember.getMemberId()%>"> 
+               		</form>
+                	<input type="image" name="submit" id="fname" src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="width: 100px; height: 100px;cursor:pointer;"
+               		onclick="goPopup(event)">
+                	<p><<%=friendslist.get(i).getMemberName()%>><p>
+                </div>
+                <%}
+                }if(acceptedlist!=null){
+                		for(int j=0;j<acceptedlist.size();j++){
+                %>
+                <div id="fname">
+                	<form id="" action="" method="post">
+                 		<input type="hidden" name="friendId" value="<%=acceptedlist.get(j).getMemberId()%>"> 
+                		<input type="hidden" name="friendName" value="<%=acceptedlist.get(j).getMemberName()%>"> 
+               			<input type="hidden" name="friendAge" value="<%=acceptedlist.get(j).getAge()%>"> 
+               	    	<input type="hidden" name="friendGender" value="<%=acceptedlist.get(j).getGender()%>"> 
+                		<input type="hidden" name="userId" value="<%=logInMember.getMemberId()%>"> 
+                	</form>
+                	<input type="image" name="submit" id="fname" src="<%=request.getContextPath()%>/images/mypage/prfile_pics.png" style="width: 100px; height: 100px;cursor:pointer"
+                	onclick="goPopup2(event)">
+                	<p><<%=acceptedlist.get(j).getMemberName()%>><p>
+              	</div>
+                <%}
+                }
+              }%>
+              </div>
+              
+              <div id="recievelist"" style="overflow:scroll">
+
+                <p><b>친구신청 받은 목록</b><p>
+
+                <%if(list.isEmpty()){ %>
+                	아직 친구 신청을 보낸 회원이 없습니다 :(
+                <%} else{
+                	for(int i=0;i<list.size();i++){
+                %>
+                <div id="" style="width:600; height:100;border: 1px solid;">
+                    <p style="color: gray; float: right;">친구신청일 : <%=list.get(i).getFEnroll()%></p>
+                    <p style="text-align: center; float: left;">
+                    <%=infolist.get(i).getMemberName()%>(<%=infolist.get(i).getAge()%>/<%=infolist.get(i).getGender()%>)</p>
+                    
+                    
+                    <p style="text-align: center;"><%=list.get(i).getPropose()%>
+                        <button name="수락" value="수락" type="submit" onclick="window.open('<%=request.getContextPath()%>/mypage/acceptFriends.do?id=<%=logInMember.getMemberId()%>&&memberfrom=<%=list.get(i).getMemberId()%>','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');">수락</button>
+                        <button name="거절" value="거절" type="submit" onclick="window.open('<%=request.getContextPath()%>/mypage/rejectFriends.do?id=<%=logInMember.getMemberId()%>&&memberfrom=<%=list.get(i).getMemberId()%>','_blank','scrollbars=yes,width=417,height=385,top=100,left=100');">거절</button>
+                    </p>
+                </div>
+                <br>
+                <%}
+                }%>
+                 
+            </div>
+            
+            <div id="sendlist"" style="overflow:scroll">
+           		<p><b>친구신청 보낸 목록</b><p>
+           		 <%if(flist.isEmpty()){ %>
+                	회원님께서 보낸 친구 신청이 아직 없습니다 :(
+                <%} else{
+                	for(int i=0;i<flist.size();i++){
+                %>
+                <div style="width:800; height:100;border: 1px solid;">
+                    <p style="color: gray; float: right;">친구신청일 : <%=flist.get(i).getFEnroll()%></p>
+                    <p style="text-align: center; float: left;">
+                    <%=flist.get(i).getMemberId()%></p>
+                    <p style="text-align: center;"><%=flist.get(i).getPropose()%></p>
+                </div>
+                <br>
+                <%}
+                }%>
+           	
+           	</div>
+              
+              
+              
+        
+        	
+        	
+            
+           <%--  <div id="mypsc">
                 <p><%=logInMember.getMemberName()%>님 어서 오세요!</p>
                 <img src="<%=request.getContextPath()%>/upload/account/<%=myImg%>" alt="" width="200" height="200">
             </div>
@@ -84,9 +182,9 @@ String myImg = (String)request.getAttribute("myImg");
                 }%>
                 
               </div>
+            </div> --%>
+        
             </div>
-          </div>
-            
             
                 <script>
             	function goPopup(e){
@@ -107,7 +205,7 @@ String myImg = (String)request.getAttribute("myImg");
             	}
             	</script>
 
-            <div id="recievelist"" style="overflow:scroll">
+            <%-- <div id="recievelist"" style="overflow:scroll">
 
                 <p><b>친구신청 받은 목록</b><p>
 
@@ -154,7 +252,7 @@ String myImg = (String)request.getAttribute("myImg");
            	</div>
             
           
-        </div>
+        </div> --%>
         
 
     </section>
@@ -194,10 +292,6 @@ String myImg = (String)request.getAttribute("myImg");
             border: 1px solid;
             border-bottom: 3px solid;
 
-            position: absolute;
-            top: 500px;
-            left: 500px;
-         
             width: 300px;
             height: 300px;
         }
@@ -205,9 +299,6 @@ String myImg = (String)request.getAttribute("myImg");
             border: 1px solid;
             border-bottom: 3px solid;
 
-            position: absolute;
-            top: 500px;
-            left: 900px;
             
             width: 600px;
             height: 300px;
@@ -227,11 +318,8 @@ String myImg = (String)request.getAttribute("myImg");
             border: 1px solid;
             border-bottom: 3px solid;
 
-            position: absolute;
-            top: 850px;
-            left: 500px;
             
-            width: 1000px;
+            width: 85%;
             height: 300px;
             
             -ms-overflow-style: none; /* IE and Edge */
@@ -242,11 +330,8 @@ String myImg = (String)request.getAttribute("myImg");
             border: 1px solid;
             border-bottom: 3px solid;
 
-            position: absolute;
-            bottom:1000px;
-            left: 500px;
             
-            width: 1000px;
+            width: 85%;
             height: 300px;
             
             -ms-overflow-style: none; /* IE and Edge */
@@ -261,11 +346,14 @@ String myImg = (String)request.getAttribute("myImg");
    		 display: none; /* Chrome, Safari, Opera*/
 		}
         .contentList{
-       		height: 1000px;
-            width: 80%;  
-            /* margin-left: 0 auto;
-            margin-right: 0 auto; */
-            text-align: center;
+       		width:80%;
+       		margin-left:0 auto;
+       		margin-left: 0 auto;
+       		text-alian : center;
+       		border : 2px solid;
+       		border-radius : 10px;
+       		padding 20px;
+       		margin-right : 150px;
         }
 
         #list{
