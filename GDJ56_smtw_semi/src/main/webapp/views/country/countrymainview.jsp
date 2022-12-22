@@ -53,7 +53,7 @@
         	flex-wrap: wrap;
         	display:flex;
          	position: absolute;
-        	left :250px; 
+        	left :280px; 
         	/* border: 5px solid green;  */
         	width:1400px;
         	height:1100px;
@@ -61,7 +61,7 @@
         #pageBar2{
         	position: absolute;
         	top :1650px;
-			left:50%;
+			left:42%;
 			width:500px;
         }
 		#btnbtn{
@@ -294,7 +294,7 @@
          section{
         /*  border: 1px solid tomato; */
          
-         /* margin-left: 50px; */
+          margin-left: 50px; 
          margin-right: 50px;
          padding-left: 30px;
          padding-right: 100px;

@@ -89,7 +89,7 @@ public class CountryGoMainServlet extends HttpServlet {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
 				pageBar+="<a href='"+request.getContextPath()
-				+"/country/countryMain.do?id="+id+"&cPage="+pageNo+"'>"+pageNo+"</a>";
+				+"/country/countryMain.do?id="+id+"&cPage="+pageNo+"'>"+" "+pageNo+" "+"</a>";
 			}
 			pageNo++;
 		}
