@@ -70,7 +70,7 @@
            	 	</div>
            
            
-	  			<div style="border:1px solid red;width:1100px;height:900px;margin-left:80px;">
+	  			<div style="border:0px solid red;width:1100px;height:850px;margin-left:80px;">
 				<div style="display:flex">
 		 	<%if(review==null||review.isEmpty()){ %>	 
 				<div style="border:0px solid green;width:270px;height:300px;text-align: center; ">
