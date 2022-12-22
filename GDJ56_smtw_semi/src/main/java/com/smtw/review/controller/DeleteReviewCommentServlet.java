@@ -38,10 +38,10 @@ public class DeleteReviewCommentServlet extends HttpServlet {
 		String msg="",loc="";
 		if(result>0) {
 			msg="댓글 삭제 완료!";
-			loc="/community/readReview.do?qnaNo="+qnaNo;     // 에러 발생 가능  키값을 변경해야할수도
+			loc="/community/readReview.do?ReviewNo="+qnaNo;     // 에러 발생 가능  키값을 변경해야할수도
 		}else {
 			msg="댓글 삭제 실패..";
-			loc="/community/readReview.do?qnaNo="+qnaNo;      // 에러 발생 가능  키값을 변경해야할수도
+			loc="/community/readReview.do?ReviewNo="+qnaNo;      // 에러 발생 가능  키값을 변경해야할수도
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
