@@ -1,11 +1,16 @@
 package com.smtw.country.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.smtw.country.model.service.CountryService;
+import com.smtw.country.model.vo.Country;
 
 /**
  * Servlet implementation class insertCountryGoFirstServlet
@@ -29,6 +34,10 @@ public class insertCountryGoFirstServlet extends HttpServlet {
 		String id=request.getParameter("id");
 		String name=request.getParameter("nName");
 //		System.out.println(id);
+		
+		List<Country> co=new CountryService().selectAllcountry();
+		
+		request.setAttribute("allcountry", co);
 		request.setAttribute("id", id);
 		request.setAttribute("name", name);
 		request.getRequestDispatcher("/views/country/countryInfoinsert.jsp").forward(request, response);

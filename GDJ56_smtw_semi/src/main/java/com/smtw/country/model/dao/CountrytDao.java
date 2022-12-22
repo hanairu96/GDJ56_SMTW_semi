@@ -262,6 +262,21 @@ public class CountrytDao {
 				.build();
 	}
 	
+	//나라 입력시 분기처리 해줄 나라 전체 찾기 
+	public List<Country> selectAllcountry(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Country> co=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectAllcountry"));
+			rs=pstmt.executeQuery();
+			while(rs.next())  co.add(getCountry(rs));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return co;
+	}
 	
-		
 }

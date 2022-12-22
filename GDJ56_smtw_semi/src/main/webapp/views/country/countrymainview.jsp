@@ -117,10 +117,13 @@
             	}	
             	/* 비상상황문구를 넣었을 경우 알림팝업 */
             	const fn_emergency=(em,name)=>{
-            		if(em!='null') swal('비상상황발생',em,'warning')
+            		if(em!='null'){ swal('국가비상 상황이 발생되었습니다.',em,'error')
             		.then(function(){
             		location.assign('<%=request.getContextPath()%>/countryinfo/searchAll.do?nName='+name);
-					})            		
+					})            	
+            		}else{
+            		location.assign('<%=request.getContextPath()%>/countryinfo/searchAll.do?nName='+name);
+            		}
             	}
 			</script>
         <div id="comaincontainer2"> 
