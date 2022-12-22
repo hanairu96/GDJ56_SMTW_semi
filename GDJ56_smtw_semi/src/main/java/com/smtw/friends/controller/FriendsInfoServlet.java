@@ -13,6 +13,7 @@ import com.smtw.admin.model.service.MemberService;
 import com.smtw.friends.model.service.FriendsService;
 import com.smtw.friends.model.vo.Friends;
 import com.smtw.member.model.vo.Member;
+import com.smtw.mypage.model.service.MypageService;
 
 /**
  * Servlet implementation class MemberInfoServlet
@@ -40,6 +41,9 @@ public class FriendsInfoServlet extends HttpServlet {
 		
 		Member m=new MemberService().selectMemberId(f.getMemberId());
 		request.setAttribute("member", m);
+		
+		String myImg=new MypageService().getImg(m.getMemberId());
+		request.setAttribute("myImg", myImg);
 		
 		RequestDispatcher rd=request.getRequestDispatcher("/views/friends/friendsInfo.jsp");
 		rd.forward(request, response);
