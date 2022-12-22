@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.List,com.smtw.country.model.vo.Country" %>
 <%
 	String id=(String)request.getAttribute("id");
+	List<Country> co=(List<Country>)request.getAttribute("allcountry");
+	String cty="";
+	for(Country cc : co){
+		cty+=cc.getNName()+"/";
+	}
 %>
 <%@ page import="com.smtw.country.model.vo.Country" %>
 <%@ include file="/views/common/header.jsp" %>
@@ -17,29 +23,29 @@
 	                    	<option disabled>--선택하세요--</option>
 	                    	<option value="self">나라직접입력</option>
 	                    	<option disabled>--24개국중선택--</option>
-	                        <option value="네덜란드" selected>네덜란드</option>
-	                        <option value="뉴질랜드">뉴질랜드</option>
-	                        <option value="대만">대만</option>
-	                        <option value="덴마크">덴마크</option>
-	                        <option value="독일">독일</option>
-	                        <option value="벨기에">벨기에</option>
-	                        <option value="스웨덴">스웨덴</option>
-	                        <option value="아르헨티나">아르헨티나</option>
-	                        <option value="아일랜드">아일랜드</option>
-	                        <option value="영국">영국</option>
-	                        <option value="오스트이라">오스트이라</option>
-	                        <option value="이스라엘">이스라엘</option>
-	                        <option value="이탈리아">이탈리아</option>
-	                        <option value="일본">일본</option>
-	                        <option value="체코">체코</option>
-	                        <option value="칠레">칠레</option>
-	                        <option value="캐나다">캐나다</option>
-	                        <option value="포르투칼">포르투칼</option>
-	                        <option value="폴란드">폴란드</option>
-	                        <option value="프랑스">프랑스</option>
-	                        <option value="헝가리">헝가리</option>
-	                        <option value="호주">호주</option>
-	                        <option value="홍콩">홍콩</option>
+	                        <option value="네덜란드" selected <%=cty.contains("네덜란드")?"disabled":""%>>네덜란드</option>
+	                        <option value="뉴질랜드" <%=cty.contains("뉴질랜드")?"disabled":""%>>뉴질랜드</option>
+	                        <option value="대만" <%=cty.contains("대만")?"disabled":""%>>대만</option>
+	                        <option value="덴마크" <%=cty.contains("덴마크")?"disabled":""%>>덴마크</option>
+	                        <option value="독일" <%=cty.contains("독일")?"disabled":""%>>독일</option>
+	                        <option value="벨기에" <%=cty.contains("벨기에")?"disabled":""%>>벨기에</option>
+	                        <option value="스웨덴" <%=cty.contains("스웨덴")?"disabled":""%>>스웨덴</option>
+	                        <option value="아르헨티나" <%=cty.contains("아르헨티나")?"disabled":""%>>아르헨티나</option>
+	                        <option value="아일랜드" <%=cty.contains("아일랜드")?"disabled":""%>>아일랜드</option>
+	                        <option value="영국" <%=cty.contains("영국")?"disabled":""%>>영국</option>
+	                        <option value="오스트리아" <%=cty.contains("오스트리아")?"disabled":""%>>오스트리아</option>
+	                        <option value="이스라엘" <%=cty.contains("이스라엘")?"disabled":""%>>이스라엘</option>
+	                        <option value="이탈리아" <%=cty.contains("이탈리아")?"disabled":""%>>이탈리아</option>
+	                        <option value="일본" <%=cty.contains("일본")?"disabled":""%>>일본</option>
+	                        <option value="체코" <%=cty.contains("체코")?"disabled":""%>>체코</option>
+	                        <option value="칠레" <%=cty.contains("칠레")?"disabled":""%>>칠레</option>
+	                        <option value="캐나다" <%=cty.contains("캐나다")?"disabled":""%>>캐나다</option>
+	                        <option value="포르투갈" <%=cty.contains("포르투갈")?"disabled":""%>>포르투갈</option>
+	                        <option value="폴란드" <%=cty.contains("폴란드")?"disabled":""%>>폴란드</option>
+	                        <option value="프랑스" <%=cty.contains("프랑스")?"disabled":""%>>프랑스</option>
+	                        <option value="헝가리" <%=cty.contains("헝가리")?"disabled":""%>>헝가리</option>
+	                        <option value="호주" <%=cty.contains("호주")?"disabled":""%>>호주</option>
+	                        <option value="홍콩" <%=cty.contains("홍콩")?"disabled":""%>>홍콩</option>
 	                    </select>   
 						<input type="text" name="selfname" style="width:150px;height:30px;" id="writeoption">
 						<input type="hidden" name="id" value="<%=id%>"> 

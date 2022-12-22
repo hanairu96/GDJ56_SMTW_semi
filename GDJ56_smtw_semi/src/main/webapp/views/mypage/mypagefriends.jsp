@@ -243,7 +243,7 @@ String myImg = (String)request.getAttribute("myImg");
             border-bottom: 3px solid;
 
             position: absolute;
-            bottom: -70%;
+            bottom:1000px;
             left: 500px;
             
             width: 1000px;
