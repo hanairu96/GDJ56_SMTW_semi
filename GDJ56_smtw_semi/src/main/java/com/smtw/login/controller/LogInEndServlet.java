@@ -16,7 +16,7 @@ import com.smtw.member.model.vo.Member;
 /**
  * Servlet implementation class LogInEndServlet
  */
-@WebServlet("/logIn/logInEnd.do")
+@WebServlet(name="logInEnd",urlPatterns = "/logIn/logInEnd.do")
 public class LogInEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

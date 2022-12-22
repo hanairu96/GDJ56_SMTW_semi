@@ -14,7 +14,7 @@ import com.smtw.member.model.vo.Member;
 /**
  * Servlet implementation class EnrollMemberEndServlet
  */
-@WebServlet("/logIn/enrollMemberEnd.do")
+@WebServlet(name = "enrollMemberEnd", urlPatterns = "/logIn/enrollMemberEnd.do")
 public class EnrollMemberEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

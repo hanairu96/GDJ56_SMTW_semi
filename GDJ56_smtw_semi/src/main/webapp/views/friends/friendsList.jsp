@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.smtw.friends.model.vo.Friends, java.util.List, com.smtw.admin.model.service.MemberService" %>
+<%@ page import="com.smtw.friends.model.vo.Friends, java.util.List, com.smtw.admin.model.service.MemberService, 
+				com.smtw.mypage.model.service.MypageService" %>
 <%
 	List<Friends> fs=(List<Friends>)request.getAttribute("list");
 %>
@@ -87,7 +88,12 @@
 						style="border:0px;background-color: white;">
                             <div style="border:0px solid magenta;width:210px;height:290px;margin-left:0px;margin-top:5px;background-color:rgba(128, 128, 128, 0.342);border-radius:20px;">
                                 <div style="border:0px solid blue;width:100%;height:110px;display:flex;justify-content:center;">
-                                    <img src="<%=request.getContextPath() %>/images/lupy.jpg" alt="" style="width:50%;height:80%;margin:auto;border-radius:120px;">
+    								<%String myImg=new MypageService().getImg(f.getMemberId()); %>
+                                    <%if(myImg==null) {%>
+                                    	<img src="<%=request.getContextPath() %>/images/lupy.jpg" alt="" style="width:50%;height:80%;margin:auto;border-radius:120px;">
+									<%}else {%>
+                                    	<img src="<%=request.getContextPath() %>/upload/account/<%=myImg %>" alt="" style="width:50%;height:80%;margin:auto;border-radius:120px;">
+									<%} %>
                                 </div>
                                 <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
                                     <div>&nbsp<strong><%=f.getFriendsTitle() %></strong></div>

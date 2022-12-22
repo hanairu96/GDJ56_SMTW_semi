@@ -544,9 +544,9 @@ public class MypageDao {
          pstmt=conn.prepareStatement(sql.getProperty("getmyImg"));
          pstmt.setString(1, userId);
          rs=pstmt.executeQuery();
-         
-         
-         
+         if(rs.next()) {
+        	 result=rs.getString("MYIMG");
+         }
       }catch(SQLException e) {
          e.printStackTrace();
       }finally {
