@@ -15,13 +15,10 @@
             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">쪽지함</p></div>
             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageWriting.do?id=<%=logInMember.getMemberId()%>');">내가 쓴 글</p></div>
             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNation.do?id=<%=logInMember.getMemberId()%>');">찜한 나라</p></div>
-           
-           
         </div>
         <div class="menuDiv"></div>
         <div class="contentList">
-            <div id="menutitle"><h2 style="background-color: cornflowerblue;">계정 관리</h2></div>
-        
+        <h1>계정관리</h1>
         <div id="mypsc">
                 <img src="<%=request.getContextPath()%>/upload/account/<%=m.getMyImg() %>" alt="" width="200" height="200" style="border">
                 <br>
@@ -39,9 +36,6 @@
             <div>이메일 : <%=m.getEmail() %></div>
             <div>비밀번호 : <button onclick="location.assign('<%=request.getContextPath()%>/mypage/mypagePwdCk3.do?id=<%=m.getMemberId()%>');">수정하기</button></div>
         </div>
-
-
-           
           
         </div>
 
@@ -70,29 +64,17 @@
     
     <style>
     #myimpo{
-       
-        position: absolute;
-        top: 500px;
-        left: 800px;
         width: 600px;
         height: 300px;
-       
-        
     }
     #myimpo>*{
         border: 1px solid;
         padding: 2%;
     }
        
-
     #mypsc{
             border: 1px solid;
             border-bottom: 3px solid;
-
-            position: absolute;
-            top: 500px;
-            left: 500px;
-         
             width: 300px;
             height: 390px;
         }
@@ -100,7 +82,6 @@
         #menutitle{
             /* border: 1px solid;
             border-bottom: 3px solid; */
-
             position: absolute;
             top: 350px;
             left: 800px;
@@ -108,12 +89,16 @@
             height: 100px;
         }
         .contentList{
-            width: 85%;  
-            margin-left: 0 auto;
-            margin-right: 0 auto;
-            text-align: center;
+            width:80%;
+            height:890px;
+       		margin-left:0 auto;
+       		margin-left: 0 auto;
+       		text-alian : center;
+       		border : 2px solid;
+       		border-radius : 10px;
+       		padding 20px;
+       		margin-right : 150px;
         }
-        
 
         #list{
             margin: 0 auto;
@@ -170,7 +155,6 @@
 
         .sidemenu>div{
             height: 70px;
-            
         }
         a{
             text-decoration: none;
@@ -182,7 +166,6 @@
        
         section{
             border: 1px solid tomato;
-            
             margin-left: 50px;
             margin-right: 50px;
             /* ★수정한 부분 */
@@ -203,9 +186,7 @@
             
         }
         section>div{
-            border: 1px solid blue;
             /* 섹션 안의 div테두리 */
-            
         }
     </style>
     <%@include file="/views/common/footer.jsp" %>

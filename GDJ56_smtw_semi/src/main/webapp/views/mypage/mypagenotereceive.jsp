@@ -16,31 +16,21 @@
             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">쪽지함</p></div>
             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageWriting.do?id=<%=logInMember.getMemberId()%>');">내가 쓴 글</p></div>
             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNation.do?id=<%=logInMember.getMemberId()%>');">찜한 나라</p></div>
-           
-           
         </div>
         <div class="menuDiv"></div>
         <div class="contentList">
-            <div>
-                <div id="menutitle"><h2 style="background-color: cornflowerblue;">쪽지함</h2></div><br>
-                
+		 	<center><h1>쪽지함</h1></center>
+            <div id="postmenu">
+            	<div id="postrecieve"><h2 style="background-color: cornflowerblue;" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">수신함</h2></div><br>
+            	<div id="postsend"><h2 style="background-color: rgb(239, 239, 239);" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteSend.do?id=<%=logInMember.getMemberId()%>');">발신함</h2></div><br>
             </div>
-
-            
-            <div id="postrecieve"><h2 style="background-color: cornflowerblue;" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">수신함</h2></div><br>
-            
-
-            <div id="postsend"><h2 style="background-color: rgb(239, 239, 239);" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteSend.do?id=<%=logInMember.getMemberId()%>');">발신함</h2></div><br>
-            
-
-            <table id="postbox" style="width: 1000px;">
-
-                
+            	<button onclick="noteDeleteClick();">삭제하기</button>
+            <table id="postbox" style="width: 95%; margin-left:2%; style="table-layout: fixed"">
                 <tr>
-                    <td style="width: 50px;"><input type="checkbox" name="" id="" onclick='selectAll(this)'></td>
-                    <td style="width: 80px;"><p>FROM</p></td>
-                    <td style="width: 700px;">내용</td>
-                    <td style="width: 100px;">보낸날짜</td>
+                    <td style="width: 5%;"><input type="checkbox" name="" id="" onclick='selectAll(this)'></td>
+                    <td style="width: 20%;"><p>FROM</p></td>
+                    <td style="width: 40%; ">내용</td>
+                    <td style="width: 35%;">보낸날짜</td>
                 </tr>
                 
                 <%if(list.isEmpty()){ %>
@@ -61,16 +51,16 @@
 			                    <input type="hidden" name="id" value=<%=logInMember.getMemberId() %>>
 			                </form>	
 		                </td>
-                    	<td onclick="goPopup(event)"><%=n.getContent() %></td>
+                    	<td onclick="goPopup(event)" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;"><%=n.getContent() %></td>
                     	<td><%=n.getDate()%></td>
                 	</tr>
                 <%}
                 } %>
             </table>
             
-            	<div id="pageBar">
+            <div id="pageBar">
 					<%=request.getAttribute("pageBar") %>
-				</div>
+			</div>
             
               <script>
             	function goPopup(e){
@@ -81,14 +71,6 @@
             		frm.submit();
             	}
             </script>
-            
- 
-
-
-            <div id="postcontroll">
-                <button onclick="noteDeleteClick();">삭제하기</button>
-                <!-- <button onclick="window.open('mypage-pop_sendnote.html','_blank','scrollbars=yes,width=600,height=600,top=100,left=300')">쪽지보내기</button> -->
-            </div>
             
             <script>
             	function selectAll(selectAll)  {
@@ -156,10 +138,6 @@
             border-left: hidden;
             border-right: hidden;
             border-top: hidden;
-            position: absolute;
-            top: 630px;
-            left: 450px;
-            
         }
         
         #pageBar{
@@ -168,34 +146,23 @@
             left: 900px;
         }
 
-        #postcontroll{
-            position: absolute;
-            top: 550px;
-            left: 450px;
-            cursor: pointer;
-            
-        }
-
-        #postcontroll>*{
-            width: 100px;
-            height: 50px;
-            
-        }
+        #postmenu{
+			display:flex;
+      		justify-content: center;
+		}
 
         #postrecieve{
-            position: absolute;
-            top: 450px;
-            left: 580px;
-            width: 300px;
+         
+            width: 150px;
             height: 100px;
+            cursor: pointer;
         }
 
         #postsend{
-            position: absolute;
-            top: 450px;
-            left: 1000px;
-            width: 300px;
+            
+            width: 150px;
             height: 100px;
+            cursor: pointer;
         }
 
         #menutitle{
@@ -209,32 +176,6 @@
             height: 100px;
         }
 
-        #mypsc{
-            border: 1px solid;
-            border-bottom: 3px solid;
-
-            position: absolute;
-            top: 500px;
-            left: 500px;
-         
-            width: 300px;
-            height: 300px;
-        }
-        #flist{
-            border: 1px solid;
-            border-bottom: 3px solid;
-
-            position: absolute;
-            top: 500px;
-            left: 900px;
-            
-            width: 600px;
-            height: 300px;
-        }
-        #flist>img{
-            float: left;
-            margin: 5px;
-        }
         #recievelist{
             border: 1px solid;
             border-bottom: 3px solid;
@@ -247,13 +188,17 @@
             height: 300px;
         }
        
-        .contentList{
-            width: 85%;  
-            margin-left: 0 auto;
-            margin-right: 0 auto;
-            text-align: center;
+      	.contentList{
+            width:50%;
+            height:700px;
+       		margin-left:0 auto;
+       		margin-left: 0 auto;
+       		text-alian : center;
+       		border : 2px solid;
+       		border-radius : 10px;
+       		padding 20px;
+       		margin-right : 150px;
         }
-
         #list{
             margin: 0 auto;
             width: 700px;
