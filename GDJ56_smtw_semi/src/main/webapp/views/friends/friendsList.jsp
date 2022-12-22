@@ -73,7 +73,7 @@
 		                    <div id="box" style="border:0px solid green;width:300px;height:300px">
 		                        <div style="border:0px solid magenta;width:220px;height:270px; margin-left :25px; margin-top :5px;background-color:rgba(128, 128, 128, 0.342);border-radius:20px;" >
 		                            <div style="border:0px solid blue;width:100%;height:110px;display:flex;justify-content: center;">
-		                            </div>        
+		                            </div>
 									<p>조회된 회원이 없습니다.</p>
 		                            <div style="border:0px solid blue;width:100%;height:30px;margin-top:30px;display:flex;">
 		                            </div>
@@ -81,13 +81,14 @@
 		                    </div>
 						<%}else {
 							int count=0;
-							for(Friends f : fs) {%>
+							for(int i=0;i<6;i++) {%>
 		                        <div id="box" style="border:0px solid green;width:300px;height:320px">
-								<button onclick="location.assign('<%=request.getContextPath() %>/friends/friendsInfo.do?friendsNo=<%=f.getFriendsNo() %>')"
+		                        <%if(i<fs.size()) {%>
+								<button onclick="location.assign('<%=request.getContextPath() %>/friends/friendsInfo.do?friendsNo=<%=fs.get(i).getFriendsNo() %>')"
 								style="border:0px;background-color: white;">
 		                            <div style="border:0px solid magenta;width:210px;height:290px;margin-left:0px;margin-top:5px;background-color:rgba(128, 128, 128, 0.342);border-radius:20px;">
 		                                <div style="border:0px solid blue;width:100%;height:110px;display:flex;justify-content:center;">
-		    								<%String myImg=new MypageService().getImg(f.getMemberId()); %>
+		    								<%String myImg=new MypageService().getImg(fs.get(i).getMemberId()); %>
 		                                    <%if(myImg==null) {%>
 		                                    	<img src="<%=request.getContextPath() %>/images/lupy.jpg" alt="" style="width:50%;height:80%;margin:auto;border-radius:120px;">
 											<%}else {%>
@@ -95,26 +96,27 @@
 											<%} %>
 		                                </div>
 		                                <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
-		                                    <div>&nbsp<strong><%=f.getFriendsTitle() %></strong></div>
+		                                    <div>&nbsp<strong><%=fs.get(i).getFriendsTitle() %></strong></div>
 		                                </div>
 		                                <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
 		                                    <div>
 			                                    &nbsp이름:
 			                                    <%
 			                                    	//아이디로 이름 찾기
-			                                    	String name=new MemberService().selectMemberId(f.getMemberId()).getMemberName();
+			                                    	String name=new MemberService().selectMemberId(fs.get(i).getMemberId()).getMemberName();
 			                                    %>
 			                                    <%=name %>
 		                                    </div>
 		                                </div>
 		                                <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
-		                                    <div>&nbsp희망국가: <%=f.getNName() %></div>
+		                                    <div>&nbsp희망국가: <%=fs.get(i).getNName() %></div>
 		                                </div>
 		                                <div style="border:0px solid blue;width:100%;height:30px;margin-top:10px;display:flex;">
-		                                    <div>&nbsp목적: <%=f.getPurpose() %></div>
+		                                    <div>&nbsp목적: <%=fs.get(i).getPurpose() %></div>
 		                                </div>
 		                            </div>
 		                        </button>
+		                        <%} %>
 		                        </div>
 		                        <%count++;
 		                        if(count==3){
