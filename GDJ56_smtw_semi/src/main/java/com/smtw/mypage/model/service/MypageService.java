@@ -29,6 +29,15 @@ public class MypageService {
 		return af;
 	}
 	
+	
+	public List<Applyfriends> sendfriends(String userId){
+		
+		Connection conn = getConnection();
+		List<Applyfriends> af=new MypageDao().sendfriends(conn,userId);
+		close(conn);
+		return af;
+	}
+	
 	public List<MemberInfo>  InfoapplyfriendsList(String userId){
 		Connection conn = getConnection();
 		List<MemberInfo> m=new MypageDao().InfoapplyfriendsList(conn,userId);
@@ -83,6 +92,7 @@ public class MypageService {
 		close(conn);
 		return m;
 	}
+	
 	
 	public Member pwdCk(String userId, String pwd) {
 		Connection conn = getConnection();
@@ -319,7 +329,12 @@ public class MypageService {
 		return result;
 	}
 	
-	
+	public int deleteNote(String checkNum) {
+		Connection conn = getConnection();
+		int result=new MypageDao().deleteNote(conn, checkNum);
+		close(conn);
+		return result;
+	}
 	
 	
 	

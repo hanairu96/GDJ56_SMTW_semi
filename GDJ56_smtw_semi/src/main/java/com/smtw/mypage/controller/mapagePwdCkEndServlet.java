@@ -13,7 +13,7 @@ import com.smtw.mypage.model.service.MypageService;
 /**
  * Servlet implementation class mapagePwdCkEndServlet
  */
-@WebServlet("/mypage/mypagePwdCkEnd.do")
+@WebServlet(name="mypagePwdCkEnd", urlPatterns="/mypage/mypagePwdCkEnd.do")
 public class mapagePwdCkEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,7 +31,8 @@ public class mapagePwdCkEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String userId=request.getParameter("id");
-		String pwd=request.getParameter("password");
+		String pwd=request.getParameter("Pwd");
+		System.out.println("비밀번호확인"+pwd);
 		
 		System.out.println(userId+" : "+pwd);
 		Member m = new MypageService().pwdCk(userId,pwd);

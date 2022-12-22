@@ -98,6 +98,14 @@ public class MypageDao {
             .build();
    }
    
+   private Applyfriends getSendfriendsList(ResultSet rs) throws SQLException{
+	      return Applyfriends.builder()
+	            .propose(rs.getString("PROPOSE"))
+	            .memberId(rs.getString("MEMBER_ID"))
+	            .fEnroll(rs.getDate("F_ENROLL"))
+	            .build();
+	   }
+   
    private MemberInfo getInfoApplyfriendsList(ResultSet rs) throws SQLException{
       return MemberInfo.builder()
             .memberId(rs.getString("MEMBER_FROM"))
@@ -135,6 +143,27 @@ public class MypageDao {
             close(rs);
             close(pstmt);
          }return af;
+   }
+   
+   public List<Applyfriends> sendfriends(Connection conn, String userId){
+	   
+	   List<Applyfriends> af=new ArrayList();
+	   PreparedStatement pstmt=null;
+	   ResultSet rs=null;
+	   
+	   try {
+		   pstmt=conn.prepareStatement(sql.getProperty("sendfriends"));
+		   pstmt.setString(1,userId);
+		   rs=pstmt.executeQuery();
+		   while(rs.next()) {
+			   af.add(getSendfriendsList(rs));
+		   }
+	   }catch(SQLException e) {
+		   e.printStackTrace();
+	   }finally {
+		   close(rs);
+		   close(pstmt);
+	   }return af;
    }
    
    
@@ -384,6 +413,8 @@ public class MypageDao {
       return m;
    }
    
+
+   
    
    public Member pwdCk(Connection conn, String userId, String pwd) {
       Member m = null;
@@ -422,6 +453,8 @@ public class MypageDao {
             .myImg(rs.getString("MYIMG"))
             .build();
    }
+   
+
    
    public int updatePassword(Connection conn, String userId, String newPass) {
       
@@ -515,16 +548,15 @@ public class MypageDao {
          pstmt=conn.prepareStatement(sql.getProperty("getmyImg"));
          pstmt.setString(1, userId);
          rs=pstmt.executeQuery();
-         
-         
-         
+         if(rs.next()) {
+        	 result=rs.getString("MYIMG");
+         }
       }catch(SQLException e) {
          e.printStackTrace();
       }finally {
          close(rs);
          close(pstmt);
       }
-      System.out.println("내이미지 디에이오"+result);
       return result;
    }
    
@@ -1044,7 +1076,24 @@ public int getqnumPerpage(Connection conn, String userId) {
                .build();
       }
 
-
+      public int deleteNote(Connection conn, String checkNum) {
+    	   
+          PreparedStatement pstmt=null;
+          ResultSet rs=null;
+          int result=0;
+          try {
+             pstmt=conn.prepareStatement(sql.getProperty("deleteNote"));
+             pstmt.setInt(1, Integer.parseInt(checkNum));
+             result=pstmt.executeUpdate();
+          
+          }catch(SQLException e) {
+             e.printStackTrace();
+          }finally {
+             close(rs);
+             close(pstmt);
+          
+          }return result;
+    }
 
 
 

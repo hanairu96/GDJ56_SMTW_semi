@@ -32,7 +32,7 @@ public class GmailCheckServlet extends HttpServlet {
 		String email=request.getParameter("email");//입력받은 이메일
 		
 		String crtfcNo=EmailSendModule.gmailSend(email);//전송된 인증번호;
-		System.out.println(crtfcNo);
+		System.out.println("인증번호 : "+crtfcNo);
 //		request.setAttribute("email",email);
 //		request.setAttribute("crtfcNo", crtfcNo);
 		

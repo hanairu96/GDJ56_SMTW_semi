@@ -13,7 +13,7 @@ import com.smtw.mypage.model.service.MypageService;
 /**
  * Servlet implementation class mypageMemberDeleteServlet
  */
-@WebServlet("/mypage/mypageMemberDelete.do")
+@WebServlet(name="mypageMemberDelete", urlPatterns="/mypage/mypageMemberDelete.do")
 public class mypageMemberDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,7 +31,7 @@ public class mypageMemberDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String userId=request.getParameter("id");
-		String pwd=request.getParameter("password");
+		String pwd=request.getParameter("Pwd");
 		
 		
 		

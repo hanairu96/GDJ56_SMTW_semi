@@ -251,10 +251,10 @@
 		//댓글창 누를 시 로그인멤버 아니면 댓글 못 달게하기
 		const logInCheck=()=>{
 			if(<%=logInMember==null%>){
+				$(".commentText").blur();
 				Swal.fire({
 					title:"로그인 한 사용자만 댓글을 \n등록할 수 있습니다."
 					,icon: 'error'});
-				$(".commentText").blur();
 			}
 		}
 		
@@ -262,16 +262,16 @@
 		const insertComment=()=>{
 			//아무것도 작성하지 않으면 재작성 요구
 			if($("#comment_1").val().trim()==""){
-				Swal.fire("댓글을 작성해주세요.");
 				$(".commentText").blur();
+				Swal.fire("댓글을 작성해주세요.");
 				return false;
 			}
 		}
 		//답글등록 클릭 시
 		const checkReply=(e)=>{
 			if($(e.target).parent().find("textarea").val().trim()==""){//해당 버튼의 답글을 아무것도 달지 않으면
-				Swal.fire("댓글을 작성해주세요.");
 				$(".commentText").blur();
+				Swal.fire("댓글을 작성해주세요.");
 				return false;
 			}
 		}

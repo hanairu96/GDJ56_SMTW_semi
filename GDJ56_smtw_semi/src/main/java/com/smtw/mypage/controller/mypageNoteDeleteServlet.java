@@ -1,25 +1,27 @@
-package com.smtw.login.controller;
+package com.smtw.mypage.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.member.model.service.MemberService;
+import com.smtw.mypage.model.service.MypageService;
 
 /**
- * Servlet implementation class ChangePwdServlet
+ * Servlet implementation class mypageNoteDeleteServlet
  */
-@WebServlet(name="changePwd",urlPatterns = "/logIn/changePwd.do")
-public class ChangePwdServlet extends HttpServlet {
+@WebServlet("/mypage/mypageNoteDelete.do")
+public class mypageNoteDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChangePwdServlet() {
+    public mypageNoteDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,26 +30,27 @@ public class ChangePwdServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId=request.getParameter("memberId");
-		String inputPwd=request.getParameter("inputPwd");
 		
-		int result=new MemberService().changePwd(memberId,inputPwd);
+		Thread t = new Thread(()->{
+			try {
+			Thread.sleep(4000);
+			}catch(InterruptedException e) {
+				e.printStackTrace();
+			}
+		});
 		
-		String msg="",loc="";
+		String[] checkBoxArr=request.getParameterValues("checkBoxArr[]");
+		int result =0;
+		String checkNum="";
 		
-		if(result>0) {
-			msg="비밀번호 재설정 완료"; 
-			loc="/logIn/logIn.do";
-			
-		}else {
-			msg="비밀번호 변경 실패";
-			loc="/logIn/logIn.do";
+		for(String str:checkBoxArr) {
+			checkNum=str;
+			result=new MypageService().deleteNote(checkNum);
+			System.out.println(result);
 		}
 		
-	
-		request.setAttribute("msg",msg);
-		request.setAttribute("loc",loc);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request,response);
+		
+		
 		
 	}
 

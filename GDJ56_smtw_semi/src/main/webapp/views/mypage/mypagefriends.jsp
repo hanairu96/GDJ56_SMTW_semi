@@ -8,23 +8,19 @@
 
 <%
 List<Applyfriends> list =  (List<Applyfriends>)request.getAttribute("list");
+List<Applyfriends> flist =  (List<Applyfriends>)request.getAttribute("sendFlist");
 %>
 <%
 List<MemberInfo> infolist =  (List<MemberInfo>)request.getAttribute("infolist");
 %>
 <%
 List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendslist");
+
 %>
 <%
 List<MemberInfo2> acceptedlist =  (List<MemberInfo2>)request.getAttribute("acceptedlist");
 String myImg = (String)request.getAttribute("myImg");
-out.print(myImg);
 %>
-
-
-
-
-
     <section>
     <div class="sector">
         <div class="sidemenu">
@@ -110,9 +106,6 @@ out.print(myImg);
             		frm.submit();
             	}
             	</script>
-            
-        
-         
 
             <div id="recievelist"" style="overflow:scroll">
 
@@ -140,6 +133,26 @@ out.print(myImg);
                 }%>
                  
             </div>
+            
+            <div id="sendlist"" style="overflow:scroll">
+           		<p><b>친구신청 보낸 목록</b><p>
+           		 <%if(flist.isEmpty()){ %>
+                	회원님께서 보낸 친구 신청이 아직 없습니다 :(
+                <%} else{
+                	for(int i=0;i<flist.size();i++){
+                %>
+                <div style="width:800; height:100;border: 1px solid;">
+                    <p style="color: gray; float: right;">친구신청일 : <%=flist.get(i).getFEnroll()%></p>
+                    <p style="text-align: center; float: left;">
+                    <%=flist.get(i).getMemberId()%></p>
+                    <p style="text-align: center;"><%=flist.get(i).getPropose()%></p>
+                </div>
+                <br>
+                <%}
+                }%>
+           	
+           	</div>
+            
           
         </div>
         
@@ -225,7 +238,26 @@ out.print(myImg);
     		scrollbar-width: none; /* Firefox */
         }
         
+          #sendlist{
+            border: 1px solid;
+            border-bottom: 3px solid;
+
+            position: absolute;
+            bottom:1000px;
+            left: 500px;
+            
+            width: 1000px;
+            height: 300px;
+            
+            -ms-overflow-style: none; /* IE and Edge */
+    		scrollbar-width: none; /* Firefox */
+        }
+        
         #recievelist::-webkit-scrollbar {
+   		 display: none; /* Chrome, Safari, Opera*/
+		}
+		
+		#sendlist::-webkit-scrollbar {
    		 display: none; /* Chrome, Safari, Opera*/
 		}
         .contentList{
@@ -313,7 +345,7 @@ out.print(myImg);
                 왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
              */
             margin-top: 100px;
-            height: auto; 
+            height: 1300px; 
             /*
                 ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
                 높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.

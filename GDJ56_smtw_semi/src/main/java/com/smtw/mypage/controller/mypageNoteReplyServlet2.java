@@ -1,4 +1,4 @@
-package com.smtw.login.controller;
+package com.smtw.mypage.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,19 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.member.model.service.MemberService;
-
 /**
- * Servlet implementation class ChangePwdServlet
+ * Servlet implementation class mypageNoteReply
  */
-@WebServlet(name="changePwd",urlPatterns = "/logIn/changePwd.do")
-public class ChangePwdServlet extends HttpServlet {
+@WebServlet("/mypage/mypageNoteReply2.do")
+public class mypageNoteReplyServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChangePwdServlet() {
+    public mypageNoteReplyServlet2() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,26 +26,26 @@ public class ChangePwdServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId=request.getParameter("memberId");
-		String inputPwd=request.getParameter("inputPwd");
 		
-		int result=new MemberService().changePwd(memberId,inputPwd);
+		//쪽지 받는 사람아이디
+		String receiver = request.getParameter("sender");
+		String receiverName = request.getParameter("friendName");
 		
-		String msg="",loc="";
+		String memberId = request.getParameter("userId");
 		
-		if(result>0) {
-			msg="비밀번호 재설정 완료"; 
-			loc="/logIn/logIn.do";
-			
-		}else {
-			msg="비밀번호 변경 실패";
-			loc="/logIn/logIn.do";
-		}
 		
-	
-		request.setAttribute("msg",msg);
-		request.setAttribute("loc",loc);
-		request.getRequestDispatcher("/views/common/msg.jsp").forward(request,response);
+		System.out.println("쪽지 보낼 아이디:"+receiver);
+		System.out.println("현재 로그인한 아이디"+memberId);
+		
+		// receibver, memberId 보내기
+		request.setAttribute("receiver", receiver);
+		request.setAttribute("receiverName", receiverName);
+		request.setAttribute("memberId", memberId);
+		
+		//쪽지 보내기 화면전환
+		request.getRequestDispatcher("/views/mypage/mypageNoteEnroll2.jsp").forward(request, response);
+		
+		
 		
 	}
 

@@ -6,21 +6,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.smtw.member.model.vo.Member;
 import com.smtw.mypage.model.service.MypageService;
 
 /**
- * Servlet implementation class mypagePasswordUpdateServlet
+ * Servlet implementation class mypageNoteEnrollEndServlet
  */
-@WebServlet(name="PasswordUpdate", urlPatterns="/mypage/mypagePasswordUpdate.do")
-public class mypagePasswordUpdateServlet extends HttpServlet {
+@WebServlet("/mypage/mypageNoteEnrollEnd2.do")
+public class mypageNoteEnrollEndServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public mypagePasswordUpdateServlet() {
+    public mypageNoteEnrollEndServlet2() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,28 +29,37 @@ public class mypagePasswordUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId=request.getParameter("id");
-		String pwd=request.getParameter("Pwd");
 		
-		System.out.println(userId+" : "+pwd);
-		Member m = new MypageService().pwdCk(userId,pwd);
+		String memberId=request.getParameter("memberId");
+		String receiver=request.getParameter("receiver");
+		String context=request.getParameter("context");
 		
+		System.out.println("!!!:"+memberId);
 		
-		String msg="",loc="";
-		if(m==null) {
-			msg="비밀번호를 잘못입력하셨습니다. 다시입력해주세요";
-			loc="/mypage/mypagePwdCk3.do?id="+userId;
-			request.setAttribute("msg", msg);
-			request.setAttribute("loc", loc);
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		//사용자 이름가져오기
+		String name = new MypageService().getName(memberId);
+		
+		//쪽지를 db에 저장하기
+		int result = new MypageService().insertNote(memberId,receiver,context);
+		
+		String msg="", loc="";
+		if(result<1) {
+			msg="실패했습니다. 다시 시도해주세요";
+			loc="/mypage/mypageNoteReply.do?id="+memberId;
+
 		}else {
-			request.setAttribute("userId", userId);
-			request.getRequestDispatcher("/views/mypage/mypageUpdatePassword.jsp").forward(request, response);
+			msg="쪽지보내기 성공!";
+			loc="/mypage/mypageNoteReceive.do?id="+memberId;
 		}
 		
-		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/mypage/close.jsp").forward(request, response);
 	}
+		
+		
 	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
