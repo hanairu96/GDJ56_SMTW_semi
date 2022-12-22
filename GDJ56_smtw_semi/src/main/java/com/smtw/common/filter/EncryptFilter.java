@@ -18,7 +18,7 @@ import com.smtw.common.PasswordEncodingWrapper;
  * Servlet Filter implementation class EncryptFilter
  */
 @WebFilter(servletNames= {
-		"enrollMemberEnd","logInEnd","changePwd"
+		"enrollMemberEnd","logInEnd","changePwd","mypagePwdCkEnd", "PasswordUpdateEnd", "PasswordUpdate", "mypageMemberDelete", "PasswordUpdate"
 })
 public class EncryptFilter extends HttpFilter implements Filter {
        

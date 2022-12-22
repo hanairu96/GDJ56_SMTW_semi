@@ -26,7 +26,7 @@ out.print(userId);
             <form action="<%=request.getContextPath()%>/mypage/mypagePasswordUpdateEnd.do" method="post" onsubmit="return passwordCheck()";>
            	
            	 <input type="hidden" name="id" value="<%=userId%>">
-             새로운 비밀번호 <input type="password" name="password_new" id="password_new" value="" required><br><br>
+             새로운 비밀번호 <input type="password" name="Pwd_new" id="password_new" value="" required><br><br>
              새로운 비밀번호 확인<input type="password" id="password_chk" value="" required>
             <input type="submit" name="submit" id="" value="취소">
             <input type="submit" name="submit" id="" value="입력">
@@ -39,7 +39,7 @@ out.print(userId);
         </section>
         <script>
 		const passwordCheck=()=>{
-			const password=document.querySelector("[name=password_new]").value;
+			const password=document.querySelector("[name=Pwd_new]").value;
 			console.log(password);
 			const passwordck=document.querySelector("#password_chk").value;
 			console.log(passwordck);
