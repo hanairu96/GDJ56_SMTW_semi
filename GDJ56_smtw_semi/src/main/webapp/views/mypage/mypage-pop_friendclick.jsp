@@ -35,7 +35,7 @@
            var gsWin=window.open("","winName2","width=500,height=600"); //open("주소",띄우는방식,크기)
            var frm=$(e.target).prev()[0];
            console.log(frm);
-           frm.action="<%=request.getContextPath()%>/mypage/mypageNoteReply.do";
+           frm.action="<%=request.getContextPath()%>/mypage/mypageNoteReply2.do";
            frm.target="winName2";
            frm.submit();
         }

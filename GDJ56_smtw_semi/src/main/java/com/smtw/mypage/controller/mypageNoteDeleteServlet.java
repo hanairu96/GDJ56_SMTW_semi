@@ -1,31 +1,27 @@
-package com.smtw.friends.controller;
+package com.smtw.mypage.controller;
 
 import java.io.IOException;
+import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.admin.model.service.MemberService;
-import com.smtw.friends.model.service.FriendsService;
-import com.smtw.friends.model.vo.Friends;
-import com.smtw.member.model.vo.Member;
 import com.smtw.mypage.model.service.MypageService;
 
 /**
- * Servlet implementation class MemberInfoServlet
+ * Servlet implementation class mypageNoteDeleteServlet
  */
-@WebServlet("/friends/friendsInfo.do")
-public class FriendsInfoServlet extends HttpServlet {
+@WebServlet("/mypage/mypageNoteDelete.do")
+public class mypageNoteDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FriendsInfoServlet() {
+    public mypageNoteDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,20 +30,28 @@ public class FriendsInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int no=Integer.parseInt(request.getParameter("friendsNo"));
 		
-		Friends f=new FriendsService().selectFriendsNo(no);
-		request.setAttribute("friends", f);
+		Thread t = new Thread(()->{
+			try {
+			Thread.sleep(4000);
+			}catch(InterruptedException e) {
+				e.printStackTrace();
+			}
+		});
 		
-		Member m=new MemberService().selectMemberId(f.getMemberId());
-		request.setAttribute("member", m);
+		String[] checkBoxArr=request.getParameterValues("checkBoxArr[]");
+		int result =0;
+		String checkNum="";
 		
-		String myImg=new MypageService().getImg(m.getMemberId());
-		request.setAttribute("myImg", myImg);
+		for(String str:checkBoxArr) {
+			checkNum=str;
+			result=new MypageService().deleteNote(checkNum);
+			System.out.println(result);
+		}
 		
-		RequestDispatcher rd=request.getRequestDispatcher("/views/friends/friendsInfo.jsp");
-		rd.forward(request, response);
-	
+		
+		
+		
 	}
 
 	/**

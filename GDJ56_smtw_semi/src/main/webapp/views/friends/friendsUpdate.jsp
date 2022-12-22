@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.smtw.friends.model.vo.Friends" %>
+<%@ page import="com.smtw.friends.model.vo.Friends, com.smtw.mypage.model.service.MypageService" %>
+<%@ include file="/views/common/header.jsp" %>
 <%
 	Friends f=(Friends)request.getAttribute("friends");
+	String myImg=new MypageService().getImg(logInMember.getMemberId()); 
 %>
-<%@ include file="/views/common/header.jsp" %>
 
 <!-- 부트스트랩 CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
@@ -21,8 +22,12 @@
 			            <h1>워홀프렌즈 수정</h1>
 			        </div><br>
                     <div style="border:0px solid pink;width:810px;height:200px;display:flex;">
-                        <div  style="border:0px solid rgb(210, 243, 21);width:300px;">
-                            <img src="<%=request.getContextPath() %>/images/lupy.jpg" style="width:65%;height:90%;margin-left:30px;display:block;border-radius:120px;">
+                        <div style="border:0px solid rgb(210, 243, 21);width:300px;">
+                            <%if(myImg==null) {%>
+                           		<img src="<%=request.getContextPath() %>/images/lupy.jpg" style="width:65%;height:90%;margin-left:30px;display:block;border-radius:120px;">
+                            <%}else {%>
+                            	<img src="<%=request.getContextPath() %>/upload/account/<%=myImg %>" style="width:65%;height:90%;margin-left:30px;display:block;border-radius:120px;">
+							<%} %>
                         </div>
                         <div style="border:0px solid rgb(210, 243, 21);width:300px;">
                         	<br><br>

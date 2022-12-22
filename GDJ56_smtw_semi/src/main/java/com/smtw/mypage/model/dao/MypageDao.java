@@ -515,9 +515,9 @@ public class MypageDao {
          pstmt=conn.prepareStatement(sql.getProperty("getmyImg"));
          pstmt.setString(1, userId);
          rs=pstmt.executeQuery();
-         
-         
-         
+         if(rs.next()) {
+        	 result=rs.getString("MYIMG");
+         }
       }catch(SQLException e) {
          e.printStackTrace();
       }finally {
@@ -1044,7 +1044,24 @@ public int getqnumPerpage(Connection conn, String userId) {
                .build();
       }
 
-
+      public int deleteNote(Connection conn, String checkNum) {
+    	   
+          PreparedStatement pstmt=null;
+          ResultSet rs=null;
+          int result=0;
+          try {
+             pstmt=conn.prepareStatement(sql.getProperty("deleteNote"));
+             pstmt.setInt(1, Integer.parseInt(checkNum));
+             result=pstmt.executeUpdate();
+          
+          }catch(SQLException e) {
+             e.printStackTrace();
+          }finally {
+             close(rs);
+             close(pstmt);
+          
+          }return result;
+    }
 
 
 
