@@ -74,7 +74,9 @@
                 </div>
 			<!--데이터 출력  -->
                <%}else{ 
-            	  for(Review r :review)  { %> 
+            	  
+            	   int count=0;
+            	   for(Review r :review)  { %> 
               	
                    
                    
@@ -87,10 +89,18 @@
                         </div>
                        
                         
+                        <%count++;
+                        if(count==4){
+                       		count=0;%>
+                       	</div>
+                       	<div style="display:flex">
+                      <%} %>
                         
-                     <% }
+                        
+                        
+                     <% }    
                     
-              		}%> 
+              		}%>    <!--else  -->
                     
                     <!--반복문에서 뺴야함  -->
                     </div> 
