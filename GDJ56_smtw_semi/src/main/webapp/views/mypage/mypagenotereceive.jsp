@@ -19,19 +19,18 @@
         </div>
         <div class="menuDiv"></div>
         <div class="contentList">
-            <div>
-                <h1>쪽지함</h1>
+		 	<center><h1>쪽지함</h1></center>
+            <div id="postmenu">
+            	<div id="postrecieve"><h2 style="background-color: cornflowerblue;" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">수신함</h2></div><br>
+            	<div id="postsend"><h2 style="background-color: rgb(239, 239, 239);" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteSend.do?id=<%=logInMember.getMemberId()%>');">발신함</h2></div><br>
             </div>
-            <div id="postrecieve"><h2 style="background-color: cornflowerblue;" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">수신함</h2></div><br>
-            <div id="postsend"><h2 style="background-color: rgb(239, 239, 239);" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteSend.do?id=<%=logInMember.getMemberId()%>');">발신함</h2></div><br>
-            <button onclick="noteDeleteClick();">삭제하기</button>
-           
-            <table id="postbox" style="width:90%;">
+            	<button onclick="noteDeleteClick();">삭제하기</button>
+            <table id="postbox" style="width: 95%; margin-left:2%; style="table-layout: fixed"">
                 <tr>
-                    <td style="width: 50px;"><input type="checkbox" name="" id="" onclick='selectAll(this)'></td>
-                    <td style="width: 80px;"><p>FROM</p></td>
-                    <td style="width: 700px;">내용</td>
-                    <td style="width: 100px;">보낸날짜</td>
+                    <td style="width: 5%;"><input type="checkbox" name="" id="" onclick='selectAll(this)'></td>
+                    <td style="width: 20%;"><p>FROM</p></td>
+                    <td style="width: 40%; ">내용</td>
+                    <td style="width: 35%;">보낸날짜</td>
                 </tr>
                 
                 <%if(list.isEmpty()){ %>
@@ -52,7 +51,7 @@
 			                    <input type="hidden" name="id" value=<%=logInMember.getMemberId() %>>
 			                </form>	
 		                </td>
-                    	<td onclick="goPopup(event)"><%=n.getContent() %></td>
+                    	<td onclick="goPopup(event)" style="text-overflow:ellipsis; overflow:hidden; white-space:nowrap;"><%=n.getContent() %></td>
                     	<td><%=n.getDate()%></td>
                 	</tr>
                 <%}
@@ -147,34 +146,23 @@
             left: 900px;
         }
 
-        #postcontroll{
-            position: absolute;
-            top: 550px;
-            left: 450px;
-            cursor: pointer;
-            
-        }
-
-        #postcontroll>*{
-            width: 100px;
-            height: 50px;
-            
-        }
+        #postmenu{
+			display:flex;
+      		justify-content: center;
+		}
 
         #postrecieve{
-            position: absolute;
-            top: 450px;
-            left: 580px;
-            width: 300px;
+         
+            width: 150px;
             height: 100px;
+            cursor: pointer;
         }
 
         #postsend{
-            position: absolute;
-            top: 450px;
-            left: 1000px;
-            width: 300px;
+            
+            width: 150px;
             height: 100px;
+            cursor: pointer;
         }
 
         #menutitle{
@@ -188,32 +176,6 @@
             height: 100px;
         }
 
-        #mypsc{
-            border: 1px solid;
-            border-bottom: 3px solid;
-
-            position: absolute;
-            top: 500px;
-            left: 500px;
-         
-            width: 300px;
-            height: 300px;
-        }
-        #flist{
-            border: 1px solid;
-            border-bottom: 3px solid;
-
-            position: absolute;
-            top: 500px;
-            left: 900px;
-            
-            width: 600px;
-            height: 300px;
-        }
-        #flist>img{
-            float: left;
-            margin: 5px;
-        }
         #recievelist{
             border: 1px solid;
             border-bottom: 3px solid;
