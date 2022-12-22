@@ -23,7 +23,8 @@
 
             <div id="proImg">
             	<%if(m.getMyImg()!=null) {%>
-            		<img src="<%=m.getMyImg()%>">
+            		<img src="<%=request.getContextPath() %>/upload/account/<%=m.getMyImg()%>"
+            		width="170" height="250">
             	<%}else {%>
             		<img src="<%=request.getContextPath() %>/images/tweety.jpg"
             		width="170" height="250">
