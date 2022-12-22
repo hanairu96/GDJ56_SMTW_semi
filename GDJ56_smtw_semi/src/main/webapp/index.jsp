@@ -31,7 +31,7 @@
                       alt="카카오톡 공유 보내기 버튼" />
                 </a>
                 <!-- 인스타그램 링크 로고 아이콘 -->
-                <a href="https://www.instagram.com/showmetheway_korea/" id="instarLogoAddress">
+                <a href="https://www.instagram.com/showmetheway_korea/" target="_blank" id="instarLogoAddress">
                     <img src="https://t1.daumcdn.net/cfile/tistory/99D8D7485D09F21432" alt="">
                 </a>  
             </div>
@@ -163,8 +163,12 @@
 	                    <!-- 서브메뉴영역 -->
 	                    <div class="sub">
 	                        <ul class="submenu">
-	                            <li><a href="<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>">쪽지함</a></li>
-	                            <li><a href="<%=request.getContextPath()%>/logIn/logOut.do">로그아웃</a></li>
+	                        	<%if(logInMember.getMemberId().equals("ADMIN")) {%>
+		                            <li><a href="<%=request.getContextPath()%>/admin/noteReceive.do">쪽지함</a></li>
+	                            <%}else {%>
+	                            	<li><a href="<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>">쪽지함</a></li>
+	                            <%} %>
+	                            	<li><a href="<%=request.getContextPath()%>/logIn/logOut.do">로그아웃</a></li>
 	                        </ul>
 	                    </div>
                         <%} %>
@@ -271,7 +275,7 @@
                           <!--   <div class="textcontainer">
                                 <h3>워킹홀리데이란</h3>
                             </div>  -->
-                            <img src="https://img.freepik.com/premium-vector/illustration-map-of-the-world-with-flags-of-all-countries_37674-7.jpg?w=1380" class="d-block w-100" alt="...">
+                            <img src="images/map.JPG" class="d-block w-100" alt="...">
                         
                         </div>
                         <div class="carousel-item" onclick="location.assign('<%=request.getContextPath()%>/country/countryMain.do')">
@@ -284,7 +288,7 @@
                             <!-- <div class="textcontainer">
                                 <h3>워홀프렌즈찾기</h3>
                             </div> -->
-                            <img src="https://post-phinf.pstatic.net/MjAyMDA3MjFfMTY1/MDAxNTk1MzIxODI2NTA2.5wzgcsDonhkKgJa43_pny5_f9mDAsAboVqoxT18P6BMg.oAYho8D61Kx2Tx8-5n_14DzOVTU_dy95xwNH9DEJDHYg.JPEG/tid354t000040.jpg?type=w1200" class="d-block w-100" alt="...">
+                            <img src="images/friendssssssssss.jpg" class="d-block w-100" alt="...">
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

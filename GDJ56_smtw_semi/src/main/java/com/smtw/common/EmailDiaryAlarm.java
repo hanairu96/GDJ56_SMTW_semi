@@ -52,7 +52,7 @@ public class EmailDiaryAlarm {
             String diaryMailText="<br><div style='text-align:center;'>====================================================================<br><br>"
             		+ "<span style='font-size:20px;'>※ 두근두근 출국 10일전입니다!!!! ※</span><br>"
             		+ "<span style='font-size:20px;'>출국 준비 다 되셨나요?! </span><br>"
-            		+ "<span style='font-size:20px;'>저희 </span> <a href='http://localhost:9090/GDJ56_smtw_semi/' style='color:red;font-size:30px;font-weight:bord;'>Show Me The Way</a><span style='font-size:20px;'> 와 함께 완벽히 준비하세요!!</span>"
+            		+ "<span style='font-size:20px;'>저희 </span> <a href='http://gd1class.iptime.org:9999/GDJ56_smtw_semi/' style='color:red;font-size:30px;font-weight:bord;'>Show Me The Way</a><span style='font-size:20px;'> 와 함께 완벽히 준비하세요!!</span>"
             		+ "<br><br>==================================================================== </div>";
             
             // Text

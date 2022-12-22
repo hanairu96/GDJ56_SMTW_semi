@@ -22,7 +22,7 @@
             <p>message : 개인정보 보호를 위해 비밀번호를 다시 한 번 입력해주세요</p>
            	<form action="<%=request.getContextPath()%>/mypage/mypageMemberDelete.do" method="post">
            	비밀번호 <input type="hidden" name="id" value="<%=userId%>">
-             <input type="password" name="password" value="">
+             <input type="password" name="Pwd" value="">
             <input type="submit" name="submit" id="" value="입력">
             </form>
             </div>
