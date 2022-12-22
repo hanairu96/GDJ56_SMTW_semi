@@ -22,7 +22,11 @@
                     <div style="display:flex">
                         <div style="border:0px solid green;width:452px;height:690px ">
                             <div style="border:0px solid pink;width:440px;height:340px;">
-                                <img src="<%=request.getContextPath()%>/upload/account/<%=myImg%>" alt="" style="width:60%;height:75%;margin:auto;display:block;margin-top:50px;border-radius:120px;">
+                            	<%if(myImg==null) {%>
+	                                <img src="<%=request.getContextPath()%>/images/lupy.jpg" alt="" style="width:60%;height:75%;margin:auto;display:block;margin-top:50px;border-radius:120px;">
+                            	<%}else {%>
+    	                            <img src="<%=request.getContextPath()%>/upload/account/<%=myImg%>" alt="" style="width:60%;height:75%;margin:auto;display:block;margin-top:50px;border-radius:120px;">
+                                <%} %>
                             </div>
                             <div style="border:0px solid pink;width:440px;height:340px;text-align:center;">
                             <%
