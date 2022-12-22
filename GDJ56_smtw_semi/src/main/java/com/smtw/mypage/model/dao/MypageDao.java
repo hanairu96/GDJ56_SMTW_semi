@@ -98,6 +98,14 @@ public class MypageDao {
             .build();
    }
    
+   private Applyfriends getSendfriendsList(ResultSet rs) throws SQLException{
+	      return Applyfriends.builder()
+	            .propose(rs.getString("PROPOSE"))
+	            .memberId(rs.getString("MEMBER_ID"))
+	            .fEnroll(rs.getDate("F_ENROLL"))
+	            .build();
+	   }
+   
    private MemberInfo getInfoApplyfriendsList(ResultSet rs) throws SQLException{
       return MemberInfo.builder()
             .memberId(rs.getString("MEMBER_FROM"))
@@ -135,6 +143,27 @@ public class MypageDao {
             close(rs);
             close(pstmt);
          }return af;
+   }
+   
+   public List<Applyfriends> sendfriends(Connection conn, String userId){
+	   
+	   List<Applyfriends> af=new ArrayList();
+	   PreparedStatement pstmt=null;
+	   ResultSet rs=null;
+	   
+	   try {
+		   pstmt=conn.prepareStatement(sql.getProperty("sendfriends"));
+		   pstmt.setString(1,userId);
+		   rs=pstmt.executeQuery();
+		   while(rs.next()) {
+			   af.add(getSendfriendsList(rs));
+		   }
+	   }catch(SQLException e) {
+		   e.printStackTrace();
+	   }finally {
+		   close(rs);
+		   close(pstmt);
+	   }return af;
    }
    
    
