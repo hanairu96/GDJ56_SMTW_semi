@@ -524,7 +524,6 @@ public class MypageDao {
          close(rs);
          close(pstmt);
       }
-      System.out.println("내이미지 디에이오"+result);
       return result;
    }
    
