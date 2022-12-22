@@ -37,7 +37,7 @@
 
                 
                 <tr>
-                    <td style="width: 50px;"><input type="checkbox" name="전체선택" id=""></td>
+                    <td style="width: 50px;"><input type="checkbox" name="전체선택" id="" onclick='selectAll(this)'></td>
                     <td style="width: 80px;"><p>TO</p></td>
                     <td style="width: 700px;">내용</td>
                     <td style="width: 100px;">보낸날짜</td>
@@ -51,7 +51,7 @@
                 	for(int i=0;i<list.size();i++){
                 %>
                		<tr>
-                    	<td><input type="checkbox" name="" id=""></td>
+                    	<td><input type="checkbox" name="check" id="" value="<%=list.get(i).getNtNo() %>"></td>
                     	<td>
                     		<p><%=list.get(i).getSenderName() %></p>
 	                    	<form name="form" action="" method="post">
@@ -83,10 +83,42 @@
             
            
             <div id="postcontroll">
-                <button>삭제하기</button>
+                <button onclick="noteDeleteClick();">삭제하기</button>
                 <!-- <button onclick="window.open('mypage-pop_sendnote.html','_blank','scrollbars=yes,width=600,height=600,top=100,left=300')">쪽지보내기</button> -->
             </div>
         </div>
+        <script>
+        function selectAll(selectAll)  {
+      	  const checkboxes 
+      	       = document.getElementsByName('check');
+      	  
+      	  checkboxes.forEach((checkbox) => {
+      	    checkbox.checked = selectAll.checked;
+      	  })
+      	}
+      
+      	function noteDeleteClick(){
+      		var checkBoxArr=[];
+      		$("input:checkbox[name='check']:checked").each(function(){
+      			checkBoxArr.push($(this).val());
+      			console.log(checkBoxArr);
+      		});
+      		$.ajax({
+      			type:"POST",
+      			url : "<%=request.getContextPath()%>/mypage/mypageNoteDelete.do",
+      			data : {
+      				checkBoxArr : checkBoxArr
+      			},
+      			success : function(result){
+      				alert("삭제 완료");
+      				history.go(0);
+      			},
+      			error:function(xhr, status, error){
+      				alert("실패");
+      			}
+      		});
+      	}
+      	</script>
    </section>
 	 <style>
        table,th,td{

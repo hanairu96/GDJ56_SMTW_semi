@@ -18,13 +18,7 @@ List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendsl
 <%
 List<MemberInfo2> acceptedlist =  (List<MemberInfo2>)request.getAttribute("acceptedlist");
 String myImg = (String)request.getAttribute("myImg");
-out.print(myImg);
 %>
-
-
-
-
-
     <section>
     <div class="sector">
         <div class="sidemenu">
@@ -110,9 +104,6 @@ out.print(myImg);
             		frm.submit();
             	}
             	</script>
-            
-        
-         
 
             <div id="recievelist"" style="overflow:scroll">
 
