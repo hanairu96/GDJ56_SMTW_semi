@@ -93,6 +93,7 @@ public class MypageService {
 		return m;
 	}
 	
+	
 	public Member pwdCk(String userId, String pwd) {
 		Connection conn = getConnection();
 		Member m = new MypageDao().pwdCk(conn,userId,pwd);

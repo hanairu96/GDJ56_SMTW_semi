@@ -8,12 +8,14 @@
 
 <%
 List<Applyfriends> list =  (List<Applyfriends>)request.getAttribute("list");
+List<Applyfriends> flist =  (List<Applyfriends>)request.getAttribute("sendFlist");
 %>
 <%
 List<MemberInfo> infolist =  (List<MemberInfo>)request.getAttribute("infolist");
 %>
 <%
 List<MemberInfo> friendslist =  (List<MemberInfo>)request.getAttribute("friendslist");
+
 %>
 <%
 List<MemberInfo2> acceptedlist =  (List<MemberInfo2>)request.getAttribute("acceptedlist");
@@ -134,16 +136,16 @@ String myImg = (String)request.getAttribute("myImg");
             
             <div id="sendlist"" style="overflow:scroll">
            		<p><b>친구신청 보낸 목록</b><p>
-           		 <%if(list.isEmpty()){ %>
+           		 <%if(flist.isEmpty()){ %>
                 	회원님께서 보낸 친구 신청이 아직 없습니다 :(
                 <%} else{
-                	for(int i=0;i<list.size();i++){
+                	for(int i=0;i<flist.size();i++){
                 %>
                 <div style="width:800; height:100;border: 1px solid;">
-                    <p style="color: gray; float: right;">친구신청일 : <%=list.get(i).getFEnroll()%></p>
+                    <p style="color: gray; float: right;">친구신청일 : <%=flist.get(i).getFEnroll()%></p>
                     <p style="text-align: center; float: left;">
-                    <%=infolist.get(i).getMemberName()%>(<%=infolist.get(i).getAge()%>/<%=infolist.get(i).getGender()%>)</p>
-                    <p style="text-align: center;"><%=list.get(i).getPropose()%></p>
+                    <%=flist.get(i).getMemberId()%></p>
+                    <p style="text-align: center;"><%=flist.get(i).getPropose()%></p>
                 </div>
                 <br>
                 <%}

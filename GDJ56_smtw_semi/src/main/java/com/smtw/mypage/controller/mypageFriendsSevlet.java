@@ -1,6 +1,7 @@
 package com.smtw.mypage.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -59,6 +60,7 @@ public class mypageFriendsSevlet extends HttpServlet {
 		//내가 보낸 친구신청 리스트
 		List<Applyfriends> sendFlist = new MypageService().sendfriends(id);
 		System.out.println("!!내가 보낸 친구신청 리스트!!"+sendFlist);
+		request.setAttribute("sendFlist",sendFlist);
 		
 		
 		System.out.println("신청수락받은 리스트:"+acceptedFlist);

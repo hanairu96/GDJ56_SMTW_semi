@@ -413,6 +413,8 @@ public class MypageDao {
       return m;
    }
    
+
+   
    
    public Member pwdCk(Connection conn, String userId, String pwd) {
       Member m = null;
@@ -451,6 +453,8 @@ public class MypageDao {
             .myImg(rs.getString("MYIMG"))
             .build();
    }
+   
+
    
    public int updatePassword(Connection conn, String userId, String newPass) {
       
