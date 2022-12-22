@@ -12,7 +12,7 @@ import com.smtw.member.model.service.MemberService;
 /**
  * Servlet implementation class ChangePwdServlet
  */
-@WebServlet("/logIn/changePwd.do")
+@WebServlet(name="changePwd",urlPatterns = "/logIn/changePwd.do")
 public class ChangePwdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
