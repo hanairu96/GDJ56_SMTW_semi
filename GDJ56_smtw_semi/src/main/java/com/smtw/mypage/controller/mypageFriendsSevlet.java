@@ -1,6 +1,7 @@
 package com.smtw.mypage.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -46,16 +47,21 @@ public class mypageFriendsSevlet extends HttpServlet {
 		String myImg=new MypageService().getImg(id);
 		request.setAttribute("myImg", myImg);
 		System.out.println("내사진"+myImg);
-		// 친구 신청한 리스트
+		// 나에게 친구 신청한 리스트
 		List<Applyfriends> list = new MypageService().applyfriendsList(id);
-		//친구 신청한 사람들의 정보
+		// 나에게 친구 신청한 사람들의 정보
 		List<MemberInfo> infolist = new MypageService().InfoapplyfriendsList(id);
 		//친구 리스트
 		List<MemberInfo> friendslist = new MypageService().FriendsList(id);
 		// (상대방이 나의 친구 신청을 받아준=)친구 수락받은 리스트
 		List<Member> acceptedFlist = new MypageService().acceptedFlist(id);
-		// 그의 정보
+		// 상대방이 나의 친구 신청을 받아준 그의 정보
 		List<MemberInfo2> acceptedlist=null;
+		//내가 보낸 친구신청 리스트
+		List<Applyfriends> sendFlist = new MypageService().sendfriends(id);
+		System.out.println("!!내가 보낸 친구신청 리스트!!"+sendFlist);
+		request.setAttribute("sendFlist",sendFlist);
+		
 		
 		System.out.println("신청수락받은 리스트:"+acceptedFlist);
 		
