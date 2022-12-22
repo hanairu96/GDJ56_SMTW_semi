@@ -4,6 +4,6 @@
 <%
 	CountryPage coarea=(CountryPage)request.getAttribute("data");
 %>
-<pre>
+	<div id="job">
 		<%=coarea.getNJob() %>
-</pre>
+	</div>

@@ -16,6 +16,7 @@
 <!-- 부트스트랩 JS -->
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script> -->
 <%@ include file="/views/common/header.jsp" %>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <style>
      a:link { color: black; text-decoration: none;}
 	 a:visited { color: black; text-decoration: none;}
@@ -112,12 +113,14 @@
            	<script>
            		/* 회원일경우 나라 상세정보가 없을때 뜨는 알림팝업 */
             	const nodatano=()=>{
-					alert("나라정보를 업데이트중입니다!!!");	
+            		swal('나라정보를 업데이트중입니다!!!','','info');	
             	}	
             	/* 비상상황문구를 넣었을 경우 알림팝업 */
             	const fn_emergency=(em,name)=>{
-            		if(em!='null') alert(em);
+            		if(em!='null') swal('비상상황발생',em,'warning')
+            		.then(function(){
             		location.assign('<%=request.getContextPath()%>/countryinfo/searchAll.do?nName='+name);
+					})            		
             	}
 			</script>
         <div id="comaincontainer2"> 

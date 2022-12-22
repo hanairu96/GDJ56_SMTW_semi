@@ -6,6 +6,7 @@
 	List<CountryPageInfo> cpi=(List<CountryPageInfo>)request.getAttribute("copageinfo");
 	String name=(String)request.getAttribute("name");
 	List<CountryPage> coinfo=(List<CountryPage>)request.getAttribute("allinfo");
+	List<CountryPageInfo> join=(List<CountryPageInfo>)request.getAttribute("joinpage");
 %>
 <%@ include file="/views/common/header.jsp" %>
 <script defer src="https://use.fontawesome.com/releases/v5.15.2/js/all.js" integrity="sha384-vuFJ2JiSdUpXLKGK+tDteQZBqNlMwAjhZ3TvPaDfN9QmbPb7Q8qUpbSNapQev3YF" crossorigin="anonymous"></script>
@@ -66,7 +67,7 @@
         	height : 450px;
         }
         #explain{
-        	border: 5px solid blue;
+/*         	border: 5px solid blue; */
         	margin-left:100px;
         	margin-right:100px;
         	height:auto;
@@ -119,7 +120,7 @@
                 <%if(c.getCPic()==null){%>
                 <img src="<%=request.getContextPath()%>/images/country/noimage_view.png" alt="" width="200" height="130">
 				<%}else{%>
-				<img src="<%=request.getContextPath()%>/upload/country/<%=c.getCPic()%>" alt="" width="200" height="130">
+				<img src="<%=request.getContextPath()%>/upload/country/<%=c.getCPic()%>" alt="" width="200" height="130" style=" box-shadow: 3px 3px 10px black;">
 				<%} %>
             </div>
             <p style="font-size: 13px;">
@@ -156,7 +157,13 @@
         <input type="button" id="cobtn5" name="button" value="취업정보">      
        
 		<div id="explain">
-			
+		<%for(CountryPageInfo cj: join){ %>
+			<%if(cj.getPage().getNInfo()==null) {%>
+				나라정보 업데이트 중입니다.
+			<%}else{ %>
+		    	<%=cj.getPage().getNInfo()%>
+			<%} 
+			}%>
 		</div>
     </div>
 	

@@ -123,7 +123,26 @@ public class CountryPageInfoDao {
 		return result;
 		}
 		
-	
+	public List<CountryPageInfo> selectjoinpage(Connection conn, String name) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<CountryPageInfo> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectjoinpage"));
+			pstmt.setString(1, name);
+			rs=pstmt.executeQuery();
+			while(rs.next()) { 
+				CountryPageInfo cp=getContryInfo(rs);
+				cp.setPage(getCountryPage(rs));
+				list.add(cp);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
 	
 	
 	//CountryPage의 dao항목들
@@ -212,29 +231,6 @@ public class CountryPageInfoDao {
 			close(pstmt);
 		}return cp;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

@@ -35,11 +35,14 @@ public class searchCountryInfoAllServlet extends HttpServlet {
 
 		String name=request.getParameter("nName");
 		
-		//api등 풀력 구문
+		//countrypageinfo 출력 구문
 		List<CountryPageInfo> c=new CountryPageInfoService().searchAll();
+		//해당 국가의 내용을 출력
+		List<CountryPageInfo> cc=new CountryPageInfoService().selectjoinpage(name);
 		
 		request.setAttribute("copageinfo", c);
 		request.setAttribute("name", name);
+		request.setAttribute("joinpage", cc);
 		request.getRequestDispatcher("/views/countryInfo/countryInfoMain.jsp").forward(request, response);
 	
 	
