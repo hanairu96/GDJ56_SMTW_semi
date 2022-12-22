@@ -3,6 +3,8 @@
 
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/review.css"/>
 
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/readReview.css"/>
+
 	<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@500&display=swap" rel="stylesheet">
     
@@ -16,10 +18,18 @@
 <script src="http://code.jquery.com/jquery-3.6.1.min.js"> </script> 
 	
 <%@ page import="com.smtw.review.model.vo.Review" %>   
+<%@ page import="com.smtw.review.model.vo. ReviewComments" %>   
+<%@ page import = "java.util.List" %>
+
 
 <%
 	Review  r=(Review)request.getAttribute("readReview");
 	Member m=(Member)request.getAttribute("member");
+	int readReviewNo=(int)request.getAttribute("readReviewNo");
+	List<ReviewComments> rcList=(List<ReviewComments>)request.getAttribute("rcList");
+	
+	
+	
 %>
 
 <%@include file="/views/common/header.jsp" %>
@@ -249,15 +259,21 @@
        <!-- 댓글 등록하기폼 -->
         <!-- div로 form을 감아줌 -->
        
-        <div style="margin-top:300px" class="comment-editor"> 
-           
-            <form class="form comment-form">
-                    <textarea placeholder="댓글을 남겨보세요"></textarea>
-                    <input type="hidden" name="boardref" value="">
-                    <input type="hidden" name="level" value="1"/>
-                    <input type="hidden" name="commentref" value="0"/>
-                    <input type="hidden" name="commentWriter" value="">   				
-                    <button type="button" class="submit  customBtn btnStyle" id="btn-insert">등록</button>
+        <div  class="comment-editor"  style="margin-top:300px" class="comment-editor"> 
+            <form class="form comment-form" 
+            action="<%=request.getContextPath()%>/community/insertRC.do"
+            onsubmit="return insertComment();">
+            
+           <textarea id="comment_1" onclick="logInCheck();" name="comment_1" class="commentText" placeholder="댓글을 남겨보세요" style="width:100%;"></textarea>
+           <input type="hidden" name="qnaNo" value="<%=r.getReviewNo()%>">
+           <input type="hidden" name="qcLevel" value="1"/> <!-- 댓글레벨  -->
+           <input type="hidden" name="qnaQcRef" value="0"/>	<!-- 답글이 아니라 그냥 댓글이라서 0 -->
+           <input type="hidden" id="commentWriter" name="commentWriter" value="<%=logInMember!=null?logInMember.getMemberId():""%>"><!-- 댓글작성자 아이디 넘기기  -->   				
+           <div style="width:100%;">
+               <button type="submit" class="submit customBtn btnStyle" id="btn-insert" style="width:80px;height:47px;float:right;"
+               		>댓글등록</button>
+           </div>
+                
             </form>
             <!-- <div>
             비밀댓글<input type="checkbox" style="margin-left: 800px;">
@@ -266,69 +282,102 @@
 
 
         <!-- 등록된 댓글 -->
-         
+          <%if(!rcList.isEmpty()) {%>
+    	<%for(ReviewComments rc : rcList) {%>
+    	<%if(rc.getReviewCommentLevel()==1) {%>
         <div class="comments level1">
-            <div class="comment ">
+            <div class="comment replies">
               <div class="content">
                 <header class="top">
-                  <div class="username">이동훈</div>
+                  <div class="username"><%=rc.getMemberId()%></div>
                   <div class="utility">
                     <!-- 현재버튼의 위치 -->
-                    <button class="menu btn-reply customBtn btnStyle">답글등록</button>  
+                    <button class="menu btn-reply customBtn btnStyle" onclick="btnReply(event);" >답글등록</button>  
                     <!-- 관리자와 해당 작성자만 보이게 -->
-                    <button class="menu customBtn btnStyle">댓글삭제</button>    
+                    <%if(logInMember!=null&&(logInMember.getMemberId().equals("ADMIN")||logInMember.getMemberId().equals(rc.getMemberId()))) {%>
+                    <button class="menu customBtn btnStyle" onclick="deleteComment('<%=rc.getRcNo()%>');">댓글삭제</button>    
+                <%} %>
                 </div>
                 </header>
-                <p>잘봤습니다.잘 보고 가요 !!</p>
+                <p><%=rc.getRcContents()%></p>
                 <ul class="bottom">
-                  <li class="menu time">2022-12-05</li>
+                  <li class="menu time"><%=rc.getEnrollDate()%></li>
                   <li class="divider"></li>
-                  <!-- <li class="menu show-reply">답글 (1)</li> -->
+                     <%if(rc.getQcCount()!=0) {%>
+                   <li class="menu show-reply" onclick="showReply(event);" style="cursor: pointer;" >
+                   	답글(<%=rc.getQcCount()%>)
+                   </li> 
+                   <%} %>
                 </ul>
-
-
               </div>
             </div>
-            
-            <!-- 이위치에 태그를 추가해줘야함 -->
-        
-        
-        
+           
+        </div>
+          <!-- 이위치에 태그를 추가해줘야함 -->
+       <!-- 답글  -->
+        <form class="form reply-form" style="display:none;flex-direction:column;align-items:center;" 
+         action="<%=request.getContextPath()%>/community/insertRC.do"  onsubmit="return checkReply(event);">
+            <textarea id="replyText" name="comment_1" class="commentText" onclick="logInCheck();" placeholder="답글을 남겨보세요"style="width:100%;"></textarea>
+	              	<input type="hidden" name="qnaNo" value="<%=r.getReviewNo()%>">
+           			<input type="hidden" name="qcLevel" value="2"/> <!-- 댓글레벨 2 -->
+           			<input type="hidden" name="qnaQcRef" value="<%=rc.getRcNo()%>"/>	<!-- 답글이라서 해당 댓글번호 -->
+           			<input type="hidden" id="commentWriter" name="commentWriter" value="<%=logInMember!=null?logInMember.getMemberId():""%>"><!-- 댓글작성자 아이디 넘기기  -->
+	              	<div style="width:100%;">
+	                	<button type="submit" class="submit customBtn btnStyle" id="btn-ReplyInsert" style="width:80px;height:47px;float:right;"
+	                		>댓글등록</button>
+	             	</div>
+           
+            </form>       
         </div>
         
         
+        
+      <%}else {%>      
+         
+           
+         
           <!--등록된 답글  -->
-        <div class="replies level2">
+        <div class="replies level2" style="border-left:5px solid #ddd;border-right:5px solid #ddd;
+        	border-bottom:5px solid #ddd;width:850px;height:auto;margin: 0 auto;display:none;">
+        	
             <div class="reply">
               <div class="content">
                 <header class="top">
-                  <div class="username">워홀러</div>
+                  <div class="username"><%=rc.getMemberId()%></div>
                   <div class="utility">
-                    <!-- <button class="menu">메뉴</button> -->
+                    <%if(logInMember!=null&&(logInMember.getMemberId().equals("ADMIN")||logInMember.getMemberId().equals(rc.getMemberId()))) {%>
+						<button class="menu customBtn btnStyle" onclick="deleteQC('<%=rc.getRcNo()%>');">답글삭제</button>    
+					<%} %>
+                  
                   </div>
                 </header>
-                <p>감사!!</p>
+                <p><%=rc.getRcContents()%></p>
                 <ul class="bottom">
-                  <li class="menu time">2022-12-06</li>
+                  <li class="menu time"><%=rc.getEnrollDate()%></li>
                 </ul>
               </div>
             </div>
             
 
-            <form class="form reply-form">
+           <!--  <form class="form reply-form">
               <textarea placeholder="답글을 남겨보세요"></textarea>
               <button type="button" class="submit customBtn btnStyle">등록하기</button>
-            </form>       
+            </form>        -->
         </div>
+       
+	    <%} %><!-- 댓글,답글 구별if문  -->
+		<%} %>
+		<%} %>
+       
        
        
        
         <div style="border:0px solid yellow;width:100%;height:30px;"></div>
         <div style="border:0px solid yellow;width:100%;height:20px;">
-        <a href="">다음글</a>
+      <!--   <a href="">다음글</a> -->
         </div>
         <div style="border:0px solid yellow;width:100%;height:20px;">
-        <a href="">이전글</a>
+       <!--  <a href="">이전글</a> -->
         </div>
         <div style="background-color:rgba(128, 0, 128, 0.4);width:100%;height:3px;"></div>
         <div style="border:0px solid yellow;width:100%;height:30px;">
@@ -340,11 +389,88 @@
 
     </section> 
     
+    <script>
+  //댓글창 누를 시 로그인멤버 아니면 댓글 못 달게하기  *
+	const logInCheck=()=>{
+		if(<%=logInMember==null%>){
+			Swal.fire({
+				title:"로그인 한 사용자만 댓글을 \n등록할 수 있습니다."
+				,icon: 'error'});
+			$(".commentText").blur();
+		}
+	}
+    
+	//댓글등록 버튼 누를 시   *
+	const insertComment=()=>{
+		//아무것도 작성하지 않으면 재작성 요구
+		if($("#comment_1").val().trim()==""){
+			Swal.fire("댓글을 작성해주세요.");
+			$(".commentText").blur();
+			return false;
+		}
+	}
+	
+	//댓글에 ->답글 등록 클릭 시    *
+	const btnReply=(e)=>{
+		$(e.target).parentsUntil("section").find("form").show();
+	}
+	
+	
+	//댓글 삭제    *    
+	const deleteComment=(qcNo)=>{
+		const result=confirm("댓글 삭제 시 댓글에 달린 답글도 전부 삭제됩니다. 삭제하시겠습니까?");
+		if(result){//확인버튼 누르면
+			location.assign("<%=request.getContextPath()%>/community/DeleteReviewComment.do?qnaNo=<%=r.getReviewNo()%>&qcNo="+qcNo);
+		}
+	}
+	
+	
+	//답글등록 클릭 시   *
+	const checkReply=(e)=>{
+		if($(e.target).parent().find("textarea").val().trim()==""){//해당 버튼의 답글을 아무것도 달지 않으면
+			Swal.fire("댓글을 작성해주세요.");
+			$(".commentText").blur();
+			return false;
+		}
+	}
+	
+	
+	//답글 삭제 *
+	const deleteQC=(qcNo)=>{
+		const result=confirm("답글을 삭제하시겠습니까?");
+		if(result){//확인버튼 누르면
+			location.assign("<%=request.getContextPath()%>/community/DeleteReviewComment.do?qnaNo=<%=r.getReviewNo()%>&qcNo="+qcNo);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	//답글 버튼 클릭 시 밑에 답글만 열리게 하기
+	const showReply=(e)=>{
+//			console.log($(e.target).parentsUntil("section").nextUntil(".level1").not("form"));
+		$(e.target).parentsUntil("section").nextUntil(".level1").not("form").toggle(300);
+		
+	}
+	
+	
+	
+    
+    
+    </script>
+    
+    
+    
+    
+    
 
     <script>
         // 기능1   로그인안한 유저는  로그인 메뉴로 이동해야한다.
 
-    	$(()=>{
+    /* 	$(()=>{
                 //1. 스크립트 태그로 만들어야  로그인 상태 분기처리 구문사용해야함
                 $(".comment-form>textarea").focus(e=>{
                         confirm("로그인 후 이용할 수 있습니다.");
@@ -394,7 +520,7 @@
     		
                      });
             
-            })
+            }) */
       </script> 
     
     <!-- 여기까지!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
