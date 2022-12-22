@@ -46,7 +46,7 @@ public class ReviewBasicServlet extends HttpServlet {
 		
 		
 		int cPage;
-		int numPerpage=4;
+		int numPerpage=8;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
