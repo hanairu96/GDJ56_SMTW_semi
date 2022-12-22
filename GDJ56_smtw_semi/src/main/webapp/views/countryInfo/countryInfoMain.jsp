@@ -36,6 +36,14 @@
             height: 50px; 
             position: relative;
             left: 15px;
+			background-color: lavender;
+			color:purple;
+			font-size:18px;
+			font-family: "Hahmlet";
+			font-weight:bolder;
+			border:0 solid black;
+			border-radius: 50px;
+            box-shadow: 5px 2px 8px lavender;
         }
         div#explain{
             /* height: 1000px; */
