@@ -111,20 +111,20 @@
 			const crtNoCheck=()=>{
 //				console.log("인증번호 : "+crtfcNoData);
 				//인증번호 칸에 아무것도 입력하지 않았을 경우
-				if($("#crtfcNoCheck").val()==""){
+				if($("#crtfcNoCheck").val().trim()==""){
 					$("span#checkCrtfcNo>small").text("인증번호를 입력해주세요.").css("color","red");
 					$("span#checkEmail>small").text("");
 					console.log("인증번호 칸 비어있음");
 				}
 				//인증번호가 틀렸을 경우
-				else if(crtfcNoData!=$("#crtfcNoCheck").val()||$("#crtfcNoCheck").val()==""){
+				else if(crtfcNoData!=$("#crtfcNoCheck").val().trim()||$("#crtfcNoCheck").val().trim()==""){
 					$("span#checkCrtfcNo>small").text("인증에 실패하였습니다. 다시 시도해주세요.").css("color","red");//인증번호 실패메세지
 					$("span#checkEmail>small").text("");
 					console.log("인증코드 틀림");
 					return false;
 					
 				//올바른 인증번호 입력
-				}else if(crtfcNoData == $("#crtfcNoCheck").val()){
+				}else if(crtfcNoData == $("#crtfcNoCheck").val().trim()){
            			$("span#checkCrtfcNo>small").text("인증에 성공하였습니다.").css("color","green");
            		}
            	}
