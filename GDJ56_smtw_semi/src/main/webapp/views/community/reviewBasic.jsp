@@ -9,6 +9,11 @@
 <!--      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"> -->
      <!-- 부트스트랩 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- 부트스트랩 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+<!-- 부트스트랩 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     
 <%@ page import="java.util.List" %>   
 <%@ page import="com.smtw.review.model.vo.Review" %>   
@@ -29,7 +34,7 @@
     <!-- 가운데 섹션 부분!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
     <section>
         <div id="friendTitle" style="text-align: center;">
-            <h1>생생후기</h1>
+            <h1 style="font-size:24px;font-weight:bold;">생생후기</h1>
         </div>
 
         <div style="height:50px;">
@@ -116,12 +121,14 @@
                    
                    
                     <!-- 페이지 바 -->
-                    <div style="border:0px solid blue;width:890px;height:60px;text-align: center;margin-left:100px;margin-top:50px;">
-                      
-                               <%=request.getAttribute("pageBar") %>
-                              
-                             
-                    </div>
+	                <div style="border:0px solid blue;width:100%;height:80px;text-align: center;">
+	                    <!-- 페이지 바 -->
+	                    <nav aria-label="Page navigation example" style="margin-top:30px;color:rgba(221, 160, 221, 0.508) !important;">
+	                        <ul class="pagination justify-content-center" style="color:rgba(221, 160, 221, 0.508) !important;">
+								<%=request.getAttribute("pageBar") %>
+	                        </ul>
+	                    </nav>
+	                </div>
                 </div>
             </div>
         </div>
@@ -134,12 +141,12 @@
                 
                 <nav class="navbar navbar-expand-sm " style="background-color: white;" >
                     <div class="container-fluid position-absolute top-0 end-0" >
-                       <div class=" navbar-collapse" id="navbarSupportedContent">
+                       <div class=" navbar-collapse" id="navbarSupportedContent" >
                         
-                         <div id="search-container">
+                         <div id="search-container" style="margin-left:50%;">
                         
                         	<div style="display:flex;">
-		                        <select  id="searchType"  class="form-select form-select-sm" aria-label=".form-select-sm  example">
+		                        <select id="searchType"  class="form-select form-select-sm" aria-label=".form-select-sm  example" style="width:100px;">
 		                          <!--   <option selected>선택</option> -->
 		                            <option value="nation">나라</option>
 		                            <option value="city">도시</option>
@@ -195,14 +202,25 @@
             <div style="border:0px solid yellow;width:400px;height:60px">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                   <%if(logInMember!=null) {%>  
-                    <button  onclick="location.assign('<%=request.getContextPath()%>/community/enrollReview.do');"
-                    class="btn btn-primary customBtn btnStyle" type="button" style=" margin-left :300px; margin-top :15px; !important;" value="작성">
+                    <button onclick="location.assign('<%=request.getContextPath()%>/community/enrollReview.do');"
+                    class="btn btn-primary customBtn btnStyle" type="button" style=" margin-left :300px; margin-top :15px;border:0px;padding-top:3px; !important;" value="작성">
                     작성하기</button>
                <% }	%>
                 </div>
             </div>
         </div>       
     </section>
+    
+    <style>
+    #search-container>*{
+    	margin:0 auto;
+		text-align:center;
+    }
+    .sidemenu>div{
+      	margin-top:20px;
+    }
+    </style>
+    
     <script>
     
     
