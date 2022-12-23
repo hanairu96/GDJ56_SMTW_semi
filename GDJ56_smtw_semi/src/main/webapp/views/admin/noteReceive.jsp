@@ -17,7 +17,7 @@
             <div><a href="<%=request.getContextPath()%>/admin/memberList.do"><p>관리자 페이지</p></a></div>
             <div><a href="<%=request.getContextPath()%>/admin/memberList.do"><p>회원 관리</p></a></div>
             <div><a href="<%=request.getContextPath()%>/admin/qnaManage.do"><p>Q&A 관리</p></a></div>
-            <div><a href="<%=request.getContextPath()%>/admin/noteReceive.do"><p id="purple">쪽지함</p></a></div>
+            <div><a href="<%=request.getContextPath()%>/admin/noteReceive.do?id=ADMIN"><p id="purple">쪽지함</p></a></div>
         </div>
         
         <div class="menuDiv"></div>
