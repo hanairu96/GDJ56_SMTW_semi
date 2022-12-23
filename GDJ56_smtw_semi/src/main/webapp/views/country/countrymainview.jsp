@@ -1,13 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List,com.smtw.country.model.vo.Country" %>
+<%@ page import="java.util.List,com.smtw.country.model.vo.Country,com.smtw.country.model.vo.Likenation" %>
 <%
 	List<Country> con=(List<Country>)request.getAttribute("country");
 	List<Country> list=(List<Country>)request.getAttribute("list");
-	
+	List<Likenation> ln=(List<Likenation>)request.getAttribute("nation");
+	String id=(String)request.getAttribute("id");
+	String likeName="";
+	for(Likenation l : ln){
+		likeName+=l.getNName()+",";
+	}
 %>
+<!-- 부트스트랩 CSS -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"> -->
+<!-- 부트스트랩 JS -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script> -->
 <%@ include file="/views/common/header.jsp" %>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <style>
      a:link { color: black; text-decoration: none;}
 	 a:visited { color: black; text-decoration: none;}
@@ -22,7 +31,7 @@
         	flex-wrap: wrap;
             padding: 30px;
             /* border: 3px solid brown; */
-            width:370px;
+            width:400px;
             height: 450px;
         }
         #maininfo2{
@@ -33,9 +42,9 @@
         	display: flex;
         }
         #like2{
-        	width:50px;
+        	width:65px;
         	height:50px;
-        	font-size:35px;
+        	/* font-size:35px; */
         }
         #likebtn{
         	padding-top:30px;
@@ -44,15 +53,15 @@
         	flex-wrap: wrap;
         	display:flex;
          	position: absolute;
-        	left :250px; 
+        	left :280px; 
         	/* border: 5px solid green;  */
-        	width:1350px;
+        	width:1400px;
         	height:1100px;
         }
         #pageBar2{
         	position: absolute;
         	top :1650px;
-			left:50%;
+			left:42%;
 			width:500px;
         }
 		#btnbtn{
@@ -71,6 +80,10 @@
 		#btninsertdelete>button{
 			width:80px;
 		}
+		#listlist>a{
+			font-size:20px;
+		}
+		
     </style>
 
 
@@ -82,91 +95,161 @@
         	나라를 추가중입니다!!
         <%}else{%>
 			<ul>
+			<!-- 페이지 왼편에 나라 리스트 -->
 	           	<%for(Country c : list){%>
-			<li>
-	                    <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN"))  {%>
-                    		<a href="<%=request.getContextPath()+(c.getInfo().getMoney()==null?"/country/updateCountry.do?nName=":"/countryinfo/searchAll.do?nName=")+c.getNName() %>"><%=c.getNName() %></a>
-                   		<%}else{
-							if(c.getInfo().getMoney()==null){%>
-                    		<a href="" onclick="nodatano();"><%=c.getNName() %></a>
-	                    	<%}else{ %>
-                    		<a href="javascript:void(0);" onclick="fn_emergency('<%=c.getEmergency()%>','<%=c.getNName() %>')" > <%=c.getNName() %> </a>
-                	 <%}
-            	}%>
-	      	</li>
+				<li id="listlist">
+                    <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN"))  {%>
+                    <!-- 나라 상세 페이지가 없으면 수정페이지로 이동한다 -->
+                   		<a href="<%=request.getContextPath()+(c.getInfo().getMoney()==null?"/country/updateCountry.do?nName=":"/countryinfo/searchAll.do?nName=")+c.getNName() %>"><%=c.getNName() %></a>
+                  		<%}else{
+						if(c.getInfo().getMoney()==null){%>
+						<!-- 회원이 상세페이지를 보려고 할때 정보가 없을 경우 분기처리 -->
+                   		<a href="" onclick="nodatano();"><%=c.getNName() %></a>
+                    	<%}else{ %>
+                   		<a href="javascript:void(0);" onclick="fn_emergency('<%=c.getEmergency()%>','<%=c.getNName() %>')" > <%=c.getNName() %> </a>
+	                	<%}
+	            	 }%>
+	      		</li>
 	      	<%}%>
 			</ul>    
 		</div>
-           	<%}%>
-            	<script>
-	            	const nodatano=()=>{
-						alert("나라정보를 업데이트중입니다!!!");	
-	            	}	
-	            	
-	            	const fn_emergency=(em,name)=>{
-	            		if(em!='null') alert(em);
-	            		location.assign('<%=request.getContextPath()%>/countryinfo/searchAll.do?nName='+name);
-	            	}
-	        
-				</script>
+        <%}%>
+        
+           	<script>
+           		/* 회원일경우 나라 상세정보가 없을때 뜨는 알림팝업 */
+            	const nodatano=()=>{
+            		Swal.fire({
+      				  title: '잠시만 기다려주세요!!',
+      				  text: '나라 정보를 업데이트중입니다!',
+      				  imageUrl: '<%=request.getContextPath()%>/upload/wwww.png',
+      				  imageWidth: 400,
+      				  imageHeight: 400,
+      				  imageAlt: 'Custom image',
+      				})
+            	}	
+            	/* 비상상황문구를 넣었을 경우 알림팝업 */
+            	const fn_emergency=(em,name)=>{
+            		if(em!='null'){ 
+            			Swal.fire({
+            				  title: '비상 상황 발생!',
+            				  text: em,
+            				  imageUrl: '<%=request.getContextPath()%>/upload/em.png',
+            				  imageWidth: 400,
+            				  imageHeight: 400,
+            				  imageAlt: 'Custom image',
+            				})
+            			
+            			/* swal('국가비상 상황이 발생되었습니다.',em,'error') */
+            		.then(function(){
+            		location.assign('<%=request.getContextPath()%>/countryinfo/searchAll.do?nName='+name);
+					})            	
+            		}else{
+            		location.assign('<%=request.getContextPath()%>/countryinfo/searchAll.do?nName='+name);
+            		}
+            	}
+			</script>
         <div id="comaincontainer2"> 
 	        <%if(con.isEmpty()) {%>
 	        	<div>
 	        		<h2>조회된 나라가 없습니다.</h2>
 	        	</div>
 	        <%}else{
+
 	        	for(int i=0;i<con.size();i++) {%>
            		 		
-           		 		
        				 <div id="collectmain2">
+       				 <!-- 메인 이미지가 있을때 없을때(대체이미지) 분기처리 -->
        				 	<%if(con.get(i).getNImg()==null) {%>
-	                    <img src="<%=request.getContextPath()%>/images/country/noimage_view.png"  alt="" style="width: 400px; height:300px;" >
+	                    <img src="<%=request.getContextPath()%>/images/country/noimage_view.png"  alt="" style="width: 400px; height:300px;border-radius:10%;" >
        				 	<%}else{ %>
-	                    <img src="<%=request.getContextPath()%>/upload/<%=con.get(i).getNImg() %>"  alt="" style="width: 400px; height:300px;" >
+	                    <img src="<%=request.getContextPath()%>/upload/country/<%=con.get(i).getNImg() %>"  alt="" style="width: 400px; height:300px;border-radius:10%;" >
 	                    <%} %>
+	                    
 	                    <div id="likenameinfo">
 	                        <div id="likename2">
+	                        
 	                        <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN"))  {%>
 	                            <p id="font1" style="font-size:30px;">
 	                            <a href="<%=request.getContextPath()+(con.get(i).getInfo().getMoney()==null?"/countryInfo/insergo.do?nName=":"/countryinfo/searchAll.do?nName=")+con.get(i).getNName()%>">
                             <%}else{
                             	if(con.get(i).getInfo().getMoney()==null){%>
-                            	<p id="font1" style="font-size:30px;">
-	                    		<a href="" onclick="nodatano()">
+                            	<!-- 내용이 없을경우 준비중 팝업이 뜬다 -->
+                            		<p id="font1" style="font-size:30px;">
+	                    			<a href="" onclick="nodatano()">
 		                    	<%}else{ %>
-		                    	<p id="font1" style="font-size:30px;">
-		                    	<a href="javascript:void(0);" onclick="fn_emergency('<%=con.get(i).getEmergency()%>','<%=con.get(i).getNName() %>')" >
+		                    	<!-- 내용이 있을 경우 상세페이지로 이동한다 -->
+		                    		<p id="font1" style="font-size:30px;">
+		                    		<a href="javascript:void(0);" onclick="fn_emergency('<%=con.get(i).getEmergency()%>','<%=con.get(i).getNName() %>')" >
 	                    		
 		                    	<%}%>
                             <%}%>    
-                            
-	                            <%=con.get(i).getNName()%></a></p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	                            <%=con.get(i).getNName()%></a></p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	                            
 	                            
 	                            
-	                        	<div id="likebtn">
-		                            <button id="like2">❤</button>
-	                        	</div>	    
+	                            <!-- 좋아요 버튼 -->
+	                            <%if(logInMember!=null){ %>
+		                        	<div id="likebtn">
+		                        		<input type="hidden" id="conameinput" value="<%=con.get(i).getNName() %>">
+		                        		<img class="likeimg"  src="<%=request.getContextPath() %>/images/country/like.png" 
+		                        		style="width:50px;height:50px;<%=likeName.contains(con.get(i).getNName())?"display:inline":"display:none" %>" onclick="likebtn(event)">
+		                        		<img class="dislikeimg" src="<%=request.getContextPath() %>/images/country/dislike.png" 
+		                        		style="width:50px;height:50px;<%=likeName.contains(con.get(i).getNName())?"display:none":"display:inline" %>"" onclick="likebtn(event)">
+		                        	</div>	 
+	                        	<%} %>   
+	                        	
+	                        	
+	                        	
 	                        </div>
 	                        <h4 id="maininfo2"><%=con.get(i).getNpharse() %></h4>
 	                        
 	                        <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
-	                        <div id="btninsertdelete">
-	                            <button id="update" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/updateCountry.do?nName=<%=con.get(i).getNName()%>')">수정</button>
-	                            <button id="delete" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/deleteCountry.do?nName=<%=con.get(i).getNName()%>')">삭제</button>
-	                        </div>
-	                        <%} %>
-	                     </div>
+		                        <div id="btninsertdelete">
+		                            <button id="update" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/updateCountry.do?nName=<%=con.get(i).getNName()%>&id=<%=logInMember.getMemberId()%>')">수정</button>
+		                            <button id="delete" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/deleteCountry.do?nName=<%=con.get(i).getNName()%>&&nImg=<%=con.get(i).getNImg()%>&id=<%=logInMember.getMemberId()%>')">삭제</button>
+		                        </div>
+	                        <%} %> 
+	                     </div> 
 	                 </div>
-				 <%} 
-			 	}%>  
+				<%} 
+			 }%>  
+		    <script>
+				//좋아요 하트 버튼
+				//$(".likeimg").hide();
+				
+				const likebtn=(e)=>{
+					$(e.target).parent().find("img").toggle();
+					//이름값 불러오기
+					const coname=$(e.target).parent().find("input").val();
+					console.log(coname);
+					if($(e.target).parent().find("img.dislikeimg").css('display')=='none'){
+						//저장(아이디 값이 없을때의 분기처리함)
+ 						location.assign('<%=request.getContextPath()%>/likecountry.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>&name='+coname+'&ckLike=Y'); 
+					}else{
+						//삭제
+ 						location.assign('<%=request.getContextPath()%>/dislikecountry.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>&name='+coname);
+					}
+				};
+				
+			</script>			
    		</div>
+	
+	<!-- 페이징 처리 -->
    	<div id="pageBar2">
-		<%=request.getAttribute("pageBar")%>
+   	<!-- 부트스트랩 ㅠㅜㅠㅜ -->
+<!-- 		<nav aria-label="Page navigation example" style="margin-top:30px;color:rgba(221, 160, 221, 0.508) !important;">
+			<ul class="pagination justify-content-center" style="color:rgba(221, 160, 221, 0.508) !important;"> -->
+				<%=request.getAttribute("pageBar") %>
+<!-- 			</ul>
+		</nav> -->
 	</div>
+	
+	
+	
 	 <%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
+	<!-- 페이지 우측 상단으로 자리 강제 이동함 -->
 	<div id="positionbtn">
-    	<button id="btnbtn" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/insertgo.do')"><span>국가 추가</span></button>
+    	<button id="btnbtn" class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/country/insertgo.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>')"><span>국가 추가</span></button>
     </div>
     <%} %>
 </section>
@@ -174,7 +257,6 @@
     	#font1{
     		padding-left:30px;
     	}
-    
         .customBtn {
             color: #fff;
             border-radius: 5px;
@@ -230,7 +312,7 @@
          section{
         /*  border: 1px solid tomato; */
          
-         /* margin-left: 50px; */
+          margin-left: 50px; 
          margin-right: 50px;
          padding-left: 30px;
          padding-right: 100px;

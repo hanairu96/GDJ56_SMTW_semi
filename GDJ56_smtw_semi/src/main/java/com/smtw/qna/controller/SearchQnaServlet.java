@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.smtw.qna.model.service.FaqService;
 import com.smtw.qna.model.service.QnaService;
+import com.smtw.qna.model.vo.Faq;
 import com.smtw.qna.model.vo.Qna;
 
 /**
@@ -45,7 +47,8 @@ public class SearchQnaServlet extends HttpServlet {
 		//검색 한 결과리스트 불러오기
 		List<Qna> list=new QnaService().searchQna(searchOption,searchQna,cPage,numPerpage);
 		request.setAttribute("qnaLists", list);
-		
+		List<Faq> faqList=new FaqService().selectFaqList();
+		request.setAttribute("faqList", faqList);//faq리스트
 		//결과가 총 몇 개인지 불러오기
 		int totalData=new QnaService().selectQnaCount(searchOption,searchQna);
 		

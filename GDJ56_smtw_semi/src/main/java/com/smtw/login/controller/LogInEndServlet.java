@@ -16,7 +16,7 @@ import com.smtw.member.model.vo.Member;
 /**
  * Servlet implementation class LogInEndServlet
  */
-@WebServlet("/logIn/logInEnd.do")
+@WebServlet(name="logInEnd",urlPatterns = "/logIn/logInEnd.do")
 public class LogInEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -46,7 +46,7 @@ public class LogInEndServlet extends HttpServlet {
 			session.setAttribute("logInMember", m); //logInMember 세션에 아이디,비번 저장
 			response.sendRedirect(request.getContextPath());//저장한 세션값 전송
 			
-			System.out.println("로그인 성공");
+			System.out.println("로그인 한 아이디 : "+m.getMemberId());
 		}
 	}
 

@@ -5,6 +5,7 @@
 	Qna q=(Qna)request.getAttribute("qna");
 	List<Qna> list=(List<Qna>)request.getAttribute("qnaList");
 	List<QnaComments> qcList=(List<QnaComments>)request.getAttribute("qcList");
+// 	int qcCount=(int)request.getAttribute("qcCount");
 %>
 <%@include file="/views/common/header.jsp" %>
 <!-- 부트스트랩 CSS -->
@@ -52,7 +53,7 @@
 	         </div>
 	         <div style="border:0px solid pink;width:950px;height:auto;margin: 0 auto;margin-top: 30px; ">
 	           
-	             <div style="padding:30px;border:1px solid lightgray;width:800px;height:auto;border-radius:10px;margin-left:75px;">
+	             <div style="overflow: hidden; padding:10px;border:1px solid lightgray;width:800px;height:auto;border-radius:10px;margin-left:75px;">
 	                <%=q.getReviewContents() %>
 	             </div> 
 	         </div>
@@ -92,12 +93,24 @@
 </div>
 <script>
 	const deleteQna=()=>{
-		const result=confirm("Q&A글을 삭제하시겠습니까?");
-		if(result){
-			location.assign('<%=request.getContextPath() %>/qna/deleteQna.do?qnaNo=<%=q.getQnaNo()%>');
-		}else{
-			return false;
-		}
+		 Swal.fire({
+             title:'Q&A글을 삭제하시겠습니까?',
+             text:"복구 할 수 없습니다.",
+             icon: 'warning',
+             showCancelButton: true,
+             confirmButtonColor: '#3085d6',
+             cancelButtonColor: '#d33',
+             confirmButtonText: 'Yes'
+          }).then((result)=>{
+             if(result.isConfirmed){
+            	 location.assign('<%=request.getContextPath() %>/qna/deleteQna.do?qnaNo=<%=q.getQnaNo()%>');
+             }else{
+                Swal.fire(
+                       '삭제취소'
+                 )
+                 return false;
+             }
+          });
 	}
 </script>
 
@@ -108,10 +121,10 @@
 	  
 	   <form class="form comment-form" style="display:flex;flex-direction:column;align-items:center;"
 	   		action="<%=request.getContextPath()%>/qna/insertQC.do" onsubmit="return insertComment();">
-           <textarea id="comment_1" onclick="logInCheck();" name="comment_1" placeholder="댓글을 남겨보세요" style="width:100%;"></textarea>
+           <textarea id="comment_1" onclick="logInCheck();" name="comment_1" class="commentText" placeholder="댓글을 남겨보세요" style="width:100%;"></textarea>
            <input type="hidden" name="qnaNo" value="<%=q.getQnaNo()%>">
-<!--            <input type="hidden" name="level" value="1"/> -->
-<!--            <input type="hidden" name="commentref" value="0"/> -->
+           <input type="hidden" name="qcLevel" value="1"/> <!-- 댓글레벨  -->
+           <input type="hidden" name="qnaQcRef" value="0"/>	<!-- 답글이 아니라 그냥 댓글이라서 0 -->
            <input type="hidden" id="commentWriter" name="commentWriter" value="<%=logInMember!=null?logInMember.getMemberId():""%>"><!-- 댓글작성자 아이디 넘기기  -->   				
            <div style="width:100%;">
                <button type="submit" class="submit customBtn btnStyle" id="btn-insert" style="width:80px;height:47px;float:right;"
@@ -122,6 +135,7 @@
     <!-- 등록된 댓글 -->
     <%if(!qcList.isEmpty()) {%>
     	<%for(QnaComments qc : qcList) {%>
+    	<%if(qc.getQnaCoLevel()==1) {%>
 	<div class="comments level1" style="border:0px solid green;width:850px;height:auto;margin: 0 auto;">
 	   <div class="comment replies" style="border:5px solid #ddd;width:850px;height:auto;margin: 0 auto;background-color: #f2f2f2;margin-bottom:10px;margin-top:10px;">
 	   		<div class="content">
@@ -129,7 +143,7 @@
 		         <div class="username" style="color:#7e8cd2"><%=qc.getMemberId()%></div>
 		         <div class="utility"> 
 					<!-- 현재버튼의 위치 -->
-				    <button class="menu btn-reply customBtn btnStyle">답글등록</button>  
+				    <button class="menu btn-reply customBtn btnStyle" onclick="btnReply(event);">답글등록</button>  
 				    <!-- 관리자와 해당 작성자만 보이게 -->
 				    <%if(logInMember!=null&&(logInMember.getMemberId().equals("ADMIN")||logInMember.getMemberId().equals(qc.getMemberId()))) {%>
 						<button class="menu customBtn btnStyle" onclick="deleteComment('<%=qc.getQnaCoNo()%>');">댓글삭제</button>    
@@ -141,54 +155,106 @@
 	            <ul class="bottom">
 	              <li class="menu time"><%=qc.getEnrollDate() %></li>
 	              <li class="divider"></li> 
-	              <li class="menu show-reply">답글 (1)</li> 
+	              <%if(qc.getQcCount()!=0) {%>
+		              <li class="menu show-reply" onclick="showReply(event);" style="cursor: pointer;">
+		              		답글 (<%=qc.getQcCount()%>)
+		              </li> 
+	              <%} %>
 	            </ul>
 			</div>
-		</div>            
+		</div>   
             <!-- 이위치에 태그를 추가해줘야함 -->
+			<!-- 답글  -->
+            <form id="refly-Form" class="form reply-form"style="display:none;flex-direction:column;align-items:center;"
+            	action="<%=request.getContextPath()%>/qna/insertQC.do" onsubmit="return checkReply(event);">
+	              <textarea id="replyText" name="comment_1" class="commentText" onclick="logInCheck();" placeholder="답글을 남겨보세요"style="width:100%;"></textarea>
+	              	<input type="hidden" name="qnaNo" value="<%=q.getQnaNo()%>">
+           			<input type="hidden" name="qcLevel" value="2"/> <!-- 댓글레벨 2 -->
+           			<input type="hidden" name="qnaQcRef" value="<%=qc.getQnaCoNo()%>"/>	<!-- 답글이라서 해당 댓글번호 -->
+           			<input type="hidden" id="commentWriter" name="commentWriter" value="<%=logInMember!=null?logInMember.getMemberId():""%>"><!-- 댓글작성자 아이디 넘기기  -->
+	              	<div style="width:100%;">
+	                	<button type="submit" class="submit customBtn btnStyle" id="btn-ReplyInsert" style="width:80px;height:47px;float:right;"
+	                		>댓글등록</button>
+	             	</div>
+            </form>   
 	</div>
-	
-          <!--등록된 답글  -->
-        <div class="replies level2" style="border-left:5px solid #ddd;border-right:5px solid #ddd;border-bottom:5px solid #ddd;width:850px;height:auto;margin: 0 auto;">
+		<%}else {%>         
+<!--           등록된 답글  -->
+        <div class="replies level2" style="border-left:5px solid #ddd;border-right:5px solid #ddd;
+        	border-bottom:5px solid #ddd;width:850px;height:auto;margin: 0 auto;display:none;">
             <div class="reply">
               <div class="content">
               	<header class="top">
-                	<div class="username">워홀러</div>
-              		<div class="utility"> 
-                		<button class="menu">메뉴</button>
-               		</div>
+                	<div class="username"><%=qc.getMemberId()%></div>
+                	<div class="utility">   
+				    <!-- 관리자와 해당 작성자만 보이게 -->
+				    <%if(logInMember!=null&&(logInMember.getMemberId().equals("ADMIN")||logInMember.getMemberId().equals(qc.getMemberId()))) {%>
+						<button class="menu customBtn btnStyle" onclick="deleteQC('<%=qc.getQnaCoNo()%>');">답글삭제</button>    
+					<%} %>
+	             </div>
                 </header>
-	                <p>감사!!</p>
+	                <p><%=qc.getQcContents()%></p>
 	                <ul class="bottom">
-	                  <li class="menu time">2022-12-06</li>
+	                  <li class="menu time"><%=qc.getEnrollDate() %></li>
 	                </ul>
          		</div>
          	</div>
-            
-            <form class="form reply-form"style="display:flex;flex-direction:column;align-items:center;">
-              <textarea placeholder="답글을 남겨보세요"style="width:100%;"></textarea>
-              <div style="width:100%;">
-                <button type="button" class="submit customBtn btnStyle" style="width:80px;height:47px;float:right;">댓글등록</button>
-             </div>
-            </form>       
-	</div> 
+		</div> 
+	<%} %><!-- 댓글,답글 구별if문  -->
 	<%} %>
 	<%} %>
 </section>
 	<script>
 		//댓글 삭제
 		const deleteComment=(qcNo)=>{
-			const result=confirm("댓글 삭제 시 댓글에 달린 답글도 전부 삭제됩니다. 삭제하시겠습니까?");
-			if(result){//확인버튼 누르면
-				location.assign("<%=request.getContextPath()%>/qna/DeleteQnaComment.do?qnaNo=<%=q.getQnaNo()%>&qcNo="+qcNo);
-			}
+			Swal.fire({
+	             title:'답글도 전부 삭제됩니다. \n삭제하시겠습니까?',
+	             text:"복구 할 수 없습니다.",
+	             icon: 'warning',
+	             showCancelButton: true,
+	             confirmButtonColor: '#3085d6',
+	             cancelButtonColor: '#d33',
+	             confirmButtonText: 'Yes'
+	          }).then((result)=>{
+	             if(result.isConfirmed){
+	            	 location.assign("<%=request.getContextPath()%>/qna/DeleteQnaComment.do?qnaNo=<%=q.getQnaNo()%>&qcNo="+qcNo);
+	             }else{
+	                Swal.fire(
+	                       '삭제취소'
+	                 )
+	                 return false;
+	             }
+	          });
+		}
+		//답글 삭제
+		const deleteQC=(qcNo)=>{
+			Swal.fire({
+	             title:'답글을 삭제하시겠습니까?',
+	             text:"복구 할 수 없습니다.",
+	             icon: 'warning',
+	             showCancelButton: true,
+	             confirmButtonColor: '#3085d6',
+	             cancelButtonColor: '#d33',
+	             confirmButtonText: 'Yes'
+	          }).then((result)=>{
+	             if(result.isConfirmed){
+	            	 location.assign("<%=request.getContextPath()%>/qna/DeleteQnaComment.do?qnaNo=<%=q.getQnaNo()%>&qcNo="+qcNo);
+	             }else{
+	                Swal.fire(
+	                       '삭제취소'
+	                 )
+	                 return false;
+	             }
+	          });
 		}
 		
 		//댓글창 누를 시 로그인멤버 아니면 댓글 못 달게하기
 		const logInCheck=()=>{
 			if(<%=logInMember==null%>){
-				alert("로그인 한 사용자만 댓글을 등록할 수 있습니다.");
-				$("#comment_1").blur();
+				$(".commentText").blur();
+				Swal.fire({
+					title:"로그인 한 사용자만 댓글을 \n등록할 수 있습니다."
+					,icon: 'error'});
 			}
 		}
 		
@@ -196,20 +262,29 @@
 		const insertComment=()=>{
 			//아무것도 작성하지 않으면 재작성 요구
 			if($("#comment_1").val().trim()==""){
-				alert("댓글을 작성해주세요.");
-				$("#comment_1").blur();
+				$(".commentText").blur();
+				Swal.fire("댓글을 작성해주세요.");
 				return false;
 			}
-// 			else{
-// 				$.ajax({
-<%-- 					url:"<%=request.getContextPath()%>/qna/insertQC.do", --%>
-// 					data:{"comment_1":$("#comment_1").val().trim(),
-// 						"commentWriter":$("#commentWriter").val()},
-// 					success:data=>{
-// 						console.log(data);
-// 					}
-// 				})
-// 			}
+		}
+		//답글등록 클릭 시
+		const checkReply=(e)=>{
+			if($(e.target).parent().find("textarea").val().trim()==""){//해당 버튼의 답글을 아무것도 달지 않으면
+				$(".commentText").blur();
+				Swal.fire("댓글을 작성해주세요.");
+				return false;
+			}
+		}
+		
+		//댓글에 ->답글 등록 클릭 시
+		const btnReply=(e)=>{
+			$(e.target).parentsUntil("section").find("form").show();
+		}
+		//답글 버튼 클릭 시 밑에 답글만 열리게 하기
+		const showReply=(e)=>{
+// 			console.log($(e.target).parentsUntil("section").nextUntil(".level1").not("form"));
+			$(e.target).parentsUntil("section").nextUntil(".level1").not("form").toggle(300);
+			
 		}
 	</script>
 

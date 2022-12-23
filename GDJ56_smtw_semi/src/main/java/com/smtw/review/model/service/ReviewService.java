@@ -2,6 +2,11 @@ package com.smtw.review.model.service;
 
 import static com.smtw.common.JDBCTemplate.close;
 import static com.smtw.common.JDBCTemplate.getConnection;
+import static com.smtw.common.JDBCTemplate.close;
+import static com.smtw.common.JDBCTemplate.commit;
+import static com.smtw.common.JDBCTemplate.getConnection;
+import static com.smtw.common.JDBCTemplate.rollback;
+
 
 import java.sql.Connection;
 import java.util.List;
@@ -89,8 +94,48 @@ public class ReviewService {
 		
 	}
 	 
+	
+	// 작성하기
+	
+	public  int insertReview(Review r) {
+		Connection conn=getConnection();
+		
+		int result=dao.insertReview(conn,r);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+		
+		
+	}
+	
+	
+	//삭제하기
+	public int  deleteReview(int no) {
+		Connection conn=getConnection();
+		
+		int result=dao.deleteReview(conn,no);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+		
+	}
+	
 	 
-	 
+	//수정하기
+	public int  updateReview(Review newR) {
+		Connection conn=getConnection();
+		int result=dao.updateReview(conn,newR);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		 close(conn); 
+		 return result;
+		
+		
+		
+	}
+	
 	
 	
 	

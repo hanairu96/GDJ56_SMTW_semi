@@ -6,12 +6,13 @@
 %>
  <section>
             <div class="sidemenu">
-                <div><h4 style="text-align: center;">마이 페이지</h4></div>
-                <div><p>워홀 프렌즈</p></div>
-                <div><p>계정 관리</p></div>
-                <div><p>쪽지함</p></div>
-                <div><p>내가 쓴 글</p></div>
-                <div><p>찜한 나라</p></div>
+               <div><h4 style="text-align: center;">마이 페이지</h4></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>');">워홀 프렌즈</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageAccountView.do?id=<%=logInMember.getMemberId()%>');">계정 관리</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">쪽지함</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageWriting.do?id=<%=logInMember.getMemberId()%>');">내가 쓴 글</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNation.do?id=<%=logInMember.getMemberId()%>');">찜한 나라</p></div>
+           
                
             </div>
             <div class="menuDiv"></div>
@@ -21,8 +22,8 @@
             <p style="color:red">warning! : 탈퇴하면 다시 복구할수 없습니다. 정말 탈퇴하시겠습니까?</p>
            	
            	 <input type="hidden" name="id" value="<%=userId%>">
-            <input type="button" name="agree" value="탈퇴하기" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageMemberDeleteEnd.do?id=<%=userId%>');">
-             <input type="button" name="cancle" value="취소하기" onclick="location.replace('<%=request.getContextPath()%>');"> 
+            <input type="button" name="agree" value="탈퇴하기" onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageMemberDeleteEnd.do?id=<%=userId%>');">
+             <input type="button" name="cancle" value="취소하기" onclick="location.assign('<%=request.getContextPath()%>');"> 
             </form>
             </div>
                
@@ -133,7 +134,6 @@
                 
             }
             section{
-                border: 1px solid tomato;
                 
                 margin-left: 50px;
                 margin-right: 50px;
@@ -155,7 +155,6 @@
                 
             }
             section>div{
-                border: 1px solid blue;
                 /* 섹션 안의 div테두리 */
                 
             }

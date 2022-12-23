@@ -13,26 +13,25 @@
   	String phone = (String)request.getAttribute("phone");
   	String name = (String)request.getAttribute("name");
   	String email = (String)request.getAttribute("email");
-  	
-out.print(bYear);
+
   %>
  <section>
         <div class="sidemenu">
-            <div><h4 style="text-align: center;">마이 페이지</h4></div>
-           <div><p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=m.getMemberId()%>');">워홀 프렌즈</p></div>
-            <div><p onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageAccountView.do?id=<%=m.getMemberId()%>');">계정 관리</p></div>
-            <div><p>쪽지함</p></div>
-            <div><p>내가 쓴 글</p></div>
-            <div><p>찜한 나라</p></div>
+             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>');">워홀 프렌즈</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageAccountView.do?id=<%=logInMember.getMemberId()%>');">계정 관리</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">쪽지함</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageWriting.do?id=<%=logInMember.getMemberId()%>');">내가 쓴 글</p></div>
+            <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNation.do?id=<%=logInMember.getMemberId()%>');">찜한 나라</p></div>
+           
            
         </div>
         <div class="menuDiv"></div>
         <div class="contentList">
             <div id="menutitle"><h2 style="background-color: cornflowerblue;">계정 관리</h2></div>
         
-        <form action="<%=request.getContextPath()%>/mypageAccountUpdateEnd.do" method="post">
+        <form action="<%=request.getContextPath()%>/mypageAccountUpdateEnd.do" method="post" enctype="multipart/form-data">
         <div id="mypsc">
-                <img src="<%=m.getMyImg()%>" alt="" width="200" height="200" >
+                <img src="<%=request.getContextPath()%>/upload/account/<%=m.getMyImg()%>" alt="" width="200" height="200" >
                 <br>
                 수정할 사진을 불러오세요 <br>
                 <input type="file" name="mypcs">
@@ -41,7 +40,7 @@ out.print(bYear);
         </div>
         <div id="myimpo">
             <div>아이디 : <input type="text" name="id" value="<%=m.getMemberId()%>" readonly></div>
-            <div>이름 : <input type="text" name="name" value="<%=name %>" required ></div>
+            <div>이름 : <input type="text" name="name" value="<%=m.getMemberName() %>" required ></div>
             
             <div>성별 : 
                 <input type="radio" name="gender" id="gender0" value="M" <%=gender=='M'? "checked":"" %>>
@@ -168,7 +167,7 @@ out.print(bYear);
         
         
                 <input type="text" class="form-control inputAddr"  value="<%=detialadd %>"
-                   name="inputAddress_detailAddress"id="inputAddress_detailAddress" placeholder="상세주소" required>
+                   name="inputAddress_detailAddress"id="inputAddress_detailAddress" placeholder="상세주소">
         </div>
     </div>
     <%}else{%>
@@ -189,7 +188,7 @@ out.print(bYear);
                     </div>
                     <div class="bir_yy address">
                             <input type="text" class="form-control inputAddr" 
-                               name="inputAddress_detailAddress"id="inputAddress_detailAddress" placeholder="상세주소" required>
+                               name="inputAddress_detailAddress"id="inputAddress_detailAddress" placeholder="상세주소">
                     </div>
                 </div>
 	<%}%>
@@ -269,7 +268,7 @@ out.print(bYear);
             left: 500px;
          
             width: 300px;
-            height: 443px;
+            height: 420px;
         }
 
         #menutitle{
@@ -344,7 +343,6 @@ out.print(bYear);
             
         }
         section{
-            border: 1px solid tomato;
             
             margin-left: 50px;
             margin-right: 50px;
@@ -366,7 +364,6 @@ out.print(bYear);
             
         }
         section>div{
-            border: 1px solid blue;
             /* 섹션 안의 div테두리 */
             
         }

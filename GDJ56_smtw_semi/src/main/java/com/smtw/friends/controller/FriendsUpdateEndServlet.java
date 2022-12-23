@@ -33,6 +33,7 @@ public class FriendsUpdateEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
+		int friendsNo=Integer.parseInt(request.getParameter("friendsNo"));
 		String nName=request.getParameter("nation");
 		String friendsTitle=request.getParameter("title");
 		String friendsContents=request.getParameter("friendsContents");
@@ -44,7 +45,7 @@ public class FriendsUpdateEndServlet extends HttpServlet {
 		String purpose=purArr.substring(1, purArr.length()-1);  //여행, 공부
 		
 		Friends f=Friends.builder()
-			//.friendsNo(friendsNo)
+			.friendsNo(friendsNo)
 			.nName(nName)
 			.friendsTitle(friendsTitle)
 			.friendsContents(friendsContents)
@@ -65,7 +66,9 @@ public class FriendsUpdateEndServlet extends HttpServlet {
 			loc="/friends/friendsList.do";
 		}else {
 			msg="수정에 실패하였습니다.";
-			loc="/friends/friendsUpdate.do?memberId="+memberId;
+			//loc="";
+			//loc="document.referrer";
+			loc="/friends/friendsUpdate.do?friendsNo="+friendsNo;
 		}
 		
 		request.setAttribute("msg", msg);

@@ -35,7 +35,6 @@ public class updateGoContentServlet extends HttpServlet {
 		
 		String name=request.getParameter("nName");
 		CountryPage cp=new CountryPageInfoService().selectPageName(name);
-		System.out.println(cp);
 		request.setAttribute("countryPage", cp);
 		request.getRequestDispatcher("/views/countryInfo/updatecontent.jsp").forward(request, response);
 		

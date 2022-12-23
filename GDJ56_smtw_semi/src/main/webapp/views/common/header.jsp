@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/index.css"/>
 	<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400&display=swap" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body>
 <header>
@@ -45,17 +46,17 @@
                 <li id="menuli">
                     <div class="hoversection">
                         <div class="hovercountry">
-                            <a href="<%=request.getContextPath()%>/country/countryMain.do"><img src="<%=request.getContextPath()%>/images/국가정보.png" alt="" width="60px" height="60px" class="country1"></a>
-                        	 <a href="<%=request.getContextPath()%>/country/countryMain.do"><img src="<%=request.getContextPath()%>/images/보라국가정보.png" alt="" width="60px" height="60px" class="country2"></a>
+                            <a href="<%=request.getContextPath()%>/country/countryMain.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>"><img src="<%=request.getContextPath()%>/images/국가정보.png" alt="" width="60px" height="60px" class="country1"></a>
+                        	 <a href="<%=request.getContextPath()%>/country/countryMain.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>"><img src="<%=request.getContextPath()%>/images/보라국가정보.png" alt="" width="60px" height="60px" class="country2"></a>
                         </div>
                         <div>
-                            <a href="<%=request.getContextPath()%>/country/countryMain.do">국가정보</a>
+                            <a href="<%=request.getContextPath()%>/country/countryMain.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>">국가정보</a>
                         </div>
                     </div>
                     <!-- 서브메뉴영역 -->
                     <div class="sub">
                         <ul class="submenu">
-                            <li><a href="">국가 및 지역별 정보</a></li>
+                            <li><a href="<%=request.getContextPath()%>/country/countryMain.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>">국가 및 지역별 정보</a></li>
                         </ul>
                     </div>
                 </li>
@@ -147,8 +148,12 @@
 	                    <!-- 서브메뉴영역 -->
 	                    <div class="sub">
 	                        <ul class="submenu">
-	                            <li><a href="">쪽지함</a></li>
-	                            <li><a href="<%=request.getContextPath()%>/logIn/logOut.do">로그아웃</a></li>
+	                        	<%if(logInMember.getMemberId().equals("ADMIN")) {%>
+		                            <li><a href="<%=request.getContextPath()%>/admin/noteReceive.do">쪽지함</a></li>
+	                            <%}else {%>
+	                            	<li><a href="<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>">쪽지함</a></li>
+	                            <%} %>
+	                            	<li><a href="<%=request.getContextPath()%>/logIn/logOut.do">로그아웃</a></li>
 	                        </ul>
 	                    </div>
                         <%} %>

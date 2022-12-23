@@ -15,12 +15,16 @@
     
             <div class="menuDiv"></div>
     
+    
+    		<!-- 다음지도가 적용이 되지 않아서 대체할 구글지도 -->
+    		<!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1583.1166118763056!2d126.88016147199414!3d37.47882238631639!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b61e357402a11%3A0x14df9fc56994724c!2zSVTsoITrrLjqtZDsnKEg6rWs65SU7JWE7Lm0642w66-4!5e0!3m2!1sko!2skr!4v1671703949361!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+    
+    
             <!-- 다음 지도+찾아오시는길 -->
             <div id="all">
                 <h1><span style="background-color: rgb(178 183 239);">찾아오시는길</span></h1>
                 <div id="map" style="width:700px;height:400px;margin:0 auto;"></div>
-                
-                <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=63790162820e52da6fdb26e25b092596"></script>
+                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=63790162820e52da6fdb26e25b092596"></script>
                 <script>
                     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                     mapOption = { 
@@ -53,7 +57,7 @@
                     
                     <h2>고객센터</h2>
                     <p>문의사항 : 질문게시판 <button class="customBtn btnStyle" id="boardBtn" onclick="location.assign('<%=request.getContextPath()%>/qna/qnaList.do')">이동</button></p>
-                    <p>대표전화 : 010-0000-0000  운영시간 : 항시대기</p>
+                    <p>대표전화 : 02-2108-5900  운영시간 : 항시대기</p>
                 </div>
             </div>
         </div>

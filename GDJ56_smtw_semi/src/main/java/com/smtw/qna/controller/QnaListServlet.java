@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smtw.notice.model.service.NoticeService;
-import com.smtw.notice.model.vo.Notice;
+import com.smtw.qna.model.service.FaqService;
+import com.smtw.qna.model.service.QnaCommentsService;
 import com.smtw.qna.model.service.QnaService;
+import com.smtw.qna.model.vo.Faq;
 import com.smtw.qna.model.vo.Qna;
 
 /**
@@ -44,7 +45,8 @@ public class QnaListServlet extends HttpServlet {
 			numPerpage=7;
 			String pageBar="";
 			
-			List<Qna> list=new QnaService().selectQnaList(cPage, numPerpage);
+			List<Qna> list=new QnaService().selectQnaList(cPage, numPerpage);//qna질문
+			List<Faq> faqList=new FaqService().selectFaqList();//faq리스트
 			
 			int totalData=new QnaService().selectQnaCount();
 			
@@ -77,6 +79,7 @@ public class QnaListServlet extends HttpServlet {
 			
 			request.setAttribute("qnaLists", list);
 			request.setAttribute("pageBar", pageBar);
+			request.setAttribute("faqList", faqList);//faq리스트
 			
 			request.getRequestDispatcher("/views/qna/qnaList.jsp").forward(request, response);
 	}

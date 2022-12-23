@@ -14,7 +14,7 @@ import java.util.Properties;
 
 import com.smtw.country.model.vo.Country;
 import com.smtw.country.model.vo.CountryPageInfo;
-import com.smtw.countrypageinfo.model.dao.CountryPageInfoDao;
+import com.smtw.country.model.vo.Likenation;
 
 public class CountrytDao {
 
@@ -199,6 +199,84 @@ public class CountrytDao {
 			close(pstmt);
 		}
 		return result;
+	}
+	
+	
+	//좋아요 기능에 대한 dao
+	public int insertlike(Connection conn,String id,String name ) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertlike"));
+			pstmt.setString(1, id);
+			pstmt.setString(2, name);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int deletLikeCountry(Connection conn, String name) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("deletLikeCountry"));
+			pstmt.setString(1,name);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public List<Likenation> selectLike(Connection conn, String id) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Likenation> n=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectLike"));
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				n.add(getLikenation(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return n;
+	}
+	
+	
+	public static Likenation getLikenation(ResultSet rs) throws SQLException{
+		return Likenation.builder()
+				.memId(rs.getString("MEMBER_ID"))
+				.nName(rs.getString("N_NAME"))
+				.ckLike(rs.getString("CK_LIKE"))
+				.build();
+	}
+	
+	//나라 입력시 분기처리 해줄 나라 전체 찾기 
+	public List<Country> selectAllcountry(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Country> co=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectAllcountry"));
+			rs=pstmt.executeQuery();
+			while(rs.next())  co.add(getCountry(rs));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return co;
 	}
 	
 }

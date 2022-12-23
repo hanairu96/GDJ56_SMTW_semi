@@ -1,5 +1,6 @@
 package com.smtw.countrypageinfo.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
 
@@ -34,7 +35,7 @@ public class UpdateCountryInfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String path=request.getServletContext().getRealPath("/upload/");
+		String path=request.getServletContext().getRealPath("/upload/country/");
 		
 		MultipartRequest mr=new MultipartRequest(request,path,1024*1024*10,"UTF-8",new DefaultFileRenamePolicy());
 		
@@ -44,7 +45,7 @@ public class UpdateCountryInfoServlet extends HttpServlet {
 			String filename=(String)e.nextElement();
 			pic = mr.getFilesystemName(filename);
 		}
-		
+		String ori=mr.getParameter("orifilename");
 		
 		String name=mr.getParameter("nName");
 		String lang=mr.getParameter("langagecountry");
@@ -71,6 +72,11 @@ public class UpdateCountryInfoServlet extends HttpServlet {
 		if(result>0) {
 			msg="수정이 완료되었습니다.";
 			loc="/countryinfo/searchAll.do?nName="+name;
+			
+			String deletepath=getServletContext().getRealPath("/upload/country/");
+			File delFile=new File(deletepath+ori);
+			if(delFile.exists()) delFile.delete();
+			
 			request.getSession().setAttribute("country", cp);
 		}else {
 			msg="수정을 실패하였습니다. 다시 시도해주세요";

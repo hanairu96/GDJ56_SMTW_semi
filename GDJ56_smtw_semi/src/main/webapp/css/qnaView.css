@@ -164,6 +164,11 @@ a{
     padding-right: 20px;
     padding-bottom: 20px;
     }
+    /* 답글 스타일  */
+    .level2{
+    	padding-bottom:0px;
+    	font-size:14px;
+    }
     .replies:after {
     content: "";
     position: absolute;

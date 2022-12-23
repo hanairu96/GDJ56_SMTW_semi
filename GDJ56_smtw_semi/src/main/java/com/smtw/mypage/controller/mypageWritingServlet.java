@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.smtw.mypage.model.service.MypageService;
 import com.smtw.mypage.model.vo.FriendsWroteList;
+import com.smtw.mypage.model.vo.Note;
 import com.smtw.mypage.model.vo.ReviewList;
 import com.smtw.mypage.model.vo.WroteList;
 import com.smtw.mypage.model.vo.qnaList;
@@ -39,89 +40,9 @@ public class mypageWritingServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId=request.getParameter("id");
+
 		
-//		int rcPage=new MypageService().getrCpage(userId);
-//		int rnumPerpage=new MypageService().getrnumPerpage(userId);
-//		System.out.println("rcpage"+rcPage);
-//		System.out.println("rnumPerpage"+rnumPerpage);
-//		
-//		int fcPage=new MypageService().getfCpage(userId);
-//		int fnumPerpage=new MypageService().getfnumPerpage(userId);
-//		System.out.println("fcpage"+fcPage);
-//		System.out.println("fnumPerpage"+fnumPerpage);
-//		
-//		int qcPage=new MypageService().getqCpage(userId);
-//		int qnumPerpage=new MypageService().getqnumPerpage(userId);
-//		System.out.println("qcPage"+fcPage);
-//		System.out.println("qcPage"+fnumPerpage);
-//	
-//		
-//		
-//		List<ReviewList> rlist=new MypageService().reviewList(userId,rcPage, rnumPerpage);
-//		System.out.println(rlist);
-//		
-//		List<ReviewList> fworiteList=new MypageService().fworiteList(userId,fcPage, fnumPerpage);
-//		System.out.println(fworiteList);
-//		
-//		List<ReviewList> qnaList=new MypageService().qnaList(userId,qcPage, qnumPerpage);
-//		System.out.println(qnaList);
-//		
-//		List<ReviewList> allList = new ArrayList();
-//		allList.addAll(rlist);
-//		allList.addAll(fworiteList);
-//		allList.addAll(qnaList);
-//		
-//		System.out.println("전체리스트"+allList);
-		
-		
-		
-		
-		
-//		int totalData=new QnaService().selectQnaCount();
-//		
-//		String pageBar="";
-//		int pageBarSize=5;
-//		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
-//		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
-//		int pageEnd=pageNo+pageBarSize-1;
-//		
-//		if(pageNo==1) {
-//			pageBar+="<button class='customBtn btnStyle'>이전</button>";
-//		}else {
-//			pageBar+="<button class='customBtn btnStyle'><a href='"+request.getContextPath()
-//				+"/admin/qnaManage.do?cPage="+(pageNo-1)+"'>이전</a></button>";
-//		}
-//		
-//		while(!(pageNo>pageEnd||pageNo>totalPage)) {
-//			if(cPage==pageNo) {
-//				pageBar+="<button class='customBtn btnStyle'>"+pageNo+"</button>";
-//			}else {
-//				pageBar+="<a href='"+request.getContextPath()
-//				+"/admin/qnaManage.do?cPage="+pageNo+"'><button class='customBtn btnStyle'>"+pageNo+"</button></a>";
-//			}
-//			pageNo++;
-//		}
-//		
-//		if(pageNo>totalPage) {
-//			pageBar+="<button class='customBtn btnStyle'>다음</button>";
-//		}else {
-//			pageBar+="<a href='"+request.getContextPath()
-//				+"/admin/qnaManage.do?cPage="+pageNo+"'>다음</a>";
-//		}
-//
-//		request.setAttribute("pageBar", pageBar);
-//		
-//		request.setAttribute("list", list);
-//		
-//		request.getRequestDispatcher("/views/admin/qnaManage.jsp")
-//		.forward(request, response);
-		
-		
-		
-		
-//		int cPage;
-//		int numPerpage=10;
-		
+		//전체글 보내기 : 보류
 		int cPage=new MypageService().getCpage(userId);
 		int numPerpage=new MypageService().getNumPerpage(userId);
 		
@@ -143,10 +64,10 @@ public class mypageWritingServlet extends HttpServlet {
 		int pageEnd=pageNo+pageBarSize-1;
 		
 		if(pageNo==1) {
-			pageBar+="<button class='customBtn btnStyle'>이전</button>";
+			pageBar+="<button class='customBtn btnStyle'> 이전 </button>";
 		}else {
 			pageBar+="<button class='customBtn btnStyle'><a href='"+request.getContextPath()
-				+"/admin/qnaManage.do?cPage="+(pageNo-1)+"'>이전</a></button>";
+				+"/mypage/mypageWriting.do?cPage="+(pageNo-1)+"'> 이전 </a></button>";
 		}
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
@@ -154,7 +75,7 @@ public class mypageWritingServlet extends HttpServlet {
 				pageBar+="<button class='customBtn btnStyle'>"+pageNo+"</button>";
 			}else {
 				pageBar+="<a href='"+request.getContextPath()
-				+"/admin/qnaManage.do?cPage="+pageNo+"'><button class='customBtn btnStyle'>"+pageNo+"</button></a>";
+				+"/mypage/mypageWriting.do?cPage="+pageNo+"'><button class='customBtn btnStyle'>"+" "+pageNo+" "+"</button></a>";
 			}
 			pageNo++;
 		}
@@ -163,7 +84,8 @@ public class mypageWritingServlet extends HttpServlet {
 			pageBar+="<button class='customBtn btnStyle'>다음</button>";
 		}else {
 			pageBar+="<a href='"+request.getContextPath()
-				+"/admin/qnaManage.do?cPage="+pageNo+"'>다음</a>";
+				+"/mypage/mypageWriting.do?cPage="+pageNo+"'>다음</a>";
+			/* String userId=request.setParameter("id"); */
 		}
 
 		request.setAttribute("pageBar", pageBar);
@@ -172,33 +94,6 @@ public class mypageWritingServlet extends HttpServlet {
 		
 		request.getRequestDispatcher("/views/mypage/mypageWritingjsp.jsp")
 		.forward(request, response);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		

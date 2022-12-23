@@ -70,21 +70,40 @@ public class QnaCommentsDao {
 		}return result;
 	}
 	//댓글등록
-	public int insertQnaComments(Connection conn, String comment,int qnaNo, String writer) {
+	public int insertQnaComments(Connection conn,int qcLevel,String qnaQcRef, String comment,int qnaNo, String writer) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("insertQnaComments"));
-			pstmt.setString(1, comment);
-			pstmt.setInt(2, qnaNo);
-			pstmt.setString(3, writer);
+			pstmt.setInt(1, qcLevel);
+			pstmt.setString(2, qnaQcRef.equals("0")?null:qnaQcRef);
+			pstmt.setString(3, comment);
+			pstmt.setInt(4, qnaNo);
+			pstmt.setString(5, writer);
 			
 			result=pstmt.executeUpdate();
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	//댓글 수 출력
+	public int qcCount(Connection conn, int qnaNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("qcCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
 			close(pstmt);
 		}return result;
 	}
@@ -99,10 +118,13 @@ public class QnaCommentsDao {
 	private QnaComments getQnaComments(ResultSet rs)throws SQLException{
 		return QnaComments.builder()
 				.qnaCoNo(rs.getInt("qnaco_no"))
+				.qnaCoLevel(rs.getInt("QNACO_LEV"))
+				.qnaCoRef(rs.getString("QNACO_REF"))
 				.qcContents(rs.getString("qc_contents"))
 				.enrollDate(rs.getDate("enroll_date"))
 				.qnaNo2(rs.getInt("qna_no2"))
 				.memberId(rs.getString("member_id"))
+				.qcCount(rs.getInt("count"))
 				.build();
 	}
 	

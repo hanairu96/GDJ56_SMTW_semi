@@ -3,13 +3,14 @@
 <%@ page import="com.smtw.country.model.vo.Country" %>
 <%
 	Country c=(Country)request.getAttribute("country");
+	String id=(String)request.getAttribute("id");
 %>
 <%@ include file="/views/common/header.jsp" %>
 <section>
     <div id="updatetpage">
         <fieldset>
             <legend><h1 style="text-align: centers;">국가정보 수정페이지</h1></legend>
-            <form name="countryinfo" action="<%=request.getContextPath()%>/country/updateFirstCountry.do" 
+            <form name="countryinfo" action="<%=request.getContextPath()%>/country/updateFirstCountry.do?id=<%=id%>" 
             		enctype="multipart/form-data" method="post">
                 <div>
                 	나라명 : <%=c.getNName()%>
@@ -25,7 +26,7 @@
 
                 <div>
                     나라성향 
-                    <br><label><input type="radio" name="tend2" value="온순" <%=c.getNTend().equals("온화")?"checked":""%>>온순</label>
+                    <br><label><input type="radio" name="tend2" value="온순" <%=c.getNTend().equals("온순")?"checked":""%>>온순</label>
                     <label><input type="radio" name="tend2" value="열정" <%=c.getNTend().equals("열정")?"checked":""%>>열정</label>
                 </div> 
                 <br>
@@ -44,16 +45,17 @@
                 <div>
                     나라사진
                     <br><input type="file" name="picpic" value="<%=c.getNImg()%>"></input>
+                    <input type="hidden" name="orifilename" value="<%=c.getNImg()%>"></input>
                 </div>
                 <br>
                 <div>
                     한줄글 
-                    <br><inpuT type="text" name="ontext" size="100" value="<%=c.getNpharse() %>" placeholder="예시)풍차와 나막신, 튤립과 치즈의 나라"></inpuT>
+                    <br><inpuT type="text" name="ontext" size="100" value="<%=c.getNpharse() %>" placeholder="예시)풍차와 나막신, 튤립과 치즈의 나라" required></inpuT>
                 </div>
                 <br>
                 <div>
-                	비상알림!
-                	<br><input type="text" name="er" size="100" value="<%=c.getEmergency()%>" placeholder="비상상황이 생기면 내용을 입력해주세요"></input>
+                	<p style="font-size:25px;color:red;">비상알림!</p>
+                	<input type="text" name="er" size="100" value="<%=c.getEmergency()%>" placeholder="비상상황이 생기면 내용을 입력해주세요"></input>
                 </div>    
 				<br>
 		        <div id="twobu">
@@ -142,7 +144,7 @@
              왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
           */
          margin-top: 100px;
-         height: 650px; 
+         height: 750px; 
          /*
              ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
              높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.

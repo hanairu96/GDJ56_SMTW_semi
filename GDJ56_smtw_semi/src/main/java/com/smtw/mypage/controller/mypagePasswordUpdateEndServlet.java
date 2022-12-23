@@ -13,7 +13,7 @@ import com.smtw.mypage.model.service.MypageService;
 /**
  * Servlet implementation class mypagePasswordUpdateEndServlet
  */
-@WebServlet("/mypage/mypagePasswordUpdateEnd.do")
+@WebServlet(name="PasswordUpdateEnd", urlPatterns="/mypage/mypagePasswordUpdateEnd.do")
 public class mypagePasswordUpdateEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,14 +32,14 @@ public class mypagePasswordUpdateEndServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		// 3개 값 받아오기 : 아이디, 이전pw, 바꿀pw
 		String userId=request.getParameter("id");
-		String newPass=request.getParameter("password_new");
+		String newPass=request.getParameter("Pwd_new");
 		String msg = "", loc="";
 		
 			// 비밀번호 변경 로직진행
 			int result=new MypageService().updatePassword(userId,newPass);
 			
 			if(result>0) {
-				msg="비밀번호 변경 완료"; 
+				msg="비밀번호 변경 완료! 새로 변경된 비밀번호로 다시 로그인 해주세요"; 
 				loc="/logIn/logOut.do";
 				String script="opener.location.replace('"+request.getContextPath()+"/logIn/logOut.do');close();";
 				//openr =  부모페이지(지금 이 페이지는 새창에 뜨기 때문)

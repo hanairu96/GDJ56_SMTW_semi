@@ -1,6 +1,7 @@
 package com.smtw.mypage.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.smtw.admin.model.service.MemberService;
 import com.smtw.member.model.vo.Member;
 import com.smtw.mypage.model.service.MypageService;
 import com.smtw.mypage.model.vo.Applyfriends;
@@ -35,22 +38,40 @@ public class mypageFriendsSevlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HttpSession session=request.getSession();
+		Member m=(Member) session.getAttribute("logInMember");
+		String id = m.getMemberId();
 		//userId가지고 오기
-		String userId=request.getParameter("id");
-		
-		
-		List<Applyfriends> list = new MypageService().applyfriendsList(userId);
-		List<MemberInfo> infolist = new MypageService().InfoapplyfriendsList(userId);
-		List<MemberInfo> friendslist = new MypageService().FriendsList(userId);
-		List<Member> acceptedFlist = new MypageService().acceptedFlist(userId);
+		System.out.println("내아이디!!!"+id);
+		//내 이미지 가지고 오기 
+		String myImg=new MypageService().getImg(id);
+		request.setAttribute("myImg", myImg);
+		System.out.println("내사진"+myImg);
+		// 나에게 친구 신청한 리스트
+		List<Applyfriends> list = new MypageService().applyfriendsList(id);
+		// 나에게 친구 신청한 사람들의 정보
+		List<MemberInfo> infolist = new MypageService().InfoapplyfriendsList(id);
+		//친구 리스트
+		List<MemberInfo> friendslist = new MypageService().FriendsList(id);
+		// (상대방이 나의 친구 신청을 받아준=)친구 수락받은 리스트
+		List<Member> acceptedFlist = new MypageService().acceptedFlist(id);
+		// 상대방이 나의 친구 신청을 받아준 그의 정보
 		List<MemberInfo2> acceptedlist=null;
+		//내가 보낸 친구신청 리스트
+		List<Applyfriends> sendFlist = new MypageService().sendfriends(id);
+		System.out.println("!!내가 보낸 친구신청 리스트!!"+sendFlist);
+		request.setAttribute("sendFlist",sendFlist);
+		
+		
+		System.out.println("신청수락받은 리스트:"+acceptedFlist);
+		
 		if(!acceptedFlist.isEmpty()) {
 			for(int i=0;i<acceptedFlist.size();i++){
 				System.out.println(acceptedFlist.get(i).getMemberId());
 				acceptedlist=new MypageService().acceptedFinfo2(acceptedFlist.get(i).getMemberId());
 			}
 		}
-		System.out.println("신청수락받은 리스트:"+acceptedlist);
+		System.out.println("신청수락받은 리스트의 친구 정보:"+acceptedlist);
 		
 		
 		

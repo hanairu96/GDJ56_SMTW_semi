@@ -29,10 +29,9 @@ public class FriendsDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id=request.getParameter("memberId");
-		System.out.println(id);
+		int no=Integer.parseInt(request.getParameter("friendsNo"));
 		
-		int result=new FriendsService().deleteFriends(id);
+		int result=new FriendsService().deleteFriends(no);
 		
 		String msg, loc;
 		if(result>0) {

@@ -1,5 +1,6 @@
 package com.smtw.mypage.controller;
 
+import java.io.File;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,17 +31,16 @@ public class mypageMemberDeleteEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId= request.getParameter("id");
+		/* String img= request.getParameter("img"); */
 		
 		int delete = new MypageService().deleteMember(userId);
-		
 		String msg="",loc="";
 		
 		if(delete>0) {
 			HttpSession session = request.getSession(false);
 			if(session!=null) {
-				session.invalidate();
-			}
-			request.getRequestDispatcher("/views/mypage/mypagedeleteMemberEnd.jsp").forward(request, response);
+				request.getRequestDispatcher("/views/mypage/mypagedeleteMemberEnd.jsp").forward(request, response);
+				//session.invalidate();
 		}else {
 			msg="회원탈퇴를 실패했습니다. 다시 시도해주세요";
 			loc="/mypage/mypagedeleteMember.do?id="+userId;
@@ -48,8 +48,9 @@ public class mypageMemberDeleteEndServlet extends HttpServlet {
 			request.setAttribute("loc", loc);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
+		
 	}
-
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

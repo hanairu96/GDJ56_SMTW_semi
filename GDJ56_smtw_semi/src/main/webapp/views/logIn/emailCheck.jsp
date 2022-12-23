@@ -28,14 +28,14 @@
 function confirmemail(emailconfirm_value, crtfcNo){
     // 입력한 값이 없거나, 인증코드가 일지하지 않을 경우
 	if(!emailconfirm_value || emailconfirm_value != crtfcNo){
-		alert("인증에 실패하였습니다. 다시 시도해주세요");
+		Swal.fire("인증에 실패하였습니다. \n다시 시도해주세요");
 		emailconfirm_value="";
 		self.close();
 		
     // 인증코드가 일치하는 경우
 	}else if(emailconfirm_value==crtfcNo){
 		emailconfirm_value="";
-		alert("");
+		Swal.fire("");
 		//self.close();
 		//opener.document.insertform.emailconfirm_value.value=1;
 	}

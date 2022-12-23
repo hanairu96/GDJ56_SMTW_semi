@@ -41,7 +41,13 @@ public class MemberService {
 		close(conn);
 		return m;
 	}
-	
+	//아이디,이름,이메일로 비밀번호 찾기
+	public Member searchPwd(String searchName, String searchEmail, String searchId) {
+		Connection conn=getConnection();
+		Member m=dao.searchPwd(conn,searchName,searchEmail,searchId);
+		close(conn);
+		return m;
+	}
 	//이메일중복확인
 	public Member emailDuplicateCheck(String inputEmail) {
 		Connection conn=getConnection();
@@ -49,4 +55,18 @@ public class MemberService {
 		close(conn);
 		return m;
 	}
+	
+	//비밀번호 재설정
+	public int changePwd(String memberId,String inputPwd) {
+		Connection conn=getConnection();
+		int result=dao.changePwd(conn,memberId,inputPwd);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		return result;
+	}
+	
+	
 }

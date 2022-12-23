@@ -22,10 +22,13 @@
      		location.replace("<%=request.getContextPath()%><%=loc%>"); 
 	    </script>
 	    <%}else{ %>
-	    <script>
+	    <script type="text/javascript">
             alert('<%=msg%>');
-              
-            opener.parent.location.reload("<%=request.getContextPath()%><%=loc%>");
+             
+            <%-- opener.document.location.href="<%=request.getContextPath()%><%=loc%>"; --%>
+			//부모 창을 새로고침함
+            //opener.location.reload();
+            window.opener.document.location.href=window.opener.document.URL;
             window.close();
         
         </script>

@@ -9,19 +9,22 @@
 
     <section>
         <div class="sidemenu">
-            <div><p>회원 관리</p></div>
-            <div><p>Q&A 관리</p></div>
+            <div><a href="<%=request.getContextPath()%>/admin/memberList.do"><p>관리자 페이지</p></a></div>
+            <div><a href="<%=request.getContextPath()%>/admin/memberList.do"><p id="purple">회원 관리</p></a></div>
+            <div><a href="<%=request.getContextPath()%>/admin/qnaManage.do"><p>Q&A 관리</p></a></div>
+            <div><a href="<%=request.getContextPath()%>/admin/noteReceive.do?id=ADMIN"><p>쪽지함</p></a></div>
         </div>
 
         <div class="menuDiv"></div>
 
-        <div class="memberInfo">
+        <div class="memberInfo" style="border:2px solid;border-radius:10px">
             <h1>회원 정보</h1>
             <br>
 
             <div id="proImg">
             	<%if(m.getMyImg()!=null) {%>
-            		<img src="<%=m.getMyImg()%>">
+            		<img src="<%=request.getContextPath() %>/upload/account/<%=m.getMyImg()%>"
+            		width="170" height="250">
             	<%}else {%>
             		<img src="<%=request.getContextPath() %>/images/tweety.jpg"
             		width="170" height="250">
@@ -77,14 +80,22 @@
                 </tr>
             </table>
             <br><br>
-        	<button id="del" onclick="deleteMember();">회원 삭제</button>
+            <div id="btns">
+            	<form name="msgForm" action="<%=request.getContextPath()%>/mypage/mypageNoteReply.do" method="post">
+        			<input type="hidden" name="sender" value=<%=m.getMemberId() %>>
+        			<input type="hidden" name="friendName" value=<%=m.getMemberName() %>>
+        			<input type="hidden" name="userId" value=<%=logInMember.getMemberId() %>>
+        		</form>
+	            <button id="sendNote" onclick="sendNote();" class="customBtn btnStyle btn btn-primary" style="height:30px;padding-bottom:40px;background-color: rgba(221, 160, 221, 0.508) !important;">&nbsp쪽지 보내기&nbsp</button>&nbsp&nbsp
+    	        <button id="del" onclick="deleteMember();" class="customBtn btnStyle btn btn-primary" style="height:30px;padding-bottom:40px;background-color: rgba(221, 160, 221, 0.508) !important;">&nbsp회원 삭제&nbsp</button>
+            </div>
         </div>
     </section>
     <style>
         .memberInfo{
-            width: 85%;  
-            margin-left: 0 auto;
-            margin-right: 0 auto;
+            width: 70%;  
+            padding: 20px;
+            margin-right: 150px;
         }
         .memberInfo>h1{
             text-align: center;
@@ -96,15 +107,19 @@
             height: 250px;
             border: 1px solid;
             margin-top: 50px;
-            margin-left: 150px;
+            margin-left: 50px;
             margin-right: 30px;
         }
+		
+		#btns{
+			display:flex;
+            margin-left: 780px;
+		}
         
-        #del{
+        #del, #sendNote{
             text-align: right;
-            /* margin-right: 0 auto; */
-            margin-left: 950px;
-            margin-top: 20px;
+            margin-top: 5px;
+            margin-bottom: 20px;
         }
 
         #list{
@@ -124,18 +139,44 @@
             font-weight: bold;
         }
 
-        .sidemenu>div:nth-child(1){
+/*      .sidemenu>div:nth-child(1){
+            color: purple;
+        } */
+        .sidemenu #purple{
             color: purple;
         }
+        
     </style>
     <script>
-        $(".sidemenu>div:nth-child(1)").click(e=>{
+<%--         $(".sidemenu>div:nth-child(1)").click(e=>{
         	location.assign('<%=request.getContextPath()%>/admin/memberList.do');
         })
         $(".sidemenu>div:nth-child(2)").click(e=>{
             location.assign("<%=request.getContextPath()%>/admin/qnaManage.do");
-        })
+        }) --%>
         
+		$(document).ready(function() {
+		    // 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
+		    var floatPosition = parseInt($(".sidemenu").css('top'));
+		    // 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
+		
+		    $(window).scroll(function() {
+		        // 현재 스크롤 위치를 가져온다.
+		        var scrollTop = $(window).scrollTop();
+		        var newPosition = scrollTop + floatPosition + "px";
+		        $(".sidemenu").stop().animate({
+		            "top" : newPosition
+		        }, 500);
+		    }).scroll();
+		});
+        
+		const sendNote=()=>{
+			open("", "note", "width=500px,height=600px");
+			let frm=$("[name=msgForm]")[0];
+			frm.target="note";
+			frm.submit();
+		}
+		
        	const deleteMember=()=>{
        		let check=confirm("정말로 삭제하겠습니까?");
        		if(check==true){

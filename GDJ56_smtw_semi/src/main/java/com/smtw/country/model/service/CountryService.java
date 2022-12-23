@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.smtw.country.model.dao.CountrytDao;
 import com.smtw.country.model.vo.Country;
+import com.smtw.country.model.vo.Likenation;
 
 public class CountryService {
 	private CountrytDao dao=new CountrytDao();
@@ -74,5 +75,40 @@ public class CountryService {
 		close(conn);
 		return result;
 		
+	}
+	
+	//좋아요 버튼에 대한  service
+	public int insertlike(String id, String name) {
+		Connection conn=getConnection();
+		int result=dao.insertlike(conn,id,name);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int deletLikeCountry(String name) {
+		Connection conn=getConnection();
+		int result=dao.deletLikeCountry(conn,name);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public List<Likenation> selectLike(String id) {
+		Connection conn=getConnection();
+		List<Likenation> result=dao.selectLike(conn,id);
+		close(conn);
+		return result;
+	}
+	
+	
+	//나라 입력시 분기처리 해줄 나라 전체 찾기 
+	public List<Country> selectAllcountry(){
+		Connection conn=getConnection();
+		List<Country> co=dao.selectAllcountry(conn);
+		close(conn);
+		return co;
 	}
 }

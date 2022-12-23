@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.smtw.country.model.vo.CountryPage;
 import com.smtw.country.model.vo.CountryPageInfo;
 import com.smtw.countrypageinfo.model.service.CountryPageInfoService;
 
@@ -31,12 +32,17 @@ public class searchCountryInfoAllServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		String name=request.getParameter("nName");
-		List<CountryPageInfo> c=new CountryPageInfoService().searchAll();
 		
-		request.setAttribute("coinfo", c);
-//		System.out.println(c);
+		//countrypageinfo 출력 구문
+		List<CountryPageInfo> c=new CountryPageInfoService().searchAll();
+		//해당 국가의 내용을 출력
+		List<CountryPageInfo> cc=new CountryPageInfoService().selectjoinpage(name);
+		
+		request.setAttribute("copageinfo", c);
 		request.setAttribute("name", name);
+		request.setAttribute("joinpage", cc);
 		request.getRequestDispatcher("/views/countryInfo/countryInfoMain.jsp").forward(request, response);
 	
 	

@@ -46,7 +46,7 @@ public class ReviewBasicServlet extends HttpServlet {
 		
 		
 		int cPage;
-		int numPerpage=4;
+		int numPerpage=8;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
@@ -79,33 +79,33 @@ public class ReviewBasicServlet extends HttpServlet {
 
 		
 		
-				if(pageNo==1) {  
-					pageBar+="<span>[이전]</span>";
-					
-				}else {   
-					pageBar+="<a href='"+request.getContextPath()
-					+"/community/reviewBasic.do?cPage="+(pageNo-1)+"&stateSort="+stateSort+"'>[이전]</a>";
-					
-				}
+		if(pageNo==1) {
+			pageBar+="<li class='page-item disabled' style='color:rgba(221, 160, 221, 0.508) !important;'>"
+					+"<a class='page-link' style='color:rgba(221, 160, 221, 0.508) !important;'>이전</a></li>";
+		}else {
+			pageBar+="<li><a class='page-link' href='"+request.getContextPath()+"/community/reviewBasic.do?cPage="+(pageNo-1)
+					+"' style='color:rgba(221, 160, 221, 0.508) !important;'>이전</a></li>";
+		}
 				
-				while(!(pageNo>pageEnd||pageNo>totalPage)) {
-					if(cPage==pageNo) {
-						//보고있는 페이지
-						pageBar+="<span>"+pageNo+"</span>";
-					}else {
-						pageBar+="<a href='"+request.getContextPath()
-						+"/community/reviewBasic.do?cPage="+pageNo+"&stateSort="+stateSort+"'>"+pageNo+"</a>";
-					}
-					
-					pageNo++;
-				}
+		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+			if(cPage==pageNo) {
+				pageBar+="<li class='page-item'><a class='page-link' style='color:rgba(221, 160, 221, 0.508) !important;'>"+pageNo+"</a></li>";
+			}else {
+				pageBar+="<li class='page-item'><a class='page-link' href='"
+						+request.getContextPath()+"/community/reviewBasic.do?cPage="+pageNo+"&stateSort="+stateSort
+						+"' style='color:rgba(221, 160, 221, 0.508) !important;'>"+pageNo+"</a></li>";
+			}
+			
+			pageNo++;
+		}
 				
-				if(pageNo>totalPage) {
-					pageBar+="<span>[다음]</span>";
-				}else {
-					pageBar+="<a href='"+request.getContextPath()
-						+"/community/reviewBasic.do?cPage="+pageNo+"&stateSort="+stateSort+"'>[다음]</a>";
-				}
+		if(pageNo>totalPage) {
+			pageBar+="<li class='page-item disabled'><a class='page-link' style='color:rgba(221, 160, 221, 0.508) !important;'>다음</a></li>";
+		}else {
+			pageBar+="<li class='page-item'><a class='page-link' href='"
+					+request.getContextPath()+"/community/reviewBasic.do?cPage="+pageNo+"&stateSort="+stateSort
+					+"' style='color:rgba(221, 160, 221, 0.508) !important;'>다음</a></li>";
+		}
 		
 		
 		

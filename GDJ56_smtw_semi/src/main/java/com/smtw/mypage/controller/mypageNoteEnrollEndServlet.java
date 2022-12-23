@@ -48,7 +48,7 @@ public class mypageNoteEnrollEndServlet extends HttpServlet {
 			loc="/mypage/mypageNoteReply.do?id="+memberId;
 
 		}else {
-			msg="성공! 기존에 있던 페이지로 이동합니다";
+			msg="쪽지보내기 성공!";
 			loc="/mypage/mypageNoteReceive.do?id="+memberId;
 		}
 		

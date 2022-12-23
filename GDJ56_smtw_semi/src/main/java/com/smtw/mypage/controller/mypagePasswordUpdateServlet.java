@@ -13,7 +13,7 @@ import com.smtw.mypage.model.service.MypageService;
 /**
  * Servlet implementation class mypagePasswordUpdateServlet
  */
-@WebServlet("/mypage/mypagePasswordUpdate.do")
+@WebServlet(name="PasswordUpdate", urlPatterns="/mypage/mypagePasswordUpdate.do")
 public class mypagePasswordUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,7 +30,7 @@ public class mypagePasswordUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId=request.getParameter("id");
-		String pwd=request.getParameter("password");
+		String pwd=request.getParameter("Pwd");
 		
 		System.out.println(userId+" : "+pwd);
 		Member m = new MypageService().pwdCk(userId,pwd);

@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.smtw.friends.model.dao.FriendsDao;
+import com.smtw.friends.model.vo.ApplyFriends;
 import com.smtw.friends.model.vo.Friends;
 
 public class FriendsService {
@@ -62,9 +63,9 @@ public class FriendsService {
 		return m;
 	}
 	
-	public int deleteFriends(String id) {
+	public int deleteFriends(int no) {
 		Connection conn=getConnection();
-		int result=dao.deleteFriends(conn, id);
+		int result=dao.deleteFriends(conn, no);
 		close(conn);
 		return result;
 	}
@@ -81,6 +82,20 @@ public class FriendsService {
 		int result=dao.updateFriends(conn, f);
 		close(conn);
 		return result;
+	}
+	
+	public int insertFriendsApply(ApplyFriends af) {
+		Connection conn=getConnection();
+		int result=dao.insertFriendsApply(conn, af);
+		close(conn);
+		return result;
+	}
+	
+	public List<ApplyFriends> selectFriendsApply(String memberId) {
+		Connection conn=getConnection();
+		List<ApplyFriends> af=dao.selectFriendsApply(conn, memberId);
+		close(conn);
+		return af;
 	}
 	
 }

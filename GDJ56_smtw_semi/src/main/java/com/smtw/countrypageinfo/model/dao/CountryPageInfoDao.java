@@ -123,27 +123,116 @@ public class CountryPageInfoDao {
 		return result;
 		}
 		
-	
-	
-	
-	//CountryPage의 dao항목들
-	public List<CountryPage> selectContent(Connection conn){
+	public List<CountryPageInfo> selectjoinpage(Connection conn, String name) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		List<CountryPage> list=new ArrayList();
+		List<CountryPageInfo> list=new ArrayList();
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectContent"));
+			pstmt=conn.prepareStatement(sql.getProperty("selectjoinpage"));
+			pstmt.setString(1, name);
 			rs=pstmt.executeQuery();
-			while(rs.next()) list.add(getCountryPage(rs));
-			
+			while(rs.next()) { 
+				CountryPageInfo cp=getContryInfo(rs);
+				cp.setPage(getCountryPage(rs));
+				list.add(cp);
+			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(rs);
 			close(pstmt);
 		}return list;
-		
 	}
+	
+	
+	//CountryPage의 dao항목들
+	
+
+	public CountryPage coArea(Connection conn,String name) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		CountryPage cp=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectInfototal"));
+			pstmt.setString(1,name);
+			rs=pstmt.executeQuery();
+			if(rs.next()) cp=getCountryPage(rs);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return cp;
+	}
+	
+	public CountryPage whVisa(Connection conn,String name) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		CountryPage cp=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectInfototal"));
+			pstmt.setString(1,name);
+			rs=pstmt.executeQuery();
+			if(rs.next()) cp=getCountryPage(rs);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return cp;
+	}
+	public CountryPage safe(Connection conn,String name) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		CountryPage cp=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectInfototal"));
+			pstmt.setString(1,name);
+			rs=pstmt.executeQuery();
+			if(rs.next()) cp=getCountryPage(rs);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return cp;
+	}
+	
+	public CountryPage stay(Connection conn,String name) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		CountryPage cp=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectInfototal"));
+			pstmt.setString(1,name);
+			rs=pstmt.executeQuery();
+			if(rs.next()) cp=getCountryPage(rs);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return cp;
+	}
+	
+	public CountryPage job(Connection conn,String name) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		CountryPage cp=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectInfototal"));
+			pstmt.setString(1,name);
+			rs=pstmt.executeQuery();
+			if(rs.next()) cp=getCountryPage(rs);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return cp;
+	}
+	
+	
 	
 	public static CountryPage getCountryPage(ResultSet rs) throws SQLException{
 		return CountryPage.builder()

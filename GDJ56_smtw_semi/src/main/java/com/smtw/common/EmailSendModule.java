@@ -48,7 +48,7 @@ public class EmailSendModule {//메일을 보내기 위한 자바 소스
 
 	            // send the message
 	            Transport.send(message); ////전송
-	            System.out.println("인증번호가 전송되었습니다.");
+//	            System.out.println("인증번호가 전송되었습니다.");
 	        } catch (AddressException e) {
 	            // TODO Auto-generated catch block
 	            e.printStackTrace();

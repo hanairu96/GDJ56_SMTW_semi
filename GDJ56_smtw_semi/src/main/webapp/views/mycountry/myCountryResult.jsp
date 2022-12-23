@@ -32,7 +32,7 @@
 			    			<td id="noResult">
 			    			<h1 id="radioValue">'<%=countryResult[0] %>','<%=countryResult[1] %>','<%=countryResult[2] %>','<%=countryResult[3] %>'</h1>
 			    				적합한 나라가 없네요!!<br>↓↓ 어떤 나라가 있는지 보고 싶다면 ↓↓<br>
-			    				<button class="customBtn btnStyle" id="detailCountryALL"  onclick="location.assign('<%=request.getContextPath()%>/country/countryMain.do')"> >> 워홀나라 알아보기 << </button>
+			    				<button class="customBtn btnStyle" id="detailCountryALL"  onclick="location.assign('<%=request.getContextPath()%>/country/countryMain.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>')"> >> 워홀나라 알아보기 << </button>
 			    			</td>
 			    		</tr>
 			    		<% } else{%>
@@ -47,7 +47,7 @@
 						    	<%for(MyCountry mc : mycountry){ %>
 					    			<%if(count<4){ %>
 							    		<td>
-							    			<img src="" width="200" height="200"><%-- <%=mc.getNImg() %> --%>
+							    			<img src="<%=request.getContextPath()%>/upload/country/<%=mc.getNImg() %>" width="300" height="250">
 							    			<h1 id="resultName">" <%=mc.getNName() %> "</h1>
 							    		</td>
 					    		 <% count++;
@@ -63,10 +63,9 @@
 			    				}%>
 			    				<tr>
 			    			  <td colspan="4">
-			    			  	<button class="customBtn btnStyle" id="detailCountry" onclick=""> >> 더 알아보기 << </button>
+			    			  	<button class="customBtn btnStyle" id="detailCountry"  onclick="location.assign('<%=request.getContextPath()%>/country/countryMain.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>')"> >> 더 알아보기 << </button>
 			    			  </td></tr>
 			    			<% }%>
-				    	<%--  <% }%> --%>
 		            </tbody>
 		        </table>
                  

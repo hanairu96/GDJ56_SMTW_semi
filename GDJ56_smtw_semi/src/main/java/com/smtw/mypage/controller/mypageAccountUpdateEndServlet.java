@@ -1,12 +1,17 @@
 package com.smtw.mypage.controller;
 
 import java.io.IOException;
+import java.util.Enumeration;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.smtw.member.model.vo.Member;
 import com.smtw.mypage.model.service.MypageService;
 
@@ -30,18 +35,29 @@ public class mypageAccountUpdateEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String mypcs=request.getParameter("mypcs");
-		String id=request.getParameter("id");
-		String name=request.getParameter("name");
-		char gender=request.getParameter("gender").charAt(0);
-		String bYear=request.getParameter("bYear");
-		String bMonth=request.getParameter("bMonth");
-		String bDay=request.getParameter("bDay");
-		String email=request.getParameter("email");
-		String phone=request.getParameter("phone");
-		String myImg=request.getParameter("mypcs");
+		 String path=request.getServletContext().getRealPath("/upload/account/");
 		
-		String address="("+request.getParameter("inputAddress_postcode")+")"+request.getParameter("inputAddress_address")+","+request.getParameter("inputAddress_detailAddress");
+		  MultipartRequest mr=new MultipartRequest(request,path,1024*1024*10,"UTF-8",new DefaultFileRenamePolicy());
+	      
+	      Enumeration e=mr.getFileNames();
+	      String pic="";
+	      if(e.hasMoreElements()) {
+	         String filename=(String)e.nextElement();//파일을 반환
+	         pic = mr.getFilesystemName(filename);
+	      }
+		
+		
+		String id=mr.getParameter("id");
+		String name=mr.getParameter("name");
+		char gender=mr.getParameter("gender").charAt(0);
+		String bYear=mr.getParameter("bYear");
+		String bMonth=mr.getParameter("bMonth");
+		String bDay=mr.getParameter("bDay");
+		String email=mr.getParameter("email");
+		String phone=mr.getParameter("phone");
+		String myImg=mr.getParameter("mypcs");
+		
+		String address="("+mr.getParameter("inputAddress_postcode")+")"+mr.getParameter("inputAddress_address")+","+mr.getParameter("inputAddress_detailAddress");
 		
 		String birth = bYear+"/"+bMonth+"/"+bDay;
 		
@@ -51,7 +67,7 @@ public class mypageAccountUpdateEndServlet extends HttpServlet {
 		System.out.println("생년월일"+birth);
 		System.out.println("주소"+address);
 		System.out.println("이멜일"+email);
-		System.out.println("내사진"+myImg);
+		System.out.println("내사진"+pic);
 		
 		Member updateMember = Member.builder()
 						.memberId(id)
@@ -61,9 +77,9 @@ public class mypageAccountUpdateEndServlet extends HttpServlet {
 						.birth(birth)
 						.gender(gender)
 						.address(address)
-						.myImg(myImg)
+						.myImg(pic)
 						.build();
-		
+							
 		int result=new MypageService().updateMember(updateMember);
 		
 		String msg="", loc="";
@@ -71,13 +87,13 @@ public class mypageAccountUpdateEndServlet extends HttpServlet {
 			msg="실패했습니다. 다시 시도해주세요";
 			loc="/mypage/mypageAccountUpdate.do?id="+id;
 		}else {
-			msg="성공! 기존에 있던 페이지로 이동합니다";
+			msg="회원정보가 수정되었습니다";
 			loc="/mypage/mypageAccountView.do?id="+id;
 		}
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/mypage/alert.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

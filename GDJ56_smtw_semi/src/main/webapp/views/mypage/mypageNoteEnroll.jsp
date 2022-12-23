@@ -38,8 +38,7 @@
     button{
         position: absolute;
         left: 50%;
-        top: 93%;
-        width: 60px;
-        height: 30px;
+        bottom: 10px;
+        transform: translate(-50%,-50%);
     }
 </style>

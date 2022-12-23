@@ -6,15 +6,23 @@ import static com.smtw.common.JDBCTemplate.rollback;
 import static com.smtw.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.smtw.diary.model.dao.DiaryDao;
 import com.smtw.diary.model.vo.CheckList;
 import com.smtw.diary.model.vo.Diary;
+import com.smtw.member.model.vo.Member;
 
 public class DiaryService {
 
 	DiaryDao dao=new DiaryDao();
 	
+	public List<Diary> searchDiaryAll(){
+		Connection conn=getConnection();
+		List<Diary> list=dao.searchDiaryAll(conn);
+		close(conn);
+		return list;
+	}
 	public Diary searchDiary(String memberId) {
 		Connection conn=getConnection();
 		Diary diary=dao.searchDiary(conn,memberId);

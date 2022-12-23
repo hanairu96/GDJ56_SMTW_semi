@@ -21,7 +21,7 @@
 <!--                     <input id="idCheck" type="button" value="중복확인"> -->
                     <span class="check" id="checkId"><small></small></span>
                     <input type="text" class="form-control" name="inputId" id="inputId" 
-                    	aria-describedby="emailHelp" placeholder="아이디를 입력해주세요" required>
+                    	aria-describedby="emailHelp" placeholder="아이디를 입력해주세요" required maxlength="8">
                     <small class="form-text text-muted">아이디는 5자리 이상 입력하세요</small>
                 </div>
                 <script>
@@ -219,34 +219,18 @@
                         <input id="searchAddr" name="emailconfirm_btn" type="button" value="인증"
                         onclick="emailcheck();">
                     </div>
-                    <span class="check" id="checkCrtfcNo" style="display:none;"><small></small></span>
-                    <div class="bir_yy address crtfcNo" style="display:none;">
+                    <span class="check" id="checkCrtfcNo"style="display:none;"><small></small></span>
+                    <div class="bir_yy address crtfcNo" style="display:none;" >
                     	<input type="text" class="form-control" name="inputEmail" id="crtfcNoCheck"
                     	  placeholder="인증번호 입력">
                	  	</div>
                	  	<div class="bir_yy address crtfcNo" style="display:none;">
-	               	  	<input id="crtfcButton" name="emailconfirm_btn" type="button" value="확인"
+	               	  	<input id="crtfcButton" name="emailconfirm_btn" type="button" value="확인" style="margin-left:10px;height:35px;"
                        onclick="crtNoCheck();">
                     </div>
                 </div>
                 
                 <script>
-	              //이메일 중복확인
-// 	             	$("input#inputEmail").keyup(e=>{
-// 	             		$.ajax({
-<%-- 	             			url:"<%=request.getContextPath()%>/logIn/emailDuplicateCheck.do", --%>
-// 	             			data:{inputEmail:$("input#inputEmail").val().trim()},
-// 	             			dataType:"json",
-// 	             			success:data=>{
-// 	             				console.log(data);
-// 	             				if(data!=null){
-// 	             					$("span#checkEmail>small").text("이미 가입된 이메일 입니다.").css("color","red");
-// 	             				}else{
-// 	             					$("span#checkEmail>small").text(" ");
-// 	             				}
-// 	             			}
-// 	             		})
-// 	             	});
 	              
 	              //정규식 확인
 						var crtfcNoData="";//변수에 인증번호를 저장하기 위함
@@ -279,7 +263,7 @@
 							success:data=>{//ajax로 돌려받은 인증번호
 								// 인증번호 값이 없을 경우
 								if(data==null){
-									alert("인증에 실패하였습니다. 다시 시도해주세요");
+									Swal.fire("인증에 실패하였습니다. \n다시 시도해주세요");
 									$("span#checkCrtfcNo>small").text(" ");//인증번호 발신메세지 지우기
 									return false;
 							    // ajax가 돌아가서 제대로 값이 돌아온 경우
@@ -294,21 +278,22 @@
 						const crtNoCheck=()=>{
 //							console.log("인증번호 : "+crtfcNoData);
 							//인증번호 칸에 아무것도 입력하지 않았을 경우
-							if($("#crtfcNoCheck").val()==""){
+							if($("#crtfcNoCheck").val().trim()==""){
 								$("span#checkCrtfcNo>small").text("인증번호를 입력해주세요.").css("color","red");
 								$("span#checkEmail>small").text("");
 								console.log("인증번호 칸 비어있음");
 							}
 							//인증번호가 틀렸을 경우
-							else if(crtfcNoData!=$("#crtfcNoCheck").val()||$("#crtfcNoCheck").val()==""){
+							else if(crtfcNoData!=$("#crtfcNoCheck").val().trim()||$("#crtfcNoCheck").val().trim()==""){
 								$("span#checkCrtfcNo>small").text("인증에 실패하였습니다. 다시 시도해주세요.").css("color","red");//인증번호 실패메세지
 								$("span#checkEmail>small").text("");
 								console.log("인증코드 틀림");
 								return false;
 								
 							//올바른 인증번호 입력
-							}else if(crtfcNoData == $("#crtfcNoCheck").val()){
+							}else if(crtfcNoData == $("#crtfcNoCheck").val().trim()){
 								
+								//이메일 중복확인
 								$.ajax({
 			             			url:"<%=request.getContextPath()%>/logIn/emailDuplicateCheck.do",
 			             			data:{inputEmail:$("input#inputEmail").val().trim()},
@@ -376,7 +361,7 @@
 		const pwdReg=/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 		
 		if(inputPwd.match(pwdReg)==null){//비밀번호가 양식대로 입력되지 않았으면(==실패)
-			alert("비밀번호는 숫자, 특수문자 및 영문자를 포함하여 8자리 이상이여야합니다.");
+			Swal.fire("비밀번호는 숫자, 영문자를 \n포함하여 8자리 이상 입력하세요");
 			$("#inputPwd").focus();
 			return false;
 		}
@@ -390,7 +375,7 @@
 		}
 		//이름 정규식 표현
 		const inputName=$("#inputName").val().trim();
-		const nameReg=/^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;//한글이름2~4자or영문 이름 2~10자 이내 : 띄어쓰기(\s)가 들어가며 First, Last Name 형식
+		const nameReg=/^[가-힣]{2,5}$/;//한글이름2~5자
 		if(!nameReg.test(inputName)){//이름이 틀렸으면
 			$("span#checkName>small").text("올바른 이름을 입력해주세요.").css("color","red");
 			$("#inputName").focus();
