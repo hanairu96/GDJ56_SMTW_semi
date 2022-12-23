@@ -24,17 +24,18 @@
         
         <div class="contentList">
             <div id="menutitle"><center><h2>내가 찜한 나라</h2></center></div>
-            <div style="margin-top: 5%;"><h2 >지금 전 세계가 <%=logInMember.getMemberName() %>님을 기다리고 있어요!</h2></div>
+            <div style="margin-top: 5%;"><center><h2>지금 전 세계가 <%=logInMember.getMemberName() %>님을 기다리고 있어요!</h2></center></div>
             
             <%if(n.isEmpty()){ %>
              <div class="npicdiv">
             	<div class="nPic" style="width:500; height:500;border: 0px solid;">
-           			<b>아직 찜한 나라가 없습니다 :(</b> <br>
-         			<b>아직 워킹홀리데이 나라를 못정하셨나요?</b>
+            		
+           			<b style="font-size: x-large;">아직 찜한 나라가 없습니다 :(</b> <br>
+         			<b style="font-size: x-large;">아직 워킹홀리데이 나라를 못정하셨나요?</b>
            		</div>
            	 </div>
-            	<div style="width:500; height:500;border: 0px solid;">
-           		<button onclick="location.assign('<%=request.getContextPath()%>/mycountry/myCountry.do');">나에게 맞는 나라 찾기 테스트 하러 가기</button><br>
+            	<div id="nBt" style="width:500px; height:50px;border: 0px solid;">
+           		<button onclick="location.assign('<%=request.getContextPath()%>/mycountry/myCountry.do');">나에게 맞는 나라찾기 테스트 GO!</button><br><br>
          		<button onclick="location.assign('<%=request.getContextPath()%>/community/reviewBasic.do');">생생후기 보러 가기</botton>
            		</div>
            	<%}else if(n.size()<3){%>
