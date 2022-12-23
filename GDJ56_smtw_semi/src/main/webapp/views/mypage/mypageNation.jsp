@@ -23,44 +23,44 @@
         <div class="menuDiv"></div>
         
         <div class="contentList">
-            <div id="menutitle"><h2 style="background-color: cornflowerblue;">내가 찜한 나라</h2></div>
+            <div id="menutitle"><center><h2>내가 찜한 나라</h2></center></div>
             <div style="margin-top: 5%;"><h2 >지금 전 세계가 <%=logInMember.getMemberName() %>님을 기다리고 있어요!</h2></div>
             
             <%if(n.isEmpty()){ %>
              <div class="npicdiv">
-            	<div class="nPic" style="width:500; height:500;border: 1px solid;">
+            	<div class="nPic" style="width:500; height:500;border: 0px solid;">
            			<b>아직 찜한 나라가 없습니다 :(</b> <br>
          			<b>아직 워킹홀리데이 나라를 못정하셨나요?</b>
            		</div>
            	 </div>
-            	<div style="width:500; height:500;border: 1px solid;">
+            	<div style="width:500; height:500;border: 0px solid;">
            		<button onclick="location.assign('<%=request.getContextPath()%>/mycountry/myCountry.do');">나에게 맞는 나라 찾기 테스트 하러 가기</button><br>
          		<button onclick="location.assign('<%=request.getContextPath()%>/community/reviewBasic.do');">생생후기 보러 가기</botton>
            		</div>
            	<%}else if(n.size()<3){%>
      			<div class="npicdiv">
 	     			<%for(int i=0;i<n.size();i++){%>
-	            	<div class="nPic" style="width:500; height:500;border: 1px solid;">
+	            	<div class="nPic" style="width:500; height:500;border: 0px solid;">
 	          			<p><%=n.get(i).getNName() %></p>
-	         		 	<img src="<%=request.getContextPath()%>/upload/<%=n.get(i).getNImg() %>" 
-	         		 	onclick="location.assign('<%=request.getContextPath()%>/countryinfo/searchAll.do?nName=<%=n.get(i).getNName() %>');" alt="" width="200" height="200">
+	         		 	<img src="<%=request.getContextPath()%>/upload/country/<%=n.get(i).getNImg() %>" 
+	         		 	onclick="location.assign('<%=request.getContextPath()%>/countryinfo/searchAll.do?nName=<%=n.get(i).getNName() %>');" alt="" style="width:200px; height:200px;">
 	           		</div>
            		<%} %>
            		</div>
-            	<div id="nBt" style="width:500; height:500;border: 1px solid;">
+            	<div id="nBt" style="width:500px; height:50px;border: 0px solid;">
            			<button onclick="location.assign('<%=request.getContextPath()%>/country/countryMain.do');">더 많은 나라 보러가기</botton>
            		</div>
             <%}else{ %>
          	<div class="npicdiv">
          		<%for(int i=0;i<n.size();i++){%>
-         		<div class="nPic" style="width:500; height:500;border: 1px solid;">
+         		<div class="nPic" style="width:500; height:250px;border: 0px solid;">
           			<p><%=n.get(i).getNName() %></p>
-         		 	<img src="<%=request.getContextPath()%>/upload/<%=n.get(i).getNImg() %>" 
-         		 	onclick="location.assign('<%=request.getContextPath()%>/countryinfo/searchAll.do?nName=<%=n.get(i).getNName() %>');" alt="" width="200" height="200">
+         		 	<img src="<%=request.getContextPath()%>/upload/country/<%=n.get(i).getNImg() %>" 
+         		 	onclick="location.assign('<%=request.getContextPath()%>/countryinfo/searchAll.do?nName=<%=n.get(i).getNName() %>');" alt="" style="width:300px; height:200px;">
            		</div>
            		<%}%>
            	</div>
-           		<div id="nBt" style="width:500; height:500;border: 1px solid;">
+           		<div id="nBt" style="width:500px; height:50px;border: 0px solid;">
            			<button onclick="location.assign('<%=request.getContextPath()%>/diary/firstDiary.do');">나의 출국일지로 이동하기</button>
            		</div>
            	<%}%>
@@ -91,7 +91,7 @@
       .npicdiv{
 		display:flex;
       	justify-content: center;
-      	
+      	flex-wrap: wrap;
       }
      .nPic{
      	float: left;
@@ -100,16 +100,29 @@
      }
      
      #nBt{
-     	clear:both
+     	clear:both;
+     	width:1000px;
+     	margin:0 auto;	
+		text-align:center;	    
      }
+     #nBt>*{
+     	width: 230px;
+     	height:60px;
+         background-color: lavender;
+         color:purple;
+         font-size:18px;
+         font-family: "Hahmlet";
+         font-weight:bolder;
+         border:0 solid black;
+         border-radius: 50px;
+         box-shadow: 5px 2px 8px lavender;
+     }
+     
  
         #menutitle{
             /* border: 1px solid;
             border-bottom: 3px solid; */
-
-            position: absolute;
-            top: 350px;
-            left: 800px;
+            margin:0 auto;
             width: 300px;
             height: 100px;
         }
@@ -123,7 +136,7 @@
        		border-radius : 10px;
        		padding 20px;
        		margin-right : 150px;
-            
+            height: 900px;
         }
         
 
@@ -144,7 +157,7 @@
             display: flex;
         }
         .sidemenu{
-            width: 15%;
+            width: 15%;	
             height: 100px;
             font-size: 20px;
             font-weight: bold;
@@ -188,7 +201,7 @@
         }
         /* ##### 여기까지 사이드메뉴 스타일 #####  */
         section{
-            border: 1px solid tomato;
+            border: 0px solid tomato;
             
             margin-left: 50px;
             margin-right: 50px;
@@ -210,7 +223,7 @@
             
         }
         section>div{
-            border: 1px solid blue;
+            border: 0px solid blue;
             /* 섹션 안의 div테두리 */
             
         }

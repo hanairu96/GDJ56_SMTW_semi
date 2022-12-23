@@ -93,6 +93,8 @@
             margin-left: 0 auto;
             margin-right: 0 auto;
             text-align: center;
+            border:2px solid;
+            border-radius:10px;
         }
         .texts h1{
             text-align: center;
@@ -118,66 +120,91 @@
             text-align: center;
             cursor: pointer;
         }
-         .sidemenu2{
-                padding: 10px;
-                /* margin-top: 1000px; */
-                /* margin: 0 auto; */
-                /* border: 1px solid; */
-                font-size: 18px;
-                font-weight: bold;
-                position: fixed;
+        .sidemenu2{
+            width: 15%;	
+            height: 100px;
+            font-size: 20px;
+            font-weight: bold;
+            position: absolute;
             }
             
-            .menuDiv{
-                width: 15%;
+        .menuDiv{
+                width: 25%;
             }
-    
-            .sidemenu2 p:hover{
-                transform: scale(1.1);
-                transition-property: transform;
-                transition-duration: 1s;
-            }
-           .sidemenu2>*:not(div:nth-child(1)){
-                width: 200px;
-                height: 50px;
-                background-color: lavender;
-                border-radius: 50px;
-                box-shadow: 5px 2px 8px lavender;
-            }
-            .sidemenu2 p{
-                text-align: center;
-                padding: 13px;
-                cursor:pointer
-            }
-            .sidemenu2>div:nth-child(5){
-                color: purple;
-                
-            }
-            section{
-                
-                margin-left: 50px;
-                margin-right: 50px;
-                /* ★수정한 부분 */
-                /* padding-left: 100px;
-                padding-right: 100px; */
-                /* ★수정한부분 */
-                /* 
-                    만약 섹션 안에 div를 만든다면 여기 padding-left,padding-right에서
-                    좌우 간격을 조정하세요
-                    왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
-                 */
-                margin-top: 100px;
-                height: 900px; 
-                /*
-                    ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
-                    높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.
-                */
-                
-            }
-            section>div{
-                /* 섹션 안의 div테두리 */
-                
-            }
+        .sidemenu2>*:hover{
+            transform: scale(1.1);
+            transition-property: transform;
+            transition-duration: 1s;
+        }
+        .sidemenu2>*:not(div:nth-child(1)){
+            background-color: lavender;
+            border-radius: 50px;
+            box-shadow: 5px 2px 8px lavender;
+        }
+        .sidemenu2 p{
+            text-align: center;
+            padding-top: 6%;
+             color: black;
+        }
+        .sidemenu2 p:hover{
+            text-align: center;
+            padding-top: 6%;
+             color: purple;
+        }
+        .sidemenu2>div:first-child{
+            color: purple;
+        }
+
+        .sidemenu2>div{
+            height: 70px;
+            
+        }
+        a{
+            text-decoration: none;
+        }
+        section{
+            
+            margin-left: 50px;
+            margin-right: 50px;
+            /* ★수정한 부분 */
+            /* padding-left: 100px;
+            padding-right: 100px; */
+            /* ★수정한부분 */
+            /* 
+                만약 섹션 안에 div를 만든다면 여기 padding-left,padding-right에서
+                좌우 간격을 조정하세요
+                왼쪽 오른쪽도 웬만하면 다같이 맞추면 좋을 듯 하니 각자 만들어보고 의견주세요
+             */
+            margin-top: 100px;
+            height: 900px; 
+            /*
+                ->내가 사용하는 중간 섹션부분의 크기를 조절하려면 이 height를 조정하세요★★
+                높낮이 조절해도 footer침범하지 않도록 설정해놨으니 마음껏 늘려도 됩니다.
+            */
+            
+        }
+        section>div{
+            /* 섹션 안의 div테두리 */
+            
+        }
     </style>
+        <script>
+      $(document).ready(function() {
+          var floatPosition = parseInt($(".sidemenu2").css('top')); //사이드메뉴바의 top위치 가져옴
+
+          $(window).scroll(function() {
+              var scrollTop = $(window).scrollTop(); // 현재 스크롤 위치를 가져온다.
+              console.log(scrollTop); //스크롤위치 콘솔창에 출력해보면서 본인 페이지의 푸터위에 
+                                      //사이드메뉴바가 딱 정지하는 위치값 확인할것
+
+              var newPosition=scrollTop +floatPosition + "px"; //사이드메뉴바의 처음위치+ 현재스크롤위치
+
+              if(scrollTop<=400){ //해당 페이지의 푸터위 스크롤값이 620이여서 scrollTop이 620까지만 이동하게 설정했음
+                  $(".sidemenu2").stop().animate({
+                      "top" : newPosition
+                  }, 500);}
+          }).scroll();
+      });
+    </script> 
     
 <%@ include file="/views/common/footer.jsp" %>
