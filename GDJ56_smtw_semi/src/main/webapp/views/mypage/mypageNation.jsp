@@ -48,7 +48,7 @@
            		<%} %>
            		</div>
             	<div id="nBt" style="width:500px; height:50px;border: 0px solid;">
-           			<button onclick="location.assign('<%=request.getContextPath()%>/country/countryMain.do');">더 많은 나라 보러가기</botton>
+           			<button onclick="location.assign('<%=request.getContextPath()%>/country/countryMain.do?id=<%=logInMember.getMemberId() %>');">더 많은 나라 보러가기</botton>
            		</div>
             <%}else{ %>
          	<div class="npicdiv">
