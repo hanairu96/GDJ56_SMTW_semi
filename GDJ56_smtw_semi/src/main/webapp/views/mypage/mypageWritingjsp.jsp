@@ -93,6 +93,8 @@
             margin-left: 0 auto;
             margin-right: 0 auto;
             text-align: center;
+            border:2px solid;
+            border-radius:10px;
         }
         .texts h1{
             text-align: center;
