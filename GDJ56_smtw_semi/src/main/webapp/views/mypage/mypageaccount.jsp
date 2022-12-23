@@ -172,7 +172,7 @@
        
        
         section{
-            border: 1px solid tomato;
+            border: 0px solid tomato;
             margin-left: 50px;
             margin-right: 50px;
             /* ★수정한 부분 */
