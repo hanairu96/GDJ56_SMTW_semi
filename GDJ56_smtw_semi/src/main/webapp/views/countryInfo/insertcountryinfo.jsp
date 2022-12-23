@@ -76,7 +76,7 @@
     }
     
      section{
-     border: 1px solid tomato;
+   /*   border: 1px solid tomato; */
      
      margin-left: 50px;
      margin-right: 50px;

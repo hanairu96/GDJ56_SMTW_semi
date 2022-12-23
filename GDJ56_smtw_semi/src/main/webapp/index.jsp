@@ -278,7 +278,7 @@
                             <img src="images/map.jpg" class="d-block w-100" alt="...">
                         
                         </div>
-                        <div class="carousel-item" onclick="location.assign('<%=request.getContextPath()%>/country/countryMain.do')">
+                        <div class="carousel-item" onclick="location.assign('<%=request.getContextPath()%>/country/countryMain.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>')">
                            <!--  <div class="textcontainer">
                                 <h3>국가정보</h3>
                             </div> -->

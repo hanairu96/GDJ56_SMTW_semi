@@ -195,12 +195,14 @@
     
 	<%if(logInMember!=null&&logInMember.getMemberId().equals("ADMIN")) {%>
 		    <div id="twobu">
-		    <%-- <%if(coinfo==null){ %> --%>
-		        <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goInsertContext.do?nName=<%=c.getNName()%>')"><span>추가</span></button>
-		    <%-- <%}else{ %> --%>
-		        <button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goUpdateContent.do?nName=<%=c.getNName()%>')"><span>수정</span></button>
+		    <%for(CountryPageInfo cj: join){ %>
+		    	<%if(cj.getPage().getNInfo()==null){ %>
+		        	<button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goInsertContext.do?nName=<%=c.getNName()%>')"><span>추가</span></button>
+		    	<%}else{ %>
+		        	<button class="customBtn btnStyle" onclick="location.assign('<%=request.getContextPath()%>/countryinfo/goUpdateContent.do?nName=<%=c.getNName()%>')"><span>수정</span></button>
 	   		</div>
-	    <%-- <%}%> --%>
+	    <%}
+	    }%>
     <%}%>
 	<style>
 		

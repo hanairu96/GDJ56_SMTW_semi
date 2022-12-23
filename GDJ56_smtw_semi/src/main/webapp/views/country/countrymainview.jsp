@@ -83,6 +83,7 @@
 		#listlist>a{
 			font-size:20px;
 		}
+		
     </style>
 
 
@@ -117,11 +118,28 @@
            	<script>
            		/* 회원일경우 나라 상세정보가 없을때 뜨는 알림팝업 */
             	const nodatano=()=>{
-            		swal('나라정보를 업데이트중입니다!!!','','info');	
+            		Swal.fire({
+      				  title: '잠시만 기다려주세요!!',
+      				  text: '나라 정보를 업데이트중입니다!',
+      				  imageUrl: '<%=request.getContextPath()%>/upload/wwww.png',
+      				  imageWidth: 400,
+      				  imageHeight: 400,
+      				  imageAlt: 'Custom image',
+      				})
             	}	
             	/* 비상상황문구를 넣었을 경우 알림팝업 */
             	const fn_emergency=(em,name)=>{
-            		if(em!='null'){ swal('국가비상 상황이 발생되었습니다.',em,'error')
+            		if(em!='null'){ 
+            			Swal.fire({
+            				  title: '비상 상황 발생!',
+            				  text: em,
+            				  imageUrl: '<%=request.getContextPath()%>/upload/em.png',
+            				  imageWidth: 400,
+            				  imageHeight: 400,
+            				  imageAlt: 'Custom image',
+            				})
+            			
+            			/* swal('국가비상 상황이 발생되었습니다.',em,'error') */
             		.then(function(){
             		location.assign('<%=request.getContextPath()%>/countryinfo/searchAll.do?nName='+name);
 					})            	
