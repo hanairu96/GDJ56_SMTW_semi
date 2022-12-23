@@ -7,10 +7,15 @@
 	List<Note> list = (List<Note>)request.getAttribute("list");
 	String id = (String)request.getParameter("id");
 %>
+<!-- 부트스트랩 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+<!-- 부트스트랩 JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+
   <section>
   <div class="sector">
         <div class="sidemenu">
-            <div><h4 style="text-align: center;">마이 페이지</h4></div>
+            <div><h4 style="text-align:center;font-size:20px;font-weight:bold;">마이 페이지</h4></div>
             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageFriends.do?id=<%=logInMember.getMemberId()%>');">워홀 프렌즈</p></div>
             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageAccountView.do?id=<%=logInMember.getMemberId()%>');">계정 관리</p></div>
             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">쪽지함</p></div>
@@ -18,11 +23,11 @@
             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNation.do?id=<%=logInMember.getMemberId()%>');">찜한 나라</p></div>
         </div>
         <div class="menuDiv"></div>
-        <div class="contentList">
-            <center><h1>쪽지함</h1></center>
+        <div class="contentList"><br>
+            <center><h1 style="font-size:24px;font-weight:bold;">쪽지함</h1></center>
             <div id="postmenu">
-            	<div id="postrecieve"><center><h2 style="background-color: rgb(239, 239, 239);" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">수신함</h2></center></div><br>
-            	<div id="postsend"><center><h2 style="background-color: mediumpurple;" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteSend.do?id=<%=logInMember.getMemberId()%>');">발신함</h2></center></div><br>
+            	<div id="postrecieve"><center><h2 style="background-color: rgb(239, 239, 239);font-size:24px;" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">수신함</h2></center></div><br>
+            	<div id="postsend"><center><h2 style="background-color: mediumpurple;font-size:24px;" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteSend.do?id=<%=logInMember.getMemberId()%>');">발신함</h2></center></div><br>
             </div>
             <button onclick="noteDeleteClick();">삭제하기</button>
            
@@ -58,9 +63,14 @@
 
             </table>
             
-            <div id="pageBar">
-					<%=request.getAttribute("pageBar") %>
-			</div>
+            <div style="border:0px solid blue;width:100%;height:80px;text-align: center;">
+                <!-- 페이지 바 -->
+                <nav aria-label="Page navigation example" style="margin-top:30px;color:rgba(221, 160, 221, 0.508) !important;">
+                    <ul class="pagination justify-content-center" style="color:rgba(221, 160, 221, 0.508) !important;">
+						<%=request.getAttribute("pageBar") %>
+                    </ul>
+                </nav>
+            </div>
 
 			<script>
             	function goPopup(e){
@@ -268,7 +278,7 @@
 
         .sidemenu>div{
             height: 70px;
-            
+            margin-top:20px;
         }
         a{
             text-decoration: none;
@@ -299,7 +309,9 @@
         section>div{
             border: 0px solid blue;
             /* 섹션 안의 div테두리 */
-            
         }
+        *{
+        	font-family: "Hahmlet";
+    	}
     </style>
 <%@include file="/views/common/footer.jsp" %>
