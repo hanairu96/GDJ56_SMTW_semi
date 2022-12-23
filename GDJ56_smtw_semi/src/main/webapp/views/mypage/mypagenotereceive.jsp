@@ -270,7 +270,10 @@
         }
         /* ##### 여기까지 사이드메뉴 스타일 #####  */
         section{
+<<<<<<< HEAD
+=======
             border: 0px solid tomato;
+>>>>>>> branch 'dev' of https://github.com/thereisri/GDJ56_SMTW_semi
             
             margin-left: 50px;
             margin-right: 50px;
@@ -292,7 +295,10 @@
             
         }
         section>div{
+<<<<<<< HEAD
+=======
             border: 0px solid blue;
+>>>>>>> branch 'dev' of https://github.com/thereisri/GDJ56_SMTW_semi
             /* 섹션 안의 div테두리 */
             
         }
