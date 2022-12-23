@@ -173,7 +173,6 @@ out.print(userId);
                 
             }
             section{
-                border: 1px solid tomato;
                 
                 margin-left: 50px;
                 margin-right: 50px;
@@ -195,7 +194,6 @@ out.print(userId);
                 
             }
             section>div{
-                border: 1px solid blue;
                 /* 섹션 안의 div테두리 */
                 
             }

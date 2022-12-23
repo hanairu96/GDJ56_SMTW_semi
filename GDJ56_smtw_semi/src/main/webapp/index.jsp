@@ -275,7 +275,7 @@
                           <!--   <div class="textcontainer">
                                 <h3>워킹홀리데이란</h3>
                             </div>  -->
-                            <img src="images/map.jpg" class="d-block w-100" alt="...">
+                            <img src="images/worldmap.jpg" class="d-block w-100" alt="...">
                         
                         </div>
                         <div class="carousel-item" onclick="location.assign('<%=request.getContextPath()%>/country/countryMain.do?id=<%=logInMember!=null?logInMember.getMemberId():""%>')">

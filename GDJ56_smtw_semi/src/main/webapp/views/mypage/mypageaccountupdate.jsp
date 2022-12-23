@@ -343,7 +343,6 @@
             
         }
         section{
-            border: 1px solid tomato;
             
             margin-left: 50px;
             margin-right: 50px;
@@ -365,7 +364,6 @@
             
         }
         section>div{
-            border: 1px solid blue;
             /* 섹션 안의 div테두리 */
             
         }
