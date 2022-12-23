@@ -64,10 +64,10 @@ public class mypageWritingServlet extends HttpServlet {
 		int pageEnd=pageNo+pageBarSize-1;
 		
 		if(pageNo==1) {
-			pageBar+="<button class='customBtn btnStyle'>이전</button>";
+			pageBar+="<button class='customBtn btnStyle'> 이전 </button>";
 		}else {
 			pageBar+="<button class='customBtn btnStyle'><a href='"+request.getContextPath()
-				+"/mypage/mypageWriting.do?cPage="+(pageNo-1)+"'>이전</a></button>";
+				+"/mypage/mypageWriting.do?cPage="+(pageNo-1)+"'> 이전 </a></button>";
 		}
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
@@ -75,7 +75,7 @@ public class mypageWritingServlet extends HttpServlet {
 				pageBar+="<button class='customBtn btnStyle'>"+pageNo+"</button>";
 			}else {
 				pageBar+="<a href='"+request.getContextPath()
-				+"/mypage/mypageWriting.do?cPage="+pageNo+"'><button class='customBtn btnStyle'>"+pageNo+"</button></a>";
+				+"/mypage/mypageWriting.do?cPage="+pageNo+"'><button class='customBtn btnStyle'>"+" "+pageNo+" "+"</button></a>";
 			}
 			pageNo++;
 		}

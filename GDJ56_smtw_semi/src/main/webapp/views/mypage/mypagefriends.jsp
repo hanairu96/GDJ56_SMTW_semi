@@ -34,11 +34,12 @@ String myImg = (String)request.getAttribute("myImg");
         </div>
         <div class="menuDiv"></div>
         <div class="contentList">
-        	<h1>마이페이지</h1>
-        	<div id="mypsc">
-                <p><%=logInMember.getMemberName()%>님 어서 오세요!</p>
-                <img src="<%=request.getContextPath()%>/upload/account/<%=myImg%>" alt="" width="200" height="200">
-            </div>
+        	<center><h1 style="padding:2%">마이페이지</h1></center>
+        	<div id="welcome">
+        		<div id="mypsc">
+               	 	<center><img src="<%=request.getContextPath()%>/upload/account/<%=myImg%>" alt="" width="250" height="250" style="margin:5%"></center>
+               	 	<center><b style="margin:2%"><%=logInMember.getMemberName()%>님 어서 오세요!</b></center>
+            	</div>
             
             <div id="flist" style="overflow:scroll">
                 <p><b>친구 목록</b></p>
@@ -81,7 +82,7 @@ String myImg = (String)request.getAttribute("myImg");
                 }
               }%>
               </div>
-              
+              </div>
               <div id="recievelist"" style="overflow:scroll">
 
                 <p><b>친구신청 받은 목록</b><p>
@@ -277,6 +278,11 @@ String myImg = (String)request.getAttribute("myImg");
     </script> 
       <style>
 
+		#welcome{
+			display:flex;
+      		justify-content: center;
+      	}
+
         #menutitle{
             /* border: 1px solid;
             border-bottom: 3px solid; */
@@ -292,16 +298,15 @@ String myImg = (String)request.getAttribute("myImg");
             border: 1px solid;
             border-bottom: 3px solid;
 
-            width: 300px;
-            height: 300px;
+            width: 330px;
+            height: 330px;
         }
         #flist{
             border: 1px solid;
             border-bottom: 3px solid;
-
-            
+			margin-left:7%;
             width: 600px;
-            height: 300px;
+            height: 330px;
         }
         /* #fname>img{
             
@@ -317,11 +322,10 @@ String myImg = (String)request.getAttribute("myImg");
         #recievelist{
             border: 1px solid;
             border-bottom: 3px solid;
-
-            
-            width: 85%;
+            margin:7%;
+			margin-left:13%;            
+            width: 74%;
             height: 300px;
-            
             -ms-overflow-style: none; /* IE and Edge */
     		scrollbar-width: none; /* Firefox */
         }
@@ -329,9 +333,9 @@ String myImg = (String)request.getAttribute("myImg");
           #sendlist{
             border: 1px solid;
             border-bottom: 3px solid;
-
-            
-            width: 85%;
+			margin:5%;
+            margin-left:13%;            
+            width: 74%;
             height: 300px;
             
             -ms-overflow-style: none; /* IE and Edge */

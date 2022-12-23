@@ -57,7 +57,7 @@
 						for(Review r : rlist) {%>
 	                    <tr>
 	                    	<td>생생후기</td>
-	                        <td onclick="location.assign('<%=request.getContextPath()%>/qna/qnaView.do?qnaNo=<%=r.getReviewNo()%>');">
+	                        <td onclick="location.assign('<%=request.getContextPath()%>/community/readReview.do?ReviewNo=<%=r.getReviewNo()%>');">
 	                        	<%=r.getReviewTitle() %>
 	                        </td>
 	                        <td><%=r.getEnrollDate()%></td>
@@ -151,7 +151,6 @@
                 
             }
             section{
-                border: 1px solid tomato;
                 
                 margin-left: 50px;
                 margin-right: 50px;
@@ -173,7 +172,6 @@
                 
             }
             section>div{
-                border: 1px solid blue;
                 /* 섹션 안의 div테두리 */
                 
             }

@@ -21,16 +21,16 @@
         <div class="contentList">
 		 	<center><h1>쪽지함</h1></center>
             <div id="postmenu">
-            	<div id="postrecieve"><h2 style="background-color: cornflowerblue;" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">수신함</h2></div><br>
-            	<div id="postsend"><h2 style="background-color: rgb(239, 239, 239);" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteSend.do?id=<%=logInMember.getMemberId()%>');">발신함</h2></div><br>
+            	<div id="postrecieve"><center><h2 style="background-color: mediumpurple;" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">수신함</h2></center></div><br>
+            	<div id="postsend"><center><h2 style="background-color: rgb(239, 239, 239);" onclick="location.replace('<%=request.getContextPath()%>/mypage/mypageNoteSend.do?id=<%=logInMember.getMemberId()%>');">발신함</h2></center></div><br>
             </div>
             	<button onclick="noteDeleteClick();">삭제하기</button>
-            <table id="postbox" style="width: 95%; margin-left:2%; style="table-layout: fixed"">
+            <table id="postbox" style="width: 95%; margin-left:2%; text-align: center;">
                 <tr>
                     <td style="width: 5%;"><input type="checkbox" name="" id="" onclick='selectAll(this)'></td>
-                    <td style="width: 20%;"><p>FROM</p></td>
+                    <td style="width: 10%;"><p>FROM</p></td>
                     <td style="width: 40%; ">내용</td>
-                    <td style="width: 35%;">보낸날짜</td>
+                    <td style="width: 15%;">보낸날짜</td>
                 </tr>
                 
                 <%if(list.isEmpty()){ %>
@@ -141,9 +141,8 @@
         }
         
         #pageBar{
-        	position: absolute;
-            top: 1000px;
-            left: 900px;
+        display:flex;
+        	justify-content: center;
         }
 
         #postmenu{

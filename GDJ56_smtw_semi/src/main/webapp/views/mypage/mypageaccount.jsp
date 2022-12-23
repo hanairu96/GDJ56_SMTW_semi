@@ -18,13 +18,15 @@
         </div>
         <div class="menuDiv"></div>
         <div class="contentList">
-        <h1>계정관리</h1>
+        
+        <center><h1>계정관리</h1></center>
+        <div id="welcome">
         <div id="mypsc">
-                <img src="<%=request.getContextPath()%>/upload/account/<%=m.getMyImg() %>" alt="" width="200" height="200" style="border">
+                <center><img src="<%=request.getContextPath()%>/upload/account/<%=m.getMyImg() %>" alt="" width="200" height="200" style="border"></center>
                 <br>
                 
-                <button onclick="location.assign('<%=request.getContextPath()%>/mypage/mypagePwdCk.do?id=<%=m.getMemberId()%>');"; style="box-shadow: 3px 3px;background-color: lavender;">수정하기</button>
-                <button onclick="location.assign('<%=request.getContextPath()%>/mypage/mypagePwdCk2.do?id=<%=m.getMemberId()%>');" style="box-shadow: 3px 3px;background-color: lavender;">탈퇴하기</button>
+                <center><button onclick="location.assign('<%=request.getContextPath()%>/mypage/mypagePwdCk.do?id=<%=m.getMemberId()%>');"; style="box-shadow: 3px 3px;background-color: lavender;">수정하기</button></center>
+                <br><center><button onclick="location.assign('<%=request.getContextPath()%>/mypage/mypagePwdCk2.do?id=<%=m.getMemberId()%>');" style="box-shadow: 3px 3px;background-color: lavender;">탈퇴하기</button></center>
         </div>
         <div id="myimpo">
             <div>아이디 : <%=m.getMemberId() %></div>
@@ -34,7 +36,7 @@
             <div>주소 : <%=m.getAddress() %></div>
             <div>전화번호 : <%=m.getPhone() %></div>
             <div>이메일 : <%=m.getEmail() %></div>
-            <div>비밀번호 : <button onclick="location.assign('<%=request.getContextPath()%>/mypage/mypagePwdCk3.do?id=<%=m.getMemberId()%>');">수정하기</button></div>
+            <div>비밀번호 : <button onclick="location.assign('<%=request.getContextPath()%>/mypage/mypagePwdCk3.do?id=<%=m.getMemberId()%>');" style="box-shadow: 3px 3px;background-color: lavender;">수정하기</button></div>
         </div>
           
         </div>
@@ -63,6 +65,11 @@
     </script> 
     
     <style>
+    #welcome{
+			display:flex;
+      		justify-content: center;
+    }
+    
     #myimpo{
         width: 600px;
         height: 300px;

@@ -22,8 +22,6 @@
             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNoteReceive.do?id=<%=logInMember.getMemberId()%>');">쪽지함</p></div>
             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageWriting.do?id=<%=logInMember.getMemberId()%>');">내가 쓴 글</p></div>
             <div><p onclick="location.assign('<%=request.getContextPath()%>/mypage/mypageNation.do?id=<%=logInMember.getMemberId()%>');">찜한 나라</p></div>
-           
-           
         </div>
 
         <div class="menuDiv"></div>
@@ -45,7 +43,7 @@
 					<tbody>
 					<%if(rlist.isEmpty()) {%>
 						<tr>
-							<td colspan="4">아직 작성한 질문 글이 없습니다:(</td>
+							<td colspan="4">아직 작성한 생생후기리뷰 글이 없습니다:(</td>
 						</tr>
 					<%}else {
 						for(Review r : rlist) {%>
