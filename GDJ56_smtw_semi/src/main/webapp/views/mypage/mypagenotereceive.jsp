@@ -230,6 +230,7 @@
             font-size: 20px;
             font-weight: bold;
             position: absolute;
+            margin-left:50px;
         }
         
         .menuDiv{
