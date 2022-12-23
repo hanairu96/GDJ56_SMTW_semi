@@ -31,7 +31,7 @@
         
         <form action="<%=request.getContextPath()%>/mypageAccountUpdateEnd.do" method="post" enctype="multipart/form-data">
         <div id="mypsc">
-                <img src="<%=m.getMyImg()%>" alt="" width="200" height="200" >
+                <img src="<%=request.getContextPath()%>/upload/account/<%=m.getMyImg()%>" alt="" width="200" height="200" >
                 <br>
                 수정할 사진을 불러오세요 <br>
                 <input type="file" name="mypcs">
