@@ -18,10 +18,10 @@
 - 버전 관리: GitHub
 
 ## 3. ERD 설계
-<img src=""/>
+<img src="https://user-images.githubusercontent.com/118409554/221806784-fcba7710-736e-475e-89d1-a81b173003d7.png"/>
 
 - ERD는 ERDCloud 사이트를 사용했습니다.
-- 주소: https://
+- 주소: https://www.erdcloud.com/d/d25H78Jz7NPDMa3Gc
 
 ## 4. 구현한 기능 설명
 #### 1. 
