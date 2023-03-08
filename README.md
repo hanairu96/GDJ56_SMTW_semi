@@ -2,6 +2,7 @@
 
 ### [Show Me The Way 바로가기](https://gd1class.iptime.org:8844/GDJ56_smtw_semi/)
 - Show Me The Way는 워킹홀리데이 관련 정보 제공 및 친구 맺기 등을 할 수 있는 워킹홀리데이 사이트입니다.
+- 기본적으로 JSP와 Servlet, JDBC를 이용해 구현했습니다.
 
 ## 1. 제작 기간 및 참여 인원
 - 기간: 2022.10.17~2022.12.23
@@ -21,7 +22,6 @@
 <img src="https://user-images.githubusercontent.com/118409554/221806784-fcba7710-736e-475e-89d1-a81b173003d7.png"/>
 
 - ERD는 ERDCloud 사이트를 사용했습니다.
-- 주소: https://www.erdcloud.com/d/d25H78Jz7NPDMa3Gc
 
 ## 4. 담당한 기능
 - 제작자 소개 페이지
