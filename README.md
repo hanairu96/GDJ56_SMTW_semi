@@ -69,8 +69,40 @@
 </details>
 
 ## 6. 트러블 슈팅
-- check가 false여도 자동 submit이 되는 문제
-- form 태그에 onsubmit="return false;"를 추가하면서 해결함
+<details>
+  <summary><b>자동 submit 문제</b></summary>
+
+#### 문제
+- form의 button을 클릭하면 confirm()으로 정말로 신청할 것인지 여부를 묻는 메시지가 뜨고, 확인 버튼을 눌러야 submit되도록 구상함
+- 그러나 취소 버튼을 눌러도 submit이 되는 문제가 발생
+#### 원인
+- form 안에 있는 button 태그는 별도로 지정하지 않으면 type="submit"으로 지정되도록 원래부터 구현되어 있음
+#### 해결
+- form의 의도치 않은 submit를 막으려면 아래의 두 가지 방법 사용이 가능
+  - button 태그에 type="button"을 추가
+  - form 태그에 onsubmit="return false;"을 추가해 기본적으로 submit이 되지 않도록 함
+- onsubmit="return false;"을 추가한 후 confirm의 결과가 true일 때만 submit()이 실행되도록 구현해 해결함
+
+<div markdown="1">
+
+```javascript
+<form action="<%=request.getContextPath() %>/friends/friendsApplyEnd.do" onsubmit="return false;">
+  //생략
+  <button onclick="apply(this.form);">신청</button>
+</form>
+```
+```javascript
+const apply=(f)=>{
+  //생략
+  let check=confirm("정말로 친구 신청을 등록하시겠습니까?");
+  if(check){
+    f.submit();
+  }
+}
+```
+
+</div>
+</details>
 
 ## 7. 회고
 #### 만족한 점
