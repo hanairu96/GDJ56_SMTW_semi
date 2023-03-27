@@ -1,6 +1,6 @@
 # [세미 프로젝트] Show Me The Way
 
-### [Show Me The Way 바로가기](https://gd1class.iptime.org:8844/GDJ56_smtw_semi/)
+### [Show Me The Way 바로가기](https://14.36.141.71:8844/GDJ56_smtw_semi/)
 - Show Me The Way는 워킹홀리데이 관련 정보 제공 및 친구 맺기 등을 할 수 있는 워킹홀리데이 사이트입니다.
 - 기본적으로 JSP와 Servlet, JDBC를 이용해 구현했습니다.
 
