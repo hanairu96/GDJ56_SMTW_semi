@@ -60,7 +60,7 @@
   - doFilter() 메소드에서 HttpSession 인터페이스를 이용해 session을 생성한다.
   - session에서 이름이 logInMember인 것을 찾고 Member 타입으로 형변환을 하여 logInMember 객체를 생성한다.
   - logInMember 객체의 id가 ADMIN이면 chain.doFilter(request, response)를 호출하고 최초 요청된 서블릿을 실행시킨다.
-  - id가 ADMIN이 아니면 커스텀 에러인 [AccessException](https://github.com/hanairu96/GDJ56_SMTW_semi/blob/master/GDJ56_smtw_semi/src/main/java/com/smtw/common/exception/AccessException.java)로 throw시킨다.
+  - id가 ADMIN이 아니면 커스텀 예외인 [AccessException](https://github.com/hanairu96/GDJ56_SMTW_semi/blob/master/GDJ56_smtw_semi/src/main/java/com/smtw/common/exception/AccessException.java)로 throw시킨다.
 - [web.xml](https://github.com/hanairu96/GDJ56_SMTW_semi/blob/master/GDJ56_smtw_semi/src/main/webapp/WEB-INF/web.xml)
   - error-page 태그에 AccessException 예외가 발생하면 accessError.jsp로 이동하도록 작성한다.
 - [accessError.jsp](https://github.com/hanairu96/GDJ56_SMTW_semi/blob/master/GDJ56_smtw_semi/src/main/webapp/views/common/error/accessError.jsp)
