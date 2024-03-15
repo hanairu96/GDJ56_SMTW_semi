@@ -17,19 +17,23 @@
 - 기술: JSP, Ajax
 - 버전 관리: GitHub
 
-## 3. ERD 설계
+## 3. 화면
+<img src="https://github.com/hanairu96/GDJ56_SMTW_semi/assets/118409554/3f4a0928-e1bf-4275-a043-e7f986fdbde9"/>
+<img src="https://github.com/hanairu96/GDJ56_SMTW_semi/assets/118409554/bf7a83db-2cf2-4910-ae22-22667ebef41b"/>
+
+## 4. ERD 설계
 <img src="https://user-images.githubusercontent.com/118409554/221806784-fcba7710-736e-475e-89d1-a81b173003d7.png"/>
 
 - ERD는 ERDCloud 사이트를 사용했습니다.
 
-## 4. 담당한 기능
+## 5. 담당한 기능
 - 제작자 소개 페이지
 - 워홀 프렌즈 구하기 게시판
 - 친구 신청 기능
 - 관리자 페이지(회원 관리 및 검색, Q&A 관리, 쪽지함)
 - 권한 없는 접근 시 에러 메시지(Filter 사용)
 
-## 5. 구현한 기능 설명
+## 6. 구현한 기능 설명
 <details>
   <summary><b>1. 친구 신청</b></summary>
 
@@ -67,7 +71,7 @@
   - 메시지를 보여주고 setTimeout() 메소드을 통해 3초 뒤 프로젝트 Path로 페이지를 이동시킨다.
 </details>
 
-## 6. 트러블 슈팅
+## 7. 트러블 슈팅
 <details>
   <summary><b>자동 submit 문제</b></summary>
 
