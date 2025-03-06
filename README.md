@@ -8,13 +8,13 @@
 - 인원: 6명
 
 ## 2. 개발 환경
-- 언어: Java 11, JavaScript, HTML, CSS, SQL
+- 프로그래밍 언어: Java 11, JavaScript
 - 프레임워크: MyBatis, Bootstrap
 - 라이브러리: jQuery, Lombok, JSTL, Gson, JavaMail
 - IDE: Eclipse, SQL Developer
 - DBMS: Oracle Database
 - WAS: Apache Tomcat v9.0
-- 기술: JSP, Ajax
+- 기타 웹 기술: JSP, Ajax
 - 버전 관리: GitHub
 
 ## 3. 화면
